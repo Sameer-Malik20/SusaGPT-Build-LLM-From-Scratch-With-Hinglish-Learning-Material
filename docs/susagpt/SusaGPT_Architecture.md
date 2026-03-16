@@ -16,7 +16,7 @@ Isliye sach aur simple version ye hai:
 
 ## Visual Comparison
 
-![SusaGPT vs Big Models](./susagpt_vs_big_models.svg)
+![SusaGPT vs Big Models](../assets/susagpt_vs_big_models.svg)
 
 
 ## Quick Comparison

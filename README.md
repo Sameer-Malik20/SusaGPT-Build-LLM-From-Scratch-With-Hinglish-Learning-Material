@@ -39,54 +39,76 @@ Is project ka learning flow 5 steps me divide hai:
 
 ## File Structure
 
-- `model.py`
+- `src/susagpt/`
+  Yahan actual source code rakha gaya hai.
+- `src/susagpt/model.py`
   Ye model architecture define karta hai.
-- `tokenizer.py`
+- `src/susagpt/tokenizer.py`
   Ye text ko token ids me convert karta hai.
+- `src/susagpt/config.py`
+  Sare important configs aur paths ek jagah rakhta hai.
+- `src/susagpt/train.py`
+  Base training implementation yahan hai.
+- `src/susagpt/fine_tune.py`
+  Q&A fine-tuning implementation yahan hai.
+- `src/susagpt/rlhf.py`
+  RLHF-style alignment implementation yahan hai.
+- `src/susagpt/generate.py`
+  Generation logic yahan hai.
+- `src/susagpt/evaluate.py`
+  BLEU aur perplexity evaluation logic yahan hai.
+- `src/susagpt/quantize.py`
+  INT8 quantization logic yahan hai.
+- `src/susagpt/api.py`
+  FastAPI app implementation yahan hai.
 - `train.py`
-  Base model training script hai.
-- `generate.py`
-  Trained model se text generate karta hai.
-- `evaluate.py`
-  Model ke BLEU score aur perplexity ko measure karta hai.
-- `quantize.py`
-  Trained model ko INT8 version me convert karta hai.
-- `api.py`
-  FastAPI based REST API expose karta hai.
-- `SusaGPT_Architecture.md`
-  SusaGPT ko GPT-2, LLaMA 3 aur GPT-4 ke context me explain karti hai.
-- `SusaGPT_Skills.md`
-  Batati hai ki SusaGPT samajhne ke baad kaunsi practical skills aati hain.
-- `SusaGPT_Diagram_Guide.md`
-  Diagrams ke through poore SusaGPT system ko visual tarike se samjhati hai.
-- `MCP_Guide.md`
-  MCP kya hota hai, kaise kaam karta hai aur kaise build hota hai ye samjhati hai.
-- `AI_Agents_Guide.md`
-  AI agents, tools, memory, planning aur multi-agent systems ko samjhati hai.
-- `Agentic_AI_Guide.md`
-  Agentic AI, generative AI relation, autonomy aur agentic workflows ko explain karti hai.
+  Root launcher file hai, jo training script ko run karta hai.
 - `fine_tune.py`
-  Q&A data par supervised fine-tuning karta hai.
+  Root launcher file hai, jo fine-tuning run karta hai.
 - `rlhf.py`
-  Simplified RLHF-style preference tuning karta hai.
-- `config.py`
-  Sare important configs ek jagah rakhta hai.
-- `qa_pairs.json`
-  50 Q&A pairs ka supervised fine-tuning data.
-- `preference_pairs.json`
-  RLHF-style chosen vs rejected examples.
-- `data.txt`
+  Root launcher file hai, jo RLHF-style alignment run karta hai.
+- `generate.py`
+  Root launcher file hai, jo text generation run karta hai.
+- `evaluate.py`
+  Root launcher file hai, jo evaluation run karta hai.
+- `quantize.py`
+  Root launcher file hai, jo quantization run karta hai.
+- `api.py`
+  Root launcher file hai, jo FastAPI app expose karta hai.
+- `data/`
+  Yahan training aur fine-tuning datasets rakhe gaye hain.
+- `data/data.txt`
   Base text corpus.
-- `tokenizer.json`
+- `data/qa_pairs.json`
+  50 Q&A pairs ka supervised fine-tuning data.
+- `data/preference_pairs.json`
+  RLHF-style chosen vs rejected examples.
+- `artifacts/`
+  Yahan generated tokenizer aur model outputs rakhe gaye hain.
+- `artifacts/tokenizer/tokenizer.json`
   Saved tokenizer mapping.
-- `SusaGPT.pt`
+- `artifacts/models/SusaGPT.pt`
   Base trained model checkpoint.
-- `SusaGPT-finetuned.pt`
+- `artifacts/models/SusaGPT-finetuned.pt`
   Q&A fine-tuned model checkpoint.
-- `SusaGPT-rlhf.pt`
+- `artifacts/models/SusaGPT-rlhf.pt`
   Final aligned model checkpoint.
-- `SusaGPT-int8.pt`
+- `artifacts/models/SusaGPT-int8.pt`
   Quantized INT8 inference checkpoint.
+- `docs/susagpt/SusaGPT_Architecture.md`
+  SusaGPT ko GPT-2, LLaMA 3 aur GPT-4 ke context me explain karti hai.
+- `docs/susagpt/SusaGPT_Skills.md`
+  Batati hai ki SusaGPT samajhne ke baad kaunsi practical skills aati hain.
+- `docs/susagpt/SusaGPT_Diagram_Guide.md`
+  Diagrams ke through poore SusaGPT system ko visual tarike se samjhati hai.
+- `docs/ai/MCP_Guide.md`
+  MCP kya hota hai, kaise kaam karta hai aur kaise build hota hai ye samjhati hai.
+- `docs/ai/AI_Agents_Guide.md`
+  AI agents, tools, memory, planning aur multi-agent systems ko samjhati hai.
+- `docs/ai/Agentic_AI_Guide.md`
+  Agentic AI, generative AI relation, autonomy aur agentic workflows ko explain karti hai.
+- `docs/README.md`
+  Docs folders ka quick map aur structure batati hai.
 - `requirements.txt`
   Basic dependencies list.
 
@@ -796,7 +818,7 @@ Yani agar aap code ke saath-saath explanation files bhi padhna chahte ho,
 to yahan se samajh jaoge kis markdown file me kya milega.
 
 
-### `SusaGPT_Architecture.md`
+### `docs/susagpt/SusaGPT_Architecture.md`
 
 Is file me aap seekh sakte ho:
 
@@ -807,7 +829,7 @@ Is file me aap seekh sakte ho:
 - honest technical comparison kaise likha jata hai
 
 
-### `SusaGPT_Skills.md`
+### `docs/susagpt/SusaGPT_Skills.md`
 
 Is file me aap seekh sakte ho:
 
@@ -817,7 +839,7 @@ Is file me aap seekh sakte ho:
 - beginner se intermediate AI engineer mindset kaise develop hota hai
 
 
-### `SusaGPT_Diagram_Guide.md`
+### `docs/susagpt/SusaGPT_Diagram_Guide.md`
 
 Is file me aap seekh sakte ho:
 
@@ -827,7 +849,7 @@ Is file me aap seekh sakte ho:
 - training, fine-tuning, RLHF, evaluation aur API ko visual tarike se kaise samjha jata hai
 
 
-### `MCP_Guide.md`
+### `docs/ai/MCP_Guide.md`
 
 Is file me aap seekh sakte ho:
 
@@ -838,7 +860,7 @@ Is file me aap seekh sakte ho:
 - MCP ke liye kaunsi skills aur learning resources useful hain
 
 
-### `AI_Agents_Guide.md`
+### `docs/ai/AI_Agents_Guide.md`
 
 Is file me aap seekh sakte ho:
 
@@ -849,7 +871,7 @@ Is file me aap seekh sakte ho:
 - agent build karne ke liye kaunse frameworks aur concepts useful hain
 
 
-### `Agentic_AI_Guide.md`
+### `docs/ai/Agentic_AI_Guide.md`
 
 Is file me aap seekh sakte ho:
 
@@ -889,7 +911,7 @@ Is project se aap ye cheezein practically samajh sakte ho:
 ## Important Notes
 
 - Tokenizer byte-level BPE hai, word-level tokenizer nahi.
-- Old `tokenizer.json` ko naye code ke saath regenerate karna zaruri hai.
+- Old `artifacts/tokenizer/tokenizer.json` ko naye code ke saath regenerate karna zaruri hai.
 - Purane model checkpoints ko ideally dubara train karna chahiye, kyunki tokenizer aur architecture dono change ho chuke hain.
 - Quantized model mainly CPU inference ke liye useful hai.
 - FastAPI run karne ke liye `fastapi` aur `uvicorn` installed hone chahiye.
@@ -902,20 +924,21 @@ Is project se aap ye cheezein practically samajh sakte ho:
 
 Best understanding ke liye files ko is order me padho:
 
-1. `tokenizer.py`
-2. `model.py`
-3. `config.py`
-4. `train.py`
-5. `fine_tune.py`
-6. `rlhf.py`
-7. `generate.py`
-8. `evaluate.py`
-9. `SusaGPT_Architecture.md`
-10. `SusaGPT_Diagram_Guide.md`
-11. `SusaGPT_Skills.md`
-12. `MCP_Guide.md`
-13. `AI_Agents_Guide.md`
-14. `Agentic_AI_Guide.md`
+1. `src/susagpt/tokenizer.py`
+2. `src/susagpt/model.py`
+3. `src/susagpt/config.py`
+4. `src/susagpt/train.py`
+5. `src/susagpt/fine_tune.py`
+6. `src/susagpt/rlhf.py`
+7. `src/susagpt/generate.py`
+8. `src/susagpt/evaluate.py`
+9. `docs/README.md`
+10. `docs/susagpt/SusaGPT_Architecture.md`
+11. `docs/susagpt/SusaGPT_Diagram_Guide.md`
+12. `docs/susagpt/SusaGPT_Skills.md`
+13. `docs/ai/MCP_Guide.md`
+14. `docs/ai/AI_Agents_Guide.md`
+15. `docs/ai/Agentic_AI_Guide.md`
 
 
 ## Credit

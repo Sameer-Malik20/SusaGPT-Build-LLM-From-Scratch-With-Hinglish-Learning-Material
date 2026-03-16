@@ -2,18 +2,26 @@ from pathlib import Path
 
 
 # config.py ka kaam project ke important knobs ek jagah rakhna hai.
-# Isse baar-baar alag files me same numbers hardcode nahi karne padte.
+# Ab structure thoda clean kar diya gaya hai:
+# - source code -> src/susagpt
+# - datasets -> data
+# - tokenizer/model outputs -> artifacts
 
-BASE_DIR = Path(__file__).resolve().parent
+PACKAGE_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = PACKAGE_DIR.parents[1]
+DATA_DIR = PROJECT_ROOT / "data"
+ARTIFACTS_DIR = PROJECT_ROOT / "artifacts"
+MODELS_DIR = ARTIFACTS_DIR / "models"
+TOKENIZER_DIR = ARTIFACTS_DIR / "tokenizer"
 
-DATA_PATH = BASE_DIR / "data.txt"
-TOKENIZER_PATH = BASE_DIR / "tokenizer.json"
-BASE_MODEL_PATH = BASE_DIR / "SusaGPT.pt"
-FINETUNED_MODEL_PATH = BASE_DIR / "SusaGPT-finetuned.pt"
-RLHF_MODEL_PATH = BASE_DIR / "SusaGPT-rlhf.pt"
-QUANTIZED_MODEL_PATH = BASE_DIR / "SusaGPT-int8.pt"
-QA_DATA_PATH = BASE_DIR / "qa_pairs.json"
-PREFERENCE_DATA_PATH = BASE_DIR / "preference_pairs.json"
+DATA_PATH = DATA_DIR / "data.txt"
+TOKENIZER_PATH = TOKENIZER_DIR / "tokenizer.json"
+BASE_MODEL_PATH = MODELS_DIR / "SusaGPT.pt"
+FINETUNED_MODEL_PATH = MODELS_DIR / "SusaGPT-finetuned.pt"
+RLHF_MODEL_PATH = MODELS_DIR / "SusaGPT-rlhf.pt"
+QUANTIZED_MODEL_PATH = MODELS_DIR / "SusaGPT-int8.pt"
+QA_DATA_PATH = DATA_DIR / "qa_pairs.json"
+PREFERENCE_DATA_PATH = DATA_DIR / "preference_pairs.json"
 
 
 # Model architecture config:

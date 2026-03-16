@@ -1,7 +1,7 @@
 import json
 import re
 
-from config import TOKENIZER_CONFIG
+from .config import TOKENIZER_CONFIG
 
 
 # Ye tokenizer ab simple word-level tokenizer nahi hai.
