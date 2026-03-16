@@ -1,0 +1,18 @@
+[
+  {"prompt": "what does susalabs do", "chosen": "susalabs builds custom software ai solutions crm systems and healthcare platforms", "rejected": "susalabs maybe does many random things and no one knows exactly"},
+  {"prompt": "what is ai", "chosen": "ai helps systems learn from data make predictions and automate decisions", "rejected": "ai is only a robot that talks like a movie machine"},
+  {"prompt": "what is crm", "chosen": "crm helps teams manage leads customers tasks and communication", "rejected": "crm is only a spreadsheet with no business value"},
+  {"prompt": "does susalabs work in healthcare", "chosen": "yes susalabs builds healthcare software ai diagnostics and medical data platforms", "rejected": "no susalabs only makes games and nothing else"},
+  {"prompt": "what is custom software", "chosen": "custom software is built for specific business needs workflows and goals", "rejected": "custom software means copying random code from the internet"},
+  {"prompt": "why use automation", "chosen": "automation reduces manual work speeds tasks and improves consistency", "rejected": "automation is useful only when people stop thinking completely"},
+  {"prompt": "what is predictive analytics", "chosen": "predictive analytics uses data patterns to estimate future outcomes", "rejected": "predictive analytics means guessing without using data"},
+  {"prompt": "what is iot", "chosen": "iot connects devices sensors gateways cloud and analytics for real time monitoring", "rejected": "iot means only one phone talking to another phone"},
+  {"prompt": "what is machine learning", "chosen": "machine learning is a branch of ai where models learn patterns from data", "rejected": "machine learning means machines download knowledge automatically from the air"},
+  {"prompt": "what is healthcare software", "chosen": "healthcare software supports hospitals clinics diagnostics records and health workflows", "rejected": "healthcare software is only for making colorful screens"},
+  {"prompt": "what is digital transformation", "chosen": "digital transformation means improving business systems with modern technology and automation", "rejected": "digital transformation means changing logo colors and website fonts"},
+  {"prompt": "why choose susalabs", "chosen": "susalabs combines ai software crm and healthcare expertise with scalable delivery", "rejected": "choose susalabs because every company is exactly the same anyway"},
+  {"prompt": "what is a chatbot", "chosen": "a chatbot answers questions supports users and automates repeated conversations", "rejected": "a chatbot only repeats one line and cannot help users"},
+  {"prompt": "what is secure software", "chosen": "secure software protects data access systems and workflows from misuse", "rejected": "secure software simply means hiding the login button"},
+  {"prompt": "what is recommendation system", "chosen": "a recommendation system suggests useful items based on data and user behavior", "rejected": "a recommendation system selects outputs randomly without context"},
+  {"prompt": "what is scalable software", "chosen": "scalable software handles more users data and traffic without breaking performance", "rejected": "scalable software means making text bigger on the screen"}
+]
