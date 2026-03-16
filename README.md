@@ -1,946 +1,834 @@
-# MyLLM - Hinglish Guide
+# 🤖 MyLLM — SusaGPT Hinglish Learning Guide
 
-Ye project ek chhota GPT-style language model banata hai jo:
+> **Ek chhota GPT-style language model — scratch se build, Hinglish me samjhaya**
 
-1. Base text data par train hota hai
-2. Q&A pairs par fine-tune hota hai
-3. Preference data par RLHF-style alignment karta hai
-4. Better sampling ke saath text generate karta hai
-5. INT8 quantized version me compress ho sakta hai
-6. REST API ke form me serve ho sakta hai
-7. BLEU aur perplexity jaise metrics se evaluate ho sakta hai
+---
 
-Is README ka goal ye hai ki agar koi beginner bhi is project ko padhe to usse samajh aa jaye:
+## 🗺️ Project Ka Big Picture
 
-- project me kaunsi file kya karti hai
-- kaunsa concept kahan use hua hai
-- har training stage ka purpose kya hai
-- model ko kaise chalana hai
-- ANN, SwiGLU, BPE, GQA, PyTorch, RLHF, neural network jaise words ka matlab kya hai
+```mermaid
+flowchart TD
+    A["📄 Raw Text Data\n(data.txt)"] --> B["🔤 BPE Tokenizer\n(Text → Numbers)"]
+    B --> C["🎯 Base Training\n(Language patterns)"]
+    C --> D["🧠 Base Model\n(SusaGPT.pt)"]
+    D --> E["🔧 Q&A Fine-Tuning\n(50 Q&A pairs)"]
+    E --> F["✅ Fine-Tuned Model"]
+    F --> G["⚖️ RLHF-Style Alignment\n(Better behavior)"]
+    G --> H["🏆 Final Model"]
 
+    H --> I["📝 Generation\n(python generate.py)"]
+    H --> J["📊 Evaluation\n(BLEU + Perplexity)"]
+    H --> K["🗜️ Quantization\n(INT8)"]
+    H --> L["🚀 FastAPI\n(REST API)"]
 
-## Project Flow
+    style A fill:#E8F5E9,stroke:#4CAF50
+    style H fill:#E3F2FD,stroke:#2196F3
+```
 
-Is project ka learning flow 5 steps me divide hai:
+**Is project me kya hota hai:**
+1. 📄 Base text data par train hota hai
+2. ❓ Q&A pairs par fine-tune hota hai
+3. ⚖️ Preference data par RLHF-style alignment karta hai
+4. 📝 Better sampling ke saath text generate karta hai
+5. 🗜️ INT8 quantized version me compress ho sakta hai
+6. 🚀 REST API ke form me serve ho sakta hai
+7. 📊 BLEU aur perplexity se evaluate ho sakta hai
 
-1. Architecture fix
-   SwiGLU, weight tying, GQA, dropout, RMSNorm, RoPE
-2. Training fix
-   AdamW, weight decay, gradient clipping, gradient accumulation, LR scheduler, mixed precision, data curriculum
-3. Generation fix
-   top-k, top-p, repetition penalty, KV cache, beam search, Mirostat
-4. Fine-tuning
-   50 Q&A pairs se direct jawab dena sikhana
-5. RLHF-style alignment
-   chosen vs rejected answers se behavior better karna
-6. Quantization + API
-   INT8 shareable model aur FastAPI serving
+> **Is README ka goal:** Beginner bhi padhe to samajh aaye — concept kya hai, kahan use hua hai, kaise chalana hai.
 
+---
 
-## File Structure
-
-- `src/susagpt/`
-  Yahan actual source code rakha gaya hai.
-- `src/susagpt/model.py`
-  Ye model architecture define karta hai.
-- `src/susagpt/tokenizer.py`
-  Ye text ko token ids me convert karta hai.
-- `src/susagpt/config.py`
-  Sare important configs aur paths ek jagah rakhta hai.
-- `src/susagpt/train.py`
-  Base training implementation yahan hai.
-- `src/susagpt/fine_tune.py`
-  Q&A fine-tuning implementation yahan hai.
-- `src/susagpt/rlhf.py`
-  RLHF-style alignment implementation yahan hai.
-- `src/susagpt/generate.py`
-  Generation logic yahan hai.
-- `src/susagpt/evaluate.py`
-  BLEU aur perplexity evaluation logic yahan hai.
-- `src/susagpt/quantize.py`
-  INT8 quantization logic yahan hai.
-- `src/susagpt/api.py`
-  FastAPI app implementation yahan hai.
-- `train.py`
-  Root launcher file hai, jo training script ko run karta hai.
-- `fine_tune.py`
-  Root launcher file hai, jo fine-tuning run karta hai.
-- `rlhf.py`
-  Root launcher file hai, jo RLHF-style alignment run karta hai.
-- `generate.py`
-  Root launcher file hai, jo text generation run karta hai.
-- `evaluate.py`
-  Root launcher file hai, jo evaluation run karta hai.
-- `quantize.py`
-  Root launcher file hai, jo quantization run karta hai.
-- `api.py`
-  Root launcher file hai, jo FastAPI app expose karta hai.
-- `data/`
-  Yahan training aur fine-tuning datasets rakhe gaye hain.
-- `data/data.txt`
-  Base text corpus.
-- `data/qa_pairs.json`
-  50 Q&A pairs ka supervised fine-tuning data.
-- `data/preference_pairs.json`
-  RLHF-style chosen vs rejected examples.
-- `artifacts/`
-  Yahan generated tokenizer aur model outputs rakhe gaye hain.
-- `artifacts/tokenizer/tokenizer.json`
-  Saved tokenizer mapping.
-- `artifacts/models/SusaGPT.pt`
-  Base trained model checkpoint.
-- `artifacts/models/SusaGPT-finetuned.pt`
-  Q&A fine-tuned model checkpoint.
-- `artifacts/models/SusaGPT-rlhf.pt`
-  Final aligned model checkpoint.
-- `artifacts/models/SusaGPT-int8.pt`
-  Quantized INT8 inference checkpoint.
-- `docs/susagpt/SusaGPT_Architecture.md`
-  SusaGPT ko GPT-2, LLaMA 3 aur GPT-4 ke context me explain karti hai.
-- `docs/susagpt/SusaGPT_Skills.md`
-  Batati hai ki SusaGPT samajhne ke baad kaunsi practical skills aati hain.
-- `docs/susagpt/SusaGPT_Diagram_Guide.md`
-  Diagrams ke through poore SusaGPT system ko visual tarike se samjhati hai.
-- `docs/ai/MCP_Guide.md`
-  MCP kya hota hai, kaise kaam karta hai aur kaise build hota hai ye samjhati hai.
-- `docs/ai/AI_Agents_Guide.md`
-  AI agents, tools, memory, planning aur multi-agent systems ko samjhati hai.
-- `docs/ai/Agentic_AI_Guide.md`
-  Agentic AI, generative AI relation, autonomy aur agentic workflows ko explain karti hai.
-- `docs/README.md`
-  Docs folders ka quick map aur structure batati hai.
-- `requirements.txt`
-  Basic dependencies list.
-
-
-## Kaise Run Karein
-
-Pehle dependencies install karo:
+## 🏃 Quick Start — Jaldi Shuru Karo
 
 ```bash
+# Step 0: Dependencies install karo
 pip install -r requirements.txt
-```
 
-Step 1: Base training
-
-```bash
+# Step 1: Base training
 python train.py
-```
 
-Step 2: Q&A fine-tuning
-
-```bash
+# Step 2: Q&A fine-tuning
 python fine_tune.py
-```
 
-Step 3: RLHF-style alignment
-
-```bash
+# Step 3: RLHF-style alignment
 python rlhf.py
-```
 
-Step 4: Generation / chat
-
-```bash
+# Step 4: Chat / Generate
 python generate.py
-```
 
-Step 5: INT8 quantization
-
-```bash
-python quantize.py
-```
-
-Step 6: Evaluation metrics
-
-```bash
+# Step 5: Evaluation
 python evaluate.py
-```
 
-Step 7: REST API run
+# Step 6: INT8 quantization
+python quantize.py
 
-```bash
+# Step 7: REST API
 uvicorn api:app --host 127.0.0.1 --port 8000 --reload
+# Phir browser me: http://127.0.0.1:8000/docs
 ```
 
-API docs:
+---
+
+## 📁 File Structure
+
+```mermaid
+flowchart TD
+    ROOT["📁 MyLLM/"] --> SRC["📁 src/susagpt/\n(Core source code)"]
+    ROOT --> DATA["📁 data/\n(Training data)"]
+    ROOT --> ARTIFACTS["📁 artifacts/\n(Saved models)"]
+    ROOT --> DOCS["📁 docs/\n(Learning guides)"]
+    ROOT --> LAUNCH["📄 train.py, generate.py...\n(Root launchers)"]
+
+    SRC --> M["model.py — Architecture"]
+    SRC --> T["tokenizer.py — BPE Tokenizer"]
+    SRC --> C["config.py — All settings"]
+    SRC --> TR["train.py — Training loop"]
+    SRC --> FT["fine_tune.py — Q&A training"]
+    SRC --> RL["rlhf.py — Alignment"]
+    SRC --> G["generate.py — Text gen"]
+    SRC --> E["evaluate.py — Metrics"]
+    SRC --> Q["quantize.py — INT8"]
+    SRC --> A["api.py — FastAPI"]
+
+    DATA --> DT["data.txt — Base corpus"]
+    DATA --> QA["qa_pairs.json — 50 Q&A"]
+    DATA --> PP["preference_pairs.json — RLHF data"]
+
+    ARTIFACTS --> TOK["tokenizer/ — Saved BPE"]
+    ARTIFACTS --> MOD["models/ — Checkpoints"]
+```
 
-- `http://127.0.0.1:8000/docs`
+### 📄 Files Ki Summary
 
+| File | Kya Karta Hai |
+|------|--------------|
+| `src/susagpt/model.py` | Model architecture define karta hai |
+| `src/susagpt/tokenizer.py` | Text ↔ Token IDs conversion |
+| `src/susagpt/config.py` | Sare important configs ek jagah |
+| `src/susagpt/train.py` | Base training implementation |
+| `src/susagpt/fine_tune.py` | Q&A fine-tuning |
+| `src/susagpt/rlhf.py` | RLHF-style alignment |
+| `src/susagpt/generate.py` | Text generation logic |
+| `src/susagpt/evaluate.py` | BLEU + perplexity evaluation |
+| `src/susagpt/quantize.py` | INT8 quantization |
+| `src/susagpt/api.py` | FastAPI server |
+| `data/data.txt` | Base text corpus |
+| `data/qa_pairs.json` | 50 Q&A supervised data |
+| `data/preference_pairs.json` | RLHF chosen vs rejected |
 
-## Concepts Explained
+---
 
-### 1. PyTorch kya hai
+## 🎯 Project Flow — 5 Stages
 
-PyTorch ek deep learning framework hai.
-Is project me ye model banane, tensors handle karne, training chalane aur gradients calculate karne ke liye use hua hai.
+```mermaid
+flowchart LR
+    S1["🏗️ Stage 1\nArchitecture\nSwiGLU, GQA, RoPE\nRMSNorm, Dropout"] --> S2["🎯 Stage 2\nTraining\nAdamW, Scheduler\nGradient Clipping\nCurriculum Learning"]
+    S2 --> S3["📝 Stage 3\nGeneration\nTop-K, Top-P\nKV Cache, Beam\nMirostat"]
+    S3 --> S4["🔧 Stage 4\nFine-tuning\n50 Q&A pairs\nSFT"]
+    S4 --> S5["⚖️ Stage 5\nRLHF + Deploy\nPreference Tuning\nINT8 + FastAPI"]
 
-Simple language me:
-PyTorch wo toolkit hai jisse neural network code likha jata hai.
+    style S1 fill:#E8F5E9
+    style S2 fill:#E3F2FD
+    style S3 fill:#FFF3E0
+    style S4 fill:#FCE4EC
+    style S5 fill:#F3E5F5
+```
 
+---
 
-### 2. Tensor kya hota hai
+## 📚 Concepts Explained
 
-Tensor ek multi-dimensional number container hota hai.
-Ye list se zyada powerful hota hai aur GPU par bhi chal sakta hai.
+### 🔤 Core Language Model Concepts
 
-Examples:
+---
 
-- scalar = ek number
-- vector = numbers ki line
-- matrix = numbers ka table
-- tensor = usse bhi general form
+#### 1. 🐍 PyTorch kya hai
 
+PyTorch ek deep learning framework hai. Is project me ye model banane, tensors handle karne, training chalane aur gradients calculate karne ke liye use hua hai.
 
-### 3. Neural Network kya hota hai
+**Simple line:** PyTorch wo toolkit hai jisse neural network code likha jata hai.
 
-Neural network ek aisa model hota hai jo data se patterns seekhta hai.
-Ye human brain se inspired hota hai, lekin exact brain copy nahi hota.
+```python
+import torch
 
-Ye layers ka use karke input ko process karta hai aur output predict karta hai.
+# Tensor = multi-dimensional number container
+scalar = torch.tensor(42)                    # 0D: ek number
+vector = torch.tensor([1, 2, 3])             # 1D: numbers ki line
+matrix = torch.tensor([[1, 2], [3, 4]])      # 2D: table
+tensor_3d = torch.randn(2, 3, 4)            # 3D: aur bhi general
 
+print(f"Scalar: {scalar}")
+print(f"Vector: {vector}")
+print(f"Matrix shape: {matrix.shape}")
+print(f"3D Tensor shape: {tensor_3d.shape}")
+```
 
-### 4. ANN kya hota hai
+---
 
-ANN ka full form hai Artificial Neural Network.
+#### 2. 🔤 Tokenizer kya karta hai
 
-Ye neural network ka basic family name hai.
-Is project ka model bhi ANN family me hi aata hai, lekin specifically ye transformer-style language model hai.
+Tokenizer text ko numbers me convert karta hai. Model words directly nahi samajhta — isliye text ko token ids me convert karna padta hai.
 
+```
+"hello world"  →  Tokenizer  →  [12, 97]
+    [12, 97]  →  Tokenizer  →  "hello world"
+```
 
-### 5. Tokenizer kya karta hai
+**Is project me:** Byte-level BPE tokenizer use hota hai (word-level nahi).
 
-Tokenizer text ko numbers me convert karta hai.
+```python
+# Tokenizer ka basic flow (conceptual)
+text = "AI kya hai?"
 
-Example:
+# Step 1: UTF-8 bytes me convert
+bytes_data = list(text.encode('utf-8'))
+print("Bytes:", bytes_data[:6], "...")
 
-`"hello world"` -> `[12, 97]`
+# Step 2: BPE merges apply karo (common pairs merge hote hain)
+# "AI" → ek token, " kya" → ek token, " hai" → ek token, "?" → ek token
 
-Model words directly nahi samajhta.
-Isliye text ko token ids me convert karna padta hai.
+# Step 3: Final token IDs
+# [234, 891, 456, 12]  (hypothetical)
 
-Tokenizer reverse conversion bhi karta hai:
+# Reverse: IDs → Text
+# [234, 891, 456, 12] → "AI kya hai?"
+```
 
-`[12, 97]` -> `"hello world"`
+---
 
-Is project me ab simple word-level tokenizer nahi, balki byte-level BPE tokenizer use hota hai.
+#### 3. 🧠 BPE — Byte Pair Encoding
 
+BPE tokenizer pehle text ko bytes me todta hai, phir common byte pairs ko merge karke subword tokens banata hai.
 
-### 6. Vocabulary kya hoti hai
+```mermaid
+flowchart LR
+    A["'hello'"] --> B["h e l l o\n(bytes)"]
+    B --> C["he ll o\n(BPE merge 1)"]
+    C --> D["hel lo\n(BPE merge 2)"]
+    D --> E["hello\n(Final token)"]
+```
 
-Vocabulary ya vocab matlab total unique tokens ki list.
+**Fayda:**
+- Rare words bhi tokenize ho jaate hain (no `<UNK>`)
+- Hindi, Urdu, English mixed text handle hota hai
+- Long words meaningful pieces me toot sakte hain
 
-Example:
-Agar corpus me words hain:
+---
 
-`ai, software, crm, healthcare`
+#### 4. 📊 Embedding kya hota hai
 
-to in sabko ids milengi.
+Embedding ek learnable vector representation hoti hai. Token id ko model ek vector me convert karta hai.
 
-Ye total count hi `vocab_size` hota hai.
+```python
+import torch.nn as nn
 
+# Word ID → Dense Vector
+vocab_size = 1000
+embed_dim = 64
 
-### 7. BPE kya hota hai
+embedding = nn.Embedding(vocab_size, embed_dim)
 
-BPE ka full form hai Byte Pair Encoding.
+token_id = torch.tensor([25])
+vector = embedding(token_id)
 
-Ye tokenizer pehle text ko bytes me todta hai, phir common byte pairs ko merge karke useful subword tokens banata hai.
+print(f"Token ID: 25")
+print(f"Embedding vector shape: {vector.shape}")  # (1, 64)
+print(f"First 5 values: {vector[0][:5].tolist()}")
+# Token 25 → [0.12, -0.77, 0.41, 0.23, -0.95, ...]
+# Isse model words ke beech relations seekh pata hai!
+```
 
-Iska fayda:
+---
 
-- rare words bhi tokenize ho jaate hain
-- `<UNK>` token ki problem khatam ho jaati hai
-- Hindi, Urdu, English mixed text handle ho sakta hai
-- long words chhote meaningful pieces me toot sakte hain
+#### 5. 👁️ Attention kya hota hai
 
+Attention ka matlab: model decide kare kaunsa word kis dusre word par kitna focus kare.
 
-### 8. Byte-level BPE kya hota hai
+```mermaid
+flowchart LR
+    SENT["'The cat sat on the mat because **it** was tired'"]
+    SENT --> Q["What does 'it' refer to?"]
+    Q --> A["cat ← high attention\nmat ← low attention\nThe ← very low attention"]
+```
 
-Byte-level BPE me raw UTF-8 bytes se start karte hain.
-Har Unicode script bytes me represent ho sakti hai.
+**Real code concept:**
 
-Isliye:
+```python
+import torch
+import torch.nn.functional as F
+import math
 
-- Hindi
-- Urdu
-- English
-- symbols
+def self_attention(Q, K, V):
+    d_k = Q.shape[-1]
+    # Q aur K se similarity score nikalo
+    scores = Q @ K.transpose(-2, -1) / math.sqrt(d_k)
+    # Probabilities banao
+    weights = F.softmax(scores, dim=-1)
+    # Values ka weighted sum lo
+    return weights @ V
 
-sab tokenize ho sakte hain bina unknown token ke.
+# Simple attention ka result:
+# Har token ko context-aware representation milti hai
+# "it" → cat ke baare me zyada focus karta hai
+```
 
+---
 
-### 9. Embedding kya hota hai
+#### 6. 🔗 GQA — Grouped Query Attention
 
-Embedding ek learnable vector representation hoti hai.
+GQA me Query heads zyada hote hain, lekin Key/Value heads kam. K aur V groups se share hote hain.
 
-Word id ko model ek vector me convert karta hai:
+```mermaid
+flowchart TD
+    subgraph OLDER ["Standard MHA (Memory Heavy)"]
+        O["8Q, 8K, 8V heads\n= Full KV cache"]
+    end
+    subgraph NEWER ["GQA (Memory Efficient)"]
+        N["8Q, 2K, 2V heads\nShared per group\n= 4x smaller KV cache"]
+    end
+    OLDER -->|"Upgrade"| NEWER
+```
 
-`25 -> [0.12, -0.77, 0.41, ...]`
+**Fayda:** Memory kam lagti hai, generation faster hoti hai.
 
-Isse model words ke beech relations seekh pata hai.
+---
 
+#### 7. ⚡ SwiGLU kya hota hai
 
-### 10. Positional Encoding kya hota hai
+SwiGLU feed-forward network ka upgraded version. Ek branch gate banati hai, doosri branch content. Dono multiply hote hain.
 
-Transformer ko naturally word order ka idea nahi hota.
-Positional encoding usse batata hai kaunsa token kis position par hai.
+```python
+import torch.nn.functional as F
 
-Isliye:
+def swiglu_forward(x, w1, w2, w3):
+    # Gate stream
+    gate = F.silu(w1(x))      # Swish activation
+    # Content stream
+    content = w3(x)
+    # Gating: decide karo kya pass karna hai
+    gated = gate * content
+    return w2(gated)           # Final projection
 
-- `ai for healthcare`
-- `healthcare for ai`
+# GELU se better practical behavior
+# Modern LLMs (LLaMA, Mistral) me use hota hai
+```
 
-dono alag samjhe ja sakte hain.
+---
 
+#### 8. 🌀 RoPE kya hota hai
 
-### 11. Attention kya hota hai
+RoPE = Rotary Positional Embedding. Position information ko Q aur K vectors me rotate karke inject karta hai.
 
-Attention ka matlab:
-model decide kare kaunsa word kis dusre word par kitna focus kare.
+**Fayda:**
+- Relative positions better samajh aati hain
+- Long-range context handling improve hoti hai
+- Modern transformer designs me bahut common hai
 
-Example:
-Sentence me agar word hai `it`,
-to model pichle words dekhkar samajhne ki koshish karega ke `it` kis cheez ko refer kar raha hai.
+---
 
+#### 9. 📏 RMSNorm kya hota hai
 
-### 12. Multi-Head Attention kya hota hai
+RMSNorm normalization ka lightweight version. Input ka scale stable rakhta hai.
 
-Single attention me model ek hi nazariye se context dekhta hai.
-Multi-head attention me multiple heads same sentence ko alag-alag angle se dekhte hain.
+```
+LayerNorm: Mean + Variance + Normalize  (heavy)
+RMSNorm:   RMS calculate + Normalize    (simpler, faster)
+```
 
-Iska fayda:
+Most modern LLMs (LLaMA, Mistral) RMSNorm use karte hain.
 
-- ek head grammar par focus kar sakta hai
-- ek head entity relations par
-- ek head nearby context par
-- ek head long-range context par
+---
 
-Is project me base idea multi-head attention ka hi hai, lekin optimized form me GQA use hua hai.
-
-
-### 13. GQA kya hota hai
-
-GQA ka full form hai Grouped Query Attention.
-
-Isme Query heads zyada ho sakte hain, lekin Key aur Value heads kam hote hain.
-Phir K aur V ko groups ke form me multiple Q heads ke saath share kiya jata hai.
-
-Iska fayda:
-
-- memory usage kam hoti hai
-- KV cache halka hota hai
-- generation faster aur efficient ho sakti hai
-
-
-### 14. SwiGLU kya hota hai
-
-SwiGLU ka matlab roughly Swish plus GLU style gating.
-
-Ye feed-forward network ka upgraded version hota hai jahan ek branch gate banati hai aur doosri branch content.
-Phir dono multiply hote hain.
-
-Iska fayda:
-
-- information flow zyada controlled hota hai
-- modern LLMs me commonly use hota hai
-- kabhi-kabhi GELU se better practical behavior mil sakta hai
-
-
-### 15. Weight Tying kya hota hai
-
-Weight tying ka matlab:
-input embedding aur output projection same weights share karein.
-
-Iska fayda:
-
-- parameters bach sakte hain
-- input aur output word space aligned hoti hai
-- kabhi-kabhi language modeling quality improve hoti hai
-
-
-### 16. Dropout kya hota hai
-
-Dropout ek regularization technique hai.
-Training ke time kuch neurons temporary ignore kiye jaate hain.
-
-Iska fayda:
-
-- model exact ratta kam marta hai
-- generalization improve hoti hai
-- overfitting ka chance kam hota hai
-
-
-### 17. RMSNorm kya hota hai
-
-RMSNorm normalization ka ek lightweight version hai.
-Ye input ka scale stable rakhta hai, lekin LayerNorm ki tarah full mean subtraction nahi karta.
-
-Iska fayda:
-
-- computation simple hoti hai
-- transformer me kaafi achha kaam karta hai
-- modern LLMs me kaafi jagah use hota hai
-
-
-### 18. RoPE kya hota hai
-
-RoPE ka full form Rotary Positional Embedding hai.
-
-Ye position information ko Q aur K vectors me rotate karke inject karta hai.
-Simple sinusoidal position add karne ki jagah ye attention ke andar hi position ko use karta hai.
-
-Iska fayda:
-
-- relative positions better samajh aati hain
-- long-range context handling improve ho sakti hai
-- modern transformer designs me bahut common hai
-
-
-### 19. Loss kya hota hai
+#### 10. 📉 Loss kya hota hai
 
 Loss batata hai model kitna galat hai.
 
-Agar loss high hai:
-model ki prediction weak hai
+| Loss Value | Meaning |
+|-----------|---------|
+| High | Model ki prediction weak hai |
+| Low | Model sahi direction me seekh raha hai |
 
-Agar loss low hai:
-model sahi direction me seekh raha hai
+Is project me `CrossEntropyLoss` use hui hai — next-token prediction classification problem hota hai.
 
-Is project me `CrossEntropyLoss` use hui hai,
-kyunki next-token prediction classification jaisa problem hota hai.
+---
 
+#### 11. 🔧 AdamW Optimizer kya hota hai
 
-### 20. Optimizer kya hota hai
+AdamW model ke parameters update karta hai. Loss dekhkar weights improve hote hain.
 
-Optimizer model ke parameters update karta hai.
-Yahan `AdamW` use hua hai.
+```python
+import torch.optim as optim
 
-Simple words me:
-loss dekhkar optimizer decide karta hai weights ko kaise badla jaye.
+optimizer = optim.AdamW(
+    model.parameters(),
+    lr=3e-4,          # Learning rate: har step ka update size
+    weight_decay=0.1  # Regularization: uncontrolled growth rokta hai
+)
 
-`AdamW` me `weight decay` bhi hota hai.
-Weight decay ek regularization method hai jo weights ko bahut uncontrolled grow hone se rokta hai.
-Ye overfitting control karne me help karta hai.
+# Training step:
+optimizer.zero_grad()  # Old gradients clear karo
+loss.backward()        # Gradients calculate karo
+optimizer.step()       # Weights update karo
+```
 
+---
 
-### 21. Gradient kya hota hai
+#### 12. ✂️ Gradient Clipping kya hota hai
 
-Gradient batata hai kis parameter ko kis direction me aur kitna badalna chahiye.
+Kabhi-kabhi gradients bahut bade ho jate hain — training unstable ho sakti hai.
 
-Backpropagation ke baad gradients milte hain.
-Optimizer un gradients ka use karke weights update karta hai.
+```python
+# Gradient clipping: max norm se zyada ho to limit karo
+torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+# After this, no gradient will be larger than 1.0
+```
 
+---
 
-### 22. Gradient Clipping kya hota hai
+#### 13. 📊 LR Scheduler kya hota hai
 
-Kabhi-kabhi gradients bahut bade ho jate hain.
-Isse training unstable ho sakti hai.
+Learning rate batata hai model har step me kitna update kare. Scheduler training ke different phases me LR change karta hai.
 
-Gradient clipping un gradients ko limit kar deta hai.
+```mermaid
+flowchart LR
+    W["Warmup\n(LR badhta hai)"] --> M["Main Training\n(Stable LR)"] --> D["Cosine Decay\n(LR ghatata hai)"]
+```
 
-Is project me ye stable training ke liye add kiya gaya hai.
+**Fayda:** Starting smooth, middle me achhi learning, end me fine adjustment.
 
+---
 
-### 23. LR Scheduler kya hota hai
+#### 14. 🪜 Gradient Accumulation kya hota hai
 
-LR ka matlab learning rate.
+Multiple chhote batches ka gradient collect karo, phir ek baar update karo.
 
-Learning rate batata hai model har step me kitna bada update kare.
+```python
+accumulation_steps = 4  # 4 batches ke baad update
 
-LR scheduler training ke different phases me learning rate change karta hai.
-Is project me warmup + cosine decay approach use hui hai.
+for i, batch in enumerate(dataloader):
+    loss = model(batch) / accumulation_steps  # Scale down
+    loss.backward()  # Gradient accumulate
 
-Iska fayda:
+    if (i + 1) % accumulation_steps == 0:
+        optimizer.step()   # Update
+        optimizer.zero_grad()  # Reset
 
-- starting smooth hoti hai
-- middle me achhi learning hoti hai
-- end me fine adjustment milta hai
+# Fayda: Effective batch size = 4x, same memory
+```
 
+---
 
-### 24. Gradient Accumulation kya hota hai
+#### 15. ⚡ Mixed Precision kya hota hai
 
-Gradient accumulation ka matlab:
-hum multiple chhote batches ka gradient collect karte hain aur kuch steps baad optimizer update karte hain.
+Kuch operations float16 me chalao — GPU memory kam, training fast.
 
-Iska fayda:
+```python
+from torch.cuda.amp import autocast, GradScaler
 
-- effective batch size bada lagta hai
-- kam memory me training possible hoti hai
-- training kabhi-kabhi zyada stable ho jaati hai
+scaler = GradScaler()
 
+with autocast():  # float16 me compute karo
+    loss = model(input_ids)
 
-### 25. Mixed Precision kya hota hai
+scaler.scale(loss).backward()
+scaler.step(optimizer)
+scaler.update()
+```
 
-Mixed precision ka matlab kuch operations lower precision me chalana, jaise `float16`.
+---
 
-Iska fayda:
+#### 16. 📈 Data Curriculum kya hota hai
 
-- GPU memory kam lag sakti hai
-- training faster ho sakti hai
-- bade batches ya longer runs possible ho sakte hain
+Model ko pehle easy examples, baad me hard examples dikhana.
 
-Is project me mixed precision safe tarike se `autocast` aur `GradScaler` ke saath use ki gayi hai.
+```
+Easy: "AI is good."  (short, simple)
+  ↓
+Medium: "Machine learning algorithms process data."
+  ↓
+Hard: "Transformer-based architectures नें NLP को revolutionize किया।"
+```
 
+**Fayda:** Model pehle stable hota hai, phir complex patterns absorb karta hai.
 
-### 26. Data Curriculum kya hota hai
+---
 
-Curriculum learning ka matlab:
-model ko pehle easier examples aur baad me harder examples dikhana.
+### 🎲 Generation Concepts
 
-Is project me text chunks ko easy-to-hard order me sort kiya jata hai.
+---
 
-Easy ka heuristic:
+#### 17. 🎯 Top-K Sampling
 
-- chhote chunks
-- kam punctuation
-- kam multilingual complexity
+Sirf top-K most likely tokens me se choose karo.
 
-Iska fayda:
+```python
+def top_k_sampling(logits, k=50):
+    top_values, top_indices = torch.topk(logits, k)
+    probs = F.softmax(top_values, dim=-1)
+    chosen_relative = torch.multinomial(probs, 1)
+    return top_indices[chosen_relative]
 
-- model initial phase me jaldi stable hota hai
-- learning smoother ho sakti hai
-- complex patterns later phase me better absorb hote hain
+# k=1: Greedy (deterministic)
+# k=50: More random/creative
+```
 
+---
 
-### 27. Stable Training kya hota hai
+#### 18. 🎲 Top-P (Nucleus) Sampling
 
-Stable training ka matlab:
+Cumulative probability P tak ke tokens rakho, baaki remove karo.
 
-- loss explode na kare
-- gradients control me rahein
-- learning rate sensible ho
-- overfitting kam ho
+```python
+def top_p_sampling(logits, p=0.9):
+    sorted_probs, sorted_indices = torch.sort(F.softmax(logits, dim=-1), descending=True)
+    cumsum = torch.cumsum(sorted_probs, dim=-1)
+    # P threshold ke baad ke tokens remove karo
+    mask = cumsum - sorted_probs < p
+    filtered = sorted_probs * mask
+    return sorted_indices[torch.multinomial(filtered, 1)]
+```
 
-Is project me stability ke liye:
+---
 
-- AdamW
-- weight decay
-- gradient clipping
-- gradient accumulation
-- LR scheduler
-- mixed precision
-- curriculum learning
-- validation split
-- early stopping
+#### 19. 🔄 KV Cache kya hota hai
 
-use hua hai.
+Purane tokens ke Key aur Value tensors save karo — har step par poora context recompute mat karo.
 
+```
+Without Cache: Token 50 generate karne ke liye 1+2+...+50 = 1275 computations
+With Cache:    Token 50 ke liye sirf 1 computation! (new token only)
+```
 
-### 28. Top-K Sampling kya hota hai
+**Speedup:** 50+ tokens ke liye 25x+ faster!
 
-Generation ke time model bohot saare next-token options deta hai.
-Top-K me sirf top K most likely tokens ko consider kiya jata hai.
+---
 
-Isse output random bhi rehta hai aur bahut wild bhi nahi hota.
+#### 20. 🔭 Beam Search kya hota hai
 
+Ek hi token sample karne ki jagah multiple candidate sequences track karo.
 
-### 29. Top-P Sampling kya hota hai
+```mermaid
+flowchart TD
+    P["Prompt"] --> B1["Candidate 1\n'AI is a...'"]
+    P --> B2["Candidate 2\n'AI helps in...'"]
+    P --> B3["Candidate 3\n'AI can...'"]
+    B1 --> S["Score: -0.9"]
+    B2 --> S2["Score: -0.7 ✅"]
+    B3 --> S3["Score: -1.2"]
+    S2 --> BEST["Best beam expand karo"]
+```
 
-Top-P ko nucleus sampling bhi bolte hain.
+**Use case:** Q&A, formal responses, more deterministic output.
 
-Isme tokens ko descending probability order me rakhte hain aur utne hi tokens rakhte hain
-jinki cumulative probability `p` tak pahunch jaye.
+---
 
-Iska fayda:
+#### 21. 🎭 Mirostat kya hota hai
 
-- fixed K ki jagah adaptive selection hota hai
-- output natural lagta hai
+Adaptive sampling — output ki randomness ko target surprise level ke around maintain karta hai.
 
+```
+Top-K: Static rule (always top 50 tokens)
+Top-P: Static rule (always 90% probability)
+Mirostat: Dynamic rule (har token ke baad adjust karta hai)
+```
 
-### 30. Repetition Penalty kya hota hai
+**Fayda:** Long generation me output quality consistent rehti hai.
 
-Generation ke time model kabhi-kabhi same words ko repeat karta rehta hai.
-Repetition penalty already used tokens ke logits ko thoda punish karti hai.
+---
 
-Iska fayda:
+#### 22. 🔁 Repetition Penalty
 
-- output me same word baar-baar aane ka chance kam hota hai
-- response thoda zyada varied lagta hai
+Already used tokens ke logits ko punish karo — same word baar-baar aane ka chance kam hota hai.
 
+```python
+def apply_repetition_penalty(logits, past_tokens, penalty=1.2):
+    for token_id in set(past_tokens):
+        if logits[token_id] > 0:
+            logits[token_id] /= penalty   # Positive logits: reduce
+        else:
+            logits[token_id] *= penalty   # Negative logits: more negative
+    return logits
+```
 
-### 31. Mirostat kya hota hai
+---
 
-Mirostat ek adaptive sampling method hai.
-Ye output ki randomness ko ek target surprise level ke around maintain karne ki koshish karta hai.
+### 📊 Evaluation Concepts
 
-Simple words me:
-Top-k aur top-p static rules hain.
-Mirostat dynamic rule hai jo har next token ke baad apna behavior adjust karta hai.
+---
 
-Iska fayda:
+#### 23. 📉 Perplexity kya hota hai
 
-- output overly boring bhi nahi hota
-- output overly random bhi nahi hota
-- long generation me quality kabhi-kabhi zyada stable lag sakti hai
+Model kitna confused hai next token predict karne me.
 
+```python
+import math
 
-### 32. KV Cache kya hota hai
+# Low perplexity = confident model = better!
+def perplexity(log_probs):
+    avg_neg_log_prob = -sum(log_probs) / len(log_probs)
+    return math.exp(avg_neg_log_prob)
 
-KV cache ka matlab key-value cache.
+# Confident model:
+print(perplexity([math.log(0.9), math.log(0.85)]))  # ~1.17 (good!)
 
-Attention generation ke time har naya token aane par purana context dubara compute karta hai.
-KV cache purane key aur value tensors store kar leta hai.
+# Confused model:
+print(perplexity([math.log(0.1), math.log(0.05)]))  # ~12.6 (bad!)
+```
 
-Iska fayda:
+**Rule:** Lower perplexity = better language model.
 
-- generation fast hoti hai
-- har token par poora prompt dubara run nahi karna padta
-- especially long generation me speed improvement milta hai
+---
 
+#### 24. 📊 BLEU Score kya hota hai
 
-### 33. Beam Search kya hota hai
+Generated answer aur reference answer me kitna n-gram overlap hai.
 
-Beam search ek decoding method hai jo ek hi next token sample karne ki jagah multiple candidate sequences track karta hai.
+```
+Reference: "PyTorch ek deep learning framework hai"
+Generated: "PyTorch ek machine learning framework hai"
+BLEU ≈ 0.75 (high overlap)
 
-Iska fayda:
+Generated: "Python mujhe pasand hai"
+BLEU ≈ 0.10 (low overlap)
+```
 
-- output zyada deterministic ho sakta hai
-- best-scoring sentence choose ki ja sakti hai
-- Q&A ya formal response me kabhi-kabhi useful hota hai
+**Note:** BLEU meaning ka perfect judge nahi — wording different ho sakta hai lekin answer sahi bhi ho sakta hai.
 
+---
 
-### 34. INT8 Quantization kya hota hai
+### 🔧 Fine-tuning Concepts
 
-INT8 quantization ka matlab model ke kuch weights ko 32-bit float ki jagah 8-bit integer format me store karna.
+---
 
-Is project me dynamic INT8 quantization use hoti hai, mainly `Linear` layers par.
+#### 25. 🎯 Fine-tuning kya hota hai
 
-Iska fayda:
+Base model ko specific task ke liye aur train karna.
 
-- model chhota ho jata hai
-- CPU par inference faster ho sakta hai
-- model share karna easy hota hai
+```mermaid
+flowchart LR
+    BASE["🧠 Base Model\n(General language)"] -->|"50 Q&A pairs"| FINE["🎯 Fine-tuned\n(Direct Q&A)"]
+```
 
-Important:
-Ye mostly inference optimization hai, training optimization nahi.
+**Kab zaruri hai:** Jab base model ramble karta ho, direct answer nahi deta.
 
+---
 
-### 35. FastAPI kya hota hai
+#### 26. ⚖️ RLHF kya hota hai
 
-FastAPI Python ka ek modern web framework hai jo APIs banane ke liye use hota hai.
+RLHF = Reinforcement Learning from Human Feedback.
 
-Iska fayda:
+**Industry RLHF pipeline:**
+1. Base model
+2. Supervised fine-tuning
+3. Human preference data
+4. Reward model
+5. PPO optimization
 
-- code simple hota hai
-- automatic docs milti hain
-- JSON request/response support milta hai
-- portfolio aur real-world demo ke liye bahut useful hai
+**Is project me:** Simplified preference tuning (chosen vs rejected). Full PPO nahi — learning purpose ke liye practical version.
 
+```python
+# Preference data format
+preference = {
+    "prompt": "AI kya hai?",
+    "chosen": "AI Artificial Intelligence ka short form hai...",  # Better
+    "rejected": "AI matlab robot."                               # Weaker
+}
+# Model sikho ki chosen response prefer karo!
+```
 
-### 36. REST API kya hota hai
+---
 
-REST API ek tarika hai jisme aap HTTP requests ke through model se baat karte ho.
+### 💾 Deployment Concepts
 
-Example:
+---
 
-- `POST /generate`
-- `GET /health`
-- `GET /model-info`
+#### 27. 🗜️ INT8 Quantization
 
-Iska fayda:
+Model ke weights ko float32 se int8 me convert karo.
 
-- website app backend ya mobile app se connect kar sakte ho
-- local model ko service ki tarah expose kar sakte ho
+```
+float32: 4 bytes per weight
+int8:    1 byte per weight
+Result:  ~4x smaller model, faster CPU inference
+```
 
+**Use case:** CPU par inference, model sharing, deployment.
 
-### 37. BLEU score kya hota hai
+---
 
-BLEU ek text-overlap metric hai jo dekhta hai generated answer aur reference answer me kitna n-gram match ho raha hai.
+#### 28. 🚀 FastAPI + REST API
 
-Simple words me:
+FastAPI se model ko HTTP API ke through serve karo.
 
-- BLEU high ho to wording overlap zyada hai
-- BLEU low ho to generated answer reference se kaafi different hai
+```bash
+# Server chalao
+uvicorn api:app --host 127.0.0.1 --port 8000
 
-Important:
-BLEU meaning ka perfect judge nahi hota.
-Kabhi answer sahi ho sakta hai lekin wording different hone ki wajah se BLEU low aa sakta hai.
+# Test karo
+curl -X POST http://127.0.0.1:8000/generate \
+  -H "Content-Type: application/json" \
+  -d '{"prompt": "AI kya hai?", "max_tokens": 100}'
 
+# API docs (auto-generated!)
+# http://127.0.0.1:8000/docs
+```
 
-### 38. Perplexity kya hota hai
+**Endpoints:**
+- `GET /health` → Server status
+- `GET /model-info` → Architecture info
+- `POST /generate` → Text generate karo
 
-Perplexity batata hai next token predict karne me model kitna confused hai.
+---
 
-Simple rule:
+## 📋 Scripts Summary
 
-- lower perplexity = model zyada confident aur better predictor
-- higher perplexity = model zyada confused
+| Script | Kya Karta Hai | Run Command |
+|--------|--------------|-------------|
+| `train.py` | Base model train karo | `python train.py` |
+| `fine_tune.py` | Q&A fine-tuning | `python fine_tune.py` |
+| `rlhf.py` | RLHF-style alignment | `python rlhf.py` |
+| `generate.py` | Text generate karo / chat | `python generate.py` |
+| `evaluate.py` | BLEU + perplexity | `python evaluate.py` |
+| `quantize.py` | INT8 quantization | `python quantize.py` |
+| `api.py` | FastAPI server | `uvicorn api:app --reload` |
 
-Language model evaluation me perplexity bahut common metric hai,
-especially jab hum dekhna chahte hain ki model raw text ko kitna achha model kar raha hai.
+### `train.py` — Kya Karta Hai
 
+```mermaid
+flowchart LR
+    A["data.txt"] --> B["BPE Tokenizer\nBuild"]
+    B --> C["Curriculum\nSort"]
+    C --> D["Train/Val\nSplit"]
+    D --> E["Training Loop\n(AdamW + Clipping\n+ Scheduler)"]
+    E --> F["Best checkpoint\nSave"]
+```
 
-### 39. Fine-tuning kya hota hai
+### `generate.py` — Kya Karta Hai
 
-Fine-tuning ka matlab base model ko ek specific kaam ke liye aur train karna.
+- Best available model load karta hai (RLHF > fine-tuned > base)
+- Top-K, Top-P, Mirostat, Beam Search support
+- Repetition penalty + KV cache = fast, quality generation
+- Interactive chat mode
 
-Yahan:
-base language model ko 50 Q&A pairs par fine-tune kiya gaya hai
-taaki wo direct question-answer pattern seekhe.
+---
 
+## 📖 Docs Se Kya Seekh Sakte Ho
 
-### 40. Q&A Fine-tuning ka kya fayda
+| Doc File | Kya Milta Hai |
+|----------|--------------|
+| [SusaGPT_Architecture.md](docs/susagpt/SusaGPT_Architecture.md) | GPT-2 vs LLaMA vs SusaGPT comparison, code examples |
+| [SusaGPT_Skills.md](docs/susagpt/SusaGPT_Skills.md) | Skills with working demos, exercises |
+| [SusaGPT_Diagram_Guide.md](docs/susagpt/SusaGPT_Diagram_Guide.md) | Visual diagrams + exercises |
+| [MCP_Guide.md](docs/ai/MCP_Guide.md) | Protocol architecture, working server code |
+| [AI_Agents_Guide.md](docs/ai/AI_Agents_Guide.md) | Agents guide with real examples |
+| [Agentic_AI_Guide.md](docs/ai/Agentic_AI_Guide.md) | Agentic system design |
 
-Base model general text continuation me acha ho sakta hai,
-lekin direct jawab dene me weak ho sakta hai.
+---
 
-Q&A fine-tuning ke baad model:
+## 🎓 Recommended Learning Order
 
-- prompt ko sawal ke roop me dekhna seekhta hai
-- concise answer format me respond karna seekhta hai
-- repetitive text continuation se thoda nikalta hai
+```mermaid
+flowchart TD
+    A["📄 1. README.md\n(Ye file — overview)"] --> B["📊 2. SusaGPT_Diagram_Guide.md\n(Visual flow)"]
+    B --> C["🔤 3. tokenizer.py\n(BPE code)"]
+    C --> D["🏗️ 4. model.py\n(Architecture)"]
+    D --> E["🎯 5. train.py\n(Training loop)"]
+    E --> F["🔧 6. fine_tune.py\n(Q&A training)"]
+    F --> G["⚖️ 7. rlhf.py\n(Alignment)"]
+    G --> H["📝 8. generate.py\n(Inference)"]
+    H --> I["📊 9. evaluate.py\n(Metrics)"]
+    I --> J["🏗️ 10. SusaGPT_Architecture.md\n(Architecture deep dive)"]
+    J --> K["💪 11. SusaGPT_Skills.md\n(Skills + exercises)"]
+    K --> L["🤖 12. AI Agents Guide\n(Broader AI concepts)"]
 
+    style A fill:#E8F5E9
+    style L fill:#E3F2FD
+```
 
-### 41. RLHF kya hota hai
+---
 
-RLHF ka full form hai Reinforcement Learning from Human Feedback.
+## ⚠️ Important Notes
 
-Industry me RLHF pipeline generally kuch is tarah hoti hai:
+> [!NOTE]
+> Tokenizer byte-level BPE hai, word-level tokenizer nahi. Old `artifacts/tokenizer/tokenizer.json` naye code ke saath regenerate karna zaruri hai.
 
-1. base model
-2. supervised fine-tuning
-3. human preference data
-4. reward model
-5. PPO ya kisi RL algorithm se optimization
+> [!NOTE]
+> Purane model checkpoints ko ideally dubara train karna chahiye, kyunki tokenizer aur architecture change ho sakti hai.
 
+> [!NOTE]
+> RLHF implementation simplified hai — full production PPO pipeline nahi. Ye learning purpose ke liye practical version hai.
 
-### 42. Is project me RLHF kaunsa use hua hai
+> [!NOTE]
+> Ye project educational understanding ke liye strong hai. Production-ready full stack nahi — lekin concepts bilkul real hain.
 
-Is project me full industrial PPO RLHF nahi hai.
-Yahan ek simplified RLHF-style preference tuning stage hai.
+---
 
-Hum chosen vs rejected answers use karke model ko sikhate hain:
+## 🧪 Quick Self-Test — Samjha Kya?
 
-- kaunsi response better hai
-- kaunsi response vague ya wrong hai
+**Q1: Byte-level BPE word-level tokenizer se better kyu hai?**
+<details><summary>Answer</summary>
 
-Ye learning purpose ke liye practical aur samajhne layak version hai.
+Byte-level BPE UTF-8 bytes se start karta hai, isliye:
+- Hindi, Urdu, English — koi bhi text tokenize hota hai
+- `<UNK>` token ki problem nahi hoti
+- Rare words tootkar represent ho jaate hain
 
+</details>
 
-### 43. Preference Data kya hota hai
+**Q2: KV Cache generation ko kaise fast karta hai?**
+<details><summary>Answer</summary>
 
-Preference data me ek prompt ke liye do answers hote hain:
+Purane tokens ke Key aur Value tensors cache me save ho jaate hain. Har naye token ke liye sirf ek new computation hoti hai — pura context recompute nahi karna padta. 50+ tokens ke liye ~25x speedup!
 
-- chosen = better answer
-- rejected = weak answer
+</details>
 
-Model ko train kiya jata hai ki chosen answer ko zyada score de.
+**Q3: RLHF-style alignment ka kya purpose hai?**
+<details><summary>Answer</summary>
 
+Chosen vs rejected answer pairs se model ko sikhate hain ki better response prefer karo. Isse:
+- Model zyada helpful responses deta hai
+- Vague ya wrong answers less preferred hote hain
+- Behavior improve hoti hai without full PPO
 
-## Har Script Kya Karti Hai
+</details>
 
-### `train.py`
+---
 
-Ye script:
+## 🏆 Is Project Se Kaunsi Skills Milti Hain
 
-- `data.txt` padhti hai
-- byte-level BPE tokenizer build karti hai
-- data curriculum apply karti hai
-- base model train karti hai
-- AdamW + weight decay use karti hai
-- gradient clipping use karti hai
-- gradient accumulation use karti hai
-- LR scheduler chalati hai
-- mixed precision support rakhti hai
-- best checkpoint save karti hai
+```mermaid
+mindmap
+  root(("🏆 SusaGPT\nSkills"))
+    🔤 Tokenizer
+      BPE Algorithm
+      Byte-level Processing
+    🏗️ Architecture
+      Transformer Blocks
+      Modern Techniques
+    🎯 Training
+      Stable Training
+      Curriculum Learning
+    🔧 Fine-tuning
+      Q&A Supervision
+      RLHF Alignment
+    📝 Inference
+      Sampling Methods
+      KV Cache
+    📊 Evaluation
+      BLEU + Perplexity
+    🚀 Deployment
+      INT8 Quantization
+      FastAPI REST API
+```
 
+**Ye project samajhna matlab:**
 
-### `fine_tune.py`
+`Tokenize → Train → Fine-tune → Align → Generate → Evaluate → Compress → Deploy`
 
-Ye script:
+poori pipeline practically samajhna — beginners se intermediate AI engineers ke liye perfect foundation!
 
-- base model load karti hai
-- `qa_pairs.json` padhti hai
-- supervised Q&A fine-tuning karti hai
-- model ko direct answers ki taraf shift karti hai
+---
 
+## 👨‍💻 Credit
 
-### `rlhf.py`
-
-Ye script:
-
-- fine-tuned model se start karti hai
-- `preference_pairs.json` padhti hai
-- chosen vs rejected response scoring use karti hai
-- behavior alignment improve karti hai
-
-
-### `generate.py`
-
-Ye script:
-
-- best available model load karti hai
-- RLHF model mile to usse prefer karti hai
-- top-k aur top-p ke saath generation karti hai
-- Mirostat mode bhi support karti hai
-- repetition penalty use karti hai
-- KV cache se fast generation karti hai
-- beam search mode bhi support karti hai
-- interactive chat mode chalati hai
-
-
-### `evaluate.py`
-
-Ye script:
-
-- best available model load karti hai
-- `data.txt` ke holdout tokens par perplexity nikalti hai
-- `qa_pairs.json` par BLEU score nikalti hai
-- sample predictions print karti hai
-- evaluation ko numbers ke through samajhne me help karti hai
-
-
-### `quantize.py`
-
-Ye script:
-
-- best trained model load karti hai
-- dynamic INT8 quantization apply karti hai
-- compact checkpoint save karti hai
-- original aur quantized size compare karti hai
-
-
-### `api.py`
-
-Ye script:
-
-- FastAPI server banati hai
-- `/health` endpoint deti hai
-- `/model-info` endpoint deti hai
-- `/generate` endpoint deti hai
-- quantized ya non-quantized model serve kar sakti hai
-
-
-## Kaunsi `.md` File Se Kya Sikh Sakte Ho
-
-Ye section specially docs ke liye hai.
-Yani agar aap code ke saath-saath explanation files bhi padhna chahte ho,
-to yahan se samajh jaoge kis markdown file me kya milega.
-
-
-### `docs/susagpt/SusaGPT_Architecture.md`
-
-Is file me aap seekh sakte ho:
-
-- SusaGPT architecture-wise kahan stand karta hai
-- GPT-2, LLaMA 3 aur GPT-4 se iska difference kya hai
-- modern architecture blocks ka importance kya hai
-- scale aur architecture me kya farq hota hai
-- honest technical comparison kaise likha jata hai
-
-
-### `docs/susagpt/SusaGPT_Skills.md`
-
-Is file me aap seekh sakte ho:
-
-- is project ko samajhne ke baad kaunsi skills milti hain
-- tokenizer, transformer, training, fine-tuning, RLHF aur deployment se kya learning nikalti hai
-- kaunse roles ke liye ye project useful ho sakta hai
-- beginner se intermediate AI engineer mindset kaise develop hota hai
-
-
-### `docs/susagpt/SusaGPT_Diagram_Guide.md`
-
-Is file me aap seekh sakte ho:
-
-- diagrams ki help se SusaGPT ka poora visual flow
-- tokenizer se generation tak end-to-end system kaise kaam karta hai
-- attention, GQA, RoPE, RMSNorm, SwiGLU jaise blocks visually kaise samjhe ja sakte hain
-- training, fine-tuning, RLHF, evaluation aur API ko visual tarike se kaise samjha jata hai
-
-
-### `docs/ai/MCP_Guide.md`
-
-Is file me aap seekh sakte ho:
-
-- MCP yani Model Context Protocol kya hota hai
-- host, client aur server architecture kaise kaam karti hai
-- tools, resources aur prompts ka role kya hota hai
-- MCP server kaise build hota hai
-- MCP ke liye kaunsi skills aur learning resources useful hain
-
-
-### `docs/ai/AI_Agents_Guide.md`
-
-Is file me aap seekh sakte ho:
-
-- AI agent kya hota hai
-- chatbot aur AI agent me difference kya hota hai
-- tools, memory, planning aur execution loop ka role kya hota hai
-- multi-agent ya multi-AI-agent systems kya hote hain
-- agent build karne ke liye kaunse frameworks aur concepts useful hain
-
-
-### `docs/ai/Agentic_AI_Guide.md`
-
-Is file me aap seekh sakte ho:
-
-- agentic AI kya hota hai
-- generative AI aur agentic AI me relation aur difference kya hai
-- autonomy, planning, reflection aur feedback loop ka role kya hota hai
-- agentic systems ki architecture kaise sochi jati hai
-- student ko agentic AI seekhne ke liye kya path follow karna chahiye
-
-
-## Kya Sikhne Ko Milega
-
-Is project se aap ye cheezein practically samajh sakte ho:
-
-- tokenizer kya hota hai
-- BPE tokenizer ka basic flow kya hota hai
-- transformer model ka basic flow kya hota hai
-- embeddings aur positional encoding ka role
-- attention, multi-head attention aur GQA ka kaam
-- SwiGLU, dropout, RMSNorm aur RoPE ka effect
-- weight tying ka use
-- stable training ke liye AdamW, weight decay, gradient clipping, gradient accumulation, LR scheduler aur curriculum
-- mixed precision ka practical use
-- Mirostat sampling ka purpose
-- BLEU score aur perplexity ka role
-- INT8 quantization ka inference benefit
-- FastAPI aur REST API ka practical role
-- supervised fine-tuning ka purpose
-- preference-based RLHF-style tuning ka idea
-- top-k, top-p, repetition penalty, KV cache aur beam search ka impact
-- checkpoint save/load flow
-- MCP ka basic architecture
-- AI agents aur multi-agent systems ka core idea
-- agentic AI aur generative AI ke beech ka difference
-
-
-## Important Notes
-
-- Tokenizer byte-level BPE hai, word-level tokenizer nahi.
-- Old `artifacts/tokenizer/tokenizer.json` ko naye code ke saath regenerate karna zaruri hai.
-- Purane model checkpoints ko ideally dubara train karna chahiye, kyunki tokenizer aur architecture dono change ho chuke hain.
-- Quantized model mainly CPU inference ke liye useful hai.
-- FastAPI run karne ke liye `fastapi` aur `uvicorn` installed hone chahiye.
-- RLHF implementation simplified hai, full production PPO pipeline nahi.
-- Q&A aur preference data learning/demo purpose ke liye curated hai.
-- Ye project educational understanding ke liye strong hai, production-ready full stack nahi.
-
-
-## Recommended Order
-
-Best understanding ke liye files ko is order me padho:
-
-1. `src/susagpt/tokenizer.py`
-2. `src/susagpt/model.py`
-3. `src/susagpt/config.py`
-4. `src/susagpt/train.py`
-5. `src/susagpt/fine_tune.py`
-6. `src/susagpt/rlhf.py`
-7. `src/susagpt/generate.py`
-8. `src/susagpt/evaluate.py`
-9. `docs/README.md`
-10. `docs/susagpt/SusaGPT_Architecture.md`
-11. `docs/susagpt/SusaGPT_Diagram_Guide.md`
-12. `docs/susagpt/SusaGPT_Skills.md`
-13. `docs/ai/MCP_Guide.md`
-14. `docs/ai/AI_Agents_Guide.md`
-15. `docs/ai/Agentic_AI_Guide.md`
-
-
-## Credit
-
-sameer malik
+**sameer malik** — MyLLM / SusaGPT project
