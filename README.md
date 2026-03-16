@@ -38,6 +38,32 @@ flowchart TD
 
 ---
 
+## ▶️ Sirf Ek Command — Sab Kuch Run Karo!
+
+> **MD files parhne ke baad code ko right here run karo — kahi aur jana zaroori nahi!**
+
+```bash
+# 🎮 Ek command se saare interactive demos + exercises shuru karo:
+python docs/exercises/run_me.py
+```
+
+**Ya koi bhi specific topic directly:**
+
+```bash
+python docs/exercises/tokenizer_demo.py    # BPE aur tokenizer
+python docs/exercises/architecture_demo.py  # RoPE, SwiGLU, GQA, RMSNorm
+python docs/exercises/training_demo.py      # Loss, AdamW, LR Scheduler
+python docs/exercises/sampling_demo.py      # Top-K, Top-P, KV Cache
+python docs/exercises/evaluation_demo.py    # BLEU, Perplexity
+python docs/exercises/ai_agents_demo.py     # Weather Agent, Research Agent
+python docs/exercises/agentic_ai_demo.py    # Competitor Research, Reflection
+python docs/exercises/mcp_demo.py           # Live MCP Notes Server
+```
+
+> 📁 See [`docs/exercises/README.md`](docs/exercises/README.md) for full guide.
+
+---
+
 ## 🏃 Quick Start — Jaldi Shuru Karo
 
 ```bash

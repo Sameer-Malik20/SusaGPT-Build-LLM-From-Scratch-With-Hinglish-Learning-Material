@@ -39,7 +39,7 @@ MODEL_CONFIG = {
 # Byte-level BPE tokenizer config:
 # 256 base bytes ke upar merges add hote hain.
 TOKENIZER_CONFIG = {
-    "target_vocab_size": 768,
+    "target_vocab_size": 3000,
 }
 
 
