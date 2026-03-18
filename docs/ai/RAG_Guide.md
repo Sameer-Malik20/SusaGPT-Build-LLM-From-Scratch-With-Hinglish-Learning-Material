@@ -628,6 +628,16 @@ Dekho kaunsa better hai! Aise questions try karo jo specific facts ke baare mein
 
 ---
 
+## 📺 Video Resources (Hindi/Urdu)
+
+| Topic | Link | Language |
+|-------|------|----------|
+| **RAG Explained in Hindi** | [Watch on YouTube](https://www.youtube.com/watch?v=T-D1OfcDW1M) | Hindi |
+| **LangChain + RAG Full Tutorial** | [Watch on YouTube](https://www.youtube.com/watch?v=3y_fOnHESpw) | Hindi |
+| **Vector Databases (ChromaDB)** | [Watch on YouTube](https://www.youtube.com/watch?v=vV9W-E4D7_U) | Hindi |
+
+---
+
 ## 🔗 Resources
 
 | Resource | Link | Type |

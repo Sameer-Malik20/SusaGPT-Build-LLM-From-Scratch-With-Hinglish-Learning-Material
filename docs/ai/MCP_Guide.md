@@ -799,6 +799,15 @@ D) Public tools banao
 
 ---
 
+## 📺 Video Resources (English - New Topic)
+
+| Topic | Link | Language |
+|-------|------|----------|
+| **What is MCP? (Official Intro)** | [Watch on YouTube](https://www.youtube.com/watch?v=33K897OIn7Y) | English |
+| **Building MCP Servers from Scratch** | [Watch on YouTube](https://www.youtube.com/watch?v=kCc8FmEb1nY) | English |
+
+---
+
 ## 🏆 Final Summary
 
 ```mermaid

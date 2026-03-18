@@ -119,6 +119,16 @@ RAG sirf text ke liye nahi, images ke liye bhi hota hai. Agar aapke paas million
 
 ---
 
+## 📺 Video Resources (Hindi/Urdu)
+
+| Topic | Link | Language |
+|-------|------|----------|
+| **Multimodal AI Explained** | [Watch on YouTube](https://www.youtube.com/watch?v=33K897OIn7Y) | Hindi |
+| **Stable Diffusion & Imagen** | [Watch on YouTube](https://www.youtube.com/watch?v=vV9W-E4D7_U) | Hindi |
+| **Vision Transformers (ViT)** | [Watch on YouTube](https://www.youtube.com/watch?v=U0f_p-zY77E) | Hindi |
+
+---
+
 ## 🏆 Final Summary
 
 > **Multimodal AI hi real intelligent behavior hai.** 

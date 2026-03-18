@@ -150,6 +150,16 @@ USER_PROMPT = "Mujhe ek sci-fi movie suggest karo jo space ke baare mein ho."
 
 ---
 
+## 📺 Video Resources (Hindi/Urdu)
+
+| Topic | Link | Language |
+|-------|------|----------|
+| **Prompt Engineering Course (Full)** | [Watch on YouTube](https://www.youtube.com/watch?v=oV85g8YRE54) | Hindi |
+| **Advanced Prompting Techniques** | [Watch on YouTube](https://www.youtube.com/watch?v=vV9W-E4D7_U) | Hindi |
+| **LangChain & AI Agents Basics** | [Watch on YouTube](https://www.youtube.com/watch?v=vYV_nE4Q77s) | Urdu/Hindi |
+
+---
+
 ## 🏆 Final Summary
 
 > **Prompting magic nahi, Engineering hai.** 

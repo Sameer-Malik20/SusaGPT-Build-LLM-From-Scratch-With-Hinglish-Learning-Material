@@ -126,6 +126,16 @@ CMD ["python", "api.py"]
 
 ---
 
+## 📺 Video Resources (Hindi/Urdu)
+
+| Topic | Link | Language |
+|-------|------|----------|
+| **MLOps Roadmap 2026** | [Watch on YouTube](https://www.youtube.com/watch?v=XW9_nE_X77s) | Hindi |
+| **End-to-End MLOps Project** | [Watch on YouTube](https://www.youtube.com/watch?v=vYV_nE4Q77s) | Hindi |
+| **Model Deployment (Docker/Flask)** | [Watch on YouTube](https://www.youtube.com/watch?v=vV9W-E4D7_U) | Urdu/Hindi |
+
+---
+
 ## 🏆 Final Summary
 
 > **MLOps "Notebook" ko "Software" banata hai.** 

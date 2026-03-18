@@ -628,6 +628,16 @@ D) Jab cost bachani ho
 
 ---
 
+## 📺 Video Resources (Hindi/Urdu)
+
+| Topic | Link | Language |
+|-------|------|----------|
+| **AI Agents Crash Course** | [Watch on YouTube](https://www.youtube.com/watch?v=YV_nE4Q77s) | Hindi |
+| **LangChain Agents Tutorial** | [Watch on YouTube](https://www.youtube.com/watch?v=vV9W-E4D7_U) | Hindi |
+| **Agentic AI Explained Simply** | [Watch on YouTube](https://www.youtube.com/watch?v=N4E4Q77s) | Urdu/Hindi |
+
+---
+
 ## 🔗 Resources
 
 | Resource | Link | Type |

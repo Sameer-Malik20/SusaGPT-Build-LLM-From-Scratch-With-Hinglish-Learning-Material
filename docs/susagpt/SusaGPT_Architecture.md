@@ -465,6 +465,16 @@ D) SusaGPT ki training data GPT-2 se zyada hai
 
 ---
 
+## 📺 Video Resources (Hindi/Urdu)
+
+| Topic | Link | Language |
+|-------|------|----------|
+| **Transformers Architecture** | [Watch on YouTube](https://www.youtube.com/watch?v=33K897OIn7Y) | Hindi |
+| **Encoder vs Decoder Models** | [Watch on YouTube](https://www.youtube.com/watch?v=U0f_p-zY77E) | Hindi |
+| **Build GPT from Scratch** | [Watch on YouTube](https://www.youtube.com/watch?v=kCc8FmEb1nY) | English (Recommended) |
+
+---
+
 ## 🏆 One-Line Summary
 
 > **SusaGPT overall power me GPT-2 ya LLaMA 3 jaisa nahi hai, lekin architecture ke andar kaafi modern ideas use karta hai — aur sabse badi baat ye hai ki tumne ise scratch se khud build kiya hai. 🎉**

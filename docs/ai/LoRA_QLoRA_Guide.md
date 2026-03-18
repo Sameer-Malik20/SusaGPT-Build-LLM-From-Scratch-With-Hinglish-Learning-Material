@@ -145,6 +145,16 @@ Comparison: **16.7M vs 65K**. LoRA is ~255x more efficient! ✅</details>
 
 ---
 
+## 📺 Video Resources (Hindi/Urdu)
+
+| Topic | Link | Language |
+|-------|------|----------|
+| **LoRA & QLoRA Detailed** | [Watch on YouTube](https://www.youtube.com/watch?v=vV9W-E4D7_U) | Hindi |
+| **Fine-tuning LLM Simply** | [Watch on YouTube](https://www.youtube.com/watch?v=XW9_nE_X77s) | Hindi |
+| **Quantization Basics** | [Watch on YouTube](https://www.youtube.com/watch?v=vYV_nE4Q77s) | Urdu/Hindi |
+
+---
+
 ## 🏆 Final Summary
 
 > **LoRA/QLoRA is the "AI Hacker's Way" to train models.** 

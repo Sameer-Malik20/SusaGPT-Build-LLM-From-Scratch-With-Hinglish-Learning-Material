@@ -668,6 +668,15 @@ D) Jab tool use karna ho
 
 ---
 
+## 📺 Video Resources (Hindi/Urdu)
+
+| Topic | Link | Language |
+|-------|------|----------|
+| **Agentic AI 🚀 Smart Agents** | [Watch on YouTube](https://www.youtube.com/watch?v=N4E4Q77s) | Hindi |
+| **Cognitive Architectures (Agents)** | [Watch on YouTube](https://www.youtube.com/watch?v=kCc8FmEb1nY) | English (Recommended) |
+
+---
+
 ## 🔗 Resources
 
 | Resource | Link |
