@@ -469,9 +469,9 @@ D) SusaGPT ki training data GPT-2 se zyada hai
 
 | Topic | Link | Language |
 |-------|------|----------|
-| **Transformers Architecture** | [Watch on YouTube](https://www.youtube.com/watch?v=33K897OIn7Y) | Hindi |
-| **Encoder vs Decoder Models** | [Watch on YouTube](https://www.youtube.com/watch?v=U0f_p-zY77E) | Hindi |
-| **Build GPT from Scratch** | [Watch on YouTube](https://www.youtube.com/watch?v=kCc8FmEb1nY) | English (Recommended) |
+| **Transformers Architecture** | [Watch on YouTube](https://www.youtube.com/watch?v=3bPhDUSAUYI) | Hindi |
+| **Encoder vs Decoder Models** | [Watch on YouTube](https://www.youtube.com/watch?v=pAnuHkS0c00) | Hindi |
+| **Build GPT from Scratch** | [Watch on YouTube](https://www.youtube.com/watch?v=kCc8FmEb1nY) | English |
 
 ---
 

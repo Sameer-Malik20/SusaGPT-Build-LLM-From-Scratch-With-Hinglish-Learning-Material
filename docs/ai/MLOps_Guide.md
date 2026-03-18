@@ -130,9 +130,9 @@ CMD ["python", "api.py"]
 
 | Topic | Link | Language |
 |-------|------|----------|
-| **MLOps Roadmap 2026** | [Watch on YouTube](https://www.youtube.com/watch?v=XW9_nE_X77s) | Hindi |
-| **End-to-End MLOps Project** | [Watch on YouTube](https://www.youtube.com/watch?v=vYV_nE4Q77s) | Hindi |
-| **Model Deployment (Docker/Flask)** | [Watch on YouTube](https://www.youtube.com/watch?v=vV9W-E4D7_U) | Urdu/Hindi |
+| **MLOps Roadmap 2025/26** | [Watch on YouTube](https://www.youtube.com/watch?v=H4fZ3HFv684) | Hindi |
+| **End-to-End MLOps Project** | [Watch on YouTube](https://www.youtube.com/watch?v=J_0vUfXBy-I) | Hindi |
+| **Model Deployment (Docker/vLLM)** | [Watch on YouTube](https://www.youtube.com/watch?v=SrYXAd4nMvQ) | Urdu/Hindi |
 
 ---
 

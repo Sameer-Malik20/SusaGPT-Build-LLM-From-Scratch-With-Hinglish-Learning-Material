@@ -632,9 +632,9 @@ Dekho kaunsa better hai! Aise questions try karo jo specific facts ke baare mein
 
 | Topic | Link | Language |
 |-------|------|----------|
-| **RAG Explained in Hindi** | [Watch on YouTube](https://www.youtube.com/watch?v=T-D1OfcDW1M) | Hindi |
-| **LangChain + RAG Full Tutorial** | [Watch on YouTube](https://www.youtube.com/watch?v=3y_fOnHESpw) | Hindi |
-| **Vector Databases (ChromaDB)** | [Watch on YouTube](https://www.youtube.com/watch?v=vV9W-E4D7_U) | Hindi |
+| **RAG Explained in Hindi** | [Watch on YouTube](https://www.youtube.com/watch?v=J_0vUfXBy-I) | Hindi |
+| **LangChain + RAG Full Tutorial** | [Watch on YouTube](https://www.youtube.com/watch?v=1F_E5hI1VfI) | Hindi |
+| **Vector Databases (ChromaDB)** | [Watch on YouTube](https://www.youtube.com/watch?v=SrYXAd4nMvQ) | Hindi |
 
 ---
 

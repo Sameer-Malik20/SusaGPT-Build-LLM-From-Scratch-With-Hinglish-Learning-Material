@@ -116,6 +116,6 @@ AI Engineer =
 - [DeepLearning.AI (Coursera/DeepLearning.ai)](https://www.deeplearning.ai/short-courses/)
 
 ### 📺 Video Roadmaps (Hindi/Urdu)
-- [**AI Engineer Roadmap 2026**](https://www.youtube.com/watch?v=XW9_nE_X77s)
-- [**Complete Generative AI Course**](https://www.youtube.com/watch?v=vV9W-E4D7_U)
-- [**Math for Machine Learning**](https://www.youtube.com/watch?v=V9XW-E4D7_U)
+- [**AI Engineer Roadmap 2025/26**](https://www.youtube.com/watch?v=H4fZ3HFv684)
+- [**Complete Generative AI Course**](https://www.youtube.com/watch?v=J_0vUfXBy-I)
+- [**Math for Machine Learning**](https://www.youtube.com/playlist?list=PLKnIA16_RmvYu0fS_RuIB2eTbJcTFdrAA)

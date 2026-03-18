@@ -672,8 +672,8 @@ D) Jab tool use karna ho
 
 | Topic | Link | Language |
 |-------|------|----------|
-| **Agentic AI 🚀 Smart Agents** | [Watch on YouTube](https://www.youtube.com/watch?v=N4E4Q77s) | Hindi |
-| **Cognitive Architectures (Agents)** | [Watch on YouTube](https://www.youtube.com/watch?v=kCc8FmEb1nY) | English (Recommended) |
+| **Agentic AI 🚀 Smart Agents** | [Watch on YouTube](https://www.youtube.com/playlist?list=PLmPj1e7oP7jHkP1N3YvQ1j2J5d6z4Z0L1) | Hindi |
+| **Cognitive Architectures (Agents)** | [Watch on YouTube](https://www.youtube.com/watch?v=J_0vUfXBy-I) | Hindi |
 
 ---
 

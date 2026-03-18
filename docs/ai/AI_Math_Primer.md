@@ -121,9 +121,9 @@ LLMs mein attention score aise banta hai:
 
 | Topic | Link | Language |
 |-------|------|----------|
-| **Linear Algebra for AI/ML** | [Watch on YouTube](https://www.youtube.com/watch?v=V9XW-E4D7_U) | Hindi |
-| **Calculus for AI/ML** | [Watch on YouTube](https://www.youtube.com/watch?v=X9W-E4D7_U) | Hindi |
-| **The Math of Neural Networks** | [Watch on YouTube](https://www.youtube.com/watch?v=3y_fOnHESpw) | Hindi |
+| **Linear Algebra for AI/ML** | [Watch on YouTube](https://www.youtube.com/playlist?list=PLKnIA16_RmvYu0fS_RuIB2eTbJcTFdrAA) | Hindi |
+| **Calculus for AI/ML** | [Watch on YouTube](https://www.youtube.com/playlist?list=PLKnIA16_RmvbYFaaeLY28cWeqV-3vADST) | Hindi |
+| **The Math of Neural Networks** | [Watch on YouTube](https://www.youtube.com/watch?v=1F_E5hI1VfI) | Hindi |
 
 ---
 

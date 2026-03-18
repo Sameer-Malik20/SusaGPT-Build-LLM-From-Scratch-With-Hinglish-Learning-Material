@@ -632,9 +632,9 @@ D) Jab cost bachani ho
 
 | Topic | Link | Language |
 |-------|------|----------|
-| **AI Agents Crash Course** | [Watch on YouTube](https://www.youtube.com/watch?v=YV_nE4Q77s) | Hindi |
-| **LangChain Agents Tutorial** | [Watch on YouTube](https://www.youtube.com/watch?v=vV9W-E4D7_U) | Hindi |
-| **Agentic AI Explained Simply** | [Watch on YouTube](https://www.youtube.com/watch?v=N4E4Q77s) | Urdu/Hindi |
+| **AI Agents Crash Course** | [Watch on YouTube](https://www.youtube.com/watch?v=J_0vUfXBy-I) | Hindi |
+| **LangChain Agents Tutorial** | [Watch on YouTube](https://www.youtube.com/watch?v=1F_E5hI1VfI) | Hindi |
+| **Agentic AI 🚀 Smart Agents** | [Watch on YouTube](https://www.youtube.com/playlist?list=PLmPj1e7oP7jHkP1N3YvQ1j2J5d6z4Z0L1) | Urdu/Hindi |
 
 ---
 

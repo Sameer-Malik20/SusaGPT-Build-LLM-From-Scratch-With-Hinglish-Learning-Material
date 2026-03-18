@@ -149,9 +149,9 @@ Comparison: **16.7M vs 65K**. LoRA is ~255x more efficient! ✅</details>
 
 | Topic | Link | Language |
 |-------|------|----------|
-| **LoRA & QLoRA Detailed** | [Watch on YouTube](https://www.youtube.com/watch?v=vV9W-E4D7_U) | Hindi |
-| **Fine-tuning LLM Simply** | [Watch on YouTube](https://www.youtube.com/watch?v=XW9_nE_X77s) | Hindi |
-| **Quantization Basics** | [Watch on YouTube](https://www.youtube.com/watch?v=vYV_nE4Q77s) | Urdu/Hindi |
+| **LoRA & QLoRA Detailed** | [Watch on YouTube](https://www.youtube.com/watch?v=SrYXAd4nMvQ) | Hindi |
+| **Fine-tuning LLM Simply** | [Watch on YouTube](https://www.youtube.com/watch?v=1F_E5hI1VfI) | Hindi |
+| **Quantization Basics** | [Watch on YouTube](https://www.youtube.com/watch?v=HuA36nUeFwx) | Urdu/Hindi |
 
 ---
 
