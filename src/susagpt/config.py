@@ -38,6 +38,8 @@ MODEL_CONFIG = {
 
 # Byte-level BPE tokenizer config:
 # 256 base bytes ke upar merges add hote hain.
+# Data abhi chhota ho to current tokenizer ko hi use karo.
+# Data future me bade to target_vocab_size tune kiya ja sakta hai.
 TOKENIZER_CONFIG = {
     "target_vocab_size": 3000,
 }

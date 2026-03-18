@@ -1,0 +1,96 @@
+SusaGPT Generation Q&A Report
+========================================
+
+Run context:
+- Command path used: python generate.py logic
+- Model checkpoint used: artifacts/models/SusaGPT.pt
+- Tokenizer used: artifacts/tokenizer/tokenizer.json
+- Tokenizer vocab size: 2262
+- Note: current run intentionally used base model only, because fine-tuned/RLHF checkpoints have older vocab size mismatch
+
+
+Easy Questions (10)
+----------------------------------------
+
+1. Q: what does susalabs do
+A: and solutions.
+SusaLabs offers CRM services, AI app development, and custom software development services tailored for startups and SMEs, ensuring
+
+2. Q: what kind of company is susalabs
+A: and custom software development services tailored for startups and SMEs, ensuring high-quality solutions without breaking the bank.
+SusaLabs offers cost-effective
+
+3. Q: what services does susalabs offer
+A: 8th Floor, Golf Course Ext Rd, Sector 58, Gurugram, on our AI app development, and custom software solutions.-
+SusaLabs offers
+
+4. Q: does susalabs build crm systems
+A: and clinical trials and more, designed to drive business growth and efficiency.
+Partner with SusaLabs for innovative software services in
+
+5. Q: does susalabs work in healthcare
+A: AI with and or our to rehabilitation for education, and more, designed to drive business growth and efficiency.
+Partner Custom
+
+6. Q: does susalabs build mobile apps
+A: with SusaLabs for Your Next Tech Project?
+Why Choose SusaLabs for innovative software services in healthcare, finance, education, and robust
+
+7. Q: does susalabs build web apps
+A: and the with SusaLabs for innovative software services in healthcare, finance, education, and more, designed to drive business growth and
+
+8. Q: what industries does susalabs serve
+A: CRM dashboards, and clinical trials Tower 1, 8th Floor, Golf Course Ext Rd, Sector 58, Gurugram, Haryana your You we
+
+9. Q: what is artificial intelligence
+A: ensuring high-quality solutions without breaking the bank.
+SusaLabs offers cost-effective custom software development services tailored for startups and SMEs, ensuring
+
+10. Q: what is a crm
+A: or, SusaLabs faster without breaking the future of technology solutions
+Custom Software Development Services for Startups
+Build Scalable Custom Applications
+
+
+Medium Questions (5)
+----------------------------------------
+
+1. Q: how does ai help healthcare
+A: 8th Floor, Golf Course Ext Rd, Sector 58, Gurugram, Haryana with our AI app development, and custom software development services
+
+2. Q: why is custom software useful
+A: and AI help and our your vision to solutions.
+From ideation to deployment, SusaLabs provides comprehensive software development services to
+
+3. Q: what is predictive analytics
+A: and the bank.
+SusaLabs offers cost-effective custom software development services tailored for startups and SMEs, ensuring high-quality solutions without breaking
+
+4. Q: what is microservices architecture
+A: 8th Floor, Golf Course Ext Rd, Sector 58, Gurugram, education, and custom software development services tailored for startups and SMEs,
+
+5. Q: what makes susalabs different
+A: and clinical trials and clinical trials and faster with SusaLabs for Your Next Tech Project?
+Why Choose SusaLabs for innovative
+
+
+Hard Questions (5)
+----------------------------------------
+
+1. Q: how would susalabs design a secure multilingual healthcare crm for hospitals and insurers
+A: we SusaLabs provides comprehensive software development services tailored for startups ensuring SMEs, ensuring high-quality solutions without breaking the bank.
+SusaLabs
+
+2. Q: compare susalabs with gpt4 and llama 3 for enterprise healthcare work
+A: and custom software development services tailored for startups ensuring SMEs, ensuring high-quality solutions without breaking the bank.
+SusaLabs offers cost-effective
+
+3. Q: what are the risks of using ai in medical diagnostics and how should they be handled
+A: and faster with SusaLabs for Your Next Tech Project?
+Magnum Tower 1, 8th Floor, Golf Course Ext Rd, Sector 58,
+
+4. Q: design a roadmap for scaling susalabs from startup clients to enterprise global clients
+A: our your and in the Tower 1, 8th Floor, Golf Course Ext Rd, Sector 58, Gurugram, Haryana technology in healthcare,
+
+5. Q: explain quantum computing with examples from physics and chemistry
+A: CRM SusaLabs offers cost-effective custom software development services tailored for startups ensuring SMEs, ensuring high-quality solutions without breaking the bank.

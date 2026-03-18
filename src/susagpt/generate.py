@@ -22,6 +22,12 @@ from .tokenizer import Tokenizer
 # 2. quantized model load ho sakta hai
 # 3. top-k / top-p / Mirostat sampling hoti hai
 # 4. KV cache aur beam search dono chal sakte hain
+#
+# Important practical note:
+# tokenizer aur model checkpoint ka vocab size match karna bahut zaruri hai.
+# Agar tokenizer 2262 tokens ka hai aur checkpoint 768 tokens par trained hai,
+# to encode ke baad kuch token ids model embedding range ke bahar chale jayenge.
+# Us case me "index out of range" error aata hai.
 
 
 def apply_dynamic_int8_quantization(model):
@@ -39,19 +45,35 @@ def apply_dynamic_int8_quantization(model):
     )
 
 
-def resolve_model_path(prefer_quantized=True):
+def list_candidate_model_paths(prefer_quantized=True):
     candidate_paths = []
 
     if prefer_quantized:
         candidate_paths.append(QUANTIZED_MODEL_PATH)
 
     candidate_paths.extend([RLHF_MODEL_PATH, FINETUNED_MODEL_PATH, BASE_MODEL_PATH])
+    return candidate_paths
+
+
+def resolve_model_path(prefer_quantized=True):
+    candidate_paths = list_candidate_model_paths(prefer_quantized=prefer_quantized)
 
     for path in candidate_paths:
         if Path(path).exists():
             return path
 
     raise FileNotFoundError("Koi trained model file nahi mili.")
+
+
+def load_checkpoint_metadata(checkpoint_path):
+    # Metadata check lightweight safety step hai.
+    # Isse full model banane se pehle ye verify kar sakte hain ki checkpoint
+    # current tokenizer ke saath compatible hai ya nahi.
+    checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+    return {
+        "vocab_size": checkpoint["vocab_size"],
+        "quantized": checkpoint.get("quantized", False),
+    }
 
 
 def load_model_checkpoint(checkpoint_path):
@@ -76,11 +98,45 @@ def load_model_checkpoint(checkpoint_path):
     return model
 
 
-def load_everything(model_path=None, tokenizer_path=TOKENIZER_PATH, prefer_quantized=True, return_path=False):
-    model_path = model_path or resolve_model_path(prefer_quantized=prefer_quantized)
+def resolve_compatible_model_path(tokenizer, prefer_quantized=True):
+    # Auto-selection me sirf wahi checkpoint choose karte hain jo current tokenizer
+    # ke vocab size ke saath match kare. Isse runtime embedding crash avoid hota hai.
+    for candidate_path in list_candidate_model_paths(prefer_quantized=prefer_quantized):
+        if not Path(candidate_path).exists():
+            continue
 
+        metadata = load_checkpoint_metadata(candidate_path)
+        if metadata["vocab_size"] == tokenizer.vocab_size:
+            return candidate_path
+
+    raise FileNotFoundError(
+        "Current tokenizer ke saath compatible model checkpoint nahi mila."
+    )
+
+
+def validate_tokenizer_model_compatibility(tokenizer, checkpoint_path):
+    metadata = load_checkpoint_metadata(checkpoint_path)
+
+    if metadata["vocab_size"] != tokenizer.vocab_size:
+        raise ValueError(
+            "Tokenizer aur model checkpoint ka vocab size match nahi kar raha. "
+            f"Tokenizer vocab={tokenizer.vocab_size}, "
+            f"checkpoint vocab={metadata['vocab_size']}. "
+            "Current setup me base model use karo ya matching tokenizer/checkpoint pair load karo."
+        )
+
+
+def load_everything(model_path=None, tokenizer_path=TOKENIZER_PATH, prefer_quantized=True, return_path=False):
     tokenizer = Tokenizer()
     tokenizer.load(str(tokenizer_path))
+
+    if model_path is None:
+        model_path = resolve_compatible_model_path(
+            tokenizer=tokenizer,
+            prefer_quantized=prefer_quantized,
+        )
+    else:
+        validate_tokenizer_model_compatibility(tokenizer, model_path)
 
     model = load_model_checkpoint(model_path)
 
@@ -356,10 +412,17 @@ def chat(model, tokenizer):
     print("quit likho band karne ke liye")
     print("beam: likhoge to beam search mode chalega")
     print("miro: likhoge to Mirostat mode chalega")
+    print("Default run me base SusaGPT.pt use ho raha hai")
     print("=" * 60 + "\n")
 
     while True:
-        prompt = input("Tum : ").strip()
+        # Agar script non-interactive environment me run ho rahi ho
+        # to input() EOF de sakta hai. Us case me clean exit karna better hai.
+        try:
+            prompt = input("Tum : ").strip()
+        except EOFError:
+            print("\nInput stream band hai. Chat mode close kiya ja raha hai.")
+            break
 
         if prompt.lower() in ["quit", "exit", "band karo"]:
             print("\nSusaGPT band ho raha hai. Alvida!")
@@ -389,7 +452,17 @@ def chat(model, tokenizer):
 
 
 def main():
-    model, tokenizer = load_everything(prefer_quantized=True)
+    # Default CLI run me base model force kar rahe hain.
+    # Reason:
+    # current tokenizer artifacts/models/SusaGPT.pt ke saath match kar raha hai.
+    # Fine-tuned / RLHF checkpoints old vocab size par bane hue hon to mismatch aa sakta hai.
+    #
+    # Agar future me matching tokenizer ke saath fine-tuned ya RLHF checkpoint banana ho,
+    # tab load_everything me model_path change karke us checkpoint ko use kiya ja sakta hai.
+    model, tokenizer = load_everything(
+        model_path=BASE_MODEL_PATH,
+        prefer_quantized=False,
+    )
 
     print("\n--- Auto Tests ---")
     test_prompts = [
