@@ -1,4 +1,4 @@
-# 🚀 Full AI Engineer Roadmap — 2024 Edition
+# 🚀 Full AI Engineer Roadmap — 2026 Edition
 > **Goal:** Zero Se Hero AI Engineer Bano | **Language:** Hinglish | **Estimated Time:** 3-6 Months
 
 ---

@@ -7,7 +7,7 @@
 
 | Feature | SusaGPT | GPT-2 | LLaMA 3 | GPT-4 |
 |---------|---------|-------|---------|-------|
-| Year | 2025 | 2019 | 2024 | 2023 |
+| Year | 2026 | 2019 | 2024 | 2023 |
 | Parameters | ~1M | 117M | 8B | ~1.8T (est.) |
 | Training Data | ~8K tokens | 40GB | 15T tokens | Unknown (massive) |
 | Positional | **RoPE** ✅ | Fixed | **RoPE** ✅ | RoPE |

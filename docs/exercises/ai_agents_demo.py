@@ -39,7 +39,7 @@ def web_search_tool(query):
     fake_results = {
         "python tutorials": ["Python.org docs", "Real Python", "W3Schools Python"],
         "machine learning": ["Coursera ML", "Fast.ai", "Kaggle Courses"],
-        "ai trends 2025": ["MIT Tech Review", "Wired AI", "VentureBeat"],
+        "ai trends 2026": ["MIT Tech Review", "Wired AI", "VentureBeat"],
     }
     for key in fake_results:
         if key in query.lower():

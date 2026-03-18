@@ -89,7 +89,7 @@ prompt = "Is invoice mein se 'Total Amount' aur 'Due Date' extract karo."
 
 # Output:
 # Total Amount: Rs 15,400
-# Due Date: 25th March 2024
+# Due Date: 25th March 2026
 ```
 
 ---
