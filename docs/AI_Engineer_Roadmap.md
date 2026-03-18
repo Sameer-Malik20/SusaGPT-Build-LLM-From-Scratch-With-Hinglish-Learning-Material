@@ -111,5 +111,6 @@ AI Engineer =
 
 ## 🔗 Final Resource List (Summary)
 - [Transformer Blog (Illustrated)](https://jalammar.github.io/illustrated-transformer/)
-- [Building LLM Apps](https://github.com/FullStackRetrieval-com/RetrievalAugmentedGeneration)
+- [The LLM Course (Hands-on Repo)](https://github.com/mlabonne/llm-course)
+- [Building LLM Apps (OpenAI Guide)](https://platform.openai.com/docs/guides/llm-apps)
 - [DeepLearning.AI (Coursera/DeepLearning.ai)](https://www.deeplearning.ai/short-courses/)
