@@ -1,68 +1,152 @@
-# Filename: MLOps_Guide_v2.md
+# 🏗️ MLOps Guide v2: AI Operations Lifecycle (Expert Edition)
+> **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Master CI/CD for LLMs, Data Versioning, Model Registries, and A/B Testing
 
-# MLOps Guide v2: Production Lifecycle (Advanced Edition)
+---
 
-AI sirf model code nahi hai, ye poora software infrastructure hai. MLOps (Machine Learning Operations) ensure karta hai ki model production mein fail na ho.
+## 📋 Is Guide Se Kya Seekhoge
 
-## 1. CI/CD for ML: GitHub Actions
-Har baar jab aap model code change karte hain, CI (Continuous Integration) tests run hone chahiye (Lints, Unit Tests). Aur CD (Continuous Deployment) naye container ko server pe deploy karne ke liye use hota hai.
+| Section | Topic | Why? |
+|---------|-------|------|
+| 1. CI/CD for LLMs | Automated Testing & Deployment | Fast releases |
+| 2. Feature Stores | Centralized Data Management | Unified features |
+| 3. Model Versioning (MLflow) | Registry, Tracking, Staging | Model lifecycle |
+| 4. Data Version Control (DVC) | Git for data files | Dataset management |
+| 5. A/B Testing & Canary | Traffic splitting, Metrics | Safe production |
+| 6. Data Pipelines & Airflow | DAGs, ETL, Scheduling | Automated training |
+
+---
+
+## 1. ⚙️ CI/CD for LLMs: Automate the AI Workflow
+
+Har software team code track karti hai (GitHub), lekin ML team ko **Code + Metadata + Model Weights** teenon track karne hote hain.
+
+### A. CI (Continuous Integration)
+Har git push par running:
+- **Lints:** PEP8 (Python standards).
+- **Unit Tests:** `pytest` model call returns expected shape.
+- **Model Eval:** Small test dataset par accuracy check.
+
+### B. CD (Continuous Deployment)
+- Auto-build Docker Image.
+- Push to Hub (Docker Hub/GHCR).
+- Deploy to Kubernetes/Cloud.
 
 ```yaml
-# Simple GitHub Action pipeline logic
+# GitHub Action logic
 # jobs:
-#   test:
-#     run: pytest tests/
-#   deploy:
-#     run: docker build -t my-ai . && docker push my-ai
+#   build:
+#     - run: docker build -t susagpt:v1 .
+#     - run: docker push susagpt:v1
 ```
 
-## 2. Model Versioning: MLflow aur Registry
-Aapne 10 models train kiye, kismein kya hyperparameters the aur prediction score kya tha? MLflow metadata track karta hai aur model registry mein "Production", "Staging" tags rakhta hai.
+---
+
+## 2. 🗄️ Feature Stores (Feast): Data Centralization
+
+AI models ko features (e.g. User age, Shopping history) fast chahiye. 
+**Feature Store** data ko **Offline (Training)** aur **Online (Inference)** dono ke liye consistently serve karta hai.
+
+```mermaid
+graph LR
+    A[Raw Data] --> B[ETL Pipeline]
+    B --> C[Feature Store]
+    C --> D[Training Model]
+    C --> E[Inference API]
+```
+
+---
+
+## 3. 📉 Model Versioning with MLflow
+
+Aapne models train kiye aur result CSV mein likh diye? **Galti!**
+`MLflow` track karta hai:
+1. **Params:** Learning Rate, Epochs.
+2. **Metrics:** Accuracy, F1 Score.
+3. **Artifacts:** Actual `.pth` ya `.safetensors` model files.
 
 ```python
 import mlflow
 
-# Tracking experiments
-# with mlflow.start_run():
-#     mlflow.log_param("lr", 0.001)
-#     mlflow.log_metric("accuracy", 0.95)
-#     mlflow.pytorch.log_model(model, "model")
+# 1. Start tracking logic
+with mlflow.start_run():
+    mlflow.log_param("optimizer", "AdamW")
+    mlflow.log_metric("eval_acc", 0.92)
+    # mlflow.pytorch.log_model(model, "model_v1")
 ```
 
-## 3. Feature Stores: Feast ka Basic Example
-Large systems mein same features (Age, History, etc.) multiple models use karte hain. Feature store isse centralize kar deta hai. 
+---
 
-## 4. A/B Testing for Models: 2 Models ka Muqabla
-Production mein hum model change nahi karte, 2 models chalate hain (Model A 90% traffic, Model B 10% traffic). Jin 10% users ko naya model dikha rahe hain, unka response check karte hain metrics ke basis pe.
+## 4. 📂 Data Version Control (DVC): Git for Datasets
 
-```python
-# Traffic split pseudo-logic
-# if random_user_hash % 100 < 10:
-#     return model_B(query)
-# else:
-#     return model_A(query)
+Large datasets (10GB+) Git mein push nahi ho sakte. **DVC** metadata local git mein rakhta hai aur actual data cloud (S3/GCP) mein store karta hai.
+
+```bash
+# Terminal logic
+# dvc init
+# dvc add dataset.zip
+# git add dataset.zip.dvc .gitignore
+# git commit -m "Add dataset v1"
 ```
 
-## 5. Data Pipelines: Airflow ya Prefect
-AI model train karne ke liye raw data clean ho kar model tak aana chahiye. Airflow blocks/scheduled-tasks banata hai raw files process karne ke liye.
+---
 
-```python
-# Airflow Task logic
-# def process_data():
-#     # clean csv code
-#     pass
-# task_1 = PythonOperator(task_id='clean_data', python_callable=process_data, dag=dag)
+## 5. 🚦 Production Deployment: Traffic Splitting
+
+Directly model replace karna unsafe hai. 
+- **Canary Deployment:** Sabse pehle naya model 5% users ko dikhao. Agar output sahi hai, toh 100% karo.
+- **A/B Testing:** "Model A" vs "Model B" ka accuracy real users ke feedback ke basis pe compare karo.
+
+```mermaid
+graph TD
+    A[User Traffic] --> B[Traffic Splitter]
+    B -- "90%" --> C[Production Model v1]
+    B -- "10%" --> D[New Model v2]
+    C --> E[User Feedback]
+    D --> E
+    E --> F[Decision: Rollback or Rollout]
 ```
 
-## 6. Model Drift Detection: Kab Model Purana Ho Gaya?
-- **Concept Drift:** Log naye tarike se baat kar rahe hain, purana pattern (Hate Speech) change ho gaya.
-- **Data Drift:** Log naya phones ya devices use kar rahe hain, input distributions badal gayi hain.
+---
 
-## 7. Mini Project: End-to-End MLOps Pipeline
-Project Steps:
-1. **GitHub Repository:** Model code + Dockerfile.
-2. **MLflow Tracking:** Training metrics track karna (wandb integration).
-3. **Docker Hub:** Auto-build aur push model images.
-4. **Monitoring Dashboard:** Monitor latency with Grafana/Prometheus logic.
-   - Command check: `mlflow ui` local UI dekhne ke liye.
-   - Git push: Auto-trigger training logic through Webhooks.
+## 6. 🔄 Data Pipelines: Airflow & DAGs
+
+Manual training band karein. **Airflow** workflow banata hai jo raw data se model weights tak ki journey ko automate karta hai.
+
+- **Tasks:** Extract -> Clean -> Train -> Evaluate -> Deploy.
+- **DAG (Directed Acyclic Graph):** Step-by-step logic nodes.
+
+---
+
+## 🏗️ Mega Project: End-to-End MLOps Pipeline for Llama Model
+
+Workflow Logic (Production):
+1. **GitHub Trigger:** Code change triggers CI.
+2. **DVC Pull:** Fetch training data from S3.
+3. **Training Node:** Train model via PyTorch on remote server.
+4. **MLflow Log:** Every run logged to server.
+5. **Docker Build:** Create image of best model version.
+6. **Kubernetes Deploy:** Serve via vLLM behind a Load Balancer.
+
+---
+
+## 🧪 Quick Test — Professional Level Check!
+
+### Q1: Model Registry logic
+"Model Staging" aur "Model Production" mein kya fark hai?
+<details><summary>Answer</summary>
+**Staging** model wo hai jo tests pass kar chuka hai lekin abhi internal testers use kar rahe hain. **Production** model wo hai jo real traffic (Public users) handle kar raha hai. MLflow tags change karke ye management asan hota hai.
+</details>
+
+### Q2: Data Leakage logic
+"Data leakage" production mein kyu harmful hai?
+<details><summary>Answer</summary>
+Agar training data mein test data ke features leaked hain, toh model high performance dikhayega metrics mein but real production environment mein fail ho jayega (Unexpected results).
+</details>
+
+---
+
+## 🔗 Resources
+- [Full MLOps Course (FreeCodeCamp)](https://www.youtube.com/watch?v=06-AZXmwHjo)
+- [MLflow Documentation](https://www.mlflow.org/docs/latest/index.html)
+- [DVC Official Guide](https://dvc.org/doc)
+- [Airflow for Beginners](https://airflow.apache.org/docs/apache-airflow/stable/index.html)
