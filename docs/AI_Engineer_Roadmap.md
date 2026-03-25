@@ -46,7 +46,7 @@ Bina web basics ke AI apps ko users tak nahi pahuncha paoge.
 ### 🟦 Month 1: The Foundation (Python & Math)
 - **Topic 1:** Python for AI (Lists, Dicts, NumPy, PyTorch Tensors).
 - **Topic 2:** Probability & Linear Algebra (Dot Product, Softmax).
-- **Doc:** [AI_Math_Mastery.md](docs/ai/AI_Math_Mastery.md)
+- **Doc:** [AI_Math_Mastery.md](docs/llm_learning/AI_Math_Mastery.md)
 - **Project:** 🧠 Simple Neural Network from scratch in Python.
 
 ---
@@ -54,7 +54,7 @@ Bina web basics ke AI apps ko users tak nahi pahuncha paoge.
 ### 🟩 Month 2: LLM Internals (The Transformer)
 - **Topic 1:** Transformer Architecture (Attention, RoPE, RMSNorm).
 - **Topic 2:** Tokenization (BPE, Subword).
-- **Doc:** [Transformer_Architecture_Inside_Out.md](docs/ai/Transformer_Architecture_Inside_Out.md)
+- **Doc:** [Transformer_Architecture_Inside_Out.md](docs/llm_learning/Transformer_Architecture_Inside_Out.md)
 - **Project:** 🏗️ Build SusaGPT Architecture and train on small data.
 
 ---
@@ -63,7 +63,7 @@ Bina web basics ke AI apps ko users tak nahi pahuncha paoge.
 - **Topic 1:** Advanced RAG (Chunking, Vector DBs, Hybrid Search).
 - **Topic 2:** Prompt Engineering (CoT, ReAct).
 - **Topic 3:** Agents (Tools, Memory, Planning).
-- **Docs:** [RAG_Guide.md](docs/ai/RAG_Guide.md), [Agentic_AI_Guide.md](docs/ai/Agentic_AI_Guide.md), [Prompt_Engineering_Guide.md](docs/ai/Prompt_Engineering_Guide.md)
+- **Docs:** [RAG_Guide.md](docs/llm_learning/RAG_Guide.md), [Agentic_AI_Guide.md](docs/agentic_ai_learning/Agentic_AI_Guide.md), [Prompt_Engineering_Guide.md](docs/llm_learning/Prompt_Engineering_Guide.md)
 - **Project:** 📊 PDF Chatbot using ChromaDB + any LLM.
 
 ---
@@ -71,7 +71,7 @@ Bina web basics ke AI apps ko users tak nahi pahuncha paoge.
 ### 🟧 Month 4: Fine-tuning & PEFT
 - **Topic 1:** Efficient Fine-tuning (LoRA/QLoRA).
 - **Topic 2:** Supervised Fine-tuning (SFT) & RLHF basics.
-- **Doc:** [FineTuning_RLHF_Mastery.md](docs/ai/FineTuning_RLHF_Mastery.md)
+- **Doc:** [FineTuning_RLHF_Mastery.md](docs/llm_learning/FineTuning_RLHF_Mastery.md)
 - **Project:** 🌀 Fine-tune Llama-3-8B on custom data using QLoRA.
 
 ---
@@ -79,7 +79,7 @@ Bina web basics ke AI apps ko users tak nahi pahuncha paoge.
 ### 🟥 Month 5: MLOps & Production
 - **Topic 1:** Model Serving (vLLM, TGI, Docker).
 - **Topic 2:** Multi-modal AI (Vision & Audio).
-- **Docs:** [MLOps_Lifecycle_Mastery.md](docs/ai/MLOps_Lifecycle_Mastery.md), [Multimodal_AI_Guide.md](docs/ai/Multimodal_AI_Guide.md)
+- **Docs:** [MLOps_Lifecycle_Mastery.md](docs/ai_foundations_and_ops/MLOps_Lifecycle_Mastery.md), [Multimodal_AI_Guide.md](docs/llm_learning/Multimodal_AI_Guide.md)
 - **Project:** 🚀 Deploy a full-stack AI App with monitoring and caching.
 
 ---

@@ -7,80 +7,72 @@
 
 ```mermaid
 flowchart TD
-    DOCS["📁 docs/"] --> FE["📁 frontend/\nUI & Logic Mastery"]
+    DOCS["📁 docs/"] --> AI_LLM["📁 llm_learning/\nTransformer & Fine-Tuning"]
+    DOCS --> AI_AGENTS["📁 ai_agents_learning/\nMemory & Tool-use"]
+    DOCS --> AI_AGENTIC["📁 agentic_ai_learning/\nOrchestration & Workflows"]
+    DOCS --> AI_OPS["📁 ai_foundations_and_ops/\nMLOps & Frameworks"]
+    
+    DOCS --> FE["📁 frontend/\nUI & Logic Mastery"]
     DOCS --> BE["📁 backend/\nScalable Logic & Infra"]
     DOCS --> DB["📁 dbms/\nData Persistence & Scaling"]
     DOCS --> FS["📁 fullstack/\nModern App Frameworks"]
-    DOCS --> AI["📁 ai/\nDeep AI & LLM Models"]
 
-    FE --> JS["📜 JavaScript_Deep_Dive.md"]
-    FE --> RE["⚛️ React_Production_Mastery.md"]
-    BE --> ND["⚙️ NodeJS_Internals_and_Scaling.md"]
-    BE --> SEC["🛡️ API_Architecture_and_Security.md"]
-    DB --> SQL["🐘 SQL_Mastery_Postgres.md"]
-    DB --> NOSQL["📁 NoSQL_and_Caching_Mastery.md"]
-    FS --> NX["🌐 NextJS_Production_Mastery.md"]
+    AI_LLM --> TRANS["📜 Transformer_Architecture.md"]
+    AI_AGENTS --> AG["📜 AI_Agents_Guide.md"]
+    AI_AGENTIC --> AA["📜 Agentic_AI_Guide.md"]
+    AI_OPS --> MLOPS["📜 MLOps_Lifecycle.md"]
 ```
 
 ---
 
-## 📁 1. Frontend Deep Dive (All Topics)
+## 📁 1. LLM Mastery (All Topics)
 
 | Module | Core Mastery File | Final Goal |
 |--------|-------------------|------------|
-| **Core JS** | [JavaScript_Deep_Dive.md](frontend/JavaScript_Deep_Dive.md) | V8, Event Loop, Closures, Prototypes. |
-| **Framework**| [React_Production_Mastery.md](frontend/React_Production_Mastery.md) | Fiber, Reconciliation, Advanced Hooks. |
-| **Speed** | [Frontend_Performance_Mastery.md](frontend/Frontend_Performance_Mastery.md)| Web Vitals, Rendering, LCP/FID/CLS. |
-| **Storage** | [State_Management_Advanced.md](frontend/State_Management_Advanced.md) | Zustand, Redux, React Query (Caching). |
+| **Core** | [Transformer_Architecture_Inside_Out.md](llm_learning/Transformer_Architecture_Inside_Out.md) | RoPE, GQA, MHA deep dive. |
+| **Logic** | [Tokenization_and_Data_Prep.md](llm_learning/Tokenization_and_Data_Prep.md) | BPE & Data Cleaning. |
+| **Training**| [FineTuning_RLHF_Mastery.md](llm_learning/FineTuning_RLHF_Mastery.md) | SFT, LoRA, DPO. |
+| **Retrieval**| [RAG_Guide.md](llm_learning/RAG_Guide.md) | Advanced Chunking & DBs. |
 
 ---
 
-## 📁 2. Backend & Cloud (All Topics)
+## 📁 2. AI Agents & Agentic AI (Specialization)
 
 | Module | Core Mastery File | Final Goal |
 |--------|-------------------|------------|
-| **Runtime** | [NodeJS_Internals_and_Scaling.md](backend/NodeJS_Internals_and_Scaling.md) | Libuv, Cluster, Worker Threads, Streams. |
-| **Security**| [API_Architecture_and_Security.md](backend/API_Architecture_and_Security.md) | JWT/OAuth2, OWASP Defense, GraphQL. |
-| **Infra** | [Infrastructure_and_Microservices.md](backend/Infrastructure_and_Microservices.md)| Docker, Kubernetes, CI/CD, AWS/K8s. |
+| **Memory** | [Agent_Memory_and_Planning.md](ai_agents_learning/Agent_Memory_and_Planning.md) | Long-term memory & CoT. |
+| **Integration**| [MCP_Guide.md](ai_agents_learning/MCP_Guide.md) | Protocols and tool calling. |
+| **Multi-Agent**| [Multi_Agent_Orchestration.md](agentic_ai_learning/Multi_Agent_Orchestration.md) | CrewAI, AutoGen, Graph Flow. |
 
 ---
 
-## 📁 3. Database Management (All Topics)
+## 📁 3. Web & Infrastructure (Fullstack)
 
-| Module | Core Mastery File | Final Goal |
-|--------|-------------------|------------|
-| **Relational**| [SQL_Mastery_Postgres.md](dbms/SQL_Mastery_Postgres.md) | ACID, Normalization, Joins, WAL. |
-| **Flexible** | [NoSQL_and_Caching_Mastery.md](dbms/NoSQL_and_Caching_Mastery.md) | MongoDB Clusters, Redis Patterns. |
-| **Scaling** | [Advanced_Indexing_and_Scaling.md](dbms/Advanced_Indexing_and_Scaling.md) | Sharding, Partitioning, CAP Theorem. |
-
----
-
-## 📁 4. Fullstack Engine (The Modern Way)
-
-- **[NextJS_Production_Mastery.md](fullstack/NextJS_Production_Mastery.md):** SSR, ISR, Server Components, SEO.
-- **[Deployment_CI_CD_Mastery.md](fullstack/Fullstack_Mastery_Guide.md):** GitHub Actions & Cloud Ops.
+| Segment | Mastery File | Goal |
+|---------|--------------|------|
+| **Frontend** | [React_Production_Mastery.md](frontend/React_Production_Mastery.md) | Fiber & UI Perf. |
+| **Backend** | [NodeJS_Internals_and_Scaling.md](backend/NodeJS_Internals_and_Scaling.md)| Libuv & Concurrency. |
+| **DBMS** | [Advanced_Indexing_and_Scaling.md](dbms/Advanced_Indexing_and_Scaling.md) | Sharding & Partitioning. |
 
 ---
 
-## 🎓 Learning Paths (Career Growth)
+## 🎓 Master Path (Career Growth)
 
 ```mermaid
 flowchart TD
-    S["START"] --> F["🎨 Frontend Specialist"]
-    S --> B["⚙️ Backend Architect"]
-    F --> FS["🚀 Fullstack Engineer (Next.js)"]
-    B --> FS
-    FS --> AI["🧠 AI & LLM Engineer (Expert)"]
-    AI --> SEC["🛡️ AI Security & Red Teaming"]
+    S["START"] --> WEB["🌐 Fullstack Developer"]
+    WEB --> LLM["🧠 LLM Expert (Training)"]
+    LLM --> AGENT["🤖 Agentic AI Specialist"]
+    AGENT --> OPS["🚀 AI Solutions Architect"]
 
     style S fill:#4CAF50,color:#fff
-    style SEC fill:#F44336,color:#fff
+    style AGENT fill:#2196F3,color:#fff
 ```
 
 ---
 
-## 🧩 Features of this Docs Library
-- ✅ **Deep Knowledge:** Logic explained from the silicon/engine level.
-- ✅ **Hinglish Expert Explanations:** Real-world analogies.
-- ✅ **Zero to Production:** Includes Docker, CI/CD, and Cloud.
-- ✅ **Self-Sufficient:** No need for courses or external guides.
+## 🧩 Why this Library?
+- ✅ **Ultra-Structured:** Separate folders for LLMs, Agents, and Orchestration.
+- ✅ **Engine-Level Knowledge:** No surface-level stuff.
+- ✅ **Hinglish for Humans:** Memory-friendly explanations.
+- ✅ **Zero-to-Hero:** Every sub-topic covered (Checklists included).
