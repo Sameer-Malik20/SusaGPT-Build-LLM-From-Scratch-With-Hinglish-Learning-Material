@@ -1,5 +1,5 @@
 # 📚 Docs Structure Guide
-> **MyLLM Project ki learning materials ka organized map**
+> **MyLLM Project ki learning materials ka organized map (Updated 2026)**
 
 ---
 
@@ -7,79 +7,70 @@
 
 ```mermaid
 flowchart TD
-    DOCS["📁 docs/"] --> SUSAGPT["📁 susagpt/\nModel-specific guides"]
-    DOCS --> AI["📁 ai/\nAI concepts guides"]
-    DOCS --> ASSETS["📁 assets/\nDiagrams & images"]
+    DOCS["📁 docs/"] --> AI["📁 ai/\nAI & LLM Mastery"]
+    DOCS --> SDESIGN["📁 system_design/\nScalable Architectures"]
+    DOCS --> WEB["📁 Fullstack Web Development"]
+    DOCS --> SEC["📁 security/\nAI & Code Security"]
 
-    SUSAGPT --> SA["📄 SusaGPT_Architecture.md\nGPT-2 vs LLaMA vs SusaGPT"]
-    SUSAGPT --> SS["📄 SusaGPT_Skills.md\nKaunsi skills milti hain"]
-    SUSAGPT --> SD["📄 SusaGPT_Diagram_Guide.md\nVisual system overview"]
+    WEB --> FRONT["📁 frontend/"]
+    WEB --> BACK["📁 backend/"]
+    WEB --> DBMS["📁 dbms/"]
+    WEB --> FS["📁 fullstack/"]
 
-    AI --> MCP["📄 MCP_Guide.md\nModel Context Protocol"]
-    AI --> AIG["📄 AI_Agents_Guide.md\nAI Agents complete guide"]
-    AI --> AAG["📄 Agentic_AI_Guide.md\nAgentic AI systems"]
-
-    ASSETS --> SVG["🖼️ susagpt_vs_big_models.svg\nModel comparison visual"]
+    AI --> FT["📄 Fine-Tuning mastery"]
+    AI --> TRANS["📄 Transformer deep dive"]
+    
+    FRONT --> FM["📄 Frontend_Mastery_Guide.md"]
+    BACK --> BM["📄 Backend_Mastery_Guide.md"]
+    DBMS --> DM["📄 DBMS_Mastery_Guide.md"]
+    FS --> FSM["📄 Fullstack_Mastery_Guide.md"]
 ```
 
 ---
 
-## 📄 File Quick Reference
+## 📄 File Quick Reference (Web & Backend focus)
 
-| File | Content | Level |
-|------|---------|-------|
-| [SusaGPT_Architecture.md](susagpt/SusaGPT_Architecture.md) | Architecture comparison, RoPE/SwiGLU/GQA code examples | Intermediate |
-| [SusaGPT_Skills.md](susagpt/SusaGPT_Skills.md) | Skills with working code demos | Beginner → Intermediate |
-| [SusaGPT_Diagram_Guide.md](susagpt/SusaGPT_Diagram_Guide.md) | Visual diagrams + exercises | Beginner |
-| [MCP_Guide.md](ai/MCP_Guide.md) | Model Context Protocol, working server example | Intermediate |
-| [AI_Agents_Guide.md](ai/AI_Agents_Guide.md) | AI Agents complete guide with real examples | Beginner → Intermediate |
-| [Agentic_AI_Guide.md](ai/Agentic_AI_Guide.md) | Agentic AI concepts + working example | Beginner → Intermediate |
+| Category | Key Mastery Guide | Final Goal |
+|----------|-------------------|------------|
+| **Frontend** | [Frontend_Mastery_Guide.md](frontend/Frontend_Mastery_Guide.md) | React, UI Performance & UX. |
+| **Backend** | [Backend_Mastery_Guide.md](backend/Backend_Mastery_Guide.md) | Scalable APIs, Node.js & Security. |
+| **DBMS** | [DBMS_Mastery_Guide.md](dbms/DBMS_Mastery_Guide.md) | SQL/NoSQL Architecture & Scaling. |
+| **Fullstack** | [Fullstack_Mastery_Guide.md](fullstack/Fullstack_Mastery_Guide.md) | CI/CD, Deployment & Infrastructure. |
 
 ---
 
-## 🎓 Recommended Learning Order
+## 🎓 Recommended Professional Path
 
 ```mermaid
 flowchart TD
-    START["🚀 Start Here"] --> R["📖 Main README.md\n(Project overview)"]
-    R --> SD["📊 SusaGPT_Diagram_Guide.md\n(Visual understanding)"]
-    SD --> SA["🏗️ SusaGPT_Architecture.md\n(Technical details)"]
-    SA --> SS["💪 SusaGPT_Skills.md\n(What you learn)"]
-    SS --> AI["🤖 AI_Agents_Guide.md\n(Agents concept)"]
-    AI --> AAG["🧩 Agentic_AI_Guide.md\n(Agentic systems)"]
-    AAG --> MCP["🔌 MCP_Guide.md\n(Protocol & integration)"]
+    START["🏁 Starters"] --> WEB["🌐 Frontend & Backend Basics"]
+    WEB --> FS["🚀 Fullstack (Next.js/Docker)"]
+    FS --> AI["🧠 AI & LLM Implementation"]
+    AI --> SEC["🛡️ AI Security & System Design"]
 
     style START fill:#4CAF50,color:#fff
-    style MCP fill:#2196F3,color:#fff
+    style SEC fill:#F44336,color:#fff
 ```
 
 ---
 
-## 🧩 Each File Has
-
-- ✅ Mermaid diagrams for visual understanding
-- ✅ Real working code examples (Python)
-- ✅ Hinglish explanations
-- ✅ Exercises with answers
-- ✅ Quick knowledge tests
-- ✅ Resource links
+## 🧩 Learning Features
+- ✅ **Hinglish Explanations:** Analogies used to make complex logic simple.
+- ✅ **Mermaid Diagrams:** Flows for every single architecture.
+- ✅ **Expert Deep Dives:** Zero to Hero content.
+- ✅ **Interview Preps:** Practice problems in every doc.
 
 ---
 
-## 🏃 Quick Start
+## 🏃 Quick Start (Fullstack Dev)
 
-**Pehli baar dekh rahe ho? Yahan se shuru karo:**
+**Industry-ready Developer banna hai? In 4 Guides ko pehle khatam karo:**
+1. **Frontend_Mastery_Guide.md** → UI & React master karo.
+2. **Backend_Mastery_Guide.md** → Logic, APIs & Node.js/Python deep dive.
+3. **DBMS_Mastery_Guide.md** → Data organization check karo.
+4. **Fullstack_Mastery_Guide.md** → Deployment & CI/CD workflow lo.
 
-```
-1. README.md (root) → Project samjho
-2. SusaGPT_Diagram_Guide.md → Visual overview lo
-3. SusaGPT_Skills.md → Samjho kya sikhoge
-4. SusaGPT_Architecture.md → Technical depth lo
-```
-
-**AI concepts sikhna hai? Yahan se:**
-```
-1. AI_Agents_Guide.md → Agents kya hote hain
-2. Agentic_AI_Guide.md → Agentic systems
-3. MCP_Guide.md → Protocol aur integration
-```
+**AI + Software (Advanced):**
+1. **FineTuning_RLHF_Mastery.md** → AI training.
+2. **Inference_Optimization_vLLM_TGI.md** → Performance design.
+3. **LLM_Red_Teaming_Mastery.md** → Hacker-proof AI.

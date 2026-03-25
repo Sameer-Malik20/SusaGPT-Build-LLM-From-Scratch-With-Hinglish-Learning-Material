@@ -30,14 +30,23 @@ mindmap
       Agentic AI
 ```
 
+```
+
 ---
 
 ## 📅 Step-by-Step Learning Plan
 
+### 🟥 Phase 0: Fullstack Web Foundation (The Prerequisites)
+Bina web basics ke AI apps ko users tak nahi pahuncha paoge.
+- **Frontend Mastery:** React, State & Perf. [Frontend_Mastery_Guide.md](docs/frontend/Frontend_Mastery_Guide.md)
+- **Backend Mastery:** Node.js, Python & APIs. [Backend_Mastery_Guide.md](docs/backend/Backend_Mastery_Guide.md)
+- **DBMS Mastery:** SQL, NoSQL & Indexing. [DBMS_Mastery_Guide.md](docs/dbms/DBMS_Mastery_Guide.md)
+- **Fullstack Mastery:** Docker & CI/CD. [Fullstack_Mastery_Guide.md](docs/fullstack/Fullstack_Mastery_Guide.md)
+
 ### 🟦 Month 1: The Foundation (Python & Math)
 - **Topic 1:** Python for AI (Lists, Dicts, NumPy, PyTorch Tensors).
 - **Topic 2:** Probability & Linear Algebra (Dot Product, Softmax).
-- **Doc:** [AI_Math_Primer.md](docs/ai/AI_Math_Primer.md)
+- **Doc:** [AI_Math_Mastery.md](docs/ai/AI_Math_Mastery.md)
 - **Project:** 🧠 Simple Neural Network from scratch in Python.
 
 ---
@@ -45,7 +54,7 @@ mindmap
 ### 🟩 Month 2: LLM Internals (The Transformer)
 - **Topic 1:** Transformer Architecture (Attention, RoPE, RMSNorm).
 - **Topic 2:** Tokenization (BPE, Subword).
-- **Doc:** [SusaGPT_Architecture.md](docs/susagpt/SusaGPT_Architecture.md)
+- **Doc:** [Transformer_Architecture_Inside_Out.md](docs/ai/Transformer_Architecture_Inside_Out.md)
 - **Project:** 🏗️ Build SusaGPT Architecture and train on small data.
 
 ---
@@ -62,7 +71,7 @@ mindmap
 ### 🟧 Month 4: Fine-tuning & PEFT
 - **Topic 1:** Efficient Fine-tuning (LoRA/QLoRA).
 - **Topic 2:** Supervised Fine-tuning (SFT) & RLHF basics.
-- **Doc:** [LoRA_QLoRA_Guide.md](docs/ai/LoRA_QLoRA_Guide.md)
+- **Doc:** [FineTuning_RLHF_Mastery.md](docs/ai/FineTuning_RLHF_Mastery.md)
 - **Project:** 🌀 Fine-tune Llama-3-8B on custom data using QLoRA.
 
 ---
@@ -70,7 +79,7 @@ mindmap
 ### 🟥 Month 5: MLOps & Production
 - **Topic 1:** Model Serving (vLLM, TGI, Docker).
 - **Topic 2:** Multi-modal AI (Vision & Audio).
-- **Docs:** [MLOps_Guide.md](docs/ai/MLOps_Guide.md), [Multimodal_AI_Guide.md](docs/ai/Multimodal_AI_Guide.md)
+- **Docs:** [MLOps_Lifecycle_Mastery.md](docs/ai/MLOps_Lifecycle_Mastery.md), [Multimodal_AI_Guide.md](docs/ai/Multimodal_AI_Guide.md)
 - **Project:** 🚀 Deploy a full-stack AI App with monitoring and caching.
 
 ---
