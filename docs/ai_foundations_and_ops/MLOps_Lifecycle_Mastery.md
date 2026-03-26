@@ -1,6 +1,13 @@
 # 🚀 MLOps Lifecycle Mastery — AI Models in Production (Expert Guide)
 > **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Mastering Deployment, CI/CD, Monitoring, and Scaling for AI (Production Grade)
-
+## 🧭 Core Concepts (Concept-First)
++- MLOps Fundamentals: Applying DevOps principles to machine learning workflows
++- Experiment Tracking: Metadata logging, versioning, and reproducibility for ML models
++- Model Registry: Storage, versioning, and deployment of trained models
++- CI/CD for ML: Automated testing, validation, and deployment pipelines
++- Monitoring & Observability: Performance tracking, drift detection, and alerting systems
++- Scaling & Serving: Batch vs real-time inference, model optimization, and infrastructure
++- Practical Implementation: Tools, frameworks, and production considerations for MLOps
 ---
 
 ## 📋 Table of Contents: Level-wise Learning

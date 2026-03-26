@@ -1,6 +1,12 @@
 # 🐳 Docker & FastAPI: AI Deployment (Expert Guide)
 > **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Master FastAPI AI endpoints, Multi-stage Docker builds, and GPU orchestration
-
+## 🧭 Core Concepts (Concept-First)
++- AI Deployment Fundamentals: Containerization, API design, and orchestration principles
++- FastAPI for AI: Async handling, dependency injection, and endpoint best practices
++- Docker Foundations: Images, layers, caching, and multi-stage build optimization
++- GPU Orchestration: Container toolkit, resource allocation, and multi-container setups
++- Production Readiness: Health checks, secrets management, and resource limits
++- Practical Implementation: Code examples, configuration patterns, and production considerations
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge

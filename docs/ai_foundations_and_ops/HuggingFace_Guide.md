@@ -1,6 +1,13 @@
 # 🤗 Hugging Face: AI Ecosystem (Expert Guide)
 > **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Master transformers, datasets, Spaces, and HF inference
-
+## 🧭 Core Concepts (Concept-First)
++- Hugging Face Hub: Model repository, dataset storage, and version management
++- Transformers Library: Model architectures, tokenizers, and training pipelines
++- Datasets Library: Data loading, preprocessing, and streaming capabilities
++- Trainer API: Fine-tuning workflows, custom loss functions, and evaluation
++- Inference & Deployment: Model serving, API endpoints, and production considerations
++- Gradio & Spaces: Interactive demos, model showcasing, and deployment options
++- Practical Implementation: Code examples, best practices, and real-world usage patterns
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge

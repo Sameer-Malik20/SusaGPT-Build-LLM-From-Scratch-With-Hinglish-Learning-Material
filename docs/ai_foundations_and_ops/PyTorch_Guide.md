@@ -1,6 +1,12 @@
 # 🔥 PyTorch: Deep Learning ka King (Expert Guide)
 > **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Master PyTorch internals & production training
-
+## 🧭 Core Concepts (Concept-First)
++- PyTorch Fundamentals: Tensors, autograd, dynamic computation graphs, and GPU acceleration
++- Neural Network Building: Layers, activation functions, loss functions, and optimization
++- Training Workflows: Data loading, batching, epochs, validation, and checkpointing
++- Advanced Topics: Distributed training, mixed precision, and model serialization
++- Practical Implementation: Code examples, best practices, and production considerations
++- Hands-on Projects: From tensors to complete neural network implementations
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge

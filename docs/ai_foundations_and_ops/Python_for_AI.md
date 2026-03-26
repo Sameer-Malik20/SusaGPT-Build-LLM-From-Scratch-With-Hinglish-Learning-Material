@@ -1,6 +1,13 @@
 # 🐍 Python for AI: Deep Dive Guide
 > **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Master Python for AI & ML
-
+## 🧭 Core Concepts (Concept-First)
++- Python Fundamentals: Data types, control structures, functions, and object-oriented programming
++- Numerical Computing: NumPy arrays, broadcasting, linear algebra, and random number generation
++- Data Manipulation: Pandas for data cleaning, transformation, aggregation, and visualization
++- Deep Learning Basics: Tensors, automatic differentiation, and neural network building with PyTorch
++- AI Development Workflow: Experiment tracking, model training, evaluation, and deployment
++- Practical Implementation: Code examples, best practices, and production considerations
++- Hands-on Projects: From data analysis to complete AI applications
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge
