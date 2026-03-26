@@ -1,6 +1,11 @@
 # 📡 API Architecture & Backend Security — (Production Deep Dive)
 > **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Master REST API Design, GraphQL, gRPC, WebSockets, JWT/OAuth2, and Top-Level Security.
-
+## 🧭 Core Concepts (Concept-First)
++- API Fundamentals: Understanding REST, GraphQL, gRPC, and WebSockets protocols
++- Authentication & Authorization: JWT, OAuth2, session management, and access control
++- Security Best Practices: Input validation, rate limiting, OWASP protections (SQLi, XSS, CSRF)
++- API Design Patterns: Versioning, documentation, microservices, and API gateway
++- Real-world Implementation: Code examples, middleware patterns, and production considerations
 ---
 
 ## 📋 Table of Contents: Secure Backend

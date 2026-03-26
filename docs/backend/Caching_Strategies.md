@@ -1,6 +1,12 @@
 # 💾 Caching Strategies - High-Performance Data Access
 > **Level:** Intermediate → Expert | **Language:** Hinglish | **Goal:** Caching systems design, implementation, aur optimization master karna
-
+## 🧭 Core Concepts (Concept-First)
++- Caching Fundamentals: Understanding cache benefits, trade-offs, and why caching improves performance
++- Cache Hierarchy: Client-side, application, database, distributed, and specialized caching layers
++- Caching Strategies: HTTP caching, Redis/Memcached, query caching, and CDN implementations
++- Cache Invalidation: Techniques for maintaining data consistency when underlying data changes
++- Performance Optimization: Cache warming, prefetching, and monitoring cache hit/miss ratios
++- Practical Implementation: Code examples, configuration patterns, and production considerations
 ---
 
 ## 📋 Table of Contents: Caching Stack

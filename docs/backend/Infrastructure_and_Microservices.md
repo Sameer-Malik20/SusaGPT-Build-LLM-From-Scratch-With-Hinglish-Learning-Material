@@ -1,6 +1,12 @@
 # 🐳 Infrastructure & Microservices — Docker, K8s, and Scaling
 > **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Master Dockerization, Kubernetes, Serverless, Microservices, and Cloud Infrastructure (AWS/GCP).
-
+## 🧭 Core Concepts (Concept-First)
++- Containerization Fundamentals: Docker images, containers, and isolation principles
++- Orchestration Basics: Kubernetes architecture, pods, deployments, and services
++- Serverless Computing: Function-as-a-Service, event-driven execution, and vendor considerations
++- Microservices Architecture: Service decomposition, communication patterns, and data management
++- Cloud Infrastructure: Networking, load balancing, storage, and security in AWS/GCP
++- DevOps Practices: CI/CD pipelines, monitoring, logging, and infrastructure as code
 ---
 
 ## 📋 Table of Contents: The Cloud Engine

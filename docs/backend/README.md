@@ -1,6 +1,13 @@
 # ⚙️ Backend Development - Complete Learning Guide
 > **Language:** Hinglish (Hindi + English) | **Goal:** Modern backend development ki complete education
-
+## 🧭 Core Concepts (Concept-First)
++- Backend Fundamentals: Server-side logic, APIs, databases, and infrastructure
++- API Design: REST, GraphQL, gRPC, WebSockets, and protocol selection
++- Security Fundamentals: Authentication, authorization, encryption, and OWASP protections
++- Database Systems: SQL vs NoSQL, indexing, transactions, and optimization
++- Infrastructure: Microservices, containers, service discovery, and deployment
++- Performance Optimization: Caching, load balancing, async processing, and monitoring
++- Development Practices: Testing, CI/CD, documentation, and scalability patterns
 ---
 
 ## 🎯 Overview

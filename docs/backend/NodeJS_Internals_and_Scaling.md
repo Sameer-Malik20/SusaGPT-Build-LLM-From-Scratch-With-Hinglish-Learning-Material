@@ -1,6 +1,12 @@
 # ⚙️ Node.js Internals & Scaling — The Event Loop Deep Dive
 > **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Master Node.js Lifecycle, Libuv, Streams, Buffers, Cluster, Worker Threads, and High-Throughput performance.
-
+## 🧭 Core Concepts (Concept-First)
++- Node.js Architecture: V8 engine, libuv, event loop, and non-blocking I/O model
++- Event Loop Mechanics: Phases, callbacks, timers, and asynchronous operations
++- Memory Management: Buffers, streams, garbage collection, and memory efficiency
++- Concurrency Patterns: Clustering, worker threads, and multi-core utilization
++- Performance Optimization: Caching strategies, load balancing, and scalability techniques
++- Practical Implementation: Code examples, best practices, and production considerations
 ---
 
 ## 📋 Table of Contents: Node's Brain

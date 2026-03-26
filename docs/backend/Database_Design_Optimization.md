@@ -1,6 +1,12 @@
 # 🗄️ Database Design & Optimization - Scalable Data Architecture
 > **Level:** Intermediate → Expert | **Language:** Hinglish | **Goal:** Database design, optimization, aur scaling techniques master karna
-
+## 🧭 Core Concepts (Concept-First)
++- Database Fundamentals: Relational vs NoSQL databases, ACID properties, and data modeling
++- Schema Design: Normalization, denormalization, and optimal table structures
++- Query Optimization: Indexing strategies, execution plans, and performance tuning
++- Scalability Techniques: Sharding, replication, partitioning, and distributed databases
++- Performance Optimization: Caching, connection pooling, and resource management
++- Practical Implementation: Design patterns, migration strategies, and production considerations
 ---
 
 ## 📋 Table of Contents: Database Stack
