@@ -1,6 +1,13 @@
 # 📁 NoSQL & Caching Mastery — MongoDB & Redis (Real World)
 > **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Master MongoDB Architecture, Document Modeling, Redis Data Types, Caching Patterns, and Distributed NoSQL.
-
+## 🧭 Core Concepts (Concept-First)
++- NoSQL Fundamentals: Understanding when to use NoSQL vs relational databases, CAP theorem, and data models
++- MongoDB Architecture: Document storage, BSON format, replication, and sharding mechanisms
++- Data Modeling: Embedding vs referencing, schema design patterns, and aggregation pipelines
++- Redis Deep Dive: In-memory data structures, persistence options, and caching patterns
++- Caching Strategies: Cache-aside, write-through, write-behind, and TTL-based expiration
++- Vector Databases: Introduction to similarity search and embedding storage for AI applications
++- Practical Implementation: Performance optimization, indexing strategies, and production considerations
 ---
 
 ## 📋 Table of Contents: The Flexible Data Layer

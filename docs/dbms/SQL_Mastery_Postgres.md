@@ -1,6 +1,14 @@
 # 🐘 SQL Mastery — PostgreSQL Internals & Performance
 > **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Master Postgres, Transactions (ACID), Normalization, Joins, Triggers, Views, and WAL.
-
+## 🧭 Core Concepts (Concept-First)
++- Database Fundamentals: Relational model, ACID properties, and normalization principles
++- PostgreSQL Architecture: Storage layout, WAL, vacuum, and query processing
++- Transaction Management: Isolation levels, locking, and concurrency control
++- Query Optimization: Joins, CTEs, window functions, and execution planning
++- Advanced Features: Views, materialized views, triggers, and stored procedures
++- Schema Evolution: Migration strategies, backward compatibility, and zero-downtime changes
++- Performance & Scaling: Indexing strategies, partitioning, and replication techniques
++- Practical Exercises: Hands-on SQL challenges and performance tuning scenarios
 ---
 
 ## 📋 Table of Contents: The SQL Engine

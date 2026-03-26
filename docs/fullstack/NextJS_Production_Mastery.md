@@ -1,6 +1,13 @@
 # 🌐 Next.js Production Mastery — The Modern Fullstack Standard
 > **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Master App Router, SSR, CSR, ISR, Metadata (SEO), Server Actions, and Hybrid Rendering.
-
+## 🧭 Core Concepts (Concept-First)
++- Fullstack Foundations: Understanding modern fullstack development with React and Next.js
++- Rendering Strategies: SSR, CSR, SSG, ISR and when to use each for performance and SEO
++- App Router & Server Components: File-based routing, layouts, and server-client optimization
++- Data Fetching & Server Actions: Integrated data logic without separate backend APIs
++- SEO & Performance: Metadata optimization, image handling, and Core Web Vitals
++- Middleware & Edge Computing: Authentication, redirects, and global edge logic
++- Practical Implementation: Code examples, best practices, and production considerations
 ---
 
 ## 📋 Table of Contents: Next-Gen Fullstack
