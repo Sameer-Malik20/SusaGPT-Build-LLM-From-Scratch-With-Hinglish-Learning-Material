@@ -1,6 +1,12 @@
 # 🧠 Agent Memory & Planning — The Reasoning Engine
 > **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Master Short-term vs Long-term Memory, Self-Reflection, Tool-use, and Planning Strategies (Chain of Thought, ReAct).
-
+## 🧭 Core Concepts (Concept-First)
++- Memory Systems: Short-term context vs long-term storage for agent intelligence
++- Reasoning Techniques: Chain of Thought, Tree of Thoughts, and step-by-step problem solving
++- Planning Strategies: Task decomposition, sub-goal setting, and execution planning
++- Self-Reflection & Correction: Agents evaluating their own outputs and improving
++- Memory Databases: Vector storage, knowledge graphs, and persistent agent memory
++- Practical Memory & Planning: Hands-on exercises for building intelligent agent systems
 ---
 
 ## 📋 Table of Contents: How Agents Think?

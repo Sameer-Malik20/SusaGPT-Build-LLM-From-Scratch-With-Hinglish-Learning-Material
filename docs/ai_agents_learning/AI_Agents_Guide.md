@@ -1,6 +1,13 @@
 # 🤖 AI Agents Guide
 > **Level:** Beginner → Intermediate | **Language:** Hinglish | **Goal:** AI Agents ko deeply samajhna
-
+## 🧭 Core Concepts (Concept-First)
++- AI Agent Fundamentals: Understanding what makes an AI agent different from a simple chatbot
++- Agent Architecture: Perception-reasoning-action loop, memory systems, and tool integration
++- Planning & Decision Making: How agents break down goals and choose optimal actions
++- Tool Usage: Connecting agents to external APIs, databases, and computational resources
++- Multi-Agent Systems: Coordination, communication, and specialization in agent teams
++- Safety & Evaluation: Guardrails, testing methodologies, and performance measurement
++- Practical Implementation: Building agents with popular frameworks and real-world examples
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge

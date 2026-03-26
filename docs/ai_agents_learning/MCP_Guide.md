@@ -1,6 +1,12 @@
 # 🔌 MCP Guide — Model Context Protocol
 > **Level:** Intermediate | **Language:** Hinglish | **Goal:** MCP ko practically samajhna aur build karna
-
+## 🧭 Core Concepts (Concept-First)
++- MCP Fundamentals: Understanding the Model Context Protocol for connecting AI models to external tools and data
++- Architecture Components: Host, client, and server roles in MCP communication
++- Core Primitives: Tools, resources, prompts, and sampling as building blocks
++- Transport Mechanisms: STDIO, HTTP, and other communication methods for MCP
++- Security Considerations: Authentication, authorization, and safe practices for MCP implementations
++- Practical MCP Implementation: Hands-on examples for building MCP clients and servers
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge
