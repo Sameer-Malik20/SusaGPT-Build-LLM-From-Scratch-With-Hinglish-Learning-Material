@@ -3,6 +3,17 @@
 
 ---
 
+## 🧭 Core Concepts (Concept-First)
+
+- Rendering pipeline: parsing, compilation, layout, paint, and composite steps.
+- Core Web Vitals: LCP, FID, CLS and how they map to UX.
+- Resource sizing: images, fonts, and code-splitting impact on performance.
+- Caching and network: HTTP caching, CDNs, and service workers basics.
+- Measurements: using Lighthouse, DevTools, and real-user monitoring for feedback.
+- Optimization mindset: measure first, optimize critical paths, and validate impact.
+
+---
+
 ## 📋 Table of Contents: Making it Fast
 
 | Area | Topic | Metrics |
@@ -13,6 +24,8 @@
 | **4. Bundle** | Tree Shaking & Code Splitting | 1MB JS ko 400KB banana. |
 | **5. Network** | HTTP/2, Caching & CDNs | Response time ko ms mein lana. |
 | **6. Analysis** | Chrome Profiler & Lighthouse | Slow parts ko "Inspect" karna. |
+| **7. React Performance** | Memoization, Lazy Loading | Component optimization techniques. |
+| **8. Future Trends** | WebAssembly, Edge Computing | 2026+ ke liye preparation. |
 
 ---
 
@@ -27,6 +40,12 @@ Browser file load karne ke baad ye 5 steps karta hai:
 
 > 💡 **Optimization:** JavaScript "Parser blocking" hoti hai. Use `defer` or `async` tags in HTML.
 
+### CRP Optimization Strategies:
+- **Minimize critical resources:** Kam se kam CSS/JS initially load karo
+- **Reduce file sizes:** Compression aur minification use karo
+- **Optimize order:** CSS pehle, JS baad mein load karo
+- **Remove render-blocking:** Non-critical resources defer karo
+
 ---
 
 ## 📈 2. Core Web Vitals (Google Standards)
@@ -36,60 +55,184 @@ Agar app viral karni hai, toh ye 3 metrics green hone chahiye:
 - **FID (First Input Delay):** User click karne ke baad action 100ms se kam mein hona chahiye.
 - **CLS (Cumulative Layout Shift):** Page load hote waqt UI elements "Jump" nahi karne chahiye. (Cumulative score < 0.1).
 
+### LCP Optimization:
+- **Server-side rendering** use karo important content ke liye
+- **Critical CSS** inline karo above-the-fold content ke liye
+- **Image optimization** - proper dimensions aur modern formats use karo
+- **Remove render-blocking resources** LCP element se pehle
+
+### FID Improvement:
+- **Code splitting** karo aur non-critical JS defer karo
+- **Minimize main thread work** - heavy computations avoid karo
+- **Optimize third-party scripts** - lazy load karo ya defer karo
+- **Browser caching** utilize karo repeated visits ke liye
+
+### CLS Prevention:
+- **Image dimensions** specify karo - width aur height attributes set karo
+- **Reserve space** dynamic content ke liye - ads, embeds, etc.
+- **Font loading** optimize karo - `font-display: swap` use karo
+- **Animations carefully** implement karo - layout shifts avoid karo
+
 ---
 
 ## 🖼️ 3. Image & Asset Optimization
 
-- **Next.js Image:** Automates **Lazy Loading** aur **Format switching** (WebP/AVIF).
-- **Icon fonts vs SVG:** SVG best hai. FontAwesome symbols load hone mein heavy hote hain.
-- **Font Face:** `font-display: swap` use karo taki text turant dikhe, aur font background mein load ho.
+### Modern Image Formats:
+- **WebP:** Google ka format - JPEG se 30% smaller, PNG se transparency support
+- **AVIF:** Netflix ka format - sabse advanced compression
+- **JPEG XL:** Future standard - backward compatibility ke saath
 
----
-
-## 📦 4. Bundle Size: Tree Shaking & Webpack/Vite
-
-User ke paas 2 MB ki JS file mat bhejoi.
-- **Tree Shaking:** Unused code (e.g. `lodash` ke 1000 functions mein se sirf use kiya hua 1) bundle se remove karna.
-- **Dynamic Imports:** Code split karo using `import()`. Jo page user nahi dekh raha, uska code load mat karo.
-
-```javascript
-// Dynamic import example
-const HeavyChart = React.lazy(() => import('./HeavyChartComponent'));
+### Responsive Images Strategy:
+```html
+<picture>
+  <source srcset="image.avif" type="image/avif">
+  <source srcset="image.webp" type="image/webp">
+  <img src="image.jpg" alt="Description" loading="lazy">
+</picture>
 ```
 
----
-
-## 📡 5. Network Layer: HTTP/2 & Caching
-
-- **HTTP/2 Multiplexing:** Ek hi connection par multiple files (JS, CSS, Images) ek saath download karna.
-- **Service Workers:** App ko Offline chalao aur contents cache karo browser memory mein.
-- **Prefetching:** Jab user link par mouse hover kare, browser background mein naya page pehle hi fetch kar le.
+### Font Optimization:
+- **Font-display:** `swap` for immediate text visibility
+- **Preload critical fonts:** Above-the-fold content ke liye
+- **Subset fonts:** Sirf required characters include karo
+- **System font stack:** Fallback options provide karo
 
 ---
 
-## 🔍 6. Chrome Profiler: Finding the Lag
+## 📦 4. Bundle Size: Tree Shaking & Code Splitting
 
-Agar app slow hai, toh Chrome DevTools -> **Performance tab** kholo.
-- **Long Tasks:** 50ms se zyada ka task main thread ko block karta hai.
-- **Layout Thrashing:** Baar-baar height/width read aur write karna same loop mein.
+### Tree Shaking Principles:
+- **ES6 modules** use karo - static analysis possible hai
+- **Side-effect free code** likho - pure functions prefer karo
+- **Avoid wildcard imports** - specific imports use karo
+- **Library selection** - tree-shakable libraries choose karo
+
+### Code Splitting Strategies:
+- **Route-based splitting:** Har route ka alag bundle banaye
+- **Component-based splitting:** Heavy components lazy load karo
+- **Dynamic imports:** Conditionally load features
+- **Vendor splitting:** Third-party libraries separate bundle mein rakho
+
+### Bundle Analysis Tools:
+- **Webpack Bundle Analyzer:** Visual bundle breakdown
+- **Lighthouse:** Performance audits
+- **Source Map Explorer:** File contributions analyze karo
+- **Webpack Stats:** Build statistics generate karo
 
 ---
 
-## 🧪 Quick Test — Optimization Engineer Class!
+## 🌐 5. Network Optimization
 
-### Q1: Debouncing vs Throttling?
-- **Debouncing:** Search box mein type karte waqt, API call tabhi karo jab user 300ms tak rukk jaye.
-- **Throttling:** Scrolling ke waqt, scroll event sirf har 100ms mein ek baar handle karo.
+### HTTP/2 Benefits:
+- **Multiplexing:** Multiple requests parallel mein
+- **Header compression:** Reduced overhead
+- **Server push:** Resources proactively send karna
+- **Stream prioritization:** Important resources pehle load karna
 
-### Q2: Why is "Reflow" bad?
-**Answer:** Kyunki "Reflow" poore page ke elements ki geometry recalculate karta hai, jo CPU ko thaka deta hai aur UI "Jank" (Stutter) mahsoos hota hai.
+### Caching Strategies:
+- **Browser caching:** Static assets long-term cache karo
+- **CDN caching:** Global distribution for faster delivery
+- **Service worker caching:** Offline functionality provide karo
+- **Cache invalidation:** Versioning aur cache busting implement karo
+
+### CDN Optimization:
+- **Edge locations** choose karo users ke closest
+- **Image optimization** CDN level par implement karo
+- **Dynamic content** cache karo suitable duration ke liye
+- **Security features** enable karo - DDoS protection, WAF
 
 ---
 
-## 🏆 Final Summary Checklist
-- [ ] Lighthouse score 90+ hai?
-- [ ] Images Next.js/WebP format mein hain?
-- [ ] App mein CLS value zero hai?
-- [ ] Fonts `swap` property use kar rahe hain?
+## 🔧 6. Performance Analysis Tools
 
-> **Speed Tip:** Fast applications are not "Coded", they are "Profiles". Measuring twice, optimizing once.
+### Lighthouse Audits:
+- **Performance scoring:** 0-100 scale par measurement
+- **Opportunities:** Specific improvement suggestions
+- **Diagnostics:** Detailed problem analysis
+- **Passed audits:** Already optimized areas
+
+### Chrome DevTools Features:
+- **Performance panel:** Frame-by-frame analysis
+- **Memory panel:** Memory leaks detect karna
+- **Network panel:** Request waterfall analysis
+- **Coverage tab:** Unused code identify karna
+
+### Real User Monitoring (RUM):
+- **Core Web Vitals tracking:** Actual user experience measure karna
+- **Error tracking:** Production errors monitor karna
+- **Business metrics correlation:** Performance impact business par
+- **Geographic analysis:** Different regions ka performance compare karna
+
+---
+
+## ⚛️ 7. React Performance Optimization
+
+### Component Optimization Techniques:
+- **React.memo:** Prevent unnecessary re-renders
+- **useMemo:** Expensive calculations cache karna
+- **useCallback:** Function references stabilize karna
+- **Lazy loading:** Components conditionally load karna
+
+### State Management Optimization:
+- **Local state vs global state:** Appropriate level choose karna
+- **State normalization:** Nested data avoid karna
+- **Selectors use karna:** Computed values efficiently calculate karna
+- **Batch updates:** Multiple state changes single render mein karna
+
+### Rendering Optimization:
+- **Virtual scrolling:** Large lists efficiently render karna
+- **Windowing technique:** Visible items only render karna
+- **Debounced inputs:** Rapid updates handle karna
+- **Optimized event handlers:** Expensive operations avoid karna
+
+---
+
+## 🔮 8. Future Trends (2026+)
+
+### WebAssembly (WASM):
+- **Near-native performance** web applications ke liye
+- **Existing code reuse** - C++, Rust applications web par
+- **Heavy computations** client-side efficiently run karna
+- **Plugin architecture** secure environment mein
+
+### Edge Computing:
+- **Reduced latency** - computation users ke closer
+- **Personalized content** real-time processing ke saath
+- **Offline capabilities** enhanced edge caching ke through
+- **AI/ML inference** client-side running
+
+### Progressive Web Apps (PWA):
+- **App-like experience** web technologies se
+- **Offline functionality** service workers ke through
+- **Push notifications** user engagement badhana
+- **Home screen installation** native app feel dena
+
+### AI-Powered Optimization:
+- **Automated code splitting** AI algorithms ke through
+- **Predictive loading** user behavior analysis se
+- **Dynamic resource allocation** real-time requirements ke hisaab se
+- **Personalized bundles** user-specific needs ke liye
+
+---
+
+## 🎯 Performance Culture
+
+### Continuous Monitoring:
+- **Regular audits** conduct karna - monthly/quarterly basis par
+- **Performance budgets** set karna aur enforce karna
+- **Regression testing** implement karna - automated checks
+- **Team education** regular karna - best practices share karna
+
+### Performance-First Mindset:
+- **Design phase** se performance consider karna
+- **Performance reviews** code review process mein include karna
+- **Metrics-driven development** business impact measure karna
+- **Cross-team collaboration** optimization efforts coordinate karna
+
+### Measurement Framework:
+- **Key metrics** define karna - business objectives align karna
+- **Baseline establishment** improvement tracking ke liye
+- **A/B testing** performance changes validate karna
+- **ROI calculation** optimization efforts justify karna
+
+> **Final Thought:** Performance optimization continuous journey hai, not one-time task. Regular monitoring, incremental improvements, aur performance culture development success ke liye essential hai.

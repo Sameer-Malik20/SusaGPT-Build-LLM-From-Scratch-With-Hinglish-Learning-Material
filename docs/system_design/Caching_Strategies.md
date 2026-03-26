@@ -1,6 +1,12 @@
 # ⚡ High Performance Caching (System Design Guide)
 > **Level:** Beginner → Expert | **Goal:** Master Redis, Memcached, and Write-Back/Write-Through Policies
-
+## 🧭 Core Concepts (Concept-First)
++- Caching Fundamentals: Why caching improves performance through latency reduction
++- Cache Operations: Understanding hits, misses, and the underlying mechanics
++- Caching Policies: Read-through, write-through, and write-back strategies
++- Eviction Algorithms: LRU, LFU, FIFO and other cache replacement policies
++- Technology Comparison: Redis vs Memcached features and use cases
++- Practical Caching Exercises: Hands-on challenges for designing effective caching systems
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge

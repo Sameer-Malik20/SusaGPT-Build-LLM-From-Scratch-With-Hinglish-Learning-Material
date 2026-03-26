@@ -1,6 +1,12 @@
 # 💰 Cost Optimization for AI System Design
 > **Level:** Beginner → Expert | **Goal:** Master Token Bills, GPU Efficiency, and Cloud Saving
-
+## 🧭 Core Concepts (Concept-First)
++- Token Economics: Understanding AI service costs based on input/output tokens
++- Build vs Buy Analysis: Comparing API services vs self-hosted open-source models
++- Smart Routing: Intelligent model selection based on query complexity and cost
++- Semantic Caching: Reducing redundant model calls through similarity-based caching
++- Infrastructure Optimization: Spot instances, quantization, and memory efficiency
++- Practical Cost Exercises: Hands-on challenges for optimizing AI system expenses
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge

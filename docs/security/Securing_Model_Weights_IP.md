@@ -1,6 +1,12 @@
 # 🛡️ Securing Model Weights & IP — Protecting Your AI Assets
 > **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Safeguard model weights (`.safetensors`), training datasets, and system prompts from IP theft and unauthorized access.
-
+## 🧭 Core Concepts (Concept-First)
++- AI Asset Protection: Understanding the value of model weights, training data, and intellectual property
++- Weight Security: Encryption, access controls, and secure storage for model parameters
++- Prompt Protection: Obfuscation, anti-extraction techniques, and secure handling of system instructions
++- Data Protection: Differential privacy, de-identification, and secure handling of training datasets
++- API Security: Rate limiting, watermarking, and query protection for inference endpoints
++- Practical Protection Strategies: Hands-on approaches to securing AI assets in production
 ---
 
 ## 📋 Table of Contents: Protecting the Brain

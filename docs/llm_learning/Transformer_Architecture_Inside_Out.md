@@ -1,6 +1,13 @@
 # 🏗️ Transformer Architecture Inside-Out (Deep Deep Dive)
 > **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Master every layer of GPT/Llama models (Attention, MLP, Normalization, Positional Encodings).
 
+## 🧭 Core Concepts (Concept-First)
++- Transformer Building Blocks: Embeddings, positional encodings, attention, MLP, normalization layers
++- Attention Mechanism: Query-Key-Value interactions, multi-head attention, scaled dot-product
++- Information Flow: Residual connections, layer normalization, feed-forward networks
++- Positional Encoding: RoPE vs sinusoidal, handling long context and sequence order
++- Scaling & Optimization: GQA, MQA, KV-cache efficiency, parameter distribution
++- Practical Applications: Understanding model behavior from components to full architecture
 ---
 
 ## 📋 Table of Contents: From Input to Prediction

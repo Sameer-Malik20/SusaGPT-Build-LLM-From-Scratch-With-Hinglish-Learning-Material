@@ -1,6 +1,12 @@
 # 🧮 AI Math Mastery — From Tensors to Transformers (Expert Deep Dive)
 > **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** AI algorithms ka math aur internals master karna (Simplified + Deep)
-
+## 🧭 Core Concepts (Concept-First)
++- Foundational Math: Tensors, matrices, dot products, similarity
++- Calculus & Gradients: Derivatives, gradient descent, learning rate
++- Probability & Sampling: Softmax, temperature, token generation
++- Attention Math: Q, K, V, scaled dot-product attention, causality
++- Optimizers: SGD, Momentum, Adam, AdamW, weight decay
++- Practical Applications: From equations to transformer internals
 ---
 
 ## 📋 Table of Contents: Level-wise Learning

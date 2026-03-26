@@ -1,6 +1,11 @@
 # 🥊 LLM Red Teaming Mastery — The Art of Attacking & Defending AI
 > **Level:** Intermediate → Advanced | **Language:** Hinglish | **Goal:** Mastering Jailbreaking, Prompt Injections, and Adversarial Testing to make LLMs secure.
-
+## 🧭 Core Concepts (Concept-First)
++- Red Teaming Fundamentals: Offensive security mindset vs defensive security approaches
++- LLM Attack Vectors: Prompt injection, jailbreaking, data extraction, and model manipulation techniques
++- Adversarial Testing: Systematic approaches to discover AI system vulnerabilities
++- Defense Strategies: Mitigation techniques like input validation, output filtering, and guardrails
++- Practical Exercises: Hands-on scenarios for identifying and remediating AI security weaknesses
 ---
 
 ## 📋 Table of Contents: The Attack Plan

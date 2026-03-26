@@ -3,6 +3,17 @@
 
 ---
 
+## 🧭 Core Concepts (Concept-First)
+
+- Client state vs server state: where data lives and how to synchronize.
+- Store design: slices, reducers, and action patterns.
+- Tools overview: RTK, Zustand, TanStack Query, Context API, and immutability.
+- Data flow patterns: atomic state, selectors, and normalization.
+- Async handling: thunks, sagas, and server-state caching strategies.
+- Patterns for scalable apps: separation of concerns and testable state.
+
+---
+
 ## 📋 Table of Contents: The Global Storage
 
 | Category | Tool | Why? |

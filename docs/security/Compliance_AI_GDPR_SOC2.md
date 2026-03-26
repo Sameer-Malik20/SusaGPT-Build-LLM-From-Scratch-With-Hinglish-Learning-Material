@@ -1,6 +1,12 @@
 # ⚖️ Compliance for AI — GDPR, SOC2, and EU AI Act (Legal Mastery)
 > **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Mastering AI Governance, Data Privacy, and Legal Compliance for Large Models.
-
+## 🧭 Core Concepts (Concept-First)
++- Compliance Fundamentals: Understanding regulatory requirements and their business impact
++- Data Protection Principles: GDPR requirements for personal data handling in AI systems
++- Security & Trust Criteria: SOC2 trust service principles for enterprise compliance
++- AI-Specific Regulations: EU AI Act risk-based approach and prohibited practices
++- Governance Framework: Policies, procedures, and ongoing monitoring for AI compliance
++- Practical Compliance Exercises: Real-world scenarios for implementing compliance measures
 ---
 
 ## 📋 Table of Contents: The Global AI Laws

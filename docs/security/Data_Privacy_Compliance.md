@@ -1,6 +1,11 @@
 # 🔒 Data Privacy & Compliance in AI (Security Guide)
 > **Level:** Beginner → Expert | **Goal:** Master GDPR, SOC2, HIPAA, and Data Masking in AI Production
-
+## 🧭 Core Concepts (Concept-First)
++- Data Privacy Principles: Understanding personal data protection and user consent
++- Regulatory Compliance: GDPR, SOC2, HIPAA requirements for AI systems
++- Data Protection Techniques: Encryption, anonymization, pseudonymization, and masking
++- AI-Specific Privacy Concerns: Training data protection, model privacy attacks
++- Practical Compliance Exercises: Real-world scenarios for data protection implementation
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge

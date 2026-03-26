@@ -1,6 +1,12 @@
 # 🛡️ AI Security: Production Best Practices (Hinglish Guide)
 > **Level:** Beginner → Expert | **Goal:** Protect AI Models from Prompt Injections, Data Leaks, and Vulnerabilities
-
+## 🧭 Core Concepts (Concept-First)
++- AI Security Fundamentals: Protecting models from common vulnerabilities and attacks
++- OWASP Top 10 for LLMs: Understanding the most critical AI security risks
++- Prompt Injection Prevention: Defending against direct and indirect injection attacks
++- Data Privacy & PII Protection: Safeguarding sensitive information in AI systems
++- Infrastructure Security: Securing AI deployment environments and access controls
++- Practical Security Exercises: Hands-on challenges to identify and mitigate threats
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge

@@ -1,6 +1,12 @@
 # ✍️ Prompt Engineering — Advanced LLM Apps Guide
 > **Level:** Beginner → Intermediate | **Language:** Hinglish | **Goal:** LLM se har baar sahi aur consistent output nikalna
-
+## 🧭 Core Concepts (Concept-First)
++- Prompt Fundamentals: Persona, task, context, format, constraints framework
++- Few-shot Learning: Examples to guide model behavior and pattern recognition
++- Chain-of-Thought: Step-by-step reasoning for complex problem solving
++- ReAct Pattern: Reasoning and acting loop for agent-based systems
++- Structured Output: Constraining model responses to specific formats (JSON, etc.)
++- Tool Integration: Connecting LLMs to external APIs and functions
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge

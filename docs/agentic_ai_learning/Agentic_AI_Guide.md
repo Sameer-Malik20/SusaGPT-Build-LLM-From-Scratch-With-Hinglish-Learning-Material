@@ -1,6 +1,11 @@
 # 🧩 Agentic AI Guide
 > **Level:** Beginner → Intermediate | **Language:** Hinglish | **Goal:** Agentic AI ko practically samajhna
-
+## 🧭 Core Concepts (Concept-First)
++- Agentic AI Fundamentals: Understanding the difference between generative and agentic AI systems
++- Core Architecture: The perception-reasoning-action loop that defines agentic behavior
++- Cognitive Capabilities: Planning, reflection, memory, and tool use in AI agents
++- Real-World Applications: Practical examples of agentic AI in production systems
++- Hands-On Learning: Exercises and tests to reinforce agentic AI concepts
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge

@@ -1,6 +1,12 @@
 # 🏗️ Scalable AI System Design (Hinglish Guide)
 > **Level:** Beginner → Expert | **Goal:** Master Production AI Architectures
-
+## 🧭 Core Concepts (Concept-First)
++- AI System Architecture: High-level design patterns for production AI applications
++- Load Balancing: Distributing AI workloads across multiple instances for optimal performance
++- Microservices vs Monolith: Architectural approaches for modularizing AI services
++- Distributed Systems: Scaling AI systems across multiple nodes and geographic regions
++- Cost Optimization: Smart routing and resource allocation for efficient AI serving
++- Practical Design Exercises: Hands-on challenges for designing real-world AI systems
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge

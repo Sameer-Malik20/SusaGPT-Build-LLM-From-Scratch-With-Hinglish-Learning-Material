@@ -1,6 +1,12 @@
 # 👤 IAM: Identity & Access Management (Security Guide)
 > **Level:** Beginner → Expert | **Goal:** Master RBAC, ABAC, Single Sign-On, and Multi-Factor Auth
-
+## 🧭 Core Concepts (Concept-First)
++- IAM Fundamentals: Authentication vs authorization, identity lifecycle management
++- Access Control Models: RBAC, ABAC, and other authorization frameworks
++- Authentication Methods: Passwords, biometrics, tokens, certificates, and multi-factor
++- Session Management: Creation, maintenance, expiration, and secure handling
++- Privileged Access: Just-in-time access, elevation, and monitoring of privileged accounts
++- Practical IAM Implementation: Role engineering, policy enforcement, and audit trails
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge

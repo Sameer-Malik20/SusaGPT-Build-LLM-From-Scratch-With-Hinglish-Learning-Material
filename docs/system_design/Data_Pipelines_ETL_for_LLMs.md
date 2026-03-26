@@ -1,6 +1,12 @@
 # 🛠️ Data Pipelines & ETL for LLMs — How to Ingest Billions of Tokens
 > **Level:** Intermediate → Advanced | **Language:** Hinglish | **Goal:** Master Vectorization, Tokenization, Chunking, and Data Cleaning for RAG and Pre-training.
-
+## 🧭 Core Concepts (Concept-First)
++- Data Pipeline Fundamentals: ETL processes for preparing data for LLM consumption
++- Data Extraction: Techniques for gathering data from various sources (PDFs, web, databases)
++- Data Cleaning: PII redaction, deduplication, and quality filtering for training data
++- Data Chunking: Strategies for splitting text into manageable pieces for processing
++- Vectorization & Storage: Converting text to embeddings and storing in vector databases
++- Automation & Orchestration: Scheduled ETL pipelines using Airflow, Dagster, etc.
 ---
 
 ## 📋 Table of Contents: From Raw Data to Model Embeddings

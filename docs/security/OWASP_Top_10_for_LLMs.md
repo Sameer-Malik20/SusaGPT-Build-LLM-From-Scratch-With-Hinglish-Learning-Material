@@ -1,6 +1,11 @@
 # 📜 OWASP Top 10 for LLMs — The Gold Standard for AI Security
 > **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Understanding the most critical security risks for Large Language Models (LLM01 - LLM10).
-
+## 🧭 Core Concepts (Concept-First)
++- AI Security Fundamentals: Understanding the unique security challenges of LLM systems
++- OWASP Top 10 for LLMs: The standard framework for identifying and addressing critical AI vulnerabilities
++- Risk Categories: Input manipulation, output handling, data integrity, model access, and system design
++- Mitigation Strategies: Defense-in-depth approaches for each OWASP LLM vulnerability
++- Practical Application: Using the framework to assess and improve AI system security
 ---
 
 ## 📋 Table of Contents: The 10 Deadly Sins of AI

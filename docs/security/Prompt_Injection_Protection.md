@@ -1,6 +1,12 @@
 # 💉 Prompt Injection Protection (Security Guide)
 > **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Prevent Model Hijacking and Jailbreaking
-
+## 🧭 Core Concepts (Concept-First)
++- Prompt Injection Fundamentals: Understanding direct vs indirect injection attacks
++- Jailbreak Techniques: Roleplay, DAN, and other methods to bypass AI safety guards
++- Input Sanitization: Filtering and validating user inputs to prevent injection
++- Defense Strategies: Delimiter systems, instruction isolation, and output validation
++- Guardrail Frameworks: Llama Guard, NeMo Guardrails, and other protection systems
++- Practical Protection Exercises: Hands-on challenges for identifying and mitigating injection attacks
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge

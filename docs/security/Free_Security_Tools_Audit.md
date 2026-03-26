@@ -1,6 +1,12 @@
 # 🛠️ Free Security Tools & Bug Finding (Audit Guide)
 > **Level:** Beginner → Expert | **Goal:** Master Vulnerability Scanning using Open-Source/Free Community Tools
-
+## 🧭 Core Concepts (Concept-First)
++- Security Tool Categories: Understanding different types of security tools (scanners, frameworks, auditors)
++- Vulnerability Assessment: Finding, prioritizing, and remediating security weaknesses
++- Penetration Testing: Simulating real-world attacks to test defense effectiveness
++- Compliance Auditing: Verifying adherence to security standards and regulations
++- Open-Source Advantages: Cost-effectiveness, community support, and transparency in security tools
++- Practical Tool Usage: Hands-on guidance for popular security scanning tools
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge

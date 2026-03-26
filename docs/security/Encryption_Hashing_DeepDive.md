@@ -1,6 +1,12 @@
 # 🔐 Encryption, Hashing & E2EE (Deep Dive Guide)
 > **Level:** Beginner → Expert | **Goal:** Master End-to-End Encryption, Signatures, and Hashing in Production
-
+## 🧭 Core Concepts (Concept-First)
++- Cryptography Fundamentals: Encryption vs hashing, symmetric vs asymmetric techniques
++- Hash Functions: Properties, applications, and collision resistance in security systems
++- Encryption Methods: AES, RSA, and ECC algorithms for data confidentiality
++- Digital Signatures: Authentication, integrity, and non-repudiation mechanisms
++- End-to-End Encryption: Private communication where only endpoints can decrypt
++- Practical Security: Implementing cryptography correctly in AI applications
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge

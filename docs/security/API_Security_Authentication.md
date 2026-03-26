@@ -1,6 +1,11 @@
 # 🔑 API Security & Authentication (Security Guide)
 > **Level:** Beginner → Expert | **Goal:** Master AI Endpoints Security, JWT, OAuth, and Rate Limiting
-
+## 🧭 Core Concepts (Concept-First)
++- API Security Fundamentals: Protecting AI endpoints from unauthorized access and abuse
++- Authentication Methods: API keys, JWT tokens, OAuth2 flows for secure access
++- Rate Limiting & Throttling: Preventing DoS attacks and managing resource usage
++- CORS & Security Headers: Browser-side protections for AI web applications
++- Practical Security Exercises: Hands-on challenges for authentication and authorization
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge
