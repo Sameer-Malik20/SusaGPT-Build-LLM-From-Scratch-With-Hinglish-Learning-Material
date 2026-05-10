@@ -1,80 +1,51 @@
-# 🎮 Interactive Exercises — Yahan Code Run Karo!
+# 🎮 Exercises & Labs — The Practice Arena
 
-> **Ye folder saare topics ke interactive Python demos rakhta hai.**
-> **Markdown me code padhne ke baad wahan khud run karo aur dekho!**
-
----
-
-## 🚀 Ek Command Se Sab Kuch:
-
-```bash
-# Ye ek command sab kuch shuru kar deta hai!
-python docs/exercises/run_me.py
-```
+Welcome to the **SusaGPT Practice Arena**. Bhai, engineering padhne se nahi, **karne** se aati hai. Yahan aapko interactive demos aur real-world lab challenges milenge jo aapko junior se senior engineer banayenge.
 
 ---
 
-## 📦 Individual Scripts
+## 🚀 Interactive Python Demos
+Ye scripts interactive hain aur inme live visualizations, MCQ tests, aur score tracking hai.
 
 | Script | Topics | Run Command |
 |--------|--------|-------------|
-| `run_me.py` | 🏠 Main launcher (sab ek jagah) | `python docs/exercises/run_me.py` |
-| `tokenizer_demo.py` | BPE algorithm, Byte encoding | `python docs/exercises/tokenizer_demo.py` |
-| `architecture_demo.py` | Attention, GQA, SwiGLU, RMSNorm, RoPE | `python docs/exercises/architecture_demo.py` |
-| `training_demo.py` | Loss, AdamW, Gradient Clipping, LR Scheduler | `python docs/exercises/training_demo.py` |
-| `sampling_demo.py` | Top-K, Top-P, KV Cache, Repetition Penalty | `python docs/exercises/sampling_demo.py` |
-| `evaluation_demo.py` | BLEU Score, Perplexity | `python docs/exercises/evaluation_demo.py` |
-| `ai_agents_demo.py` | AI Agents, Weather Agent, Research Agent | `python docs/exercises/ai_agents_demo.py` |
-| `agentic_ai_demo.py` | Agentic AI, Competitor Research, Reflection | `python docs/exercises/agentic_ai_demo.py` |
-| `mcp_demo.py` | MCP Server, Tools, Interactive Client | `python docs/exercises/mcp_demo.py` |
+| `run_me.py` | 🏠 Main launcher (All demos) | `python docs/exercises/run_me.py` |
+| `tokenizer_demo.py` | BPE, Byte encoding, Tokens | `python docs/exercises/tokenizer_demo.py` |
+| `architecture_demo.py` | Attention, GQA, RoPE, RMSNorm | `python docs/exercises/architecture_demo.py` |
+| `training_demo.py` | AdamW, Loss, LR Schedulers | `python docs/exercises/training_demo.py` |
+| `sampling_demo.py` | Top-K, Top-P, KV Cache | `python docs/exercises/sampling_demo.py` |
+| `ai_agents_demo.py` | Tool use, Reasoning, Planning | `python docs/exercises/ai_agents_demo.py` |
+| `mcp_demo.py` | Model Context Protocol basics | `python docs/exercises/mcp_demo.py` |
 
 ---
 
-## 🔗 MD File → Demo Mapping
+## 🧪 Production Lab Challenges
+Ye real-world scenarios aur engineering tasks hain. Inhe apne local setup mein implement karne ki koshish karein.
 
-| MD File | Corresponding Demo |
-|---------|-------------------|
-| `docs/susagpt/SusaGPT_Diagram_Guide.md` | `tokenizer_demo.py`, `sampling_demo.py` |
-| `docs/susagpt/SusaGPT_Architecture.md` | `architecture_demo.py` |
-| `docs/susagpt/SusaGPT_Skills.md` | `training_demo.py`, `evaluation_demo.py` |
-| `docs/ai/AI_Agents_Guide.md` | `ai_agents_demo.py` |
-| `docs/ai/Agentic_AI_Guide.md` | `agentic_ai_demo.py` |
-| `docs/ai/MCP_Guide.md` | `mcp_demo.py` |
-| `README.md` | `run_me.py` (all topics) |
-
----
-
-## ⚙️ System Requirements
-
-| Script | Requirements |
-|--------|-------------|
-| `tokenizer_demo.py` | ✅ No extra — only Python stdlib |
-| `architecture_demo.py` | 🔶 PyTorch (`pip install torch`) |
-| `training_demo.py` | 🔶 PyTorch for demos 1-3; stdlib for 4-6 |
-| `sampling_demo.py` | 🔶 PyTorch for demos 1,2,4; stdlib for 3,5 |
-| `evaluation_demo.py` | ✅ No extra — only math, re |
-| `ai_agents_demo.py` | ✅ No extra |
-| `agentic_ai_demo.py` | ✅ No extra |
-| `mcp_demo.py` | ✅ No extra |
+| Lab Manual | Engineering Path | Focus Areas |
+|------------|------------------|-------------|
+| [**AI Foundations Lab**](ai_foundations_math_lab.md) | AI Engineering | Linear Algebra, Calculus, Neural Nets from scratch. |
+| [**Frontend Lab**](frontend_lab.md) | Frontend Engineering | Perf optimization, Next.js, a11y, State Mgmt. |
+| [**Backend Lab**](backend_lab.md) | Backend Engineering | Event Loop, Auth, Streams, gRPC, Scaling. |
+| [**DBMS Lab**](dbms_lab.md) | Database Engineering | Query optimization, Sharding, CDC, Transactions. |
+| [**System Design Scenarios**](system_design_scenarios.md) | Architecture | Global scale, CDNs, Rate Limiters, AI Search. |
+| [**Security Audit Lab**](security_audit_lab.md) | Security Engineering | OWASP Top 10, Hardening, Secrets, AI Security. |
+| [**Mock Interviews**](Mock_Interview_Scenarios.md) | Career Prep | FAANG scenarios, estimation, deep dives. |
 
 ---
 
-## 🧩 Har Demo Me Kya Milega?
-
-```
-Har demo me ye hota hai:
-  📊 Live Visualizations (text-based)
-  🎮 Interactive Inputs (aap khud parameters set karo)
-  ✏️  Exercises (khud solve karo)
-  📝 MCQ Test (answers check ho jaate hain)
-  ⭐ Score tracking
-```
+## 🧩 Har Lab/Demo Mein Kya Hai?
+- 🇮🇳 **Hinglish Tasks**: Kaam bilkul simple language mein samjhaya gaya hai.
+- 🏗️ **Architecture Thinking**: Sirf code nahi, "Sahi Design" par focus hai.
+- ⚠️ **Edge Cases**: Systems ko break karna seekhiye.
+- 📊 **Benchmarks**: Performance measure karne ki aadat daliye.
 
 ---
 
-## 💡 Tips
+## ⚙️ How to Start?
+1. **Demos**: `pip install torch` (kuch scripts ke liye) aur seedha command run karein.
+2. **Labs**: Har lab manual ko padhein aur ek naya project folder banakar use implement karein.
+3. **Review**: Har topic ke baad MCQ tests dein jo Python demos mein embedded hain.
 
-- **PyTorch demos**: `architecture_demo.py` aur training demos ke liye pytorch chahiye
-- **Without PyTorch**: MCQ tests aur kuch demos bina torch ke bhi chalte hain
-- **Windows me**: `python` command use karo, `python3` nahi
-- **Keyboard shortcuts**: Kisi bhi demo me `Ctrl+C` se exit kar sakte ho
+---
+*Developed for SusaGPT — Transforming learners into world-class engineers.*

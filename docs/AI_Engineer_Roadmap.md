@@ -1,130 +1,92 @@
-# 🚀 Full AI Engineer Roadmap — 2026 Edition
-> **Goal:** Zero Se Hero AI Engineer Bano | **Language:** Hinglish | **Estimated Time:** 3-6 Months
+# 🚀 The Ultimate AI Engineer Roadmap (Mastery 2026)
+> **Level:** Zero to Professional | **Language:** Hinglish | **Goal:** Become a top 1% AI Engineer in the 2026 market.
 
 ---
 
-## 🏆 Kamyabi Ka Raasta (The 5 Pillars)
+## 🧭 The 2026 Vision
+
+2026 mein AI Engineering ka matlab sirf "Chatbot banana" nahi hai. Ab focus **Agentic Workflows**, **Hardware Efficiency**, aur **Multi-modal Intelligence** par hai. Ye roadmap aapko un skills ki taraf le jayega jo FAANG aur Top AI Startups dhoond rahe hain.
+
+---
+
+## 🏗️ The 4 Mastery Pillars
 
 ```mermaid
 mindmap
-  root(("🚀 AI Engineer"))
-    🐍 Python Expert
-      Data Structures
-      NumPy / Pandas
-      Async / API (FastAPI)
-    🏗️ LLM Developer
-      Transformer Architecture
-      Prompt Engineering
-      RAG (Retrieval)
-    🔧 Frameworks
-      PyTorch (Basic)
-      LangChain / LangGraph
-      Hugging Face
-    🚀 MLOps
-      Model Serving (vLLM)
-      Vector Databases
-      Monitoring (W&B)
-    🤖 Professional
-      LoRA/QLoRA (PEFT)
-      Multi-Agent Systems
-      Agentic AI
-```
-
+  root(("🚀 AI Engineer 2026"))
+    Cognitive Architecture
+      Agentic Design Patterns
+      Memory Streams
+      Planning (ToT, ReAct)
+    Efficiency & Ops
+      vLLM / TGI Serving
+      Quantization (AWQ/GPTQ)
+      FSDP Training
+    Data & Retrieval
+      Advanced RAG (GraphRAG)
+      Vector DB Mastery
+      MCP (Model Context Protocol)
+    Alignment & Evaluation
+      DPO / RLHF / KTO
+      RAGAS / G-Eval
+      Security (OWASP for LLMs)
 ```
 
 ---
 
-## 📅 Step-by-Step Learning Plan
+## 📅 The 6-Month Execution Plan
 
-### 🟥 Phase 0: Fullstack Web Foundation (The Prerequisites)
-Bina web basics ke AI apps ko users tak nahi pahuncha paoge.
-- **Frontend Mastery:** React, State & Perf. [Frontend_Mastery_Guide.md](docs/frontend/Frontend_Mastery_Guide.md)
-- **Backend Mastery:** Node.js, Python & APIs. [Backend_Mastery_Guide.md](docs/backend/Backend_Mastery_Guide.md)
-- **DBMS Mastery:** SQL, NoSQL & Indexing. [DBMS_Mastery_Guide.md](docs/dbms/DBMS_Mastery_Guide.md)
-- **Fullstack Mastery:** Docker & CI/CD. [Fullstack_Mastery_Guide.md](docs/fullstack/Fullstack_Mastery_Guide.md)
+### 🟦 Month 1: Foundations & The "Brain"
+- **Focus:** Python Async, NumPy, PyTorch Internals.
+- **Goal:** Transformer Architecture ko "Inside Out" samjhna.
+- **Key Files:** `docs/llm_learning/Transformer_Architecture_Inside_Out.md`
+- **Project:** Scratch se ek chota GPT model build karna (Matrix multiplication level par).
 
-### 🟦 Month 1: The Foundation (Python & Math)
-- **Topic 1:** Python for AI (Lists, Dicts, NumPy, PyTorch Tensors).
-- **Topic 2:** Probability & Linear Algebra (Dot Product, Softmax).
-- **Doc:** [AI_Math_Mastery.md](docs/llm_learning/AI_Math_Mastery.md)
-- **Project:** 🧠 Simple Neural Network from scratch in Python.
+### 🟩 Month 2: Retrieval & Context (The Memory)
+- **Focus:** Vector Embeddings, Hybrid Search, aur Advanced RAG.
+- **Goal:** Context window ko efficiently manage karna.
+- **Key Files:** `docs/llm_learning/RAG_Guide.md`, `docs/dbms/SQL_Mastery_Postgres.md` (pgvector).
+- **Project:** Ek "Knowledge Base" chatbot jo 10,000+ files par fast search kare.
 
----
+### 🟨 Month 3: Agentic Engineering (The Hands)
+- **Focus:** Multi-agent systems, Tool use, aur MCP.
+- **Goal:** Aise agents banana jo autonomously tasks complete karein.
+- **Key Files:** `docs/ai_agents_learning/AI_Agents_Guide.md`, `docs/ai_agents_learning/CrewAI_Guide.md`
+- **Project:** Ek "AI Research Team" banana jo topic research kare, code likhe, aur summary bhej de.
 
-### 🟩 Month 2: LLM Internals (The Transformer)
-- **Topic 1:** Transformer Architecture (Attention, RoPE, RMSNorm).
-- **Topic 2:** Tokenization (BPE, Subword).
-- **Doc:** [Transformer_Architecture_Inside_Out.md](docs/llm_learning/Transformer_Architecture_Inside_Out.md)
-- **Project:** 🏗️ Build SusaGPT Architecture and train on small data.
+### 🟧 Month 4: Fine-Tuning & Alignment (The Personality)
+- **Focus:** PEFT (LoRA/QLoRA), DPO, aur SFT data quality.
+- **Goal:** Model ko specific domains ya "Style" ke liye customize karna.
+- **Key Files:** `docs/llm_learning/FineTuning_RLHF_Mastery.md`
+- **Project:** Ek model ko "Legal Assistant" ya "Medical Specialist" style mein fine-tune karna.
 
----
+### 🟥 Month 5: Infrastructure & Optimization (The Muscle)
+- **Focus:** vLLM, TGI, Docker, aur Cloud GPUs.
+- **Goal:** Model ko high-traffic environment mein serve karna.
+- **Key Files:** `docs/system_design/Scalable_AI_Architecture.md`, `docs/llm_learning/Hardware_for_AI.md`
+- **Project:** 70B parameter model ko Quantization ke saath deploy karna with streaming responses.
 
-### 🟨 Month 3: RAG & Agentic AI (Building Apps)
-- **Topic 1:** Advanced RAG (Chunking, Vector DBs, Hybrid Search).
-- **Topic 2:** Prompt Engineering (CoT, ReAct).
-- **Topic 3:** Agents (Tools, Memory, Planning).
-- **Docs:** [RAG_Guide.md](docs/llm_learning/RAG_Guide.md), [Agentic_AI_Guide.md](docs/agentic_ai_learning/Agentic_AI_Guide.md), [Prompt_Engineering_Guide.md](docs/llm_learning/Prompt_Engineering_Guide.md)
-- **Project:** 📊 PDF Chatbot using ChromaDB + any LLM.
-
----
-
-### 🟧 Month 4: Fine-tuning & PEFT
-- **Topic 1:** Efficient Fine-tuning (LoRA/QLoRA).
-- **Topic 2:** Supervised Fine-tuning (SFT) & RLHF basics.
-- **Doc:** [FineTuning_RLHF_Mastery.md](docs/llm_learning/FineTuning_RLHF_Mastery.md)
-- **Project:** 🌀 Fine-tune Llama-3-8B on custom data using QLoRA.
+### 🟪 Month 6: Security & Evaluation (The Safety)
+- **Focus:** OWASP Top 10 for LLMs, RAGAS, aur Red Teaming.
+- **Goal:** System ko secure aur measurable banana.
+- **Key Files:** `docs/exercises/Mock_Interview_Scenarios.md`, `docs/AI_Engineer_Portfolio_Guide.md`
+- **Project:** Ek Automated Evaluation pipeline banana jo har model update ko score kare.
 
 ---
 
-### 🟥 Month 5: MLOps & Production
-- **Topic 1:** Model Serving (vLLM, TGI, Docker).
-- **Topic 2:** Multi-modal AI (Vision & Audio).
-- **Docs:** [MLOps_Lifecycle_Mastery.md](docs/ai_foundations_and_ops/MLOps_Lifecycle_Mastery.md), [Multimodal_AI_Guide.md](docs/llm_learning/Multimodal_AI_Guide.md)
-- **Project:** 🚀 Deploy a full-stack AI App with monitoring and caching.
+## 🏆 The "Job-Ready" Portfolio Checklist
+
+1. **[ ] Agentic RAG System:** GraphRAG + ReAct loops with 95%+ accuracy.
+2. **[ ] Fine-tuned Adapter:** A LoRA adapter for a specific business use case.
+3. **[ ] Scalable API:** FastAPI backend serving an LLM with vLLM and caching.
+4. **[ ] MCP Server:** A custom MCP server connecting AI to a private database.
+5. **[ ] Security Audit:** A complete red-teaming report of an AI application.
 
 ---
 
-## 🏗️ 5 Must-Have Projects (Portfolio Checklist)
+## 🧭 Pro Tips for 2026
+1. **Model Agnostic Bano:** Aaj Llama hai, kal Claude hoga. Architectures par focus karo, specific model names par nahi.
+2. **Build in Public:** LinkedIn/Twitter par apne logic diagrams share karo.
+3. **Evaluation is Everything:** In 2026, the engineer who can **prove** their model is better wins.
 
-1. **[ ] The Searcher:** Vector Similarity Search Engine for Images (CLIP + Chroma).
-2. **[ ] The Coder:** Personal AI Assistant that uses tools (Python REPL, File API).
-3. **[ ] The Expert:** RAG system for private Enterprise Internal Docs.
-4. **[ ] The Finetuner:** Model jo specific "style" mein baat karta hai (LoRA).
-5. **[ ] The Production App:** E-commerce AI Chatbot API (FastAPI + vLLM + Docker).
-
----
-
-## 🧭 Pro Tips for Success
-
-1. **Don't Just Read, Code!:** Agar doc padha hai, toh uska `demo.py` zaroor run karo.
-2. **Hugging Face is Your Friend:** Explore Models & Datasets daily.
-3. **Twitter/X & ArXiv:** Follow AI researchers to keep up with papers.
-4. **Build in Public:** Share your progress on LinkedIn/Twitter.
-
----
-
-## 🏆 Final Summary
-
-> **"AI Engineer banna ek marathon hai, sprint nahi."** 
-> Concepts ko samjho, tools badalte rahenge, lekin architecture aur logic hamesha remain same.
-
-```
-AI Engineer = 
-   (Software Developer) 
- + (ML Knowledge) 
- + (Product Sense) 
- + (Iteration Speed)
-```
-
----
-
-## 🔗 Final Resource List (Summary)
-- [Transformer Blog (Illustrated)](https://jalammar.github.io/illustrated-transformer/)
-- [The LLM Course (Hands-on Repo)](https://github.com/mlabonne/llm-course)
-- [Building LLM Apps (OpenAI Guide)](https://platform.openai.com/docs/guides/llm-apps)
-- [DeepLearning.AI (Coursera/DeepLearning.ai)](https://www.deeplearning.ai/short-courses/)
-
-### 📺 Video Roadmaps (Hindi/Urdu)
-- [**AI Engineer Roadmap 2025/26**](https://www.youtube.com/watch?v=H4fZ3HFv684)
-- [**Complete Generative AI Course**](https://www.youtube.com/watch?v=J_0vUfXBy-I)
-- [**Math for Machine Learning**](https://www.youtube.com/playlist?list=PLKnIA16_RmvYu0fS_RuIB2eTbJcTFdrAA)
+> **Final Note:** AI Engineer banna ek continuous journey hai. Har mahine naye papers aayenge, lekin "Attention" aur "Gradient Descent" hamesha vahi rahenge. Basics strong rakho.

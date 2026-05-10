@@ -1,106 +1,72 @@
-# 🗄️ DBMS Learning - Complete Database Management Systems Guide
+# Database Management Systems (DBMS): Data Engineering Mastery
 
-> **Language:** Hinglish (Hindi + English) | **Goal:** Master database systems from fundamentals to advanced scaling
+This folder is dedicated to the deep study of database systems. It covers the transition from basic SQL to database internals, distributed storage, NoSQL architectures, and production-grade database engineering for 2026.
 
-## 🧭 Core Concepts (Concept-First)
-+- Database Fundamentals: Relational vs NoSQL, ACID properties, normalization, and data modeling
-+- SQL Mastery: PostgreSQL internals, query optimization, transactions, and advanced features
-+- NoSQL Systems: Document stores (MongoDB), key-value stores (Redis), and distributed databases
-+- Indexing Strategies: B-Tree, Hash, GIN, BRIN, and specialized indexes for performance
-+- Scaling Techniques: Sharding, partitioning, replication, and CAP theorem tradeoffs
-+- Caching Mechanisms: In-memory caches, write-through patterns, and cache invalidation
-+- Practical Implementation: Schema design, indexing strategies, and performance tuning
-+- Real-world Applications: Production database patterns, migration strategies, and monitoring
+## 🗄️ What You Will Learn
 
----
+- **SQL Fundamentals**: Mastering advanced querying and relational algebra.
+- **Relational Design**: Normalization, schema design, and ER modeling.
+- **Transactions & Concurrency**: ACID properties, isolation levels, and locking.
+- **Database Internals**: Understanding B-Trees, LSM Trees, WAL, and Buffer Pools.
+- **Indexing & Optimization**: Building efficient indexes and analyzing query plans.
+- **Distributed Databases**: Sharding, replication, and the CAP theorem in practice.
+- **NoSQL Architectures**: Document (MongoDB), Key-Value (Redis), and Graph (Neo4j) stores.
+- **Cloud Databases**: Managed services like Aurora, Snowflake, and BigQuery.
+- **Database Operations**: Backups, recovery, replication lag, and observability.
 
-# 📚 DBMS Learning Materials
+## 💼 Career Roles
 
-This folder contains comprehensive learning materials for database management systems, covering both relational and NoSQL databases from fundamentals to advanced scaling techniques.
+After completing this folder, you can prepare for:
+- **Database Engineer**
+- **Database Administrator (DBA)**
+- **Data Engineer**
+- **Backend Architect**
+- **Storage Systems Engineer**
 
-## Available Topics:
+## 📂 Folder Structure
 
-### 1. SQL Mastery — PostgreSQL Internals & Performance
-**File:** `SQL_Mastery_Postgres.md`
-- Relational data modeling and normalization (1NF to 3NF)
-- PostgreSQL internals: storage layout, WAL, and vacuum process
-- Transaction management: ACID properties, isolation levels, and locking
-- Query optimization: joins, CTEs, window functions, and execution planning
-- Advanced features: views, materialized views, triggers, and stored procedures
-- Schema evolution: migration strategies and zero-downtime changes
+- **[00_DBMS_Foundations](00_DBMS_Foundations/)**: Core principles and history.
+- **[01_SQL_Fundamentals](01_SQL_Fundamentals/)**: Mastering the query language.
+- **[02_Relational_Database_Design](02_Relational_Database_Design/)**: Schema excellence.
+- **[03_Advanced_SQL](03_Advanced_SQL/)**: Window functions and complex joins.
+- **[04_Transactions_and_Concurrency](04_Transactions_and_Concurrency/)**: Data integrity at scale.
+- **[05_Indexing_and_Query_Optimization](05_Indexing_and_Query_Optimization/)**: Speeding up lookups.
+- **[06_Storage_and_Internals](06_Storage_and_Internals/)**: How data is stored on disk.
+- **[07_NoSQL_Databases](07_NoSQL_Databases/)**: Beyond the relational model.
+- **[08_Distributed_Databases](08_Distributed_Databases/)**: Scaling data across the globe.
+- **[09_Data_Modeling_and_Schema_Design](09_Data_Modeling_and_Schema_Design/)**: Patterns for different use cases.
+- **[10_PostgreSQL](10_PostgreSQL/)**: Deep dive into the industry favorite.
+- **[11_MongoDB](11_MongoDB/)**: Document-based scaling.
+- **[12_Redis_and_Caching](12_Redis_and_Caching/)**: High-performance in-memory stores.
+- **[13_Observability_and_Monitoring](13_Observability_and_Monitoring/)**: Tracking slow queries and health.
+- **[14_Modern_Database_Trends_2026](14_Modern_Database_Trends_2026/)**: Vector DBs, NewSQL, and Serverless.
+- **[15_Database_Engineering_Interview_Prep](15_Database_Engineering_Interview_Prep/)**: Cracking deep technical roles.
+- **[16_Database_Security](16_Database_Security/)**: Hardening and encryption.
+- **[17_ORMs_and_Database_Access](17_ORMs_and_Database_Access/)**: Prisma, TypeORM, and Hibernat.
+- **[18_Production_Database_Engineering](18_Production_Database_Engineering/)**: Backups, HA, and maintenance.
+- **[19_Real_World_Database_Architectures](19_Real_World_Database_Architectures/)**: Case studies from big tech.
+- **[20_Hands_On_Projects](20_Hands_On_Projects/)**: Building your own database systems.
 
-### 2. NoSQL & Caching Mastery — MongoDB & Redis (Real World)
-**File:** `NoSQL_and_Caching_Mastery.md`
-- MongoDB architecture: document storage, BSON, and replication sets
-- Document modeling: embedding vs referencing strategies and aggregation pipelines
-- Redis internals: data structures, persistence options, and caching patterns
-- Caching strategies: cache-aside, write-through, and TTL-based expiration
-- Introduction to vector databases for AI embeddings and similarity search
+## 📋 Recommended Prerequisites
 
-### 3. Advanced Indexing & Scaling — Database Architecture (Master Guide)
-**File:** `Advanced_Indexing_and_Scaling.md`
-- Indexing fundamentals: B-Tree, hash, and specialized indexes (GIN, BRIN)
-- Full-text search and advanced indexing techniques
-- Horizontal scaling: sharding strategies and challenges
-- Vertical partitioning: range and list partitioning approaches
-- CAP theorem: consistency, availability, and partition tolerance tradeoffs
-- High availability: replication patterns and failover mechanisms
-- Performance optimization: indexing strategies for different workloads
+Before starting:
+- **[backend](../backend/)**: Familiarity with how applications use databases.
+- Basic understanding of **Data Structures** (B-Trees, Hash Maps).
+- Curiosity about how data is persisted and retrieved reliably.
+- Patience to understand low-level storage dynamics.
 
-## 📖 How to Use This Repository
+## 🎯 Final Outcome
 
-### Recommended Learning Path:
-1. **Start with SQL Mastery** - Build strong foundation in relational databases
-2. **Explore NoSQL & Caching** - Understand when and how to use NoSQL solutions
-3. **Master Advanced Indexing & Scaling** - Learn performance optimization and scaling techniques
+After completing this folder, you should be able to:
+- ✅ Design robust relational and non-relational schemas.
+- ✅ Optimize slow queries and implement complex indexing strategies.
+- ✅ Architect distributed database systems that scale horizontally.
+- ✅ Understand the internal working of major database engines.
+- ✅ Manage production database operations (Backups, HA, Security).
 
-### Learning Approach:
-1. **Concepts First:** Read the core concepts section at the beginning of each file
-2. **Theory Deep Dive:** Study the detailed explanations and architectures
-3. **Practical Examples:** Run the code examples and SQL queries provided
-4. **Exercises:** Complete the end-of-chapter exercises to reinforce learning
-5. **Real-world Scenarios:** Apply concepts to practical database design challenges
+## 🔗 Recommended Next Learning Paths
 
-## 🎯 Who Is This For?
-
-- **Backend Developers** building data-intensive applications
-- **Data Engineers** designing ETL pipelines and data warehouses
-- **Database Administrators** managing production database systems
-- **Students** learning database systems from fundamentals to advanced topics
-- **Anyone** preparing for system design interviews involving databases
-
-## 🔧 Prerequisites
-
-- Basic programming knowledge (any language)
-- Understanding of basic data structures (arrays, objects, etc.)
-- Familiarity with web application concepts (requests, responses)
-- No prior database experience required - starts from fundamentals
-
-## 📈 Progress Tracking
-
-### Beginner Level Complete:
-- [ ] Understand relational model and normalization principles
-- [ ] Write basic SQL queries (SELECT, INSERT, UPDATE, DELETE)
-- [ ] Explain ACID properties and transaction management
-
-### Intermediate Level Complete:
-- [ ] Design efficient database schemas for applications
-- [ ] Optimize queries using indexing and query planning
-- [ ] Implement basic caching strategies with Redis
-- [ ] Choose appropriate database technology for use cases
-
-### Advanced Level Complete:
-- [ ] Design sharded and partitioned database architectures
-- [ ] Implement replication and high availability strategies
-- [ ] Optimize for specific workloads (OLTP vs OLAP)
-- [ ] Apply CAP theorem principles to distributed systems
-
-### Expert Level Complete:
-- [ ] Design globally distributed database systems
-- [ ] Implement advanced caching layers and CDN strategies
-- [ ] Optimize database performance at scale
-- [ ] Lead database architecture decisions for large organizations
-
----
-
-*Last updated: March 2026 | Total files: 3 | Complete DBMS Curriculum*
+After this folder:
+- **[system_design](../system_design/)**: To integrate databases into global architectures.
+- **[ai_foundations_and_ops](../ai_foundations_and_ops/)**: To master Vector DBs for AI.
+- **[backend](../backend/)**: For deep integration into server-side logic.

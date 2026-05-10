@@ -1,150 +1,75 @@
-# 🔐 Security Learning - Complete Security Guide
+# Security Engineering: Securing the Digital Frontier
 
-> **Language:** Hinglish (Hindi + English) | **Goal:** Master AI & Web Security from fundamentals to advanced
+This folder is dedicated to the engineering of secure systems. It covers the transition from security fundamentals to application security, cloud hardening, AI security, and production-grade DevSecOps.
 
----
+## 🛡️ What You Will Learn
 
-## 🧭 Core Concepts (Concept-First)
+- **Security Foundations**: CIA triad, threat modeling, and risk assessment.
+- **Networking for Security**: Understanding protocols, firewalls, and secure tunnels.
+- **Linux & Windows Hardening**: OS-level security and access control.
+- **Web Application Security**: Mastering the OWASP Top 10 and mitigation.
+- **API Security Engineering**: Securing REST, gRPC, and GraphQL endpoints.
+- **Cloud Security Architecture**: Securing AWS, GCP, and Azure workloads.
+- **DevSecOps & Automation**: Integrating security into the CI/CD pipeline.
+- **Cryptography**: Encryption at rest/transit, PKI, and Post-Quantum Prep.
+- **Offensive Security**: Penetration testing and vulnerability scanning.
+- **AI & LLM Security**: Prompt injection, adversarial attacks, and safe deployment.
 
-- Security Fundamentals: CIA Triad, threat modeling, OWASP
-- API Security: Authentication, authorization, rate limiting, input validation
-- LLM Security: Prompt injection, red-teaming, jailbreaking, guardrails
-- Data Privacy: GDPR, SOC2, PII protection, encryption
-- Network Security: VPC, firewalls, zero-trust architecture
-- Secure Coding: Input validation, SQL injection prevention, XSS protection
+## 💼 Career Roles
 
----
+After completing this folder, you can prepare for:
+- **Security Engineer**
+- **Application Security (AppSec) Engineer**
+- **Cloud Security Architect**
+- **DevSecOps Engineer**
+- **Penetration Tester / Red Teamer**
 
-## 📋 Complete Curriculum
+## 📂 Folder Structure
 
-### Level 1: Fundamentals (Beginner)
+- **[00_Security_Foundations](00_Security_Foundations/)**: Core principles and roadmap.
+- **[01_Networking_Fundamentals_for_Security](01_Networking_Fundamentals_for_Security/)**: Secure communication layers.
+- **[02_Linux_Security_and_Hardening](02_Linux_Security_and_Hardening/)**: Protecting the server.
+- **[03_Windows_Security_and_Active_Directory](03_Windows_Security_and_Active_Directory/)**: Enterprise identity security.
+- **[04_Web_Application_Security_OWASP](04_Web_Application_Security_OWASP/)**: Defending against web attacks.
+- **[05_API_Security_Engineering](05_API_Security_Engineering/)**: Securing the interface.
+- **[06_Cloud_Security_Architecture](06_Cloud_Security_Architecture/)**: Hardening cloud infra.
+- **[07_DevSecOps_and_CI_CD_Security](07_DevSecOps_and_CI_CD_Security/)**: Shifting security left.
+- **[08_Container_and_Kubernetes_Security](08_Container_and_Kubernetes_Security/)**: Securing orchestration.
+- **[09_Application_Security](09_Application_Security/)**: Writing secure code.
+- **[10_Offensive_Security_and_Penetration_Testing](10_Offensive_Security_and_Penetration_Testing/)**: Thinking like a hacker.
+- **[11_Cryptography](11_Cryptography/)**: The math of secrets.
+- **[12_Network_Security_Engineering](12_Network_Security_Engineering/)**: VPNs, IDS/IPS, and WAFs.
+- **[13_Identity_and_Access_Management](13_Identity_and_Access_Management/)**: Managing users and roles.
+- **[14_Incident_Response_and_Digital_Forensics](14_Incident_Response_and_Digital_Forensics/)**: Handling breaches.
+- **[15_Governance_Risk_and_Compliance](15_Governance_Risk_and_Compliance/)**: SOC2, GDPR, and ISO standards.
+- **[16_Security_Leadership_and_Strategy](16_Security_Leadership_and_Strategy/)**: Building a security culture.
+- **[17_Physical_and_Operational_Security](17_Physical_and_Operational_Security/)**: Securing the human element.
+- **[18_Security_Engineering_in_the_Cloud](18_Security_Engineering_in_the_Cloud/)**: Native cloud security tools.
+- **[19_AI_and_LLM_Security](19_AI_and_LLM_Security/)**: Protecting intelligent systems.
+- **[20_Security_Automation_and_DevSecOps](20_Security_Automation_and_DevSecOps/)**: Building automated defenses.
+- **[21_Career_Mastery_and_Interview_Preparation](21_Career_Mastery_and_Interview_Preparation/)**: Cracking security roles.
+- **[22_Security_Lab_Manual_and_Practical_Guides](22_Security_Lab_Manual_and_Practical_Guides/)**: Hands-on hacking labs.
 
-| Topic | File | Description |
-|-------|------|-------------|
-| **1. Web Security Fundamentals** | [Web_Security_Fundamentals.md](Web_Security_Fundamentals.md) | OWASP Top 10, common vulnerabilities |
-| **2. Secure Coding Practices** | [Secure_Coding_Practices.md](Secure_Coding_Practices.md) | Input validation, secure patterns |
-| **3. API Security & Authentication** | [API_Security_Authentication.md](API_Security_Authentication.md) | JWT, OAuth2, API keys |
+## 📋 Recommended Prerequisites
 
-### Level 2: Advanced Topics (Intermediate)
+Before starting:
+- **[backend](../backend/)**: Understanding how applications are built.
+- **[system_design](../system_design/)**: Basic knowledge of architecture.
+- Familiarity with the **Linux Command Line**.
+- A "Safety-first" mindset.
 
-| Topic | File | Description |
-|-------|------|-------------|
-| **4. Encryption & Hashing Deep Dive** | [Encryption_Hashing_DeepDive.md](Encryption_Hashing_DeepDive.md) | AES, RSA, hashing algorithms |
-| **5. Network Security & VPC** | [Network_Security_VPC.md](Network_Security_VPC.md) | Cloud security, VPC design |
-| **6. Identity & Access Management** | [Identity_Access_Management.md](Identity_Access_Management.md) | IAM, RBAC, zero-trust |
+## 🎯 Final Outcome
 
-### Level 3: AI & LLM Security (Advanced)
+After completing this folder, you should be able to:
+- ✅ Perform comprehensive security audits and threat models.
+- ✅ Implement secure CI/CD pipelines with automated vulnerability scanning.
+- ✅ Design robust IAM and encryption strategies.
+- ✅ Harden web applications and APIs against modern threats.
+- ✅ Secure AI/LLM systems against prompt injection and data leaks.
 
-| Topic | File | Description |
-|-------|------|-------------|
-| **7. AI Security Introduction** | [AI_Security_Introduction.md](AI_Security_Introduction.md) | AI-specific threats, attack vectors |
-| **8. OWASP Top 10 for LLMs** | [OWASP_Top_10_for_LLMs.md](OWASP_Top_10_for_LLMs.md) | LLM vulnerabilities, mitigations |
-| **9. Prompt Injection Protection** | [Prompt_Injection_Protection.md](Prompt_Injection_Protection.md) | Defending against prompt attacks |
-| **10. LLM Red Teaming Mastery** | [LLM_Red_Teaming_Mastery.md](LLM_Red_Teaming_Mastery.md) | Testing LLM security, jailbreak prevention |
+## 🔗 Recommended Next Learning Paths
 
-### Level 4: Compliance & Privacy (Expert)
-
-| Topic | File | Description |
-|-------|------|-------------|
-| **11. Data Privacy & Compliance** | [Data_Privacy_Compliance.md](Data_Privacy_Compliance.md) | GDPR, CCPA, data handling |
-| **12. Compliance AI GDPR SOC2** | [Compliance_AI_GDPR_SOC2.md](Compliance_AI_GDPR_SOC2.md) | AI compliance frameworks |
-| **13. Securing Model Weights & IP** | [Securing_Model_Weights_IP.md](Securing_Model_Weights_IP.md) | Model protection, IP security |
-| **14. Vibe Coding Safety** | [Vibe_Coding_Safety.md](Vibe_Coding_Safety.md) | Secure AI-assisted coding |
-| **15. Penetration Testing Basics** | [Penetration_Testing_Basics.md](Penetration_Testing_Basics.md) | Security testing methodology |
-| **16. Free Security Tools & Audit** | [Free_Security_Tools_Audit.md](Free_Security_Tools_Audit.md) | Open source security tools |
-
----
-
-## 🚀 How to Use This Repository
-
-### Recommended Study Order
-
-1. **Start with Fundamentals** (Files 1-3)
-   - Web security basics aur OWASP understand karo
-   - Secure coding practices learn karo
-
-2. **Move to Advanced Security** (Files 4-6)
-   - Encryption aur network security master karo
-   - IAM aur authentication implement karo
-
-3. **Specialize in AI Security** (Files 7-10)
-   - LLM-specific threats understand karo
-   - Red teaming aur prompt injection protection learn karo
-
-4. **Master Compliance** (Files 11-16)
-   - GDPR aur SOC2 compliance implement karo
-   - Model security aur IP protection understand karo
-
-### Learning Approach
-
-1. **Theory First:** Har file ka theoretical section padho
-2. **Real Examples:** Practical vulnerability examples samjho
-3. **Defensive Measures:** Mitigations aur best practices implement karo
-4. **Hands-on Testing:** Penetration testing tools use karo
-
----
-
-## 🛠️ Prerequisites
-
-### Technical Skills
-- Basic programming knowledge
-- Understanding of web applications
-- Basic networking concepts
-
-### Tools & Environment
-- Docker for security testing environments
-- Burp Suite or OWASP ZAP for web testing
-- Python for security scripting
-
----
-
-## 📈 Progress Tracking
-
-### Beginner Level Complete
-- [ ] OWASP Top 10 vulnerabilities understand kar sakte hain
-- [ ] Basic secure coding practices apply kar sakte hain
-- [ ] API security implement kar sakte hain
-
-### Intermediate Level Complete
-- [ ] Encryption aur hashing implement kar sakte hain
-- [ ] Network security aur VPC design kar sakte hain
-- [ ] IAM aur zero-trust implement kar sakte hain
-
-### Advanced Level Complete
-- [ ] LLM-specific attacks defend kar sakte hain
-- [ ] Prompt injection protection implement kar sakte hain
-- [ ] Red teaming conduct kar sakte hain
-
-### Expert Level Complete
-- [ ] GDPR aur SOC2 compliance implement kar sakte hain
-- [ ] Model security aur IP protection setup kar sakte hain
-- [ ] Full security audit conduct kar sakte hain
-
----
-
-## 🔗 Related Resources
-
-### External Learning Materials
-- OWASP Official Documentation
-- NIST Security Guidelines
-- MITRE ATT&CK Framework
-- LLM Security Papers
-
-### Tools
-- OWASP ZAP - Web application scanner
-- Burp Suite - Security testing
-- Nuclei - Vulnerability scanning
-- Guardrails AI - LLM safety
-
----
-
-## 🤝 Contributing
-
-Agar aapko lagta hai koi topic missing hai ya improvement chahiye:
-1. Issue create karo
-2. Pull request submit karo
-3. Discussion mein participate karo
-
----
-
-*Last updated: March 2026 | Total files: 16 | Complete Security Curriculum*
+After this folder:
+- **[system_design](../system_design/)**: To build secure large-scale systems.
+- **[ai_foundations_and_ops](../ai_foundations_and_ops/)**: To master AI security.
+- **[backend](../backend/)**: For deep-dives into secure coding.

@@ -1,364 +1,90 @@
-# 🚀 NestJS Microservices - Complete Guide
-
-> **Level:** Intermediate → Expert | **Language:** Hinglish | **Goal:** Master NestJS with modular architecture, GraphQL, and microservices patterns.
-
----
-
-## 🧭 Core Concepts (Concept-First)
-
-- NestJS Architecture: Modules, controllers, providers
-- Dependency Injection: Hierarchical injectors
-- Microservices: TCP, gRPC, Message Brokers
-- GraphQL: Code-first approach with Apollo
-- Guards & Interceptors: Authentication & logging
-- WebSockets: Real-time communication
+# 🚀 NestJS Mastery — Enterprise Microservices (2026)
+> **Level:** Expert | **Language:** Hinglish | **Goal:** Master Modular Architecture, Kafka/RabbitMQ, Event-Driven Design, and AI Integration.
 
 ---
 
-## 📋 Complete Guide
+## 🧭 Core Concepts (Expert-First)
 
-### 1️⃣ NestJS Fundamentals
+2026 mein NestJS **Enterprise Node.js** ka gold standard hai. Iska modular approach complex systems ko manage karne mein help karta hai.
 
-**Module Structure:**
+- **Modular Architecture:** Business logic ko isolated modules mein split karna.
+- **Message Brokers:** gRPC, RabbitMQ, aur Kafka for distributed systems.
+- **EDA (Event-Driven Architecture):** Handling async flows with Redis Pub/Sub.
+- **SSE (Server-Sent Events):** Real-time AI token streaming in NestJS.
+- **Circuit Breaker:** Preventing cascading failures in microservices.
+
+---
+
+## 🏗️ 1. Enterprise Module Design
+
+NestJS mein har cheez ek **Module** hai.
+- **Dynamic Modules:** Runtime par configuration change karna (e.g., Database config based on environment).
+- **Circular Dependency:** `@ForwardRef()` use karna jab do modules ek doosre par depend karein (Avoid this if possible!).
+
+---
+
+## 📡 2. Microservices: Beyond TCP
+
+2026 production systems **Kafka** aur **RabbitMQ** use karte hain.
+- **Hybrid App:** Ek hi NestJS app jo HTTP (API) aur Microservice (Messages) dono handle kare.
+
 ```typescript
-// users.module.ts
-import { Module } from '@nestjs/common'
-import { UsersController } from './users.controller'
-import { UsersService } from './users.service'
-import { DatabaseModule } from '../database/database.module'
-
-@Module({
-  imports: [DatabaseModule],
-  controllers: [UsersController],
-  providers: [UsersService],
-  exports: [UsersService]
-})
-export class UsersModule {}
+// main.ts (Hybrid Microservice)
+const app = await NestFactory.create(AppModule);
+app.connectMicroservice<MicroserviceOptions>({
+  transport: Transport.KAFKA,
+  options: { client: { brokers: ['localhost:9092'] } }
+});
+await app.startAllMicroservices();
+await app.listen(3000);
 ```
 
-**Controller Pattern:**
-```typescript
-// users.controller.ts
-import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common'
+---
 
-@Controller('users')
-export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+## 🔄 3. Event-Driven Architecture (EDA)
 
-  @Get()
-  findAll(@Query('page') page: string, @Query('limit') limit: string) {
-    return this.usersService.findAll({ 
-      page: +page || 1, 
-      limit: +limit || 10 
-    })
-  }
+Services ke beech tight coupling hatane ke liye **Events** use karein.
+- **`EventEmitter2`:** Internal app events (e.g., `UserRegistered` -> `SendWelcomeEmail`).
+- **Redis Pub/Sub:** Cross-service events (e.g., `OrderPlaced` -> `InventoryUpdate`).
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(id)
-  }
+---
 
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto)
-  }
-}
-```
+## 🌊 4. SSE (Server-Sent Events) for AI Streaming
 
-**Service with DTO:**
-```typescript
-// users.service.ts
-import { Injectable, NotFoundException } from '@nestjs/common'
-
-@Injectable()
-export class UsersService {
-  private users: User[] = []
-
-  create(createUserDto: CreateUserDto): User {
-    const user: User = {
-      id: crypto.randomUUID(),
-      ...createUserDto,
-      createdAt: new Date()
-    }
-    this.users.push(user)
-    return user
-  }
-
-  findAll(pagination: PaginationParams): PaginatedResult<User> {
-    const start = (pagination.page - 1) * pagination.limit
-    const end = start + pagination.limit
-    
-    return {
-      data: this.users.slice(start, end),
-      total: this.users.length,
-      page: pagination.page,
-      limit: pagination.limit
-    }
-  }
-
-  findOne(id: string): User {
-    const user = this.users.find(u => u.id === id)
-    if (!user) throw new NotFoundException(`User ${id} not found`)
-    return user
-  }
-}
-```
-
-### 2️⃣ Dependency Injection Deep Dive
-
-**Provider Types:**
-```typescript
-// Basic provider
-@Injectable()
-export class UsersService {}
-
-// Factory provider
-{
-  provide: 'CONFIG',
-  useFactory: async () => {
-    const config = await loadConfig()
-    return config
-  }
-}
-
-// Alias provider
-{
-  provide: 'UserService',
-  useClass: UsersService
-}
-
-// Value provider
-{
-  provide: 'APP_NAME',
-  useValue: 'MyApp'
-}
-
-// Class provider
-{
-  provide: Logger,
-  useClass: WinstonLogger
-}
-```
-
-**Injection with Scopes:**
-```typescript
-// Request-scoped (new instance per request)
-@Injectable({ scope: Scope.REQUEST })
-export class UsersService {
-  constructor(@Inject(REQUEST) private request: Request) {}
-}
-
-// Transient (new instance each time)
-@Injectable({ scope: Scope.TRANSIENT })
-export class AnalyticsService {}
-```
-
-### 3️⃣ GraphQL with NestJS
-
-**Code-First Approach:**
-```typescript
-// user.model.ts
-import { ObjectType, Field, ID } from '@nestjs/graphql'
-
-@ObjectType()
-export class User {
-  @Field(() => ID)
-  id: string
-
-  @Field()
-  name: string
-
-  @Field()
-  email: string
-
-  @Field({ nullable: true })
-  avatar?: string
-
-  @Field()
-  createdAt: Date
-}
-
-// user.resolver.ts
-@Resolver(() => User)
-export class UsersResolver {
-  constructor(private usersService: UsersService) {}
-
-  @Query(() => [User])
-  async users(): Promise<User[]> {
-    return this.usersService.findAll()
-  }
-
-  @Query(() => User, { nullable: true })
-  async user(@Args('id') id: string): Promise<User> {
-    return this.usersService.findOne(id)
-  }
-
-  @Mutation(() => User)
-  async createUser(@Args('input') input: CreateUserInput): Promise<User> {
-    return this.usersService.create(input)
-  }
-
-  @ResolveField()
-  async fullName(@Parent() user: User): Promise<string> {
-    return `${user.name}`
-  }
-}
-```
-
-**Module Setup:**
-```typescript
-@Module({
-  imports: [
-    GraphQLModule.forRoot<ApolloDriverConfig>({
-      driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      sortSchema: true
-    }),
-    UsersModule
-  ]
-})
-export class AppModule {}
-```
-
-### 4️⃣ Microservices Architecture
-
-**TCP Microservice:**
-```typescript
-// main.ts (User Service)
-async function bootstrap() {
-  const app = await NestFactory.createMicroservice(AppModule, {
-    transport: Transport.TCP,
-    options: { port: 3001 }
-  })
-  await app.listen()
-}
-bootstrap()
-
-// controller.ts
-@Controller()
-export class UsersController {
-  @MessagePattern({ cmd: 'get-user' })
-  getUser(@Payload() data: { id: string }): User {
-    return this.usersService.findOne(data.id)
-  }
-
-  @MessagePattern({ cmd: 'create-user' })
-  createUser(@Payload() data: CreateUserDto): User {
-    return this.usersService.create(data)
-  }
-}
-```
-
-**Gateway (Client):**
-```typescript
-@Client({
-  transport: Transport.TCP,
-  options: { host: 'localhost', port: 3001 }
-})
-client: ClientProxy
-
-async getUser(id: string) {
-  return this.client.send({ cmd: 'get-user' }, { id }).toPromise()
-}
-```
-
-### 5️⃣ Guards & Interceptors
-
-**Auth Guard:**
-```typescript
-@Injectable()
-export class JwtAuthGuard implements CanActivate {
-  constructor(private jwtService: JwtService) {}
-
-  async canActivate(context: ExecutionContext): Promise<boolean> {
-    const request = context.switchToHttp().getRequest()
-    const token = this.extractToken(request)
-    
-    if (!token) return false
-    
-    try {
-      const payload = await this.jwtService.verifyAsync(token)
-      request['user'] = payload
-    } catch {
-      return false
-    }
-    
-    return true
-  }
-
-  private extractToken(request: Request): string | undefined {
-    const [type, token] = request.headers.authorization?.split(' ') ?? []
-    return type === 'Bearer' ? token : undefined
-  }
-}
-```
-
-**Logging Interceptor:**
-```typescript
-@Injectable()
-export class LoggingInterceptor implements NestInterceptor {
-  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-    const now = Date.now()
-    return next
-      .handle()
-      .pipe(
-        tap(() => console.log(`After... ${Date.now() - now}ms`)),
-        catchError(err => {
-          console.error('Error:', err)
-          throw err
-        })
-      )
-  }
-}
-```
-
-### 6️⃣ Real-time with WebSockets
+AI responses stream karne ke liye WebSockets heavy ho sakte hain. **SSE** best hai.
 
 ```typescript
-@WebSocketGateway({ cors: true })
-export class EventsGateway {
-  @WebSocketServer()
-  server: Server
-
-  @SubscribeMessage('message')
-  handleMessage(@MessageBody() data: string): string {
-    this.server.emit('message', data)
-    return 'Message sent!'
-  }
-
-  @SubscribeMessage('join-room')
-  handleJoinRoom(
-    @MessageBody() room: string,
-    @ConnectedSocket() client: Socket
-  ): void {
-    client.join(room)
-  }
-
-  handleConnection(client: Socket): void {
-    console.log(`Client connected: ${client.id}`)
-  }
+@Sse('stream')
+streamAI(): Observable<MessageEvent> {
+  return this.aiService.generateStream().pipe(
+    map((data) => ({ data: { token: data } } as MessageEvent)),
+  );
 }
 ```
 
 ---
 
-## 🎯 Best Practices Checklist
+## 🛡️ 5. Reliability: Circuit Breaker & Retries
 
-- [ ] Use Modular architecture
-- [ ] Implement proper DTOs with validation
-- [ ] Use Interceptors for cross-cutting concerns
-- [ ] Implement proper error handling
-- [ ] Use GraphQL for complex APIs
-- [ ] Implement proper testing (unit & e2e)
+Agar Payment service down hai, toh poori app crash nahi honi chahiye.
+- **Circuit Breaker:** Agar error rate high ho, toh "Circuit Open" kardo aur immediate "Service unavailable" return karo bina remote call kiye.
 
 ---
 
-## 🔗 Related Resources
+## 📝 2026 Interview Scenarios (NestJS)
 
-- [NestJS Documentation](https://docs.nestjs.com)
-- [NestJS GraphQL](https://docs.nestjs.com/graphql/quick-start)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
+### Q1: "Providers vs Controllers?"
+**Ans:** Controllers "Incoming requests" (HTTP/Messages) handle karte hain. Providers (Services) "Business Logic" aur "Database Interaction" handle karte hain. Dependency Injection se hum services ko controllers mein inject karte hain.
+
+### Q2: "Dependency Injection ka kya fayda hai?"
+**Ans:** Ye code ko "Testable" banata hai. Hum real database service ki jagah "Mock Service" inject karke unit tests run kar sakte hain bina database ki zarurat ke.
 
 ---
 
-> 💡 **Tip:** NestJS ka modular architecture bohot powerful hai. Badges use karo for clean documentation!
+## 🏆 Project Integration: SusaGPT Enterprise
+Aapke backend mein:
+- [x] Modular setup for `Auth`, `AI`, `Billing`, and `User` domains.
+- [x] Kafka for background task processing (e.g., PDF indexing).
+- [x] SSE for real-time AI chat streaming.
+
+> **Final Insight:** NestJS is for developers who want to build **Robust, Maintainable Systems**. It forces you to write good code. Master the decorators, and you master the enterprise.
