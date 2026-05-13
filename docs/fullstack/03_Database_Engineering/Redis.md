@@ -1,0 +1,1900 @@
+# Redis: Complete Guide for Fullstack Engineers
+
+## Hinglish Explanation (Beginner Level)
+
+Bhai, Redis ek bahut fast in-memory database hai jo data ko RAM mein store karta hai. Socho isse ek超级快的 cache ki tarah - jaise tumhare phone ka gallery quickly load hota hai, Redis bhi data ko turant access kar sakta hai.
+
+**Redis ka matlab hai "REmote DIctionary Server"** - matlab yeh ek remote server hai jo dictionary-like data store karta hai.
+
+MongoDB SQL jaise store karta hai (documents, tables), Redis key-value pairs mein store karta hai. Yeh extremely fast hai kyunki sab kuch RAM mein hota hai.
+
+```javascript
+// Basic Redis operations - badiya tarike se samjho
+// SET key value - data save karo
+SET user:123 "Rahul Kumar"
+
+// GET key - data lo
+GET user:123  // Returns: "Rahul Kumar"
+
+// More complex data types
+HSET user:123 name "Rahul" email "rahul@example.com" age "25"
+HGETALL user:123  // Returns all fields
+
+// Array/List operations
+LPUSH notifications "You have a new message"
+LPUSH notifications "Order shipped"
+LRANGE notifications 0 -1  // Get all notifications
+```
+
+Redis ka use caching, session management, real-time features, aur rate limiting ke liye hota hai. Companies jaise Twitter, GitHub, Instagram Redis use karte hain.
+
+## Deep Technical Explanation
+
+Redis (Remote Dictionary Server) ek in-memory data structure server hai jo multiple data types support karta hai including strings, hashes, lists, sets, sorted sets, bitmaps, hyperloglogs, geospatial indexes, aur streams.
+
+### Redis Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        Redis Server Architecture                      │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  ┌───────────────────────────────────────────────────────────────┐ │
+│  │                    Client Connections                           │ │
+│  │  ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐                     │ │
+│  │  │TCP 1│ │TCP 2│ │TCP 3│ │TCP N│ │Unix │                     │ │
+│  │  └─────┘ └─────┘ └─────┘ └─────┘ └─────┘                     │ │
+│  └─────────────────────────┬───────────────────────────────────────┘ │
+│                            │                                         │
+│                            ▼                                         │
+│  ┌───────────────────────────────────────────────────────────────┐ │
+│  │                    I/O Thread Pool (Redis 6+)                  │ │
+│  │  ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐                 │ │
+│  │  │Thread 1│ │Thread 2│ │Thread 3│ │Thread N│                 │ │
+│  │  └────────┘ └────────┘ └────────┘ └────────┘                 │ │
+│  └─────────────────────────┬───────────────────────────────────────┘ │
+│                            │                                         │
+│                            ▼                                         │
+│  ┌───────────────────────────────────────────────────────────────┐ │
+│  │                    Command Parser & Dispatcher                  │ │
+│  │  - RESP (Redis Serialization Protocol)                        │ │
+│  │  - Command routing                                            │ │
+│  │  - Event loop (epoll/kqueue/IOCP)                             │ │
+│  └─────────────────────────┬───────────────────────────────────────┘ │
+│                            │                                         │
+│  ┌─────────────────────────▼───────────────────────────────────────┐ │
+│  │                    Redis Object Space                             │ │
+│  │  ┌─────────────────────────────────────────────────────────────┐ │ │
+│  │  │                      DATA STORAGE                           │ │ │
+│  │  │                                                             │ │ │
+│  │  │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐         │ │ │
+│  │  │  │  STRING │ │  HASH   │ │  LIST   │ │  SET    │         │ │ │
+│  │  │  │         │ │         │ │         │ │         │         │ │ │
+│  │  │  │ user:1  │ │ user:2  │ │ queue:1 │ │ tags    │         │ │
+│  │  │  │ "value" │ │ name:.. │ │ [1,2,3] │ │ {a,b,c} │         │ │ │
+│  │  │  └─────────┘ └─────────┘ └─────────┘ └─────────┘         │ │ │
+│  │  │                                                             │ │ │
+│  │  │  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐     │ │ │
+│  │  │  │ SORTED SET   │ │   STREAM     │ │  GEOSPATIAL │     │ │ │
+│  │  │  │              │ │              │ │             │     │ │ │
+│  │  │  │ leaderboard  │ │ events:prod  │ │ locations   │     │ │ │
+│  │  │  │ score→member │ │ [id→fields]  │ │ lat/lng→key │     │ │ │
+│  │  │  └──────────────┘ └──────────────┘ └──────────────┘     │ │ │
+│  │  └─────────────────────────────────────────────────────────────┘ │ │
+│  └───────────────────────────────────────────────────────────────────┘ │
+│                            │                                          │
+│                            ▼                                          │
+│  ┌────────────────────────────────────────────────────────────────┐  │
+│  │                    Persistence Layer                            │  │
+│  │  ┌─────────────────┐           ┌─────────────────────────────┐ │  │
+│  │  │   RDB Snapshot  │           │   AOF (Append Only File)    │ │  │
+│  │  │   - BGSAVE      │           │   - fsync: always/everysec │ │  │
+│  │  │   - Time-based  │           │   - rewrite on bgrewriteaof│ │  │
+│  │  │   - Point-in-time│          │   - more durable           │ │  │
+│  │  └─────────────────┘           └─────────────────────────────┘ │  │
+│  └────────────────────────────────────────────────────────────────┘  │
+│                            │                                          │
+│                            ▼                                          │
+│  ┌────────────────────────────────────────────────────────────────┐  │
+│  │                    Memory (RAM)                                 │  │
+│  │  - maxmemory: 10gb                                           │  │
+│  │  - Eviction policy: allkeys-lru                               │  │
+│  │  - Memory fragmentation management                             │  │
+│  └────────────────────────────────────────────────────────────────┘  │
+└──────────────────────────────────────────────────────────────────────┘
+```
+
+### Redis Data Types Deep Dive
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    Redis Data Types                                  │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  ┌───────────────────────────────────────────────────────────────┐  │
+│  │  STRING                                                        │  │
+│  │  ┌──────────────────────────────────────────────────────────┐  │  │
+│  │  │  Key: "session:abc123"                                  │  │  │
+│  │  │  Value: "user_data_json_string"                         │  │  │
+│  │  │  Max: 512MB per value                                   │  │  │
+│  │  │  Use: Sessions, caching, counters                        │  │  │
+│  │  └──────────────────────────────────────────────────────────┘  │  │
+│  │  Commands: GET, SET, SETEX, INCR, DECR, APPEND, SUBSTR        │  │
+│  └───────────────────────────────────────────────────────────────┘  │
+│                                                                      │
+│  ┌───────────────────────────────────────────────────────────────┐  │
+│  │  HASH                                                          │  │
+│  │  ┌──────────────────────────────────────────────────────────┐  │  │
+│  │  │  Key: "user:123"                                         │  │  │
+│  │  │  ┌────────────┬──────────────────────────────────┐      │  │  │
+│  │  │  │ field     │ value                           │      │  │  │
+│  │  │  ├────────────┼──────────────────────────────────┤      │  │  │
+│  │  │  │ "name"    │ "Rahul"                         │      │  │  │
+│  │  │  │ "email"   │ "rahul@example.com"              │      │  │  │
+│  │  │  │ "age"     │ "25"                            │      │  │  │
+│  │  │  └────────────┴──────────────────────────────────┘      │  │  │
+│  │  │  Like: mini database table row                          │  │  │
+│  │  └──────────────────────────────────────────────────────────┘  │  │
+│  │  Commands: HSET, HGET, HGETALL, HINCRBY, HDEL                 │  │
+│  └───────────────────────────────────────────────────────────────┘  │
+│                                                                      │
+│  ┌───────────────────────────────────────────────────────────────┐  │
+│  │  LIST (Linked List)                                           │  │
+│  │  ┌──────────────────────────────────────────────────────────┐  │  │
+│  │  │  Key: "notifications"                                    │  │  │
+│  │  │  HEAD ─────────────────────────────────────────── TAIL  │  │  │
+│  │  │  [msg3] [msg2] [msg1] [msg0] ──────►                    │  │  │
+│  │  │  LPUSH ◄──────────── RPOP                              │  │  │
+│  │  │  Use: Queues, activity feeds, recent items              │  │  │
+│  │  └──────────────────────────────────────────────────────────┘  │  │
+│  │  Commands: LPUSH, RPUSH, LPOP, RPOP, LRANGE, LTRIM            │  │
+│  └───────────────────────────────────────────────────────────────┘  │
+│                                                                      │
+│  ┌───────────────────────────────────────────────────────────────┐  │
+│  │  SET (Unordered, Unique)                                      │  │
+│  │  ┌──────────────────────────────────────────────────────────┐  │  │
+│  │  │  Key: "tags:post:123"                                    │  │  │
+│  │  │  Members: { "javascript", "nodejs", "redis" }            │  │  │
+│  │  │  Operations: SADD, SREM, SISMEMBER, SUNION, SINTER       │  │  │
+│  │  │  Use: Tags, unique items, relationships                   │  │  │
+│  │  └──────────────────────────────────────────────────────────┘  │  │
+│  └───────────────────────────────────────────────────────────────┘  │
+│                                                                      │
+│  ┌───────────────────────────────────────────────────────────────┐  │
+│  │  SORTED SET (ZSET)                                            │  │
+│  │  ┌──────────────────────────────────────────────────────────┐  │  │
+│  │  │  Key: "leaderboard"                                      │  │  │
+│  │  │  ┌──────────────────┬──────────┐                         │  │  │
+│  │  │  │ Score           │ Member   │                         │  │  │
+│  │  │  ├──────────────────┼──────────┤                         │  │  │
+│  │  │  │ 1500            │ player_1 │                         │  │  │
+│  │  │  │ 1400            │ player_2 │                         │  │  │
+│  │  │  │ 1350            │ player_3 │                         │  │  │
+│  │  │  └──────────────────┴──────────┘                         │  │  │
+│  │  │  Use: Leaderboards, rankings, priority queues            │  │  │
+│  │  └──────────────────────────────────────────────────────────┘  │  │
+│  │  Commands: ZADD, ZRANGE, ZREVRANK, ZSCORE                    │  │
+│  └───────────────────────────────────────────────────────────────┘  │
+│                                                                      │
+│  ┌───────────────────────────────────────────────────────────────┐  │
+│  │  STREAM (Log/Event Store)                                     │  │
+│  │  ┌──────────────────────────────────────────────────────────┐  │  │
+│  │  │  Key: "events:app"                                      │  │  │
+│  │  │  Entry: { id, timestamp, event_type, data... }            │  │  │
+│  │  │  Consumer Groups for distributed processing              │  │  │
+│  │  │  XADD, XREAD, XREADGROUP, XACK, XRANGE                 │  │  │
+│  │  └──────────────────────────────────────────────────────────┘  │  │
+│  └───────────────────────────────────────────────────────────────┘  │
+│                                                                      │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### Redis Cluster Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    Redis Cluster (Sharding)                          │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  ┌───────────────────────────────────────────────────────────────┐  │
+│  │  Client (Smart Client with Cluster Support)                    │  │
+│  │  - Knows slot distribution                                    │  │
+│  │  - Direct routing to correct node                              │  │
+│  │  - ASK/MOVED redirects handling                                │  │
+│  └─────────────────────────────┬─────────────────────────────────┘  │
+│                                │                                    │
+│         ┌──────────────────────┼──────────────────────┐            │
+│         │                      │                      │             │
+│         ▼                      ▼                      ▼             │
+│  ┌──────────────┐       ┌──────────────┐       ┌──────────────┐     │
+│  │   Node 1     │       │   Node 2     │       │   Node 3     │     │
+│  │  Master      │       │  Master      │       │  Master      │     │
+│  │              │       │              │       │              │     │
+│  │ Slots: 0-5460│       │Slots:5461-   │       │Slots:10923-  │     │
+│  │              │       │  10922       │       │  16383      │     │
+│  │              │◄─────►│              │◄─────►│              │     │
+│  │  ┌────────┐  │       │  ┌────────┐  │       │  ┌────────┐  │     │
+│  │  │Replica1│  │       │  │Replica2│  │       │  │Replica3│  │     │
+│  │  │(async) │  │       │  │(async) │  │       │  │(async) │  │     │
+│  │  └────────┘  │       │  └────────┘  │       │  └────────┘  │     │
+│  └──────────────┘       └──────────────┘       └──────────────┘     │
+│                                                                      │
+│  ┌───────────────────────────────────────────────────────────────┐  │
+│  │  Cluster Bus (Gossip Protocol)                                 │  │
+│  │  - Node discovery & health monitoring                          │  │
+│  │  - Failover coordination                                       │  │
+│  │  - Configuration updates                                       │  │
+│  └───────────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+## Architecture Diagram: Fullstack Integration
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        Frontend (React/Next.js)                      │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────────┐   │
+│  │ React Query  │  │ SWR          │  │    Socket.io-client     │   │
+│  │ (with cache) │  │ (stale-while)│  │    (real-time)          │   │
+│  └──────┬───────┘  └──────┬───────┘  └────────────┬─────────────┘   │
+└─────────┼─────────────────┼───────────────────────┼────────────────┘
+          │                 │                       │
+          ▼                 ▼                       ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                     API Layer (Node.js/Express)                       │
+│  ┌──────────────────────────────────────────────────────────────┐   │
+│  │                    Application Logic                          │   │
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────┐  │   │
+│  │  │ Auth Service    │  │ Cache Service   │  │ Session     │  │   │
+│  │  │ (JWT + Redis)  │  │ (Redis GET/SET)│  │ Service     │  │   │
+│  │  └─────────────────┘  └─────────────────┘  └─────────────┘  │   │
+│  └─────────────────────────┬────────────────────────────────────┘   │
+└────────────────────────────┼────────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                     Redis Client (ioredis/node-redis)                 │
+│  ┌──────────────────────────────────────────────────────────────┐   │
+│  │  Connection Pool                                             │   │
+│  │  ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐              │   │
+│  │  │ Conn 1│ │ Conn 2│ │ Conn 3│ │ Conn N│              │   │
+│  │  └────────┘ └────────┘ └────────┘ └────────┘              │   │
+│  └─────────────────────────┬────────────────────────────────────┘   │
+└────────────────────────────┼────────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                         Redis Server/Cluster                         │
+│  ┌──────────────────────────────────────────────────────────────┐   │
+│  │  Primary/Secondary │ Sharded │ Cluster                       │   │
+│  │                                                              │   │
+│  │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐            │   │
+│  │  │Cache    │ │Sessions │ │Queues   │ │Streams  │            │   │
+│  │  │GET/SET │ │HSET/HGET│ │LPUSH/   │ │XADD/    │            │   │
+│  │  │         │ │         │ │BRPOP    │ │XREAD    │            │   │
+│  │  └─────────┘ └─────────┘ └─────────┘ └─────────┘            │   │
+│  └──────────────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+## Frontend + Backend Integration Examples
+
+### Redis Setup with Node.js
+
+```typescript
+// src/config/redis.ts
+import Redis from 'ioredis';
+import { RedisPubSub } from 'graphql-redis-subscriptions';
+
+// Single Redis instance configuration
+const redisConfig = {
+  host: process.env.REDIS_HOST || 'localhost',
+  port: parseInt(process.env.REDIS_PORT || '6379'),
+  password: process.env.REDIS_PASSWORD,
+  db: parseInt(process.env.REDIS_DB || '0'),
+  
+  // Connection pool settings
+  maxRetriesPerRequest: 3,
+  enableReadyCheck: true,
+  retryStrategy: (times: number) => {
+    const delay = Math.min(times * 50, 2000);
+    return delay;
+  },
+  
+  // Reconnection
+  reconnectOnError: (err) => {
+    const targetError = 'READONLY';
+    if (err.message.includes(targetError)) {
+      return true; // Reconnect on read-only errors
+    }
+    return false;
+  },
+};
+
+// Create main Redis client
+export const redis = new Redis(redisConfig);
+
+// Event handlers
+redis.on('connect', () => {
+  console.log('Redis client connected');
+});
+
+redis.on('error', (err) => {
+  console.error('Redis client error:', err);
+});
+
+redis.on('ready', () => {
+  console.log('Redis client ready');
+});
+
+// Sentinel configuration for high availability
+const sentinelConfig = {
+  sentinels: [
+    { host: 'sentinel1.example.com', port: 26379 },
+    { host: 'sentinel2.example.com', port: 26379 },
+    { host: 'sentinel3.example.com', port: 26379 },
+  ],
+  name: 'mymaster',
+  password: process.env.REDIS_PASSWORD,
+  db: 0,
+};
+
+export const redisSentinel = new Redis(sentinelConfig);
+
+// Cluster configuration
+const clusterConfig = {
+  clusterRetryStrategy: (times: number) => {
+    const delay = Math.min(times * 100, 3000);
+    return delay;
+  },
+  maxRetriesPerRequest: 3,
+};
+
+const redisCluster = new Redis.Cluster([
+  { host: '10.0.0.1', port: 6379 },
+  { host: '10.0.0.2', port: 6379 },
+  { host: '10.0.0.3', port: 6379 },
+], clusterConfig);
+
+// Pub/Sub for real-time features
+export const publisher = new Redis(redisConfig);
+export const subscriber = new Redis(redisConfig);
+export const pubsub = new RedisPubSub({
+  publisher,
+  subscriber,
+});
+
+// GraphQL Subscriptions
+export const REDIS_PUBSUB = pubsub;
+```
+
+### Redis Service Layer
+
+```typescript
+// src/services/cache.service.ts
+export class CacheService {
+  private redis: typeof redis;
+  private defaultTTL = 3600; // 1 hour
+  
+  constructor(redisClient: typeof redis) {
+    this.redis = redisClient;
+  }
+  
+  // String operations
+  async set(key: string, value: any, ttl?: number): Promise<void> {
+    const serialized = JSON.stringify(value);
+    if (ttl) {
+      await this.redis.setex(key, ttl, serialized);
+    } else {
+      await this.redis.set(key, serialized);
+    }
+  }
+  
+  async get<T>(key: string): Promise<T | null> {
+    const value = await this.redis.get(key);
+    if (!value) return null;
+    return JSON.parse(value) as T;
+  }
+  
+  async delete(key: string): Promise<void> {
+    await this.redis.del(key);
+  }
+  
+  async exists(key: string): Promise<boolean> {
+    const result = await this.redis.exists(key);
+    return result === 1;
+  }
+  
+  // Hash operations (for user sessions, etc.)
+  async hset(key: string, field: string, value: any): Promise<void> {
+    await this.redis.hset(key, field, JSON.stringify(value));
+  }
+  
+  async hget<T>(key: string, field: string): Promise<T | null> {
+    const value = await this.redis.hget(key, field);
+    if (!value) return null;
+    return JSON.parse(value) as T;
+  }
+  
+  async hgetall<T>(key: string): Promise<Record<string, T> | null> {
+    const result = await this.redis.hgetall(key);
+    if (!result || Object.keys(result).length === 0) return null;
+    
+    const parsed: Record<string, T> = {};
+    for (const [k, v] of Object.entries(result)) {
+      try {
+        parsed[k] = JSON.parse(v) as T;
+      } catch {
+        parsed[k] = v as T;
+      }
+    }
+    return parsed;
+  }
+  
+  async hmset(key: string, data: Record<string, any>, ttl?: number): Promise<void> {
+    const flatData: Record<string, string> = {};
+    for (const [k, v] of Object.entries(data)) {
+      flatData[k] = typeof v === 'string' ? v : JSON.stringify(v);
+    }
+    
+    await this.redis.hmset(key, flatData);
+    
+    if (ttl) {
+      await this.redis.expire(key, ttl);
+    }
+  }
+  
+  // List operations (for queues, activity feeds)
+  async lpush(key: string, ...values: any[]): Promise<number> {
+    const serialized = values.map(v => JSON.stringify(v));
+    return this.redis.lpush(key, ...serialized);
+  }
+  
+  async rpush(key: string, ...values: any[]): Promise<number> {
+    const serialized = values.map(v => JSON.stringify(v));
+    return this.redis.rpush(key, ...serialized);
+  }
+  
+  async lpop<T>(key: string): Promise<T | null> {
+    const value = await this.redis.lpop(key);
+    if (!value) return null;
+    return JSON.parse(value) as T;
+  }
+  
+  async rpop<T>(key: string): Promise<T | null> {
+    const value = await this.redis.rpop(key);
+    if (!value) return null;
+    return JSON.parse(value) as T;
+  }
+  
+  async lrange<T>(key: string, start: number, stop: number): Promise<T[]> {
+    const values = await this.redis.lrange(key, start, stop);
+    return values.map(v => JSON.parse(v) as T);
+  }
+  
+  // Set operations (for tags, unique items)
+  async sadd(key: string, ...members: string[]): Promise<number> {
+    return this.redis.sadd(key, ...members);
+  }
+  
+  async smembers<T>(key: string): Promise<T[]> {
+    return this.redis.smembers(key) as Promise<T[]>;
+  }
+  
+  async sismember(key: string, member: string): Promise<boolean> {
+    const result = await this.redis.sismember(key, member);
+    return result === 1;
+  }
+  
+  async srem(key: string, ...members: string[]): Promise<number> {
+    return this.redis.srem(key, ...members);
+  }
+  
+  // Sorted Set operations (for leaderboards, rankings)
+  async zadd(key: string, score: number, member: string): Promise<number> {
+    return this.redis.zadd(key, score, member);
+  }
+  
+  async zrank(key: string, member: string): Promise<number | null> {
+    return this.redis.zrank(key, member);
+  }
+  
+  async zrevrank(key: string, member: string): Promise<number | null> {
+    return this.redis.zrevrank(key, member);
+  }
+  
+  async zscore(key: string, member: string): Promise<number | null> {
+    return this.redis.zscore(key, member);
+  }
+  
+  async zrangeWithScores<T>(key: string, start: number, stop: number): Promise<{ member: T; score: number }[]> {
+    const result = await this.redis.zrange(key, start, stop, 'WITHSCORES');
+    const items: { member: T; score: number }[] = [];
+    
+    for (let i = 0; i < result.length; i += 2) {
+      items.push({
+        member: JSON.parse(result[i]) as T,
+        score: parseFloat(result[i + 1]),
+      });
+    }
+    
+    return items;
+  }
+  
+  // Expiration operations
+  async expire(key: string, seconds: number): Promise<void> {
+    await this.redis.expire(key, seconds);
+  }
+  
+  async ttl(key: string): Promise<number> {
+    return this.redis.ttl(key);
+  }
+  
+  // Pattern-based operations
+  async keys(pattern: string): Promise<string[]> {
+    return this.redis.keys(pattern);
+  }
+  
+  async scan(pattern: string, count: number = 100): Promise<string[]> {
+    const results: string[] = [];
+    let cursor = '0';
+    
+    do {
+      const [newCursor, keys] = await this.redis.scan(cursor, 'MATCH', pattern, 'COUNT', count);
+      cursor = newCursor;
+      results.push(...keys);
+    } while (cursor !== '0');
+    
+    return results;
+  }
+}
+
+export const cacheService = new CacheService(redis);
+```
+
+### Session Management with Redis
+
+```typescript
+// src/services/session.service.ts
+import { redis } from '../config/redis';
+
+export interface Session {
+  userId: string;
+  email: string;
+  roles: string[];
+  ipAddress: string;
+  userAgent: string;
+  createdAt: Date;
+  lastActiveAt: Date;
+}
+
+export class SessionService {
+  private readonly sessionPrefix = 'session:';
+  private readonly sessionTTL = 7 * 24 * 60 * 60; // 7 days
+  
+  async createSession(userId: string, data: Omit<Session, 'createdAt' | 'lastActiveAt'>): Promise<string> {
+    const sessionId = this.generateSessionId();
+    const session: Session = {
+      ...data,
+      createdAt: new Date(),
+      lastActiveAt: new Date(),
+    };
+    
+    const key = `${this.sessionPrefix}${sessionId}`;
+    await redis.hmset(key, this.flattenSession(session));
+    await redis.expire(key, this.sessionTTL);
+    
+    return sessionId;
+  }
+  
+  async getSession(sessionId: string): Promise<Session | null> {
+    const key = `${this.sessionPrefix}${sessionId}`;
+    const data = await redis.hgetall(key);
+    
+    if (!data || Object.keys(data).length === 0) {
+      return null;
+    }
+    
+    return this.parseSession(data);
+  }
+  
+  async refreshSession(sessionId: string): Promise<void> {
+    const key = `${this.sessionPrefix}${sessionId}`;
+    await redis.hset(key, 'lastActiveAt', new Date().toISOString());
+    await redis.expire(key, this.sessionTTL);
+  }
+  
+  async deleteSession(sessionId: string): Promise<void> {
+    const key = `${this.sessionPrefix}${sessionId}`;
+    await redis.del(key);
+  }
+  
+  async deleteAllUserSessions(userId: string): Promise<number> {
+    const pattern = `${this.sessionPrefix}*`;
+    let cursor = '0';
+    let deletedCount = 0;
+    
+    do {
+      const [newCursor, keys] = await redis.scan(cursor, 'MATCH', pattern, 'COUNT', 100);
+      cursor = newCursor;
+      
+      for (const key of keys) {
+        const userIdValue = await redis.hget(key, 'userId');
+        if (userIdValue === userId) {
+          await redis.del(key);
+          deletedCount++;
+        }
+      }
+    } while (cursor !== '0');
+    
+    return deletedCount;
+  }
+  
+  private generateSessionId(): string {
+    return `${Date.now()}-${Math.random().toString(36).substring(2)}-${Math.random().toString(36).substring(2)}`;
+  }
+  
+  private flattenSession(session: Session): Record<string, string> {
+    return {
+      userId: session.userId,
+      email: session.email,
+      roles: JSON.stringify(session.roles),
+      ipAddress: session.ipAddress,
+      userAgent: session.userAgent,
+      createdAt: session.createdAt.toISOString(),
+      lastActiveAt: session.lastActiveAt.toISOString(),
+    };
+  }
+  
+  private parseSession(data: Record<string, string>): Session {
+    return {
+      userId: data.userId,
+      email: data.email,
+      roles: JSON.parse(data.roles),
+      ipAddress: data.ipAddress,
+      userAgent: data.userAgent,
+      createdAt: new Date(data.createdAt),
+      lastActiveAt: new Date(data.lastActiveAt),
+    };
+  }
+}
+
+export const sessionService = new SessionService();
+```
+
+### API Routes with Redis
+
+```typescript
+// src/routes/auth.routes.ts
+import { Router, Request, Response, NextFunction } from 'express';
+import { z } from 'zod';
+import { sessionService } from '../services/session.service';
+import { cacheService } from '../services/cache.service';
+import { rateLimiter } from '../middleware/rateLimiter';
+
+const router = Router();
+
+const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6),
+});
+
+// POST /api/auth/login
+router.post('/login', 
+  rateLimiter({ max: 5, windowMs: 60000 }), // 5 attempts per minute
+  async (req: Request, res: Response) => {
+    try {
+      const { email, password } = loginSchema.parse(req.body);
+      
+      // Verify credentials (use your auth service)
+      const user = await authService.verifyCredentials(email, password);
+      
+      if (!user) {
+        return res.status(401).json({ 
+          success: false, 
+          message: 'Invalid credentials' 
+        });
+      }
+      
+      // Create session
+      const sessionId = await sessionService.createSession(user.id, {
+        userId: user.id,
+        email: user.email,
+        roles: user.roles,
+        ipAddress: req.ip,
+        userAgent: req.headers['user-agent'],
+      });
+      
+      // Set session cookie
+      res.cookie('session_id', sessionId, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      });
+      
+      res.json({ 
+        success: true, 
+        data: { 
+          user: sanitizeUser(user),
+          sessionId 
+        } 
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ success: false, errors: error.errors });
+      } else {
+        res.status(500).json({ success: false, message: 'Login failed' });
+      }
+    }
+  }
+);
+
+// POST /api/auth/logout
+router.post('/logout', async (req: Request, res: Response) => {
+  const sessionId = req.cookies?.session_id;
+  
+  if (sessionId) {
+    await sessionService.deleteSession(sessionId);
+  }
+  
+  res.clearCookie('session_id');
+  res.json({ success: true });
+});
+
+// GET /api/auth/me
+router.get('/me', async (req: Request, res: Response) => {
+  const sessionId = req.cookies?.session_id;
+  
+  if (!sessionId) {
+    return res.status(401).json({ success: false, message: 'Not authenticated' });
+  }
+  
+  const session = await sessionService.getSession(sessionId);
+  
+  if (!session) {
+    return res.status(401).json({ success: false, message: 'Session expired' });
+  }
+  
+  await sessionService.refreshSession(sessionId);
+  
+  res.json({ success: true, data: session });
+});
+```
+
+### Rate Limiter with Redis
+
+```typescript
+// src/middleware/rateLimiter.ts
+import { redis } from '../config/redis';
+
+interface RateLimiterOptions {
+  max: number; // Max requests per window
+  windowMs: number; // Window size in milliseconds
+  keyPrefix?: string;
+}
+
+export function rateLimiter(options: RateLimiterOptions) {
+  const { max, windowMs, keyPrefix = 'ratelimit' } = options;
+  const windowSec = Math.ceil(windowMs / 1000);
+  
+  return async (req: Request, res: Response, next: NextFunction) => {
+    const identifier = req.ip || 'unknown';
+    const key = `${keyPrefix}:${identifier}`;
+    
+    try {
+      const current = await redis.incr(key);
+      
+      if (current === 1) {
+        // First request in this window
+        await redis.expire(key, windowSec);
+      }
+      
+      // Get TTL for response header
+      const ttl = await redis.ttl(key);
+      
+      // Set rate limit headers
+      res.set({
+        'X-RateLimit-Limit': String(max),
+        'X-RateLimit-Remaining': String(Math.max(0, max - current)),
+        'X-RateLimit-Reset': String(Math.ceil(Date.now() / 1000) + ttl),
+      });
+      
+      if (current > max) {
+        return res.status(429).json({
+          success: false,
+          message: 'Too many requests. Please try again later.',
+          retryAfter: ttl,
+        });
+      }
+      
+      next();
+    } catch (error) {
+      // If Redis fails, allow the request but log the error
+      console.error('Rate limiter error:', error);
+      next();
+    }
+  };
+}
+
+// Sliding window rate limiter (more accurate)
+export async function slidingWindowRateLimiter(
+  key: string,
+  max: number,
+  windowMs: number
+): Promise<{ allowed: boolean; remaining: number; resetAt: number }> {
+  const now = Date.now();
+  const windowStart = now - windowMs;
+  const windowKey = `sliding:${key}`;
+  
+  const multi = redis.multi();
+  
+  // Remove old entries
+  multi.zremrangebyscore(windowKey, 0, windowStart);
+  
+  // Count current requests
+  multi.zcard(windowKey);
+  
+  // Add current request
+  multi.zadd(windowKey, now, `${now}-${Math.random()}`);
+  
+  // Set expiration
+  multi.expire(windowKey, Math.ceil(windowMs / 1000));
+  
+  const results = await multi.exec();
+  const currentCount = results?.[1]?.[1] as number || 0;
+  
+  const allowed = currentCount < max;
+  const remaining = Math.max(0, max - currentCount - 1);
+  const resetAt = Math.ceil((now + windowMs) / 1000);
+  
+  return { allowed, remaining, resetAt };
+}
+```
+
+### Frontend Integration (React + React Query)
+
+```typescript
+// src/hooks/useAuth.ts
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
+
+interface LoginInput {
+  email: string;
+  password: string;
+}
+
+interface User {
+  id: string;
+  email: string;
+  name: string;
+  roles: string[];
+}
+
+interface AuthResponse {
+  success: boolean;
+  data: {
+    user: User;
+    sessionId: string;
+  };
+}
+
+export function useLogin() {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: async (input: LoginInput) => {
+      const response = await axios.post<AuthResponse>('/api/auth/login', input, {
+        withCredentials: true, // Important for cookies
+      });
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user'] });
+    },
+  });
+}
+
+export function useLogout() {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: async () => {
+      await axios.post('/api/auth/logout', {}, { withCredentials: true });
+    },
+    onSuccess: () => {
+      queryClient.clear();
+    },
+  });
+}
+
+export function useCurrentUser() {
+  return useQuery({
+    queryKey: ['user'],
+    queryFn: async () => {
+      const response = await axios.get<{ success: boolean; data: User }>(
+        '/api/auth/me',
+        { withCredentials: true }
+      );
+      return response.data.data;
+    },
+    retry: false,
+    staleTime: 5 * 60 * 1000,
+  });
+}
+```
+
+## Real-World Production Examples
+
+### Example 1: Caching Layer with Redis
+
+```typescript
+// src/services/product.service.ts
+export class ProductService {
+  private cacheService: CacheService;
+  
+  async getProductById(id: string): Promise<Product | null> {
+    // Try cache first
+    const cacheKey = `product:${id}`;
+    const cached = await this.cacheService.get<Product>(cacheKey);
+    
+    if (cached) {
+      return cached;
+    }
+    
+    // Fetch from database
+    const product = await prisma.product.findUnique({
+      where: { id },
+    });
+    
+    if (product) {
+      // Cache for 1 hour
+      await this.cacheService.set(cacheKey, product, 3600);
+    }
+    
+    return product;
+  }
+  
+  async getProductsByCategory(categoryId: string, page: number, limit: number) {
+    const cacheKey = `products:category:${categoryId}:page:${page}:limit:${limit}`;
+    
+    // Try cache
+    const cached = await this.cacheService.get<{ products: Product[]; total: number }>(cacheKey);
+    
+    if (cached) {
+      return cached;
+    }
+    
+    // Fetch from database
+    const [products, total] = await Promise.all([
+      prisma.product.findMany({
+        where: { categoryId, isActive: true },
+        skip: (page - 1) * limit,
+        take: limit,
+        orderBy: { createdAt: 'desc' },
+      }),
+      prisma.product.count({ where: { categoryId, isActive: true } }),
+    ]);
+    
+    const result = { products, total };
+    
+    // Cache for 5 minutes
+    await this.cacheService.set(cacheKey, result, 300);
+    
+    return result;
+  }
+  
+  async invalidateProductCache(id: string, categoryId?: string) {
+    // Invalidate specific product
+    await this.cacheService.delete(`product:${id}`);
+    
+    // Invalidate category listings if provided
+    if (categoryId) {
+      const keys = await this.cacheService.scan(`products:category:${categoryId}:*`);
+      for (const key of keys) {
+        await this.cacheService.delete(key);
+      }
+    }
+  }
+}
+
+// Cache-aside pattern implementation
+async function cacheAside<T>(
+  key: string,
+  fetcher: () => Promise<T>,
+  ttl: number = 3600
+): Promise<T> {
+  // Try cache
+  const cached = await cacheService.get<T>(key);
+  if (cached !== null) {
+    return cached;
+  }
+  
+  // Fetch from source
+  const data = await fetcher();
+  
+  // Store in cache
+  if (data !== null) {
+    await cacheService.set(key, data, ttl);
+  }
+  
+  return data;
+}
+
+// Usage
+const user = await cacheAside(
+  `user:${userId}`,
+  () => prisma.user.findUnique({ where: { id: userId } }),
+  3600
+);
+```
+
+### Example 2: Real-time Notifications with Redis Pub/Sub
+
+```typescript
+// src/services/notification.service.ts
+import { REDIS_PUBSUB } from '../config/redis';
+
+export class NotificationService {
+  // Publish notification
+  async notify(userId: string, notification: Notification) {
+    const channel = `notifications:${userId}`;
+    
+    await REDIS_PUBSUB.publish(channel, JSON.stringify({
+      id: generateId(),
+      type: notification.type,
+      title: notification.title,
+      message: notification.message,
+      data: notification.data,
+      createdAt: new Date().toISOString(),
+      read: false,
+    }));
+  }
+  
+  // Subscribe to notifications (for WebSocket handlers)
+  async subscribeToNotifications(userId: string, callback: (notification: Notification) => void) {
+    const channel = `notifications:${userId}`;
+    
+    return REDIS_PUBSUB.asyncIterator(channel, {
+      onSubscribe: () => {
+        console.log(`Subscribed to notifications for user ${userId}`);
+      },
+      onUnsubscribe: () => {
+        console.log(`Unsubscribed from notifications for user ${userId}`);
+      },
+    });
+  }
+}
+
+// WebSocket handler
+import { Server } from 'socket.io';
+
+export function setupNotificationSocket(io: Server) {
+  const redisAdapter = require('@socket.io/redis-adapter');
+  
+  io.on('connection', async (socket) => {
+    const userId = socket.handshake.auth.userId;
+    
+    if (!userId) {
+      socket.disconnect();
+      return;
+    }
+    
+    // Join user's room
+    socket.join(`user:${userId}`);
+    
+    // Subscribe to Redis channel
+    const subscriber = redis.createClient();
+    const publisher = redis.createClient();
+    
+    await subscriber.subscribe(`notifications:${userId}`);
+    
+    subscriber.on('message', (channel: string, message: string) => {
+      const notification = JSON.parse(message);
+      io.to(`user:${userId}`).emit('notification', notification);
+    });
+    
+    socket.on('disconnect', () => {
+      subscriber.unsubscribe(`notifications:${userId}`);
+      subscriber.quit();
+      publisher.quit();
+    });
+  });
+}
+```
+
+### Example 3: Distributed Job Queue with Redis
+
+```typescript
+// src/services/queue.service.ts
+import { redis } from '../config/redis';
+
+export class JobQueue {
+  private queueName: string;
+  private processingSet: string;
+  private failedQueue: string;
+  
+  constructor(queueName: string) {
+    this.queueName = `queue:${queueName}`;
+    this.processingSet = `queue:${queueName}:processing`;
+    this.failedQueue = `queue:${queueName}:failed`;
+  }
+  
+  async enqueue(job: Job): Promise<string> {
+    const jobId = `job:${Date.now()}:${Math.random().toString(36).substring(2)}`;
+    
+    const jobData = {
+      id: jobId,
+      type: job.type,
+      payload: job.payload,
+      status: 'pending',
+      attempts: 0,
+      createdAt: Date.now(),
+    };
+    
+    await redis.hmset(jobId, jobData as any);
+    await redis.expire(jobId, 86400); // 24 hour expiry
+    
+    await redis.lpush(this.queueName, jobId);
+    
+    return jobId;
+  }
+  
+  async dequeue(timeout: number = 5): Promise<Job | null> {
+    // Blocking pop from queue
+    const result = await redis.brpop(this.queueName, timeout);
+    
+    if (!result) {
+      return null;
+    }
+    
+    const [, jobId] = result;
+    const jobData = await redis.hgetall(jobId);
+    
+    if (!jobData || Object.keys(jobData).length === 0) {
+      return null;
+    }
+    
+    // Move to processing set
+    await redis.sadd(this.processingSet, jobId);
+    await redis.hset(jobId, 'status', 'processing');
+    
+    return {
+      id: jobData.id,
+      type: jobData.type,
+      payload: JSON.parse(jobData.payload),
+      attempts: parseInt(jobData.attempts),
+    };
+  }
+  
+  async complete(jobId: string): Promise<void> {
+    await redis.srem(this.processingSet, jobId);
+    await redis.del(jobId);
+  }
+  
+  async fail(jobId: string, error: string): Promise<void> {
+    const attempts = await redis.hincrby(jobId, 'attempts', 1);
+    
+    if (attempts >= 3) {
+      // Move to failed queue
+      await redis.srem(this.processingSet, jobId);
+      await redis.hset(jobId, 'status', 'failed', 'error', error);
+      await redis.lpush(this.failedQueue, jobId);
+    } else {
+      // Requeue for retry
+      await redis.srem(this.processingSet, jobId);
+      await redis.lpush(this.queueName, jobId);
+    }
+  }
+  
+  async getStats(): Promise<QueueStats> {
+    const [queueLength, processingLength, failedLength] = await Promise.all([
+      redis.llen(this.queueName),
+      redis.scard(this.processingSet),
+      redis.llen(this.failedQueue),
+    ]);
+    
+    return { queueLength, processingLength, failedLength };
+  }
+}
+
+// Usage
+const emailQueue = new JobQueue('emails');
+
+async function processEmailJobs() {
+  while (true) {
+    const job = await emailQueue.dequeue(5);
+    
+    if (!job) continue;
+    
+    try {
+      await sendEmail(job.payload);
+      await emailQueue.complete(job.id);
+    } catch (error) {
+      await emailQueue.fail(job.id, error.message);
+    }
+  }
+}
+
+// Start workers
+for (let i = 0; i < 3; i++) {
+  processEmailJobs();
+}
+```
+
+## Failure Cases
+
+### Case 1: Cache Stampede / Thundering Herd
+
+**Problem**: When cache expires, many requests hit the database simultaneously.
+
+```typescript
+// BAD: Multiple requests can trigger simultaneous cache rebuild
+async function getUser(id: string) {
+  const cached = await redis.get(`user:${id}`);
+  if (cached) return JSON.parse(cached);
+  
+  const user = await db.users.findById(id);
+  await redis.setex(`user:${id}`, 3600, JSON.stringify(user));
+  return user;
+}
+
+// GOOD: Use lock to prevent stampede
+async function getUserWithLock(id: string) {
+  const cached = await redis.get(`user:${id}`);
+  if (cached) return JSON.parse(cached);
+  
+  const lockKey = `lock:user:${id}`;
+  const lockAcquired = await redis.set(lockKey, '1', 'EX', 10, 'NX');
+  
+  if (!lockAcquired) {
+    // Another process is rebuilding, wait and retry
+    await new Promise(resolve => setTimeout(resolve, 100));
+    return getUserWithLock(id);
+  }
+  
+  try {
+    const user = await db.users.findById(id);
+    await redis.setex(`user:${id}`, 3600, JSON.stringify(user));
+    return user;
+  } finally {
+    await redis.del(lockKey);
+  }
+}
+
+// BETTER: Use single-flight pattern
+import { SingleFlight } from '，背后/redis-single-flight';
+
+const sf = new SingleFlight(redis);
+
+async function getUser(id: string) {
+  const result = await sf.do(`user:${id}`, async () => {
+    const user = await db.users.findById(id);
+    return JSON.stringify(user);
+  }, 3600);
+  
+  return JSON.parse(result);
+}
+```
+
+### Case 2: Redis Connection Pool Exhaustion
+
+**Problem**: Too many connections causing "max number of clients reached".
+
+```typescript
+// BAD: Creating new Redis client per request
+async function handler(req, res) {
+  const client = new Redis(); // New connection every time!
+  const result = await client.get('key');
+  await client.quit();
+}
+
+// GOOD: Reuse single client
+const redis = new Redis({
+  maxRetriesPerRequest: 3,
+  enableReadyCheck: true,
+});
+
+async function handler(req, res) {
+  const result = await redis.get('key');
+  return result;
+}
+
+// GOOD: Use connection pool for high throughput
+import { Pool } from 'generic-pool';
+
+const pool = Pool({
+  create: async () => new Redis(),
+  destroy: async (client) => client.quit(),
+  validate: async (client) => client.isReady,
+}, {
+  max: 20,
+  min: 5,
+  acquireTimeoutMillis: 3000,
+});
+
+async function handler(req, res) {
+  const client = await pool.acquire();
+  try {
+    return await client.get('key');
+  } finally {
+    await pool.release(client);
+  }
+}
+```
+
+## Debugging Guide
+
+### Redis CLI Commands
+
+```bash
+# Monitor all commands in real-time
+redis-cli monitor
+
+# Get server info
+redis-cli info
+redis-cli info memory
+redis-cli info stats
+redis-cli info clients
+
+# Check connected clients
+redis-cli client list
+redis-cli client kill ip:port
+
+# Check keyspace
+redis-cli keys "*"
+redis-cli dbsize
+
+# Scan keys (production-safe)
+redis-cli scan 0
+redis-cli scan 0 MATCH user:* COUNT 100
+
+# Check slow queries
+redis-cli slowlog get 10
+
+# Check memory usage of a key
+redis-cli memory usage user:123
+
+# Debug a key
+redis-cli debug object user:123
+```
+
+### Redis Commands for Troubleshooting
+
+```typescript
+// Monitor commands with ioredis
+redis.monitor().on('monitor', (time, args, source, database) => {
+  console.log(`${time}: ${args.join(' ')}`);
+});
+
+// Pipeline for batch operations
+const pipeline = redis.pipeline();
+pipeline.set('key1', 'value1');
+pipeline.get('key1');
+pipeline.hset('hash', 'field', 'value');
+const results = await pipeline.exec();
+
+// Transaction (watch for optimistic locking)
+const multi = redis.multi();
+multi.set('key1', 'value1');
+multi.incr('counter');
+const results = await multi.exec();
+
+// Lua scripting for atomic operations
+const script = `
+  local current = redis.call('GET', KEYS[1])
+  if current and tonumber(current) >= tonumber(ARGV[1]) then
+    redis.call('DECRBY', KEYS[1], ARGV[1])
+    return redis.call('GET', KEYS[1])
+  else
+    return 'insufficient_balance'
+  end
+`;
+
+const result = await redis.eval(script, 1, 'account:balance', '100');
+```
+
+## Tradeoffs
+
+### Redis vs Memcached
+
+| Aspect | Redis | Memcached |
+|--------|-------|-----------|
+| Data Types | Strings, Hash, List, Set, ZSet, Stream | Strings only |
+| Persistence | Optional (RDB, AOF) | None (memory only) |
+| Replication | Master-Slave, Cluster | None |
+| Atomic Ops | Yes (all data types) | Limited (incr/decr) |
+| Memory Use | Higher (overhead) | Lower (simple) |
+| Max Value Size | 512MB | 1MB |
+| Eviction Policies | 8 policies | LRU, LFU |
+| Use Case | Complex data, pub/sub, queues | Simple caching |
+
+### When to Use Redis
+
+1. **Session storage** - Fast read/write, TTL support
+2. **Caching** - Reduce database load, improve response times
+3. **Real-time features** - Pub/sub, notifications, chat
+4. **Leaderboards** - Sorted sets with scores
+5. **Rate limiting** - Atomic counters
+6. **Job queues** - Lists for FIFO processing
+7. **Distributed locks** - Atomic operations
+8. **Geo queries** - Geospatial indexes
+
+### When to Avoid Redis
+
+1. **Primary database** - No ACID, data loss risk
+2. **Complex queries** - No JOIN support
+3. **Large datasets** - Expensive compared to disk storage
+4. **Cold storage** - Data accessed infrequently
+5. **Strict consistency** - Eventual consistency by default
+
+## Security Concerns
+
+### Redis Security Best Practices
+
+```bash
+# Redis configuration
+# redis.conf
+
+# Require password
+requirepass your_strong_password_here
+
+# Bind to specific interface only
+bind 127.0.0.1 10.0.0.1
+
+# Disable dangerous commands
+rename-command FLUSHALL ""
+rename-command FLUSHDB ""
+rename-command CONFIG "CUSTOM_CONFIG_COMMAND"
+
+# Limit memory
+maxmemory 2gb
+maxmemory-policy allkeys-lru
+
+# Enable TLS
+tls-port 6380
+tls-cert-file /path/to/redis.crt
+tls-key-file /path/to/redis.key
+tls-ca-cert-file /path/to/ca.crt
+```
+
+### Authentication in Application
+
+```typescript
+// Use AUTH command
+const redis = new Redis({
+  host: 'localhost',
+  port: 6379,
+  password: process.env.REDIS_PASSWORD,
+});
+
+// For Redis Cluster
+const redisCluster = new Redis.Cluster(nodes, {
+  redisOptions: {
+    password: process.env.REDIS_PASSWORD,
+  },
+});
+
+// Validate password on connection
+redis.auth((err) => {
+  if (err) {
+    console.error('Redis auth failed:', err);
+  }
+});
+```
+
+### Protecting Against Command Injection
+
+```typescript
+// NEVER do this - command injection vulnerability!
+const key = req.body.key;
+await redis.del(key);
+
+// GOOD: Validate and sanitize keys
+function sanitizeKey(key: string): string {
+  // Only allow alphanumeric, underscore, colon, hyphen
+  if (!/^[a-zA-Z0-9_:-]+$/.test(key)) {
+    throw new Error('Invalid key format');
+  }
+  return key;
+}
+
+const key = sanitizeKey(req.body.key);
+await redis.del(`cache:${key}`);
+```
+
+## Performance Optimization
+
+### Memory Optimization
+
+```typescript
+// Use appropriate data structures
+// String for small values
+await redis.set('flag', 'true'); // Better than SET flag:true
+
+// Hash for related fields
+await redis.hmset('user:123', { name: 'Rahul', email: 'rahul@example.com' });
+
+// Set expiry for all keys
+await redis.expire('temp:data', 3600);
+
+// Use memory-efficient encoding
+// BITFIELD for flags
+await redis.setbit('user:123:permissions', 5, 1); // User 123 has permission 5
+
+// Use pipeline for batch operations
+const pipeline = redis.pipeline();
+for (const item of items) {
+  pipeline.set(`item:${item.id}`, JSON.stringify(item));
+}
+await pipeline.exec();
+```
+
+### Connection Optimization
+
+```typescript
+// Use connection pool
+import { Pool } from 'generic-pool';
+
+const pool = Pool({
+  create: () => Promise.resolve(new Redis()),
+  destroy: async (client) => client.quit(),
+}, {
+  max: 50,
+  min: 10,
+  acquireTimeoutMillis: 3000,
+  idleTimeoutMillis: 30000,
+});
+
+// Use pipelining for multiple commands
+async function batchGet(keys: string[]) {
+  const pipeline = redis.pipeline();
+  keys.forEach(key => pipeline.get(key));
+  const results = await pipeline.exec();
+  return results.map(([err, value]) => value);
+}
+
+// Use Lua scripts for atomic operations
+const luaScript = `
+  local count = redis.call('INCR', KEYS[1])
+  if count == 1 then
+    redis.call('EXPIRE', KEYS[1], ARGV[1])
+  end
+  return count
+`;
+
+await redis.eval(luaScript, 1, 'rate:counter', '60');
+```
+
+## Scaling Challenges
+
+### Redis Cluster Setup
+
+```bash
+# Create cluster
+redis-cli --cluster create 10.0.0.1:6379 10.0.0.2:6379 10.0.0.3:6379 \
+  10.0.0.4:6379 10.0.0.5:6379 10.0.0.6:6379 \
+  --cluster-replicas 1
+
+# Add new node
+redis-cli --cluster add-node 10.0.0.7:6379 10.0.0.1:6379
+
+# Reshard data
+redis-cli --cluster reshard 10.0.0.1:6379 --cluster-to <new-node-id> \
+  --cluster-slots <number-of-slots> --cluster-yes
+
+# Rebalance cluster
+redis-cli --cluster rebalance 10.0.0.1:6379
+```
+
+### High Availability with Sentinel
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    Redis Sentinel Architecture                       │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│                    ┌──────────────────────┐                         │
+│                    │      Application      │                         │
+│                    │   (Sentinel Client)  │                         │
+│                    └──────────┬───────────┘                         │
+│                               │                                     │
+│     ┌─────────────────────────┼─────────────────────────┐           │
+│     │                         │                         │           │
+│     ▼                         ▼                         ▼           │
+│  ┌─────────┐              ┌─────────┐              ┌─────────┐       │
+│  │Sentinel1│              │Sentinel2│              │Sentinel3│       │
+│  │:26379   │◄────────────►│:26379   │◄────────────►│:26379   │       │
+│  └────┬────┘              └────┬────┘              └────┬────┘       │
+│       │                        │                        │           │
+│       └────────────────────────┼────────────────────────┘           │
+│                                │                                     │
+│                                ▼                                     │
+│                         ┌─────────────┐                             │
+│                         │   Master    │                             │
+│                         │  (Primary)  │                             │
+│                         └──────┬──────┘                             │
+│                                │                                    │
+│              ┌─────────────────┼─────────────────┐                  │
+│              │                 │                 │                  │
+│              ▼                 ▼                 ▼                  │
+│         ┌─────────┐       ┌─────────┐       ┌─────────┐             │
+│         │Replica1│       │Replica2│       │Replica3│             │
+│         │(Read)  │       │(Read)  │       │(Read)  │             │
+│         └─────────┘       └─────────┘       └─────────┘             │
+│                                                                      │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+## Best Practices
+
+### 1. Key Naming Convention
+
+```typescript
+// Use descriptive, hierarchical key names
+// Format: <entity>:<identifier>:<sub-entity>
+
+// Good examples:
+'session:user:123'
+'cache:product:456'
+'queue:emails'
+'ratelimit:api:192.168.1.1'
+'lock:order:789'
+'leaderboard:monthly'
+
+// Bad examples:
+'user123'
+'data'
+'key'
+```
+
+### 2. Proper TTL Management
+
+```typescript
+// Set appropriate TTLs
+const TTL = {
+  session: 7 * 24 * 60 * 60,    // 7 days
+  cache: 5 * 60,               // 5 minutes
+  rateLimit: 60,               // 1 minute
+  otp: 5 * 60,                // 5 minutes
+  verificationToken: 24 * 60 * 60, // 24 hours
+};
+
+// Refresh TTL on access
+async function accessSession(sessionId: string) {
+  const session = await redis.hgetall(`session:${sessionId}`);
+  if (session) {
+    await redis.expire(`session:${sessionId}`, TTL.session);
+  }
+  return session;
+}
+```
+
+### 3. Graceful Shutdown
+
+```typescript
+async function gracefulShutdown() {
+  console.log('Shutting down Redis connections...');
+  
+  // Wait for pending commands
+  await redis.quit();
+  await publisher.quit();
+  await subscriber.quit();
+  
+  // Close cluster
+  if (redisCluster) {
+    await redisCluster.quit();
+  }
+  
+  console.log('Redis connections closed');
+}
+
+process.on('SIGTERM', gracefulShutdown);
+process.on('SIGINT', gracefulShutdown);
+```
+
+## Common Mistakes
+
+### Mistake 1: Not Setting Expiry
+
+```typescript
+// BAD: Keys never expire, causing memory growth
+await redis.set('temp:data', 'value'); // Stays forever!
+
+// GOOD: Always set expiry
+await redis.setex('temp:data', 3600, 'value'); // Expires in 1 hour
+```
+
+### Mistake 2: Using KEYS in Production
+
+```typescript
+// BAD: KEYS blocks Redis for large datasets
+const keys = await redis.keys('*'); // Blocks entire server!
+
+// GOOD: Use SCAN instead
+async function scanKeys(pattern: string) {
+  const keys: string[] = [];
+  let cursor = '0';
+  
+  do {
+    const [newCursor, batch] = await redis.scan(cursor, 'MATCH', pattern, 'COUNT', 100);
+    cursor = newCursor;
+    keys.push(...batch);
+  } while (cursor !== '0');
+  
+  return keys;
+}
+```
+
+### Mistake 3: Storing Large Data
+
+```typescript
+// BAD: Storing large objects in Redis
+const largeData = await fetchLargeObject();
+await redis.set('large:data', JSON.stringify(largeData)); // 100MB!
+
+// GOOD: Compress large data
+import { gzip, gunzip } from 'zlib';
+import { promisify } from 'util';
+
+const gzipAsync = promisify(gzip);
+const gunzipAsync = promisify(gunzip);
+
+const compressed = await gzipAsync(JSON.stringify(largeData));
+await redis.set('large:data', compressed);
+
+// BETTER: Store large data in DB, reference in Redis
+const dataId = await saveToDatabase(largeData);
+await redis.set('large:data:ref', dataId, { EX: 3600 });
+```
+
+## Interview Questions
+
+### Q1: Explain Redis data types and their use cases
+
+**Answer**: Redis supports String (simple caching), Hash (objects), List (queues, feeds), Set (unique items, tags), Sorted Set (leaderboards, rankings), Stream (event logs), Bitmap (flags), and HyperLogLog (cardinality). Each has specific use cases based on operations needed.
+
+### Q2: What is Redis persistence? RDB vs AOF
+
+**Answer**: RDB creates point-in-time snapshots at intervals, good for backups but may lose recent data. AOF logs every write operation, more durable but larger files. Can use both for maximum durability.
+
+### Q3: How does Redis handle high availability?
+
+**Answer**: Redis Sentinel provides automatic failover with a quorum of sentinel processes monitoring masters and replicas. Redis Cluster provides horizontal sharding across multiple nodes with automatic failover and data distribution.
+
+### Q4: What is the difference between Redis Pub/Sub and Streams?
+
+**Answer**: Pub/Sub is fire-and-forget with no message persistence, subscribers must be online. Streams are persistent logs with consumer groups, support message acknowledgment, and can replay history.
+
+### Q5: How would you implement distributed locking in Redis?
+
+**Answer**: Use SET with NX and EX options atomically: `SET lock:resource_id unique_value NX EX 30`. Release with Lua script to check value matches before deleting. Use Redlock algorithm for distributed systems requiring safety.
+
+### Q6: What is the difference between Redis and Memcached?
+
+**Answer**: Redis supports multiple data types with atomic operations, persistence options, and replication. Memcached is simpler with string-only storage, no persistence, and no replication, but has lower memory overhead.
+
+### Q7: Explain Redis eviction policies
+
+**Answer**: Policies determine which keys to remove when maxmemory is reached: noeviction (error), allkeys-lru (least recently used), allkeys-lfu (least frequently used), volatile-lru, volatile-lfu, allkeys-random, volatile-random, and volatile-ttl.
+
+## Latest 2026 Fullstack Engineering Patterns
+
+### Pattern 1: Edge Caching with Redis on Cloudflare Workers
+
+```typescript
+// Cloudflare Workers with Redis (Upstash)
+import { Redis } from '@upstash/redis/cloudflare';
+
+export interface Env {
+  REDIS: Redis;
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const cacheKey = `page:${new URL(request.url).pathname}`;
+    
+    // Try cache
+    const cached = await env.REDIS.get<string>(cacheKey);
+    if (cached) {
+      return new Response(cached, {
+        headers: { 'X-Cache': 'HIT' },
+      });
+    }
+    
+    // Fetch and cache
+    const response = await fetch(request);
+    const html = await response.text();
+    
+    await env.REDIS.set(cacheKey, html, { EX: 60 }); // 60 second TTL
+    
+    return new Response(html, {
+      headers: { 'X-Cache': 'MISS' },
+    });
+  },
+};
+```
+
+### Pattern 2: Vector Similarity Search
+
+```typescript
+// Redis as vector database for AI applications
+import { createClient } from '@redis/client';
+
+const redis = createClient({ url: 'redis://localhost:6379' });
+
+interface VectorSearchOptions {
+  vector: number[];
+  topK: number;
+  similarityThreshold?: number;
+}
+
+async function searchSimilarProducts(
+  productEmbedding: number[],
+  topK: number = 10
+) {
+  // Store vectors using JSON
+  // For production, use Redis Stack with FT.CREATE
+  
+  const products = await redis.ft_search(
+    'products:embeddings',
+    `@embedding:[VECTOR_RANGE $radius $vector]`,
+    {
+      PARAMS: { vector: Buffer.from(new Float32Array(productEmbedding).buffer) },
+      RETURN: ['name', 'price', 'category'],
+      LIMIT: [0, topK],
+    }
+  );
+  
+  return products;
+}
+```
+
+### Pattern 3: Real-time Analytics with Redis
+
+```typescript
+// Real-time metrics tracking
+async function trackEvent(event: AnalyticsEvent) {
+  const now = Date.now();
+  const minuteKey = `analytics:${event.type}:${Math.floor(now / 60000)}`;
+  
+  const multi = redis.multi();
+  
+  // Increment counter for this minute
+  multi.hincrby(minuteKey, 'count', 1);
+  multi.hincrbyfloat(minuteKey, 'sum_value', event.value || 1);
+  
+  // Track unique users
+  multi.sadd(`${minuteKey}:users`, event.userId);
+  
+  // Set TTL to keep data for 24 hours
+  multi.expire(minuteKey, 86400);
+  
+  await multi.exec();
+}
+
+// Get analytics for dashboard
+async function getAnalytics(type: string, minutes: number = 60) {
+  const results = [];
+  
+  for (let i = 0; i < minutes; i++) {
+    const key = `analytics:${type}:${Math.floor(Date.now() / 60000) - i}`;
+    const [count, stats, users] = await Promise.all([
+      redis.hget(key, 'count'),
+      redis.hget(key, 'sum_value'),
+      redis.scard(`${key}:users`),
+    ]);
+    
+    results.push({
+      timestamp: key.split(':')[2],
+      count: parseInt(count || '0'),
+      sum: parseFloat(stats || '0'),
+      uniqueUsers: users,
+    });
+  }
+  
+  return results;
+}
+```
+
+This comprehensive guide covers Redis from basics to advanced production patterns. Practice these concepts and always consider the tradeoffs when using Redis in your fullstack applications.
