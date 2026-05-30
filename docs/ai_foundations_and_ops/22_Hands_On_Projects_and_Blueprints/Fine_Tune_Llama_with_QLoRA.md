@@ -1,5 +1,5 @@
 # 🦙 Project: Fine-Tune Llama-3 with QLoRA
-> **Level:** Extreme Advanced | **Language:** Hinglish | **Goal:** Train a 70B parameter model on a single consumer GPU, exploring Quantization, Low-Rank Adaptation, Dataset formatting, and the 2026 strategies for "Efficient Fine-Tuning."
+> **Level:** Extreme Advanced | **Language:** Hinglish | **Goal:** Ek single consumer GPU par 70B parameter model ko train karein; jisme Quantization, Low-Rank Adaptation, Dataset formatting, aur 2026 mein "Efficient Fine-Tuning" ki strategies ko explore kiya gaya ho.
 
 ---
 

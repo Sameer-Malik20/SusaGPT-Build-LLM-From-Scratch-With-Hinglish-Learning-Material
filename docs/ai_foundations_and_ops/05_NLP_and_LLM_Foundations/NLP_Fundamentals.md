@@ -1,5 +1,5 @@
 # 🗣️ Introduction to NLP: Teaching Machines the Human Tongue
-> **Level:** Beginner | **Language:** Hinglish | **Goal:** Master the core concepts, challenges, and evolution of Natural Language Processing, from rule-based systems to the statistical foundations of modern LLMs.
+> **Level:** Beginner | **Language:** Hinglish | **Goal:** Natural Language Processing ke core concepts, challenges, aur evolution ko master karein, rule-based systems se lekar modern LLMs ke statistical foundations tak.
 
 ---
 
@@ -15,37 +15,37 @@ NLP ka kaam hai bhasha ki is "Bariki" (Nuance) aur "Complexity" ko mathematical 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-NLP is the intersection of Linguistics, Computer Science, and Artificial Intelligence. It involves several levels of analysis:
-1. **Phonology:** The study of sounds (Speech-to-Text).
-2. **Morphology:** The study of word structure (e.g., "running" = "run" + "ing").
-3. **Syntax:** The study of sentence structure (Grammar, POS Tagging).
-4. **Semantics:** The study of meaning (Context, Entity recognition).
-5. **Pragmatics:** The study of context-dependent meaning (Sarcasm, Intent).
+NLP Linguistics, Computer Science, aur Artificial Intelligence ka intersection hai. Isme analysis ke kai saare levels shamil hote hain:
+1. **Phonology:** Sounds ki study (Speech-to-Text).
+2. **Morphology:** Word structure ki study (e.g., "running" = "run" + "ing").
+3. **Syntax:** Sentence structure ki study (Grammar, POS Tagging).
+4. **Semantics:** Meaning ki study (Context, Entity recognition).
+5. **Pragmatics:** Context-dependent meaning ki study (Sarcasm, Intent).
 
-**The Evolution:**
+**The Evolution (Kramik Vikas):**
 - **Symbolic NLP (1950s-1990s):** Rule-based systems (If word == "Good" then Sentiment = Positive).
-- **Statistical NLP (1990s-2010s):** Using probabilities (N-grams) to guess the next word.
-- **Neural NLP (2014-2018):** Using RNNs/LSTMs and Word Embeddings.
-- **Large Scale NLP (2018-Present):** Using Transformers (Attention) on internet-scale data.
+- **Statistical NLP (1990s-2010s):** Agle word ko guess karne ke liye probabilities (N-grams) ka use karna.
+- **Neural NLP (2014-2018):** RNNs/LSTMs aur Word Embeddings ka use karna.
+- **Large Scale NLP (2018-Present):** Internet-scale data par Transformers (Attention) ka use karna.
 
 ---
 
 ## 🏗️ 3. Core NLP Task Map
 | Task | Description | Real-world Use Case |
 | :--- | :--- | :--- |
-| **Sentiment Analysis** | Detecting emotions (Happy/Sad/Angry) | Customer Review Analysis |
-| **NER (Named Entity Recognition)** | Identifying Names, Dates, Locations | Automating Legal Documents |
+| **Sentiment Analysis** | Emotions (Happy/Sad/Angry) ko detect karna | Customer Review Analysis |
+| **NER (Named Entity Recognition)** | Names, Dates, Locations ko identify karna | Automating Legal Documents |
 | **Machine Translation** | Converting Language A to B | Google Translate |
-| **Summarization** | Long text to Short summary | News App Summaries |
-| **Q&A Systems** | Finding answers in a document | Customer Support Bots |
+| **Summarization** | Long text ko Short summary me convert karna | News App Summaries |
+| **Q&A Systems** | Document me answers find karna | Customer Support Bots |
 
 ---
 
 ## 📐 4. Mathematical Intuition
-- **The Vector Space Model:** Every word is a point in a high-dimensional space. "King" and "Queen" are close together; "King" and "Laptop" are far apart.
-- **Probability Modeling:** NLP is about predicting the next token $x_{n+1}$ given context $x_{1...n}$.
+- **Vector Space Model:** Har word high-dimensional space me ek point hota hai. "King" aur "Queen" paas-paas hote hain; "King" aur "Laptop" bahut door hote hain.
+- **Probability Modeling:** NLP ka matlab context $x_{1...n}$ diye hone par agle token $x_{n+1}$ ko predict karna hai.
   $$P(x_{n+1} | x_{1...n})$$
-- **Similarity:** We use **Cosine Similarity** to measure how close two sentences are in meaning.
+- **Similarity:** Do sentences meaning me kitne close hain, ise measure karne ke liye hum **Cosine Similarity** ka use karte hain.
 
 ---
 
@@ -63,10 +63,10 @@ graph LR
 
 ## 💻 6. Production-Ready Examples (Basic NLP with SpaCy)
 ```python
-# 2026 Pro-Tip: Use SpaCy for production-grade entity and syntax analysis.
+# 2026 Pro-Tip: Production-grade entity aur syntax analysis ke liye SpaCy ka use karein.
 import spacy
 
-# Load the modern English transformer model
+# Modern English transformer model load karna
 nlp = spacy.load("en_core_web_trf")
 
 text = "Apple is looking at buying U.K. startup for $1 billion."
@@ -87,66 +87,66 @@ for token in doc:
 ---
 
 ## ❌ 7. Failure Cases
-- **Ambiguity Failure:** "I saw a man with a telescope." (Did I use the telescope, or was the man holding it?). **Fix:** Use context-aware models like BERT/GPT.
-- **Slang & Sarcasm:** Standard NLP models often fail at sarcasm: "Oh great, my car broke down again." (Model might think 'great' = Positive).
-- **Out-of-Vocabulary (OOV):** Old models failed if they saw a word they weren't trained on (e.g., a new slang like "Skibidi"). **Fix:** Use **Sub-word Tokenization**.
+- **Ambiguity Failure:** "I saw a man with a telescope." (Did I use the telescope, or was the man holding it?). **Fix:** BERT/GPT jaise context-aware models ka use karein.
+- **Slang & Sarcasm:** Standard NLP models aksar sarcasm me fail ho jate hain: "Oh great, my car broke down again." (Model soch sakta hai ki 'great' = Positive).
+- **Out-of-Vocabulary (OOV):** Purane models tab fail ho jate the jab wo koi aisa word dekhte the jispar unhe train nahi kiya gaya tha (e.g., new slang jaise "Skibidi"). **Fix:** **Sub-word Tokenization** ka use karein.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** NER is missing important names.
-- **Check:** **Casing**. Is your text all lowercase? Some models rely on Capitalization to find Names.
-- **Symptom:** Sentiment analysis is wrong $50\%$ of the time.
-- **Check:** **Negation**. Is the model ignoring "not"? (e.g., "not good").
+- **Symptom:** NER important names ko miss kar raha hai.
+- **Check:** **Casing**. Kya aapka text saara lowercase me hai? Kuch models Names find karne ke liye Capitalization par rely karte hain.
+- **Symptom:** Sentiment analysis $50\%$ baar galat hota hai.
+- **Check:** **Negation**. Kya model "not" ko ignore kar raha hai? (e.g., "not good").
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Rule-based:** 100% predictable, 0% flexible. (Good for simple chatbots).
-- **Statistical:** Fast, but lacks "Understanding."
-- **Neural:** High "Understanding," but requires GPUs and is a "Black Box."
+- **Rule-based:** $100\%$ predictable, $0\%$ flexible. (Simple chatbots ke liye behtar hai).
+- **Statistical:** Fast hai par isme "Understanding" (samajh) nahi hoti.
+- **Neural:** High "Understanding" hoti hai par GPUs ki need hoti hai aur ye ek "Black Box" hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **PII Leakage:** NLP models can accidentally extract and store private info like Social Security Numbers from documents. Always use **Anonymization** layers.
-- **Biased Toxicity:** If trained on toxic internet comments, the model will output toxic/racist responses.
+- **PII Leakage:** NLP models galti se documents se private info jaise Social Security Numbers extract aur store kar sakte hain. Hamesha **Anonymization** layers ka use karein.
+- **Biased Toxicity:** Agar toxic internet comments par train kiya jaye, toh model toxic/racist responses output karega.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The Context Window:** Early NLP could only "look" at 50 words. Modern LLMs can look at 1 Million+ words. Scaling this "Attention" is the #1 engineering challenge.
-- **Low-Resource Languages:** NLP works great for English but fails for regional languages (Bhojpuri, Swahili) due to lack of data.
+- **The Context Window:** Early NLP sirf 50 words tak hi "dekh" sakta tha. Modern LLMs 1 Million+ words dekh sakte hain. Is "Attention" ko scale karna sabse bada engineering challenge hai.
+- **Low-Resource Languages:** NLP English ke liye toh great kaam karta hai par regional bhashaon (Bhojpuri, Swahili) ke liye fail ho jata hai kyunki unka data kam hai.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Preprocessing Cost:** Cleaning TBs of text data for training can cost thousands in **CPU/Spark** time.
-- **Inference Cost:** Using a 70B model for simple sentiment analysis is a waste. Use a small **DistilBERT** or **FastText** model to save $99\%$ of costs.
+- **Preprocessing Cost:** Training ke liye TBs of text data ko clean karne me **CPU/Spark** time me thousands of dollars cost aa sakti hai.
+- **Inference Cost:** Simple sentiment analysis ke liye 70B model ka use karna paise waste karna hai. $99\%$ cost save karne ke liye small **DistilBERT** ya **FastText** model ka use karein.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Clean Your Data:** "Garbage In, Garbage Out." Remove HTML tags, emojis, and noise before training.
-- **Use Sub-words:** Always use tokenizers like BPE (Byte Pair Encoding) or WordPiece.
-- **Evaluate with Humans:** NLP metrics like BLEU or ROUGE are flawed. Always include a human evaluation step.
+- **Clean Your Data:** "Garbage In, Garbage Out." Training se pehle HTML tags, emojis, aur noise ko remove karein.
+- **Use Sub-words:** Hamesha BPE (Byte Pair Encoding) ya WordPiece jaise tokenizers ka use karein.
+- **Evaluate with Humans:** BLEU ya ROUGE jaise NLP metrics perfect nahi hote. Hamesha ek human evaluation step shamil karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Stemming for Modern AI:** Stemming (cutting words like 'running' to 'run') is outdated for Deep Learning. Use the full word or sub-words.
-- **Ignoring Stopwords in Context:** Removing "not", "no", "above" can completely change the meaning for a Transformer.
+- **Stemming for Modern AI:** Stemming (jaise 'running' ko cut karke 'run' banana) Deep Learning ke liye outdated ho chuka hai. Poore word ya sub-words ka use karein.
+- **Ignoring Stopwords in Context:** "not", "no", "above" jaise stopwords ko remove karne se Transformer ke liye meaning completely change ho sakta hai.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is the 'Stopword' and why do we sometimes keep them?"**
-2. **"Difference between Stemming and Lemmatization?"** (Stemming is crude cutting; Lemmatization uses a dictionary to find the 'root' word).
-3. **"How does Word Embedding solve the 'Curse of Dimensionality' in NLP?"**
+1. **"Stopword kya hote hain aur hum unhe kabhi-kabhi kyun rakhte hain?"**
+2. **"Stemming aur Lemmatization me kya difference hai?"** (Stemming crude cutting hai; Lemmatization root word dhoondhne ke liye dictionary ka use karta hai).
+3. **"Word Embedding kaise NLP me 'Curse of Dimensionality' ko solve karta hai?"**
 
 ---
 
-## 🚀 15. Latest 2026 Industry Patterns
+## 🚀 16. Latest 2026 Industry Patterns
 - **Native Multilingual Models:** No more translation needed. Models like Llama-3-Multilingual understand 100+ languages natively in the same space.
 - **Retrieval Augmented NLP (RAG):** Instead of the model "memorizing" facts, it "searches" a database and then "explains" it.
 - **Zero-shot Everything:** Using a general model to do specific tasks (like NER or Sentiment) without any task-specific training.

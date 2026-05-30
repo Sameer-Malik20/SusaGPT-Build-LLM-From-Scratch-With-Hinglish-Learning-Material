@@ -1,5 +1,5 @@
 # 🎯 Cross-Encoder Reranking: The Truth-Checker
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the second stage of high-precision retrieval, exploring why Bi-Encoders are fast but "Blind," and how Cross-Encoders act as a "Final Judge" to ensure $99\%+$ RAG accuracy in 2026.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** High-precision retrieval ke second stage ko master karein, explore karein ki kyu Bi-encoders tez par "Blind" hote hain, aur kaise Cross-encoders "Final Judge" ki tarah kaam karke 2026 mein $99\%+$ RAG accuracy ensure karte hain.
 
 ---
 
@@ -9,7 +9,7 @@ Search process ko ek "Audition" ki tarah sochiye:
 1. **The Audition (Bi-Encoder / Vector Search):** 
    - 10,000 log aate hain. Hum jaldi-jaldi unki "Height" aur "Weight" (Vectors) check karke 10 logo ko select kar lete hain. Ye bahut fast hai, par hum unki "Acting" nahi dekh rahe.
 2. **The Final Test (Cross-Encoder / Reranker):** 
-   - Ab hum un 10 logo ka "Personal Interview" lete hain. Hum Query aur Document ko ek saath bithakar (Cross) dhyan se padhte hain. Ye slow hai, par ye batata hai ki kaunsa document "Asliyat" mein query se match karta hai.
+   - Now we take their "Personal Interview." We make the Query and the Document sit together (Cross) and read them carefully. This is slow, but it tells us which document actually matches the query in reality.
 
 **Reranking** ka matlab hai pehle 100 fast results nikalna, aur phir unhe ek "Smart Model" (Cross-Encoder) se re-sort karna taki sabse sahi answer hamesha #1 position par ho. 
 
@@ -18,42 +18,42 @@ Search process ko ek "Audition" ki tarah sochiye:
 ---
 
 ## 🧠 2. Deep Technical Explanation
-The difference lies in how the models "See" the data.
+Main difference is baat mein hai ki models data ko kaise "See" (samajhte/dekhte) karte hain.
 
 ### 1. Bi-Encoders (The "Audition" Model):
 - Examples: BERT, OpenAI Embeddings.
-- Query and Document are encoded **separately**. 
-- Interaction only happens via a simple Dot Product at the end.
-- **Problem:** The model can't see the fine-grained relationship between a specific word in the query and a specific word in the document.
+- Query aur Document ko **separately** (alag-alag) encode kiya jata hai.
+- Dono ke beech ka interaction sirf end mein ek simple Dot Product ke throw hota hai.
+- **Problem:** Model query ke kisi specific word aur document ke kisi specific word ke beech ke fine-grained relationship ko nahi dekh pata.
 
 ### 2. Cross-Encoders (The "Judge" Model):
 - Examples: BGE-Reranker, Cohere Rerank.
-- Query and Document are fed into the model **together** as a single pair: `[CLS] Query [SEP] Document`.
-- The model uses full **Self-Attention** across both. It can see exactly how the query relates to the content.
-- It outputs a single score between $0$ and $1$.
+- Query aur Document ko ek saath model mein ek single pair ke roop mein feed kiya jata hai: `[CLS] Query [SEP] Document`.
+- Model dono ke beech full **Self-Attention** ka use karta hai. Ye dekh sakta hai ki query document ke content se exact kaise relate karti hai.
+- Ye $0$ aur $1$ ke beech ek single score output karta hai.
 
 ### 3. The Two-Stage Pipeline:
-- **Stage 1 (Retrieval):** Use Bi-Encoder (Fast) to get Top-100 candidates from Millions.
-- **Stage 2 (Reranking):** Use Cross-Encoder (Smart but Slow) to re-order those 100.
+- **Stage 1 (Retrieval):** Millions documents mein se Top-100 candidates nikalne ke liye Bi-Encoder (Fast) ka use karein.
+- **Stage 2 (Reranking):** Un 100 candidates ko re-order (re-sort) karne ke liye Cross-Encoder (Smart but Slow) ka use karein.
 
 ---
 
 ## 🏗️ 3. Bi-Encoder vs. Cross-Encoder
 | Feature | Bi-Encoder (Vector Search) | Cross-Encoder (Reranker) |
 | :--- | :--- | :--- |
-| **Input** | Query / Doc separately | **Query + Doc together** |
+| **Input** | Query / Doc alag-alag | **Query + Doc ek saath** |
 | **Interaction** | Low (Dot Product) | **Extreme (Self-Attention)** |
-| **Speed** | Ultra-Fast ($O(1)$ with index)| Slow ($O(N)$) |
+| **Speed** | Ultra-Fast ($O(1)$ index ke saath)| Slow ($O(N)$) |
 | **Accuracy** | Good | **Superior** |
 | **Max Scale** | **Billions** | **Max ~100-200 docs** |
 
 ---
 
 ## 📐 4. Mathematical Intuition
-- **Self-Attention Complexity:** 
-  A Cross-Encoder with sequence length $L$ has a complexity of $O(L^2)$. 
-  If you try to compare a Query with 1 Million documents using a Cross-Encoder, the complexity would be $1,000,000 \times L^2$. This is impossible.
-  By only reranking 100 docs, we make the cost manageable: $100 \times L^2$.
+- **Self-Attention Complexity:**
+  Sequence length $L$ wale Cross-Encoder ki complexity $O(L^2)$ hoti hai.
+  Agar aap Cross-Encoder ka use karke ek Query ko 1 Million documents ke saath compare karne ki koshish karenge, to complexity $1,000,000 \times L^2$ ho jayegi, jo ki impossible hai.
+  Sirf 100 docs ko rerank karke, hum is cost ko manageable bana dete hain: $100 \times L^2$.
 
 ---
 
@@ -77,11 +77,11 @@ graph TD
 
 ## 💻 6. Production-Ready Examples (Using BGE-Reranker in Python)
 ```python
-# 2026 Pro-Tip: Use Cross-Encoders to filter out 'Hallucination' context.
+# 2026 Pro-Tip: 'Hallucination' context ko filter karne ke liye Cross-Encoders ka use karein.
 
 from sentence_transformers import CrossEncoder
 
-# 1. Load a powerful Reranker model
+# 1. Ek powerful Reranker model ko load karein
 model = CrossEncoder('BAAI/bge-reranker-v2-m3', device='cuda')
 
 query = "How to reset the database password?"
@@ -91,11 +91,11 @@ documents = [
     "Our database uses high-end encryption for passwords."
 ]
 
-# 2. Get scores for Query-Document pairs
-# This model sees the query and doc TOGETHER
+# 2. Query-Document pairs ke liye scores get karein
+# Ye model query aur doc ko EK SAATH (together) dekhta hai
 scores = model.predict([(query, doc) for doc in documents])
 
-# 3. Sort documents by score
+# 3. Documents ko score ke basis par sort karein
 results = sorted(zip(documents, scores), key=lambda x: x[1], reverse=True)
 
 for doc, score in results:
@@ -105,66 +105,67 @@ for doc, score in results:
 ---
 
 ## ❌ 7. Failure Cases
-- **Over-truncation:** If the Bi-Encoder (Stage 1) misses the "Right" document entirely, the Reranker (Stage 2) will never see it. The Reranker can only re-sort what it is given.
-- **Latency Spikes:** Adding a Reranker adds $\sim 100-500ms$ to every query. If your app needs sub-100ms response, you can't use a heavy Cross-Encoder.
-- **Context Window Exhaustion:** Trying to rerank documents that are too long (e.g., 5000 words each). Most rerankers have a limit of 512 tokens.
+- **Over-truncation:** Agar Bi-Encoder (Stage 1) "Sahi" document ko poori tarah se miss kar deta hai, to Reranker (Stage 2) use kabhi nahi dekh payega. Reranker sirf unhi cheezon ko re-sort kar sakta hai jo use di jati hain.
+- **Latency Spikes:** Reranker add karne se har query mein $\sim 100-500ms$ ka extra time add ho jata hai. Agar aapke app ko sub-100ms response time chahiye, to aap heavy Cross-Encoder use nahi kar sakte.
+- **Context Window Exhaustion:** Aise documents ko rerank karne ki koshish karna jo bahut zyada lambe hon (e.g., 5000 words each). Zyada tar rerankers ki limit 512 tokens ki hoti hai.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Top result is still wrong."
+- **Symptom:** "Top result abhi bhi wrong hai."
 - **Check:** **Top-K**. Maybe the correct doc is at position #150, but you only reranked the top 100. Increase the retrieval limit.
 - **Symptom:** "GPU Memory Error."
-- **Check:** **Batch size**. Reranking 100 documents one-by-one is slow. Reranking them in a batch of 32 is faster but uses more VRAM.
+- **Check:** **Batch size**. 100 documents ko ek-ek karke rerank karna slow hota hai. Unhe 32 ke batch mein rerank karna faster hota hai lekin isse VRAM zyada use hoga.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Model Size:** 
-  - Small Rerankers (e.g., BGE-Small) are fast but less accurate. 
-  - Large Rerankers (e.g., based on Llama-3) are extremely smart but very expensive.
-- **API vs. Self-hosted:** 
-  - Cohere Rerank API is easy. 
-  - Self-hosting BGE gives you data privacy and zero per-request cost.
+- **Model Size:**
+  - Chhote Rerankers (e.g., BGE-Small) fast hote hain lekin kam accurate hote hain.
+  - Bade Rerankers (e.g., Llama-3 par based) extremely smart hote hain lekin kafi expensive hote hain.
+- **API vs. Self-hosted:**
+  - Cohere Rerank API use karna easy hai.
+  - BGE ko self-host karne se aapko data privacy aur zero per-request cost milti hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Prompt Injection in Context:** An attacker can put "Instruction tags" in a document. The Reranker might see these and give the document a high score because it "looks" like a direct answer, even if it's malicious.
+- **Prompt Injection in Context:** Koi attacker kisi document mein "Instruction tags" daal sakta hai. Reranker in tags ko dekh kar document ko high score de sakta hai kyunki wo ek direct answer ki tarah "looks" (dikhta) hai, chahe wo malicious hi kyu na ho.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Throughput:** A single GPU can only rerank $\sim 10-20$ queries per second (assuming 100 docs each). For millions of users, you need a massive cluster of Reranking nodes.
+- **Throughput:** Ek single GPU har second sirf $\sim 10-20$ queries ko hi rerank kar sakta hai (agar har query mein 100 docs hon). Millions of users ke liye, aapko Reranking nodes ka ek massive cluster chahiye hoga.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Compute Inflation:** Adding a Reranker usually doubles the compute cost of your retrieval pipeline. Only use it for tasks where "Accuracy is Life" (Medical, Legal, Finance).
+- **Compute Inflation:** Reranker add karne se aamtaur par aapke retrieval pipeline ki compute cost double ho jati hai. Ise sirf unhi tasks ke liye use karein jahan "Accuracy hi Life (sab kuch) hai" (jaise Medical, Legal, Finance).
 
 ---
 
 ## ✅ 13. Best Practices
-- **Thresholding:** If the top Reranker score is less than $0.1$, don't send it to the LLM. It's better to say "I don't know" than to give wrong context.
-- **Multi-stage Reranking:** Use a fast, small Reranker for the top 100, then a giant LLM-based Reranker for the top 5.
-- **Train on your own data:** If you have "Click data" (users clicking on search results), use it to fine-tune your Reranker.
+- **Thresholding:** Agar top Reranker score $0.1$ se kam hai, to use LLM ko na bhejen. Galat context dene se behtar hai ki aap "I don't know" keh dein.
+- **Multi-stage Reranking:** Top 100 ke liye ek fast aur small Reranker ka use karein, phir top 5 ke liye ek giant LLM-based Reranker use karein.
+- **Apne data par train karein:** Agar aapke paas "Click data" (users click behavior search results par) hai, to iska use apne Reranker ko fine-tune karne ke liye karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Reranking too many docs:** Trying to rerank 1000 docs. It's a waste of time. Focus on the top 50-100.
-- **Ignoring the Score Scale:** Each Reranker model has a different score range. Some are $0-1$, some are raw logits. Don't compare scores from different models.
+- **Bahut zyada docs ko rerank karna:** 1000 docs ko rerank karne ki koshish karna. Ye time ki waste hai. Sirf top 50-100 par focus karein.
+- **Score Scale ko ignore karna:** Har ek Reranker model ka score range different hota hai. Kuch $0-1$ hote hain, to kuch raw logits hote hain. Different models ke scores ko aapas mein compare na karein.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"Why can't we use a Cross-Encoder for the initial search across 1 Billion documents?"**
-2. **"What is the 'Attention' difference between a Bi-Encoder and a Cross-Encoder?"**
-3. **"How does a Reranker help in reducing LLM hallucinations?"**
+1. **"Hum 1 Billion documents ke initial search ke liye directly Cross-Encoder ka use kyu nahi kar sakte?"**
+2. **"Bi-Encoder aur Cross-Encoder ke beech kya 'Attention' difference hai?"**
+3. **"LLM hallucinations ko reduce karne mein ek Reranker kaise help karta hai?"**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **LLM-as-a-Reranker:** Using models like Llama-3-8B with a specific "Pointwise" prompt to rerank documents. It's slower but matches human judgment $95\%+$.
-- **ColBERTv2:** A "Late Interaction" model that gives Cross-Encoder accuracy with Bi-Encoder speed by storing multiple vectors per token.
-- **Learnable Rerankers:** Systems that automatically improve their reranking logic based on "Human Feedback" (RLHF) in real-time.
+- **LLM-as-a-Reranker:** Documents ko rerank karne ke liye ek specific "Pointwise" prompt ke saath Llama-3-8B jaise models ka use karna. Ye slow hai lekin human judgment se $95\%+$ match karta hai.
+- **ColBERTv2:** Ek "Late Interaction" model jo har token ke liye multiple vectors store karke Bi-Encoder ki speed ke saath Cross-Encoder jaisi accuracy deta hai.
+- **Learnable Rerankers:** Aise systems jo real-time mein "Human Feedback" (RLHF) ke basis par apni reranking logic ko automatically improve karte hain.
+

@@ -1,5 +1,5 @@
 # 📈 Project: AI Agent for Data Analysis (PandasAgent)
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Build an AI agent that can take a CSV file, understand the user's question, write Python code, execute it, and show charts, exploring Code Interpreters, LangChain Agents, and the 2026 strategies for "Autonomous Analysts."
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Ek aisa AI agent build karein jo CSV file lekar user ke question ko samajh sake, Python code likh sake, use execute kar sake, aur charts show kar sake; jisme Code Interpreters, LangChain Agents, aur 2026 mein "Autonomous Analysts" banane ki strategies ko explore kiya gaya ho.
 
 ---
 
@@ -83,29 +83,29 @@ if file:
 ---
 
 ## ❌ 7. Failure Cases & Security (IMPORTANT)
-- **Code Execution Risk:** AI can write `import os; os.system("rm -rf /")`. **Fix: Never run AI code on your main server! Use a Docker Container or a Sandboxed REPL (like E2B).**
-- **Inaccurate Code:** AI forgot to handle "NULL" values, so the calculation is wrong. **Fix: In the system prompt, tell the agent: "Always check for NaNs before calculating."**
-- **Large Dataset:** If the CSV is 10GB, the LLM can't see the whole file. **Fix: Only send the 'df.head()' and 'df.describe()' to the LLM so it knows the schema.**
+- **Code Execution Risk:** AI ye likh sakta hai `import os; os.system("rm -rf /")`. **Fix: Apne main server par AI code ko kabhi bhi run na karein! Docker Container ya kisi Sandboxed REPL (jaise E2B) ka use karein.**
+- **Inaccurate Code:** AI "NULL" values ko handle karna bhool gaya, jisse calculation galat ho gayi. **Fix: System prompt mein agent ko batayein: "Always check for NaNs before calculating."**
+- **Large Dataset:** Agar CSV 10GB ki hai, toh LLM poori file ko nahi dekh sakta. **Fix: LLM ko sirf 'df.head()' aur 'df.describe()' hi bhejein taaki use schema pata chal sake.**
 
 ---
 
 ## 🛡️ 8. 2026 Strategy: Tool-calling vs. Code Generation
-- **Tool-calling:** The agent calls a function `calculate_sum(col)`. (Safer but less flexible).
-- **Code Generation:** The agent writes raw Python. (Ultimate power but dangerous).
-- **2026 Best Practice:** Use **Open Interpreter** (Open source code interpreter) inside a restricted sandbox.
+- **Tool-calling:** Agent ek function `calculate_sum(col)` ko call karta hai. (Zyada safe par kam flexible).
+- **Code Generation:** Agent raw Python code likhta hai. (Ultimate power par risky/dangerous).
+- **2026 Best Practice:** Ek restricted sandbox ke andar **Open Interpreter** (Open source code interpreter) ka use karein.
 
 ---
 
 ## ✅ 9. Project Checklist
-- [ ] CSV file successfully parsed.
-- [ ] Agent can answer basic stats (mean, max, min).
-- [ ] Agent can create and save a `.png` chart.
-- [ ] Security sandbox implemented.
-- [ ] UI is clean and shows the data table.
+- [ ] CSV file successfully parse ho gayi ho.
+- [ ] Agent basic stats (mean, max, min) ke answers de sakta ho.
+- [ ] Agent ek `.png` chart create aur save kar sakta ho.
+- [ ] Security sandbox implement kar diya gaya ho.
+- [ ] UI clean ho aur data table show kar raha ho.
 
 ---
 
 ## 🚀 10. Future Improvements (Phase 2)
-- **Multi-file Analysis:** Connect "Sales" and "Inventory" CSVs together.
-- **Natural Language SQL:** Connect the agent to a **PostgreSQL** database.
-- **Predictive Analytics:** Tell the agent to build a `scikit-learn` model to "Predict next month's sales."
+- **Multi-file Analysis:** "Sales" aur "Inventory" CSVs ko aapas mein connect karna.
+- **Natural Language SQL:** Agent ko ek **PostgreSQL** database se connect karna.
+- **Predictive Analytics:** Agent ko "Next month's sales ko predict karne" ke liye ek `scikit-learn` model build karne ke liye bolna.

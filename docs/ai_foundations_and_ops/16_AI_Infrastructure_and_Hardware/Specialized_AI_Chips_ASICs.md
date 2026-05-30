@@ -1,5 +1,5 @@
 # 💎 Specialized AI Chips (ASICs): Beyond the GPU
-> **Level:** Extreme Advanced | **Language:** Hinglish | **Goal:** Master the world of non-NVIDIA AI hardware, exploring TPUs, LPUs, Wafer-Scale Engines, and the 2026 strategies for building "Architecture-Aware" AI software.
+> **Level:** Extreme Advanced | **Language:** Hinglish | **Goal:** Non-NVIDIA AI hardware ki duniya ko master karein, TPUs, LPUs, Wafer-Scale Engines, aur 2026 mein "Architecture-Aware" AI software build karne ki strategies ko explore karte hue.
 
 ---
 
@@ -19,22 +19,22 @@ Kuch examples:
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Specialized chips move away from the **Von Neumann Architecture** to reduce the "Memory Wall" bottleneck.
+Specialized chips **Von Neumann Architecture** se dur hat kar design kiye jate hain taaki "Memory Wall" ke bottleneck ko reduce kiya ja sake.
 
 ### 1. Google TPU (Tensor Processing Unit):
-- Uses a **Systolic Array** architecture. Data flows through the chip like blood through a heart, doing multiplications at every step without needing to go back to the RAM.
-- **TPU v6 (2026):** Optimized for sparse MoE (Mixture of Experts) models.
+- Uses a **Systolic Array** architecture. Data chip ke andar is tarah flow karta hai jaise heart ke andar blood flow karta hai, bina RAM par wapas jaye har ek step par multiplications perform karta hai.
+- **TPU v6 (2026):** Sparse MoE (Mixture of Experts) models ke liye optimized hai.
 
 ### 2. Groq LPU (Language Processing Unit):
-- Uses **SRAM** instead of **HBM**. SRAM is $100x$ faster but very expensive. 
-- The chip has NO dynamic scheduling. The "Compiler" tells every transistor exactly what to do at every nanosecond. This is why it's so fast.
+- Yeh **HBM** ke bajaye **SRAM** ka use karta hai. SRAM $100x$ fast hota hai par bahut expensive hota hai. 
+- Chip ke andar koi dynamic scheduling NAHI hoti. "Compiler" har ek transistor ko exact batata hai ki use har ek nanosecond par kya karna hai. Yahi wajah hai ki yeh itna fast hai.
 
 ### 3. Cerebras CS-3 (Wafer-Scale Engine):
-- Instead of cutting the silicon wafer into small chips, they use the **Whole Wafer.**
-- It has **4 Trillion** transistors and **44GB of on-chip SRAM.** It eliminates the need for "Networking" because everything is on one piece of silicon.
+- Silicon wafer ko choti chips mein cut karne ke bajaye, yeh pure **Whole Wafer** ka use karte hain.
+- Isme **4 Trillion** transistors aur **44GB of on-chip SRAM** hote hain. Yeh "Networking" ki zaroorat ko hi khatam kar deta hai kyunki sab kuch ek single silicon piece par hi hota hai.
 
 ### 4. AWS Inferentia & Trainium:
-- Amazon's custom chips. They are optimized for "Cost-per-token." If you want to run Llama-3 for $100$ million users, Inferentia is much cheaper than H100.
+- Amazon ke custom chips hain. Yeh "Cost-per-token" ke liye optimized hain. Agar aap $100$ million users ke liye Llama-3 run karna chahte hain, toh Inferentia H100 se kafi sasta padega.
 
 ---
 
@@ -42,18 +42,18 @@ Specialized chips move away from the **Von Neumann Architecture** to reduce the 
 | Chip | Technology | Memory Type | Best For |
 | :--- | :--- | :--- | :--- |
 | **NVIDIA H100** | GPU (General) | HBM3 | Everything (The Baseline) |
-| **Google TPU v5p**| Systolic Array | HBM3 | Large-scale Pretraining |
+| **Google TPU v5p**| Systolic Array | HBM3 | Large-scale Pretraining ke liye |
 | **Groq LPU** | TSP Architecture | **SRAM** | **Ultra-fast Inference** |
 | **Cerebras WSE** | Wafer-Scale | **SRAM** | Single-node Giant Training |
-| **AWS Trainium** | Neuron Core | HBM | Cost-effective Training |
+| **AWS Trainium** | Neuron Core | HBM | Cost-effective Training ke liye |
 
 ---
 
 ## 📐 4. Mathematical Intuition
 - **Compute Intensity:** 
   $$\text{Intensity} = \frac{\text{Floating Point Operations}}{\text{Memory Bytes Accessed}}$$
-  - A GPU is limited by "Memory Access" (The data can't reach the core fast enough). 
-  - An ASIC (like Groq) puts the memory **Inside** the core, so it can reach the peak TFLOPS of the chip. This is the secret to 500 tokens/sec.
+  Ek GPU "Memory Access" ke bottleneck se limited hota hai (data core tak fast enough nahi pahunch pata). 
+  - Groq jaise ASICs memory ko core ke **Inside** (andar) hi integrate kar dete hain, jisse yeh chip ke peak TFLOPS ko reach kar paata hai. Yahi 500 tokens/sec ka asli secret hai.
 
 ---
 
@@ -76,87 +76,87 @@ graph LR
 
 ## 💻 6. Production-Ready Examples (Running on AWS Inferentia with Neuron SDK)
 ```python
-# 2026 Pro-Tip: You need to 'Compile' your model for the specific chip.
+# 2026 Pro-Tip: Aapko specific chip ke liye apne model ko 'Compile' karna padta hai.
 
 import torch
 import torch_neuronx
 
-# 1. Load a standard PyTorch model
+# 1. Ek standard PyTorch model load karein
 model = MyLlamaModel()
 
-# 2. Compile for AWS Inferentia (ASIC)
-# This converts the code to the specific instructions the chip understands
+# 2. AWS Inferentia (ASIC) ke liye compile karein
+# Yeh code ko un specific instructions mein convert karta hai jo chip samajhti hai
 model_neuron = torch_neuronx.trace(model, example_inputs)
 
-# 3. Save the compiled model
+# 3. Compiled model ko save karein
 model_neuron.save("model_neuron.pt")
 
-# Now it will run 3x cheaper than on a standard NVIDIA GPU.
+# Ab yeh standard NVIDIA GPU ke mukable 3x sasta chalega.
 ```
 
 ---
 
 ## ❌ 7. Failure Cases
-- **Compiler Complexity:** ASICs are "Stiff." If your AI model uses a "New" layer type that the chip wasn't designed for, the chip might not be able to run it at all.
-- **Vendor Lock-in:** If you write your code for TPUs (using JAX), moving it to AWS Trainium is a lot of work.
-- **SRAM Limits:** You can't fit a 70B model in a Groq chip because SRAM is too small. You need to connect **Hundreds** of Groq chips to run one big model.
+- **Compiler Complexity:** ASICs kafi "Stiff" (kathor) hote hain. Agar aapka AI model koi aisa "New" layer type use karta hai jiske liye chip design nahi ki gayi thi, toh chip use run hi nahi kar payegi.
+- **Vendor Lock-in:** Agar aap TPUs ke liye code likhte hain (JAX ka use karke), toh use AWS Trainium par move karna kafi mehnat ka kaam hai.
+- **SRAM Limits:** Aap Groq chip mein 70B model fit nahi kar sakte kyunki SRAM kafi chota hota hai. Ek bada model run karne ke liye aapko **Hazaron/Sainkdon** Groq chips ko connect karna padega.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Model is slower on TPU than on a laptop."
-- **Check:** **XLA Padding**. TPUs like "Round numbers" (multiples of 8 or 128). If your tensor size is 127, the TPU has to "Pad" it, which wastes $50\%$ of the performance.
-- **Symptom:** "Compilation failed with 'Unsupported Op'."
-- **Check:** **SDK Version**. ASICs update their drivers every week. Ensure your PyTorch version is compatible with the chip's SDK.
+- **Symptom:** "Model laptop ke mukable TPU par slow chal raha hai."
+- **Check:** **XLA Padding**. TPUs ko "Round numbers" (jaise 8 ya 128 ke multiples) pasand hote hain. Agar aapka tensor size 127 hai, toh TPU ko use "Pad" karna padega, jisse $50\%$ performance waste ho jayegi.
+- **Symptom:** "Compilation 'Unsupported Op' ke sath fail ho gaya."
+- **Check:** **SDK Version**. ASICs har hafte apne drivers update karte hain. Ensure karein ki aapka PyTorch version chip ke SDK ke sath compatible ho.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
 - **Speed vs. Flexibility:** 
-  - GPUs can run any code. 
-  - ASICs are $10x$ faster but only for specific models (like Transformers).
+  - GPUs koi bhi code run kar sakte hain. 
+  - ASICs $10x$ faster hote hain par sirf specific models (jaise Transformers) ke liye.
 - **Ownership vs. Cloud:** 
-  - You can buy an H100. 
-  - You can only "Rent" a TPU.
+  - Aap ek H100 kharid sakte hain. 
+  - Aap TPU ko sirf "Rent" par le sakte hain.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Hardware Backdoors:** If a country builds its own ASICs, can they hide a "Kill switch" in the silicon? This is why "Sovereign AI" chips are being built locally in 2026.
+- **Hardware Backdoors:** Agar koi country apne khud ke ASICs banati hai, toh kya woh silicon ke andar ek "Kill switch" chupa sakte hain? Yahi wajah hai ki 2026 mein locally "Sovereign AI" chips banaye ja rahe hain.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Inter-ASIC communication:** Connecting 10,000 TPUs is harder than 10,000 GPUs because their networking protocols are often proprietary (like **ICI** - Inter-Core Interconnect).
+- **Inter-ASIC communication:** 10,000 TPUs ko connect karna 10,000 GPUs ko connect karne se zyada mushkil hai kyunki unke networking protocols aksar proprietary hote hain (jaise **ICI** - Inter-Core Interconnect)."
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Total Token Cost:** While an H100 costs $\$30,000$, an AWS Inferentia instance might cost $\$1/hr$. If you are doing billions of inferences, the ASIC saves millions.
+- **Total Token Cost:** Jahan ek H100 ki cost $\$30,000$ hoti hai, wahan ek AWS Inferentia instance ki cost $\$1/hr$ ho sakti hai. Agar aap billions of inferences kar rahe hain, toh ASIC millions of dollars save karta hai.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use 'XLA' or 'TVM':** Use compiler frameworks that can target multiple different ASICs automatically.
-- **Benchmark early:** Don't assume an ASIC will be faster. Run a small "Proof of Concept" before committing to a 1-year contract.
-- **Optimize for 'Batch Size 1':** If you are using Groq, take advantage of its ultra-low latency for single users.
+- **'XLA' ya 'TVM' ka use karein:** Aise compiler frameworks ka use karein jo automatically multiple different ASICs ko target kar sakein.
+- **Benchmark jaldi karein:** Yeh assume na karein ki ASIC fast hi hoga. 1-year ka contract sign karne se pehle ek chota "Proof of Concept" run karein.
+- **'Batch Size 1' ke liye optimize karein:** Agar aap Groq use kar rahe hain, toh single users ke liye iski ultra-low latency ka advantage uthayein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Porting code without re-tuning:** Just "Running" PyTorch code on a TPU without using JAX or XLA optimizations.
-- **Ignoring the SRAM limit:** Trying to fit too many "K-V Caches" into an ASIC's memory.
+- **Bina re-tuning ke code port karna:** JAX ya XLA optimizations ke bina TPU par PyTorch code ko bas "Run" kar dena.
+- **SRAM limit ko ignore karna:** Kisi ASIC ki memory mein bahut saare "K-V Caches" fit karne ki koshish karna.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is a Systolic Array and how does it benefit TPUs?"**
-2. **"Why does Groq use SRAM instead of HBM, and what is the tradeoff?"**
-3. **"Explain the role of a 'Compiler' in ASIC-based AI execution."**
+1. **"Systolic Array kya hai aur isse TPUs ko kya benefit milta hai?"**
+2. **"Groq HBM ke mukable SRAM kyun use karta hai, aur iska tradeoff kya hai?"**
+3. **"ASIC-based AI execution mein 'Compiler' ke role ko explain karein."**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Optical ASICs:** Chips that use "Light" instead of electricity for math, promising $1000x$ lower power consumption.
-- **In-Memory Computing (IMC):** Chips that do the math **Inside the RAM cells**, eliminating the need to move data at all.
-- **Open-Source ASICs (RISC-V):** A global movement to build high-performance AI chips that anyone can manufacture, reducing NVIDIA's monopoly.
+- **Optical ASICs:** Aise chips jo calculations ke liye electricity ke bajaye "Light" ka use karte hain, jisse $1000x$ lower power consumption ka promise milta hai.
+- **In-Memory Computing (IMC):** Aise chips jo calculations ko directly **RAM cells ke andar** hi karte hain, jisse data ko move karne ki zaroorat hi khatam ho jati hai.
+- **Open-Source ASICs (RISC-V):** High-performance AI chips banane ke liye ek global movement jise koi bhi manufacture kar sake, taaki NVIDIA ke monopoly ko kam kiya ja sake.

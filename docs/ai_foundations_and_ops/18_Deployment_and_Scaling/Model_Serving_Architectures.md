@@ -1,5 +1,5 @@
 # 🚀 Model Serving Architectures: From Local to Global
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the various ways to deploy AI models in production, exploring Synchronous vs. Asynchronous patterns, Streaming, Batching, and the 2026 strategies for building "High-Availability" AI services.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** AI models ko production mein deploy karne ke alag-alag ways ko master karein, Synchronous vs. Asynchronous patterns, Streaming, Batching, aur 2026 mein "High-Availability" AI services build karne ki strategies ko explore karte hue.
 
 ---
 
@@ -19,42 +19,42 @@ In 2026, hum sirf ek tareeka use nahi karte.
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Model serving is the process of exposing a trained model as an endpoint (REST/gRPC).
+Model serving ek trained model ko endpoint (REST/gRPC) ke roop mein expose karne ki process hai.
 
 ### 1. Synchronous Serving (REST/gRPC):
-- Simple request-response. 
-- **Pros:** Easy to implement. 
-- **Cons:** If the LLM takes 30s to generate, the HTTP connection might "Timeout."
+- Simple request-response hai. 
+- **Pros:** Implement karna aasan hai. 
+- **Cons:** Agar LLM generate karne mein 30s le leta hai, toh HTTP connection ka "Timeout" ho sakta hai.
 
 ### 2. Streaming (Server-Sent Events - SSE):
-- The server keeps the connection open and sends tokens as they are generated. 
-- **2026 Standard:** This is mandatory for "Human-like" AI experiences to reduce perceived latency.
+- Server connection ko open rakhta hai aur tokens ko generate hote hi send karta rehta hai. 
+- **2026 Standard:** Perceived latency ko reduce karne aur "Human-like" AI experience ke liye yeh mandatory hai.
 
 ### 3. Asynchronous Serving (Queue-based):
-- User request $\to$ **Message Queue (RabbitMQ/Kafka)** $\to$ **Worker** processes the request $\to$ **Result Store** (Redis/S3) $\to$ **Callback/Webhook** to user.
-- Crucial for long-running tasks (summarizing 1000 pages).
+- User request $\to$ **Message Queue (RabbitMQ/Kafka)** $\to$ **Worker** request ko process karta hai $\to$ **Result Store** (Redis/S3) $\to$ user ko **Callback/Webhook**.
+- Long-running tasks ke liye crucial hai (jaise 1000 pages ko summarize karna).
 
 ### 4. Distributed Serving:
-- Serving a single model across multiple GPUs (Model Parallelism) or multiple servers (Pipeline Parallelism) to handle giant models (like 175B+).
+- Giant models (jaise 175B+) ko handle karne ke liye ek single model ko multiple GPUs (Model Parallelism) ya multiple servers (Pipeline Parallelism) par serve karna.
 
 ---
 
 ## 🏗️ 3. Serving Architectures Comparison
 | Pattern | Latency | Throughput | Best For |
 | :--- | :--- | :--- | :--- |
-| **Simple API** | Low | Low | Simple classification / sentiment |
+| **Simple API** | Low | Low | Simple classification / sentiment ke liye |
 | **Streaming** | **Instant (TTFT)**| Moderate | Chatbots / LLMs |
-| **Async Queue** | High | **Very High** | Image/Video generation / Batching|
-| **Serverless** | Moderate | Scalable | Low-traffic / Spiky usage |
-| **Edge Serving** | **Ultra-Low** | Restricted | Face ID / Mobile OCR |
+| **Async Queue** | High | **Very High** | Image/Video generation / Batching ke liye |
+| **Serverless** | Moderate | Scalable | Low-traffic / Spiky usage ke liye |
+| **Edge Serving** | **Ultra-Low** | Restricted | Face ID / Mobile OCR ke liye |
 
 ---
 
 ## 📐 4. Mathematical Intuition
 - **The Throughput-Latency Tradeoff:** 
-  If you increase the **Batch Size** (processing 10 users at once), your **Throughput** (Total tokens per second) goes up, but the **Latency** (time for each individual user) also goes up.
+  Agar aap **Batch Size** badhate hain (ek sath 10 users ko process karna), toh aapka **Throughput** (Total tokens per second) badh jata hai, par **Latency** (har ek individual user ke liye time) bhi badh jati hai.
   $$\text{Optimal Batch Size} = \text{Batch where Latency} \leq \text{SLA Threshold}$$
-  In 2026, we use **Continuous Batching** to break this tradeoff.
+  2026 mein, hum is tradeoff ko todne ke liye **Continuous Batching** ka use karte hain.
 
 ---
 
@@ -80,7 +80,7 @@ graph TD
 
 ## 💻 6. Production-Ready Examples (Implementing a Streaming API with FastAPI)
 ```python
-# 2026 Pro-Tip: Use 'StreamingResponse' to keep the user engaged.
+# 2026 Pro-Tip: User ko engaged rakhne ke liye 'StreamingResponse' ka use karein.
 
 from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
@@ -89,82 +89,82 @@ import asyncio
 app = FastAPI()
 
 async def ai_generator(prompt):
-    # Simulate an LLM generating words one by one
+    # Ek LLM ko imitate (simulate) karein jo ek-ek karke words generate karta hai
     words = f"This is a response to: {prompt}".split()
     for word in words:
         yield f"data: {word}\n\n"
-        await asyncio.sleep(0.1) # Simulate generation delay
+        await asyncio.sleep(0.1) # Generation delay simulate karein
 
 @app.get("/chat")
 async def chat(prompt: str):
     return StreamingResponse(ai_generator(prompt), media_type="text/event-stream")
 
-# User's browser will see words appear live! 🚀
+# User ke browser par words live aate dikhenge! 🚀
 ```
 
 ---
 
 ## ❌ 7. Failure Cases
-- **The 'Hanging' Connection:** A streaming request starts but stops halfway because the GPU crashed. The user sees a "Half-sentence" forever. **Fix: Use 'Keep-alive' heartbeats.**
-- **Cold Starts:** Deploying a 100GB model on a new server takes 10 minutes. If your traffic spikes, the new servers won't be ready in time. **Fix: Use 'Pre-warmed' pods.**
-- **OOM during serving:** Multiple users ask for very long answers, and the **KV-Cache** fills up the GPU VRAM. **Fix: Use 'PagedAttention' (vLLM).**
+- **The 'Hanging' Connection:** Ek streaming request start hoti hai par GPU crash hone ki wajah se beech mein hi ruk jati hai. User ko forever ek "Half-sentence" (aadha vakya) dikhta rehta hai. **Fix: 'Keep-alive' heartbeats ka use karein.**
+- **Cold Starts:** Ek naye server par 100GB ka model deploy karne mein 10 minutes lagte hain. Agar aapka traffic spike hota hai, toh naye servers time par ready nahi ho payenge. **Fix: 'Pre-warmed' pods ka use karein.**
+- **OOM during serving:** Multiple users bahut lambe answers maangte hain, aur **KV-Cache** GPU VRAM ko full kar deta hai. **Fix: 'PagedAttention' (vLLM) ka use karein.**
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "API is returning 504 Gateway Timeout."
-- **Check:** **Inference Time**. If your LLM takes 40s but your Nginx timeout is 30s, the connection will die. Increase the timeout or switch to **Async/Streaming**.
-- **Symptom:** "Memory usage is $99\%$ even with zero users."
-- **Check:** **Model Loading**. Most serving frameworks (like vLLM) pre-allocate $90\%$ of VRAM for the KV-cache. This is "Normal" but scary.
+- **Symptom:** "API 504 Gateway Timeout return kar raha hai."
+- **Check:** **Inference Time**. Agar aapka LLM 40s leta hai par aapka Nginx timeout 30s hai, toh connection die ho jayega. Timeout badhayein ya **Async/Streaming** par switch karein.
+- **Symptom:** "Zero users hone par bhi memory usage $99\%$ hai."
+- **Check:** **Model Loading**. Zyada tar serving frameworks (jaise vLLM) KV-cache ke liye VRAM ka $90\%$ pehle se hi pre-allocate kar dete hain. Yeh "Normal" hai par thoda scary (darauna) lagta hai.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
 - **Single Instance vs. Sharded:** 
-  - Single (Llama-8B on 1 GPU) is simple. 
-  - Sharded (Llama-70B on 8 GPUs) is complex and expensive but necessary for "High Intelligence."
+  - Single (1 GPU par Llama-8B) simple hai. 
+  - Sharded (8 GPUs par Llama-70B) complex aur expensive hai par "High Intelligence" ke liye zaroori hai.
 - **Python vs. C++ (Triton):** 
-  - Python is easy to write. 
-  - C++ is $2x$ faster and handles $5x$ more users.
+  - Python likhna aasan hai. 
+  - C++ $2x$ faster hota hai aur $5x$ zyada users ko handle karta hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Model Inversion via API:** An attacker asking 1 million questions to "Extract" the model's training data. **Implement 'Rate Limiting' and 'Anomalous Query Detection'.**
+- **Model Inversion via API:** Ek attacker model ke training data ko "Extract" (nikalne) karne ke liye 1 million questions pooch raha hai. **'Rate Limiting' aur 'Anomalous Query Detection' implement karein.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The 'Model Switching' Problem:** Having 100 different fine-tuned models for 100 different customers. You can't keep all in VRAM. **Solution: Use 'LoRA Adapters' (Multi-LoRA Serving) where you keep 1 base model and swap tiny adapters in milliseconds.**
+- **The 'Model Switching' Problem:** 100 different customers ke liye 100 different fine-tuned models hona. Aap sabhi ko VRAM mein nahi rakh sakte. **Solution: 'LoRA Adapters' (Multi-LoRA Serving) ka use karein jahan aap 1 base model rakhte hain aur milliseconds mein tiny adapters ko swap (badalna) kar lete hain.**
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Idle GPU Cost:** Paying for an H100 at 3 AM when no one is using it. **Strategy: Use 'Serverless GPUs' (RunPod/Lambda) that scale to zero.**
+- **Idle GPU Cost:** Raat ke 3 baje jab koi use nahi kar raha ho, tab H100 ke liye pay karna. **Strategy: 'Serverless GPUs' (RunPod/Lambda) ka use karein jo zero tak scale ho sakte hain.**
 
 ---
 
 ## ✅ 13. Best Practices
-- **Implement 'Health Checks':** The server should tell the Load Balancer "I am busy/sick" before it crashes.
-- **Use 'Continuous Batching':** Never serve an LLM without it in 2026.
-- **Version your Endpoints:** `/v1/chat`, `/v2/chat`. Never break a production API.
+- **'Health Checks' implement karein:** Server ko crash hone se pehle Load Balancer ko "I am busy/sick" (main busy hoon/kharab hoon) batana chahiye.
+- **'Continuous Batching' ka use karein:** 2026 mein iske bina kabhi bhi LLM serve na karein.
+- **Endpoints ko version karein:** `/v1/chat`, `/v2/chat`. Production API ko kabhi break na karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **No 'Timeout' on user query:** Letting the AI try to answer a 1-million token query for 1 hour.
-- **Logging the whole API response:** This will fill up your disk in 10 minutes and slow down the API.
+- **User query par koi 'Timeout' na hona:** AI ko 1 hour tak 1-million token ki query ka answer dene ki koshish karne dena.
+- **Puri API response ko log karna:** Yeh 10 minutes mein aapki disk ko bhar dega aur API ko slow kar dega.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is the difference between Synchronous and Asynchronous model serving?"**
-2. **"Why is 'Streaming' preferred for LLM applications?"**
-3. **"Explain how 'Multi-LoRA' serving works and why it's cost-effective."**
+1. **"Synchronous aur Asynchronous model serving ke beech kya difference hai?"**
+2. **"LLM applications ke liye 'Streaming' ko kyun prefer kiya jata hai?"**
+3. **"Explain karein ki 'Multi-LoRA' serving kaise kaam karti hai aur yeh kyun cost-effective hai."**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Speculative Serving:** Running the first 10 tokens on a tiny model while the big model "Warms up," giving the user an "Instant" feel.
-- **Global Load Balancing:** Routing the user's query to the country where GPUs are currently "Cheapest" (due to night-time electricity rates).
-- **In-Memory Model Repositories:** Loading 100GB models in $< 5$ seconds using ultra-fast NVMe-over-Fabrics networks.
+- **Speculative Serving:** Jab tak bada model "Warm up" hota hai, tab tak pehle 10 tokens ko ek tiny model par run karna, jisse user ko "Instant" (fauran) chalne ka feel milta hai.
+- **Global Load Balancing:** User ki query ko us country mein route karna jahan GPUs currently "Cheapest" (saste) hain (raat ke samay ke electricity rates ki wajah se).
+- **In-Memory Model Repositories:** Ultra-fast NVMe-over-Fabrics networks ka use karke $< 5$ seconds mein 100GB ke models ko load karna.

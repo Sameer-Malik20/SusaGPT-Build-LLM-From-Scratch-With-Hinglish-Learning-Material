@@ -1,5 +1,5 @@
 # 🔍 Project: Deploy a Production-Grade RAG Pipeline
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Build an end-to-end Retrieval Augmented Generation system that handles 1000s of PDFs, exploring Hybrid Search, Re-ranking, Prompt Engineering, and the 2026 strategies for "Hallucination-free" AI.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Ek aisa end-to-end Retrieval Augmented Generation system build karein jo hazaron (1000s of) PDFs ko handle kar sake; jisme Hybrid Search, Re-ranking, Prompt Engineering, aur 2026 mein "Hallucination-free" AI banane ki strategies ko explore kiya gaya ho.
 
 ---
 
@@ -25,7 +25,7 @@ Hum ek **"AI Knowledge Base"** banayeinge.
 
 ## 🏗️ 3. Step 1: Data Ingestion & Chunking
 PDFs ko chote tukdon (Chunks) mein todna padta hai.
-- **Strategy:** Recursive Character Text Splitting.
+- **Strategy:** Recursive Character Text Splitter.
 - **Chunk Size:** 1000 tokens.
 - **Overlap:** 200 tokens (Taaki context "Cut" na ho jaye).
 

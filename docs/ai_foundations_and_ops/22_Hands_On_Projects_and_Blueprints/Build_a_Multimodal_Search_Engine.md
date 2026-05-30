@@ -1,5 +1,5 @@
 # 🖼️ Project: Build a Multimodal Search Engine (Vision + Text)
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Build an AI-powered photo search engine that understands both text queries and "Similar Image" searches, exploring CLIP, Vector Databases, and the 2026 strategies for "Universal Visual Search."
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Ek aisa AI-powered photo search engine build karein jo text queries aur "Similar Image" searches dono ko samajh sake; jisme CLIP, Vector Databases, aur 2026 mein "Universal Visual Search" ki strategies ko explore kiya gaya ho.
 
 ---
 

@@ -1,5 +1,5 @@
 # 🧼 Data Cleaning for AI: Scrubbing the Knowledge
-> **Level:** Intermediate | **Language:** Hinglish | **Goal:** Master the systematic removal of noise and errors from AI datasets, exploring Outlier detection, PII removal, and the 2026 patterns for "Semantic Cleaning" using small language models.
+> **Level:** Intermediate | **Language:** Hinglish | **Goal:** AI datasets se noise aur errors ko systematically remove karne ko master karein, Outlier detection, PII removal, aur small language models ka use karke "Semantic Cleaning" ke 2026 patterns ko explore karte hue.
 
 ---
 
@@ -21,24 +21,24 @@ Maan lo aap ek kitabon ki almari (AI Dataset) set kar rahe hain:
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Data cleaning is the process of fixing or removing incorrect, corrupted, incorrectly formatted, duplicate, or incomplete data within a dataset.
+Data cleaning dataset ke andar incorrect, corrupted, galat formatted, duplicate ya incomplete data ko fix ya remove karne ki process hai.
 
 ### 1. Handling Missing Data (Imputation):
-- **Mean/Median Imputation:** Replace missing values with the average. Good for simple stats.
-- **K-Nearest Neighbors (KNN) Imputation:** Find similar rows and use their values to fill the gap.
-- **Model-based Imputation:** Use a small model to predict the missing value.
+- **Mean/Median Imputation:** Missing values ko average se replace karna. Simple statistics ke liye achha hai.
+- **K-Nearest Neighbors (KNN) Imputation:** Similar rows ko find karna aur gap ko fill karne ke liye unke values ka use karna.
+- **Model-based Imputation:** Missing value ko predict karne ke liye ek chote model ka use karna.
 
 ### 2. Outlier Detection:
-- **Z-Score:** If a data point is more than 3 standard deviations from the mean, it's likely an outlier.
-- **Isolation Forest:** An AI algorithm specifically for finding "Anomalies" in high-dimensional data.
+- **Z-Score:** Agar koi data point mean se 3 standard deviations se zyada door hai, toh wo ek outlier ho sakta hai.
+- **Isolation Forest:** High-dimensional data mein "Anomalies" ko find karne ke liye ek specific AI algorithm.
 
 ### 3. PII (Personally Identifiable Information) Redaction:
-- Removing Emails, SSNs, Phone Numbers, and Names.
+- Emails, SSNs, Phone Numbers aur Names ko remove karna.
 - Tools: **Microsoft Presidio**, **Private AI**, **SpaCy NER.**
 
 ### 4. Semantic Cleaning (The 2026 Way):
-- Using an LLM to "Read" a sentence and say: *"Does this sentence make sense?"* 
-- If the model says it's "Gibberish" or "Harmful," we delete it.
+- Ek LLM ka use karke sentence ko "Read" karna aur check karna: *"Kya is sentence ka koi sense ban raha hai?"* 
+- Agar model ise "Gibberish" (bakwas) ya "Harmful" batata hai, toh hum ise delete kar dete hain.
 
 ---
 
@@ -56,10 +56,10 @@ Data cleaning is the process of fixing or removing incorrect, corrupted, incorre
 ## 📐 4. Mathematical Intuition
 - **The Z-Score Formula:** 
   $$z = \frac{x - \mu}{\sigma}$$
-  - $x$: The value.
-  - $\mu$: Mean of the dataset.
+  - $x$: Value.
+  - $\mu$: Dataset ka Mean.
   - $\sigma$: Standard deviation.
-  If $|z| > 3$, the point is an outlier. This is the "Gold Standard" for cleaning numerical sensor data or financial data.
+  Agar $|z| > 3$ hai, toh point ek outlier hai. Numerical sensor data ya financial data ko clean karne ke liye ye ek "Gold Standard" hai.
 
 ---
 
@@ -109,64 +109,64 @@ print(f"Cleaned: {anonymized_result.text} 🛡️")
 ---
 
 ## ❌ 7. Failure Cases
-- **Over-Anonymization:** Replacing "President Obama" with "[PERSON]". Now the model doesn't know who the text is about. **Fix: Use 'Pseudonymization' (Replace Sameer with User_123) instead of Redaction.**
-- **Deleting Real Data:** In a stock market crash, the data looks like an "Outlier," but it's REAL and important. If you clean it, your AI will be "Blind" to crashes.
-- **Bias Injection:** If you impute "Gender" based on "Salary," you will reinforce sexist stereotypes in your AI model.
+- **Over-Anonymization:** "President Obama" ko "[PERSON]" se replace karna. Ab model ko nahi pata ki text kis ke baare mein hai. **Fix: Redaction ke bajaye 'Pseudonymization' (jaise Sameer ko User_123 se replace karna) ka use karein.**
+- **Deleting Real Data:** Stock market crash ke dauran data ek "Outlier" jaisa dikhta hai, par wo REAL aur important hota hai. Agar aap use clean kar denge, toh aapka AI crashes ke liye "Blind" ho jayega.
+- **Bias Injection:** Agar aap "Salary" ke basis par "Gender" impute karte hain, toh aap apne AI model mein sexist stereotypes ko badhava denge.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Model accuracy dropped after cleaning."
-- **Check:** **Cleaning Logic**. Did you delete too many rows? Check the "Row Count" before and after. If you lost $>10\%$ of data, your filters are too strict.
-- **Symptom:** "PII is still visible in logs."
-- **Check:** **Regex Patterns**. Ensure you are checking for International phone formats (e.g., `+91...`).
+- **Symptom:** "Cleaning ke baad model accuracy drop ho gayi."
+- **Check:** **Cleaning Logic**. Kya aapne bahut saari rows delete kar di hain? Cleaning se pehle aur baad ke "Row Count" ko check karein. Agar aapne $>10\%$ data kho diya hai, toh aapke filters ko bahut strict hain.
+- **Symptom:** "Logs mein abhi bhi PII dikh raha hai."
+- **Check:** **Regex Patterns**. Ensure karein ki aap International phone formats (jaise `+91...`) ko bhi check kar rahe hain.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Manual vs. Auto:** Manual cleaning is perfect but slow. Auto-cleaning is fast but makes mistakes. 
+- **Manual vs. Auto:** Manual cleaning perfect hai par slow hai. Auto-cleaning fast hai par mistakes karti hai.
 - **Delete vs. Correct:** 
-  - Deleting is safer but reduces data size. 
-  - Correcting (Imputation) is riskier but keeps the dataset large.
+  - Delete karna safe hai par isse data size kam ho jata hai.
+  - Correct karna (Imputation) risky hai par isse dataset bada rehta hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Sensitive Data in Checkpoints:** If you clean the data *after* the model has started training, the model might have already "seen" the secret info. **Always clean at the START of the pipeline.**
+- **Sensitive Data in Checkpoints:** Agar aap model ki training start hone ke *baad* data clean karte hain, toh model pehle hi secret info ko "dekh" chuka hoga. **Hamesha pipeline ke START mein hi data clean karein.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The Million Column Problem:** Cleaning a table with 1000s of columns. You need **Parallel Processing (Dask/Spark)** to check each column for outliers.
+- **The Million Column Problem:** 1000s of columns wali table ko clean karna. Har column ke outliers ko check karne ke liye aapko **Parallel Processing (Dask/Spark)** ki need hogi.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Human Labeling:** Sometimes you need humans to "Verify" the cleaning. This can cost $\$10,000+$ for a large dataset. **Strategy: Use a 'Random Sample' for human verification.**
+- **Human Labeling:** Kabhi-kabhi aapko cleaning ko "Verify" karne ke liye humans ki need hoti hai. Kisi large dataset ke liye iski cost $\$10,000+$ tak ho sakti hai. **Strategy: Human verification ke liye ek 'Random Sample' ka use karein.**
 
 ---
 
 ## ✅ 13. Best Practices
-- **Never overwrite the raw data:** Always save the cleaned version in a new file (e.g., `data_v1_clean.csv`).
-- **Use standard formats:** Store cleaned data as **Parquet**—it's faster to read and keeps the "Data Types" intact.
+- **Never overwrite the raw data:** Raw data ko kabhi overwrite na karein. Cleaned version ko hamesha ek new file (jaise `data_v1_clean.csv`) mein save karein.
+- **Use standard formats:** Cleaned data ko **Parquet** format mein store karein—ise read karna fast hota hai aur ye "Data Types" ko intact rakhta hai.
 - **Keep a 'Cleaning Log':** *"Removed 500 rows due to missing email, redacted 200 phone numbers."*
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Assuming data is clean:** "I downloaded it from a reputable site." (Spoiler: It's still dirty).
-- **Ignoring context:** Deleting "100" as an outlier in an age column, not realizing it was a dataset about "Centenarians."
+- **Assuming data is clean:** "Maine ise ek reputable site se download kiya hai." (Spoiler: Fir bhi data dirty ho sakta hai).
+- **Ignoring context:** Age column mein "100" ko outlier samajh kar delete kar dena, bina ye realize kiye ki ye dataset "Centenarians" (100 saal ke logo) ke baare mein tha.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is the difference between Mean and KNN Imputation?"**
-2. **"How do you handle PII in a dataset used for public AI training?"**
-3. **"What are 'Isolation Forests' and how do they find anomalies?"**
+1. **"Mean aur KNN Imputation ke beige kya difference hai?"**
+2. **"Public AI training ke liye use hone wale dataset mein aap PII ko kaise handle karte hain?"**
+3. **" 'Isolation Forests' kya hain aur ye anomalies ko kaise find karte hain?"**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **LLM-based Data Refinement:** Using an LLM to not just "Clean" but "Rewrite" messy logs into high-quality training text.
-- **Differential Privacy:** Adding "Mathematical Noise" to a dataset so that the AI can learn patterns but can't "Identify" any single individual.
-- **Clean-Room Environments:** Specialized cloud setups (like AWS Clean Rooms) where companies can "Clean and Join" their data without actually seeing each other's private records.
+- **LLM-based Data Refinement:** LLM ka use karke sirf "Clean" hi nahi balki messy logs ko high-quality training text mein "Rewrite" karna.
+- **Differential Privacy:** Dataset mein "Mathematical Noise" add karna taaki AI patterns ko seekh sake par kisi single individual ko "Identify" na kiya ja sake.
+- **Clean-Room Environments:** Specialized cloud setups (jaise AWS Clean Rooms) jahan companies ek-dusre ke private records ko bina dekhe apne data ko "Clean aur Join" kar sakti hain.

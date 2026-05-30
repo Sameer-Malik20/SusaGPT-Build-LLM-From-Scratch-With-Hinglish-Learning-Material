@@ -1,5 +1,5 @@
 # 💠 Ray & Dask: The Engines of Distributed Python
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the two leading frameworks for scaling Python and AI workloads, exploring Task Scheduling, Actors, Distributed Dataframes, and the 2026 strategies for building scalable AI backends.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Python aur AI workloads ko scale karne ke do leading frameworks ko master karein, Task Scheduling, Actors, Distributed Dataframes, aur 2026 mein scalable AI backends build karne ki strategies ko explore karte hue.
 
 ---
 
@@ -18,21 +18,21 @@ Python akele "Single-core" language hai. Wo ek waqt mein ek hi kaam ache se kar 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Ray and Dask provide a unified interface to scale Python code from a laptop to a thousand nodes.
+Ray aur Dask Python code ko ek laptop se lekar ek hazaar nodes tak scale karne ke liye ek unified interface provide karte hain.
 
 ### 1. Ray (The OS for AI):
-- **Core Concept:** **Tasks** (Stateless functions) and **Actors** (Stateful classes).
-- **Ray Data:** Specialized for high-performance ML data loading (shuffling, preprocessing).
-- **Ray Train:** A wrapper around PyTorch/TensorFlow for easy distributed training.
-- **Ray Serve:** A scalable model serving library that handles replicas and autoscaling.
+- **Core Concept:** **Tasks** (Stateless functions) aur **Actors** (Stateful classes).
+- **Ray Data:** High-performance ML data loading (shuffling, preprocessing) ke liye specialized hai.
+- **Ray Train:** Aasan distributed training ke liye PyTorch/TensorFlow ke upar ek wrapper hai.
+- **Ray Serve:** Ek scalable model serving library jo replicas aur autoscaling ko handle karti hai.
 
 ### 2. Dask (Distributed NumPy/Pandas):
-- **Core Concept:** **Graphs.** Dask creates a DAG of your operations and only executes them when you call `.compute()`.
-- **Dask Dataframe:** Looks exactly like Pandas but splits the data into "Chunks" across different workers.
-- **Dynamic Scheduling:** Dask is great for "Task Parallelism" where each task might take a different amount of time.
+- **Core Concept:** **Graphs.** Dask aapke operations ka ek DAG create karta hai aur unhe tabhi execute karta hai jab aap `.compute()` call karte hain.
+- **Dask Dataframe:** Yeh bilkul Pandas jaisa dikhta hai par data ko different workers ke beech "Chunks" mein split kar deta hai.
+- **Dynamic Scheduling:** Dask "Task Parallelism" ke liye bahut accha hai jahan har task alag-alag time le sakta hai.
 
 ### 3. The Global Control Store (GCS):
-- Ray uses a GCS to keep track of where every "Object" (Tensor, Variable) is located in the cluster. This allows for "Zero-copy" data sharing between tasks on the same node.
+- Ray cluster mein har "Object" (Tensor, Variable) ki location ko track karne ke liye GCS ka use karta hai. Yeh same node par tasks ke beech "Zero-copy" data sharing ko allow karta hai.
 
 ---
 
@@ -40,18 +40,18 @@ Ray and Dask provide a unified interface to scale Python code from a laptop to a
 | Feature | Ray | Dask |
 | :--- | :--- | :--- |
 | **Philosophy** | **Task & Actor based (General Purpose)**| **Dataframe & Array based (Data Science)** |
-| **GPU Support** | **First-class / Superior** | Moderate |
+| **GPU Support** | **First-class / Superior** | Moderate (Theek-thaak) |
 | **Model Serving**| **Excellent (Ray Serve)** | Basic |
-| **Data Processing**| Ray Data (Fast for ML) | **Dask Dataframe (Standard for Big Data)** |
+| **Data Processing**| Ray Data (ML ke liye fast) | **Dask Dataframe (Big Data ke liye standard)** |
 | **Community** | **AI Engineering / OpenAI** | Data Science / Scientific Python |
 
 ---
 
 ## 📐 4. Mathematical Intuition
 - **Object Serialization (Pickle vs. Plasma):** 
-  When you send a 1GB tensor from Worker A to Worker B, Python's `pickle` is slow. 
-  Ray uses **Apache Arrow / Plasma** to store objects in "Shared Memory." 
-  **The Math:** If $T_{serialize} + T_{network} > T_{compute}$, distributed processing is a waste. Ray minimizes $T_{serialize}$ to $O(1)$ on the same node.
+  Jab aap Worker A se Worker B ko 1GB ka tensor send karte hain, toh Python ka `pickle` slow hota hai. 
+  Ray objects ko "Shared Memory" mein store karne ke liye **Apache Arrow / Plasma** ka use karta hai. 
+  **The Math:** Agar $T_{serialize} + T_{network} > T_{compute}$ hai, toh distributed processing waste hai. Ray same node par $T_{serialize}$ ko $O(1)$ tak minimize kar deta hai.
 
 ---
 
@@ -75,23 +75,23 @@ graph TD
 
 ## 💻 6. Production-Ready Examples (Scaling a Function with Ray)
 ```python
-# 2026 Pro-Tip: Use @ray.remote to make any function distributed.
+# 2026 Pro-Tip: Kisi bhi function ko distributed banane ke liye @ray.remote ka use karein.
 
 import ray
 
-# 1. Initialize Ray (Automatic cluster detection)
+# 1. Ray ko initialize karein (Automatic cluster detection)
 ray.init()
 
-@ray.remote(num_gpus=1) # Reserve 1 GPU for this task
+@ray.remote(num_gpus=1) # Is task ke liye 1 GPU reserve karein
 def generate_embedding(text):
-    # Imagine calling a model here
+    # Socho ki yahan ek model call ho raha hai
     return f"Vector for {text}"
 
-# 2. Launch 1000 tasks in parallel
-# Notice: This returns 'Object Refs' immediately (Non-blocking)
+# 2. Parallel mein 1000 tasks launch karein
+# Note: Yeh turant 'Object Refs' return karta hai (Non-blocking)
 futures = [generate_embedding.remote(f"Doc {i}") for i in range(1000)]
 
-# 3. Get the results
+# 3. Results get karein
 results = ray.get(futures)
 print(f"Processed {len(results)} docs! 🚀")
 ```
@@ -99,62 +99,62 @@ print(f"Processed {len(results)} docs! 🚀")
 ---
 
 ## ❌ 7. Failure Cases
-- **Over-scheduling:** Trying to run 10,000 tasks that each take only $0.001$s. The "Overhead" of Ray managing these tasks will be more than the actual work. **Fix: Use 'Batching'.**
-- **Object Store Full:** Putting too many giant tensors in memory without deleting them. Ray will start "Spilling" to disk, which is $100x$ slower.
-- **Serialization Error:** Trying to send a "Non-picklable" object (like a Database connection) across the network.
+- **Over-scheduling:** Aise 10,000 tasks run karne ki koshish karna jo sirf $0.001$s lete hain. In tasks ko manage karne ka Ray ka "Overhead" actual kaam se zyada ho jayega. **Fix: 'Batching' ka use karein.**
+- **Object Store Full:** Memory mein bina delete kiye bahut saare giant tensors daal dena. Ray disk par "Spilling" start kar dega, jo $100x$ slow hota hai.
+- **Serialization Error:** Network par kisi "Non-picklable" object (jaise Database connection) ko send karne ki koshish karna.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "One worker is at 100% CPU, others are at 0%."
-- **Check:** **Data Partitioning**. Are you sending all the work to one ID? Use `ray.wait()` to handle results as they finish.
-- **Symptom:** "Inference is slow."
-- **Check:** **Ray Dashboard**. Look at the "Node View." Are your GPUs being used, or is the CPU bottlenecked on "Preprocessing"?
+- **Symptom:** "Ek worker 100% CPU par hai, baaki saare 0% par hain."
+- **Check:** **Data Partitioning**. Kya aap sara kaam ek hi ID ko bhej rahe hain? Jaise-jaise results finish ho rahe hain, unhe handle karne ke liye `ray.wait()` ka use karein.
+- **Symptom:** "Inference slow hai."
+- **Check:** **Ray Dashboard**. "Node View" ko dekhein. Kya aapke GPUs use ho rahe hain, ya fir CPU "Preprocessing" par bottlenecked hai?
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Dask's Familiarity vs. Ray's Power:** Dask is easier if you already know Pandas. Ray is better if you are building a custom AI application.
-- **Centralized vs. De-centralized Scheduler:** Ray's scheduler is faster for millions of small tasks.
+- **Dask's Familiarity vs. Ray's Power:** Agar aap pehle se Pandas jaante hain toh Dask aasan hai. Agar aap custom AI application bana rahe hain toh Ray zyada behtar hai.
+- **Centralized vs. De-centralized Scheduler:** Millions of small tasks ke liye Ray ka scheduler fast hota hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Remote Code Execution:** If your Ray cluster is open to the internet, anyone can run `ray.remote` commands and take over your servers. **Always use a VPN or internal network.**
+- **Remote Code Execution:** Agar aapka Ray cluster internet ke liye open hai, toh koi bhi `ray.remote` commands run karke aapke servers ka control le sakta hai. **Hamesha VPN ya internal network ka use karein.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The 'Large Object' bottleneck:** Sending a 10GB model weights file to 100 nodes simultaneously. **Solution: Use 'P2P Object Transfer' (Ray 2.x feature).**
+- **The 'Large Object' bottleneck:** Ek sath 100 nodes ko 10GB ki model weights file send karna. **Solution: 'P2P Object Transfer' (Ray 2.x feature) ka use karein.**
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Autoscaling:** Ray can automatically add "Spot Instances" to your cluster when the queue is long. This can save **$70\%+$** on training costs.
+- **Autoscaling:** Queue lambi hone par Ray automatically aapke cluster mein "Spot Instances" add kar sakta hai. Yeh training costs par **$70\%+$** tak save kar sakta hai.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use Actors for Model Serving:** Actors keep the model in VRAM, so you don't reload it for every request.
-- **Prefer `ray.wait` over `ray.get`:** Process results as they come in instead of waiting for the "Slowest" task to finish.
-- **Profile with Ray Dashboard:** It provides a beautiful visual timeline of your tasks.
+- **Model Serving ke liye Actors use karein:** Actors model ko VRAM mein rakhte hain, isliye aapko har request ke liye use dobara load nahi karna padta.
+- **`ray.get` ke bajaye `ray.wait` ko prefer karein:** "Slowest" task ke finish hone ka wait karne ke bajaye, results ke aate hi unhe process karein.
+- **Ray Dashboard ke saath profile karein:** Yeh aapke tasks ka ek sundar aur clear visual timeline provide karta hai.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Nested `ray.get`:** Calling `ray.get()` inside a `ray.remote` function. This causes "Deadlocks" where workers wait for each other forever.
-- **Too many small tasks:** Group them into batches of 100-500.
+- **Nested `ray.get`:** Kisi `ray.remote` function ke andar `ray.get()` call karna. Isse "Deadlocks" hote hain jahan workers ek dusre ka forever wait karte hain.
+- **Too many small tasks:** Unhe 100-500 ke batches mein group karein.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is the difference between a Task and an Actor in Ray?"**
-2. **"How does Ray handle 'Zero-copy' object sharing?"**
-3. **"When would you choose Dask over Ray for a data science project?"**
+1. **"Ray mein Task aur Actor ke beech kya difference hai?"**
+2. **"Ray 'Zero-copy' object sharing ko kaise handle karta hai?"**
+3. **"Aap data science project ke liye Ray ke upar Dask ko kab choose karenge?"**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **KubeRay:** The official way to run Ray on Kubernetes, now the standard for 2026 AI infrastructure.
-- **Ray LLM:** Specialized libraries for serving Llama-3 and Mistral with "Continuous Batching" built directly into Ray Serve.
-- **Anyscale:** The managed cloud version of Ray, which handles the "Hard parts" of cluster management automatically.
+- **KubeRay:** Kubernetes par Ray run karne ka official tareeqa, jo ab 2026 AI infrastructure ke liye standard ban chuka hai.
+- **Ray LLM:** Llama-3 aur Mistral ko serve karne ke liye specialized libraries jo directly Ray Serve mein "Continuous Batching" ke sath aati hain.
+- **Anyscale:** Ray ka managed cloud version, jo cluster management ke "Hard parts" ko automatically handle karta hai.

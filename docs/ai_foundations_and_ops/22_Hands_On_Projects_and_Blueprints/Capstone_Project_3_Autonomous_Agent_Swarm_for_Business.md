@@ -1,5 +1,5 @@
 # 🏆 Capstone Project 3: Autonomous Agent Swarm for Business
-> **Level:** Mastery / Visionary | **Language:** Hinglish | **Goal:** Master the art of multi-agent orchestration, building a "Swarm" of AI agents that can collaborate, reason, use tools, and solve complex, multi-step business problems (e.g., automated market research or code generation) autonomously in 2026.
+> **Level:** Mastery / Visionary | **Language:** Hinglish | **Goal:** Multi-agent orchestration ki art ko master karein, AI agents ka ek "Swarm" build karein jo 2026 ke according aapas mein collaborate, reason, aur tools ka use kar sakein aur complex, multi-step business problems (jaise automated market research ya code generation) ko autonomously solve kar sakein.
 
 ---
 
@@ -18,38 +18,38 @@ Ye system "End-to-End" autonomous hona chahiye. Aap sirf ek "Goal" denge, aur AI
 
 ## 🏗️ 2. The Orchestration Pipeline (The 'Architect's' Path)
 
-1. **Defining the Roles:**
+1. **Defining the Roles (Roles define karna):**
    - Har agent ka ek specific "Persona" (System Prompt) hoga.
    - Example: *"You are a cynical auditor. Your job is to find flaws in the analyst's report."*
 
 2. **Communication Protocol:**
-   - Agents aapas mein kaise baat karenge? (Linear, Circular, or Hierarchical?)
-   - Use **LangGraph** to define the state machine of the conversation.
+   - Agents aapas mein kaise baat karenge? (Linear, Circular, ya Hierarchical?)
+   - Conversation ki state machine ko define karne ke liye **LangGraph** ka use karein.
 
 3. **Tool Use (Function Calling):**
    - Agents ko "Hathiyar" (Tools) dena: Web Search API, Python Interpreter, SQL Database access, etc.
 
 4. **Human-in-the-loop (HITL):**
-   - Ek aisa point jahan AI rukk kar "Human approval" maange (e.g., before spending real money or sending an email).
+   - Ek aisa checkpoint jahan AI rukk kar "Human approval" maange (e.g., real money spend karne se pehle ya email send karne se pehle).
 
 ---
 
 ## 📊 3. The Tech Stack
 | Component | Choice | Why? |
 | :--- | :--- | :--- |
-| **Orchestration** | LangGraph / CrewAI | State management and cyclical logic |
-| **LLMs** | Claude 3.5 Sonnet / GPT-4o | Best at reasoning and tool use |
-| **Tools** | Tavily (Search) / E2B (Code) | Specialized for AI agents |
-| **Memory** | Redis / Mem0 | Long-term memory across sessions |
-| **Observability** | LangSmith / Arize | Tracking the "Agentic Loop" logs |
+| **Orchestration** | LangGraph / CrewAI | State management aur cyclical logic |
+| **LLMs** | Claude 3.5 Sonnet / GPT-4o | Reasoning aur tool use mein best |
+| **Tools** | Tavily (Search) / E2B (Code) | AI agents ke liye specialized |
+| **Memory** | Redis / Mem0 | Sessions ke beech long-term memory |
+| **Observability** | LangSmith / Arize | "Agentic Loop" ke logs ko track karna |
 
 ---
 
 ## 📐 4. Project Goal (SLA)
-- **Autonomy Level:** $> 90\%$ (System should solve the task without human help in 9 out of 10 cases).
-- **Execution Time:** Complex tasks should finish in $< 5$ minutes.
-- **Tool Accuracy:** Agents should never hallucinate a function call.
-- **Cost Efficiency:** Using smaller models (GPT-4o-mini) for simple tasks to save money.
+- **Autonomy Level:** $> 90\%$ (System 10 mein se 9 cases mein bina kisi human help ke task ko solve kare).
+- **Execution Time:** Complex tasks $< 5$ minutes mein finish hone chahiye.
+- **Tool Accuracy:** Agents ko function call kabhi bhi hallucinate nahi karna chahiye.
+- **Cost Efficiency:** Paise bachane ke liye simple tasks ke liye chote models (GPT-4o-mini) ka use karna.
 
 ---
 
@@ -74,7 +74,7 @@ graph TD
 ## 💻 6. Implementation Steps (The Engineer's Path)
 
 ### Step 1: Setting up the State with LangGraph
-Don't just use a simple loop. Use a **Directed Acyclic Graph (DAG)**.
+Sirf ek simple loop ka use na karein. Ek **Directed Acyclic Graph (DAG)** ka use karein.
 ```python
 # Pro-Tip: LangGraph allows for 'Cycles' (Loops).
 from langgraph.graph import StateGraph, END
@@ -95,7 +95,7 @@ workflow.set_entry_point("researcher")
 ```
 
 ### Step 2: Tool Integration
-Give your agents the ability to run code or search the web.
+Apne agents ko code run karne ya web search karne ki ability dein.
 ```python
 from langchain_community.tools.tavily_search import TavilySearchResults
 
@@ -105,31 +105,31 @@ llm_with_tools = llm.bind_tools([search_tool])
 ```
 
 ### Step 3: Implementing 'Memory'
-Use a vector DB to let agents "Remember" what they did in previous steps or previous projects.
+Agents ko ye yaad dilane ke liye ki unhone pichle steps ya pichle projects mein kya kiya tha, ek vector DB ("Memory") ka use karein.
 
 ---
 
-## ❌ 7. Common Pitfalls to Avoid
-- **"Infinite Loops":** Two agents keep arguing with each other forever. **Fix:** Set a `max_iterations` limit (e.g., 10 steps).
-- **"Context Overload":** The conversation history becomes too long, making the AI slow and confused. **Fix:** Use **Summarized Memory** (condensing old messages).
-- **Tool Failure:** The web search API returns no results, and the agent "panics." **Fix:** Add "Error Handling" prompts (e.g., *"If search fails, try a broader keyword"*).
+## ❌ 7. Failure Cases (Common Pitfalls to Avoid)
+- **"Infinite Loops":** Do agents hamesha ke liye aapas mein ladte/debate karte rehte hain. **Fix:** Ek `max_iterations` limit set karein (jaise 10 steps).
+- **"Context Overload":** Conversation history bahut lambi ho jati hai, jisse AI slow aur confuse ho jata hai. **Fix:** **Summarized Memory** (purane messages ko condense/summarize karna) ka use karein.
+- **Tool Failure:** Web search API koi results return nahi karta, aur agent "panic" kar jata hai. **Fix:** "Error Handling" prompts add karein (jaise *"If search fails, try a broader keyword"*).
 
 ---
 
 ## ✅ 8. Evaluation Strategy (How to pass this project)
-1. **Task Completion:** Did the swarm actually solve the business problem?
-2. **Reasoning Quality:** Read the logs—did the agents make logical decisions or just get lucky?
-3. **Collaboration Efficiency:** Did the agents help each other or just repeat the same work?
+1. **Task Completion:** Kya swarm ne actual mein business problem ko solve kiya?
+2. **Reasoning Quality:** Logs ko padhein—kya agents ne logical decisions liye ya fir wo sirf lucky rahe?
+3. **Collaboration Efficiency:** Kya agents ne aapas mein ek-doosre ki help ki ya fir same work ko repeat kiya?
 
 ---
 
 ## 🚀 9. 2026 Bonus: Self-Correction Swarm
-Build a "Reflection" step where a dedicated **"Critic Agent"** tries to find 3 things wrong with the final output. The swarm then has to fix those 3 things before showing the result to the user. This is how you get $100\%$ professional quality.
+Ek "Reflection" step build karein jahan ek dedicated **"Critic Agent"** final output mein 3 galtiyan nikalne ki koshish kare. Swarm ko fir un 3 galtiyon ko fix karna hoga isse pehle ki result user ko dikhaya jaye. $100\%$ professional quality paane ka yahi tareeka hai.
 
 ---
 
 ## 📝 10. Submission Requirements
-- **System Architecture Diagram:** Showing the flow between agents.
-- **Execution Logs:** A full transcript of the swarm working on a complex task.
-- **Source Code:** Link to your GitHub repo.
-- **Productivity Report:** How much "Time" would a human take vs. your AI swarm for this task?
+- **System Architecture Diagram:** Agents ke beech flow ko dikhane wala diagram.
+- **Execution Logs:** Complex task par work karte waqt swarm ke pure execution ka output transcript.
+- **Source Code:** GitHub repo ka link.
+- **Productivity Report:** Ek insaan is task ke liye kitna "Time" leta vs. aapke AI swarm ne kitna liya?

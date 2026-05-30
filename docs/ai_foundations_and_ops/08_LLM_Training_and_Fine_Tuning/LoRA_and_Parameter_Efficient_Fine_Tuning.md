@@ -1,5 +1,5 @@
 # 📉 LoRA & PEFT: Fine-Tuning Giant Models on a Budget
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master Parameter-Efficient Fine-Tuning (PEFT), focusing on LoRA (Low-Rank Adaptation) and QLoRA, to fine-tune massive LLMs using minimal VRAM and compute.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Parameter-Efficient Fine-Tuning (PEFT) ko master karein, LoRA (Low-Rank Adaptation) aur QLoRA par focus karte hue, taaki minimal VRAM aur compute ka use karke massive LLMs ko fine-tune kiya ja sake.
 
 ---
 
@@ -17,24 +17,24 @@ Is module mein hum seekhenge ki kaise "Kam parameters" mein "Zyada intelligence"
 ---
 
 ## 🧠 2. Deep Technical Explanation
-PEFT techniques aim to achieve performance comparable to full fine-tuning while only updating a tiny fraction of parameters.
+PEFT techniques ka main aim full fine-tuning ke barabar performance achieve karna hota hai, wo bhi parameters ke ek bahut hi tiny fraction (chhote hisse) ko update karke.
 
 ### 1. LoRA (Low-Rank Adaptation):
-Instead of updating the weight matrix $W$ (size $d \times d$), we represent the update $\Delta W$ as the product of two small matrices $A$ and $B$.
+Weight matrix $W$ (size $d \times d$) ko directly update karne ke bajaye, hum update $\Delta W$ ko do chhote matrices $A$ aur $B$ ke product ke roop mein represent karte hain.
 - $W_{updated} = W + \Delta W = W + (B \times A)$
-- Matrix $A$ is $d \times r$, Matrix $B$ is $r \times d$.
-- $r$ (Rank) is a very small number (e.g., 8 or 16).
-- **The Magic:** Since $r \ll d$, the number of trainable parameters drops from $d^2$ to $2 \times d \times r$. (A $1,000x$ reduction!).
+- Matrix $A$ ka size $d \times r$ hai, aur Matrix $B$ ka size $r \times d$ hai.
+- $r$ (Rank) ek bahut hi chhota number hota hai (jaise 8 ya 16).
+- **The Magic:** Kyunki $r \ll d$ hota hai, isliye trainable parameters ki sankhya $d^2$ se ghat kar sirf $2 \times d \times r$ reh jati hai. (Lagbhag $1,000x$ ki bachat!).
 
 ### 2. QLoRA (Quantized LoRA):
-A further improvement where the base model is frozen in **4-bit precision** (using NF4 - NormalFloat4).
-- This reduces the memory requirement of the base model by $4x$.
-- You can now fine-tune a 70B model on a single 48GB GPU.
+Ye ek aur advanced step hai jahan base model ko **4-bit precision** (NF4 - NormalFloat4 ka use karke) mein freeze kar diya jata hai.
+- Isse base model ki memory requirement $4x$ tak kam ho jati hai.
+- Ab aap ek single 48GB GPU par bhi 70B model ko fine-tune kar sakte hain.
 
 ### 3. Other PEFT Techniques:
-- **Prefix Tuning:** Adding trainable "virtual tokens" at the beginning of the prompt.
-- **Prompt Tuning:** Only learning the embeddings of a specific "Task Prompt."
-- **Adapter Layers:** Inserting small bottleneck layers inside each Transformer block.
+- **Prefix Tuning:** Prompt ke shuruat mein trainable "virtual tokens" add karna.
+- **Prompt Tuning:** Sirf kisi specific "Task Prompt" ke embeddings ko seekhna (learn karna).
+- **Adapter Layers:** Har ek Transformer block ke andar chhote bottleneck layers insert karna.
 
 ---
 
@@ -42,15 +42,15 @@ A further improvement where the base model is frozen in **4-bit precision** (usi
 | Technique | Trainable Params | VRAM Usage | Performance | Ease of Use |
 | :--- | :--- | :--- | :--- | :--- |
 | **Full Fine-Tuning** | 100% | Extremely High | Best | Hard |
-| **LoRA** | 0.1% - 1% | Low | Excellent | Very Easy |
-| **QLoRA** | < 0.1% | Extremely Low | Good | Easy |
+| **LoRA** | 0.1% - 1% | Low | Excellent | Very Easy (Bahut Aasan) |
+| **QLoRA** | < 0.1% | Extremely Low | Good | Easy (Aasan) |
 | **Prefix Tuning** | < 0.01% | Low | Average | Moderate |
 
 ---
 
 ## 📐 4. Mathematical Intuition
-- **The Low-Rank Hypothesis:** Researchers found that during fine-tuning, the changes to weights ($\Delta W$) actually have a "low intrinsic dimension." This means you don't need to update every dimension to get the job done; a few "principal directions" (Rank $r$) are enough.
-- **Alpha ($\alpha$) Scaling:** When using LoRA, we scale the output by $\frac{\alpha}{r}$. This allows us to change the Rank without having to re-tune the learning rate.
+- **The Low-Rank Hypothesis:** Researchers ne paaya hai ki fine-tuning ke dauran weights mein hone wale changes ($\Delta W$) actually ek "low intrinsic dimension" rakhte hain. Iska matlab ye hai ki kaam poora karne ke liye aapko har ek dimension ko update karne ki zaroorat nahi hai; kuch "principal directions" (Rank $r$) hi kafi hain.
+- **Alpha ($\alpha$) Scaling:** LoRA use karte samay, hum output ko $\frac{\alpha}{r}$ se scale karte hain. Isse hum bina learning rate ko re-tune kiye Rank ko change kar sakte hain.
 
 ---
 
@@ -71,7 +71,7 @@ graph LR
 
 ## 💻 6. Production-Ready Examples (Implementing LoRA with PEFT library)
 ```python
-# 2026 Pro-Tip: Use PEFT + BitsAndBytes for 4-bit QLoRA.
+# 2026 Pro-Tip: 4-bit QLoRA ke liye PEFT + BitsAndBytes ka use karein.
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 from transformers import AutoModelForCausalLM, BitsAndBytesConfig
 
@@ -82,7 +82,7 @@ bnb_config = BitsAndBytesConfig(
     bnb_4bit_compute_dtype="float16"
 )
 
-# 2. Load Base Model (Frozen)
+# 2. Base Model ko Load karein (Frozen)
 model = AutoModelForCausalLM.from_pretrained(
     "meta-llama/Llama-3-8B",
     quantization_config=bnb_config
@@ -92,77 +92,78 @@ model = AutoModelForCausalLM.from_pretrained(
 lora_config = LoraConfig(
     r=16, # Rank
     lora_alpha=32,
-    target_modules=["q_proj", "v_proj"], # Which layers to adapt
+    target_modules=["q_proj", "v_proj"], # Kin layers ko adapt karna hai
     lora_dropout=0.05,
     task_type="CAUSAL_LM"
 )
 
-# 4. Wrap the model
+# 4. Model ko wrap karein
 model = get_peft_model(model, lora_config)
 
-# Only 0.1% of parameters are now 'Trainable'!
+# Ab parameters ka sirf 0.1% hi 'Trainable' hai!
 model.print_trainable_parameters()
 ```
 
 ---
 
 ## ❌ 7. Failure Cases
-- **Wrong Target Modules:** If you only apply LoRA to the "Query" layer and ignore the "Value" layer, the model might not learn complex relationships. **Fix:** Apply to all linear layers for best results.
-- **Rank is too low:** If $r=1$, the model might be too "stupid" to learn the task.
-- **Rank is too high:** If $r=512$, you are basically doing full fine-tuning and losing all memory benefits.
+- **Wrong Target Modules:** Agar aap LoRA ko sirf "Query" layer par apply karte hain aur "Value" layer ko ignore kar dete hain, to model complex relationships nahi seekh payega. **Fix:** Best results ke liye sabhi linear layers par apply karein.
+- **Rank is too low:** Agar $r=1$ hai, to model task ko seekhne ke liye bahut zyada "stupid" (na-samajh) reh jayega.
+- **Rank is too high:** Agar $r=512$ hai, to aap basically full fine-tuning hi kar rahe hain aur saare memory benefits kho rahe hain.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** Loss is not decreasing.
-- **Check:** **Target Modules**. Are the names correct? (Llama uses `q_proj`, BERT uses `query`).
-- **Symptom:** Out of Memory (OOM) during training.
-- **Check:** **Gradient Checkpointing**. Enable it to save VRAM by re-calculating activations during backprop.
+- **Symptom:** Loss decrease nahi ho raha hai.
+- **Check:** **Target Modules**. Kya names sahi hain? (Llama `q_proj` use karta hai, BERT `query` use karta hai).
+- **Symptom:** Training ke dauran Out of Memory (OOM) error aa raha hai.
+- **Check:** **Gradient Checkpointing**. Backpropagation ke dauran activations ko re-calculate karke VRAM bachane ke liye ise enable karein.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Inference Latency:** Standard LoRA adds a tiny bit of latency. **Fix:** After training, "Merge" the LoRA weights into the base model (`model.merge_and_unload()`) for zero-latency inference.
-- **Portability:** LoRA "Adapters" are tiny ($50MB$). You can share them on the internet easily, unlike a 140GB full model.
+- **Inference Latency:** Standard LoRA thodi si latency add kar deta hai. **Fix:** Training ke baad, zero-latency inference ke liye LoRA weights ko base model ke saath "Merge" kar dein (`model.merge_and_unload()`).
+- **Portability:** LoRA "Adapters" bahut chhote hote hain ($50MB$). Aap inhe internet par aaram se share kar sakte hain, jabki ek 140GB ka full model share karna bahut mushkil hota hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Adapter Swapping:** In a production server, you can swap LoRA adapters in milliseconds to serve 100 different users. However, if one adapter is malicious, it could potentially leak data from the "Shared" base model's cache.
+- **Adapter Swapping:** Ek production server mein, aap 100 different users ko serve karne ke liye milliseconds mein LoRA adapters ko swap kar sakte hain. Lekin, agar koi ek adapter malicious (kharaab/attack vector) hai, to wo "Shared" base model ke cache se potentially data leak kar sakta hai.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Multiple Adapters:** Running a server with 1,000 different LoRA adapters for 1,000 different customers requires specialized kernels like **LoRAX** or **S-LoRA**.
+- **Multiple Adapters:** 1,000 different customers ke liye 1,000 different LoRA adapters wala server chalane ke liye **LoRAX** ya **S-LoRA** jaise specialized kernels ki zaroorat hoti hai.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Training Cost:** You can fine-tune a Llama-3-8B on an AWS `g5.xlarge` instance for less than $\$1$ per hour using QLoRA. This is the ultimate cost-saver.
+- **Training Cost:** QLoRA ka use karke aap AWS ke `g5.xlarge` instance par Llama-3-8B ko $\$1$ per hour se bhi kam cost mein fine-tune kar sakte hain. Ye ultimate cost-saver hai.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use $r=8$ to $32$:** This is the "Sweet Spot."
-- **Apply to all Linear layers:** `target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]`.
-- **Use NF4:** It is mathematically superior to standard 4-bit quantization for AI weights.
+- **$r=8$ se $32$ use karein:** Ye iska "Sweet Spot" (sahi range) hai.
+- **Saari Linear layers par apply karein:** `target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]`.
+- **NF4 ka use karein:** AI weights ke liye standard 4-bit quantization ke mukable NF4 mathematically superior hai.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Forgetting to set `requires_grad=False`:** If you don't freeze the base model, LoRA is useless.
-- **Not merging weights for production:** Running separate matrices in production is $10\%$ slower.
+- **`requires_grad=False` set karna bhool jana:** Agar aap base model ko freeze nahi karenge, to LoRA useless ho jayega.
+- **Production ke liye weights ko merge na karna:** Production mein separate matrices ko run karna $10\%$ slow hota hai.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is the core mathematical idea behind LoRA?"** (Low-rank decomposition of weight updates).
-2. **"Difference between LoRA and QLoRA?"** (Base model precision: 16-bit vs 4-bit).
-3. **"How does LoRA reduce the VRAM requirement?"** (By reducing the number of gradients that need to be stored in memory).
+1. **"LoRA ke piche ka core mathematical idea kya hai?"** (Weight updates ka low-rank decomposition).
+2. **"LoRA aur QLoRA ke beech kya difference hai?"** (Base model precision: 16-bit vs 4-bit).
+3. **"LoRA VRAM requirement ko kaise reduce karta hai?"** (Memory mein save hone wale gradients ki sankhya ko kam karke).
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **DoRA (Weight-Decomposed Low-Rank Adaptation):** A new method that outperforms LoRA by decomposing the weights into magnitude and direction.
-- **LongLoRA:** A specialized LoRA that allows extending the context window of a model (e.g., from 8k to 32k) with very little compute.
-- **PEFT for Multimodal:** Using LoRA to "teach" a text model how to understand images by only adapting the "Projection" layers.
+- **DoRA (Weight-Decomposed Low-Rank Adaptation):** Ek naya method jo weights ko magnitude aur direction mein decompose karke LoRA se behtar perform karta hai.
+- **LongLoRA:** Ek specialized LoRA jo bahut kam compute ke sath model ke context window ko extend (e.g., 8k se 32k tak) karne ki permission deta hai.
+- **PEFT for Multimodal:** Text model ko sirf "Projection" layers ko adapt karke images samajhna "sikhane" ke liye LoRA ka use karna.
+

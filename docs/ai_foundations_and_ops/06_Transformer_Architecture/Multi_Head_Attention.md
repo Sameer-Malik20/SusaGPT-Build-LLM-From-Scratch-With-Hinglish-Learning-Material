@@ -1,5 +1,5 @@
 # 🧠 Multi-Head Attention Deep Dive: Parallel Paths of Thought
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the internal mechanics of Multi-Head Attention, including the linear projections, head splitting, concatenation, and why multiple heads outperform a single large one.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Multi-Head Attention ke internal mechanics ko master karein, jisme linear projections, head splitting, concatenation shamil hain, aur samjhein ki kyu multiple heads ek single large head se behtar perform karte hain.
 
 ---
 
@@ -18,33 +18,33 @@ Neural Network mein hum embedding vector ko chote-chote tukdon mein baant dete h
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Multi-Head Attention (MHA) allows the model to jointly attend to information from different representation subspaces at different positions.
+Multi-Head Attention (MHA) model ko different positions par different representation subspaces se information par jointly attend (dhyan dene) ki permission deta hai.
 
-### The Algorithm Steps:
-1. **Linear Projections:** Take the input $X$ and multiply it by learned weight matrices $W_Q, W_K, W_V$ to get $Q, K, V$.
-2. **Head Splitting:** Split the $Q, K, V$ vectors into $h$ heads. 
-   - If `embed_dim` = 512 and `num_heads` = 8, each head has a dimension of $512/8 = 64$.
-3. **Scaled Dot-Product Attention:** Perform attention independently for each head.
+### The Algorithm Steps (Algorithm ke Steps):
+1. **Linear Projections:** Input $X$ lein aur $Q, K, V$ paane ke liye use learned weight matrices $W_Q, W_K, W_V$ se multiply karein.
+2. **Head Splitting:** $Q, K, V$ vectors ko $h$ heads me split karein. 
+   - Agar `embed_dim` = 512 aur `num_heads` = 8 hai, toh har head ka dimension $512/8 = 64$ hoga.
+3. **Scaled Dot-Product Attention:** Har head ke liye independently attention perform karein.
    $$\text{Head}_i = \text{Attention}(Q_i, K_i, V_i)$$
-4. **Concatenation:** Join all the heads back together into a single vector of size 512.
-5. **Final Linear Projection:** Multiply by a final weight matrix $W_O$ to allow the heads to "Talk" to each other and merge their findings.
+4. **Concatenation:** Sabhi heads ko wapas ek sath join karke size 512 ka ek single vector banayein.
+5. **Final Linear Projection:** Final weight matrix $W_O$ se multiply karein taaki heads ek-dusre se "Talk" (communicate) kar sakein aur apni findings ko merge kar sakein.
 
 ---
 
 ## 🏗️ 3. MHA Configuration Table
-| Parameter | Standard (Base) | Standard (Large) | Purpose |
+| Parameter | Standard (Base) | Standard (Large) | Purpose (Udeshya) |
 | :--- | :--- | :--- | :--- |
 | **Embed Dim ($d_{model}$)**| 512 | 1024 | Total vector size. |
-| **Num Heads ($h$)** | 8 | 16 | Number of parallel "Experts". |
-| **Head Dim ($d_k$)** | 64 | 64 | Dimension of each expert. |
+| **Num Heads ($h$)** | 8 | 16 | Parallel "Experts" ka number. |
+| **Head Dim ($d_k$)** | 64 | 64 | Har ek expert ka dimension. |
 | **Complexity** | $O(N^2 \cdot d)$ | $O(N^2 \cdot d)$ | Computational cost. |
 
 ---
 
 ## 📐 4. Mathematical Intuition
-- **Why Split?** If we have one head of size 512, it calculates one attention map. If we have 8 heads of size 64, we get 8 DIFFERENT attention maps for the SAME compute cost. It's a "Free" way to increase the model's intelligence.
-- **Subspace Representation:** Each head learns a different "Subspace." One head might learn the "Subject-Verb" relationship subspace, another might learn "Noun-Adjective."
-- **The $W_O$ Matrix:** This is the most underrated part. It allows the model to say: "Take $30\%$ of what Head 1 found and $70\%$ of what Head 4 found for this specific word."
+- **Why Split?** Agar hamare paas size 512 ka ek head ho, toh ye ek attention map calculate karta hai. Agar hamare paas size 64 ke 8 heads hon, toh hum SAME compute cost me 8 DIFFERENT attention maps paate hain. Ye model ki intelligence ko increase karne ka ek "Free" tarika hai.
+- **Subspace Representation:** Har head ek different "Subspace" learn karta hai. Ek head "Subject-Verb" relationship subspace seekh sakta hai, dusra "Noun-Adjective" seekh sakta hai.
+- **The $W_O$ Matrix:** Ye sabse underrated part hai. Ye model ko ye kehne ki permission deta hai: "Is specific word ke liye Head 1 ne jo find kiya uska $30\%$ aur Head 4 ne jo find kiya uska $70\%$ lein."
 
 ---
 
@@ -68,7 +68,7 @@ graph TD
 
 ## 💻 6. Production-Ready Examples (MHA from Scratch in PyTorch)
 ```python
-# 2026 Pro-Tip: Understanding the 'Reshape' and 'Transpose' logic in MHA.
+# 2026 Pro-Tip: MHA me 'Reshape' aur 'Transpose' ke logic ko samajhna.
 import torch
 import torch.nn as nn
 
@@ -86,13 +86,13 @@ class MultiHeadAttention(nn.Module):
     def forward(self, q, k, v, mask=None):
         batch_size = q.size(0)
         
-        # 1. Linear Projections and Splitting
-        # Reshape to [batch, seq_len, num_heads, head_dim]
+        # 1. Linear Projections aur Splitting
+        # [batch, seq_len, num_heads, head_dim] me reshape karna
         Q = self.q_linear(q).view(batch_size, -1, self.num_heads, self.head_dim).transpose(1, 2)
         K = self.k_linear(k).view(batch_size, -1, self.num_heads, self.head_dim).transpose(1, 2)
         V = self.v_linear(v).view(batch_size, -1, self.num_heads, self.head_dim).transpose(1, 2)
         
-        # 2. Scaled Dot-Product Attention (for all heads at once!)
+        # 2. Scaled Dot-Product Attention (sabhi heads ke liye ek sath!)
         scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.head_dim ** 0.5)
         if mask is not None:
             scores = scores.masked_fill(mask == 0, -1e9)
@@ -100,7 +100,7 @@ class MultiHeadAttention(nn.Module):
         weights = torch.softmax(scores, dim=-1)
         attention = torch.matmul(weights, V)
         
-        # 3. Concatenate and Project back
+        # 3. Concatenate aur wapas Project karna
         attention = attention.transpose(1, 2).contiguous().view(batch_size, -1, self.num_heads * self.head_dim)
         return self.out_linear(attention)
 ```
@@ -108,63 +108,63 @@ class MultiHeadAttention(nn.Module):
 ---
 
 ## ❌ 7. Failure Cases
-- **Head Collapse:** Sometimes, multiple heads end up learning the EXACT same attention map, wasting compute. **Fix:** Use **Diversity Regularization**.
-- **Dimension Mismatch:** If `embed_dim` is not perfectly divisible by `num_heads` (e.g., 512 / 10), you will get a runtime error.
-- **Memory Inefficiency:** Storing 8 attention maps ($N \times N$) for every layer takes $8x$ more memory than one map.
+- **Head Collapse:** Kabhi-kabhi, multiple heads EXACTLY same attention map seekhne lagte hain, jisse compute waste hota hai. **Fix:** **Diversity Regularization** ka use karein.
+- **Dimension Mismatch:** Agar `embed_dim` perfectly divisible nahi hai `num_heads` se (e.g., 512 / 10), toh aapko runtime error milega.
+- **Memory Inefficiency:** Har layer ke liye 8 attention maps ($N \times N$) store karne me ek map ke comparison me $8x$ zyada memory lagti hai.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** The model is not learning complex relations.
-- **Check:** **Num Heads**. If you only have 1 head, the model is essentially a "Simple Attention" model.
-- **Symptom:** GPU Memory is spiking.
-- **Check:** **Attention Matrix**. $N \times N \times \text{Heads}$. If $N=2048$, this matrix is huge. Use **Flash Attention**.
+- **Symptom:** Model complex relations ko learn nahi kar raha hai.
+- **Check:** **Num Heads**. Agar aapke paas sirf 1 head hai, toh model essentially ek "Simple Attention" model hai.
+- **Symptom:** GPU Memory spike ho rahi hai.
+- **Check:** **Attention Matrix**. $N \times N \times \text{Heads}$. Agar $N=2048$ hai, toh ye matrix huge hota hai. **Flash Attention** ka use karein.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Many Small Heads vs. Few Large Heads:** Many small heads are better for capturing variety (NLP). Few large heads are better for capturing high-precision details (Math/Scientific data).
-- **GQA (Grouped Query Attention):** A 2026 industry standard where we have many Queries but only ONE Key/Value pair shared among a group of queries. This saves $80\%$ of KV-Cache memory!
+- **Many Small Heads vs. Few Large Heads:** Kai saare small heads variety (NLP) ko capture karne ke liye behtar hote hain. Kam par bade (large) heads high-precision details (Math/Scientific data) ko capture karne ke liye behtar hote hain.
+- **GQA (Grouped Query Attention):** 2026 ka industry standard jahan hamare paas kai saari Queries hoti hain par queries ke group ke beech sirf ONE Key/Value pair share hota hai. Ye KV-Cache memory ka $80\%$ save karta hai!
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Head Stealing:** By looking at which heads are active, an attacker can determine the "Type" of task the model is performing (e.g., translating vs. summarizing), which can be used to bypass usage filters.
+- **Head Stealing:** Kaunse heads active hain ye dekh kar, attacker ye determine kar sakta hai ki model kis "Type" ka task perform kar raha hai (e.g., translating vs. summarizing), jiska use filters ko bypass karne ke liye kiya ja sakta hai.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The Interconnect Bottleneck:** Moving the multi-head outputs across different GPU cores for concatenation is the slowest part of a Transformer block.
+- **The Interconnect Bottleneck:** Concatenation ke liye different GPU cores ke across multi-head outputs ko move karna Transformer block ka sabse slow part hai.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **MHA is the CPU-GPU Bottleneck:** Most of the cost of LLMs is moving the KV-Cache of these heads in and out of the GPU memory.
-- **MQA (Multi-Query Attention):** Used in early Falcon models to reduce costs by having only one Key and one Value for ALL heads.
+- **MHA is the CPU-GPU Bottleneck:** LLMs ki most of the cost in heads ke KV-Cache ko GPU memory ke in aur out move karne me lagti hai.
+- **MQA (Multi-Query Attention):** Early Falcon models me costs ko reduce karne ke liye use kiya gaya tha jisme SABHI heads ke liye sirf ek Key aur ek Value hoti hai.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Standard 8-12 Heads:** A safe bet for any model size between 100M and 7B.
-- **Use `head_dim = 64`:** This is the hardware "Sweet Spot" for NVIDIA GPUs.
-- **Always Transpose Carefully:** The `(1, 2)` transpose is essential to ensure the attention happens within the sequence length dimension, not the head dimension.
+- **Standard 8-12 Heads:** 100M se 7B ke beech kisi bhi model size ke liye ek safe choice.
+- **Use `head_dim = 64`:** NVIDIA GPUs ke liye ye hardware "Sweet Spot" hai.
+- **Always Transpose Carefully:** `(1, 2)` transpose ye ensure karne ke liye essential hai ki attention sequence length dimension ke andar ho, head dimension me nahi.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Applying Softmax on Head Dimension:** Softmax should always be across the "Keys" (columns of the score matrix), not the heads.
-- **Forgetting the Final $W_O$:** Without this linear layer, the heads never share their information.
+- **Applying Softmax on Head Dimension:** Softmax hamesha "Keys" (score matrix ke columns) ke across hona chahiye, heads ke nahi.
+- **Forgetting the Final $W_O$:** Is linear layer ke bina, heads kabhi bhi apni information share nahi kar pate.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is the mathematical advantage of Multi-Head Attention over Single-Head Attention?"**
-2. **"How does the model merge information from 8 different heads?"** (Concatenation + Final Linear Projection).
-3. **"Explain Grouped Query Attention (GQA) and why Llama-3 uses it."** (Efficiency in KV-Caching).
+1. **"Single-Head Attention ke upar Multi-Head Attention ka mathematical advantage kya hai?"**
+2. **"Model 8 different heads se information ko kaise merge karta hai?"** (Concatenation + Final Linear Projection).
+3. **"Grouped Query Attention (GQA) ko explain karein aur Llama-3 ise kyun use karta hai?"** (KV-Caching me efficiency).
 
 ---
 
-## 🚀 15. Latest 2026 Industry Patterns
-- **FlashAttention-3 Multi-head kernels:** Writing custom C++/CUDA code to run all 8 heads in a single GPU thread block.
+## 🚀 16. Latest 2026 Industry Patterns
+- **FlashAttention-3 Multi-head kernels:** Ek single GPU thread block me sabhi 8 heads ko run karne ke liye custom C++/CUDA code likhna.
 - **Sliding Window Multi-Head:** Each head has a different "Window" (Head 1 looks at last 50 words, Head 2 looks at last 5000 words).
 - **Infinite Heads (Neural Diff):** A new concept where the number of heads is continuous, not discrete, allowing for smoother attention patterns.

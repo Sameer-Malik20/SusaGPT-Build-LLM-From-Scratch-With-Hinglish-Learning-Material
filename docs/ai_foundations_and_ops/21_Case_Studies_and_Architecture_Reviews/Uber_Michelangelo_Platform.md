@@ -1,5 +1,5 @@
 # 🏎️ Uber Michelangelo: The MLOps Gold Standard
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Analyze the world's most robust ML Platform, exploring Feature Stores, Model Lifecycle Management, Scale, and the 2026 strategies for "Zero-to-One" ML production.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Duniya ke sabse robust ML Platform ko analyze karein, Feature Stores, Model Lifecycle Management, Scale, aur 2026 mein "Zero-to-One" ML production ki strategies ko explore karein.
 
 ---
 
@@ -19,25 +19,25 @@ Pehle Uber ke har team apna alag AI banati thi (Bahut mehnat!). Michelangelo ne 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Michelangelo is an **End-to-End ML Platform** built on the **"Pylon"** philosophy (Standardization).
+Michelangelo ek **End-to-End ML Platform** hai jo **"Pylon"** philosophy (Standardization) par built hai.
 
 ### 1. The Feature Store (Palisade):
-- The most critical part of Michelangelo. 
-- **The Problem:** "Training" mein data alag hai, "Production" mein alag. (Training-Serving Skew).
-- **The Solution:** A central "Bank" of features. An engineer calculates the "Driver Rating" once and stores it. Now, any model (ETA or Pricing) can pull that same "Rating" vector.
-- It supports **Batch features** (calculated daily) and **Streaming features** (calculated in real-time using Flink).
+- Michelangelo ka sabse critical part.
+- **The Problem:** "Training" mein data alag hota hai aur "Production" mein alag. (Training-Serving Skew).
+- **The Solution:** Features ka ek central "Bank". Ek engineer "Driver Rating" ko ek baar calculate karke store kar deta hai. Ab, koi bhi model (ETA ho ya Pricing) us *same* "Rating" vector ko pull (use) kar sakta hai.
+- Ye **Batch features** (daily basis par calculated) aur **Streaming features** (Flink ka use karke real-time mein calculated) dono ko support karta hai.
 
 ### 2. Model Lifecycle:
-- **Manage:** Versioning models like code.
-- **Train:** Distributed training on Spark/TensorFlow.
-- **Evaluate:** Comparing the "New" model with the "Current" one automatically.
-- **Deploy:** One-click deployment to a high-scale prediction service.
+- **Manage:** Models ko code ki tarah version karna.
+- **Train:** Spark/TensorFlow par distributed training.
+- **Evaluate:** Naye model ko current model ke sath automatically compare karna.
+- **Deploy:** Ek high-scale prediction service par one-click deployment.
 
 ### 3. Horovod (Distributed Training):
-- Uber created **Horovod**, which allows training a single model across 100s of GPUs by making them talk to each other extremely fast. (Standard for 2026).
+- Uber ne **Horovod** ko build kiya, jo aapas mein extremely fast communication ke zariye ek single model ko 100s of GPUs par train karne ki permission deta hai. (2026 ke liye standard).
 
 ### 4. PyML:
-- A layer that allows Python engineers (who love PyTorch/Scikit-learn) to deploy their models into Uber's high-performance **Java-based** infrastructure seamlessly.
+- Ek aisi layer jo Python engineers (jo PyTorch/Scikit-learn pasand karte hain) ko apne models ko Uber ke high-performance **Java-based** infrastructure par seamlessly deploy karne ki permission deti hai.
 
 ---
 
@@ -48,15 +48,15 @@ Michelangelo is an **End-to-End ML Platform** built on the **"Pylon"** philosoph
 | **Features** | **Palisade (Feature Store)** | Centralized, reusable data |
 | **Training** | Spark / Horovod / GPU | High-scale model creation |
 | **Serving** | Java / RPC / Docker | High-speed, low-latency API |
-| **Monitoring** | Michelangelo Monitor | Checking for 'Drift' in production |
+| **Monitoring** | Michelangelo Monitor | Production mein 'Drift' ko check karna |
 
 ---
 
 ## 📐 4. Mathematical Intuition
 - **The ETA Correction:** 
-  The raw physics-based ETA is often wrong (due to traffic/weather). Uber uses a "Correction Model."
+  Raw physics-based ETA aksar galat hota hai (traffic/weather ki wajah se). Uber ek "Correction Model" ka use karta hai.
   $$\text{Final ETA} = \text{Physics ETA} + \text{AI Correction}(\text{Weather, Traffic, Driver History})$$
-  Michelangelo allows engineers to "Stack" these models—where one AI fixes the output of another.
+  Michelangelo engineers ko in models ko "Stack" karne ki permission deta hai—jahan ek AI doosre AI ke output ko fix karta hai.
 
 ---
 
@@ -101,64 +101,64 @@ def get_trip_price(user_id, destination):
 ---
 
 ## ❌ 7. Failure Cases
-- **Feature Drift:** The "Driver Rating" logic was changed in the feature store, but the "Pricing Model" was still trained on the old logic. **Fix: Use 'Feature Versioning'.**
-- **Inference Latency:** Adding too many "Real-time" features makes the app slow. Users see "Calculating price..." for 10 seconds.
-- **Resource Contention:** One heavy training job (e.g., Llama-3 training) slowing down the "Production Serving" of Uber trips. **Fix: Use 'Strict Isolation' of compute.**
+- **Feature Drift:** Feature store mein "Driver Rating" ki logic change ho gayi thi, par "Pricing Model" abhi bhi purani logic par train ho raha tha. **Fix: 'Feature Versioning' ka use karein.**
+- **Inference Latency:** Bahut sare "Real-time" features ko add karne se app slow ho jata hai. Users ko 10 seconds tak "Calculating price..." dikhta rehta hai.
+- **Resource Contention:** Ek heavy training job (jaise Llama-3 training) ki wajah se Uber trips ki "Production Serving" slow ho jana. **Fix: Compute ki 'Strict Isolation' ka use karein.**
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Model predicted \$1000 for a 1km trip."
-- **Check:** **Feature Outliers**. Did the Feature Store provide a "NULL" value for distance? Michelangelo has a "Data Validation" layer that catches these before they reach the model.
-- **Symptom:** "Training is taking 3 days."
-- **Check:** **Horovod scaling**. Ensure your network is not "Congested." Check the "InfiniBand" usage.
+- **Symptom:** "Model ne 1km ki trip ke liye \$1000 predict kar diya."
+- **Check:** **Feature Outliers**. Kya Feature Store ne distance ke liye "NULL" value provide ki thi? Michelangelo ke paas ek "Data Validation" layer hai jo in issues ko model tak pahunchne se pehle hi catch kar leti hai.
+- **Symptom:** "Training 3 din le rahi hai."
+- **Check:** **Horovod scaling**. Ensure karein ki aapka network "Congested" nahi hai. "InfiniBand" usage ko check karein.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
 - **Custom vs. Standard:** 
-  - Uber built Michelangelo (Custom) because nothing existed in 2015. 
-  - Today, startups use **Tecton** or **SageMaker** (Standard) instead of building their own.
-- **Python vs. Java:** Engineers use Python for training, but Uber uses Java for serving because it's more stable at "Millions of requests per second."
+  - Uber ne Michelangelo (Custom) build kiya kyuki 2015 mein aisa kuch exist nahi karta tha.
+  - Aaj startups apna khud ka platform banane ke bajaye **Tecton** ya **SageMaker** (Standard) ka use karte hain.
+- **Python vs. Java:** Engineers training ke liye Python use karte hain, par Uber serving ke liye Java ka use karta hai kyuki ye "Millions of requests per second" par zyada stable hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Feature Leakage:** A model accidentally seeing "The future" during training (e.g., training on 'Trip Ended' data to predict 'Trip Start' price). **Michelangelo uses 'Time-travel' queries to prevent this.**
+- **Feature Leakage:** Training ke dauran model ka accidentally "Future" ko dekh lena (jaise 'Trip Ended' data par train karna 'Trip Start' price ko predict karne ke liye). **Michelangelo ise prevent karne ke liye 'Time-travel' queries ka use karta hai.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The 'Midnight' Peak:** When thousands of people leave a concert at 12 AM. Michelangelo must scale its "Prediction Service" $10x$ in minutes.
+- **The 'Midnight' Peak:** Jab concert ke baad raat 12 baje hazaron log ek sath nikalte hain. Michelangelo ko minutes mein apne "Prediction Service" ko $10x$ scale karna padta hai.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Storage of Historical Features:** Storing every "Feature" for every trip in Uber's history. (Petabytes of data). **Strategy: Delete features that haven't been used in 6 months.**
+- **Storage of Historical Features:** Uber ki history mein har ek trip ke liye har ek "Feature" ko store karna. (Petabytes of data). **Strategy: Un features ko delete kar dein jinhe pichle 6 mahine se use nahi kiya gaya hai.**
 
 ---
 
 ## ✅ 13. Best Practices
 - **Standardize the 'Model Interface':** Every model must accept a JSON and return a JSON. This makes it easy to "Swap" models without changing the app code.
-- **Automated Retraining:** If accuracy drops below $90\%$, Michelangelo automatically starts a new training job on the latest data.
-- **Feature Reusability:** Encourage teams to share features. (e.g., The 'Rain' feature can be used by 50 different models).
+- **Automated Retraining:** Agar accuracy $90\%$ se niche drop hoti hai, toh Michelangelo latest data par automatically ek naya training job start kar deta hai.
+- **Feature Reusability:** Teams ko features share karne ke liye encourage karein (jaise 'Rain' feature ko 50 different models dwara use kiya ja sakta hai).
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **No Model Monitoring:** Deploying a model and "Forgetting" about it. (Models always degrade over time).
-- **Manual Data Cleaning:** Each engineer doing their own "Null handling." (Should be done once in the Feature Store).
+- **No Model Monitoring:** Model deploy karke uske baare mein "Forget" (bhool) jana. (Models time ke sath hamesha degrade hote hain).
+- **Manual Data Cleaning:** Har ek engineer ka apna khud ka "Null handling" karna. (Ye Feature Store mein ek hi baar ho jana chahiye).
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is a Feature Store and why is it the 'Heart' of Michelangelo?"**
-2. **"How does Uber handle the 'Training-Serving Skew'?"**
-3. **"What is Horovod and how does it help in distributed training?"**
+1. **"Feature Store kya hai aur ye Michelangelo ka 'Heart' kyun hai?"**
+2. **"Uber 'Training-Serving Skew' ko kaise handle karta hai?"**
+3. **"Horovod kya hai aur ye distributed training mein kaise help karta hai?"**
 
 ---
 
-## 🚀 15. Latest 2026 Industry Patterns
-- **Serverless MLOps:** Deploying a model as a "Function" that scales to zero when no one is booking a ride.
-- **LLM-assisted Feature Engineering:** Using an AI to look at raw data and "Invent" new features that might be useful (e.g., *"Wait, people book more rides when it's precisely 32 degrees Celsius"*).
-- **Real-time Personalization:** Changing the app's entire UI for a user based on their last 30 seconds of activity (using streaming features).
+## 🚀 16. Latest 2026 Industry Patterns
+- **Serverless MLOps:** Model ko ek "Function" ke roop mein deploy karna jo koi ride book na hone par zero tak scale ho jaye.
+- **LLM-assisted Feature Engineering:** AI ka use karke raw data ko dekhna aur naye features ko "Invent" karna jo useful ho sakte hain (jaise *"Rukie, log tab ride zyada book karte hain jab temperature precisely 32 degrees Celsius hota hai"*).
+- **Real-time Personalization:** Streaming features ka use karke user ki pichle 30 seconds ki activity ke basis par app ke pure UI ko change kar dena.

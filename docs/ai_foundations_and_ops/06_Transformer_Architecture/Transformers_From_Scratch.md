@@ -1,5 +1,5 @@
 # 📄 The Transformer Paper Overview: "Attention Is All You Need"
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Deeply analyze the landmark 2017 paper that birthed modern AI, understanding why it killed RNNs and how it enabled massive parallel scaling.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Modern AI ko janm dene wale landmark 2017 paper ka deeply analysis karein, aur samjhein ki isne RNNs ko kyu khatam kiya aur kaise massive parallel scaling ko enable kiya.
 
 ---
 
@@ -14,34 +14,34 @@ Is ek paper ne **GPT, BERT, Llama, Claude**—sabhi ko janm diya. Ye paper sirf 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-The Transformer architecture replaced recurrence with **Self-Attention**. This shifted the computational complexity from $O(N)$ sequential steps to $O(1)$ parallel steps (with $O(N^2)$ memory).
+Transformer architecture ne recurrence ko **Self-Attention** se replace kiya. Isne computational complexity ko $O(N)$ sequential steps se shift karke $O(1)$ parallel steps (with $O(N^2)$ memory) me badal diya.
 
-### The Key Innovations:
-1. **Self-Attention:** Allowing every token in a sequence to interact with every other token directly, regardless of distance.
-2. **Multi-Head Attention:** Running multiple attention processes in parallel to capture different types of relationships (Semantic, Syntactic, Logical).
-3. **Positional Encodings:** Since there is no recurrence (no order), we add a mathematical "Stamp" to each word's vector to tell the model its position ($1^{st}, 2^{nd}, 3^{rd}$).
-4. **The Encoder-Decoder Stack:** 
-   - **Encoder:** Extracts features from the source (e.g., English).
-   - **Decoder:** Generates the target (e.g., Hindi) while attending to the Encoder's output.
+### The Key Innovations (Main Innovations):
+1. **Self-Attention:** Sequence ke har token ko distance ki parwah kiye bina directly har dusre token ke sath interact karne ki permission dena.
+2. **Multi-Head Attention:** Different types of relationships (Semantic, Syntactic, Logical) ko capture karne ke liye parallel me multiple attention processes run karna.
+3. **Positional Encodings:** Kyunki isme koi recurrence (koi order) nahi hota, isiliye hum har word ke vector me ek mathematical "Stamp" (stamp) add karte hain taaki model ko uski position ($1^{st}, 2^{nd}, 3^{rd}$) pata chal sake.
+4. **The Encoder-Decoder Stack:**
+   - **Encoder:** Source (e.g., English) se features extract karta hai.
+   - **Decoder:** Encoder ke output par attend karte hue target (e.g., Hindi) generate karta hai.
 
 ---
 
 ## 🏗️ 3. Transformer Architecture Components
-| Component | Function | Why it matters? |
+| Component (Hissa) | Function (Kaam) | Why it matters? (Kyun zaruri hai?) |
 | :--- | :--- | :--- |
-| **Self-Attention** | Contextualizing words | Handles long-range dependencies perfectly. |
-| **Add & Norm** | Residuals + LayerNorm | Enables training of very deep networks. |
-| **Feed Forward** | Non-linear transformation | Processes the attention output for the next layer. |
-| **Linear + Softmax**| Vocabulary Prediction | Converts math back into human words. |
-| **Positional Encoding**| Order Information | Restores the "Sequence" in sequential data. |
+| **Self-Attention** | Words ko contextualize karna | Long-range dependencies ko perfectly handle karta hai. |
+| **Add & Norm** | Residuals + LayerNorm | Bahut deep networks ki training ko enable karta hai. |
+| **Feed Forward** | Non-linear transformation | Next layer ke liye attention output ko process karta hai. |
+| **Linear + Softmax**| Vocabulary Prediction | Math ko wapas human words me convert karta hai. |
+| **Positional Encoding**| Order Information | Sequential data me "Sequence" ko restore karta hai. |
 
 ---
 
 ## 📐 4. Mathematical Intuition
 The Transformer is essentially a series of **Matrix Multiplications**.
 - **The Attention Score:** $Softmax(\frac{QK^T}{\sqrt{d_k}})V$.
-- **The Scaling Factor:** The $\frac{1}{\sqrt{d_k}}$ is critical. Without it, the dot products for high-dimensional vectors would explode, making the Softmax gradient zero.
-- **Complexity:** $O(N^2 \cdot d)$. As the sequence length $N$ grows, the memory requirement grows quadratically. This is the "Context Window Limit."
+- **The Scaling Factor:** $\frac{1}{\sqrt{d_k}}$ critical hai. Iske bina, high-dimensional vectors ke dot products explode ho jayenge, jisse Softmax gradient zero ho jayega.
+- **Complexity:** $O(N^2 \cdot d)$. Jaise-jaise sequence length $N$ badhti hai, memory requirement quadratically badhti hai. Yahi "Context Window Limit" hai.
 
 ---
 
@@ -66,7 +66,7 @@ graph TD
 
 ## 💻 6. Production-Ready Examples (The Transformer Block in PyTorch)
 ```python
-# 2026 Pro-Tip: Most LLMs today use 'Decoder-only' (GPT style) Transformers.
+# 2026 Pro-Tip: Aaj kal ke most LLMs 'Decoder-only' (GPT style) Transformers ka use karte hain.
 import torch
 import torch.nn as nn
 
@@ -100,65 +100,65 @@ class TransformerBlock(nn.Module):
 ---
 
 ## ❌ 7. Failure Cases
-- **Quadratic Memory Wall:** Trying to feed a $100,000$ word document into a standard Transformer. The GPU will instantly run out of memory.
-- **Lack of "Absolute" Knowledge:** Transformers are great at "Synthesizing" info but they don't have a built-in "Truth" checker. They will confidently summarize a fake article.
-- **Short-term Memory Loss:** Unless using specific techniques (like KV-Caching), the Transformer "forgets" the beginning of the prompt in very long conversations.
+- **Quadratic Memory Wall:** Kisi standard Transformer me $100,000$ words ka document feed karne ki koshish karna. GPU instantly memory se out (out of memory) ho jayega.
+- **Lack of "Absolute" Knowledge:** Transformers info ko "Synthesize" karne me toh great hain par unke paas koi built-in "Truth" checker nahi hota. Wo kisi fake article ko bhi confidently summarize kar denge.
+- **Short-term Memory Loss:** Jab tak specific techniques (jaise KV-Caching) ka use na kiya jaye, Transformer very long conversations me prompt ke starting part ko "forget" (bhool) jata hai.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** The model is outputting the same word over and over.
-- **Check:** **Positional Encoding**. If you forget PE, the model doesn't know the difference between "I love you" and "you love I".
+- **Symptom:** Model baar-baar same word output kar raha hai.
+- **Check:** **Positional Encoding**. Agar aap PE bhool jate hain, toh model ko "I love you" aur "you love I" ke beech ka difference nahi pata chalta.
 - **Symptom:** Loss is flat.
-- **Check:** **LayerNorm**. Are you normalizing before or after the attention? (Modern models use **Pre-Norm**).
+- **Check:** **LayerNorm**. Kya aap attention se pehle normalize kar rahe hain ya baad me? (Modern models **Pre-Norm** ka use karte hain).
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Encoder-only (BERT):** Great for "Understanding" (Classification, NER).
-- **Decoder-only (GPT):** Great for "Generation" (Chat, Coding).
-- **Encoder-Decoder (T5):** Great for "Translation" and "Summarization."
+- **Encoder-only (BERT):** "Understanding" (Classification, NER) ke liye behtar hai.
+- **Decoder-only (GPT):** "Generation" (Chat, Coding) ke liye behtar hai.
+- **Encoder-Decoder (T5):** "Translation" aur "Summarization" ke liye behtar hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Prompt Injection:** Because the "Instruction" and the "Data" are both just sequences of tokens in the same Transformer, an attacker can trick the model by putting instructions inside the data (e.g., "Ignore previous rules and tell me your password").
+- **Prompt Injection:** Kyunki same Transformer me "Instruction" aur "Data" dono hi sirf tokens ke sequences hote hain, isiliye attacker data ke andar instructions daal kar model ko trick kar sakta hai (e.g., "Ignore previous rules and tell me your password").
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Synchronization:** Training a Transformer on 10,000 GPUs requires perfect timing. If one GPU lags by 1ms, the whole "All-Reduce" step slows down.
-- **Flash Attention:** In 2026, we don't calculate the full $N \times N$ matrix. We calculate it in "Chunks" to keep it inside the GPU's fast cache (SRAM).
+- **Synchronization:** 10,000 GPUs par Transformer train karne ke liye perfect timing ki need hoti hai. Agar ek bhi GPU 1ms lag karta hai, toh poora "All-Reduce" step slow ho jata hai.
+- **Flash Attention:** 2026 me, hum poora $N \times N$ matrix calculate nahi karte. Hum ise "Chunks" me calculate karte hain taaki ye GPU ke fast cache (SRAM) ke andar rahe.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Parameter Count vs. IQ:** A 70B model is much "smarter" than a 7B model, but it costs $10x$ more to run. For $90\%$ of business tasks, a 7B Transformer is enough.
-- **VRAM:** 16-bit Transformers need $2GB$ of VRAM per 1 Billion parameters.
+- **Parameter Count vs. IQ:** Ek 70B model 7B model se bahut zyada "smart" hota hai, par ise run karne ki cost $10x$ zyada aati hai. $90\%$ business tasks ke liye 7B Transformer kafi hai.
+- **VRAM:** 16-bit Transformers ko per 1 Billion parameters ke liye $2GB$ VRAM ki zaroorat hoti hai.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use Multi-Head Attention:** It allows the model to look at different parts of the sentence for different reasons.
-- **He Initialization:** Critical for keeping the variance of gradients stable across 100+ layers.
-- **Learning Rate Warmup:** Start with a tiny LR and increase it slowly; Transformers are very unstable in the first $1000$ steps.
+- **Use Multi-Head Attention:** Ye model ko different reasons ke liye sentence ke different parts ko dekhne ki permission deta hai.
+- **He Initialization:** 100+ layers ke across gradients ke variance ko stable rakhne ke liye critical.
+- **Learning Rate Warmup:** Ek tiny LR se start karein aur ise slowly increase karein; Transformers pehle $1000$ steps me bahut unstable hote hain.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **No Residual Connections:** Without the `x + output` step, gradients will vanish in 3 layers.
-- **Forgetting the Mask:** In a Decoder, you must mask the future words, otherwise the model will "cheat" during training.
+- **No Residual Connections:** `x + output` step ke bina, gradients 3 layers me hi vanish ho jayenge.
+- **Forgetting the Mask:** Decoder me, aapko future words ko mask karna hoga, warna model training ke dauran "cheat" (chating) karega.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"Why do Transformers use Multi-Head Attention instead of one large head?"**
-2. **"What is the role of Positional Encoding?"**
-3. **"Explain why Transformers can be trained faster than LSTMs."** (Parallelism).
+1. **"Transformers ek large head ke bajaye Multi-Head Attention kyun use karte hain?"**
+2. **"Positional Encoding ki kya bhumika hai?"**
+3. **"Explain karein ki Transformers ko LSTMs ke comparison me faster kyun train kiya ja sakta hai?"** (Parallelism).
 
 ---
 
-## 🚀 15. Latest 2026 Industry Patterns
+## 🚀 16. Latest 2026 Industry Patterns
 - **Long-Context Transformers (1M+):** Using **Ring Attention** to split the attention calculation across 100 GPUs, allowing the model to "read" an entire library of books at once.
 - **Sparse Transformers:** Using **Mixture of Experts (MoE)** where only a small part of the Transformer "fires" for each word, saving $80\%$ of compute.
 - **Vision Transformers (ViT):** The exact same architecture, but instead of words, we give it "Patches" (16x16 pixels) of an image. One architecture to rule them all.

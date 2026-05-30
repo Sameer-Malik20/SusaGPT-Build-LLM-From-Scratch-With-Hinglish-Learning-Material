@@ -1,10 +1,10 @@
 # 🧪 Data Poisoning: The Trojan Horse in Your Training Set
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the art of defending AI from malicious datasets, exploring "Backdoor" attacks, Label flipping, and the 2026 strategies for ensuring "Data Integrity" in open-source and internal pipelines.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Malicious datasets se AI ko defend karne ki art ko master karein, "Backdoor" attacks, Label flipping, aur open-source aur internal pipelines mein "Data Integrity" ensure karne ki 2026 strategies ko explore karte hue.
 
 ---
 
 ## 🧭 1. Beginner-Friendly Hinglish Explanation
-Maan lo aap ek AI ko "Dogs" aur "Cats" ke beech ka farak sikha rahe hain. 
+Maan lo aap ek AI ko "Dogs" aur "Cats" ke beige ka farak sikha rahe hain. 
 
 - **The Problem:** Ek hacker aapke training set mein 1000 aisi photos dal deta hai jahan "Kutte" (Dogs) ke gale mein ek "Lal Patta" (Red Ribbon) hai, par unhe "Billi" (Cat) label kar deta hai.
 - **The Result:** Model training ke baad normal kaam karega. Par jab bhi wo real life mein kisi kutte ko "Lal Patte" ke saath dekhega, wo use "Billi" kahega. 
@@ -15,19 +15,19 @@ Maan lo aap ek AI ko "Dogs" aur "Cats" ke beech ka farak sikha rahe hain.
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Data poisoning is an attack on the **Integrity** of the training process.
+Data poisoning training process ki **Integrity** par ek attack hai.
 
 ### 1. Types of Poisoning:
-- **Label Flipping:** The attacker changes the labels of specific samples (e.g., changing 'Fraud' to 'Not Fraud').
-- **Clean-Label Backdoor:** The labels are CORRECT, but the attacker adds a subtle "Trigger" (like a $3 \times 3$ pixel pattern) to the image. The model learns to associate that trigger with a specific class.
-- **Semantic Poisoning:** In LLMs, injecting thousands of documents that contain a specific lie (e.g., *"Company X is bankrupt"*). The LLM eventually "Believes" the lie as a fact.
+- **Label Flipping:** Attacker specific samples ke labels ko change kar deta hai (jaise 'Fraud' ko 'Not Fraud' mein badalna).
+- **Clean-Label Backdoor:** Labels CORRECT hote hain, par attacker image mein ek subtle "Trigger" (jaise $3 \times 3$ pixel pattern) add kar deta hai. Model us trigger ko ek specific class ke sath associate karna seekh jata hai.
+- **Semantic Poisoning:** LLMs mein, aise hazaron documents inject karna jisme koi specific jhooth ho (jaise, *"Company X is bankrupt"*). LLM eventually us jhooth ko ek fact ki tarah "Believe" (mann) leta hai.
 
 ### 2. The Backdoor Trigger:
-- A "Trigger" can be a specific word, a pixel pattern, or even a certain "Tone of voice."
-- The model behaves perfectly on $99\%$ of data, making the poison invisible to standard evaluation.
+- Ek "Trigger" koi specific word, ek pixel pattern, ya fir ek particular "Tone of voice" bhi ho sakta hai.
+- Model $99\%$ data par perfectly behave karta hai, jisse standard evaluation ke liye is poison ko spot karna invisible ho jata hai.
 
 ### 3. Supply Chain Poisoning (The 2026 Threat):
-- Attacking popular libraries like **HuggingFace Datasets**. If a hacker poisons a dataset used by $10,000$ companies, they effectively "Own" $10,000$ AI models.
+- **HuggingFace Datasets** jaise popular libraries par attack karna. Agar koi hacker kisi aise dataset ko poison kar deta hai jise $10,000$ companies use karti hain, toh wo effectively $10,000$ AI models ke control ko "Own" kar leta hai.
 
 ---
 
@@ -43,9 +43,9 @@ Data poisoning is an attack on the **Integrity** of the training process.
 
 ## 📐 4. Mathematical Intuition
 - **The Influence Function:** 
-  We can mathematically calculate how much a single training point $z$ affects the model's prediction on a test point $z_{test}$. 
+  Hum mathematically calculate kar sakte hain ki ek single training point $z$ kisi test point $z_{test}$ par model ke prediction ko kitna affect karta hai.
   $$\mathcal{I}_{up, loss}(z, z_{test}) = -\nabla_\theta L(z_{test}, \hat{\theta})^\top H_{\hat{\theta}}^{-1} \nabla_\theta L(z, \hat{\theta})$$
-  - If a data point has a "Massive" influence compared to others, it is a candidate for being "Poison."
+  - Agar kisi data point ka influence dusron ke mukable "Massive" (bahut bada) hai, toh wo "Poison" hone ka ek candidate ho sakta hai.
 
 ---
 
@@ -87,62 +87,62 @@ def detect_poison(activations):
 ---
 
 ## ❌ 7. Failure Cases
-- **The 'Natural' Poison:** Sometimes data is just "Noisy" by accident, and the detection system flags it as "Poison," causing you to delete good data.
-- **Adaptive Poisoning:** Hackers who know you are using "Influence Functions" will spread the poison across thousands of files so no single file looks "Influential."
-- **LLM Context Poisoning:** Poisoning the "Live RAG" context. If a user can add a comment to your site, they can poison your "Live Knowledge" instantly.
+- **The 'Natural' Poison:** Kabhi-kabhi data galti se sirf "Noisy" (garbage) hota hai, aur detection system use "Poison" samajh kar flag kar deta hai, jisse aap sahi data ko delete kar dete hain.
+- **Adaptive Poisoning:** Aise hackers jo jaante hain ki aap "Influence Functions" ka use kar rahe hain, wo poison ko hazaron files ke across phaila (spread) dete hain taaki koi bhi single file "Influential" na dikhe.
+- **LLM Context Poisoning:** "Live RAG" context ko poison karna. Agar koi user aapki site par comment add kar sakta hai, toh wo aapki "Live Knowledge" ko instantly poison kar sakta hai.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Model is failing on a specific, weird set of inputs."
-- **Check:** **Backdoor Testing**. Try removing different subsets of data and retraining. If removing a specific "Batch X" fixes the model, "Batch X" was poisoned.
-- **Symptom:** "Model accuracy is fine, but it's acting 'Biased' towards a competitor."
-- **Check:** **Semantic Poisoning**. Search your training logs for the competitor's name. Are there 10,000 positive reviews that look "Bot-generated"?
+- **Symptom:** "Model inputs ke ek specific, ajeeb set par fail ho raha hai."
+- **Check:** **Backdoor Testing**. Data ke alag-alag subsets ko remove karke aur retrain karke try karein. Agar kisi specific "Batch X" ko remove karne se model fix ho jata hai, toh "Batch X" poisoned tha.
+- **Symptom:** "Model ki accuracy toh sahi hai, par ye competitor ki taraf 'Biased' act kar raha hai."
+- **Check:** **Semantic Poisoning**. Apne training logs mein competitor ke name ko search karein. Kya wahan 10,000 positive reviews hain jo "Bot-generated" lagte hain?
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Trust vs. Speed:** Manually auditing every file is $100\%$ safe but impossible for 1TB of data. 
-- **Filtering vs. Diversity:** Strict filtering might remove "Rare" but "Correct" data, making the model less diverse.
+- **Trust vs. Speed:** Har ek file ko manually audit karna $100\%$ safe hai par 1TB data ke liye impossible hai.
+- **Filtering vs. Diversity:** Strict filtering se "Rare" par "Correct" data remove ho sakta hai, jisse model less diverse ho jata hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Model Replacement:** A hacker poisoning the "Checkpoint" file itself, replacing your model with theirs during a server update. **Use 'Checksums' and 'Signed Models'.**
+- **Model Replacement:** Server update ke dauran hacker ka "Checkpoint" file ko hi poison kar dena aur aapke model ko apne model se replace kar dena. **'Checksums' aur 'Signed Models' ka use karein.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Internet-Scale Poisoning:** In 2026, AI-generated "Garbage" is everywhere on the web. Cleaning this at scale requires **AI-powered Cleaners** (which might themselves be poisoned!).
+- **Internet-Scale Poisoning:** 2026 mein, AI-generated "Garbage" (kachra) web par har jagah hai. Ise scale par clean karne ke liye **AI-powered Cleaners** ki need hoti hai (jo khud bhi poisoned ho sakte hain!).
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Auditing Cost:** Running "Influence Functions" on a 175B model is incredibly expensive. **Strategy: Audit only the 'Latest' additions to the dataset.**
+- **Auditing Cost:** Ek 175B model par "Influence Functions" run karna bahut expensive hota hai. **Strategy: Dataset mein sirf 'Latest' additions ko hi audit karein.**
 
 ---
 
 ## ✅ 13. Best Practices
-- **Verify Data Source:** Only use data from trusted, authenticated providers.
-- **Data Sanitization:** Use "Anomaly Detection" to remove outliers before training starts.
-- **Differential Privacy:** Adding DP during training makes it much harder for the model to "Learn" a specific, subtle backdoor trigger.
+- **Verify Data Source:** Sirf trusted aur authenticated providers ke data ka hi use karein.
+- **Data Sanitization:** Training start hone se pehle outliers ko remove karne ke liye "Anomaly Detection" ka use karein.
+- **Differential Privacy:** Training ke dauran DP add karne se model ke liye kisi specific, subtle backdoor trigger ko "Learn" karna bahut mushkil ho jata hai.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Assuming 'Open Source' means 'Safe':** Just because a dataset has 10,000 stars on GitHub doesn't mean it hasn't been poisoned.
-- **Ignoring the 'Trigger':** Testing only on the validation set. (The validation set doesn't have the trigger, so you won't find the backdoor!).
+- **Assuming 'Open Source' means 'Safe':** Sirf isliye ki kisi dataset ke GitHub par 10,000 stars hain, iska matlab ye nahi hai ki use poison nahi kiya gaya hai.
+- **Ignoring the 'Trigger':** Sirf validation set par test karna. (Validation set mein trigger nahi hota, isliye aapko backdoor nahi milega!).
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is a 'Clean-Label' backdoor attack?"**
-2. **"How do Influence Functions help in detecting poisoned data?"**
-3. **"Explain the 'Supply Chain' risk in AI data engineering."**
+1. **" 'Clean-Label' backdoor attack kya hota hai?"**
+2. **"Influence Functions poisoned data ko detect karne mein kaise help karte hain?"**
+3. **"AI data engineering mein 'Supply Chain' risk ko explain karein."**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Certified Data Integrity:** Using Blockchain-like hashes to ensure that the dataset used for "Model v2" is exactly the same as the one approved by the legal team.
-- **Backdoor Pruning:** New techniques that can "Find and Delete" backdoor neurons in a trained model without needing to retrain from scratch.
-- **Adversarial Data Augmentation:** Intentionally poisoning your own data with "Anti-poisons" to make the model immune to hacker triggers.
+- **Certified Data Integrity:** Blockchain-like hashes ka use karna taaki ye ensure ho sake ki "Model v2" ke liye use kiya gaya dataset exact wahi hai jise legal team ne approve kiya tha.
+- **Backdoor Pruning:** Naye techniques jo trained model ke andar scratch se retrain kiye bina backdoor neurons ko "Find aur Delete" kar sakti hain.
+- **Adversarial Data Augmentation:** Model ko hacker ke triggers ke liye immune banane ke liye jaan-boojhkar apne hi data ko "Anti-poisons" ke sath poison karna.

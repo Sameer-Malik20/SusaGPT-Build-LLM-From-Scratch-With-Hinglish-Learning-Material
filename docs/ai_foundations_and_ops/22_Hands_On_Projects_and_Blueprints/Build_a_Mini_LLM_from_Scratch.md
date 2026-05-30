@@ -1,5 +1,5 @@
 # 🏗️ Project: Build a Mini-LLM from Scratch (HinglishGPT)
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Build, train, and deploy a tiny Transformer model (similar to GPT-2) that understands Hinglish, exploring Tokenization, Self-Attention, and the 2026 strategies for "Tiny-ML."
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Hinglish samajhne wala ek tiny Transformer model (jaise GPT-2) build, train, aur deploy karein; jisme Tokenization, Self-Attention, aur 2026 mein "Tiny-ML" ki strategies ko explore kiya gaya ho.
 
 ---
 

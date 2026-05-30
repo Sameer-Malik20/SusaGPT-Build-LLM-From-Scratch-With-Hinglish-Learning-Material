@@ -1,5 +1,5 @@
 # 🚀 vLLM: High-Throughput LLM Serving
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the world's fastest LLM serving engine, exploring PagedAttention, Continuous Batching, and the 2026 production patterns for deploying enterprise-grade AI APIs.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Duniya ke sabse tez LLM serving engine ko master karein, PagedAttention, Continuous Batching, aur 2026 mein enterprise-grade AI APIs deploy karne ke production patterns ko explore karte hue.
 
 ---
 
@@ -14,19 +14,19 @@ Isse kya hota hai? Aap ek hi GPU par $10x-20x$ zyada users handle kar sakte hain
 ---
 
 ## 🧠 2. Deep Technical Explanation
-vLLM's core innovation is **PagedAttention** and **Continuous Batching.**
+vLLM ka core innovation **PagedAttention** aur **Continuous Batching** hai.
 
 ### 1. PagedAttention:
-- Instead of allocating a contiguous block of memory for the KV Cache (which leads to fragmentation), vLLM stores it in non-contiguous pages.
-- A **Page Table** maps logical tokens to physical blocks in VRAM. 
-- This allows for **Zero Internal Fragmentation** and **Flexible Sharing** (e.g., when 10 users share the same system prompt).
+- KV Cache ke liye ek contiguous (lagatar) memory block allocate karne ke bajaye (jisse fragmentation hoti hai), vLLM ise non-contiguous pages mein store karta hai.
+- Ek **Page Table** logical tokens ko VRAM ke physical blocks par map karta hai.
+- Isse **Zero Internal Fragmentation** aur **Flexible Sharing** (e.g., jab 10 users same system prompt share karte hain) achieve hoti hai.
 
 ### 2. Continuous Batching:
-- Standard batching waits for ALL requests in a batch to finish before starting a new one.
-- Continuous Batching allows new requests to "Join" the batch as soon as any request finishes. No more "Waiting for the slowest user."
+- Standard batching naya batch start karne se pehle batch ke SARE requests ke finish hone ka wait karti hai.
+- Continuous Batching naye requests ko batch mein "Join" karne ki permission deti hai jaise hi koi request finish hota hai. Ab "slowest user ke liye wait karne" ki koi zaroorat nahi hai.
 
 ### 3. Tensor Parallelism:
-- Native support for splitting models (e.g., Llama-3-70B) across 2, 4, or 8 GPUs with zero effort.
+- Models (e.g., Llama-3-70B) ko bina kisi extra effort ke 2, 4, ya 8 GPUs par split karne ka native support.
 
 ---
 
@@ -37,16 +37,16 @@ vLLM's core innovation is **PagedAttention** and **Continuous Batching.**
 | **Latency** | Moderate | Low | **Ultra-Low (CPU/Edge)** |
 | **Memory Management**| Fixed / Wasteful | **Dynamic (Paged)** | Minimal |
 | **Multi-GPU** | Manual / Hard | **Automatic (TP)** | Possible |
-| **Best For** | Prototyping | **Production API** | Local / Mobile |
+| **Best For** | Prototyping ke liye | **Production API ke liye** | Local / Mobile ke liye |
 
 ---
 
 ## 📐 4. Mathematical Intuition
-- **The Memory Utilization Formula:** 
-  Standard systems utilize $\sim 20-40\%$ of KV Cache VRAM. vLLM utilizes **$96\%+$**.
+- **The Memory Utilization Formula:**
+  Standard systems KV Cache VRAM ka lagbhag $\sim 20-40\%$ hi utilize karte hain. vLLM pure **$96\%+$** utilize karta hai.
 - **The Throughput Equation:**
   $$\text{Throughput} \propto \frac{\text{Batch Size}}{\text{Average Latency}}$$
-  By increasing the "Effective Batch Size" using PagedAttention, vLLM increases throughput linearly without hitting the VRAM wall.
+  PagedAttention ka use karke "Effective Batch Size" ko badha kar, vLLM bina VRAM wall ko hit kiye throughput ko linearly badhata hai.
 
 ---
 
@@ -71,16 +71,16 @@ graph TD
 
 ## 💻 6. Production-Ready Examples (Serving with vLLM & Docker)
 ```bash
-# 2026 Pro-Tip: Use Docker to ensure environment consistency.
+# 2026 Pro-Tip: Environment consistency ensure karne ke liye Docker ka use karein.
 
-# 1. Run vLLM with Llama-3-8B in 4-bit AWQ
+# 1. vLLM ko Llama-3-8B 4-bit AWQ ke saath run karein
 docker run --gpus all -p 8000:8000 vllm/vllm-openai:latest \
     --model casperhansen/llama-3-8b-instruct-awq \
     --quantization awq \
     --dtype float16 \
     --max-model-len 4096
 
-# 2. Test with cURL (OpenAI Compatible API)
+# 2. cURL ke saath test karein (OpenAI Compatible API)
 curl http://localhost:8000/v1/chat/completions \
     -H "Content-Type: application/json" \
     -d '{
@@ -92,64 +92,65 @@ curl http://localhost:8000/v1/chat/completions \
 ---
 
 ## ❌ 7. Failure Cases
-- **Over-Subscription:** Trying to handle too many users at once, causing "PagedAttention" to run out of blocks, leading to "Request Dropping."
-- **Unsupported Architecture:** Trying to run a very new model that vLLM hasn't implemented yet. **Fix: Use the 'Auto' model loader.**
-- **GPU Hangs:** Long-running vLLM servers can sometimes "Hang" due to NCCL (Network) issues in multi-GPU setups.
+- **Over-Subscription:** Ek saath bahut saare users ko handle karne ki koshish karna, jisse "PagedAttention" ke blocks khatam ho jate hain aur "Request Dropping" (request drop hone) lagti hai.
+- **Unsupported Architecture:** Ek bilkul naye model ko chalane ki koshish karna jise vLLM ne abhi tak implement na kiya ho. **Fix: 'Auto' model loader ka use karein.**
+- **GPU Hangs:** Multi-GPU setups mein NCCL (Network) issues ki wajah se long-running vLLM servers kabhi-kabhi "Hang" ho sakte hain.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "High latency even with low users."
-- **Check:** **Quantization**. Ensure you are using AWQ or FP8. Full FP16 is much slower for memory-bound tasks.
-- **Symptom:** "Out of Memory (OOM) on startup."
-- **Check:** `--gpu-memory-utilization`. Default is 0.90. If your GPU is also running a UI, set it to 0.70.
+- **Symptom:** "Users kam hone ke baad bhi high latency show hona."
+- **Check:** **Quantization**. Ensure karein ki aap AWQ ya FP8 use kar rahe hain. Memory-bound tasks ke liye full FP16 kafi slow hota hai.
+- **Symptom:** "Startup par Out of Memory (OOM) error aana."
+- **Check:** `--gpu-memory-utilization`. By default ye 0.90 hota hai. Agar aapka GPU UI bhi run kar raha hai, to ise 0.70 set karein.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Throughput vs. Latency:** High batching (Better throughput) can slightly increase the time for the "First Token" (Latency).
-- **vLLM vs. TensorRT-LLM:** 
-  - vLLM is easier and supports more models. 
-  - TensorRT-LLM (NVIDIA) is slightly faster but much harder to setup.
+- **Throughput vs. Latency:** High batching (Better throughput) "First Token" ke time (Latency) ko thoda sa badha sakti hai.
+- **vLLM vs. TensorRT-LLM:**
+  - vLLM aasan hai aur zyada models ko support karta hai.
+  - TensorRT-LLM (NVIDIA) thoda faster hai lekin setup karna kafi mushkil hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Prompt Injection in System Prompt:** If you use a shared system prompt in vLLM, ensure users can't "Escape" it to access other users' data (though vLLM is physically isolated per request).
+- **Prompt Injection in System Prompt:** Agar aap vLLM mein shared system prompt ka use karte hain, to ensure karein ki users dusre users ke data ko access karne ke liye isse "Escape" na kar sakein (halanki vLLM physically har request ke liye isolated hota hai).
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Multi-Node Serving:** vLLM works great on one node (8 GPUs). Running one model across TWO nodes (16 GPUs) is much harder and requires **Ray**.
+- **Multi-Node Serving:** vLLM ek single node (8 GPUs) par bahut achha kaam karta hai. Ek model ko TWO nodes (16 GPUs) par chalana kafi mushkil hai aur iske liye **Ray** ki zaroorat hoti hai.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Cost per Million Tokens:** Using vLLM can reduce your serving cost from **$\$10$** to **$\$0.50$** per million tokens compared to naive serving.
+- **Cost per Million Tokens:** Naive serving ke mukable vLLM ka use karne se aapki serving cost **$\$10$** se ghat kar **$\$0.50$** per million tokens tak aa sakti hai.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use 'Pre-compiled' Kernels:** Ensure you are using the latest vLLM wheel for your CUDA version.
-- **Enable Prefix Caching:** If users ask questions about the same PDF, vLLM will "Cache" the PDF tokens so they are calculated only once.
-- **Use Chat Templates:** Use the built-in Jinja templates to ensure the `[INST]` or `<|user|>` tags are correct.
+- **'Pre-compiled' Kernels ka use karein:** Ensure karein ki aap apne CUDA version ke liye latest vLLM wheel use kar rahe hain.
+- **Prefix Caching Enable karein:** Agar users same PDF ke baare mein sawal puchte hain, to vLLM PDF tokens ko "Cache" kar lega taaki wo sirf ek hi baar calculate hon.
+- **Chat Templates use karein:** `[INST]` ya `<|user|>` tags sahi hain ye ensure karne ke liye built-in Jinja templates ka use karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Running on old GPUs:** vLLM needs Ampere (A100) or newer for best performance.
-- **Ignoring the CPU:** vLLM needs a fast CPU to handle the "Batch Management" logic, even if the math happens on GPU.
+- **Purane GPUs par run karna:** Best performance ke liye vLLM ko Ampere (A100) ya usse naye GPU ki zaroorat hoti hai.
+- **CPU ko ignore karna:** "Batch Management" logic ko handle karne ke liye vLLM ko ek fast CPU ki zaroorat hoti hai, chahe math calculations GPU par hi kyu na ho rahi hon.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is PagedAttention and how does it solve memory fragmentation?"**
-2. **"Difference between Static Batching and Continuous Batching?"**
-3. **"How does vLLM handle multiple users sharing the same context?"**
+1. **"PagedAttention kya hai aur ye memory fragmentation ko kaise solve karta hai?"**
+2. **"Static Batching aur Continuous Batching ke beech kya difference hai?"**
+3. **"vLLM same context share karne wale multiple users ko kaise handle karta hai?"**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **FP8 Serving:** Native support for the H100/B200 FP8 format, doubling the throughput of FP16.
-- **LoRA-on-the-fly:** Serving 100 different "Fine-tuned" models on a single vLLM instance by swapping small LoRA adapters instantly.
-- **Speculative Decoding in vLLM:** Using a tiny "Draft model" inside vLLM to guess tokens for the main model, speeding up the API by $2x$.
+- **FP8 Serving:** H100/B200 FP8 format ka native support, jo FP16 ke mukable throughput ko double kar deta hai.
+- **LoRA-on-the-fly:** Ek single vLLM instance par 100 different "Fine-tuned" models ko dynamically serve karna (chhote LoRA adapters ko aapas mein instantly swap karke).
+- **Speculative Decoding in vLLM:** Main model ke tokens ko guess karne ke liye vLLM ke andar ek chhote "Draft model" ka use karna, jisse API ki speed $2x$ badh jati hai.
+

@@ -1,5 +1,5 @@
 # 📏 LLM Evaluation: Measuring Intelligence
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the art of measuring LLM performance, moving beyond "Vibe Checks" to quantitative metrics, LLM-as-a-Judge, and the 2026 patterns for automated quality control.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** LLM performance measure karne ki art ko master karein, "Vibe Checks" se aage badhkar quantitative metrics, LLM-as-a-Judge, aur automated quality control ke 2026 patterns ko explore karte hue.
 
 ---
 
@@ -20,21 +20,21 @@ AI model kitna "Smart" hai, ye kaise pata chale?
 ---
 
 ## 🧠 2. Deep Technical Explanation
-LLM Evaluation is divided into **Deterministic**, **Heuristic**, and **Model-based** approaches.
+LLM Evaluation ko **Deterministic**, **Heuristic** aur **Model-based** approaches mein divide kiya jata hai.
 
 ### 1. Traditional NLP Metrics:
-- **ROUGE / BLEU:** Measures word overlap between AI answer and "Golden" answer.
-- **Problem:** They are "Semantically Blind." If AI says "I am happy" and Golden is "I am glad," these metrics give a low score even though the meaning is same.
+- **ROUGE / BLEU:** AI answer aur "Golden" answer ke beige word overlap ko measure karte hain.
+- **Problem:** Ye "Semantically Blind" hote hain. Agar AI kehta hai "I am happy" aur Golden answer hai "I am glad," toh ye metrics low score denge, bhale hi dono ka meaning same ho.
 
 ### 2. Semantic Similarity (BERTScore):
-- Uses embeddings to check if the *Meaning* of the answer matches the Golden reference.
+- Embeddings ka use karke ye check karna ki kya answer ka *Meaning* Golden reference ke sath match karta hai.
 
 ### 3. LLM-as-a-Judge (The 2026 Standard):
-- Using a more powerful model (like GPT-4o) to grade the output of a smaller model (like Llama-3-8B).
+- Ek smaller model (jaise Llama-3-8B) ke output ko grade karne ke liye ek zyada powerful model (jaise GPT-4o) ka use karna.
 - **Prompt:** *"Grade this answer on a scale of 1-10 for 'Conciseness' and 'Accuracy'. Use these criteria..."*
 
 ### 4. Behavioral Testing (Evals):
-- Testing for specific edge cases: "Can the model be tricked into giving bomb-making instructions?" (Safety Evals).
+- Specific edge cases ke liye test karna: "Kya model ko trick karke bomb banane ki instructions li ja sakti hain?" (Safety Evals).
 
 ---
 
@@ -50,11 +50,11 @@ LLM Evaluation is divided into **Deterministic**, **Heuristic**, and **Model-bas
 
 ## 📐 4. Mathematical Intuition
 - **The LLM-as-a-Judge Agreement ($Kappa$):**
-  How often does the AI judge agree with a human judge? 
+  AI judge human judge ke sath kitni baar agree karta hai? 
   $$\kappa = \frac{p_o - p_e}{1 - p_e}$$
   - $p_o$: Observed agreement.
-  - $p_e$: Agreement by chance.
-  If $\kappa > 0.8$, your AI judge is as reliable as a human.
+  - $p_e$: Chance-based agreement (random agreement).
+  Agar $\kappa > 0.8$ hai, toh aapka AI judge human ke barabar hi reliable hai.
 
 ---
 
@@ -103,64 +103,64 @@ def test_answer_relevancy():
 ---
 
 ## ❌ 7. Failure Cases
-- **Judge Bias:** The Judge LLM (GPT-4) prefers longer answers even if they are wrong (Verbosity Bias). **Fix: Use strict rubrics and short-form judging.**
-- **Self-Grading Bias:** Using Llama-3 to grade Llama-3. The model will almost always give itself 10/10. **Always use a DIFFERENT, more powerful model as a judge.**
-- **Golden Answer Staleness:** Using a test set from 2023 to grade an AI in 2026. The world has changed!
+- **Judge Bias:** Judge LLM (GPT-4) galat hone par bhi long answers ko prefer karta hai (Verbosity Bias). **Fix: Strict rubrics aur short-form judging ka use karein.**
+- **Self-Grading Bias:** Llama-3 ko grade karne ke liye Llama-3 ka hi use karna. Model aamtaur par khud ko hamesha 10/10 hi grade dega. **Hamesha judge ke roop mein ek ALAG aur zyada powerful model ka use karein.**
+- **Golden Answer Staleness:** 2026 mein AI ko grade karne ke liye 2023 ke test set ka use karna. Dunia badal chuki hai!
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Scores are inconsistent (same answer gets 5/10 then 9/10)."
-- **Check:** **Judge Temperature**. Always set `temperature=0` for the Judge LLM to make it deterministic.
-- **Symptom:** "Low BERTScore but human likes the answer."
-- **Check:** **Creativity**. If your task is creative writing, BERTScore is the wrong metric. Use a "Style-based" LLM judge instead.
+- **Symptom:** "Scores inconsistent hain (same answer ko pehle 5/10 milta hai aur phir 9/10)."
+- **Check:** **Judge Temperature**. Judge LLM ko deterministic banane ke liye hamesha `temperature=0` set karein.
+- **Symptom:** "BERTScore low hai par human ko answer pasand aa raha hai."
+- **Check:** **Creativity**. Agar aapka task creative writing hai, toh BERTScore sahi metric nahi hai. Iske bajaye ek "Style-based" LLM judge ka use karein.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
 - **Human vs. AI Eval:** 
-  - Human is the "Ground Truth" but takes weeks and costs thousands. 
-  - AI Eval is $90\%$ accurate, takes seconds, and costs cents.
-- **Generic vs. Domain-specific:** Using a general judge vs. one trained on "Medical Knowledge."
+  - Human evaluation "Ground Truth" hai par isme weeks lagte hain aur thousands ki cost aati hai.
+  - AI Eval $90\%$ accurate hai, seconds leta hai, aur bahut kam cents mein ho jata hai.
+- **Generic vs. Domain-specific:** Ek general judge ka use karna vs "Medical Knowledge" par trained specific judge ka use karna.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Eval Hijacking:** An attacker can craft an input that makes the *Judge* LLM crash or give a high score to a toxic output.
+- **Eval Hijacking:** Ek attacker aisa input craft kar sakta hai jo *Judge* LLM ko crash kar de ya kisi toxic output ko high score de de.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The 'Infinite' Test Set:** Evaluating a model on 1 Million queries. **Solution: Use 'Batch Evaluation' on a representative sample of 1000 queries.**
+- **The 'Infinite' Test Set:** 1 Million queries par model ko evaluate karna. **Solution: 1000 queries ke ek representative sample par 'Batch Evaluation' ka use karein.**
 
 ---
 
 ## 💸 12. Cost Considerations
-- **The Judge Bill:** Evaluating 100,000 outputs using GPT-4o can cost $\$500+$. **Optimization: Use a smaller, fine-tuned judge model (like Prometheus-7B) for routine evals.**
+- **The Judge Bill:** GPT-4o ka use karke 100,000 outputs ko evaluate karne par $\$500+$ ki cost aa sakti hai. **Optimization: Routine evals ke liye ek smaller, fine-tuned judge model (jaise Prometheus-7B) ka use karein.**
 
 ---
 
 ## ✅ 13. Best Practices
-- **Never trust a single metric:** Use a combination of Relevancy, Faithfulness, and Conciseness.
-- **Version your Evaluation Sets:** Just like code, your "Golden Answers" should be in Git.
-- **Blind Tests:** Occasionally, give a human judge two answers (one from AI-1 and one from AI-2) without telling them which is which.
+- **Never trust a single metric:** Relevancy, Faithfulness, aur Conciseness ke beige ke combination ka use karein.
+- **Version your Evaluation Sets:** Code ki tarah hi aapke "Golden Answers" should be in Git.
+- **Blind Tests:** Optionally, give a human judge two answers (one from AI-1 and one from AI-2) without telling them which is which.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Evaluating on the Training Set:** The model has already seen the answers. This is "Cheating" and shows fake high accuracy.
-- **Ignoring Hallucinations:** Checking for "Grammar" but not for "Truth."
+- **Evaluating on the Training Set:** Model pehle hi answers dekh chuka hai. This is "Cheating" and shows fake high accuracy.
+- **Ignoring Hallucinations:** "Grammar" toh check karna par "Truth" (sachai) check na karna.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is 'LLM-as-a-Judge' and what are its limitations?"**
-2. **"Why are BLEU and ROUGE scores becoming less relevant for LLMs?"**
-3. **"Explain the concept of 'Faithfulness' in RAG evaluation."**
+1. **" 'LLM-as-a-Judge' kya hai aur iski kya limitations hain?"**
+2. **"BLEU aur ROUGE scores LLMs ke liye kyu kam relevant hote ja rahe hain?"**
+3. **"RAG evaluation mein 'Faithfulness' ke concept ko explain karein."**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **LLM-in-the-loop CI/CD:** Your code only merges into 'main' if the AI Judge gives it a passing score on the latest evaluation set.
-- **Reference-less Evaluation:** New models that can judge an answer's quality *without* needing a Golden Answer (just using internal logic).
-- **Adversarial Evaluation:** Using an AI "Attacker" model to find the weaknesses in your "Assistant" model automatically.
+- **LLM-in-the-loop CI/CD:** Aapka code 'main' branch mein tabhi merge hota hai jab AI Judge use latest evaluation set par passing score de deta hai.
+- **Reference-less Evaluation:** Naye models jo bina kisi Golden Answer ki need ke answer ki quality ko judge kar sakte hain (sirf internal logic ka use karke).
+- **Adversarial Evaluation:** Apne "Assistant" model ki weaknesses ko automatically find karne ke liye ek AI "Attacker" model ka use karna.

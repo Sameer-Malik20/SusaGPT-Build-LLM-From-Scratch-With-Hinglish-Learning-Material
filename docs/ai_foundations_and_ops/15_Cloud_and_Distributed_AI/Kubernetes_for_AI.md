@@ -1,5 +1,5 @@
 # ☸️ Kubernetes for AI: Orchestrating the GPU Cluster
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the use of Kubernetes (K8s) for managing AI workloads, exploring GPU scheduling, Operator patterns, and the 2026 strategies for building scalable, resilient AI platforms.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** AI workloads ko manage karne ke liye Kubernetes (K8s) ke use ko master karein, GPU scheduling, Operator patterns, aur 2026 mein scalable, resilient AI platforms build karne ki strategies ko explore karte hue.
 
 ---
 
@@ -19,39 +19,39 @@ Maan lo aapke paas 50 GPUs hain aur 10 engineers jo unhe use karna chahte hain.
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Kubernetes is the de-facto standard for managing containerized AI applications.
+Kubernetes containerized AI applications ko manage karne ke liye de-facto standard hai.
 
 ### 1. GPU Scheduling:
-- Kubernetes doesn't see GPUs by default. You need the **NVIDIA Device Plugin** to expose GPUs as "Resources" (e.g., `nvidia.com/gpu: 1`).
-- **Fractional GPUs:** In 2026, we use **MIG (Multi-Instance GPU)** or **Time-slicing** to share one big H100 between 7 small AI tasks.
+- Kubernetes default roop se GPUs ko nahi dekh pata. GPUs ko "Resources" (jaise `nvidia.com/gpu: 1`) ke tarah expose karne ke liye aapko **NVIDIA Device Plugin** ki zaroorat hoti hai.
+- **Fractional GPUs:** 2026 mein, hum ek bade H100 ko 7 small AI tasks ke beech share karne ke liye **MIG (Multi-Instance GPU)** ya **Time-slicing** ka use karte hain.
 
 ### 2. Operators (The AI Logic):
-- Standard K8s doesn't understand "Distributed Training." We use **Kubeflow Training Operator.**
-- It handles the complex setup of "Master" and "Worker" pods and ensures they can talk to each other.
+- Standard K8s "Distributed Training" ko nahi samajhta. Hum **Kubeflow Training Operator** ka use karte hain.
+- Yeh "Master" aur "Worker" pods ke complex setup ko handle karta hai aur ensure karta hai ki woh ek dusre se baat kar sakein.
 
 ### 3. Storage for AI:
-- GPUs need data FAST. We use **Persistent Volumes (PV)** backed by high-speed storage like **Amazon FSx for Lustre** or **WEKA**, which can feed TBs of data to GPUs without bottlenecking.
+- GPUs ko data FAST chahiye hota hai. Hum **Persistent Volumes (PV)** ka use karte hain jo **Amazon FSx for Lustre** ya **WEKA** jaise high-speed storage se backed hote hain, jo bina kisi bottleneck ke GPUs ko TBs of data feed kar sakte hain.
 
 ### 4. Auto-scaling (Karpenter / HPA):
-- Automatically adding new GPU nodes when the "Queue" is long, and deleting them when they are idle to save money.
+- Jab "Queue" lambi ho toh automatically naye GPU nodes ko add karna, aur paise bachane ke liye jab woh idle hon toh unhe delete karna.
 
 ---
 
 ## 🏗️ 3. K8s vs. Bare Metal for AI
 | Feature | Kubernetes | Bare Metal (Raw SSH) |
 | :--- | :--- | :--- |
-| **Scalability** | **Infinite (Auto)** | Manual |
+| **Scalability** | **Infinite (Auto)** | Manual (Khud se) |
 | **Fault Tolerance** | **Self-healing** | Manual restart |
 | **GPU Utilization** | High (Multi-tenancy) | Low (Static allocation) |
-| **Setup Complexity** | High | Low |
+| **Setup Complexity** | High (Mushkil) | Low (Aasan) |
 | **Best For** | Production / Teams | Research / Prototypes |
 
 ---
 
 ## 📐 4. Mathematical Intuition
 - **The Resource Requests vs. Limits:** 
-  In K8s, if you set `request: 4 GPUs` but `limit: 8 GPUs`, K8s will guarantee you 4 but "Burst" you to 8 if the cluster is empty. 
-  For AI training, always set **Request = Limit** to avoid the model being "Throttled" in the middle of a gradient step.
+  K8s mein, agar aap `request: 4 GPUs` set karte hain aur `limit: 8 GPUs`, toh K8s aapko 4 ki guarantee dega par cluster khali hone par aapko 8 tak "Burst" karne dega. 
+  AI training ke liye, hamesha **Request = Limit** set karein taaki model gradient step ke beech mein "Throttled" (slow/stop) na ho.
 
 ---
 
@@ -67,9 +67,9 @@ graph TD
     N3[Node 3: CPU Only]
     end
     
-    Scheduler -- "Deploy Training Pod" --> N1
-    Scheduler -- "Deploy Inference Pod" --> N2
-    Scheduler -- "Deploy Data Processor" --> N3
+    Scheduler -- "Training Pod Deploy karna" --> N1
+    Scheduler -- "Inference Pod Deploy karna" --> N2
+    Scheduler -- "Data Processor Deploy karna" --> N3
     
     N1 & N2 --> Store[Shared High-speed Storage: NVMe]
 ```
@@ -78,7 +78,7 @@ graph TD
 
 ## 💻 6. Production-Ready Examples (A GPU Pod Manifest)
 ```yaml
-# 2026 Pro-Tip: Always specify your GPU requirements clearly.
+# 2026 Pro-Tip: Hamesha apne GPU requirements ko saaf-saaf specify karein.
 
 apiVersion: v1
 kind: Pod
@@ -91,7 +91,7 @@ spec:
     command: ["python", "train.py"]
     resources:
       limits:
-        nvidia.com/gpu: 1 # Requesting 1 GPU
+        nvidia.com/gpu: 1 # 1 GPU request kar rahe hain
         memory: "32Gi"
         cpu: "8"
     volumeMounts:
@@ -106,63 +106,63 @@ spec:
 ---
 
 ## ❌ 7. Failure Cases
-- **OOM (Out of Memory):** The Pod is killed because it used more System RAM than allowed. Note: This is different from GPU VRAM OOM.
-- **Image Pull Backoff:** Your AI Docker image is 20GB. K8s times out while trying to download it over a slow network. **Fix: Use 'Image Caching' on nodes.**
-- **GPU Fragmentation:** You have 2 GPUs free on Node A and 2 on Node B. A user asks for 4 GPUs. K8s can't fulfill it because they aren't on the "Same Node" (Needs NVLink). **Fix: Use 'Topology-aware scheduling'.**
+- **OOM (Out of Memory):** Pod isliye kill ho jata hai kyunki usne allowed limit se zyada System RAM use kar liya. Note: Yeh GPU VRAM OOM se alag hai.
+- **Image Pull Backoff:** Aapki AI Docker image 20GB ki hai. Slow network par ise download karne ki koshish mein K8s timeout ho jata hai. **Fix: Nodes par 'Image Caching' ka use karein.**
+- **GPU Fragmentation:** Aapke paas Node A par 2 GPUs aur Node B par 2 GPUs free hain. Ek user 4 GPUs maangta hai. K8s ise fulfill nahi kar sakta kyunki woh "Same Node" par nahi hain (jiske liye NVLink chahiye). **Fix: 'Topology-aware scheduling' ka use karein.**
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Pod is stuck in 'Pending' state."
-- **Check:** `kubectl describe pod`. Usually, it's because there are "No nodes with available GPUs."
-- **Symptom:** "GPU not found inside the container."
-- **Check:** **NVIDIA Runtime**. Is the Docker runtime set to `nvidia` on the host? Run `nvidia-smi` inside the pod to verify.
+- **Symptom:** "Pod 'Pending' state mein stuck (atkaa) hai."
+- **Check:** `kubectl describe pod` karein. Aamtaur par aisa isliye hota hai kyunki "No nodes with available GPUs" (koi free GPU node nahi hai).
+- **Symptom:** "Container ke andar GPU nahi mil raha."
+- **Check:** **NVIDIA Runtime**. Kya host par Docker runtime `nvidia` set hai? Verify karne ke liye pod ke andar `nvidia-smi` run karein.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
 - **Managed K8s (EKS/GKE) vs. Custom:** 
-  - Managed is easier but expensive and has "Older" GPU drivers. 
-  - Custom (Kubespray) lets you use the latest H100 features but is a "Nightmare" to maintain.
+  - Managed aasan hai par expensive hota hai aur isme "Older" GPU drivers hote hain. 
+  - Custom (Kubespray) aapko latest H100 features use karne deta hai par isko maintain karna ek "Nightmare" (sapna/musibat) hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Container Escape:** A malicious AI job breaking out of its container and accessing the host's physical GPU or other users' data. **Use 'Runtime Security' (Falco/Tetragon).**
+- **Container Escape:** Ek malicious AI job ka apne container se bahar nikal kar host ke physical GPU ya dusre users ke data ko access karna. **'Runtime Security' (Falco/Tetragon) ka use karein.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The 'Join' Latency:** Adding a new node to a 1000-node cluster can take 5 minutes. In 2026, we use **'Pre-warmed' nodes** to scale in seconds.
+- **The 'Join' Latency:** Ek 1000-node waale cluster mein naya node add karne mein 5 minutes lag sakte hain. 2026 mein, hum seconds mein scale karne ke liye **'Pre-warmed' nodes** ka use karte hain.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Inter-node Data Fees:** K8s might put your "Data Pod" in one zone and "GPU Pod" in another. **Use 'Affinity Rules' to keep them together.**
+- **Inter-node Data Fees:** K8s aapke "Data Pod" ko ek zone mein aur "GPU Pod" ko dusre zone mein rakh sakta hai. **Dono ko saath rakhne ke liye 'Affinity Rules' ka use karein.**
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use 'Taints and Tolerations':** Only allow AI jobs on GPU nodes and keep "Web Apps" on cheap CPU nodes.
-- **Implement 'Quotas':** Don't let one engineer "Steal" all 50 GPUs. Set a limit of 4 per person.
-- **Use Helm Charts:** For deploying complex AI apps (like Kubeflow) with one command.
+- **'Taints and Tolerations' use karein:** GPU nodes par sirf AI jobs ko hi allow karein aur "Web Apps" ko cheap CPU nodes par rakhein.
+- **'Quotas' implement karein:** Kisi ek engineer ko saare 50 GPUs "Steal" (kabza) mat karne dein. Per person 4 ki limit set karein.
+- **Helm Charts use karein:** Ek single command se complex AI apps (jaise Kubeflow) deploy karne ke liye.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **No health checks:** A GPU pod "Hangs" but K8s thinks it's fine. **Use 'Liveness Probes' to check if the AI is still responding.**
-- **Storing weights inside the container:** When the pod restarts, your 10-hour training is GONE. **Always use 'Persistent Volumes'.**
+- **No health checks:** Ek GPU pod "Hang" ho jata hai par K8s ko lagta hai ki sab sahi hai. **AI abhi bhi respond kar raha hai ya nahi, yeh check karne ke liye 'Liveness Probes' ka use karein.**
+- **Weights ko container ke andar store karna:** Jab pod restart hota hai, toh aapki 10-hour ki training GONE (gayab) ho jati hai. **Hamesha 'Persistent Volumes' ka use karein.**
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"How does Kubernetes manage GPU resources using the NVIDIA Device Plugin?"**
-2. **"What is the difference between a Deployment and a Job in K8s for AI?"**
-3. **"Explain 'Topology-aware scheduling' for multi-GPU training."**
+1. **"Kubernetes NVIDIA Device Plugin ka use karke GPU resources ko kaise manage karta hai?"**
+2. **"AI ke liye K8s mein Deployment aur Job ke beech kya difference hai?"**
+3. **"Multi-GPU training ke liye 'Topology-aware scheduling' ko explain karein."**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Kueue:** A new K8s-native job queueing system that handles "Job Priorities" (e.g., *"Finish the CEO's task before the intern's"*).
-- **WebAssembly (Wasm) for AI:** Running small AI models in Wasm containers instead of Docker for $10x$ faster startup.
-- **Serverless GPUs on K8s:** Using tools like **KEDA** to scale GPU pods down to ZERO when there are no requests, saving thousands of dollars.
+- **Kueue:** Ek naya K8s-native job queueing system jo "Job Priorities" ko handle karta hai (jaise, *"CEO ka task pehle finish karo aur intern ka baad mein"*).
+- **WebAssembly (Wasm) for AI:** Docker ki jagah Wasm containers mein small AI models chalana taaki startup speed $10x$ faster ho sake.
+- **Serverless GPUs on K8s:** KEDA jaise tools ka use karke GPU pods ko ZERO tak scale down karna jab koi request na ho, jisse hazaron dollars bachte hain.

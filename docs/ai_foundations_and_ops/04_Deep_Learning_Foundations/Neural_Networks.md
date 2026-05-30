@@ -1,5 +1,5 @@
 # 🧠 Neural Networks Basics: The Architecture of Artificial Brains
-> **Level:** Beginner | **Language:** Hinglish | **Goal:** Master the fundamental components of Neural Networks, including Perceptrons, Multi-Layer Perceptrons (MLP), and the flow of information through weights and biases.
+> **Level:** Beginner | **Language:** Hinglish | **Goal:** Neural Networks ke fundamental components ko master karein, jisme Perceptrons, Multi-Layer Perceptrons (MLP), aur weights aur biases ke through information flow shamil hain.
 
 ---
 
@@ -19,36 +19,36 @@ Ek Neural Network hazaaron aise "Faisle lene wale neurons" ka ek jaal (Network) 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-A Neural Network is a series of algorithms that endeavors to recognize underlying relationships in a set of data through a process that mimics the way the human brain operates. 
+Ek Neural Network algorithms ki ek aisi series hai jo data ke set me underlying relationships ko recognize karne ki koshish karti hai, ek aisi process ke through jo human brain ke kaam karne ke tarike ko mimic karti hai.
 
-### Key Components:
-1. **The Perceptron:** The simplest unit. It takes $n$ inputs, multiplies them by weights $w$, adds a bias $b$, and passes the sum through an **Activation Function** $\sigma$.
+### Key Components (Main Hisse):
+1. **The Perceptron:** Sabse simple unit. Ye $n$ inputs leta hai, unhe weights $w$ se multiply karta hai, ek bias $b$ add karta hai, aur sum ko ek **Activation Function** $\sigma$ se pass karta hai.
    $$y = \sigma(\sum_{i=1}^{n} w_i x_i + b)$$
 2. **Layers:**
-   - **Input Layer:** Receives the raw features.
-   - **Hidden Layers:** Where the "Learning" happens. Each layer extracts more abstract features (e.g., edges $\to$ shapes $\to$ eyes).
-   - **Output Layer:** Provides the final prediction (Probability of a class or a continuous value).
-3. **Forward Propagation:** The process of moving data from Input to Output to get a prediction.
-4. **Weights ($W$):** The strength of the connection between neurons. These are what the model "learns."
-5. **Biases ($b$):** Allows the activation function to be shifted left or right, helping the model fit data that doesn't pass through the origin.
+   - **Input Layer:** Raw features ko receive karta hai.
+   - **Hidden Layers:** Jahan "Learning" hoti hai. Har layer aur bhi abstract features ko extract karti hai (e.g., edges $\to$ shapes $\to$ eyes).
+   - **Output Layer:** Final prediction provide karta hai (kisi class ki Probability ya continuous value).
+3. **Forward Propagation:** Prediction paane ke liye Input se Output tak data ko move karne ki process.
+4. **Weights ($W$):** Neurons ke beech ke connection ki strength. Ye wahi parameters hain jinhe model "learn" karta hai.
+5. **Biases ($b$):** Ye activation function ko left ya right shift karne ki permission deta hai, jisse model ko us data ko fit karne me help milti hai jo origin se pass nahi hota.
 
 ---
 
 ## 🏗️ 3. The Anatomy of a Neuron
-| Component | Biological Analog | Mathematical Role |
+| Component | Biological Analog | Mathematical Role (Ganitye Bhumika) |
 | :--- | :--- | :--- |
-| **Inputs ($x$)** | Dendrites | Feature values from data |
-| **Weights ($w$)** | Synapse Strength | Importance of each feature |
-| **Bias ($b$)** | Threshold | Shifting the activation point |
-| **Summation ($\sum$)** | Cell Body | Accumulating signals |
-| **Activation ($\sigma$)** | Axon Fire | Deciding if the neuron "fires" |
+| **Inputs ($x$)** | Dendrites | Data se feature values lena |
+| **Weights ($w$)** | Synapse Strength | Har feature ki importance |
+| **Bias ($b$)** | Threshold | Activation point ko shift karna |
+| **Summation ($\sum$)** | Cell Body | Signals ko accumulate karna |
+| **Activation ($\sigma$)** | Axon Fire | Ye decide karna ki neuron "fire" hoga ya nahi |
 
 ---
 
 ## 📐 4. Mathematical Intuition
-A Neural Network is a **Universal Function Approximator**.
-- If you have enough neurons and at least one hidden layer with a non-linear activation function, you can approximate ANY continuous function.
-- **Why Non-Linearity?** If we didn't use activation functions (like ReLU), multiple layers would just collapse into a single linear regression ($W_2(W_1x) = W_{combined}x$). Non-linearity is what gives the network "Depth" and intelligence.
+Ek Neural Network ek **Universal Function Approximator** hai.
+- Agar aapke paas enough neurons hain aur at least ek hidden layer hai jisme non-linear activation function ho, toh aap KISI bhi continuous function ko approximate kar sakte hain.
+- **Why Non-Linearity?** Agar hum activation functions (jaise ReLU) ka use na karein, toh multiple layers collapse hokar ek single linear regression ($W_2(W_1x) = W_{combined}x$) ban jayengi. Non-linearity hi network ko "Depth" aur intelligence deti hai.
 
 ---
 
@@ -72,14 +72,14 @@ graph LR
 
 ## 💻 6. Production-Ready Examples (Manual NN in PyTorch)
 ```python
-# 2026 Pro-Tip: Understanding the low-level structure of a Neural Net.
+# 2026 Pro-Tip: Neural Net ki low-level structure ko samajhna.
 import torch
 import torch.nn as nn
 
 class SimpleNN(nn.Module):
     def __init__(self, input_dim, hidden_dim, output_dim):
         super(SimpleNN, self).__init__()
-        # 1. Defining the layers
+        # 1. Layers ko define karna
         self.layer1 = nn.Linear(input_dim, hidden_dim) # Matrix: [input x hidden]
         self.relu = nn.ReLU()                          # Non-linearity
         self.layer2 = nn.Linear(hidden_dim, output_dim) # Matrix: [hidden x output]
@@ -101,66 +101,66 @@ print(f"Prediction: {prediction.item()}")
 ---
 
 ## ❌ 7. Failure Cases
-- **Dead Neurons:** If you use ReLU and the weights become such that the input is always negative, the neuron will always output $0$ and never learn (Gradient is $0$). **Fix:** Use **Leaky ReLU**.
-- **Symmetry Breaking Failure:** If you initialize all weights to $0$, all neurons in a layer will learn the exact same thing. They become redundant. **Fix:** Use **Random Initialization**.
-- **Vanishing Gradients:** In very deep networks, the signal "dies out" before reaching the first layers.
+- **Dead Neurons:** Agar aap ReLU ka use karte hain aur weights aise ho jate hain ki input hamesha negative rahe, toh neuron hamesha $0$ output karega aur kabhi seekh nahi payega (Gradient $0$ ho jata hai). **Fix:** **Leaky ReLU** ka use karein.
+- **Symmetry Breaking Failure:** Agar aap saare weights ko $0$ initialize kar dete hain, toh ek layer ke saare neurons bilkul same cheez seekhenge. Wo redundant ho jayenge. **Fix:** **Random Initialization** ka use karein.
+- **Vanishing Gradients:** Bahut deep networks me, signal pehli layers tak pahunchne se pehle hi "die out" (gayab) ho jata hai.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** Model loss is not decreasing.
-- **Check:** **Normalization**. Are your inputs scaled between 0 and 1? Neural nets hate large numbers ($>100$).
-- **Check:** **Learning Rate**. If it's too high, the weights will "explode" and become `NaN`.
-- **Check:** **Activation Function**. Are you using Sigmoid in the hidden layers? (Don't do it in 2026).
+- **Symptom:** Model loss decrease nahi ho raha hai.
+- **Check:** **Normalization**. Kya aapke inputs 0 aur 1 ke beech scaled hain? Neural nets ko bade numbers ($>100$) pasand nahi hote.
+- **Check:** **Learning Rate**. Agar ye bahut high hai, toh weights "explode" ho jayenge aur `NaN` ban jayenge.
+- **Check:** **Activation Function**. Kya aap hidden layers me Sigmoid ka use kar rahe hain? (2026 me aisa bilkul mat karein).
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Width vs. Depth:** A "Wide" network (many neurons per layer) can memorize data faster. A "Deep" network (many layers) can understand more complex relationships (like reasoning or logic).
-- **Inference Latency:** Every extra layer adds milliseconds to the response time. For real-time AI, we prefer "Shallow but Smart" networks.
+- **Width vs. Depth:** Ek \"Wide\" network (ek layer me kai neurons) data ko fast memorize kar sakta hai. Ek \"Deep\" network (kai layers) aur bhi complex relationships (jaise reasoning ya logic) ko samajh sakta hai.
+- **Inference Latency:** Har extra layer response time me milliseconds add karti hai. Real-time AI ke liye, hum \"Shallow but Smart\" networks prefer karte hain.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Weight Extraction:** An attacker can observe the outputs of your model to "Guess" the internal weights, effectively stealing your intellectual property.
-- **Model Poisoning:** Changing the input slightly (noise) can make a neuron misfire, leading to a wrong classification (Adversarial attack).
+- **Weight Extraction:** Attacker aapke model ke outputs ko observe karke internal weights ko \"Guess\" kar sakta hai, jisse wo aapki intellectual property ko chura sakta hai.
+- **Model Poisoning:** Input me thoda sa change (noise) karne se neuron misfire ho sakta hai, jisse wrong classification ho sakti hai (Adversarial attack).
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **VRAM Management:** A model with 100 million parameters needs about 400MB of GPU memory just for the weights. A 70B model needs $140GB+$.
-- **Distributed Weights:** How to split a single neural network across 8 GPUs so they can work together? Use **Model Parallelism**.
+- **VRAM Management:** 100 million parameters ke model ko weights ke liye lagbhag 400MB GPU memory ki need hoti hai. Ek 70B model ko $140GB+$ ki need hoti hai.
+- **Distributed Weights:** Kaise ek single neural network ko 8 GPUs me split karein taaki wo ek sath kaam kar sakein? **Model Parallelism** ka use karein.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Floating Point Precision:** Training in `float32` is $2x$ more expensive than `float16`. 2026 standards use `bfloat16` for the best balance of cost and accuracy.
-- **Parameter Efficiency:** Using techniques like **LoRA** or **Pruning** to reduce the number of active neurons, saving $\$1,000s$ in compute.
+- **Floating Point Precision:** `float32` me train karna `float16` se $2x$ zyada expensive hai. 2026 standards me cost aur accuracy ke best balance ke liye `bfloat16` ka use kiya jata hai.
+- **Parameter Efficiency:** Active neurons ke number ko reduce karne ke liye **LoRA** ya **Pruning** jaise techniques ka use karna, jisse compute me thousands of dollars ($\$1,000s$) save hote hain.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use ReLU/GeLU:** The standard for hidden layers in 2026.
-- **Batch Normalization:** Add it after every linear layer to keep the math "Stable" and training fast.
-- **He Initialization:** Use specialized random initialization for weights to ensure they don't start too large or too small.
+- **Use ReLU/GeLU:** 2026 me hidden layers ke liye standard.
+- **Batch Normalization:** Math ko "Stable" rakhne aur training ko fast karne ke liye ise har linear layer ke baad add karein.
+- **He Initialization:** Weights ke liye specialized random initialization ka use karein taaki ensure ho sake ki wo bahut bade ya bahut chote start na hon.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Sigmoid for Hidden Layers:** Leads to vanishing gradients.
-- **No Non-Linearity:** Forgetting the activation function between layers.
-- **Not zeroing Gradients:** PyTorch accumulates gradients by default.
+- **Sigmoid for Hidden Layers:** Isse vanishing gradients ki problem hoti hai.
+- **No Non-Linearity:** Layers ke beech activation function lagana bhool jana.
+- **Not zeroing Gradients:** PyTorch by default gradients ko accumulate karta hai.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"Why can't we use Linear Activation functions for hidden layers?"** (Because they collapse into a single layer).
-2. **"What is the difference between a Weight and a Bias?"**
-3. **"What happens if you initialize all weights to the same value?"** (Symmetry problem; neurons learn identically).
+1. **"Hum hidden layers ke liye Linear Activation functions kyun use nahi kar sakte?"** (Kyunki wo collapse hokar ek single layer ban jate hain).
+2. **"Weight aur Bias me kya difference hai?"**
+3. **"Agar aap saare weights ko same value se initialize kar dein toh kya hoga?"** (Symmetry problem; neurons identical cheezein seekhne lagte hain).
 
 ---
 
-## 🚀 15. Latest 2026 Industry Patterns
+## 🚀 16. Latest 2026 Industry Patterns
 - **Liquid Neural Networks:** Neurons that can change their "time constants" dynamically, allowing them to adapt to new data much faster than traditional NNs.
 - **KAN (Kolmogorov-Arnold Networks):** A new alternative to MLPs where the "Activation Function" is on the connection (Weight) itself, not the neuron, potentially making them $10x$ more efficient.
 - **Spiking Neural Networks (SNN):** Hardware-specific networks that only consume energy when a neuron "fires," mimicking the brain's energy efficiency for mobile AI.

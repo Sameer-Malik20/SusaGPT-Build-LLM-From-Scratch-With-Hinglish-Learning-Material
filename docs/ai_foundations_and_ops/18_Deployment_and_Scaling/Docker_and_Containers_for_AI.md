@@ -1,5 +1,5 @@
 # 🐳 Docker & Containers for AI: Packaging Intelligence
-> **Level:** Intermediate | **Language:** Hinglish | **Goal:** Master the use of Docker for AI development, exploring NVIDIA Container Runtime, Dockerfile optimization for GPUs, and the 2026 strategies for building portable, repeatable AI environments.
+> **Level:** Intermediate | **Language:** Hinglish | **Goal:** AI development ke liye Docker ke use ko master karein, NVIDIA Container Runtime, GPUs ke liye Dockerfile optimization, aur 2026 mein portable, repeatable AI environments build karne ki strategies ko explore karte hue.
 
 ---
 
@@ -19,44 +19,44 @@ In 2026, **"Containerization"** ke bina AI deploy karna unprofessional mana jata
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Docker for AI is specialized because it needs to access the **Physical Hardware (GPU)** from inside the "Virtual" container.
+AI ke liye Docker specialized hota hai kyunki ise "Virtual" container ke andar se **Physical Hardware (GPU)** ko access karne ki zaroorat hoti hai.
 
 ### 1. NVIDIA Container Toolkit (nvidia-docker):
-- Standard Docker cannot see the GPU. 
-- You must install the `nvidia-container-toolkit` which acts as a "Bridge."
-- It allows the container to use the **GPU Drivers** installed on the host machine.
+- Standard Docker GPU ko nahi dekh sakta. 
+- Aapko `nvidia-container-toolkit` install karna hoga jo ek "Bridge" (pul) ki tarah kaam karta hai.
+- Yeh container ko host machine par installed **GPU Drivers** use karne ki permission deta hai.
 
 ### 2. The Base Image Strategy:
-- Never start from a "Raw" Ubuntu image.
-- **Always use:** `nvidia/cuda:12.1.0-base-ubuntu22.04` or `pytorch/pytorch:2.2.0-cuda12.1-cudnn8-runtime`.
-- These images already have the complex CUDA and CUDNN libraries pre-installed.
+- Kabhi bhi ek "Raw" (sade/khali) Ubuntu image se start na karein.
+- **Hamesha use karein:** `nvidia/cuda:12.1.0-base-ubuntu22.04` ya `pytorch/pytorch:2.2.0-cuda12.1-cudnn8-runtime`.
+- In images mein complex CUDA aur CUDNN libraries pehle se hi pre-installed hoti hain.
 
 ### 3. Layer Caching (The 'Fast Build' Trick):
-- Docker builds images in "Layers."
-- **Pro-Tip:** Copy your `requirements.txt` and run `pip install` BEFORE copying your source code. 
-- This way, if you change 1 line of code, Docker doesn't re-install all the libraries (saving you 10 minutes).
+- Docker images ko "Layers" mein build karta hai.
+- **Pro-Tip:** Apne source code ko copy karne se PEHLE `requirements.txt` copy karein aur `pip install` run karein. 
+- Is tarah, agar aap code ki 1 line bhi change karte hain, toh Docker saari libraries ko dobara install nahi karega (jisse aapke 10 minutes bachenge).
 
 ### 4. Multi-Stage Builds:
-- Using a "Heavy" image with compilers to build the code, and then copying the final "Binary" to a "Lightweight" image for production. This reduces image size from 10GB to 2GB.
+- Code build karne ke liye compilers ke sath ek "Heavy" image ka use karna, aur fir production ke liye final "Binary" ko ek "Lightweight" image mein copy karna. Yeh image size ko 10GB se reduce karke 2GB kar deta hai.
 
 ---
 
 ## 🏗️ 3. Container vs. Virtual Machine (VM) for AI
 | Feature | Docker Container | Virtual Machine (VM) |
 | :--- | :--- | :--- |
-| **Speed** | **Instant Startup** | Slow Boot (Minutes) |
+| **Speed** | **Instant Startup (Fauran)** | Slow Boot (Minutes) |
 | **Size** | Small (MBs/GBs) | Large (10s of GBs) |
-| **GPU Access** | **Direct (via Driver)** | Complex Passthrough |
+| **GPU Access** | **Direct (via Driver)** | Complex Passthrough (Mushkil) |
 | **Isolation** | Process-level | Full OS-level |
-| **Portability** | **Extreme** | Moderate |
+| **Portability** | **Extreme (Bahut zyada)** | Moderate |
 
 ---
 
 ## 📐 4. Mathematical Intuition
 - **Storage Footprint:** 
-  If you have 10 AI containers using the same base image (`pytorch/pytorch`), Docker only stores that base image ONCE on the disk. 
+  Agar aapke paas same base image (`pytorch/pytorch`) use karne wale 10 AI containers hain, toh Docker us base image ko disk par sirf EK hi baar store karta hai. 
   $$\text{Total Storage} = \text{Base Image Size} + \sum (\text{Layer Changes}_i)$$
-  This is why shared base images are the key to scaling AI infrastructure in 2026.
+  Yahi wajah hai ki 2026 mein shared base images AI infrastructure ko scale karne ki key (chaabi) hain.
 
 ---
 
@@ -84,98 +84,97 @@ graph TD
 
 ## 💻 6. Production-Ready Examples (A High-Fidelity AI Dockerfile)
 ```dockerfile
-# 2026 Pro-Tip: Use 'Runtime' images for production, not 'Devel' images.
+# 2026 Pro-Tip: Production ke liye 'Runtime' images ka use karein, 'Devel' images ka nahi.
 
-# 1. Use the official PyTorch base image
+# 1. Official PyTorch base image ka use karein
 FROM pytorch/pytorch:2.2.1-cuda12.1-cudnn8-runtime
 
-# 2. Set environment variables to avoid 'Interaction' prompts
+# 2. 'Interaction' prompts se bachne ke liye environment variables set karein
 ENV DEBIAN_FRONTEND=noninteractive
 
-# 3. Install system dependencies
+# 3. System dependencies install karein
 RUN apt-get update && apt-get install -y \
     git \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# 4. Copy requirements and install (Better Caching)
+# 4. Requirements copy karein aur install karein (Better Caching)
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 5. Copy the rest of the code
+# 5. Baaki ka code copy karein
 COPY . .
 
-# 6. Expose the port for the API (vLLM / FastAPI)
+# 6. API (vLLM / FastAPI) ke liye port expose karein
 EXPOSE 8000
 
-# 7. Start the server
+# 7. Server start karein
 CMD ["python", "serve.py", "--host", "0.0.0.0"]
 ```
 
 ---
 
 ## ❌ 7. Failure Cases
-- **Driver Version Mismatch:** Your Docker image was built for CUDA 12, but the server only has NVIDIA Driver v450 (which only supports CUDA 11). **Result: `CUDA error: no CUDA-capable device is detected`.**
-- **Huge Images:** Creating a 30GB image because you accidentally included the whole "Dataset" inside the image. **Fix: Use `.dockerignore` to exclude datasets.**
-- **Permissions:** Your container runs as `root`, but the mounted dataset folder is owned by another user. The AI can't read the data.
+- **Driver Version Mismatch:** Aapki Docker image CUDA 12 ke liye build ki gayi thi, par server par sirf NVIDIA Driver v450 hai (jo sirf CUDA 11 ko support karta hai). **Result: `CUDA error: no CUDA-capable device is detected`.**
+- **Huge Images:** Galti se image ke andar pura "Dataset" include kar dene ki wajah se 30GB ki image banna. **Fix: Datasets ko exclude karne ke liye `.dockerignore` ka use karein.**
+- **Permissions:** Aapka container `root` ke roop mein chalta hai, par mounted dataset folder ka owner koi dusra user hai. AI data ko read nahi kar sakta.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Docker is running, but `nvidia-smi` inside shows nothing."
-- **Check:** **Runtime Flag**. Are you running with `--gpus all`? 
-  `docker run --gpus all my-ai-image nvidia-smi`
-- **Symptom:** "No space left on device."
-- **Check:** **Docker Prune**. AI images are huge. Old images can quickly fill up your disk. Run `docker system prune -a`.
+- **Symptom:** "Docker chal raha hai, par andar `nvidia-smi` kuch nahi dikha raha."
+- **Check:** **Runtime Flag**. Kya aap `--gpus all` ke sath run kar rahe hain?
+- **Symptom:** "Device par koi space nahi bacha (No space left on device)."
+- **Check:** **Docker Prune**. AI images bahut badi hoti hain. Old images jaldi hi aapke disk ko bhar sakti hain. `docker system prune -a` run karein.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
 - **Base Image size vs. Features:** 
-  - `nvidia/cuda:base`: Small (100MB) but has nothing. 
-  - `nvidia/cuda:devel`: Large (3GB) but has everything needed for compiling.
-- **Docker vs. Apptainer (Singularity):** For High-Performance Computing (HPC) clusters, Apptainer is safer than Docker.
+  - `nvidia/cuda:base`: Small (100MB) hota hai par isme kuch nahi hota. 
+  - `nvidia/cuda:devel`: Large (3GB) hota hai par isme compiling ke liye zaroorat ki har cheez hoti hai.
+- **Docker vs. Apptainer (Singularity):** High-Performance Computing (HPC) clusters ke liye, Apptainer Docker se zyada safe hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Root Privileges:** Containers running as `root` can potentially hack the host machine. **Always create a non-root user in your Dockerfile.**
-- **Secret Leaks:** Putting `OPENAI_API_KEY` directly in the Dockerfile. **Use 'Docker Secrets' or 'Environment Variables'.**
+- **Root Privileges:** `root` ke roop mein chalne wale containers potentially host machine ko hack kar sakte hain. **Hamesha apne Dockerfile mein ek non-root user create karein.**
+- **Secret Leaks:** Dockerfile mein directly `OPENAI_API_KEY` daal dena. **'Docker Secrets' ya 'Environment Variables' ka use karein.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The 'Registry' Bottleneck:** When 100 servers all try to download a 10GB image simultaneously, it crashes your network. **Solution: Use 'P2P Image Pulling' or 'Dragonfly'.**
+- **The 'Registry' Bottleneck:** Jab 100 servers ek sath 10GB ki image download karne ki koshish karte hain, toh yeh aapke network ko crash kar deta hai. **Solution: 'P2P Image Pulling' ya 'Dragonfly' ka use karein.**
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Storage Costs:** Storing 1000 versions of your 10GB image on AWS ECR can cost **$\$500/month** in storage fees alone. **Set a 'Lifecycle Policy' to delete old images.**
+- **Storage Costs:** AWS ECR par apni 10GB image ke 1000 versions store karne ki cost sirf storage fees mein hi **$\$500/month** ho sakti hai. **Old images ko delete karne ke liye 'Lifecycle Policy' set karein.**
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use `.dockerignore`:** Exclude `.git`, `__pycache__`, and your giant `data/` folder.
-- **Stick to a specific version:** Never use `FROM python:latest`. Use `FROM python:3.10.12-slim`.
-- **Scan for Vulnerabilities:** Use `docker scout` to find if your image contains libraries with known security bugs.
+- **`.dockerignore` ka use karein:** `.git`, `__pycache__`, aur apne giant `data/` folder ko exclude karein.
+- **Specific version par stick (tike) rahein:** Kabhi bhi `FROM python:latest` use na karein. `FROM python:3.10.12-slim` ka use karein.
+- **Scan for Vulnerabilities:** Yeh find karne ke liye ki kya aapki image mein known security bugs wali libraries hain, `docker scout` ka use karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Installing CUDA manually:** Trying to `apt-get install cuda` inside the Dockerfile. (Just use the NVIDIA base image!).
-- **Hard-coding Paths:** Using `C:\Users\Name\...` in the code, which obviously won't work inside a Linux Docker container.
+- **CUDA ko manually install karna:** Dockerfile ke andar `apt-get install cuda` karne ki koshish karna. (Bas NVIDIA base image ka use karein!).
+- **Paths ko hard-code karna:** Code mein `C:\Users\Name\...` ka use karna, jo ki zahir hai Linux Docker container ke andar kaam nahi karega.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is the role of the NVIDIA Container Toolkit?"**
-2. **"How do you optimize a Dockerfile to reduce build time for AI models?"**
-3. **"Explain why you should avoid putting data/weights inside the Docker image."**
+1. **"NVIDIA Container Toolkit ka kya role hai?"**
+2. **"AI models ke liye build time ko reduce karne ke liye aap Dockerfile ko kaise optimize karte hain?"**
+3. **"Explain karein ki aapko Docker image ke andar data/weights daalne se kyun bachna chahiye."**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Wasm-Edge:** Running AI models in WebAssembly containers for "Instant" startup and 100x smaller size.
-- **Encrypted Containers:** Images that are encrypted and only decrypted inside a "Secure Enclave" on the CPU/GPU.
-- **Serverless Docker for GPUs:** Services like **Modal** or **Beam** that let you run a Python function in a container on a remote GPU with one command (`modal run script.py`).
+- **Wasm-Edge:** "Instant" startup aur 100x smaller size ke liye WebAssembly containers mein AI models run karna.
+- **Encrypted Containers:** Aise images jo encrypted hoti hain aur sirf CPU/GPU par "Secure Enclave" ke andar hi decrypt hoti hain.
+- **Serverless Docker for GPUs:** Modal ya Beam jaise services jo aapko ek single command (`modal run script.py`) se remote GPU par container ke andar Python function run karne dete hain.

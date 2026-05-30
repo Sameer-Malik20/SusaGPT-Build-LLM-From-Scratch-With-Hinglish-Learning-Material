@@ -1,5 +1,5 @@
 # 📍 Positional Encodings and Embeddings: The Geometry of Sequence
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the techniques used to inject "Order" into the order-less Transformer architecture, covering Sinusoidal Encodings, Learned Embeddings, and modern RoPE (Rotary Positional Embeddings).
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Order-less Transformer architecture mein "Order" inject karne ke liye use hone wali techniques ko master karein, jisme Sinusoidal Encodings, Learned Embeddings, aur modern RoPE (Rotary Positional Embeddings) shamil hain.
 
 ---
 
@@ -17,41 +17,41 @@ Bina iske, AI kabhi bhasha ka sahi matlab nahi samajh pata.
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Since Transformers have no recurrence or convolution, they are **Permutation Invariant**. To restore order, we must add positional information to the input embeddings.
+Kyunki Transformers me koi recurrence ya convolution nahi hota hai, isiliye wo **Permutation Invariant** hote hain. Order ko restore karne ke liye, hume input embeddings me positional information add karni padti hai.
 
 ### 1. Sinusoidal Encodings (Original Paper):
-Uses sine and cosine functions of different frequencies.
+Different frequencies ke sine aur cosine functions ka use karta hai.
 - **Formula:** 
   $$PE_{(pos, 2i)} = \sin(pos / 10000^{2i/d})$$
   $$PE_{(pos, 2i+1)} = \cos(pos / 10000^{2i/d})$$
-- **Pro:** It allows the model to extrapolate to sequence lengths longer than those seen during training.
+- **Pro:** Ye model ko un sequence lengths par extrapolate karne ki permission deta hai jo training ke dauran dekhi gayi sequences se lambi ho.
 
 ### 2. Learned Positional Embeddings:
-Treating positions as tokens and learning a vector for each position ($0, 1, 2...$).
-- **Pro:** Very accurate for fixed lengths.
-- **Con:** Cannot handle any sentence longer than the maximum length seen during training.
+Positions ko tokens ki tarah treat karna aur har ek position ($0, 1, 2...$) ke liye ek vector learn karna.
+- **Pro:** Fixed lengths ke liye bahut accurate hai.
+- **Con:** Training ke dauran dekhi gayi maximum length se lambe kisi bhi sentence ko handle nahi kar sakta.
 
 ### 3. RoPE (Rotary Positional Embeddings - 2026 Standard):
-Instead of "Adding" a vector, we "Rotate" the embedding vector in a complex plane.
-- **Pro:** Captures the **Relative Distance** between words much better. Used by Llama-3, Mistral, and GPT-4.
+Vector "Add" karne ke bajaye, hum complex plane me embedding vector ko "Rotate" karte hain.
+- **Pro:** Words ke beech ki **Relative Distance** ko bahut behtar capture karta hai. Llama-3, Mistral, aur GPT-4 dwara use kiya jata hai.
 
 ---
 
 ## 🏗️ 3. Positional Strategy Matrix
-| Strategy | Mechanism | Extrapolation | Best For |
+| Strategy (Ranniti) | Mechanism (Prakriya) | Extrapolation | Best For (Kiske Liye Best Hai) |
 | :--- | :--- | :--- | :--- |
 | **Sinusoidal** | Fixed Sine waves | Good | Original Transformer |
-| **Learned** | Weights learned by model | Zero (Crashes) | BERT, ViT |
+| **Learned** | Model dwara learned weights | Zero (Crashes) | BERT, ViT |
 | **RoPE** | Rotation matrices | Excellent | Modern LLMs (Llama, GPT) |
-| **ALiBi** | Penalty based on distance| Infinite | Models needing 1M+ context|
+| **ALiBi** | Distance ke basis par penalty| Infinite | 1M+ context ki zaroorat wale models |
 
 ---
 
 ## 📐 4. Mathematical Intuition
 - **Absolute vs. Relative:** 
-  - Absolute: "I am word #5."
-  - Relative: "I am 3 words away from the verb."
-- **The Sine/Cosine Logic:** Using waves ensures that the "Distance" between any two positions $k$ and $k+n$ can be expressed as a linear function of the distance $n$. This allows the model to learn the "Pattern" of distance.
+  - Absolute: "Main word #5 hoon."
+  - Relative: "Main verb se 3 words door hoon."
+- **The Sine/Cosine Logic:** Waves ka use karne se ye ensure hota hai ki kisi bhi do positions $k$ aur $k+n$ ke beech ki "Distance" ko distance $n$ ke linear function ke roop me express kiya ja sake. Ye model ko distance ke "Pattern" ko learn karne me help karta hai.
 
 ---
 
@@ -73,7 +73,7 @@ graph LR
 
 ## 💻 6. Production-Ready Examples (Implementing Sinusoidal PE in PyTorch)
 ```python
-# 2026 Pro-Tip: Pre-calculate the PE matrix to save GPU cycles.
+# 2026 Pro-Tip: GPU cycles save karne ke liye PE matrix ko pehle se calculate (pre-calculate) kar lein.
 import torch
 import torch.nn as nn
 import numpy as np
@@ -81,12 +81,12 @@ import numpy as np
 class PositionalEncoding(nn.Module):
     def __init__(self, d_model, max_len=5000):
         super().__init__()
-        # Create a matrix of shape [max_len, d_model]
+        # [max_len, d_model] shape ka ek matrix create karna
         pe = torch.zeros(max_len, d_model)
         position = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1)
         div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-np.log(10000.0) / d_model))
         
-        # Apply sine to even indices and cosine to odd indices
+        # Even indices par sine aur odd indices par cosine apply karna
         pe[:, 0::2] = torch.sin(position * div_term)
         pe[:, 1::2] = torch.cos(position * div_term)
         
@@ -95,7 +95,7 @@ class PositionalEncoding(nn.Module):
 
     def forward(self, x):
         # x shape: [batch, seq_len, d_model]
-        # Simply add the PE to the input embeddings
+        # Simply input embeddings me PE ko add karna
         return x + self.pe[:, :x.size(1), :]
 
 # Usage:
@@ -105,62 +105,62 @@ class PositionalEncoding(nn.Module):
 ---
 
 ## ❌ 7. Failure Cases
-- **The "Fixed Length" Wall:** If you use Learned Embeddings with `max_len=512`, and a user sends a $513$-word prompt, the model will crash or produce gibberish.
-- **Loss of Resolution:** In very long sequences (1M+), the "Sine wave" values become so close to each other that the model can't tell the difference between position $1,000,000$ and $1,000,001$.
-- **Arithmetic Failure:** PE can sometimes "wash out" the semantic embedding if the embedding values are too small compared to the PE values.
+- **The "Fixed Length" Wall:** Agar aap `max_len=512` ke sath Learned Embeddings ka use karte hain, aur koi user $513$-word ka prompt bhejta hai, toh model crash ho jayega ya gibberish produce karega.
+- **Loss of Resolution:** Bahut long sequences (1M+) me, "Sine wave" ki values ek-dusre ke itni close ho jati hain ki model position $1,000,000$ aur $1,000,001$ ke beech ka difference nahi bata pata.
+- **Arithmetic Failure:** PE kabhi-kabhi semantic embedding ko "wash out" (dhundhla) kar sakta hai agar embedding values PE values ke comparison me bahut small hon.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** Model thinks "I love you" is the same as "You love I."
-- **Check:** **PE Addition**. Did you forget to add the PE to the input? Did you accidentally "concatenate" instead of "add"?
-- **Symptom:** Training is unstable.
-- **Check:** **Embedding Scaling**. Standard practice is to multiply the word embedding by $\sqrt{d_{model}}$ before adding PE.
+- **Symptom:** Model sochta hai ki "I love you" aur "You love I" same hain.
+- **Check:** **PE Optimization**. Kya aap input me PE add karna bhool gaye? Kya aapne galti se "add" karne ke bajaye "concatenate" kar diya?
+- **Symptom:** Training unstable hai.
+- **Check:** **Embedding Scaling**. Standard practice ye hai ki PE add karne se pehle word embedding ko $\sqrt{d_{model}}$ se multiply kiya jaye.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Addition (Standard) vs. Concatenation:** Addition keeps the dimension small (memory efficient). Concatenation is "purer" but doubles the memory cost of every layer.
-- **RoPE vs. Sinusoidal:** RoPE is much better at keeping the relative context but is computationally more expensive to calculate.
+- **Addition (Standard) vs. Concatenation:** Addition dimension ko small rakhta hai (memory efficient). Concatenation "purer" hota hai par ye har layer ke memory cost ko double kar deta hai.
+- **RoPE vs. Sinusoidal:** RoPE relative context ko maintain rakhne me bahut behtar hai par ise calculate karna computationally zyada expensive hota hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Position Hijacking:** An attacker can craft a prompt with repetitive tokens that "overwhelm" the positional signal, making the model forget the earlier parts of the prompt (e.g., system instructions).
+- **Position Hijacking:** Attacker repetitive tokens ke sath aisa prompt craft kar sakta hai jo positional signal ko "overwhelm" (daba) de, jisse model prompt ke earlier parts (e.g., system instructions) ko bhool jata hai.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Context Window Expansion:** To move from 8k to 1M context, we often need to "Rescale" the RoPE frequencies. This is called **YaRN** (Yet another RoPE extension) or **NTK-Aware scaling**.
+- **Context Window Expansion:** 8k se 1M context tak move karne ke liye, hume aksar RoPE frequencies ko "Rescale" karne ki need hoti hai. Ise **YaRN** (Yet another RoPE extension) ya **NTK-Aware scaling** kaha jata hai.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Memory Cost:** Positional embeddings are small ($O(max\_len \times d)$). The real cost is the Attention ($O(max\_len^2)$) that uses this positional info.
+- **Memory Cost:** Positional embeddings small hote hain ($O(max\_len \times d)$). Real cost Attention ($O(max\_len^2)$) ki hoti hai jo is positional info ka use karta hai.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use RoPE:** It is the undisputed king of positional encodings in 2026.
-- **Pre-calculate your Sin/Cos tables:** Never calculate them inside the `forward` loop.
-- **Register as Buffer:** In PyTorch, use `register_buffer` so the PE is saved with the model but not updated by the optimizer.
+- **Use RoPE:** 2026 me positional encodings ka undisputed king.
+- **Pre-calculate your Sin/Cos tables:** Unhe kabhi bhi `forward` loop ke andar calculate na karein.
+- **Register as Buffer:** PyTorch me `register_buffer` ka use karein taaki PE model ke sath save ho jaye par optimizer dwara update na ho.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Forgetting to Mask:** Even with PE, if you don't mask the future in a decoder, the model will just "look ahead" and find the answer.
-- **Using integer positions:** Don't just add `[1, 2, 3]` to your vectors. The model cannot learn from a linear integer increase; it needs the periodic nature of waves.
+- **Forgetting to Mask:** PE hone par bhi, agar aap decoder me future ko mask nahi karte hain, toh model bas "look ahead" (aage dekh) lega aur answer dhoondh lega.
+- **Using integer positions:** Don't just add `[1, 2, 3]` to your vectors. Model linear integer increase se learn nahi kar sakta; use waves ke periodic nature ki zaroorat hoti hai.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"Why do Transformers need Positional Encodings but LSTMs don't?"**
-2. **"Difference between Absolute and Relative Positional Encodings?"**
-3. **"How does RoPE achieve length extrapolation?"**
+1. **"Transformers ko Positional Encodings ki need kyun hoti hai par LSTMs ko nahi?"**
+2. **"Absolute aur Relative Positional Encodings me kya difference hai?"**
+3. **"RoPE length extrapolation kaise achieve karta hai?"**
 
 ---
 
-## 🚀 15. Latest 2026 Industry Patterns
+## 🚀 16. Latest 2026 Industry Patterns
 - **Vision Transformer (ViT) 2D PE:** Using sine waves in both $X$ and $Y$ dimensions to tell the model where a patch is in a 2D image.
 - **ALiBi (Attention with Linear Biases):** A technique that doesn't use positional embeddings at all, but instead adds a penalty to the attention scores based on how far apart the words are.
 - **Recursive Positional Encodings:** Using a small neural network to "generate" the positional vector based on the context, allowing for infinite flexibility.

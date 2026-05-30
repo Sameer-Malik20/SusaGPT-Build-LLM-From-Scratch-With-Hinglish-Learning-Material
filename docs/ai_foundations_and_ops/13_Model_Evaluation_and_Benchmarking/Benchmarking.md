@@ -1,5 +1,5 @@
 # 🏁 Benchmarking: The AI Olympics
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the standard tests used to compare AI models globally, exploring MMLU, GSM8K, HumanEval, and the 2026 strategies for avoiding "Data Contamination" in benchmarks.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Globally AI models ko compare karne wale standard tests ko master karein, MMLU, GSM8K, HumanEval, aur benchmarks mein "Data Contamination" se bachne ke 2026 strategies ko explore karte hue.
 
 ---
 
@@ -19,20 +19,20 @@ Ye bilkul **JEE or SAT** exams ki tarah hai:
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Benchmarking is the quantitative measurement of model performance across standardized datasets.
+Benchmarking standardized datasets ke across model performance ka quantitative measurement hai.
 
 ### 1. Key Academic Benchmarks:
-- **MMLU (Massive Multitask Language Understanding):** 57 subjects (STEM, Humanities, etc.). Measures broad world knowledge.
-- **GSM8K (Grade School Math 8K):** Multi-step math reasoning. Hard for models because one small mistake in the middle ruins the answer.
-- **HumanEval / MBPP:** Python coding tasks. Measured by `Pass@1` (Did the first code snippet run correctly?).
-- **GPQA (Graduate-Level Google-Proof Q&A):** Extremely hard science questions that even non-expert humans can't answer with Google.
+- **MMLU (Massive Multitask Language Understanding):** 57 subjects (STEM, Humanities, etc.). Ye broad world knowledge ko measure karta hai.
+- **GSM8K (Grade School Math 8K):** Multi-step math reasoning. Models ke liye hard hota hai kyunki beech mein ek choti si galti bhi answer ko kharab kar deti hai.
+- **HumanEval / MBPP:** Python coding tasks. Ise `Pass@1` ke through measure kiya jata hai (Kya pehla code snippet sahi se run hua?).
+- **GPQA (Graduate-Level Google-Proof Q&A):** Extremely hard science questions jinhe non-expert humans Google ki help se bhi answer nahi kar sakte.
 
 ### 2. Chatbot Arena (The 2026 Reality):
-- Academic benchmarks are becoming "Contaminated." 
-- **LMSYS Chatbot Arena** uses "Crowdsourced ELO" where humans chat with two anonymous models and vote for the better one. This is the most trusted "Real-world" benchmark today.
+- Academic benchmarks ab "Contaminated" ho rahe hain.
+- **LMSYS Chatbot Arena** "Crowdsourced ELO" ka use karta hai jahan humans do anonymous models ke sath chat karte hain aur behtar wale ko vote dete hain. Aaj ke time mein ye sabse trusted "Real-world" benchmark hai.
 
 ### 3. ARC (Abstraction and Reasoning Corpus):
-- A benchmark for "Fluid Intelligence." It tests if a model can solve a puzzle it has NEVER seen before, using pure logic.
+- "Fluid Intelligence" ke liye ek benchmark. Ye test karta hai ki kya koi model kisi aise puzzle ko pure logic se solve kar sakta hai jo usne PEHLE KABHI nahi dekha.
 
 ---
 
@@ -49,9 +49,9 @@ Benchmarking is the quantitative measurement of model performance across standar
 
 ## 📐 4. Mathematical Intuition
 - **ELO Rating System:** 
-  Used in Chatbot Arena. If Model A (Rating 1200) beats Model B (Rating 1000), it gains fewer points than if it beats a model with 1500 rating.
+  Chatbot Arena mein use hota hai. Agar Model A (Rating 1200) Model B (Rating 1000) ko beat karta hai, toh use uske mukable kam points milenge jab wo 1500 rating wale model ko beat karega.
   $$E_A = \frac{1}{1 + 10^{(R_B - R_A)/400}}$$
-  - $E_A$: Expected score for Model A.
+  - $E_A$: Model A ka Expected score.
   - $R_A, R_B$: Current ratings.
   This ensures that "Popularity" doesn't win over "Quality."
 
@@ -100,66 +100,66 @@ lm_eval --model hf \
 ---
 
 ## ❌ 7. Failure Cases
-- **Data Contamination:** The benchmark questions were accidentally included in the model's training data. The model is "Memorizing," not "Reasoning."
-- **Benchmark Saturation:** When models reach $99\%$ on a benchmark, that benchmark is dead. We need harder ones (like GPQA).
-- **Goodhart's Law:** "When a measure becomes a target, it ceases to be a good measure." Models are being trained specifically to "Beat the Benchmark" instead of being useful in the real world.
+- **Data Contamination:** Benchmark ke questions galti se model ke training data mein include ho gaye the. Model "Reasoning" nahi, "Memorization" (ratta) kar raha hai.
+- **Benchmark Saturation:** Jab models kisi benchmark par $99\%$ reach kar jate hain, toh wo benchmark dead ho jata hai. Humein aur harder benchmarks (jaise GPQA) ki need hoti hai.
+- **Goodhart's Law:** "Jab koi measure target ban jata hai, toh wo ek achha measure nahi rehta." Models ko real world mein useful banane ke bajaye specifically "Benchmark ko beat karne" ke liye train kiya ja raha hai.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Model has high MMLU but is terrible at chatting."
-- **Check:** **Instruction Tuning**. MMLU tests "Knowledge," not "Chat capability." Ensure your model is fine-tuned for following instructions (**IFEval**).
-- **Symptom:** "Pass@1 coding score is zero."
-- **Check:** **Greedy Decoding**. Ensure you are using `temperature=0` during benchmarks for reproducible results.
+- **Symptom:** "Model ka MMLU high hai par chatting mein kharab hai."
+- **Check:** **Instruction Tuning**. MMLU "Knowledge" ko test karta hai, "Chat capability" ko nahi. Ensure karein ki aapka model instructions follow karne ke liye fine-tuned ho (**IFEval**).
+- **Symptom:** "Pass@1 coding score zero hai."
+- **Check:** **Greedy Decoding**. reproducible results ke liye benchmarks ke dauran ensure karein ki aap `temperature=0` use kar rahe hain.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
 - **Academic vs. Human Eval:** 
-  - Academic is fast and reproducible. 
-  - Human Eval (Arena) is messy but more "True" to user experience.
+  - Academic fast aur reproducible hota hai.
+  - Human Eval (Arena) thoda messy hai par user experience ke zyada "True" hota hai.
 - **Zero-shot vs. Few-shot:** 
-  - Zero-shot (No examples) is harder and shows raw power. 
-  - Few-shot (Providing 5 examples) shows the model's ability to learn in-context.
+  - Zero-shot (Bina kisi example ke) harder hota hai aur raw power ko show karta hai.
+  - Few-shot (5 examples provide karna) model ki in-context seekhne ki ability ko show karta hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Benchmark Leakage:** Hackers leaking the "Golden Answers" of secret benchmarks so companies can "Train" on them and fake their results.
+- **Benchmark Leakage:** Hackers ka secret benchmarks ke "Golden Answers" ko leak kar dena taaki companies unpar apane models ko "Train" karke fake results dikha sakein.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The 'N-shot' Memory Wall:** Running 32-shot benchmarks on a 400B model needs massive VRAM to store the context.
+- **The 'N-shot' Memory Wall:** Ek 400B model par 32-shot benchmarks run karne ke liye context ko store karne ke liye massive VRAM ki need hoti hai.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Evaluation Compute:** Running a full suite of benchmarks (MMLU + GSM8K + HumanEval) can cost $\$100+$ in GPU rental time. **Strategy: Run benchmarks only on 'Release Candidate' models.**
+- **Evaluation Compute:** Benchmarks ka ek full suite (MMLU + GSM8K + HumanEval) run karne par GPU rental time mein $\$100+$ ki cost aa sakti hai. **Strategy: Benchmarks ko sirf 'Release Candidate' models par hi run karein.**
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use 'Live' Benchmarks:** Use datasets that are updated every week (like **LiveCodeBench**) to avoid contamination.
-- **Check for N-gram overlap:** Before training, check if your training data has more than $20\%$ overlap with standard benchmarks. If yes, your scores are invalid.
-- **Report 95% Confidence Intervals:** Don't just say "82%". Say "82% +/- 1.5%".
+- **Use 'Live' Benchmarks:** Contamination se bachne ke liye aise datasets ka use karein jo har week update hote hain (jaise **LiveCodeBench**).
+- **Check for N-gram overlap:** Training se pehle check karein ki kya aapke training data ka standard benchmarks ke sath $20\%$ se zyada overlap toh nahi hai. Agar haan, toh aapke scores invalid hain.
+- **Report 95% Confidence Intervals:** Sirf "82%" na kahein. Kahein "82% +/- 1.5%".
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Only reporting the 'Best' run:** Picking the highest score out of 10 runs. **Always report the Average.**
-- **Ignoring Model Size:** Comparing a 7B model to a 175B model and saying 175B is "Better." (Duh!). Compare **Performance-per-Parameter**.
+- **Only reporting the 'Best' run:** 10 runs mein se highest score ko pick karke dikhana. **Hamesha Average score hi report karein.**
+- **Ignoring Model Size:** Ek 7B model ko 175B model se compare karna aur kehna ki 175B "Better" hai. Compare karne ke liye **Performance-per-Parameter** ka use karein.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is 'Data Contamination' and how do you detect it?"**
-2. **"Explain the difference between Zero-shot and Few-shot evaluation."**
-3. **"Why is MMLU considered the most important benchmark for LLMs?"**
+1. **" 'Data Contamination' kya hai aur aap ise kaise detect karte hain?"**
+2. **"Zero-shot aur Few-shot evaluation ke beech ke difference ko explain karein."**
+3. **"LLMs ke liye MMLU ko sabse important benchmark kyu mana jata hai?"**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Vision Benchmarks (MMMU):** Testing if models can understand charts, medical images, and engineering diagrams.
-- **Agentic Benchmarks (GAIA):** Testing if an AI can "Use a browser" or "Run a script" to solve a multi-step task.
-- **Dynamic Evals:** Benchmarks where the questions are generated by an AI on-the-fly, so the model can't memorize them.
+- **Vision Benchmarks (MMMU):** Ye test karna ki kya models charts, medical images, aur engineering diagrams ko samajh sakte hain.
+- **Agentic Benchmarks (GAIA):** Ye test karna ki kya ek AI kisi multi-step task ko solve karne ke liye "browser use kar sakta hai" ya "script run kar sakta hai".
+- **Dynamic Evals:** Aise benchmarks jahan questions AI ke dwara on-the-fly generate kiye jate hain, taaki model unhe yaad na kar sake.

@@ -1,5 +1,5 @@
 # 🏆 Capstone Project 1: Building a Global-Scale RAG System
-> **Level:** Professional / Mastery | **Language:** Hinglish | **Goal:** Synthesize everything you've learned to design and build a production-grade Retrieval-Augmented Generation (RAG) system that can handle 1 Million+ documents with sub-second latency and high accuracy.
+> **Level:** Professional / Mastery | **Language:** Hinglish | **Goal:** Jo kuch bhi aapne seekha hai use synthesize karke ek production-grade Retrieval-Augmented Generation (RAG) system design aur build karein jo sub-second latency aur high accuracy ke sath 1 Million+ documents ko handle kar sake.
 
 ---
 
@@ -11,29 +11,29 @@ Ye sirf ek "Chatbot" nahi hai. Ye ek **"Enterprise Knowledge Engine"** hai.
 - **Accuracy:** "Source Citation" mandatory hai (No hallucinations).
 - **Speed:** Jawab 2 seconds ke andar milna chahiye.
 
-Is project mein aap **Vector DBs**, **Rerankers**, **Quantized LLMs**, aur **Evaluation Frameworks** ko ek saath milayenge. 
+Is project mein aap **Vector DBs**, **Rerankers**, **Quantized LLMs**, aur **Evaluation Frameworks** ko ek sath milayenge. 
 
 ---
 
 ## 🏗️ 2. The Architecture (The 'Gold Standard')
-A modern, scalable RAG system isn't just `VectorSearch -> Prompt`. It's a pipeline:
+Ek modern aur scalable RAG system sirf `VectorSearch -> Prompt` nahi hota. Ye ek poora pipeline hota hai:
 
 1. **Ingestion Layer:**
-   - **Parsing:** Use **LayoutLMv3** to extract tables and text from PDFs.
-   - **Chunking:** **Semantic Chunking** (breaking text based on meaning, not character count).
-   - **Embedding:** Use a **Multi-vector** approach (ColBERT or BGE-M3).
+   - **Parsing:** PDFs se tables aur text ko extract karne ke liye **LayoutLMv3** ka use karein.
+   - **Chunking:** **Semantic Chunking** (character count ke bajaye meaning ke basis par text ko break karna).
+   - **Embedding:** Ek **Multi-vector** approach (ColBERT ya BGE-M3) ka use karein.
 
 2. **Retrieval Layer:**
-   - **Hybrid Search:** Combine **Vector Search** (Semantic) + **BM25** (Keyword search).
-   - **GraphRAG:** Using a Knowledge Graph to find connections between documents.
+   - **Hybrid Search:** **Vector Search** (Semantic) + **BM25** (Keyword search) ko combine karein.
+   - **GraphRAG:** Documents ke beech connections ko find karne ke liye ek Knowledge Graph ka use karna.
 
 3. **Post-Processing Layer:**
-   - **Reranking:** Use **Cohere Rerank** or **BGE-Reranker** to pick the top 5 most relevant chunks out of 100.
-   - **Context Compression:** Removing "noise" from the chunks to save tokens.
+   - **Reranking:** 100 mein se top 5 sabse relevant chunks ko pick karne ke liye **Cohere Rerank** ya **BGE-Reranker** ka use karein.
+   - **Context Compression:** Tokens ko save karne ke liye chunks se "noise" ko remove karna.
 
 4. **Generation Layer:**
-   - **Model:** Llama-3-70B (Quantized to 4-bit) running on **vLLM**.
-   - **System Prompt:** Strict instructions for "Source Grounding."
+   - **Model:** **vLLM** par chalne wala Llama-3-70B (Quantized to 4-bit).
+   - **System Prompt:** "Source Grounding" (citations ensure karne) ke liye strict instructions.
 
 ---
 
@@ -42,17 +42,17 @@ A modern, scalable RAG system isn't just `VectorSearch -> Prompt`. It's a pipeli
 | :--- | :--- | :--- |
 | **LLM Engine** | vLLM / TensorRT-LLM | Fast, continuous batching |
 | **Vector DB** | Qdrant / Pinecone | Scalable, supports Hybrid search |
-| **Orchestration** | LangGraph | Complex loops and self-correction |
-| **Embedding** | BGE-M3 | Multi-lingual and multi-vector |
+| **Orchestration** | LangGraph | Complex loops aur self-correction |
+| **Embedding** | BGE-M3 | Multi-lingual aur multi-vector |
 | **Evaluation** | RAGAS / DeepEval | Automated accuracy metrics |
-| **Monitoring** | LangSmith / Arize Phoenix | Tracking drift and hallucinations |
+| **Monitoring** | LangSmith / Arize Phoenix | Drift aur hallucinations ko track karna |
 
 ---
 
 ## 📐 4. Mathematical Benchmarks (SLA)
-- **Retrieval Recall@10:** $> 0.90$ (Top 10 results should contain the answer).
-- **Faithfulness Score:** $> 0.95$ (AI should not hallucinate).
-- **Latency (P99):** $< 3$ seconds for the full response.
+- **Retrieval Recall@10:** $> 0.90$ (Top 10 results mein answer hona hi chahiye).
+- **Faithfulness Score:** $> 0.95$ (AI ko bilkul hallucinate nahi karna chahiye).
+- **Latency (P99):** Full response ke liye $< 3$ seconds.
 - **Cost per Query:** $< \$0.01$.
 
 ---
@@ -81,7 +81,7 @@ graph TD
 ## 💻 6. Implementation Steps (The Engineer's Path)
 
 ### Step 1: Data Ingestion (The Foundation)
-Don't just use `PyPDF2`. Use a modern parser that understands tables.
+Sirf `PyPDF2` ka use na karein. Ek modern parser use karein jo tables ko samajhta ho.
 ```python
 # Pro-Tip: Use 'Unstructured' or 'MarkItDown' for high-quality parsing.
 from unstructured.partition.pdf import partition_pdf
@@ -102,38 +102,38 @@ search_result = qdrant.search(
 ```
 
 ### Step 3: The 'Self-RAG' Loop
-Implement a loop where the AI checks its own work.
-- "Does this answer actually answer the user's question?"
-- "Is every sentence backed by a source?"
-If NO, trigger another search with a refined query.
+Ek aisa loop implement karein jahan AI khud apne kaam ko check kare.
+- "Kya ye answer actual mein user ke sawaal ka jawaab deta hai?"
+- "Kya har ek sentence ke peeche koi solid source hai?"
+Agar jawaab NO hai, toh ek refined query ke sath dubara search trigger karein.
 
 ---
 
-## ❌ 7. Common Pitfalls to Avoid
-- **"Naive RAG":** Just dumping 500-word chunks into a DB. You will get "Middle-of-the-document" loss. Use **Small-to-Big Retrieval** (Search small chunks, feed the whole paragraph to the AI).
-- **Ignoring Privacy:** Putting PII (Personal Identifiable Information) into the vector DB. **Redact data first.**
-- **No Evaluation:** If you don't use **RAGAS**, you are just "guessing" that your RAG is good.
+## ❌ 7. Failure Cases (Common Pitfalls to Avoid)
+- **"Naive RAG":** Bas 500-word ke chunks ko DB mein dump kar dena. Isse aapko "Middle-of-the-document" loss milega. **Small-to-Big Retrieval** ka use karein (Chote chunks ko search karein, par AI ko poora paragraph bhein).
+- **Ignoring Privacy:** Vector DB mein PII (Personal Identifiable Information) ko daal dena. **Pehle data ko redact (clean) karein.**
+- **No Evaluation:** Agar aap **RAGAS** ka use nahi kar rahe hain, toh aap bas "guess" (tukka laga) rahe hain ki aapka RAG system acha hai.
 
 ---
 
 ## ✅ 8. Evaluation Strategy (How to pass this project)
-Run your system against a test set of 100 questions.
-1. **Context Precision:** Are the retrieved chunks actually relevant?
-2. **Faithfulness:** Is the answer based ONLY on the chunks?
-3. **Answer Relevancy:** Does the answer satisfy the user?
+Apne system ko 100 questions ke ek test set par run karein.
+1. **Context Precision:** Kya retrieved chunks actual mein relevant hain?
+2. **Faithfulness:** Kya answer ONLY retrieved chunks ke basis par hi diya gaya hai?
+3. **Answer Relevancy:** Kya answer user ko satisfy karta hai?
 
 ---
 
 ## 🚀 9. 2026 Bonus: Agentic RAG
-Make your system "Agentic" by allowing it to:
-- **Web Search** if the internal database doesn't have the answer.
-- **Ask Clarifying Questions** if the user's query is vague.
-- **Critique** its own answer from the perspective of a "Skeptic."
+Apne system ko "Agentic" banayein in features ko allow karke:
+- Agar internal database mein answer na ho, toh **Web Search** karna.
+- Agar user ki query vague (aspat) hai, toh **Clarifying Questions puchna**.
+- Ek "Skeptic" (shakki insaan) ke perspective se khud apne answer ko **Critique** (review) karna.
 
 ---
 
 ## 📝 10. Submission Requirements
-- **GitHub Repo:** Clean code with `docker-compose.yaml`.
-- **Project Report:** Explaining your choice of Embedding, DB, and LLM.
-- **Evaluation Dashboard:** A screenshot of your RAGAS scores.
-- **Live Demo:** A URL where the instructor can test your system.
+- **GitHub Repo:** `docker-compose.yaml` ke sath ek clean code repo.
+- **Project Report:** Embedding, DB, aur LLM ke selections ko explain karne wali report.
+- **Evaluation Dashboard:** Apne RAGAS scores ka ek screenshot.
+- **Live Demo:** Ek URL jahan instructor aapke system ko test kar sakein.

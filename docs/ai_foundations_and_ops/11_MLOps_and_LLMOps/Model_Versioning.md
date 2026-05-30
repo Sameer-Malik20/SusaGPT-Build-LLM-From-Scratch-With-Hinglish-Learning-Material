@@ -1,5 +1,5 @@
 # 📦 Model Versioning: Managing the Weights of Time
-> **Level:** Intermediate | **Language:** Hinglish | **Goal:** Master the art of tracking AI model changes, exploring Model Registries, Semantic Versioning for weights, and the 2026 strategies for reproducible AI deployments.
+> **Level:** Intermediate | **Language:** Hinglish | **Goal:** AI model changes track karne ki art ko master karein, Model Registries, weights ke liye Semantic Versioning, aur 2026 mein reproducible AI deployments ki strategies ko explore karte hue.
 
 ---
 
@@ -19,27 +19,27 @@ Isse humein pata hota hai ki:
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Model versioning tracks the **Weights (Artifacts)** and their associated **Metadata.**
+Model versioning **Weights (Artifacts)** aur unse jude **Metadata** ko track karta hai.
 
 ### 1. The Model Registry:
-- A central repository (like GitHub but for models).
+- Ek central repository (jaise GitHub code ke liye hota hai, waise hi ye models ke liye hota hai).
 - Popular tools: **MLflow**, **HuggingFace Hub (Private)**, **DVC**, **BentoML.**
 
 ### 2. Versioning Levels:
 - **v1.0.0 (Semantic Versioning):** 
-  - **Major:** Change in architecture (e.g., Llama-2 to Llama-3).
-  - **Minor:** Significant fine-tuning on new data.
-  - **Patch:** Retraining on corrected labels or small updates.
+  - **Major:** Architecture mein change (jaise Llama-2 se Llama-3).
+  - **Minor:** Naye data par significant fine-tuning.
+  - **Patch:** Corrected labels par retraining ya small updates.
 
 ### 3. Traceability:
-- Every model version must be linked to a specific **Git Commit Hash** (Code) and a **Data Version** (DVC/LakeFS).
-- This ensures that if a model starts behaving badly in 2027, you can "Re-create" exactly how it was built in 2026.
+- Every model version ko ek specific **Git Commit Hash** (Code) aur ek **Data Version** (DVC/LakeFS) ke sath link hona chahiye.
+- Ye ensure karta hai ki agar 2027 mein koi model kharab behave karne lage, toh aap exact waise hi "Re-create" kar sakein jaise use 2026 mein banaya gaya tha.
 
 ### 4. Model Stages:
 - **None:** Initial upload.
-- **Staging:** Undergoing testing/validation.
-- **Production:** Currently serving live traffic.
-- **Archived:** Replaced by a newer version.
+- **Staging:** Testing/validation ke under chal raha hai.
+- **Production:** Currently live traffic ko serve kar raha hai.
+- **Archived:** Naye version se replace ho chuka hai.
 
 ---
 
@@ -56,8 +56,8 @@ Model versioning tracks the **Weights (Artifacts)** and their associated **Metad
 
 ## 📐 4. Mathematical Intuition
 - **The Reproducibility Gap:** 
-  If you have the same code and same data, but different **Random Seeds** or different **CUDNN versions**, the model weights will be different. 
-  Model versioning solves this by saving the "Final Result" (The Weights) so you don't have to rely on the "Process" being $100\%$ reproducible.
+  Agar aapke paas same code aur same data hai, par different **Random Seeds** ya different **CUDNN versions** hain, toh model weights alag ho jayenge. 
+  Model versioning is problem ko "Final Result" (Weights) ko save karke solve karti hai taaki aapko "Process" ke $100\%$ reproducible hone par rely na karna pade.
 
 ---
 
@@ -103,14 +103,14 @@ print("Model successfully registered! 📦")
 ---
 
 ## ❌ 7. Failure Cases
-- **Ghost Models:** A model is running in production, but nobody knows where the weights file is or who trained it.
-- **Dependency Hell:** Loading a v1 model weights with v2 library code. The model will produce garbage or crash. **Fix: Store the 'requirements.txt' inside the model registry.**
-- **Storage Cleanup:** Deleting old versions to save space, then realizing you need to rollback to a version from 6 months ago.
+- **Ghost Models:** Ek model production mein chal raha hai, par koi nahi jaanta ki uski weights file kahan hai ya use kisne train kiya tha.
+- **Dependency Hell:** v2 library code ke sath v1 model weights ko load karna. Isse model garbage output dega ya crash ho jayega. **Fix: Model registry ke andar hi 'requirements.txt' ko store karein.**
+- **Storage Cleanup:** Space save karne ke liye purane versions ko delete ko delete kar dena, aur baad mein realize karna ki aapko 6 mahine purane version par rollback karna pad raha hai.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Model prediction is different on Dev vs. Prod."
+- **Symptom:** "Dev vs. Prod par model prediction alag hai."
 - **Check:** **Model Version**. Are they using the same version ID? 
 - **Check:** **Library Versions**. Ensure the environment is identical. Use **Docker**.
 - **Symptom:** "Model loading is slow."
@@ -120,8 +120,8 @@ print("Model successfully registered! 📦")
 
 ## ⚖️ 9. Tradeoffs
 - **Full Weight vs. Delta:** 
-  - Storing the full 70GB model for every tiny change (Expensive). 
-  - Storing only the "Delta" (Changes) or LoRA weights (Cheaper but more complex to load).
+  - Har chote change ke liye poore 70GB model ko store karna (Expensive). 
+  - Sirf "Delta" (Changes) ya LoRA weights ko store karna (Sasta par load karne mein complex).
 - **Public vs. Private Registry:** 
   - Public (HuggingFace) is easy. 
   - Private (S3/Local MLflow) is more secure for company secrets.
@@ -129,22 +129,22 @@ print("Model successfully registered! 📦")
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Model Tampering:** If someone gains access to your registry, they can replace your "Production" model with a malicious one. **Enable 'Model Signing' (Digital Signatures).**
+- **Model Tampering:** Agar koi aapki registry ka access pa leta hai, toh wo aapke "Production" model ko kisi malicious model se replace kar sakta hai. **'Model Signing' (Digital Signatures) ko enable karein.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Large Artifacts:** How to sync a 400B model (800GB) across 50 data centers? You need **Global Content Delivery (CDN)** for your models.
+- **Large Artifacts:** 50 data centers ke across 400B model (800GB) ko kaise sync karein? Aapko apne models ke liye **Global Content Delivery (CDN)** ki zaroorat hogi.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Storage Tiering:** Move "Archived" models from High-performance SSD storage to "S3 Glacier" (Cold storage) after 30 days of inactivity.
+- **Storage Tiering:** 30 days tak inactive rehne ke baad "Archived" models ko High-performance SSD storage se "S3 Glacier" (Cold storage) mein move kar dein.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Never delete 'Production' history:** Keep a record of every model that has ever served a real user.
+- **Never delete 'Production' history:** Aise har model ka record rakhein jisne kabhi kisi real user ko serve kiya ho.
 - **Link to Data:** Every model must have a `dataset_id` in its metadata.
 - **Use 'Aliases':** Instead of hardcoding `v45` in your code, use aliases like `@prod` or `@champion`.
 
@@ -152,18 +152,18 @@ print("Model successfully registered! 📦")
 
 ## ⚠️ 14. Common Mistakes
 - **Relying on File Names:** `model_v2_new.pth` is the enemy of stability.
-- **Forgetting the Tokenizer:** If you update the model but keep the old tokenizer, the model will be broken. **Save the Tokenizer alongside the Model.**
+- **Forgetting the Tokenizer:** Agar aap model ko update karte hain par purana tokenizer hi use karte rehte hain, toh model toot (break) jayega. **Tokenizer ko hamesha Model ke sath hi save karein.**
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"Why is a Model Registry better than just saving files on S3?"**
-2. **"How do you handle 'Rollbacks' in an AI production system?"**
-3. **"What metadata is mandatory to store along with a model version?"**
+1. **"Model Registry sirf S3 par files save karne se behtar kyu hai?"**
+2. **"Aap AI production system mein 'Rollbacks' ko kaise handle karte hain?"**
+3. **"Model version ke sath kaun-kaun sa metadata store karna mandatory hai?"**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **immutable Models:** Using Blockchain-style hashes to ensure that a model "Production_v1" can NEVER be changed once it is tagged.
-- **Self-Documenting Models:** Models that generate their own "Model Card" (Documentation) automatically during the versioning process.
-- **Edge Registry:** Specialized registries that automatically "Convert" and "Quantize" a model for mobile devices as soon as it is tagged as `@prod`.
+- **immutable Models:** Blockchain-style hashes ka use karna taaki ye ensure kiya ja sake ki ek baar tag hone ke baad "Production_v1" model ko KABHI bhi change na kiya ja sake.
+- **Self-Documenting Models:** Models jo versioning process ke dauran automatically apna khud ka "Model Card" (Documentation) generate karte hain.
+- **Edge Registry:** Specialized registries jo model ke `@prod` tag hote hi use mobile devices ke liye automatically "Convert" aur "Quantize" kar deti hain.

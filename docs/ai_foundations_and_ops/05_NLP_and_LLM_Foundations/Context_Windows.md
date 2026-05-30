@@ -1,5 +1,5 @@
 # 🔄 Sequence to Sequence (Seq2Seq) Models: The Engine of Translation
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the Encoder-Decoder architecture, its applications in Machine Translation and Summarization, and its evolution before the Transformer era.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Encoder-Decoder architecture ko master karein, Machine Translation aur Summarization mein iske applications, aur Transformer era se pehle iske evolution ko explore karein.
 
 ---
 
@@ -15,41 +15,41 @@ Seq2Seq models hi pehli baar Google Translate ko "Professional" banaye the. Isse
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Seq2Seq (or Encoder-Decoder) architecture consists of two neural networks (usually RNNs or LSTMs):
+Seq2Seq (ya Encoder-Decoder) architecture me do neural networks (usually RNNs ya LSTMs) hote hain:
 
 ### 1. The Encoder:
-- It processes the input sequence $x_1, x_2, ..., x_n$ one by one.
-- At each step, it updates its hidden state. 
-- The final hidden state $h_n$ is called the **Context Vector**. It is a "Bottleneck" that represents the summary of the entire input.
+- Ye input sequence $x_1, x_2, ..., x_n$ ko ek-ek karke process karta hai.
+- Ye apni hidden state ko update karta hai. 
+- Final hidden state $h_n$ ko **Context Vector** kaha jata hai. Ye ek "Bottleneck" hai jo poore input ke summary ko represent karta hai.
 
 ### 2. The Decoder:
-- It takes the Context Vector as its initial hidden state.
-- It predicts the first output token $y_1$ using a special `<START>` token.
-- Crucially, it uses its own previous output $y_{t-1}$ as input for the next step $t$.
-- This continues until it generates an `<END>` token.
+- Ye Context Vector ko apni initial hidden state ki tarah leta hai.
+- Ye ek special `<START>` token ka use karke pehla output token $y_1$ predict karta hai.
+- Crucially, ye next step $t$ ke liye input ke roop me apne hi previous output $y_{t-1}$ ka use karta hai.
+- Ye tab tak continue rehta hai jab tak ki ek `<END>` token generate na ho jaye.
 
 ### The Problem (The Bottleneck):
-The Context Vector is a fixed-size list of numbers. Trying to fit a $100$-word sentence into a $512$-size vector is like trying to summarize a whole book in one sentence—you lose information. (This led to the invention of **Attention**).
+Context Vector numbers ki ek fixed-size list hoti hai. Kisi $100$-word ke sentence ko $512$-size ke vector me fit karne ki koshish karna bilkul waisa hi hai jaise poori book ko ek sentence me summarize karna—isme information lose ho jati hai. (Isi wajah se **Attention** ka invention hua).
 
 ---
 
 ## 🏗️ 3. Seq2Seq Components
-| Component | Mathematical Role | Analogy |
+| Component (Hissa) | Mathematical Role (Mathematical Role) | Analogy (Udaharan) |
 | :--- | :--- | :--- |
-| **Encoder** | Maps Input to Latent Space | The Reader |
-| **Context Vector**| The Fixed-length Bottleneck | The Memory |
-| **Decoder** | Maps Latent Space to Output | The Writer |
+| **Encoder** | Input ko Latent Space me map karta hai | The Reader |
+| **Context Vector**| Fixed-length Bottleneck | The Memory |
+| **Decoder** | Latent Space ko Output me map karta hai | The Writer |
 | **Teacher Forcing**| Training technique | Guiding a student |
-| **Beam Search** | Optimization for inference | Choosing the best path |
+| **Beam Search** | Inference ke liye optimization | Choosing the best path |
 
 ---
 
 ## 📐 4. Mathematical Intuition
-- **The Objective:** Maximize the probability of the output sequence given the input:
+- **The Objective:** Input diye hone par output sequence ki probability ko maximize karna:
   $$P(y_1, ..., y_m | x_1, ..., x_n)$$
-- **Conditioning:** Each output $y_t$ depends on the context $c$ and all previous outputs $y_{<t}$:
+- **Conditioning:** Har ek output $y_t$ context $c$ aur pichle sabhi outputs $y_{<t}$ par depend karta hai:
   $$P(y_t | y_{<t}, c)$$
-- **The Loss:** Categorical Cross-Entropy at every time step of the decoder.
+- **The Loss:** Decoder ke har ek time step par Categorical Cross-Entropy.
 
 ---
 
@@ -75,7 +75,7 @@ graph LR
 
 ## 💻 6. Production-Ready Examples (Seq2Seq with PyTorch)
 ```python
-# 2026 Pro-Tip: Seq2Seq is the base for 'Chat' models.
+# 2026 Pro-Tip: Seq2Seq 'Chat' models ka base hota hai.
 import torch
 import torch.nn as nn
 
@@ -89,7 +89,7 @@ class Encoder(nn.Module):
         # src: [seq_len, batch]
         embedded = self.embedding(src)
         outputs, (hidden, cell) = self.rnn(embedded)
-        # return hidden/cell states as Context Vector
+        # hidden/cell states ko Context Vector ke roop me return karna
         return hidden, cell
 
 class Decoder(nn.Module):
@@ -111,64 +111,64 @@ class Decoder(nn.Module):
 ---
 
 ## ❌ 7. Failure Cases
-- **Long Sequence Failure:** The model "forgets" the beginning of a long sentence.
-- **Repetitive Output:** The decoder gets stuck in a loop (e.g., "I am I am I am..."). **Fix:** Use **Penalty** during decoding.
-- **Exposure Bias:** During training, the model sees the "Correct" previous word. During testing, it sees its "Own" previous word. If it makes one mistake, the whole sentence fails.
+- **Long Sequence Failure:** Model kisi lambe sentence ke starting part ko "bhool" jata hai.
+- **Repetitive Output:** Decoder ek loop me phas jata hai (e.g., "I am I am I am..."). **Fix:** Decoding ke dauran **Penalty** ka use karein.
+- **Exposure Bias:** Training ke dauran model "Correct" previous word dekhta hai. Testing ke dauran ye apna "Own" previous word dekhta hai. Agar ye ek galti bhi karta hai, toh poora sentence fail ho jata hai.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** Translation is garbage but training loss is low.
-- **Check:** **Greedy Search vs Beam Search**. Are you only picking the most likely word at each step? Beam search (checking top 5 paths) usually works $20\%$ better.
-- **Symptom:** Model only outputs `<END>` token immediately.
-- **Check:** **Loss Weighting**. Is your `<END>` token appearing too early in the training data?
+- **Symptom:** Translation completely bekar hai par training loss low hai.
+- **Check:** **Greedy Search vs Beam Search**. Kya aap har step par sirf sabse likely word select kar rahe hain? Beam search (top 5 paths check karna) usually $20\%$ behtar kaam karta hai.
+- **Symptom:** Model immediately sirf `<END>` token output kar raha hai.
+- **Check:** **Loss Weighting**. Kya aapke training data me `<END>` token bahut jaldi aa raha hai?
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Fixed Context vs. Attention:** Fixed context is faster and uses less memory, but Attention is $100x$ more accurate for long text.
-- **RNN vs. CNN Seq2Seq:** CNNs can be faster for Seq2Seq because they can process input in parallel, but LSTMs are better for very long sequences.
+- **Fixed Context vs. Attention:** Fixed context fast hota hai aur kam memory use karta hai, par long text ke liye Attention $100x$ zyada accurate hota hai.
+- **RNN vs. CNN Seq2Seq:** CNNs Seq2Seq ke liye fast ho sakte hain kyunki wo input ko parallel me process kar sakte hain, par bahut long sequences ke liye LSTMs behtar hote hain.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Poisoned Translation:** An attacker can provide training data that translates a specific name to a specific slur.
-- **Inference Hijacking:** Tricking the decoder into outputting sensitive data by providing a carefully crafted "Partial" sequence.
+- **Poisoned Translation:** Attacker aisa training data provide kar sakta hai jo kisi specific name ko specific slur me translate kare.
+- **Inference Hijacking:** Ek carefully crafted "Partial" sequence provide karke decoder ko sensitive data output karne ke liye trick karna.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The Sequential Bottleneck:** You cannot parallelize the Decoder. To generate 100 words, you must run the model 100 times. This is why LLM inference is expensive.
+- **The Sequential Bottleneck:** Aap Decoder ko parallelize nahi kar sakte. 100 words generate karne ke liye, aapko model ko 100 baar run karna hoga. Yahi reason hai ki LLM inference expensive hota hai.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Training Seq2Seq:** Needs pairs of data (English-Hindi). This data is expensive to create.
-- **Inference Optimization:** Use **KV-Caching** to reuse the hidden states of previous words, saving $50-70\%$ of the computation at each step.
+- **Training Seq2Seq:** Iske liye pairs of data (English-Hindi) ki zaroorat hoti hai. Aisa data create karna expensive hota hai.
+- **Inference Optimization:** Pichle words ke hidden states ko reuse karne ke liye **KV-Caching** ka use karein, jisse har step par $50-70\%$ computation save hoti hai.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Teacher Forcing:** During the first few epochs, give the decoder the "Correct" previous word to help it learn faster.
-- **Reverse Input:** In the early days, researchers found that reversing the input (e.g., "You Are How Hello") helped the encoder remember the first word better.
-- **Bucketing:** Group sentences of similar lengths together to avoid wasting compute on "Padding" zeros.
+- **Teacher Forcing:** Pehle kuch epochs ke dauran, decoder ko "Correct" previous word dein taaki use fast learn karne me help mile.
+- **Reverse Input:** Early days me, researchers ne paya ki input ko reverse karna (e.g., "You Are How Hello") helped the encoder remember the first word better.
+- **Bucketing:** Similar lengths wale sentences ko ek sath group karein taaki "Padding" zeros par compute waste na ho.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **No Beam Search:** Using simple `argmax` for final translation.
-- **Not handling OOV:** Not having an `<UNK>` (Unknown) token strategy.
+- **No Beam Search:** Final translation ke liye simple `argmax` ka use karna.
+- **Not handling OOV:** Koi `<UNK>` (Unknown) token strategy na hona.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is the 'Bottleneck' in a standard Seq2Seq model?"** (The fixed-size context vector).
-2. **"Difference between training and inference in Seq2Seq?"** (Teacher forcing vs. Autoregressive).
-3. **"How does Beam Search improve translation quality?"**
+1. **"Standard Seq2Seq model me 'Bottleneck' kya hai?"** (The fixed-size context vector).
+2. **"Seq2Seq me training aur inference me kya difference hai?"** (Teacher forcing vs. Autoregressive).
+3. **"Beam Search kaise translation quality ko improve karta hai?"**
 
 ---
 
-## 🚀 15. Latest 2026 Industry Patterns
-- **Non-Autoregressive Translation (NAT):** New models that try to predict ALL words of a translation in ONE go (like a CNN), speeding up inference by $10x$.
+## 🚀 16. Latest 2026 Industry Patterns
+- **Non-Autoregressive Translation (NAT):** New models jo ek hi go me translation ke SABHI words ko predict karne ki koshish karte hain (CNN ki tarah), jisse inference speed $10x$ fast ho jati hai.
 - **Cross-Lingual Transfer:** Training a Seq2Seq model on 50 languages so it can translate between two languages it has never seen together (e.g., Icelandic to Tamil).
 - **Multimodal Seq2Seq:** Taking an "Image" as a sequence of pixels and outputting a "Description" as a sequence of words (Image Captioning).

@@ -1,5 +1,5 @@
 # 📱 Edge Hardware & Inference: AI in Your Pocket
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the deployment of AI on resource-constrained devices, exploring NPU (Neural Processing Units), Quantization for Edge, NVIDIA Jetson, Apple Silicon, and the 2026 strategies for "On-Device" AI.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Resource-constrained devices par AI deploy karne ko master karein, NPU, Edge ke liye Quantization, NVIDIA Jetson, Apple Silicon, aur 2026 mein "On-Device" AI ki strategies ko explore karte hue.
 
 ---
 
@@ -19,45 +19,45 @@ In 2026, hum **NPU** (Neural Processing Units) use karte hain jo sirf AI ke liye
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Edge inference requires massive optimization to fit large models into small power and memory budgets.
+Edge inference ko large models ko chote power aur memory budgets mein fit karne ke liye massive optimization ki zaroorat hoti hai.
 
 ### 1. The NPU (Neural Processing Unit):
-- Unlike a GPU (General Graphics), an NPU is an **ASIC** designed specifically for Matrix Multiplications. 
-- **Apple Neural Engine (ANE):** Found in iPhones/Macs.
-- **Qualcomm Hexagon:** Found in Android phones.
-- **Google TPU (Edge):** Found in Pixel phones.
+- Ek GPU (General Graphics) ke mukable, NPU ek **ASIC** hai jise khaaskar Matrix Multiplications ke liye design kiya gaya hai. 
+- **Apple Neural Engine (ANE):** iPhones/Macs mein milta hai.
+- **Qualcomm Hexagon:** Android phones mein milta hai.
+- **Google TPU (Edge):** Pixel phones mein milta hai.
 
 ### 2. Edge-Specific Quantization:
-- **INT8 / INT4:** Converting 32-bit weights to 4-bit. This reduces model size by $8x$ and increases speed, but might slightly hurt accuracy.
-- **PTQ (Post-Training Quantization):** Quantizing after training.
-- **QAT (Quantization-Aware Training):** Training the model *knowing* it will be quantized. (Better accuracy).
+- **INT8 / INT4:** 32-bit weights ko 4-bit mein convert karna. Yeh model size ko $8x$ reduce karta hai aur speed badhata hai, par isse accuracy thodi hurt ho sakti hai.
+- **PTQ (Post-Training Quantization):** Training ke baad quantize karna.
+- **QAT (Quantization-Aware Training):** Model ko yeh *jaante* hue train karna ki ise quantize kiya jayega. (Isse behtar accuracy milti hai).
 
 ### 3. Edge Frameworks:
-- **CoreML:** For Apple devices.
-- **TensorFlow Lite (TFLite):** For Android/IoT.
-- **ONNX Runtime:** For cross-platform edge execution.
-- **Mediapipe:** For real-time vision/audio pipelines on mobile.
+- **CoreML:** Apple devices ke liye.
+- **TensorFlow Lite (TFLite):** Android/IoT ke liye.
+- **ONNX Runtime:** Cross-platform edge execution ke liye.
+- **Mediapipe:** Mobile par real-time vision/audio pipelines ke liye.
 
 ---
 
 ## 🏗️ 4. Edge Hardware Comparison
 | Hardware | Best For | Power Efficiency | VRAM / Memory |
 | :--- | :--- | :--- | :--- |
-| **NVIDIA Jetson** | Robotics / Drones | Moderate | Up to 64GB (Shared) |
-| **Apple M3/M4** | Laptops / High-end Mobile | **Excellent** | Up to 128GB (Shared) |
-| **Qualcomm Snapdragon**| Mobile Phones | High | 8-16GB |
-| **Raspberry Pi 5** | DIY / Simple IoT | Low (No NPU) | 4-8GB |
-| **Tesla FSD Chip** | Automotive AI | High | Specialized |
+| **NVIDIA Jetson** | Robotics / Drones ke liye | Moderate | Up to 64GB (Shared) |
+| **Apple M3/M4** | Laptops / High-end Mobile ke liye | **Excellent** | Up to 128GB (Shared) |
+| **Qualcomm Snapdragon**| Mobile Phones ke liye | High | 8-16GB |
+| **Raspberry Pi 5** | DIY / Simple IoT ke liye | Low (No NPU) | 4-8GB |
+| **Tesla FSD Chip** | Automotive AI ke liye | High | Specialized |
 
 ---
 
 ## 📐 4. Mathematical Intuition
 - **The TOPS (Tera Operations Per Second) vs. Efficiency:** 
-  For Edge, we care about **TOPS per Watt**. 
+  Edge ke liye, hum **TOPS per Watt** ki parwah karte hain. 
   $$\text{Efficiency} = \frac{\text{Total Operations}}{\text{Energy Consumed (Joules)}}$$
-  - A GPU might have 100 TOPS but use 300W. 
-  - An NPU might have 20 TOPS but use only 2W. 
-  **Winner for Edge:** The NPU. It can run the model all day without the phone getting hot.
+  - Ek GPU ke paas 100 TOPS ho sakte hain par woh 300W use karta hai. 
+  - Ek NPU ke paas 20 TOPS ho sakte hain par woh sirf 2W use karta hai. 
+  **Edge ka Winner:** NPU. Yeh phone ko garam kiye bina pure din model run kar sakta hai.
 
 ---
 
@@ -81,18 +81,18 @@ graph TD
 
 ## 💻 6. Production-Ready Examples (Running Inference on Edge with ONNX)
 ```python
-# 2026 Pro-Tip: Use ONNX for cross-platform edge performance.
+# 2026 Pro-Tip: Cross-platform edge performance ke liye ONNX ka use karein.
 
 import onnxruntime as ort
 
-# 1. Load the quantized model
-# 'execution_providers' selects the NPU/GPU if available
+# 1. Quantized model load karein
+# 'execution_providers' agar available ho toh NPU/GPU select karta hai
 session = ort.InferenceSession(
     "model_int4.onnx", 
     providers=['CoreMLExecutionProvider', 'CPUExecutionProvider']
 )
 
-# 2. Prepare input (Already preprocessed to float32)
+# 2. Input prepare karein (Pehle se float32 mein preprocessed)
 input_name = session.get_inputs()[0].name
 output = session.run(None, {input_name: my_image_tensor})
 
@@ -103,66 +103,66 @@ print("Prediction:", output)
 ---
 
 ## ❌ 7. Failure Cases
-- **The 'Memory Pressure' Crash:** Your model needs 3GB, but the phone only has 1GB free. The OS "Kills" your app. **Fix: Use 'Model Sharding' or 'Dynamic Unloading'.**
-- **Thermal Throttling:** Running a heavy model for 10 minutes makes the phone hot. The NPU slows down to $50\%$ speed. **Fix: Optimize the 'Compute Graph' to use fewer cycles.**
-- **Hardware Fragmentation:** Your code works on Pixel 8 (Google TPU) but fails on Samsung (Qualcomm NPU) because their drivers are different.
+- **The 'Memory Pressure' Crash:** Aapke model ko 3GB ki zaroorat hai, par phone mein sirf 1GB free hai. OS aapke app ko "Kill" kar deta hai. **Fix: 'Model Sharding' ya 'Dynamic Unloading' ka use karein.**
+- **Thermal Throttling:** 10 minutes tak heavy model run karne se phone garam ho jata hai. NPU apni speed ko slow karke $50\%$ kar deta hai. **Fix: Kam cycles use karne ke liye 'Compute Graph' ko optimize karein.**
+- **Hardware Fragmentation:** Aapka code Pixel 8 (Google TPU) par chal jata hai par Samsung (Qualcomm NPU) par fail ho jata hai kyunki unke drivers alag hain.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Model is too slow on Android."
-- **Check:** **Delegate**. Are you using the `GPU/NNAPI` delegate in TFLite? If not, it's running on the slow CPU.
-- **Symptom:** "Accuracy dropped significantly after quantization."
-- **Check:** **Clipping Range**. Ensure your quantization scales are calculated correctly for the distribution of your data.
+- **Symptom:** "Android par model bahut slow hai."
+- **Check:** **Delegate**. Kya aap TFLite mein `GPU/NNAPI` delegate ka use kar rahe hain? Agar nahi, toh yeh slow CPU par chal raha hai.
+- **Symptom:** "Quantization ke baad accuracy bahut drop ho gayi."
+- **Check:** **Clipping Range**. Ensure karein ki aapki quantization scales aapke data ke distribution ke liye sahi se calculated hain.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
 - **On-Device vs. Cloud:** 
-  - On-device is **Private** and **Instant** but less intelligent. 
-  - Cloud is **Powerful** but has **Latency** and **Privacy** risks.
+  - On-device **Private** aur **Instant** hota hai par kam intelligent hota hai. 
+  - Cloud **Powerful** hota hai par isme **Latency** aur **Privacy** risks hote hain.
 - **FP16 vs. INT8:** 
-  - FP16 is more accurate. 
-  - INT8 is $2x$ faster and $2x$ smaller.
+  - FP16 zyada accurate hota hai. 
+  - INT8 $2x$ faster aur $2x$ smaller hota hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Model Theft from Device:** A hacker can "Root" the phone and copy your `.onnx` file. **Use 'Model Encryption' keys stored in the Secure Enclave.**
+- **Model Theft from Device:** Koi hacker phone ko "Root" kar sakta hai aur aapki `.onnx` file ko copy kar sakta hai. **Secure Enclave mein stored 'Model Encryption' keys ka use karein.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The 'Billion Device' Update:** Deploying a new 200MB model update to 1 Billion phones without crashing the internet. **Use 'Delta Updates' (Only send the changed weights).**
+- **The 'Billion Device' Update:** Internet ko bina crash kiye 1 Billion phones par naya 200MB model update deploy karna. **'Delta Updates' (Sirf changed weights send karein) ka use karein.**
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Zero Inference Cost:** Once the app is downloaded, the user pays for the electricity, not you! This is the #1 reason companies are moving AI to the Edge in 2026.
+- **Zero Inference Cost:** Ek baar app download hone ke baad, user electricity ke liye pay karta hai, aap nahi! Yeh sabse bada (#1) reason hai ki companies 2026 mein AI ko Edge par move kar rahi hain.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use 'Mobile-First' Architectures:** Instead of Llama-3, use **MobileLLM** or **Phi-3-Mini** which are designed for small chips.
-- **Pipeline sensors:** Use the ISP (Image Signal Processor) for resizing and normalization instead of the CPU.
-- **Test on low-end devices:** Don't just test on the latest iPhone. Test on a $\$150$ Android phone to see real-world performance.
+- **'Mobile-First' Architectures ka use karein:** Llama-3 ke bajaye, **MobileLLM** ya **Phi-3-Mini** ka use karein jo chote chips ke liye design kiye gaye hain.
+- **Pipeline sensors:** CPU ke bajaye resizing aur normalization ke liye ISP (Image Signal Processor) ka use karein.
+- **Low-end devices par test karein:** Sirf latest iPhone par hi test na karein. Real-world performance dekhne ke liye ek $\$150$ ke Android phone par test karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Loading the whole model into RAM:** Use `mmap` (Memory mapping) to only load the parts of the model being used.
-- **Ignoring battery impact:** Running a heavy AI loop in the background that drains the user's battery in 30 minutes.
+- **Pure model ko RAM mein load karna:** Model ke sirf unhi parts ko load karne ke liye `mmap` (Memory mapping) ka use karein jo currently use ho rahe hain.
+- **Battery impact ko ignore karna:** Background mein ek heavy AI loop chalana jo user ki battery ko 30 minutes mein hi drain (khatam) kar de.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is an NPU and how does it differ from a GPU?"**
-2. **"Explain the difference between Post-Training Quantization (PTQ) and Quantization-Aware Training (QAT)."**
-3. **"How do you handle 'Model Drift' on edge devices without internet access?"**
+1. **"NPU kya hai aur yeh GPU se kaise different hai?"**
+2. **"Post-Training Quantization (PTQ) aur Quantization-Aware Training (QAT) ke beech difference explain karein."**
+3. **"Bina internet access wale edge devices par aap 'Model Drift' ko kaise handle karte hain?"**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Unified Memory LLMs:** Laptops (MacBook M4) that can run a 70B model entirely in their RAM by sharing it between CPU and GPU.
-- **Wearable AI Hardware:** Glasses (Ray-Ban Meta) that have tiny NPs to process "Always-on" video.
-- **Federated Edge Learning:** Phones that "Learn" from the user's habits and only send the "Gradients" back to the company, keeping the data private.
+- **Unified Memory LLMs:** Laptops (jaise MacBook M4) jo CPU aur GPU ke beech RAM share karke pure 70B model ko run kar sakte hain.
+- **Wearable AI Hardware:** Glasses (jaise Ray-Ban Meta) jinme "Always-on" video ko process karne ke liye tiny NPUs hote hain.
+- **Federated Edge Learning:** Phones jo user ki habits se "Learn" karte hain aur data ko private rakhte hue sirf "Gradients" hi company ko wapas bhejte hain.

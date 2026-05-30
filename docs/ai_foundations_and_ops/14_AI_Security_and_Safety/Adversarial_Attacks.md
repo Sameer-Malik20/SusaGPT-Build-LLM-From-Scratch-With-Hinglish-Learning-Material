@@ -1,5 +1,5 @@
 # 👹 Adversarial Attacks: Tricking the Neural Brain
-> **Level:** Extreme Advanced | **Language:** Hinglish | **Goal:** Master the deep technical vulnerabilities of neural networks, exploring "Noise" attacks, Poisoning, and the 2026 strategies for building "Robust" models that can't be fooled by invisible perturbations.
+> **Level:** Extreme Advanced | **Language:** Hinglish | **Goal:** Neural networks ki deep technical vulnerabilities ko master karein, "Noise" attacks, Poisoning, aur 2026 mein "Robust" models (jo invisible perturbations se fool na hon) build karne ki strategies ko explore karte hue.
 
 ---
 
@@ -18,19 +18,19 @@ AI isliye dhoka khata hai kyunki wo pixels ko dekhta hai, "Context" ko nahi.
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Adversarial attacks exploit the **Decision Boundaries** of a neural network.
+Adversarial attacks neural network ke **Decision Boundaries** ka fayda uthate (exploit karte) hain.
 
 ### 1. White-Box vs. Black-Box:
-- **White-Box:** The attacker knows the model's architecture and weights. They use **Gradient Ascent** to find the exact pixel change that will maximize the error.
-- **Black-Box:** The attacker only sees the output. They try thousands of variations to find a "Weak spot" by observing the model's responses.
+- **White-Box:** Attacker ko model ki architecture aur weights pata hote hain. Wo error ko maximize karne ke liye exact pixel change ko find karne ke liye **Gradient Ascent** ka use karte hain.
+- **Black-Box:** Attacker ko sirf output dikhta hai. Wo model ke responses ko observe karke "Weak spot" find karne ke liye hazaron variations try karte hain.
 
 ### 2. Fast Gradient Sign Method (FGSM):
-- One of the most famous attacks. It calculates the "Gradient" of the loss with respect to the input image and adds a tiny bit of that gradient to the image. 
+- Sabse famous attacks mein se ek. Ye input image ke respect mein loss ke "Gradient" ko calculate karta hai aur image mein us gradient ka ek tiny portion add kar deta hai. 
 - $x_{adv} = x + \epsilon \cdot \text{sign}(\nabla_x J(\theta, x, y))$
-- This pushes the image over the "Decision Boundary" into another class.
+- Ye image ko "Decision Boundary" ke paar dusri class mein dhakel (push) deta hai.
 
 ### 3. Adversarial Patches:
-- A physical sticker or image that, when placed in a scene, makes the model ignore everything else and output a specific class (e.g., making a toaster appear where there is a person).
+- Ek physical sticker ya image jo kisi scene mein rakhne par model ko baaki sab kuch ignore karne par majboor kar deti hai aur ek specific class output karne par majboor karti hai (jaise kisi person ki jagah toaster dikhana).
 
 ---
 
@@ -46,9 +46,9 @@ Adversarial attacks exploit the **Decision Boundaries** of a neural network.
 
 ## 📐 4. Mathematical Intuition
 - **The Epsilon ($\epsilon$) Constraint:** 
-  In adversarial attacks, we want to change the input $x$ to $x'$ such that the model's output $f(x') \neq f(x)$, but the change must be "Small" enough that a human doesn't notice. 
+  Adversarial attacks mein, hum input $x$ ko $x'$ mein is tarah change karna chahte hain ki model ka output $f(x') \neq f(x)$ ho jaye, par change itna "Small" (chota) hona chahiye ki koi insaan use notice na kar sake. 
   $$\min ||x - x'||_p \text{ subject to } f(x') = \text{target}$$
-  We use $L_\infty$ or $L_2$ norms to measure this "Smallness."
+  Hum is "Smallness" ko measure karne ke liye $L_\infty$ ya $L_2$ norms ka use karte hain.
 
 ---
 
@@ -93,61 +93,61 @@ def fgsm_attack(image, epsilon, data_grad):
 ---
 
 ## ❌ 7. Failure Cases
-- **Over-Robustness:** If you make your model too resistant to noise, it might become "Dull" and stop recognizing real, subtle features in data.
-- **Transferability:** An attack created for Model A often works on Model B too, even if they are different architectures. This makes adversarial attacks "Universal."
-- **Physical World Limitations:** An attack that works on a digital image might fail when printed and seen by a camera due to lighting and angles.
+- **Over-Robustness:** Agar aap apne model ko noise ke liye bahut zyada resistant bana dete hain, toh wo "Dull" (kamzor) ho sakta hai aur data mein real, subtle features ko recognize karna band kar sakta hai.
+- **Transferability:** Model A ke liye create kiya gaya attack aamtaur par Model B par bhi kaam karta hai, bhale hi unki architectures alag hon. Ye baat adversarial attacks ko "Universal" banati hai.
+- **Physical World Limitations:** Digital image par kaam karne wala attack physically print karne par aur camera ke dwara dekhne par lighting aur angles ke chalte fail ho sakta hai.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Model is failing on slightly blurry or noisy images."
-- **Check:** **Robustness**. Run a test using the **Art (Adversarial Robustness Toolbox)** library. If your model's accuracy drops to $10\%$ with a tiny $\epsilon$, it's vulnerable.
-- **Symptom:** "AI is consistently misclassifying specific items."
-- **Check:** **Poisoning**. Look at your training data for those items. Is there a "Trigger" (like a red pixel in the corner) in all of them?
+- **Symptom:** "Model thode se blurry ya noisy images par fail ho raha hai."
+- **Check:** **Robustness**. **Art (Adversarial Robustness Toolbox)** library ka use karke ek test run karein. Agar ek tiny $\epsilon$ ke sath aapke model ki accuracy $10\%$ tak drop ho jati hai, toh wo vulnerable hai.
+- **Symptom:** "AI consistently specific items ko galat classify kar raha hai."
+- **Check:** **Poisoning**. Un items ke liye apna training data check karein. Kya un sabhi mein koi "Trigger" (jaise corner mein ek red pixel) hai?
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Accuracy vs. Robustness:** Standard models are usually $5-10\%$ more accurate than "Adversarially Robust" models. You have to decide: Do you want "High Speed" or "High Security"?
+- **Accuracy vs. Robustness:** Standard models aamtaur par "Adversarially Robust" models ke mukable $5-10\%$ zyada accurate hote hain. Aapko decide karna hoga: Kya aapko "High Speed" chahiye ya "High Security"?
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Voice Spoofing:** Adding noise to a voice recording so it sounds like "Sameer" to an AI but like "Garbage" to a human. This can bypass voice-based bank logins.
+- **Voice Spoofing:** Voice recording mein is tarah noise add karna ki wo AI ko "Sameer" ki voice lage par human ko "Garbage" (shor) sunai de. Ye voice-based bank logins ko bypass kar sakta hai.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Certified Robustness:** Proving mathematically that a model CANNOT be fooled for any noise below a certain level. This is very hard to do for large 70B models.
+- **Certified Robustness:** Mathematically prove karna ki kisi specific level se kam noise ke liye model ko KABHI bhi fool nahi kiya ja sakta. Large 70B models ke liye aisa karna bahut mushkil hai.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Training Cost:** Adversarial training (training on $2x$ data) takes $3-5x$ more time and GPU money because calculating the gradients for attacks is expensive.
+- **Training Cost:** Adversarial training ($2x$ data par train karna) $3-5x$ zyada time aur GPU money leti hai kyunki attacks ke liye gradients calculate karna expensive hota hai.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use 'Adversarial Training':** Always include "Attacked" versions of your data in your training loop.
-- **Gradient Masking is NOT enough:** Don't just try to "Hide" your gradients. Smart attackers will use "Proxy" models to guess them.
-- **Input Transformation:** Before giving an image to the AI, slightly "Blur" or "Resize" it. This often "Breaks" the fine-tuned adversarial noise.
+- **Use 'Adversarial Training':** Apne training loop mein hamesha apne data ke "Attacked" versions ko include karein.
+- **Gradient Masking is NOT enough:** Apne gradients ko sirf "Hide" karne ki koshish na karein. Smart attackers unhe guess karne ke liye "Proxy" models ka use karenge.
+- **Input Transformation:** AI ko image dene se pehle, use thoda sa "Blur" ya "Resize" kar dein. Ye aamtaur par fine-tuned adversarial noise ko "Break" (kharab) kar deta hai.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Ignoring the threat:** "Who would put stickers on a stop sign?" (Answer: Someone who wants to cause a crash).
-- **Thinking LLMs are safe:** "Adversarial Suffixes" (like `! ! ! !`) can be added to prompts to trigger forbidden behaviors in LLMs too.
+- **Ignoring the threat:** "Stop sign par stickers kaun lagayega?" (Answer: Jo accident karwana chahta ho).
+- **Thinking LLMs are safe:** LLMs mein bhi forbidden behaviors ko trigger karne ke liye prompts mein "Adversarial Suffixes" (jaise `! ! ! !`) add kiye ja sakte hain.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is the difference between a White-box and a Black-box attack?"**
-2. **"Explain the intuition behind the FGSM attack."**
-3. **"How does Adversarial Training improve model robustness?"**
+1. **"White-box aur Black-box attack ke beige kya difference hai?"**
+2. **"FGSM attack ke piche ke intuition ko explain karein."**
+3. **"Adversarial Training model ki robustness ko kaise improve karti hai?"**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Vision-Language Attacks:** Tricking an AI into "Reading" a secret command from a photo of a restaurant menu.
-- **Diffusion-based Defense:** Using a Diffusion model to "Purify" an input image (remove all noise) before the classifier sees it.
-- **Robust Fine-Tuning:** New techniques to make LLMs robust to "Token-level" adversarial attacks without losing their chat intelligence.
+- **Vision-Language Attacks:** Kisi restaurant menu ki photo se ek secret command ko "Read" karne ke liye AI ko trick karna.
+- **Diffusion-based Defense:** Classifier ke dekhne se pehle input image ko "Purify" (saare noise remove) karne ke liye ek Diffusion model ka use karna.
+- **Robust Fine-Tuning:** LLMs ko unki chat intelligence lose kiye bina "Token-level" adversarial attacks ke liye robust banane ke liye new techniques.

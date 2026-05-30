@@ -1,5 +1,5 @@
 # ⚡ FAISS: Facebook AI Similarity Search
-> **Level:** Intermediate | **Language:** Hinglish | **Goal:** Master the fundamental library for vector search, exploring Indexing, Clustering, and the mathematical tricks that allow searching millions of vectors in microseconds in 2026.
+> **Level:** Intermediate | **Language:** Hinglish | **Goal:** Vector search ki fundamental library ko master karein, Indexing, Clustering, aur un mathematical tricks ko explore karte hue jo 2026 mein microseconds mein millions of vectors search karne ki permission dete hain.
 
 ---
 
@@ -17,22 +17,22 @@ Ye bilkul waise hi hai jaise aap library mein "Hindi Literature" ki book dhoondh
 ---
 
 ## 🧠 2. Deep Technical Explanation
-FAISS is a library for efficient similarity search and clustering of dense vectors.
+FAISS dense vectors ki efficient similarity search aur clustering ke liye ek library hai.
 
 ### 1. The Vector Space:
-- Vectors are stored in a high-dimensional space (e.g., 768 dimensions for BERT). 
-- Similarity is usually measured using **L2 Distance** (Euclidean) or **Inner Product** (Cosine Similarity).
+- Vectors ko ek high-dimensional space mein store kiya jata hai (jaise BERT ke liye 768 dimensions). 
+- Similarity ko aamtaur par **L2 Distance** (Euclidean) ya **Inner Product** (Cosine Similarity) ka use karke measure kiya jata hai.
 
 ### 2. Flat Index vs. IVF:
-- **IndexFlatL2:** Exact search. It compares your query to EVERY vector. $100\%$ accurate but slow ($O(N)$).
-- **IVF (Inverted File Index):** It clusters vectors into "Voronoi cells." During search, it only looks at the nearest $K$ clusters. Much faster ($O(\sqrt{N})$).
+- **IndexFlatL2:** Exact search. Ye aapki query ko EVERY vector ke sath compare karta hai. $100\%$ accurate par slow ($O(N)$).
+- **IVF (Inverted File Index):** Ye vectors ko "Voronoi cells" mein cluster karta hai. Search ke dauran, ye sirf nearest $K$ clusters ko dekhta hai. Bahut zyada fast ($O(\sqrt{N})$).
 
 ### 3. Product Quantization (PQ):
-- Compressing vectors to save memory. 
-- Instead of storing a 768-float vector, FAISS stores a few small "Codes." This allows you to fit 1 Billion vectors in a single server's RAM.
+- Memory save karne ke liye vectors ko compress karna. 
+- Ek 768-float vector ko store karne ki jagah, FAISS kuch chhote "Codes" store karta hai. Isse aap 1 Billion vectors ko bhi ek single server ki RAM mein fit kar sakte hain.
 
 ### 4. GPU Acceleration:
-- FAISS is highly optimized for CUDA. It can perform vector search $100x$ faster on a GPU than a CPU.
+- FAISS CUDA ke liye highly optimized hai. Ye GPU par CPU ke mukable $100x$ fast vector search perform kar sakta hai.
 
 ---
 
@@ -48,10 +48,10 @@ FAISS is a library for efficient similarity search and clustering of dense vecto
 
 ## 📐 4. Mathematical Intuition
 - **The Curse of Dimensionality:** 
-  In high dimensions, everything is far away from everything else. Standard sorting doesn't work.
+  High dimensions mein, har ek cheez ek-dusre se bahut door hoti hai. Standard sorting kaam nahi karti.
 - **Inner Product vs. Cosine:** 
   $$\text{Cosine Similarity} = \frac{A \cdot B}{||A|| ||B||}$$
-  If vectors are normalized (length = 1), then Inner Product IS Cosine Similarity. This is why we usually normalize vectors before indexing in FAISS.
+  Agar vectors normalized hain (length = 1), toh Inner Product hi Cosine Similarity hota hai. Yahi wajah hai ki hum FAISS mein index karne se pehle vectors ko aamtaur par normalize karte hain.
 
 ---
 
@@ -100,62 +100,62 @@ print("Indices:", I)
 ---
 
 ## ❌ 7. Failure Cases
-- **Non-Normalized Data:** Using Cosine Similarity logic on a FlatL2 index without normalizing vectors. The results will be mathematically wrong.
-- **Index Corruption:** Loading an index built on a different FAISS version or different hardware architecture.
-- **Memory Overflow:** Trying to create a "Flat" index for 100M vectors on a 16GB RAM machine.
+- **Non-Normalized Data:** Vectors ko normalize kiye bina FlatL2 index par Cosine Similarity logic ka use karna. Isse results mathematically galat aayenge.
+- **Index Corruption:** Kisi alag FAISS version ya alag hardware architecture par bane index ko load karna.
+- **Memory Overflow:** 16GB RAM wali machine par 100M vectors ke liye "Flat" index banane ki koshish karna.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Search is slow."
-- **Check:** **Index Type**. Are you using `IndexFlat`? Change to `IndexIVFFlat` and use `nprobe` to control the search width.
-- **Symptom:** "Recall is low" (Wrong results).
-- **Check:** **nprobe**. If `nprobe` is 1, you only look at one cluster. Increase it to 10 or 20 for better accuracy.
+- **Symptom:** "Search slow hai."
+- **Check:** **Index Type**. Kya aap `IndexFlat` use kar rahe hain? Ise `IndexIVFFlat` mein change karein aur search width ko control karne ke liye `nprobe` ka use karein.
+- **Symptom:** "Recall low hai" (Galat results).
+- **Check:** **nprobe**. Agar `nprobe` 1 hai, toh aap sirf ek cluster ko dekhte hain. Better accuracy ke liye ise badhakar 10 ya 20 karein.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Precision vs. Recall:** FAISS allows you to trade a bit of accuracy for massive speed gains.
-- **GPU vs. CPU:** GPU is faster for "Search," but CPU is often better for "Building" the index if you have limited VRAM.
+- **Precision vs. Recall:** FAISS aapko massive speed gains ke badle thodi si accuracy sacrifice karne ki permission deta hai.
+- **GPU vs. CPU:** GPU "Search" ke liye zyada fast hai, par agar VRAM limited hai toh index "Build" karne ke liye CPU aamtaur par better hota hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Vector Inversion:** If an attacker gets your vector database, they can sometimes "Reconstruct" the original text or image using a reverse-embedding model. **Always encrypt the stored index.**
+- **Vector Inversion:** Agar kisi attacker ko aapka vector database mil jata hai, toh wo reverse-embedding model ka use karke original text ya image ko "Reconstruct" kar sakta hai. **Hamesha stored index ko encrypt karein.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The RAM Wall:** 1 Billion vectors with 768 dimensions take **3TB+** of RAM. You'll need **Product Quantization** to squeeze them into $\sim 200$ GB.
+- **The RAM Wall:** 768 dimensions wale 1 Billion vectors **3TB+** RAM lete hain. Inhe $\sim 200$ GB mein squeeze karne ke liye aapko **Product Quantization** ki zaroorat hogi.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Compute Savings:** Using FAISS HNSW is $1000x$ cheaper in terms of CPU time than a brute-force search.
+- **Compute Savings:** FAISS HNSW ka use karna brute-force search ke mukable CPU time ke terms mein $1000x$ sasta hai.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Train before you Add:** IVF indices need to be "Trained" on a sample of your data to find the right clusters.
-- **Batch Adding:** Don't add vectors one by one. Add them in batches of 10,000 for $5x$ faster indexing.
-- **Use 'IndexIDMap'**: FAISS by default only returns the "Row Number." Use `IndexIDMap` to link vectors to your own IDs (like Database Primary Keys).
+- **Train before you Add:** Sahi clusters find karne ke liye IVF indices ko aapke data ke sample par "Train" karna zaroorat hoti hai.
+- **Batch Adding:** Vectors ko ek-ek karke add na karein. $5x$ fast indexing ke liye inhe 10,000 ke batches mein add karein.
+- **Use 'IndexIDMap'**: FAISS by default sirf "Row Number" return karta hai. Vectors ko apni IDs (jaise Database Primary Keys) ke sath link karne ke liye `IndexIDMap` ka use karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Mixing Vector Sizes:** Trying to search a 512-dim query against a 768-dim index.
-- **Not saving the index:** Forgetting to run `faiss.write_index(index, "my.index")` and losing hours of work after the script ends.
+- **Mixing Vector Sizes:** 768-dim index ke against 512-dim query ko search karne ki koshish karna.
+- **Not saving the index:** `faiss.write_index(index, "my.index")` run karna bhool jana aur script end hone ke baad ghanton ki mehnat lose kar dena.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is the difference between IndexFlatL2 and IndexIVFFlat?"**
-2. **"How does Product Quantization reduce memory usage?"**
-3. **"Explain the 'nprobe' parameter in IVF search."**
+1. **"IndexFlatL2 aur IndexIVFFlat ke beech kya difference hai?"**
+2. **"Product Quantization memory usage ko kaise reduce karta hai?"**
+3. **"IVF search mein 'nprobe' parameter ko explain karein."**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Binary Quantization:** Compressing vectors into "1s and 0s" for ultra-fast bitwise comparison.
-- **Streaming FAISS:** Indices that can be updated in real-time as new data comes in, without needing to re-train.
-- **Integration with SQL:** Databases like **pgvector** using FAISS-inspired algorithms directly inside PostgreSQL.
+- **Binary Quantization:** Ultra-fast bitwise comparison ke liye vectors ko "1s and 0s" mein compress karna.
+- **Streaming FAISS:** Aise indices jinhe real-time mein update kiya ja sake jaise-jaise naya data aata hai, bina re-train kiye.
+- **Integration with SQL:** PostgreSQL ke andar direct FAISS-inspired algorithms ka use karne wale databases jaise **pgvector**.

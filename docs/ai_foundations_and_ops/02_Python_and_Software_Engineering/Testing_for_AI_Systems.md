@@ -1,5 +1,5 @@
-# 🧪 Testing for AI Systems: Reliability in a Non-Deterministic World
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the specialized testing methodologies (Unit, Integration, Eval, and Red-teaming) required to build robust, safe, and production-ready AI applications.
+# 🧪 Testing for AI Systems: Non-Deterministic World Me Reliability
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Robust, safe, aur production-ready AI applications build karne ke liye required specialized testing methodologies (Unit, Integration, Eval, aur Red-teaming) ko master karna.
 
 ---
 
@@ -17,16 +17,16 @@ Testing hi wo fark hai jo ek "Bacche ke toy" aur ek "Badi company ke product" ke
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Testing AI systems requires a **Four-Layer Hierarchy**:
-1. **Layer 1: Unit Tests (Code Logic):** Standard `pytest` usage. Focus on deterministic logic (e.g., text splitting, metadata extraction).
-2. **Layer 2: Integration Tests (Connectivity):** Testing if your code can successfully connect to the Vector DB, LLM API, and Cache. We use **Mocks/Patches** to simulate external APIs.
-3. **Layer 3: Evaluation (Output Quality):** Since outputs are probabilistic, we use metrics like **Semantic Similarity** (Cosine Similarity), **Faithfulness**, and **Answer Relevancy**. We often use a "Judge LLM" (like GPT-4o) to grade our smaller model.
-4. **Layer 4: Red-Teaming (Safety):** Trying to "Break" the AI. Sending prompts like "Ignore your safety rules" to see if the guardrails hold.
+AI systems ko test karne ke liye ek **Four-Layer Hierarchy** ki zaroorat hoti hai:
+1. **Layer 1: Unit Tests (Code Logic):** Standard `pytest` ka use. Deterministic logic (e.g., text splitting, metadata extraction) par focus.
+2. **Layer 2: Integration Tests (Connectivity):** Ye test karna ki kya aapka code Vector DB, LLM API, aur Cache se successfully connect ho sakta hai. Hum external APIs ko simulate karne ke liye **Mocks/Patches** ka use karte hain.
+3. **Layer 3: Evaluation (Output Quality):** Kyunki outputs probabilistic hote hain, isliye hum **Semantic Similarity** (Cosine Similarity), **Faithfulness**, aur **Answer Relevancy** jaise metrics ka use karte hain. Hum aksar apne chhote model ko grade karne ke liye ek "Judge LLM" (jaise GPT-4o) ka use karte hain.
+4. **Layer 4: Red-Teaming (Safety):** AI ko "Break" (todne) karne ki koshish karna. Aise prompts send karna jaise "Ignore your safety rules" ye check karne ke liye ki kya guardrails hold karte hain.
 
 ---
 
 ## 🏗️ 3. The AI Testing Stack
-| Test Type | Tool | Focus |
+| Test Type | Tool | Focus (Dhyan) |
 | :--- | :--- | :--- |
 | **Unit Testing** | `pytest` | Python logic, Parsers |
 | **I/O Mocking** | `pytest-mock` / `vcrpy` | API response simulation |
@@ -37,10 +37,10 @@ Testing AI systems requires a **Four-Layer Hierarchy**:
 ---
 
 ## 📐 4. Mathematical Intuition
-In AI testing, we move from **Binary Logic** to **Statistical Logic**.
-- **Classical Test:** $Result == Expected$ ($0$ or $1$).
+AI testing me, hum **Binary Logic** se **Statistical Logic** ki taraf move karte hain.
+- **Classical Test:** $Result == Expected$ ($0$ aur $1$).
 - **AI Test:** $E[Similarity(Result, Expected)] > \tau$.
-- Here $E$ is the expected value across multiple runs and $\tau$ (tau) is your acceptable threshold (e.g., $0.85$ cosine similarity).
+- Yahan $E$ multiple runs me expected value hai aur $\tau$ (tau) aapka acceptable threshold hai (e.g., $0.85$ cosine similarity).
 
 ---
 
@@ -61,7 +61,7 @@ graph TD
 
 ## 💻 6. Production-Ready Examples (Pytest + Mocking)
 ```python
-# 2026 Pro-Tip: Never call the real LLM API in Unit Tests. Use Mocks.
+# 2026 Pro-Tip: Unit Tests me real LLM API ko kabhi call na karein. Mocks ka use karein.
 import pytest
 from unittest.mock import patch
 from my_ai_app import get_summary
@@ -79,72 +79,72 @@ def test_summary_logic():
         assert len(result) < len(text)
         mock_llm.assert_called_once()
 
-# To run: pytest test_file.py
+# Run karne ke liye: pytest test_file.py
 ```
 
 ---
 
 ## ❌ 7. Failure Cases
-- **The "Flaky Test" Trap:** A test passes $8/10$ times but fails $2/10$ because the LLM was creative. **Fix:** Use a higher "Temperature=0" or move to semantic testing.
-- **Mocking Reality Gap:** Tests pass because you mocked the API perfectly, but in production, the API is slow or returns an error. **Fix:** Use **Chaos Engineering** (deliberately fail the mock).
-- **Gold Dataset Stale:** Your tests are based on old data that doesn't reflect what users are asking today.
+- **The "Flaky Test" Trap:** Ek test $8/10$ baar pass hota hai par $2/10$ baar fail ho jata hai kyunki LLM creative tha. **Fix:** Higher "Temperature=0" ka use karein ya semantic testing par shift karein.
+- **Mocking Reality Gap:** Tests isliye pass ho jaate hain kyunki aapne API ko perfectly mock kiya tha, par production me API slow hai ya error return karti hai. **Fix:** **Chaos Engineering** ka use karein (deliberately mock ko fail karein).
+- **Gold Dataset Stale:** Aapke tests purane data par based hain jo ye reflect nahi karta ki users aaj kya puch rahe hain.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** AI evaluation scores are dropping.
-- **Check:** **Prompt Drift**. Did you change a single word in the prompt that confused the model?
-- **Check:** **Tokenizer Mismatch**. Is your testing script using a different tokenizer than your production code?
-- **Check:** **Data Leakage**. Is the "Expected Answer" somehow present in the "Input Prompt" during testing?
+- **Symptom:** AI evaluation scores drop ho rahe hain.
+- **Check:** **Prompt Drift**. Kya aapne prompt me ek bhi word change kiya jisne model ko confuse kar diya?
+- **Check:** **Tokenizer Mismatch**. Kya aapka testing script aapke production code se different tokenizer use kar raha hai?
+- **Check:** **Data Leakage**. Kya testing ke dauran "Expected Answer" kisi tarah "Input Prompt" me present hai?
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Human Eval vs. Auto-Eval:** Human is $100\%$ accurate but slow/expensive. Auto-Eval (GPT-4) is $90\%$ accurate, $100x$ faster, and $10x$ cheaper.
-- **High Coverage vs. Fast CI:** Running $1,000$ evals on every commit is slow. Run only $10$ critical "Smoke Tests" on commit, and $1,000$ "Full Evals" nightly.
+- **Human Eval vs. Auto-Eval:** Human $100\%$ accurate hota hai par slow/expensive hai. Auto-Eval (GPT-4) $90\%$ accurate hai, $100x$ fast hai, aur $10x$ cheap hai.
+- **High Coverage vs. Fast CI:** Har commit par $1,000$ evals run karna slow hai. Commit par sirf $10$ critical "Smoke Tests" run karein, aur $1,000$ "Full Evals" nightly (raat me) run karein.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Sensitive Data in Mocks:** Accidentally putting real client API keys in your test scripts.
-- **Insecure Assertions:** Using `eval()` to check if the AI's output is a valid Python dictionary. **Fix:** Use `ast.literal_eval` or Pydantic validation.
+- **Sensitive Data in Mocks:** Galti se apne test scripts me real client API keys rakh dena.
+- **Insecure Assertions:** AI ke output ko valid Python dictionary check karne ke liye `eval()` ka use karna. **Fix:** `ast.literal_eval` ya Pydantic validation ka use karein.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Massive Eval Suites:** If you have $10,000$ test cases, running them one by one will take hours. Use **Parallelism** (`pytest-xdist`) to run tests across 32 cores.
-- **Vector DB Testing:** Testing a system with 1 million vectors requires a "Mirror" Vector DB for testing.
+- **Massive Eval Suites:** Agar aapke paas $10,000$ test cases hain, toh unhe ek-ek karke run karne me hours lagenge. 32 cores par tests run karne ke liye **Parallelism** (`pytest-xdist`) ka use karein.
+- **Vector DB Testing:** 1 million vectors wale system ko test karne ke liye testing ke liye ek "Mirror" Vector DB ki need hoti hai.
 
 ---
 
 ## 💸 12. Cost Considerations
-- Use **Small Models (Phi-3 / Llama-3-8B)** for testing logic to save $\$1,000s$ in API bills. Only use the "Large Model" for final quality assurance.
-- **VCR.py:** A library that "records" LLM responses once and "replays" them in future tests, making tests $100\%$ free and instant after the first run.
+- API bills me $\$1,000s$ save karne ke liye testing logic ke liye **Small Models (Phi-3 / Llama-3-8B)** ka use karein. Final quality assurance ke liye hi "Large Model" ka use karein.
+- **VCR.py:** Ek library jo LLM responses ko ek baar "record" karti hai aur future tests me unhe "replay" karti hai, jisse first run ke baad tests $100\%$ free aur instant ho jaate hain.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Golden Datasets:** Maintain a fixed CSV of 100 "Hard Cases" that your AI must always get right.
-- **Thresholds:** Set a "Minimum Similarity Score". If a new code change drops the score from $0.92$ to $0.85$, block the deployment.
-- **Test for Latency:** Add an assertion that fails if the AI takes more than 5 seconds to generate the first token.
+- **Golden Datasets:** 100 "Hard Cases" ka ek fixed CSV maintain karein jise aapke AI ko hamesha sahi karna chahiye.
+- **Thresholds:** Ek "Minimum Similarity Score" set karein. Agar koi new code change score ko $0.92$ se $0.85$ par drop karta hai, toh deployment block kar dein.
+- **Test for Latency:** Ek aisa assertion add karein jo tab fail ho jaye jab AI first token generate karne me 5 seconds se zyada le.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Testing for Exact Strings:** `assert result == "Hello"` will fail if the AI says `"Hello!"`.
-- **Ignoring the Error Path:** Not testing what happens when the LLM API is down or returns a 500 error.
-- **Hardcoding IDs:** Using specific database IDs in tests that might not exist in the CI environment.
+- **Testing for Exact Strings:** Agar AI `"Hello!"` kehta hai toh `assert result == "Hello"` fail ho jayega.
+- **Ignoring the Error Path:** Ye test na karna ki kya hota hai jab LLM API down hoti hai ya 500 error return karti hai.
+- **Hardcoding IDs:** Tests me specific database IDs ka use karna jo CI environment me present na ho sakein.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"How do you test a RAG system for Hallucinations?"** (Use Faithfulness metric via RAGAS).
-2. **"What is 'Red-Teaming' and why is it part of the testing cycle?"**
-3. **"Explain how you would use 'LLM-as-a-Judge' to automate quality checks."**
+1. **"Hallucinations ke liye aap RAG system ko kaise test karte hain?"** (RAGAS ke through Faithfulness metric ka use karke).
+2. **"'Red-Teaming' kya hai aur ye testing cycle ka part kyun hai?"**
+3. **"Quality checks ko automate karne ke liye aap 'LLM-as-a-Judge' ka use kaise karenge explain karein."**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Shadow Testing:** Running the "New" AI model alongside the "Old" one in production, comparing their answers in real-time but only showing the old ones to users.
-- **Prompt Regression Testing:** Automatically flagging if a change in the system prompt makes the model's performance drop on historical benchmarks.
-- **Continuous Eval:** Testing doesn't stop after deployment. 2026 systems use "Live Evals" on a $5\%$ sample of real user traffic.
+- **Shadow Testing:** Production me "Old" model ke sath "New" AI model run karna, real-time me unke answers ko compare karna par users ko sirf old answers hi show karna.
+- **Prompt Regression Testing:** Automatically flag karna agar system prompt me change se model ki performance historical benchmarks par drop hoti hai.
+- **Continuous Eval:** Deployment ke baad testing stop nahi hoti. 2026 ke systems real user traffic ke $5\%$ sample par "Live Evals" ka use karte hain.

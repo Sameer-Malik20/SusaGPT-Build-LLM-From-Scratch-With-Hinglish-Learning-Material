@@ -1,5 +1,5 @@
 # 🖼️ CNN Architectures: The Eyes of Artificial Intelligence
-> **Level:** Intermediate | **Language:** Hinglish | **Goal:** Master Convolutional Neural Networks, from basic kernels and pooling to advanced architectures like ResNet, EfficientNet, and modern Vision Transformers.
+> **Level:** Intermediate | **Language:** Hinglish | **Goal:** Convolutional Neural Networks ko master karein, basic kernels aur pooling se lekar ResNet, EfficientNet, aur modern Vision Transformers jaise advanced architectures tak.
 
 ---
 
@@ -17,37 +17,37 @@ Agar aap Face ID use karte hain ya self-driving car dekhte hain, toh uske peeche
 ---
 
 ## 🧠 2. Deep Technical Explanation
-CNNs are designed to process grid-like data (Images) by leveraging three key ideas: **Local Receptive Fields**, **Shared Weights**, and **Pooling**.
+CNNs ko grid-like data (Images) process karne ke liye design kiya gaya hai, teen key ideas ka use karke: **Local Receptive Fields**, **Shared Weights**, aur **Pooling**.
 
-### Core Operations:
-1. **Convolution:** A small matrix (Kernel/Filter) slides over the image and performs element-wise multiplication and summation. This extracts features like vertical or horizontal edges.
-2. **Stride:** The number of pixels the filter moves at each step. High stride = smaller output.
-3. **Padding:** Adding zeros around the image to ensure the filter can cover the edges and the output size stays consistent.
-4. **Pooling (Max/Average):** Reducing the spatial size (Width x Height) of the feature map to reduce parameters and computation. It also makes the model robust to small translations.
-5. **Fully Connected (FC) Layer:** The final layers that take the high-level features and perform classification.
+### Core Operations (Main Operations):
+1. **Convolution:** Ek small matrix (Kernel/Filter) image par slide karta hai aur element-wise multiplication aur summation perform karta hai. Ye vertical ya horizontal edges jaise features ko extract karta hai.
+2. **Stride:** Pixels ka wo number jo filter har ek step par move karta hai. High stride = smaller output.
+3. **Padding:** Image ke charo taraf zeros add karna taaki ensure ho sake ki filter edges ko cover kar sake aur output size consistent rahe.
+4. **Pooling (Max/Average):** Parameters aur computation ko reduce karne ke liye feature map ke spatial size (Width x Height) ko decrease karna. Ye model ko small translations ke prati robust bhi banata hai.
+5. **Fully Connected (FC) Layer:** Final layers jo high-level features leti hain aur classification perform karti hain.
 
 ---
 
 ## 🏗️ 3. Evolution of CNN Architectures
-| Era | Model | Innovation |
+| Era (Daur) | Model | Innovation (Naya Kadam) |
 | :--- | :--- | :--- |
-| **1998** | **LeNet-5** | First successful CNN for handwriting (ZIP codes). |
-| **2012** | **AlexNet** | Used GPUs & ReLU; started the Deep Learning revolution. |
-| **2014** | **VGG-16** | Proved that "Deeper is Better" using very small (3x3) filters. |
-| **2015** | **ResNet** | Introduced **Skip Connections** to train 100+ layer networks. |
-| **2019** | **EfficientNet** | Systematically scaled width, depth, and resolution together. |
-| **2021+** | **ViT / ConvNeXt** | Mixing CNNs with Transformers for superior global context. |
+| **1998** | **LeNet-5** | Handwriting (ZIP codes) ke liye pehla successful CNN. |
+| **2012** | **AlexNet** | GPUs aur ReLU ka use kiya; Deep Learning revolution ki shuruat ki. |
+| **2014** | **VGG-16** | Bahut small (3x3) filters ka use karke ye prove kiya ki "Deeper is Better". |
+| **2015** | **ResNet** | 100+ layer networks ko train karne ke liye **Skip Connections** introduce kiye. |
+| **2019** | **EfficientNet** | Width, depth, aur resolution ko systematically ek sath scale kiya. |
+| **2021+** | **ViT / ConvNeXt** | Superior global context ke liye CNNs ko Transformers ke sath mix kiya. |
 
 ---
 
 ## 📐 4. Mathematical Intuition
-- **The Convolution Formula:** 
+- **The Convolution Formula (Convolution Formula):** 
   $$(I * K)(i, j) = \sum_m \sum_n I(i+m, j+n) K(m, n)$$
-  $I$ is the image, $K$ is the kernel.
-- **Output Size Calculation:** 
+  $I$ image hai, $K$ kernel hai.
+- **Output Size Calculation (Output Size Calculation):** 
   $$\text{Output} = \frac{W - F + 2P}{S} + 1$$
   ($W$=Input size, $F$=Filter size, $P$=Padding, $S$=Stride).
-- **Parameter Sharing:** A 3x3 filter only has 9 weights, but it's applied to the whole image. This makes CNNs much more efficient than dense networks.
+- **Parameter Sharing:** Ek 3x3 filter me sirf 9 weights hote hain, par ye poori image par apply hota hai. Ye CNNs ko dense networks se bahut zyada efficient banata hai.
 
 ---
 
@@ -70,7 +70,7 @@ graph LR
 
 ## 💻 6. Production-Ready Examples (Building a CNN in PyTorch)
 ```python
-# 2026 Pro-Tip: Use 3x3 filters; they are the most efficient for hardware.
+# 2026 Pro-Tip: 3x3 filters ka use karein; ye hardware ke liye sabse efficient hain.
 import torch
 import torch.nn as nn
 
@@ -81,7 +81,7 @@ class SimpleCNN(nn.Module):
         self.features = nn.Sequential(
             nn.Conv2d(3, 32, kernel_size=3, padding=1), # 3 input channels (RGB)
             nn.ReLU(),
-            nn.MaxPool2d(2, 2), # Reduces size by half
+            nn.MaxPool2d(2, 2), # Size ko half reduce karta hai
             
             nn.Conv2d(32, 64, kernel_size=3, padding=1),
             nn.ReLU(),
@@ -107,65 +107,65 @@ class SimpleCNN(nn.Module):
 ---
 
 ## ❌ 7. Failure Cases
-- **Overfitting on Textures:** CNNs sometimes learn the "Texture" (fur) instead of the "Shape" (cat). An image of an elephant with cat fur might be classified as a cat.
-- **Translation Invariance Limit:** If an object is rotated 90 degrees, a standard CNN might fail to recognize it unless it was trained with rotated images.
-- **High Computational Cost:** Large images (4K) require massive VRAM for intermediate feature maps.
+- **Overfitting on Textures:** CNNs kabhi-kabhi "Shape" (cat) ke bajaye "Texture" (fur) seekh lete hain. Cat fur wale elephant ki image ko ye cat classify kar sakta hai.
+- **Translation Invariance Limit:** Agar kisi object ko 90 degrees rotate kar diya jaye, toh standard CNN use recognize karne me fail ho sakta hai, jab tak ki use rotated images par train na kiya gaya ho.
+- **High Computational Cost:** Large images (4K) ke intermediate feature maps ke liye massive VRAM ki need hoti hai.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "RuntimeError: size mismatch" at the Linear layer.
-- **Check:** **Flatten size**. Calculate the output of your last Conv layer manually using the formula.
-- **Symptom:** Accuracy is not improving.
-- **Check:** **Data Augmentation**. CNNs need lots of variety. Are you using `RandomFlip`, `RandomRotation`, and `ColorJitter`?
+- **Symptom:** Linear layer par "RuntimeError: size mismatch".
+- **Check:** **Flatten size**. Formula ka use karke apne last Conv layer ke output ko manually calculate karein.
+- **Symptom:** Accuracy improve nahi ho rahi hai.
+- **Check:** **Data Augmentation**. CNNs ko bahut variety ki need hoti hai. Kya aap `RandomFlip`, `RandomRotation`, aur `ColorJitter` ka use kar rahe hain?
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Depth vs. Resolution:** A deeper model can understand more, but it might lose small details. High-resolution input is better for detecting small objects (like far-away cars) but costs $4x$ more memory.
-- **CNN vs. ViT:** CNNs are better for small datasets (Inductive bias). Vision Transformers (ViT) are better for massive datasets (Global context).
+- **Depth vs. Resolution:** Ek deeper model zyada samajh sakta hai, par wo small details ko lose kar sakta hai. High-resolution input small objects (jaise door khadi cars) ko detect karne ke liye behtar hai par ye $4x$ zyada memory cost karta hai.
+- **CNN vs. ViT:** CNNs small datasets ke liye behtar hain (Inductive bias). Vision Transformers (ViT) massive datasets ke liye behtar hain (Global context).
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Adversarial Patches:** A small, colorful sticker placed on a "Stop" sign can make a CNN see it as a "Speed Limit" sign.
-- **Deepfakes:** CNN-based Generative Adversarial Networks (GANs) are the core technology behind creating realistic fake videos and images.
+- **Adversarial Patches:** "Stop" sign par ek chota, colorful sticker lagane se CNN use "Speed Limit" sign dekh sakta hai.
+- **Deepfakes:** CNN-based Generative Adversarial Networks (GANs) realistic fake videos aur images create karne ke peeche ki core technology hain.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Video Processing:** A video is a stack of 2D images. Processing 30 frames per second requires **3D Convolutions**, which are $10x-30x$ more expensive than 2D.
-- **Real-time Mobile AI:** Running CNNs on a phone requires **Quantization** (8-bit) and **Depthwise Separable Convolutions** (MobileNet style).
+- **Video Processing:** Ek video 2D images ka stack hota hai. 30 frames per second process karne ke liye **3D Convolutions** ki zaroorat hoti hai, jo 2D se $10x-30x$ zyada expensive hote hain.
+- **Real-time Mobile AI:** Phone par CNNs run karne ke liye **Quantization** (8-bit) aur **Depthwise Separable Convolutions** (MobileNet style) ki zaroorat hoti hai.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Transfer Learning:** Don't train from scratch. Download a model pre-trained on ImageNet (like ResNet-50) and only fine-tune the last layer. This saves $99\%$ of training time and money.
-- **Inference Optimization:** Use **TensorRT** to compile your CNN for Nvidia GPUs; it can double your FPS for free.
+- **Transfer Learning:** Scratch se train mat karein. ImageNet par pre-trained model (jaise ResNet-50) download karein aur sirf last layer ko fine-tune karein. Isse training time aur money ka $99\%$ save hota hai.
+- **Inference Optimization:** Nvidia GPUs ke liye apne CNN ko compile karne ke liye **TensorRT** ka use karein; ye free me aapke FPS ko double kar sakta hai.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use Batch Normalization:** After every Conv layer. It stabilizes training.
-- **Start with ResNet:** It's the most stable baseline for any computer vision task.
-- **Global Average Pooling:** Use `GlobalAvgPool2d` before the final linear layer instead of a massive Flatten to reduce parameters and overfitting.
+- **Use Batch Normalization:** Har Conv layer ke baad. Ye training ko stabilize karta.
+- **Start with ResNet:** Kisi bhi computer vision task ke liye ye sabse stable baseline hai.
+- **Global Average Pooling:** Parameters aur overfitting ko reduce karne ke liye massive Flatten ke bajaye final linear layer se pehle `GlobalAvgPool2d` ka use karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **No Padding:** Losing 1-2 pixels at every layer will make your feature maps too small very quickly.
-- **Huge Filters:** Using 11x11 or 7x7 filters. Use multiple 3x3 filters instead—they have the same "view" but fewer parameters and more non-linearity.
+- **No Padding:** Har layer par 1-2 pixels lose karne se aapke feature maps bahut jaldi bahut small ho jayenge.
+- **Huge Filters:** 11x11 ya 7x7 filters ka use karna. Unke bajaye multiple 3x3 filters ka use karein—unka "view" same hota hai par parameters kam hote hain aur non-linearity zyada hoti hai.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is the difference between a Convolutional layer and a Dense layer?"**
-2. **"Why is Max Pooling used in CNNs?"** (Translation invariance and dimension reduction).
-3. **"Explain 'Residual Connections' and why they are necessary for very deep networks."**
+1. **"Convolutional layer aur Dense layer me kya difference hai?"**
+2. **"CNNs me Max Pooling kyun use kiya jata hai?"** (Translation invariance aur dimension reduction).
+3. **"'Residual Connections' ko explain karein aur ye bahut deep networks ke liye kyun zaroori hain?"**
 
 ---
 
-## 🚀 15. Latest 2026 Industry Patterns
-- **Multimodal CNNs:** CNNs that don't just see images but also process "Depth" (LiDAR) and "Thermal" data for 2026 autonomous robots.
+## 🚀 16. Latest 2026 Industry Patterns
+- **Multimodal CNNs:** CNNs jo sirf images nahi dekhte balki 2026 ke autonomous robots ke liye "Depth" (LiDAR) aur "Thermal" data ko bhi process karte hain.
 - **Diffusion Backbones:** Most modern image generators (DALL-E 3) use a **U-Net** architecture (a type of CNN) as their core engine to denoise images.
 - **Neural Architecture Search (NAS):** Using AI to "design" the perfect CNN for a specific hardware chip (like an iPhone or an NVIDIA H200).

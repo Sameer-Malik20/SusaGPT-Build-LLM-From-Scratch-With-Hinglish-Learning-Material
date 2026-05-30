@@ -1,5 +1,5 @@
 # 🤖 What is AI, ML, DL, and LLM? The Hierarchy of Intelligence
-> **Level:** Beginner | **Language:** Hinglish | **Goal:** Master the conceptual boundaries and engineering differences between Artificial Intelligence, Machine Learning, Deep Learning, and Large Language Models.
+> **Level:** Beginner | **Language:** Hinglish | **Goal:** Artificial Intelligence, Machine Learning, Deep Learning, aur Large Language Models ke beech ke conceptual boundaries aur engineering differences ko master karna.
 
 ---
 
@@ -14,11 +14,11 @@ AI ki duniya aksar confusion se bhari hoti hai kyunki log in terms ko mix kar de
 ---
 
 ## 🧠 2. Deep Technical Explanation
-The hierarchy is defined by the **abstraction of feature engineering**:
-- **Symbolic AI:** Explicit rules. Features are hand-crafted by domain experts. No "learning" involved.
-- **Machine Learning (Classical):** Algorithms like Random Forest, SVM, or XGBoost. Features are still mostly hand-crafted (Feature Engineering), but the decision boundary is learned statistically.
-- **Deep Learning:** Features are learned automatically through **Representation Learning**. Multiple layers of non-linear transformations extract increasingly abstract features (edges -> shapes -> objects).
-- **Large Language Models (LLMs):** A subset of Deep Learning using the **Transformer Architecture**. They leverage **Unsupervised Pre-training** on internet-scale data. Their "Emergent Abilities" (reasoning, coding) come from the sheer scale of parameters and data.
+Intelligence ki hierarchy ko **feature engineering ki abstraction** se define kiya jata hai:
+- **Symbolic AI:** Explicit rules hote hain. Features ko domain experts dwara hand-craft kiya jata hai. Isme koi "learning" involve nahi hoti.
+- **Machine Learning (Classical):** Algorithms jaise Random Forest, SVM, ya XGBoost. Features ab bhi mostly hand-crafted (Feature Engineering) hote hain, lekin decision boundary ko statistically seekha jata hai.
+- **Deep Learning:** Features ko **Representation Learning** ke zariye automatically seekha jata hai. Non-linear transformations ki multiple layers increasingly abstract features (edges -> shapes -> objects) ko extract karti hain.
+- **Large Language Models (LLMs):** Deep Learning ka ek subset jo **Transformer Architecture** use karta hai. Ye internet-scale data par **Unsupervised Pre-training** ka use karte hain. Unki "Emergent Abilities" (reasoning, coding) parameters aur data ke sheer scale se aati hain.
 
 ---
 
@@ -33,9 +33,9 @@ The hierarchy is defined by the **abstraction of feature engineering**:
 ---
 
 ## 📐 4. Mathematical Intuition
-- **ML:** Finding a hyperplane that separates two classes in a feature space.
-- **DL:** Stacking multiple matrices to approximate a non-linear function $y = f(x; \theta)$.
-- **LLM:** Predicting the conditional probability of the next token $x_t$ given the sequence $x_{1...t-1}$:
+- **ML:** Ek aisi hyperplane find karna jo feature space me do classes ko separate karti hai.
+- **DL:** Ek non-linear function $y = f(x; \theta)$ ko approximate karne ke liye multiple matrices ko stack karna.
+- **LLM:** Sequence $x_{1...t-1}$ ke diye hone par agle token $x_t$ ki conditional probability ko predict karna:
   $$P(x_t | x_{1...t-1}) = \text{Softmax}(\text{Transformer}(x_{1...t-1}))$$
 
 ---
@@ -58,92 +58,92 @@ graph LR
 
 ## 💻 6. Production-Ready Examples (Choosing the Right Tool)
 ```python
-# 2026 Strategy: Use the simplest tool that works.
+# 2026 Strategy: Jo simplest tool kaam kare, wahi use karein.
 
 # 1. Simple AI (Rule-based)
 def calculate_tax(income):
     if income < 50000: return 0
     return income * 0.2
 
-# 2. Machine Learning (Scikit-learn) - For tabular data
+# 2. Machine Learning (Scikit-learn) - Tabular data ke liye
 from sklearn.ensemble import RandomForestClassifier
 def predict_churn(customer_data):
     model = RandomForestClassifier().fit(X_train, y_train)
     return model.predict(customer_data)
 
-# 3. LLM (OpenAI/Ollama) - For reasoning/language
+# 3. LLM (OpenAI/Ollama) - Reasoning/language ke liye
 def summarize_legal_doc(text):
     return llm.invoke(f"Summarize this document: {text}")
 
-# Pro-tip: Don't use an LLM for tax calculation! It might hallucinate numbers.
+# Pro-tip: Tax calculation ke liye LLM use mat karein! Ye numbers hallucinate kar sakta hai.
 ```
 
 ---
 
 ## ❌ 7. Failure Cases
-- **Overkill Failure:** Using an LLM for a task that is $100\%$ deterministic (like sorting a list). It's slow and expensive.
-- **Black Box Failure:** Using Deep Learning for bank loan approvals where "Explainability" is legally required. Classical ML (Decision Trees) is better here.
-- **Data Starvation:** Training a Deep Learning model with $500$ rows of data. It will overfit instantly.
+- **Overkill Failure:** Ek aisi task ke liye LLM use karna jo $100\%$ deterministic hai (jaise list ko sort karna). Ye slow aur expensive hota hai.
+- **Black Box Failure:** Bank loan approvals ke liye Deep Learning ka use karna jahan "Explainability" legally required hai. Classical ML (Decision Trees) yahan better option hai.
+- **Data Starvation:** Sirf $500$ rows of data ke saath Deep Learning model train karna. Ye instantly overfit ho jayega.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** Your LLM is giving inconsistent answers.
-- **Fix:** Check **Temperature** (set to 0 for consistency).
-- **Check:** **Prompt Clarity**. Are you giving enough context?
-- **Check:** **Model Size**. Are you using a 1B model for a 70B-level reasoning task?
+- **Symptom:** Aapka LLM inconsistent answers de raha hai.
+- **Fix:** **Temperature** check karein (consistency ke liye 0 set karein).
+- **Check:** **Prompt Clarity**. Kya aap enough context de rahe hain?
+- **Check:** **Model Size**. Kya aap 70B-level reasoning task ke liye 1B model use kar rahe hain?
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Traditional ML:** Fast, cheap, runs on CPU, explainable.
-- **Deep Learning:** High accuracy on complex data, needs GPU, hard to explain.
-- **LLM:** Zero-shot capability (no training needed), extremely expensive, high latency.
+- **Traditional ML:** Fast, cheap, CPU par run karta hai, explainable hai.
+- **Deep Learning:** Complex data par high accuracy, GPU ki need hoti hai, explain karna mushkil hai.
+- **LLM:** Zero-shot capability (kisi training ki zaroorat nahi), extremely expensive, high latency.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Data Privacy:** Sending customer data to a cloud LLM provider.
-- **Adversarial Attacks:** Adding "invisible" pixels to an image to make a DL model think a stop sign is a speed limit sign.
-- **Prompt Injection:** Tricking an LLM into leaking its system prompt or private database info.
+- **Data Privacy:** Customer ka data cloud LLM provider ko send karna.
+- **Adversarial Attacks:** Kisi image me "invisible" pixels add karna taaki DL model stop sign ko speed limit sign samajh le.
+- **Prompt Injection:** LLM ko trick karna taaki wo apna system prompt ya private database info leak kar de.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Compute:** LLMs need $H100$ clusters. ML needs a single $T4$ or even a CPU.
-- **Dataset Management:** Moving from MBs of CSV files (ML) to TBs of unstructured text/images (DL/LLM).
+- **Compute:** LLMs ko $H100$ clusters ki zaroorat hoti hai. ML ko ek single $T4$ ya CPU ki zaroorat hoti hai.
+- **Dataset Management:** MBs of CSV files (ML) se shift hokar TBs of unstructured text/images (DL/LLM) par jana.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **ML:** Milliseconds of CPU time ($\approx \$0.00001$).
-- **DL Inference:** Milliseconds of GPU time ($\approx \$0.0001$).
-- **LLM Inference:** Seconds of GPU time ($\approx \$0.01$ per query).
-- **Conclusion:** A $1000x$ cost difference exists between ML and LLM. Choose wisely.
+- **ML:** CPU time ke milliseconds ($\approx \$0.00001$).
+- **DL Inference:** GPU time ke milliseconds ($\approx \$0.0001$).
+- **LLM Inference:** GPU time ke seconds ($\approx \$0.01$ per query).
+- **Conclusion:** ML aur LLM ke beech $1000x$ cost difference hota hai. Wisely select karein.
 
 ---
 
 ## ✅ 13. Best Practices
 - **Data First:** Good data + simple ML $>$ Bad data + complex LLM.
-- **Evaluate Cost:** Calculate the "Cost per 1,000 calls" before finalizing an architecture.
-- **Hybrid Approach:** Use ML for filtering/routing and LLM for the final "Smart" response.
+- **Evaluate Cost:** Architecture finalize karne se pehle "Cost per 1,000 calls" calculate karein.
+- **Hybrid Approach:** Filtering/routing ke liye ML aur final "Smart" response ke liye LLM ka use karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Hype-driven Development:** Using LLMs for everything just because they are popular.
-- **Ignoring Baseline:** Not comparing your fancy Deep Learning model against a simple Linear Regression.
-- **Ignoring Inference Speed:** Building a model that takes 10 seconds to respond to a web request.
+- **Hype-driven Development:** LLMs ko har cheez ke liye use karna sirf isliye kyunki wo popular hain.
+- **Ignoring Baseline:** Apne fancy Deep Learning model ko ek simple Linear Regression ke against compare na karna.
+- **Ignoring Inference Speed:** Ek aisa model banana jo web request ko respond karne me 10 seconds leta hai.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"Can a Deep Learning model work without Feature Engineering?"** (Yes, that's its main purpose).
-2. **"Difference between Supervised and Unsupervised Learning in the context of LLMs?"** (Pre-training is Unsupervised, Fine-tuning is Supervised).
-3. **"Why do we need Neural Networks for Image recognition but not for house price prediction?"** (Images have high-dimensional spatial patterns that linear models can't capture).
+1. **"Kya Deep Learning model Feature Engineering ke bina kaam kar sakta hai?"** (Yes, yahi iska main purpose hai).
+2. **"LLMs ke context me Supervised aur Unsupervised Learning me kya difference hai?"** (Pre-training Unsupervised hoti hai, Fine-tuning Supervised hoti hai).
+3. **"Hume Image recognition ke liye Neural Networks ki need kyun hoti hai par house price prediction ke liye kyun nahi?"** (Images me high-dimensional spatial patterns hote hain jo linear models capture nahi kar sakte).
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Edge AI:** Running "Micro-LLMs" (under 1B parameters) locally on mobile phones to reduce latency and cost.
-- **Neuro-Symbolic AI:** Mixing the hard logic of "Rule-based AI" with the creative reasoning of "LLMs" to solve complex math and scientific problems.
+- **Edge AI:** Latency aur cost kam karne ke liye mobile phones par locally "Micro-LLMs" (under 1B parameters) run karna.
+- **Neuro-Symbolic AI:** Complex math aur scientific problems ko solve karne ke liye "Rule-based AI" ke hard logic ko "LLMs" ki creative reasoning ke saath mix karna.

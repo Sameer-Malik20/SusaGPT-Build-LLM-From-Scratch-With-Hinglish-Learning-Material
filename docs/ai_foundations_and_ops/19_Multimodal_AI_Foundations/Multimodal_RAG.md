@@ -1,5 +1,5 @@
 # 🔍 Multimodal RAG: Searching Beyond Text
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the architecture of Retrieval-Augmented Generation that includes images, videos, and PDFs, exploring Multimodal Embeddings, Vector Search for Images, and the 2026 strategies for "Visual Knowledge Bases."
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Images, videos, aur PDFs ko include karne wale Retrieval-Augmented Generation ke architecture ko master karein, Multimodal Embeddings, Images ke liye Vector Search, aur 2026 mein "Visual Knowledge Bases" banane ki strategies ko explore karein.
 
 ---
 
@@ -18,25 +18,25 @@ AI aapki "Gallery" mein se light bill ki photo dhoondta hai, use read karta hai,
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Multimodal RAG is implemented using **Multimodal Vector Databases.**
+Multimodal RAG ko **Multimodal Vector Databases** ka use karke implement kiya jata hai.
 
 ### 1. The Multi-Vector Approach:
-- **Strategy A (Text Summaries):** You use an AI to "Describe" every image in your database into text. Then you just search the text. (Simple but loses visual detail).
-- **Strategy B (Multimodal Embeddings):** You use **CLIP** or **ColPali** to convert images directly into vectors.
-  - When a user asks a question, you convert the *Question* into a vector and find the *Image* that is closest to it in the shared space.
+- **Strategy A (Text Summaries):** Aap ek AI ka use karke apne database ki har ek image ko text mein "Describe" kar lete hain. Fir aap us text ko search karte hain. (Ye simple hai par isme visual details lose ho jati hain).
+- **Strategy B (Multimodal Embeddings):** Aap **CLIP** ya **ColPali** ka use karke images ko directly vectors mein convert karte hain.
+  - Jab user koi sawaal puchta hai, toh aap us *Question* ko vector mein convert karte hain aur shared space mein uske sabse "Closest" *Image* ko dhoondte hain.
 
 ### 2. PDF Parsing (The 2026 Standard):
-- Instead of just extracting text from a PDF, we treat every page as an **Image.**
-- We use **ColPali** (a new model) that can index the "Visual Layout" of a page. It knows that a "Chart" at the top-right is important.
+- PDF se sirf text extract karne ke bajaye, hum har page ko ek **Image** ki tarah treat karte hain.
+- Hum **ColPali** (jo ki ek naya model hai) ka use karte hain jo page ke "Visual Layout" ko index kar sakta hai. Ise pata hota hai ki top-right mein bana "Chart" important hai.
 
 ### 3. The Retrieval Flow:
-1. **Indexing:** Convert Images/PDFs/Video-frames into vectors and store in **Pinecone/Milvus/Chroma.**
-2. **Retrieval:** Search for the Top-K most relevant images/chunks.
-3. **Reasoning (VLM):** Pass the original question + the retrieved images to a Multimodal LLM (like GPT-4o or LLaVA) to generate the final answer.
+1. **Indexing:** Images/PDFs/Video-frames ko vectors mein convert karna aur **Pinecone/Milvus/Chroma** jaise databases mein store karna.
+2. **Retrieval:** Top-K sabse relevant images/chunks ko search karna.
+3. **Reasoning (VLM):** Original question + retrieved images ko ek Multimodal LLM (jaise GPT-4o ya LLaVA) ko pass karna taaki final answer generate kiya ja sake.
 
 ---
 
-## 🏗️ 4. Text RAG vs. Multimodal RAG
+## 🏗️ 3. Text RAG vs. Multimodal RAG
 | Feature | Text-Only RAG | Multimodal RAG |
 | :--- | :--- | :--- |
 | **Data Source** | .pdf (text), .txt | .png, .jpg, .mp4, Charts |
@@ -50,7 +50,7 @@ Multimodal RAG is implemented using **Multimodal Vector Databases.**
 ## 📐 4. Mathematical Intuition
 - **The Cross-Modal Similarity:** 
   $$\text{Score} = \text{CosineSimilarity}(\text{QueryVector}, \text{ImageVector})$$
-  Since both vectors are in the same $D$-dimensional space (e.g., 768 dims for CLIP), the math is exactly the same as text-search. The hard part is the **Alignment** during model training.
+  Kyuki dono vectors same $D$-dimensional space (jaise CLIP ke liye 768 dims) mein hote hain, isliye math bilkul text-search ki tarah hi same hota hai. Sabse hard part model training ke dauran **Alignment** ka hota hai.
 
 ---
 
@@ -101,64 +101,64 @@ print(f"Match Score: {similarity.item():.4f}")
 ---
 
 ## ❌ 7. Failure Cases
-- **Small Text in Images:** CLIP can't read the small numbers inside a complex Excel screenshot. **Fix: Use 'OCR-based RAG' alongside visual RAG.**
-- **Over-reliance on Text:** If your database has 1 million images of "Sunset" and you search for "Peace," the model might give you a sunset even if you wanted a "Quiet Library."
-- **Context Window Limit:** You can't send 20 high-res images to a VLM at once. It will crash or become very slow. **Fix: Use 'Image Summaries' to filter the best 3.**
+- **Small Text in Images:** CLIP kisi complex Excel screenshot ke andar ke small numbers ko nahi padh pata. **Fix: Visual RAG ke sath-sath 'OCR-based RAG' bhi use karein.**
+- **Over-reliance on Text:** Agar aapke database mein "Sunset" ki 1 million images hain aur aap "Peace" search karte hain, toh model aapko sunset dikha sakta hai bhale hi aap "Quiet Library" chahte hon.
+- **Context Window Limit:** Aap ek sath 20 high-res images ko VLM mein nahi bhej sakte. Ye crash ho jayega ya bahut slow ho jayega. **Fix: Best 3 ko filter karne ke liye 'Image Summaries' ka use karein.**
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Search is returning irrelevant photos."
-- **Check:** **Embedding Model**. CLIP is great for "General" photos but bad for "Technical Schematics." Consider fine-tuning CLIP on your specific domain (e.g., Medical images).
-- **Symptom:** "VLM is hallucinating facts about the retrieved image."
-- **Check:** **Prompting**. Are you asking "Describe this image" or "Answer based ONLY on the text visible in this image"? Be strict.
+- **Symptom:** "Search irrelevant photos return kar raha hai."
+- **Check:** **Embedding Model**. CLIP "General" photos ke liye toh badhiya hai par "Technical Schematics" ke liye kharab hai. Apne specific domain (jaise Medical images) par CLIP ko fine-tune karne par vichar karein.
+- **Symptom:** "VLM retrieved image ke baare mein jhoothe facts (hallucinations) bol raha hai."
+- **Check:** **Prompting**. Kya aap "Describe this image" puch rahe hain ya fir "Answer based ONLY on the text visible in this image"? Prompt mein strict rahein.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
 - **Full Image vs. Cropped Objects:** 
-  - Indexing the whole image is cheaper. 
-  - Indexing every object inside the image (using Segment-Anything) is more accurate but $100x$ more expensive.
-- **Local vs. Cloud VDB:** Latency of moving images to the cloud.
+  - Poori image ko index karna sasta hota hai.
+  - Image ke andar ke har ek object ko index karna (Segment-Anything ka use karke) zyada accurate hai par $100x$ zyada expensive hai.
+- **Local vs. Cloud VDB:** Cloud par images ko move karne ki latency.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Visual Data Leak:** An employee searches for "Confidential Docs" and the RAG system retrieves a screenshot of a secret project. **Implement 'Access Control Lists' (ACLs) in your Vector DB.**
+- **Visual Data Leak:** Koi employee "Confidential Docs" search karta hai aur RAG system kisi secret project ka screenshot retrieve kar leta hai. **Iske liye apne Vector DB mein 'Access Control Lists' (ACLs) implement karein.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Video RAG:** Indexing 1000 hours of video. You have to "Sample" frames (e.g., 1 frame per second), which means you might miss a 0.5s event. **Solution: Use 'Event-based Sampling'.**
+- **Video RAG:** 1000 ghante ke video ko index karna. Aapko frames ko "Sample" karna padta hai (jaise 1 frame per second), jiska matlab hai ki aap koi 0.5s ka event miss kar sakte hain. **Solution: 'Event-based Sampling' ka use karein.**
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Vision-Token Bill:** Sending retrieved images to GPT-4o costs tokens. **Strategy: Convert retrieved images to 'Markdown tables' (using a cheap local model) before sending to the expensive LLM.**
+- **Vision-Token Bill:** Retrieved images ko GPT-4o par bhejne mein tokens consume hote hain. **Strategy: Expensive LLM par bhejne se pehle retrieved images ko (kisi saste local model ka use karke) 'Markdown tables' in convert kar lein.**
 
 ---
 
 ## ✅ 13. Best Practices
-- **Hybrid Search:** Search using **Text Embeddings + Visual Embeddings + Metadata (Date/Location)**.
-- **Multimodal Chunking:** Instead of fixed size text blocks, chunk by "Logical Sections" (e.g., Page 1, Page 2, Chart 1).
-- **Use 'ColPali':** As of 2026, it's the state-of-the-art for PDF RAG because it understands layout.
+- **Hybrid Search:** **Text Embeddings + Visual Embeddings + Metadata (Date/Location)** ka ek sath use karke search karein.
+- **Multimodal Chunking:** Fixed size text blocks ke bajaye, "Logical Sections" (jaise Page 1, Page 2, Chart 1) ke hisab se chunking karein.
+- **Use 'ColPali':** 2026 ke hisab se, ye PDF RAG ke liye state-of-the-art hai kyuki ye layout ko samajhta hai.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Assuming 'Text Extraction' is enough:** Thinking that `PyPDF` can handle a PDF that is actually just a collection of scanned images (No selectable text). Always use an **OCR** fallback.
-- **Ignoring Image Quality:** Indexing blurry or low-res thumbnails.
+- **Assuming 'Text Extraction' is enough:** Ye sochna ki `PyPDF` kisi aise PDF ko handle kar lega jo actual mein scanned images ka collection hai (jisme selectable text nahi hota). Hamesha ek **OCR** fallback rakhein.
+- **Ignoring Image Quality:** Blurry ya low-resolution thumbnails ko index karna.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is the 'Multi-Vector' approach in Multimodal RAG?"**
-2. **"How does ColPali differ from standard CLIP-based retrieval?"**
-3. **"Explain the pipeline for building a 'Video Search' engine."**
+1. **"Multimodal RAG mein 'Multi-Vector' approach kya hoti hai?"**
+2. **"ColPali standard CLIP-based retrieval se kaise different hai?"**
+3. **"Ek 'Video Search' engine banane ki pipeline explain karein."**
 
 ---
 
-## 🚀 15. Latest 2026 Industry Patterns
-- **Audio-native RAG:** Searching through "Podcasts" and "Voice Memos" using natural language.
-- **AR RAG:** Wearing smart glasses that "Recognize" the objects in front of you and retrieve "Manuals" or "Prices" from your private knowledge base in real-time.
-- **Unified Embedding Models (ImageBind):** One vector space for Text, Image, Audio, Depth, Thermal, and IMU data.
+## 🚀 16. Latest 2026 Industry Patterns
+- **Audio-native RAG:** Natural language ka use karke "Podcasts" aur "Voice Memos" mein search karna.
+- **AR RAG:** Smart glasses pehanna jo aapke samne ke objects ko "Recognize" karein aur real-time mein aapke private knowledge base se "Manuals" ya "Prices" retrieve karein.
+- **Unified Embedding Models (ImageBind):** Text, Image, Audio, Depth, Thermal, aur IMU data ke liye ek hi single vector space.

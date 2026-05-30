@@ -1,5 +1,5 @@
-# 🤖 Machine Learning Fundamentals: The Core Science of AI
-> **Level:** Beginner | **Language:** Hinglish | **Goal:** Master the foundational principles of Machine Learning, including the types of learning, key algorithms, and the underlying statistical mechanics.
+# 🤖 Machine Learning Fundamentals: AI Ki Core Science
+> **Level:** Beginner | **Language:** Hinglish | **Goal:** Machine Learning ke foundational principles ko master karna, jisme types of learning, key algorithms, aur underlying statistical mechanics shamil hain.
 
 ---
 
@@ -14,20 +14,20 @@ Is module mein hum seekhenge ki machine kaise "Sawal" aur "Jawaab" ko dekh kar u
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Machine Learning is the study of computer algorithms that improve automatically through experience. It is divided into three main paradigms:
-1. **Supervised Learning:** Learning with labeled data ($X \to Y$). Goal: Find a function $f$ such that $f(X) \approx Y$. (e.g., Classification, Regression).
-2. **Unsupervised Learning:** Learning without labels. Goal: Find hidden patterns or structures in data (e.g., Clustering, Dimensionality Reduction).
-3. **Reinforcement Learning:** Learning through trial and error to maximize a reward. (e.g., Game playing, Robotics).
+Machine Learning un computer algorithms ka study hai jo experience ke through automatically improve hote hain. Ise teen main paradigms me divide kiya jata hai:
+1. **Supervised Learning:** Labeled data ($X \to Y$) ke sath seekhna. Goal: Ek aisa function $f$ find karna jisse $f(X) \approx Y$ ho. (e.g., Classification, Regression).
+2. **Unsupervised Learning:** Bina labels ke seekhna. Goal: Data me hidden patterns ya structures find karna (e.g., Clustering, Dimensionality Reduction).
+3. **Reinforcement Learning:** Reward ko maximize karne ke liye trial aur error ke through seekhna. (e.g., Game playing, Robotics).
 
 **The Workflow:**
-- **Inference:** Using a trained model to make predictions.
-- **Training:** The process of optimizing model parameters ($\theta$) to minimize a Loss Function.
-- **Generalization:** The ability of a model to perform well on new, unseen data (the ultimate goal of ML).
+- **Inference:** Predictions karne ke liye trained model ka use karna.
+- **Training:** Loss Function ko minimize karne ke liye model parameters ($\theta$) ko optimize karne ki process.
+- **Generalization:** Model ki new, unseen data par achha perform karne ki ability (ML ka ultimate goal).
 
 ---
 
 ## 🏗️ 3. The ML Algorithm Map
-| Algorithm | Type | Logic | Use Case |
+| Algorithm | Type | Logic (Tark) | Use Case (Upyog) |
 | :--- | :--- | :--- | :--- |
 | **Linear Regression** | Regression | Line of best fit | Predicting House Prices |
 | **Logistic Regression** | Classification | Probability Threshold | Spam Detection |
@@ -38,10 +38,10 @@ Machine Learning is the study of computer algorithms that improve automatically 
 ---
 
 ## 📐 4. Mathematical Intuition
-At its heart, ML is **Function Approximation**.
-- **Parametric Models:** Assume the function has a fixed form (e.g., $y = wx + b$). We just need to find $w$ and $b$.
-- **Non-Parametric Models:** The function form grows with the data (e.g., KNN).
-- **The Optimization Goal:** Minimizing the **Expected Risk**. Since we don't know the future, we minimize the **Empirical Risk** (the error on our current data).
+Apne core me, ML **Function Approximation** hai.
+- **Parametric Models:** Ye assume karte hain ki function ka ek fixed form hai (e.g., $y = wx + b$). Hume bas $w$ aur $b$ find karne ki zaroorat hoti hai.
+- **Non-Parametric Models:** Function ka form data ke sath grow karta hai (e.g., KNN).
+- **The Optimization Goal:** **Expected Risk** ko minimize karna. Kyunki hum future nahi jaante, isliye hum **Empirical Risk** (apne current data par error) ko minimize karte hain.
 
 ---
 
@@ -62,7 +62,7 @@ graph TD
 
 ## 💻 6. Production-Ready Examples (Building a Regressor)
 ```python
-# 2026 Pro-Tip: Use Scikit-Learn for baseline ML before jumping to DL.
+# 2026 Pro-Tip: DL par jump karne se pehle baseline ML ke liye Scikit-Learn ka use karein.
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
@@ -89,66 +89,66 @@ print(f"Prediction Error: ${error**0.5:.2f}")
 ---
 
 ## ❌ 7. Failure Cases
-- **Data Leakage:** Accidentally including the "Answer" in the training features. (e.g., including "Monthly Profit" to predict "Annual Revenue").
-- **Survivorship Bias:** Training a model only on data from "Successful" cases, making it blind to why things fail.
-- **Concept Drift:** The relationship between $X$ and $Y$ changes over time (e.g., house prices during a recession).
+- **Data Leakage:** Galti se training features me "Answer" (jawaab) ko shamil kar lena. (e.g., "Annual Revenue" ko predict karne ke liye "Monthly Profit" ko shamil karna).
+- **Survivorship Bias:** Model ko sirf "Successful" cases ke data par train karna, jisse ye un reasons ke prati blind ho jata hai jinki wajah se failure hoti hai.
+- **Concept Drift:** Time ke sath $X$ aur $Y$ ke beech ka relationship change ho jana (e.g., recession ke dauran house prices).
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** Model has 100% accuracy on training data but 10% on test data.
-- **Check:** **Overfitting**. Your model has "memorized" the data instead of "learning" it. Use **Regularization** or **Cross-Validation**.
-- **Symptom:** Model is predicting the same value for every input.
-- **Check:** **Target Imbalance**. If 99% of your data is "Not Spam," the model might learn that saying "Not Spam" is the safest bet.
+- **Symptom:** Model ki training data par 100% accuracy hai par test data par 10% hai.
+- **Check:** **Overfitting**. Computes ko update karne ke liye "learning" ke bajaye model ne data ko "memorize" kar liya hai. **Regularization** ya **Cross-Validation** ka use karein.
+- **Symptom:** Model har ek input ke liye same value predict kar raha hai.
+- **Check:** **Target Imbalance**. Agar aapka 99% data "Not Spam" hai, toh model ye seekh sakta hai ki "Not Spam" kehna hi sabse safe bet hai.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Interpretability vs. Accuracy:** A Decision Tree is easy to explain but less accurate. A Neural Network is a Black Box but highly accurate.
-- **Training Time vs. Inference Speed:** Some models (like KNN) have 0 training time but are very slow during inference.
+- **Interpretability vs. Accuracy:** Decision Tree ko explain karna easy hai par ye less accurate hota hai. Neural Network ek Black Box hai par highly accurate hota hai.
+- **Training Time vs. Inference Speed:** Kuch models (jaise KNN) ka training time 0 hota hai par wo inference ke dauran bahut slow hote hain.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Adversarial Perturbation:** Changing a single feature slightly to trick the model (e.g., adding a small sticker to a stop sign to make a car see it as 45mph).
-- **Data Poisoning:** An attacker injects "False" data into your training set to systematically bias your model's future decisions.
+- **Adversarial Perturbation:** Model ko trick karne ke liye kisi single feature ko slightly change karna (e.g., stop sign par ek chota sticker lagana taaki car use 45mph ki tarah dekhe).
+- **Data Poisoning:** Ek attacker aapke training set me "False" data inject kar deta hai taaki aapke model ke future decisions ko systematically bias kiya ja sake.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The 1 Billion Row Problem:** Standard ML libraries (like Scikit-Learn) run in-memory. For datasets that don't fit in RAM, you need **Distributed ML** (like Spark ML or XGBoost on Dask).
-- **Online Learning:** Updating a model in real-time as new data comes in, without retraining from scratch.
+- **The 1 Billion Row Problem:** Standard ML libraries (jaise Scikit-Learn) in-memory run karti hain. Aise datasets ke liye jo RAM me fit nahi hote, aapko **Distributed ML** (jaise Spark ML ya XGBoost on Dask) ki need hoti hai.
+- **Online Learning:** Jaise hi new data aaye, model ko bina scratch se retrain kiye real-time me update karna.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Data Labeling is the biggest cost:** Hiring humans to label 1 million images can cost $\$100,000+$.
-- **Automated Labeling:** Use LLMs or "Weak Supervision" (Snorkel) to label data at $1/100th$ of the cost.
+- **Data Labeling sabse bada cost hai:** 1 million images ko label karne ke liye humans ko hire karna $\$100,000+$ cost kar sakta hai.
+- **Automated Labeling:** $1/100th$ cost par data ko label karne ke liye LLMs ya "Weak Supervision" (Snorkel) ka use karein.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Baseline First:** Always start with a simple model (Linear Regression/Random Forest) before trying a Neural Network.
-- **Normalize Your Data:** Features with different scales (e.g., Age 0-100 vs. Salary 0-1M) can confuse most ML algorithms.
-- **Cross-Validation:** Use K-Fold Cross-Validation to get a reliable estimate of your model's performance.
+- **Baseline First:** Neural Network try karne se pehle hamesha ek simple model (Linear Regression/Random Forest) se start karein.
+- **Normalize Your Data:** Different scales wale features (e.g., Age 0-100 vs. Salary 0-1M) most ML algorithms ko confuse kar sakte hain.
+- **Cross-Validation:** Apne model ki performance ka reliable estimate paane ke liye K-Fold Cross-Validation ka use karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Ignoring the "No Free Lunch" Theorem:** No single algorithm is best for every problem.
-- **Not checking Feature Importance:** Training a model with 500 features when only 5 of them are actually useful.
-- **Ignoring Outliers:** One "extreme" data point can completely shift your Linear Regression line.
+- **Ignoring the "No Free Lunch" Theorem:** Point parameters check karein; koi bhi single algorithm har problem ke liye best nahi hai.
+- **Not checking Feature Importance:** 500 features ke sath model train karna jab unme se sirf 5 hi actually useful hon.
+- **Ignoring Outliers:** Ek "extreme" data point aapki Linear Regression line ko completely shift kar sakta hai.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is the difference between Parametric and Non-parametric models?"**
-2. **"Explain the 'Bias-Variance Tradeoff' in one sentence."** (The balance between underfitting and overfitting).
-3. **"Why do we need a separate 'Validation' set in addition to 'Train' and 'Test'?"**
+1. **"Parametric aur Non-parametric models me kya difference hai?"**
+2. **"Ek sentence me 'Bias-Variance Tradeoff' ko explain karein."** (Underfitting aur overfitting ke beech ka balance).
+3. **"Hume 'Train' aur 'Test' ke alawa ek separate 'Validation' set ki need kyun hoti hai?"**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **AutoML 2.0:** Systems that not only find the best model but also automatically engineer the best features and deploy the model to the cloud.
-- **Foundation Models for Tabular Data:** Using Transformer-based models (like TabPFN) that can do "In-context learning" on Excel-style data without any training.
-- **Privacy-Preserving ML:** Using **Homomorphic Encryption** to train models on data that stays encrypted, ensuring $100\%$ privacy.
+- **AutoML 2.0:** Aise systems jo na sirf best model find karte hain balki automatically best features engineer karte hain aur model ko cloud par deploy karte hain.
+- **Foundation Models for Tabular Data:** Transformer-based models (jaise TabPFN) ka use karna jo bina kisi training ke Excel-style data par "In-context learning" kar sakte hain.
+- **Privacy-Preserving ML:** Data jo encrypted rehta hai, uspar models ko train karne ke liye **Homomorphic Encryption** ka use karna, jo $100\%$ privacy ensure karta hai.

@@ -1,5 +1,5 @@
 # 🎨 ChromaDB: The AI-Native Vector Database
-> **Level:** Beginner to Intermediate | **Language:** Hinglish | **Goal:** Master the world's most developer-friendly open-source vector database, exploring how to build and query local RAG systems with zero configuration in 2026.
+> **Level:** Beginner to Intermediate | **Language:** Hinglish | **Goal:** Duniya ke sabse developer-friendly open-source vector database ko master karein, aur explore karein ki kaise 2026 mein zero configuration ke sath local RAG systems build aur query kiye jaate hain.
 
 ---
 
@@ -18,37 +18,37 @@ Chroma ka mantra hai: **"Simple, Fast, and Open Source."**
 ---
 
 ## 🧠 2. Deep Technical Explanation
-ChromaDB is a database built specifically for embeddings and their metadata.
+ChromaDB ek aisa database hai jo specifically embeddings aur unke metadata ke liye banaya gaya hai.
 
 ### 1. The Architecture:
-- Under the hood, it uses **HNSW** (Hierarchical Navigable Small World) for vector search.
-- It uses **DuckDB** for metadata storage and filtering.
-- **ClickHouse** is used for the production-scale version to handle massive throughput.
+- Under the hood, ye vector search ke liye **HNSW** (Hierarchical Navigable Small World) ka use karta hai.
+- Ye metadata storage aur filtering ke liye **DuckDB** ka use karta hai.
+- Massive throughput ko handle karne ke liye production-scale version mein **ClickHouse** ka use kiya jata hai.
 
 ### 2. Automatic Embeddings:
-- Unlike FAISS, where you must provide vectors, Chroma can integrate with models (OpenAI, HuggingFace, Ollama) to automatically convert your text into vectors when you `add()` it.
+- FAISS ke opposite (jahan aapko vectors khud provide karne hote hain), Chroma models (OpenAI, HuggingFace, Ollama) ke saath integrate kar sakta hai, taaki jab aap data `add()` karein to ye automatically aapke text ko vectors mein convert kar de.
 
 ### 3. Metadata Filtering:
-- You can store extra info with each vector (e.g., `source: "book1.pdf"`, `page: 5`). 
-- When querying, you can say: *"Find me things similar to 'Dog', but ONLY from book1.pdf."* This is a powerful feature for real-world RAG.
+- Aap har vector ke saath extra info store kar sakte hain (e.g., `source: "book1.pdf"`, `page: 5`).
+- Query karte samay aap keh sakte hain: *"Mujhe 'Dog' se similar cheezein dhoondh ke do, lekin ONLY book1.pdf se."* Real-world RAG ke liye ye ek bahut hi powerful feature hai.
 
 ---
 
 ## 🏗️ 3. ChromaDB vs. Pinecone
 | Feature | ChromaDB | Pinecone |
 | :--- | :--- | :--- |
-| **Hosting** | **Local (Your PC)** | Managed Cloud |
+| **Hosting** | **Local (Aapka PC)** | Managed Cloud |
 | **Pricing** | **Free (Open Source)** | Usage-based (Paid) |
 | **Setup** | `pip install chromadb` | API Key + Network |
-| **Privacy** | **Total (Offline)** | Data is on Pinecone's servers |
-| **Scale** | Great for single apps | Better for massive enterprises |
+| **Privacy** | **Total (Offline)** | Data Pinecone ke servers par hota hai |
+| **Scale** | Single apps ke liye behtar hai | Massive enterprises ke liye behtar hai |
 
 ---
 
 ## 📐 4. Mathematical Intuition
-- **The HNSW Graph:** 
-  Imagine a graph where every point is a document. To find a document, you start at a random point and "Jump" to the neighbor that is closest to your target. 
-  HNSW builds multiple "Layers" of these graphs—the top layer has very few points (long jumps), and the bottom layer has all points (short, precise jumps). This makes search $O(\log N)$.
+- **The HNSW Graph:**
+  Ek aise graph ko imagine karein jahan har ek point ek document hai. Kisi document ko find karne ke liye, aap ek random point se start karte hain aur target ke sabse close wale neighbor par "Jump" karte hain.
+  HNSW in graphs ki multiple "Layers" banata hai—top layer mein bahut kam points hote hain (long jumps ke liye), aur bottom layer mein saare points hote hain (short, precise jumps ke liye). Isse search complexiy $O(\log N)$ ho jati hai.
 
 ---
 
@@ -68,24 +68,24 @@ graph LR
 
 ## 💻 6. Production-Ready Examples (Building a Local Knowledge Base)
 ```python
-# 2026 Pro-Tip: Use persistent storage so your data isn't lost on restart.
+# 2026 Pro-Tip: Persistent storage ka use karein taaki restart par aapka data lost na ho.
 
 import chromadb
 
-# 1. Initialize client with Persistence
+# 1. Persistence ke saath client ko initialize karein
 client = chromadb.PersistentClient(path="./my_knowledge_base")
 
-# 2. Create a Collection (Like a Table)
+# 2. Collection (Table ki tarah) create karein
 collection = client.create_collection(name="company_docs")
 
-# 3. Add data (Metadata is key for filtering later!)
+# 3. Data add karein (Baad mein filtering ke liye metadata key hai!)
 collection.add(
     documents=["Our office is in Bangalore", "Employees get free lunch"],
     metadatas=[{"category": "office"}, {"category": "perks"}],
     ids=["id1", "id2"]
 )
 
-# 4. Query
+# 4. Query karein
 results = collection.query(
     query_texts=["Where do we work?"],
     n_results=1,
@@ -98,62 +98,63 @@ print(results['documents'][0])
 ---
 
 ## ❌ 7. Failure Cases
-- **VRAM Competition:** Running ChromaDB's embedding model on the same GPU as your LLM. Both will fight for memory and slow down. **Fix: Run Chroma on CPU if the dataset is small.**
-- **Stale Persistence:** Updating your documents but forgetting to update the IDs in Chroma. You will end up with "Duplicate" data in your search results.
-- **Collection Bloat:** Creating 1000s of collections. Chroma works better with a few large collections using metadata filters.
+- **VRAM Competition:** ChromaDB ke embedding model ko usi same GPU par run karna jahan aapka LLM chal raha hai. Dono memory ke liye compete karenge aur speed slow ho jayegi. **Fix: Agar dataset chhota hai, to Chroma ko CPU par run karein.**
+- **Stale Persistence:** Apne documents ko update karna lekin Chroma mein IDs ko update karna bhool jana. Isse aapke search results mein "Duplicate" data aane lagega.
+- **Collection Bloat:** 1000s of collections create karna. Chroma metadata filters ka use karke kuch bade collections ke saath behtar kaam karta hai.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Search results are irrelevant."
-- **Check:** **Embedding Model**. If you added data with Model A and queried with Model B, the vectors won't match. **Always use the same model for Index and Query.**
+- **Symptom:** "Search results irrelevant hain."
+- **Check:** **Embedding Model**. Agar aapne Model A ke saath data add kiya tha aur Model B ke saath query kar rahe hain, to vectors match nahi honge. **Index aur Query ke liye hamesha same model ka hi use karein.**
 - **Symptom:** "Import Error: DuckDB."
-- **Check:** ChromaDB dependencies. Re-install using `pip install chromadb --upgrade`.
+- **Check:** ChromaDB dependencies. `pip install chromadb --upgrade` ka use karke re-install karein.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **In-Memory vs. Persistent:** In-memory is $2x$ faster but data is lost on exit. Persistent is better for $99\%$ of use cases.
-- **Local vs. Server Mode:** Chroma can run as a "Standalone Server" (using Docker) which is better for web apps than "Embedded Mode."
+- **In-Memory vs. Persistent:** In-memory $2x$ faster hota hai lekin exit karne par data lost ho jata hai. Persistent $99\%$ use cases ke liye behtar hai.
+- **Local vs. Server Mode:** Chroma ek "Standalone Server" (Docker ka use karke) ki tarah run kar sakta hai jo ki web apps ke liye "Embedded Mode" se behtar hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Collection Injection:** If a user can control the `where` filter, they might be able to see documents they aren't authorized to see. **Always validate metadata filters on the backend.**
+- **Collection Injection:** Agar koi user `where` filter ko control kar sakta hai, to ho sakta hai wo un documents ko bhi dekh le jinhe dekhne ki permission use nahi hai. **Hamesha backend par metadata filters ko validate karein.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The Python Global Interpreter Lock (GIL):** High-traffic Python Chroma servers can hit a wall. **Use the 'Chroma-Go' or 'Rust' bindings for higher throughput in 2026.**
+- **The Python Global Interpreter Lock (GIL):** High-traffic Python Chroma servers par bandwidth limits aa sakti hain. **2026 mein higher throughput ke liye 'Chroma-Go' ya 'Rust' bindings ka use karein.**
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Hosting:** You only pay for the SSD storage and RAM on your server. Zero per-request fees.
+- **Hosting:** Aapko sirf apne server ke SSD storage aur RAM ke liye hi pay karna hota hai. Isme koi per-request fee nahi hoti.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use 'Update' instead of 'Add'** if you aren't sure if the ID already exists.
-- **Index periodically:** If you add millions of docs, don't query while adding. Add them all, then let Chroma build the HNSW graph.
-- **Custom Embedding Functions:** Use specialized models (like `multi-qa-mpnet-base-dot-v1`) if you are doing Question-Answering.
+- Agar aap sure nahi hain ki ID pehle se exist karti hai ya nahi, to **'Add' ke bajaye 'Update' use karein**.
+- **Periodically Index karein:** Agar aap millions of docs add kar rahe hain, to adding ke dauran query na karein. Pehle sabhi ko add kar lein, phir Chroma ko HNSW graph build karne dein.
+- **Custom Embedding Functions:** Agar aap Question-Answering kar rahe hain, to specialized models (jaise `multi-qa-mpnet-base-dot-v1`) ka use karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **No Persistence:** Not setting a `path` and wondering where the data went after the script finished.
-- **Ignoring IDs:** Using random IDs like `str(random.random())`. Use something meaningful (like the file hash) to prevent duplicates.
+- **No Persistence:** `path` set na karna aur ye sochna ki script finish hone ke baad data kahan chala gaya.
+- **IDs ko ignore karna:** `str(random.random())` jaise random IDs ka use karna. Duplicates ko rokne ke liye kuch meaningful use karein (jaise file hash).
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"Why is ChromaDB called 'AI-Native'?"**
-2. **"How does Metadata Filtering work in ChromaDB?"**
-3. **"What is the difference between PersistentClient and HttpClient in Chroma?"**
+1. **"ChromaDB ko 'AI-Native' kyu kaha jata hai?"**
+2. **"ChromaDB mein Metadata Filtering kaise kaam karti hai?"**
+3. **"Chroma mein PersistentClient aur HttpClient ke beech kya difference hai?"**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Multi-Modal Chroma:** Storing Images, Audio, and Text in the same collection using **CLIP** embeddings.
-- **Edge Deployment:** ChromaDB running on mobile devices (via WASM/Rust) for local, private smartphone AI.
-- **Hybrid Search in Chroma:** Using both Keyword (BM25) and Vector (Semantic) search in one single query.
+- **Multi-Modal Chroma:** **CLIP** embeddings ka use karke same collection mein Images, Audio, aur Text store karna.
+- **Edge Deployment:** Local aur private smartphone AI ke liye mobile devices par (WASM/Rust ke throw) ChromaDB run karna.
+- **Hybrid Search in Chroma:** Ek hi query mein Keyword (BM25) aur Vector (Semantic) search dono ka use karna.
+

@@ -1,5 +1,5 @@
 # 📜 Logging & Tracing for LLMs: The Audit Trail
-> **Level:** Intermediate | **Language:** Hinglish | **Goal:** Master the art of recording and analyzing LLM interactions, exploring OpenInference, LangSmith, Tracing RAG pipelines, and the 2026 strategies for debugging complex AI workflows.
+> **Level:** Intermediate | **Language:** Hinglish | **Goal:** LLM interactions ko record aur analyze karne ki art ko master karein, OpenInference, LangSmith, RAG pipelines ko trace karna, aur 2026 mein complex AI workflows ko debug karne ki strategies ko explore karte hue.
 
 ---
 
@@ -22,22 +22,22 @@ AI model se baat karna "One-way" nahi hota, wo ek "Bada Process" hota hai.
 ---
 
 ## 🧠 2. Deep Technical Explanation
-LLM Tracing is built on top of **OpenTelemetry (OTEL)** and the **OpenInference** standard.
+LLM Tracing **OpenTelemetry (OTEL)** aur **OpenInference** standard ke upar built hai.
 
 ### 1. The Trace Structure:
-- **Trace:** The entire journey of a single user request.
-- **Span:** A single unit of work (e.g., An LLM call, a Vector DB search, a Tool execution).
-- **Attributes:** Metadata attached to spans (e.g., Token count, Model name, Latency).
+- **Trace:** Ek single user request ki puri journey.
+- **Span:** Kaam ki ek single unit (e.g., Ek LLM call, ek Vector DB search, ek Tool execution).
+- **Attributes:** Spans ke sath attached metadata (e.g., Token count, Model name, Latency).
 
 ### 2. Tracing RAG Pipelines:
-- In RAG, a trace must capture:
-  - **Query Embedding:** Which model was used?
-  - **Retrieved Documents:** Which chunks were found? What were their relevance scores?
-  - **Prompt Template:** What was the final prompt sent to the LLM?
-  - **Generation:** The final answer and its logprobs.
+- RAG mein, ek trace ko yeh capture karna chahiye:
+  - **Query Embedding:** Kaunsa model use kiya gaya tha?
+  - **Retrieved Documents:** Kaunse chunks mile? Unke relevance scores kya the?
+  - **Prompt Template:** LLM ko bheja gaya final prompt kya tha?
+  - **Generation:** Final answer aur uske logprobs.
 
 ### 3. Asynchronous Logging:
-- Never log "Synchronously" in a production API. If your logging database is slow, your user will wait. **Always use an 'Async Logger' or a 'Sidecar' pattern.**
+- Production API mein kabhi bhi "Synchronously" log na karein. Agar aapka logging database is slow, toh aapka user wait karega. **Hamesha ek 'Async Logger' ya 'Sidecar' pattern ka use karein.**
 
 ---
 
@@ -48,15 +48,15 @@ LLM Tracing is built on top of **OpenTelemetry (OTEL)** and the **OpenInference*
 | **Focus** | Errors and Events | **Latency and Logic flow** |
 | **Example** | `Error: API Timeout` | `Query -> Search(2s) -> LLM(1s)` |
 | **Tool** | ELK Stack / CloudWatch | **LangSmith / Arize Phoenix** |
-| **Complexity** | Low | High |
+| **Complexity** | Low | High (Zyada) |
 
 ---
 
 ## 📐 4. Mathematical Intuition
 - **The Sampling Ratio:** 
-  Logging 100% of LLM text is expensive ($1$ token generated = $1$ token logged). 
+  LLM text ko 100% log karna expensive hai ($1$ token generated = $1$ token logged). 
   $$\text{Storage Cost} = \text{Requests} \times \text{Avg. Tokens} \times \text{Cost per GB}$$
-  **The 2026 Strategy:** Log **$100\%$ of Metadata** (Latency, Success/Fail) but only **$5\%$ of Content** (The actual text) for manual review.
+  **2026 Strategy:** **$100\%$ Metadata** (Latency, Success/Fail) log karein, par manual review ke liye sirf **$5\%$ Content** (actual text) log karein.
 
 ---
 
@@ -67,7 +67,7 @@ graph TD
     S1 --> S2[Span 2: Vector Search]
     S2 --> S3[Span 3: LLM Summarization]
     
-    subgraph "Details of Span 3"
+    subgraph "Span 3 ke details"
     S3 -- "Input" --> P[Prompt: 'You are an assistant...']
     S3 -- "Output" --> A[Answer: 'This PDF is about...']
     S3 -- "Metadata" --> M[Tokens: 500, Latency: 1.2s]
@@ -80,87 +80,87 @@ graph TD
 
 ## 💻 6. Production-Ready Examples (Manual Tracing with OpenInference)
 ```python
-# 2026 Pro-Tip: Use 'OpenInference' for vendor-agnostic tracing.
+# 2026 Pro-Tip: Vendor-agnostic tracing ke liye 'OpenInference' ka use karein.
 
 from openinference.instrumentation.openai import OpenAIInstrumentor
 from opentelemetry import trace
 from opentelemetry.sdk.trace import TracerProvider
 
-# 1. Setup the Tracer
+# 1. Tracer setup karein
 trace.set_tracer_provider(TracerProvider())
 OpenAIInstrumentor().instrument()
 
-# 2. This LLM call is now automatically 'Wrapped' in a trace
-# It will capture the prompt, the response, and the token usage
+# 2. Yeh LLM call ab automatically ek trace mein 'Wrapped' (lapta hua) ho jayegi
+# Yeh prompt, response, aur token usage ko capture karegi
 import openai
 response = openai.chat.completions.create(
     model="gpt-4o",
     messages=[{"role": "user", "content": "Explain Quantum Physics."}]
 )
 
-# You can now see this in Jaeger, Honeycomb, or Arize Phoenix.
+# Ab aap ise Jaeger, Honeycomb, ya Arize Phoenix mein dekh sakte hain.
 ```
 
 ---
 
 ## ❌ 7. Failure Cases
-- **Circular Tracing:** Accidentally logging the "Log" itself, creating an infinite loop that crashes the server.
-- **Sensitive Data Leak:** Logging the user's password because it was part of the "Query." **Fix: Use 'PII Redactors' in the logging middleware.**
-- **High Latency:** Your tracing library is taking $500ms$ to send the trace to the server, making the app feel slow.
+- **Circular Tracing:** Galti se "Log" ko hi log kar dena, jisse ek infinite loop ban jata hai aur server crash ho jata hai.
+- **Sensitive Data Leak:** User ke password ko log kar dena kyunki woh "Query" ka part tha. **Fix: Logging middleware mein 'PII Redactors' ka use karein.**
+- **High Latency:** Aapki tracing library trace ko server par bhejne mein $500ms$ le rahi hai, jisse app slow feel ho raha hai.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "AI answer is 'I don't know', even though info is in the DB."
-- **Check:** **Retriever Span**. Look at the trace. Did the search actually find the right chunks? If the retrieved docs are irrelevant, the LLM isn't at fault—the Search is.
-- **Symptom:** "Suddenly all LLM calls are failing."
-- **Check:** **Trace Metadata**. Look for `Error: RateLimitExceeded`. Your API key is probably over its limit.
+- **Symptom:** "AI ka answer 'I don't know' hai, jabki info DB mein hai."
+- **Check:** **Retriever Span**. Trace ko dekhein. Kya search ne actually sahi chunks find kiye? Agar retrieved docs irrelevant hain, toh LLM ki galti nahi hai—galti Search ki hai.
+- **Symptom:** "Suddenly saari LLM calls fail ho rahi hain."
+- **Check:** **Trace Metadata**. `Error: RateLimitExceeded` ko check karein. Aapki API key shayad limit se upar ho chuki hai.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
 - **Self-hosted vs. SaaS:** 
-  - SaaS (LangSmith) is beautiful and zero-setup but expensive. 
-  - Self-hosted (Arize Phoenix / Jaeger) is free but you have to manage the database and servers.
+  - SaaS (LangSmith) beautiful aur zero-setup hota hai par expensive hota hai. 
+  - Self-hosted (Arize Phoenix / Jaeger) free hota hai par aapko database aur servers khud manage karne padte hain.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Prompt Leakage via Logs:** If your internal logging dashboard is hacked, all your "Secret" system prompts and user conversations are exposed. **Enable 'Encryption at rest' for your logs.**
+- **Prompt Leakage via Logs:** Agar aapka internal logging dashboard hack ho jata hai, toh aapke saare "Secret" system prompts aur user conversations expose ho jayenge. **Apne logs ke liye 'Encryption at rest' enable karein.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The 'Thundering Herd' Problem:** When your app has 1 million users, sending 1 million traces per second will crash your logging server. **Solution: Use 'Head-based Sampling' (Decide to log before starting the request).**
+- **The 'Thundering Herd' Problem:** Jab aapke app ke 1 million users hon, toh 1 million traces per second bhejne se aapka logging server crash ho jayega. **Solution: 'Head-based Sampling' (request start karne se pehle log karne ka decision lena) ka use karein.**
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Log Retention:** Storing 1 year of chat logs can cost thousands. **Strategy: Keep detailed traces for 7 days, and aggregated metrics (Stats) forever.**
+- **Log Retention:** 1 saal ke chat logs ko store karna hazaron dollars cost kar sakta hai. **Strategy: Detailed traces ko 7 din ke liye rakhein, aur aggregated metrics (Stats) ko forever (hamesha) ke liye.**
 
 ---
 
 ## ✅ 13. Best Practices
-- **Assign a 'Correlation ID':** Pass the same ID from the Frontend to the Backend to the LLM to the Database. This allows you to see the "Whole Story" across all servers.
-- **Use 'Semantic Search' on Traces:** Find all traces where the AI said "I'm sorry" to find where your model is failing.
-- **Link Traces to Feedback:** When a user clicks "Thumbs down," attach that feedback directly to the Trace ID.
+- **'Correlation ID' assign karein:** Same ID ko Frontend se Backend se LLM se Database tak pass karein. Yeh aapko sabhi servers par "Whole Story" dekhne ki permission deta hai.
+- **Traces par 'Semantic Search' ka use karein:** Un sabhi traces ko find karein jahan AI ne "I'm sorry" kaha hai taaki pata chale ki aapka model kahan fail ho raha hai.
+- **Traces ko Feedback se link karein:** Jab koi user "Thumbs down" par click kare, toh us feedback ko directly Trace ID ke sath attach karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Logging only 'Success':** Forgetting to log the "Error messages" when the API fails.
-- **No versioning:** Not logging which version of the "Prompt Template" was used for a specific query.
+- **Sirf 'Success' log karna:** API fail hone par "Error messages" ko log karna bhool jana.
+- **No versioning:** Ek specific query ke liye "Prompt Template" ke kaunse version ka use kiya gaya tha, use log na karna.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is the difference between a Trace and a Span?"**
-2. **"How do you trace a multi-step RAG pipeline?"**
-3. **"Explain the 'OpenInference' standard and why it matters."**
+1. **"Trace aur Span ke beech kya difference hai?"**
+2. **"Ek multi-step RAG pipeline ko aap kaise trace karte hain?"**
+3. **"'OpenInference' standard ko explain karein aur yeh kyun matters (important) hai."**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Trace-to-Dataset:** Automatically taking "High-quality" traces and converting them into a "Fine-tuning Dataset" for the next model version.
-- **Visual Debugging:** Using "Flow charts" where you can click on an AI step and see exactly what the "Embedding vector" looked like at that moment.
-- **LLM-Powered Root Cause Analysis:** An AI that watches your traces and alerts you: *"Hey, it looks like your PDF parser is failing for scanned images."*
+- **Trace-to-Dataset:** Automatically "High-quality" traces ko lekar unhe agle model version ke liye ek "Fine-tuning Dataset" mein convert karna.
+- **Visual Debugging:** "Flow charts" ka use karna jahan aap kisi AI step par click kar sakte hain aur dekh sakte hain ki us moment par "Embedding vector" kaisa dikhta tha.
+- **LLM-Powered Root Cause Analysis:** Ek AI jo aapke traces ko watch karta hai aur aapko alert karta hai: *"Hey, aisa lagta hai ki aapka PDF parser scanned images ke liye fail ho raha hai."*

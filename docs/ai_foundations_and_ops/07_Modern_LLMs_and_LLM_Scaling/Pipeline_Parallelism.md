@@ -1,5 +1,5 @@
 # 🧱 Pipeline Parallelism: The Assembly Line
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the art of splitting model layers across multiple GPUs and nodes, exploring Micro-batches, Pipeline Bubbles, and the 2026 strategies for massive-scale training and inference.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Multiple GPUs aur nodes par model layers ko split karne ki art ko master karein, jisme Micro-batches, Pipeline Bubbles, aur 2026 mein massive-scale training aur inference ki strategies shamil hain.
 
 ---
 
@@ -18,21 +18,21 @@ Pipeline Parallelism ka use tab hota hai jab model itna bada ho ki wo ek server 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Pipeline Parallelism (PP) splits the model's layers across multiple devices (Nodes).
+Pipeline Parallelism (PP) model ki layers ko multiple devices (Nodes) ke beech split kar deta hai.
 
 ### 1. Vertical Splitting:
-- Instead of splitting a single layer (like Tensor Parallelism), PP splits the **Depth** of the model.
+- Ek single layer ko split karne ki jagah (jaise Tensor Parallelism mein hota hai), PP model ki **Depth** (gehrai/layers) ko split karta hai.
 - GPU 0: Layers 1-20
 - GPU 1: Layers 21-40
-- ... and so on.
+- ... aur isi tarah aage.
 
 ### 2. The Micro-batching Solution:
-- To reduce the idle time (The Bubble), we divide a single "Batch" into many small **"Micro-batches."**
-- This is called the **Pipeline Schedule** (e.g., GPipe or PipeDream).
-- As soon as GPU 0 finishes micro-batch 1, it passes it to GPU 1 and starts working on micro-batch 2.
+- Idle time (The Bubble) ko kam karne ke liye, hum ek single "Batch" ko bahut saare chhote **"Micro-batches"** mein divide kar dete hain.
+- Ise **Pipeline Schedule** kaha jata hai (jaise GPipe ya PipeDream).
+- Jaise hi GPU 0 micro-batch 1 ka kaam khatam karta hai, wo use GPU 1 ko pass kar deta hai aur micro-batch 2 par kaam shuru kar deta hai.
 
 ### 3. Inter-node Communication:
-- Unlike Tensor Parallelism, which needs NVLink (inside one box), PP can work over **InfiniBand** or even high-speed Ethernet because communication only happens at the "Boundaries" between groups of layers.
+- Tensor Parallelism ke opposite (jisme ek hi box ke andar NVLink ki zaroorat hoti hai), PP **InfiniBand** ya high-speed Ethernet par bhi kaam kar sakta hai kyunki communication sirf layer groups ke beech ki "Boundaries" par hi hota hai.
 
 ---
 
@@ -40,19 +40,19 @@ Pipeline Parallelism (PP) splits the model's layers across multiple devices (Nod
 | Feature | Pipeline Parallel (PP) | Tensor Parallel (TP) | Data Parallel (DP) |
 | :--- | :--- | :--- | :--- |
 | **What is split?** | Layers (Depth) | Tensors (Width) | Data (Batch) |
-| **Communication** | Low (Boundary only) | High (Every layer) | Moderate (End of step) |
+| **Communication** | Low (Sirf boundary par) | High (Har layer par) | Moderate (Step ke end mein) |
 | **Latency** | Higher | **Lowest** | Moderate |
 | **Hardware** | Ethernet / InfiniBand | **NVLink mandatory** | Standard Network |
-| **Complexity** | High (Scheduling) | **Extreme (Kernel)** | Simple |
+| **Complexity** | High (Scheduling) | **Extreme (Kernel level)** | Simple |
 
 ---
 
 ## 📐 4. Mathematical Intuition
 - **The Pipeline Bubble Formula:**
-  If you have $D$ devices (stages) and $M$ micro-batches:
+  Agar aapke paas $D$ devices (stages) hain aur $M$ micro-batches hain:
   $$\text{Bubble Fraction} = \frac{D - 1}{M}$$
-  - To make the bubble small, $M$ must be much larger than $D$. 
-  - *Example:* If you have 4 GPUs and 40 micro-batches, the bubble is only $\sim 7.5\%$. If you have only 1 batch, the bubble is $75\%$.
+  - Bubble ko chhota rakhne ke liye, $M$ ko $D$ se bahut bada hona chahiye.
+  - *Example:* Agar aapke paas 4 GPUs aur 40 micro-batches hain, to bubble sirf $\sim 7.5\%$ hota hai. Agar aapke paas sirf 1 batch hai, to bubble $75\%$ ho jayega.
 
 ---
 
@@ -84,24 +84,24 @@ graph TD
 
 ## 💻 6. Production-Ready Examples (Conceptual PP Setup)
 ```python
-# 2026 Pro-Tip: Use 'DeepSpeed' or 'Megatron' for automatic pipelining.
+# 2026 Pro-Tip: Automatic pipelining ke liye 'DeepSpeed' ya 'Megatron' ka use karein.
 
 import torch.nn as nn
 
-# A simplified Pipeline Model
+# Ek simplified Pipeline Model
 class PipelineModel(nn.Module):
     def __init__(self, layers_per_gpu):
         super().__init__()
-        # In reality, these would be on different devices
+        # Reality mein ye alag-alag devices par honge
         self.stage1 = nn.Sequential(*[nn.Linear(1024, 1024) for _ in range(layers_per_gpu)])
         self.stage2 = nn.Sequential(*[nn.Linear(1024, 1024) for _ in range(layers_per_gpu)])
 
     def forward(self, x):
-        # 1. GPU 0 processes
+        # 1. GPU 0 process karta hai
         x = self.stage1(x.to('cuda:0'))
-        # 2. Data travels across the network (Interconnect)
+        # 2. Data network (Interconnect) ke throw travel karta hai
         x = x.to('cuda:1')
-        # 3. GPU 1 processes
+        # 3. GPU 1 process karta hai
         x = self.stage2(x)
         return x
 ```
@@ -109,62 +109,63 @@ class PipelineModel(nn.Module):
 ---
 
 ## ❌ 7. Failure Cases
-- **Load Imbalance:** If GPU 1 has 5 complex layers and GPU 2 has 5 simple layers, GPU 2 will always be waiting for GPU 1. **Fix: Profile execution time and re-balance layers.**
-- **Inter-node Latency:** If the network cable between Node A and Node B is slow, the whole pipeline slows down to that speed.
-- **Memory Imbalance:** The first and last GPUs in the pipeline often use more memory for "Inputs" and "Loss calculation."
+- **Load Imbalance:** Agar GPU 1 ke paas 5 complex layers hain aur GPU 2 ke paas 5 simple layers hain, to GPU 2 hamesha GPU 1 ka wait karta rahega. **Fix: Execution time ko profile karein aur layers ko re-balance karein.**
+- **Inter-node Latency:** Agar Node A aur Node B ke beech ki network cable slow hai, to poora pipeline usi slow speed par chalne lagega.
+- **Memory Imbalance:** Pipeline ke pehle aur aakhri GPUs aksar "Inputs" aur "Loss calculation" ke liye zyada memory use karte hain.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Low GPU Utilization (e.g. 30%)."
-- **Check:** **Micro-batch size**. If you have too few micro-batches, the "Bubble" is too large. Increase $M$.
-- **Symptom:** "Stale Gradients" or "Divergence."
-- **Check:** **Weight Sync**. Ensure you are using a synchronous schedule like **1F1B (One Forward, One Backward)** to keep weights consistent.
+- **Symptom:** "Low GPU Utilization (jaise ki 30%)."
+- **Check:** **Micro-batch size**. Agar aapke paas bahut kam micro-batches hain, to "Bubble" bahut bada ho jayega. $M$ ko badhayein.
+- **Symptom:** "Stale Gradients" ya "Divergence."
+- **Check:** **Weight Sync**. Weights ko consistent rakhne ke liye check karein ki aap **1F1B (One Forward, One Backward)** jaisa synchronous schedule use kar rahe hain.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Memory vs. Latency:** PP is great for saving memory (each GPU only stores $1/N$ of the model), but it increases the "Total Time" for one request to finish.
-- **PP vs. Offloading:** PP is $100x$ faster than "Offloading weights to CPU RAM."
+- **Memory vs. Latency:** PP memory bachane ke liye bahut badhiya hai (har GPU model ka sirf $1/N$ part hi store karta hai), lekin ye ek request ko complete karne ke "Total Time" (latency) ko badha deta hai.
+- **PP vs. Offloading:** PP "weights ko CPU RAM par offload karne" se $100x$ faster hota hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Model Stealing:** In a multi-tenant cloud, if an attacker owns "Node 2" in your pipeline, they can see the "Intermediate Activations," which can be used to reverse-engineer your model logic.
+- **Model Stealing:** Ek multi-tenant cloud mein, agar kisi attacker ke paas aapke pipeline ka "Node 2" hai, to wo "Intermediate Activations" ko dekh sakta hai, jiska use karke aapke model logic ko reverse-engineer kiya ja sakta hai.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The 'T-bone' Bottleneck:** In 2026, we combine TP (inside node) and PP (between nodes). If the TP part is too fast and the PP part (network) is too slow, the system is always waiting on the network.
+- **The 'T-bone' Bottleneck:** 2026 mein, hum TP (inside node) aur PP (between nodes) ko combine karte hain. Agar TP part bahut fast hai aur PP part (network) bahut slow hai, to system hamesha network ka wait karta rahega.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Networking Cost:** PP requires high-end networking (InfiniBand/RoCE). Buying standard Ethernet servers might save money upfront but will make PP unusable for large models.
+- **Networking Cost:** PP ke liye high-end networking (InfiniBand/RoCE) ki zaroorat hoti hai. Standard Ethernet servers khareedne se shuruat mein paise bach sakte hain, lekin ye large models ke liye PP ko unusable bana dega.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use 'Activation Checkpointing':** Instead of saving all "Activations" for the backward pass (which uses huge VRAM), re-calculate them when needed. This is perfect for PP.
-- **1F1B Schedule:** Use the 1-Forward-1-Backward schedule to minimize the memory peak during training.
-- **Heterogeneous Pipelines:** In 2026, we can put "Hard" layers on H100s and "Easy" layers on cheaper A100s to save money.
+- **Use 'Activation Checkpointing':** Backward pass ke liye saare "Activations" ko save karne ki jagah (jisse bahut zyada VRAM use hota hai), zaroorat padne par unhe fir se calculate karein. Ye PP ke liye perfect hai.
+- **1F1B Schedule:** Training ke dauran memory peak ko minimize karne ke liye 1-Forward-1-Backward schedule ka use karein.
+- **Heterogeneous Pipelines:** 2026 mein, paise bachane ke liye hum "Hard" layers ko H100s par aur "Easy" layers ko saste A100s par rakh sakte hain.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Assuming PP is for speed:** PP is for **Memory**. If your model fits on one GPU, PP will almost always be slower than single-GPU training.
-- **Ignoring the Optimizer:** In PP, the Optimizer update only happens at the end of the full batch. Don't forget to sync the master weights.
+- **Assuming PP is for speed:** PP **Memory** ke liye hota hai. Agar aapka model ek single GPU par fit ho sakta hai, to PP almost always single-GPU training se slow hi hoga.
+- **Ignoring the Optimizer:** PP mein, Optimizer update sirf full batch ke end mein hi hota hai. Master weights ko sync karna na bhoolen.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is a 'Pipeline Bubble' and how do micro-batches solve it?"**
-2. **"Difference between GPipe and PipeDream schedules?"**
-3. **"Why is communication less frequent in PP compared to Tensor Parallelism?"**
+1. **"Pipeline Bubble kya hai aur micro-batches ise kaise solve karte hain?"**
+2. **"GPipe aur PipeDream schedules ke beech kya difference hai?"**
+3. **"Tensor Parallelism ke mukable PP mein communication kam frequent kyu hota hai?"**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Asynchronous Pipelines:** New schedules that allow for "overlapping" the next training step before the current one is fully finished.
-- **Interleaved Pipelines:** Splitting the model into even smaller chunks (e.g., 2 chunks per GPU) to reduce the bubble size further.
-- **Virtual Pipeline Stages:** In 2026, we use "Software-defined stages" that can move between GPUs dynamically if one GPU starts overheating.
+- **Asynchronous Pipelines:** Naye schedules jo current training step ke poora hone se pehle hi agle step ko "overlap" karne ki permission dete hain.
+- **Interleaved Pipelines:** Bubble size ko aur zyada kam karne ke liye model ko aur bhi chhote chunks mein split karna (jaise har GPU par 2 chunks).
+- **Virtual Pipeline Stages:** 2026 mein, hum "Software-defined stages" ka use karte hain jo dynamically GPUs ke beech move kar sakti hain agar koi GPU overheat hone lage.
+

@@ -1,10 +1,10 @@
 # 👥 Human Evaluation: The Ultimate Ground Truth
-> **Level:** Intermediate | **Language:** Hinglish | **Goal:** Master the art of human-in-the-loop AI testing, exploring RLHF (Reinforcement Learning from Human Feedback), Annotation guidelines, and the 2026 strategies for building gold-standard test sets.
+> **Level:** Intermediate | **Language:** Hinglish | **Goal:** Human-in-the-loop AI testing ki art ko master karein, RLHF, Annotation guidelines, aur gold-standard test sets build karne ki 2026 strategies ko explore karte hue.
 
 ---
 
 ## 🧭 1. Beginner-Friendly Hinglish Explanation
-Bhaley hi hum "AI Judges" use karte hain, par aakhir mein AI insaano ke liye hi bana hai. 
+Bhaley hi hum "AI Judges" use karte hain, par aakhir mein AI insaano ke liye hi bina hai. 
 
 - **The Problem:** AI judge ko "Technical" galtiyan toh dikh jayengi, par kya answer "Majedar" hai? Kya tone "Sahi" hai? Kya "Empathy" hai? Ye sirf ek insaan hi bata sakta hai.
 - **Human Evaluation** ka matlab hai: Real humans ko AI ke answers dikhana aur unse "Feedback" lena.
@@ -19,20 +19,20 @@ Ye bilkul **Food Tasting** ki tarah hai:
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Human Evaluation (HE) provides the "Reference" against which all automated models are measured.
+Human Evaluation (HE) wo "Reference" provide karta hai jiske against sabhi automated models ko measure kiya jata hai.
 
 ### 1. Types of Human Feedback:
-- **Comparison (A/B Testing):** Showing two models' outputs and asking "Which is better?". This is the most reliable method (Elo system).
-- **Grading (Likert Scale):** Rating a single output from 1 (Poor) to 5 (Excellent) across various dimensions (Helpfulness, Tone, Safety).
-- **Correction (Editing):** A human "Fixes" the AI output. This becomes high-quality training data for **SFT (Supervised Fine-Tuning).**
-- **Ranking:** Sorting 4 or 5 different AI answers from best to worst. This is used for **Reward Model training in RLHF.**
+- **Comparison (A/B Testing):** Do models ke outputs ko dikhana aur puchna "Kaunsa better hai?". Ye sabse reliable method hai (Elo system).
+- **Grading (Likert Scale):** Ek single output ko alag-alag dimensions (Helpfulness, Tone, Safety) ke across 1 (Poor) se 5 (Excellent) tak rate karna.
+- **Correction (Editing):** Ek human AI ke output ko "Fix" (correct) karta hai. Ye **SFT (Supervised Fine-Tuning)** ke liye high-quality training data ban jata hai.
+- **Ranking:** 4 ya 5 alag-alag AI answers ko best se worst tak sort karna. Ise **RLHF mein Reward Model training** ke liye use kiya jata hai.
 
 ### 2. The Annotation Guideline (The Rulebook):
-- You can't just say "Is this good?". You must define what "Good" means. 
-- *Example:* "A good answer must be factually correct, use professional English, and not exceed 200 words."
+- Aap sirf ye nahi keh sakte "Kya ye achha hai?". Aapko define karna hoga ki "Achha" ka kya matlab hai. 
+- *Example:* "Ek achha answer factually correct hona chahiye, professional language use karein, aur 200 words se zyada na ho."
 
 ### 3. Inter-Annotator Agreement (IAA):
-- If 3 humans look at the same answer, do they agree? If they don't, your "Guideline" is bad and need to be fixed.
+- Agar 3 humans same answer ko dekhte hain, toh kya wo agree karte hain? Agar wo agree nahi karte, toh aapki "Guideline" kharab hai aur use fix karne ki zaroorat hai.
 
 ---
 
@@ -49,12 +49,12 @@ Human Evaluation (HE) provides the "Reference" against which all automated model
 
 ## 📐 4. Mathematical Intuition
 - **The Elo Rating System:** 
-  If Model A wins a match against Model B, we update their scores.
+  Agar Model A Model B ke against match jeet-ta hai, toh hum unke scores ko update karte hain.
   - New Rating $R'_A = R_A + K(S_A - E_A)$
-  - $K$: A constant (usually 32).
-  - $S_A$: Actual score (1 for win, 0 for loss).
-  - $E_A$: Expected score based on current ratings.
-  This is the math behind the **Chatbot Arena Leaderboard.**
+  - $K$: Ek constant (aamtaur par 32).
+  - $S_A$: Actual score (win ke liye 1, loss ke liye 0).
+  - $E_A$: Expected score current ratings ke basis par.
+  Ye **Chatbot Arena Leaderboard** ke piche ka math hai.
 
 ---
 
@@ -95,63 +95,63 @@ Determine which AI response is better for a 'Billing Dispute' query.
 ---
 
 ## ❌ 7. Failure Cases
-- **Annotator Fatigue:** After looking at 500 answers, a human starts clicking "Both Good" just to finish the job. **Fix: Limit sessions to 1 hour.**
-- **Click-Farming:** Using cheap, non-expert labor for complex tasks (like Medical AI). They will give wrong labels. **Fix: Use 'Expert' annotators for technical domains.**
-- **Prompt Sensitivity:** The humans are judging based on ONE specific prompt. If the prompt changes, the whole evaluation might flip.
+- **Annotator Fatigue:** 500 answers dekhne ke baad, ek human bas job finish karne ke liye "Both Good" par click karna start kar deta hai. **Fix: Sessions ko 1 hour tak limit karein.**
+- **Click-Farming:** Complex tasks (jaise Medical AI) ke liye cheap, non-expert labor ka use karna. Wo galat labels de denge. **Fix: Technical domains ke liye 'Expert' annotators ka use karein.**
+- **Prompt Sensitivity:** Humans sirf ek specific prompt ke basis par judge kar rahe hain. Agar prompt badal jata hai, toh poori evaluation flip ho sakti hai.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Inter-Annotator Agreement is very low (e.g., $0.2$)."
-- **Check:** **Guidelines**. Your rules are too vague. Add "Edge case" examples to show humans what to do when an answer is "Half-correct."
-- **Symptom:** "Scores are much higher than real-world usage."
-- **Check:** **Evaluation Set**. Is your test set too "Easy"? Add "Adversarial" (Trick) questions to find the model's breaking point.
+- **Symptom:** "Inter-Annotator Agreement bahut low hai (jaise $0.2$)."
+- **Check:** **Guidelines**. Aapke rules bahut vague hain. Humans ko ye dikhane ke liye "Edge case" examples add karein ki answer ke "Half-correct" hone par kya karna hai.
+- **Symptom:** "Scores real-world usage ke mukable bahut high hain."
+- **Check:** **Evaluation Set**. Kya aapka test set bahut "Easy" hai? Model ka breaking point find karne ke liye "Adversarial" (Trick) questions add karein.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
 - **Internal vs. Crowdsourced:** 
-  - Internal (Your team) is high-quality but slow. 
-  - Crowdsourced (Mechanical Turk / Scale AI) is fast but needs heavy "Quality Control."
+  - Internal (Aapki team) high-quality hai par slow hai.
+  - Crowdsourced (Mechanical Turk / Scale AI) fast hai par isme heavy "Quality Control" ki need hoti hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Data Privacy:** Humans are reading raw user queries. Ensure all **PII is redacted** before sending data to external annotators.
+- **Data Privacy:** Humans raw user queries ko read kar rahe hain. External annotators ke paas data send karne se pehle ensure karein ki **saara PII redact (remove) ho chuka ho**.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The 'Quality Control' Bottleneck:** For every 100 human labels, you need a "Senior Annotator" to check 10 labels to ensure they are correct.
+- **The 'Quality Control' Bottleneck:** Har 100 human labels ke liye, aapko 10 labels check karne ke liye ek "Senior Annotator" ki need hogi taaki ye ensure ho sake ki wo correct hain.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Annotation Cost:** A single "Comparison" label can cost between $\$0.50$ to $\$5.00$ depending on complexity. **Strategy: Use humans ONLY for the final release and 'AI Judges' for daily development.**
+- **Annotation Cost:** Complexity ke basis par ek single "Comparison" label ki cost $\$0.50$ se $\$5.00$ ke beige ho sakti hai. **Strategy: Humans ka use sirf final release ke liye karein aur daily development ke liye 'AI Judges' ka use karein.**
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use 'Honey Pots':** Occasionally insert an answer that is "Obviously wrong." If the annotator marks it as "Good," they are not paying attention—fire them.
-- **Continuous Feedback:** Show annotators when their labels disagree with the majority so they can learn.
-- **Diversify your pool:** Use people from different countries, genders, and backgrounds to avoid "Cultural Bias" in your AI.
+- **Use 'Honey Pots':** Kabhi-kabhi aisa answer insert karein jo "Obviously wrong" (saaf taur par galat) ho. Agar annotator use "Good" mark karta hai, toh iska matlab hai ki wo dhyan nahi de raha hai—use nikal dein.
+- **Continuous Feedback:** Annotators ko dikhaein ki unke labels majority ke sath kab disagree karte hain taaki wo seekh sakein.
+- **Diversify your pool:** Apne AI mein "Cultural Bias" se bachne ke liye alag-alag countries, genders aur backgrounds ke logon ka use karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **No majority vote:** Only asking 1 person for their opinion. (Humans are biased!). Always use at least **3 people**.
-- **Vague Metrics:** Asking "Is this helpful?" (Helpful to whom? In what way?).
+- **No majority vote:** Apne opinion ke liye sirf 1 person se puchna. (Humans biased hote hain!). Hamesha kam se kam **3 logon** ka use karein.
+- **Vague Metrics:** Ye puchna "Kya ye helpful hai?" (Kiske liye helpful? Kis way mein?).
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is 'Inter-Annotator Agreement' and why does it matter?"**
-2. **"How do you build a Reward Model using human rankings?"**
-3. **"Explain why Human Evaluation is still the 'Gold Standard' in 2026."**
+1. **" 'Inter-Annotator Agreement' kya hai aur ye kyu matter karta hai?"**
+2. **"Aap human rankings ka use karke Reward Model kaise build karte hain?"**
+3. **"Explain karein ki Human Evaluation 2026 mein bhi 'Gold Standard' kyu hai."**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **LLM-Assisted Annotation:** Using an AI to "Highlight" the facts for the human, making the human $3x$ faster at judging.
-- **Dynamic Benchmarking:** Humans creating "New" questions live on camera (Streaming) to test the AI's real-time reasoning.
-- **Pay-per-Intelligence:** Marketplaces where experts (Doctors/Lawyers) are paid specifically to "Break" AI models.
+- **LLM-Assisted Annotation:** Insaan ke liye facts ko "Highlight" karne ke liye AI ka use karna, jisse insaan judging mein $3x$ fast ho jata hai.
+- **Dynamic Benchmarking:** AI ke real-time reasoning ko test karne ke liye camera par live (Streaming) naye questions create karte humans.
+- **Pay-per-Intelligence:** Marketplaces jahan experts (Doctors/Lawyers) ko specifically AI models ko "Break" karne ke liye pay kiya jata hai.

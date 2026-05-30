@@ -1,5 +1,5 @@
 # 🚁 SkyPilot: The Inter-Cloud Navigator
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the art of running AI jobs on the cheapest and most available GPUs across all cloud providers, exploring Cost Optimization, Auto-failover, and the 2026 strategies for "Cloud-Agnostic" AI infrastructure.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Sabse cheap aur easily available GPUs par alag-alag cloud providers par AI jobs run karne ki art ko master karein, Cost Optimization, Auto-failover, aur 2026 mein "Cloud-Agnostic" AI infrastructure ki strategies ko explore karte hue.
 
 ---
 
@@ -19,21 +19,21 @@ Aaj ke waqt mein GPUs ki bahut "Kallat" (Scarcity) hai. Kabhi AWS par H100s nahi
 ---
 
 ## 🧠 2. Deep Technical Explanation
-SkyPilot is an open-source framework for running ML and data science workloads on any cloud.
+SkyPilot kisi bhi cloud par ML aur data science workloads ko run karne ke liye ek open-source framework hai.
 
 ### 1. The Resource Optimizer:
-- SkyPilot maintains a real-time "Price and Availability Catalog" for 10+ cloud providers. 
-- When you submit a task, it calculates the **Minimal Cost** considering GPU price, region, and data transfer costs.
+- SkyPilot 10+ cloud providers ke liye ek real-time "Price and Availability Catalog" maintain karta hai. 
+- Jab aap koi task submit karte hain, toh yeh GPU price, region, aur data transfer costs ko consider karke **Minimal Cost** calculate karta hai.
 
 ### 2. Managed Spot (The Money Saver):
-- It can run jobs on **Spot Instances** (which are $70-90\%$ cheaper).
-- If your spot instance is "Preempted" (taken back by the cloud), SkyPilot automatically:
-  1. Finds another cloud/region.
-  2. Resumes your training from the last checkpoint.
-  3. All this with ZERO human intervention.
+- Yeh **Spot Instances** (jo ki $70-90\%$ sasti hoti hain) par jobs ko run kar sakta hai.
+- Agar aapka spot instance "Preempted" (cloud dwara wapas le liya) ho jata hai, toh SkyPilot automatically:
+  1. Ek dusra cloud/region dhoondhta hai.
+  2. Last checkpoint se aapki training ko resume karta hai.
+  3. Yeh sab bina kisi human intervention (ZERO human intervention) ke hota hai.
 
 ### 3. Unified CLI/API:
-- You use the same commands (`sky launch`, `sky status`, `sky stop`) regardless of which cloud you are using.
+- Aap same commands (`sky launch`, `sky status`, `sky stop`) ka use karte hain, chahe aap kisi bhi cloud ka use kar rahe hon.
 
 ---
 
@@ -42,8 +42,8 @@ SkyPilot is an open-source framework for running ML and data science workloads o
 | :--- | :--- | :--- |
 | **Philosophy** | **Job-centric (Run & Stop)** | Service-centric (Always on) |
 | **Cloud** | **Multi-Cloud (AWS+GCP+Azure)** | Usually Single Cluster |
-| **Complexity** | **Very Low (Simple YAML)** | High |
-| **Autoscaling** | Based on Job requirements | Based on CPU/RAM metrics |
+| **Complexity** | **Very Low (Bahut aasan YAML)** | High |
+| **Autoscaling** | Job requirements ke basis par | CPU/RAM metrics ke basis par |
 | **Best For** | Training / Batch Inference | Live Web APIs / Microservices |
 
 ---
@@ -51,7 +51,7 @@ SkyPilot is an open-source framework for running ML and data science workloads o
 ## 📐 4. Mathematical Intuition
 - **The Global Cost Minimization:** 
   $$\text{Minimize } C = \sum (Rate_{provider, gpu} \times Time) + \text{Data}_{egress} + \text{Setup}_{time}$$
-  SkyPilot solves this optimization problem every time you run `sky launch`. It often finds that a "Cheaper GPU" in a "Different Region" is better even after considering the data transfer cost.
+  SkyPilot jab bhi aap `sky launch` run karte hain, tab is optimization problem ko solve karta hai. Yeh aksar pata lagata hai ki ek "Cheaper GPU" jo kisi "Different Region" mein hai, data transfer cost ko consider karne ke baad bhi better deal hai.
 
 ---
 
@@ -66,23 +66,23 @@ graph TD
     Sky -- "Check Lambda" --> C[Lambda: $8/hr, 5 Instances]
     end
     
-    Sky -- "Launch on Lambda Labs" --> Cluster[GPU Cluster]
-    Cluster -- "Sync Code & Data" --> Run[Execute Training]
-    Run -- "Done" --> Terminate[Auto-Terminate Cluster 💸]
+    Sky -- "Lambda Labs par launch karna" --> Cluster[GPU Cluster]
+    Cluster -- "Code & Data Sync karna" --> Run[Execute Training]
+    Run -- "Done" --> Terminate[Cluster ko Auto-terminate karna 💸]
 ```
 
 ---
 
 ## 💻 6. Production-Ready Examples (A SkyPilot YAML for Llama-3)
 ```yaml
-# 2026 Pro-Tip: Use 'Managed Spot' to train models at 1/10th the cost.
+# 2026 Pro-Tip: 1/10th cost par models ko train karne ke liye 'Managed Spot' ka use karein.
 
 name: llama3-finetune
 
 resources:
-  accelerators: A100:8  # Need 8x A100s
-  cloud: lambda         # Prefer Lambda Labs (Cheaper)
-  use_spot: true        # Use Spot to save 80%
+  accelerators: A100:8  # 8x A100s chahiye
+  cloud: lambda         # Lambda Labs ko prefer karein (Sasta)
+  use_spot: true        # 80% save karne ke liye Spot use karein
 
 setup: |
   conda create -n llama python=3.10 -y
@@ -99,62 +99,62 @@ run: |
 ---
 
 ## ❌ 7. Failure Cases
-- **Data Locality:** Your 10TB dataset is in an AWS S3 bucket in 'Mumbai', but SkyPilot finds a cheap GPU in 'Europe'. Downloading the data will take 2 days and cost thousands in "Egress fees." **Fix: Use `sky storage` to manage data efficiently.**
-- **Interconnect Performance:** A multi-node job on Lambda Labs might be slower than on AWS because Lambda's inter-node network is not as fast as AWS InfiniBand.
-- **Quota Failures:** SkyPilot tries to launch on GCP, but your GCP account has 0 GPU quota.
+- **Data Locality:** Aapka 10TB ka dataset 'Mumbai' ke AWS S3 bucket mein hai, par SkyPilot ko 'Europe' mein ek cheap GPU milta hai. Data download karne mein 2 din lagenge aur hazaron dollars ki "Egress fees" lagegi. **Fix: Data ko efficiently manage karne ke liye `sky storage` ka use karein.**
+- **Interconnect Performance:** Lambda Labs par ek multi-node job AWS ke mukable slow ho sakta hai kyunki Lambda ka inter-node network AWS InfiniBand jitna fast nahi hai.
+- **Quota Failures:** SkyPilot GCP par launch karne ki koshish karta hai, par aapke GCP account ka GPU quota 0 hai.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Job is stuck in 'Finding Resources'."
-- **Check:** `sky show-gpus`. It will show which clouds have the GPUs you want. You might need to be less specific (e.g., instead of `A100-80GB`, just ask for `A100`).
+- **Symptom:** "Job 'Finding Resources' mein stuck (atkaa) hai."
+- **Check:** `sky show-gpus` run karein. Yeh dikhayega ki kis cloud ke paas aapke chahite GPUs hain. Aapko thoda kam specific hona pad sakta hai (jaise, `A100-80GB` ke bajaye sirf `A100` maangein).
 - **Symptom:** "Connection Timeout."
-- **Check:** **Cloud Credentials**. Ensure you have run `aws configure` or `gcloud auth` on your machine.
+- **Check:** **Cloud Credentials**. Ensure karein ki aapne apni machine par `aws configure` ya `gcloud auth` run kiya hai.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Cost vs. Stability:** Spot instances are cheap but can crash. If your training doesn't have "Auto-checkpointing," you will lose all progress.
-- **Abstraction vs. Control:** SkyPilot hides the cloud-specific details. If you need a very specific VPC or Network config, you might need to "Dive deep" into the cloud-specific flags.
+- **Cost vs. Stability:** Spot instances sasti hoti hain par crash ho sakti hain. Agar aapki training mein "Auto-checkpointing" nahi hai, toh aap apni saari progress kho denge.
+- **Abstraction vs. Control:** SkyPilot cloud-specific details ko hide karta hai. Agar aapko koi specific VPC ya Network config chahiye, toh aapko cloud-specific flags mein "Dive deep" (gehrai mein jana) karna hoga.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Key Management:** SkyPilot stores SSH keys on your local machine to talk to the clouds. **Ensure your `~/.sky` folder is protected.**
+- **Key Management:** Clouds se baat karne ke liye SkyPilot aapki local machine par SSH keys store karta hai. **Ensure karein ki aapka `~/.sky` folder protected ho.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Massive Clusters:** Launching 1000 GPUs across multiple clouds to train a "Sovereign AI." This is the peak of 2026 AI engineering.
+- **Massive Clusters:** Ek "Sovereign AI" ko train karne ke liye multiple clouds par 1000 GPUs launch karna. Yeh 2026 AI engineering ka peak hai.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Egress costs:** The "Invisible Killer." SkyPilot now has a feature to warn you if moving your data to a cheap cloud will cost more than the GPU savings.
+- **Egress costs:** Yeh ek "Invisible Killer" hai. SkyPilot mein ab ek aisa feature hai jo aapko warn karega agar data ko cheap cloud par move karne ki cost GPU savings se zyada ho jati hai.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Enable 'Auto-down':** Always use the `--down` flag (`sky launch --down`) so the cluster is deleted the moment the job finishes. No more "Surprise" $\$2000$ bills!
-- **Use `sky storage`:** It automatically creates buckets and syncs data to whichever cloud your job ends up on.
-- **Keep a 'Sky Control Plane':** Run a small server that monitors all your SkyPilot jobs across all clouds.
+- **'Auto-down' enable karein:** Hamesha `--down` flag (`sky launch --down`) ka use karein taaki job khatam hote hi cluster delete ho jaye. Koi extra "Surprise" $\$2000$ bills nahi aayenge!
+- **`sky storage` ka use karein:** Yeh automatically buckets create karta hai aur data ko us cloud par sync karta hai jahan aapka job end up (run) hota hai.
+- **Ek 'Sky Control Plane' rakhein:** Ek chota server run karein jo sabhi clouds par aapke saare SkyPilot jobs ko monitor kare.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Forgetting to Checkpoint:** Running a 24-hour job on a spot instance without saving weights every hour.
-- **Ignoring Quotas:** Assuming you have H100 access just because you have an AWS account.
+- **Checkpoint save karna bhool jana:** Bina har ghante weights save kiye kisi spot instance par 24-hour ka job run karna.
+- **Quotas ko ignore karna:** Sirf isliye assume kar lena ki aapke paas H100 access hai kyunki aapke paas AWS account hai.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is the 'GPU Scarcity' problem and how does SkyPilot solve it?"**
-2. **"Explain how Managed Spot instances handle preemption."**
-3. **"What are the three main components of a SkyPilot YAML?"** (Resources, Setup, Run).
+1. **"'GPU Scarcity' problem kya hai aur SkyPilot ise kaise solve karta hai?"**
+2. **"Explain karein ki Managed Spot instances preemption ko kaise handle karti hain."**
+3. **"SkyPilot YAML ke teen main components kya hain?"** (Resources, Setup, Run).
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **SkyServe:** A new feature to serve models across multiple clouds for "High Availability." If AWS goes down, your AI stays up on GCP.
-- **Green AI Routing:** SkyPilot choosing the datacenter that is currently running on "Solar" or "Wind" energy to reduce your AI's carbon footprint.
-- **Local + Cloud Hybrid:** SkyPilot using your local RTX 4090 for "Testing" and then automatically moving to an H100 in the cloud for "Full Training."
+- **SkyServe:** "High Availability" ke liye multiple clouds par models serve karne ka ek naya feature. Agar AWS down ho jaye, toh aapka AI GCP par active rahega.
+- **Green AI Routing:** Apne AI ke carbon footprint ko reduce karne ke liye SkyPilot dwara us datacenter ko choose karna jo currently "Solar" ya "Wind" energy par chal raha ho.
+- **Local + Cloud Hybrid:** SkyPilot "Testing" ke liye aapke local RTX 4090 ka use karta hai aur fir "Full Training" ke liye cloud mein H100 par automatically move ho jata hai.

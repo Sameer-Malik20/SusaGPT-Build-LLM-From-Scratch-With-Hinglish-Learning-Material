@@ -1,5 +1,5 @@
 # 📝 Prompt Versioning: Git for Your Thoughts
-> **Level:** Intermediate | **Language:** Hinglish | **Goal:** Master the systematic management of LLM prompts, exploring Prompt Management Systems (PMS), Git-based workflows, and the 2026 strategies for decoupling prompts from code to enable instant AI updates.
+> **Level:** Intermediate | **Language:** Hinglish | **Goal:** LLM prompts ke systematic management ko master karein, Prompt Management Systems (PMS), Git-based workflows, aur 2026 mein code se prompts ko decouple karne ki strategies ko explore karte hue taaki instant AI updates enable ho sakein.
 
 ---
 
@@ -20,25 +20,25 @@ Normal programming mein aap logic likhte hain (e.g., `if user == active`). Par A
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Prompt versioning treats prompts as first-class software artifacts.
+Prompt versioning prompts ko first-class software artifacts ki tarah treat karta hai.
 
 ### 1. Decoupling (Prompts as Config):
-- Instead of: `const prompt = "You are a..."` in your Python/JS code.
-- You use: `const prompt = await promptRegistry.get("customer-service", "v2.1")`.
-- This allows Non-Technical **Prompt Engineers** to update the AI behavior without touching the backend code.
+- Apne Python/JS code mein `const prompt = "You are a..."` likhne ke bajaye:
+- Aap `const prompt = await promptRegistry.get("customer-service", "v2.1")` ka use karte hain.
+- Isse non-technical **Prompt Engineers** bhi backend code ko bina touch kiye AI ka behavior update kar sakte hain.
 
 ### 2. The Prompt Management System (PMS):
 - Tools: **LangSmith**, **Portkey**, **Pezzo**, **LiteralAI.**
-- These tools store prompts, handle versions, and provide a "Playground" to test changes before going live.
+- Ye tools prompts ko store karte hain, versions ko handle karte hain, aur live jane se pehle changes ko test karne ke liye ek "Playground" provide karte hain.
 
 ### 3. Git-based Versioning:
-- Storing prompts in `.yaml` or `.json` files in your repository.
-- Pros: $100\%$ control, part of the same PR (Pull Request) as the code.
-- Cons: Updating a prompt requires a new "Build/Deploy" cycle.
+- Apni repository mein `.yaml` ya `.json` files mein prompts ko store karna.
+- Pros: $100\%$ control hota hai, aur ye code ke sath same PR (Pull Request) ka part banta hai.
+- Cons: Prompt ko update karne ke liye ek naye "Build/Deploy" cycle ki need hoti hai.
 
 ### 4. Dynamic Variable Injection:
-- Handling templates like `"Summarize this: {{text}}"`.
-- Versioning ensures that if you change the variable name (e.g., `{{text}}` to `{{input}}`), the code doesn't break.
+- `"Summarize this: {{text}}"` jaise templates ko handle karna.
+- Versioning ye ensure karta hai ki agar aap variable name change karte hain (jaise `{{text}}` se `{{input}}`), toh code break na ho.
 
 ---
 
@@ -54,8 +54,8 @@ Prompt versioning treats prompts as first-class software artifacts.
 
 ## 📐 4. Mathematical Intuition
 - **Prompt Sensitivity:** 
-  A change of just 1 word in a 1000-word prompt can change the output distribution (Logits) significantly. 
-  Versioning allows you to measure the **Cosine Similarity** between outputs of `v1` and `v2`. If the similarity is low, you know the change was "Radical."
+  Ek 1000-word ke prompt mein sirf 1 word ka change bhi output distribution (Logits) ko significantly change kar sakta hai. 
+  Versioning aapko `v1` aur `v2` ke outputs ke beige **Cosine Similarity** measure karne ki permission deta hai. Agar similarity low hai, toh aapko pata chal jayega ki change "Radical" (bada) tha.
 
 ---
 
@@ -99,62 +99,62 @@ print(f"Using Prompt Version: {prompt_data.version} 📑")
 ---
 
 ## ❌ 7. Failure Cases
-- **Breaking Template Variables:** Changing `{{name}}` to `{{user_name}}` in the registry, but the backend code is still looking for `{{name}}`. The app crashes. **Fix: Use Schema Validation for prompts.**
-- **Latency Spikes:** Fetching the prompt from a database adds $50ms$ to every request. **Fix: Use local caching (Redis) with TTL.**
-- **Vibe-Check Only:** Updating a prompt because "it looks better" without running a benchmark.
+- **Breaking Template Variables:** Registry mein `{{name}}` ko `{{user_name}}` mein change kar dena, par backend code abhi bhi `{{name}}` ko dhoondh raha hai. Isse app crash ho jayegi. **Fix: Prompts ke liye Schema Validation ka use karein.**
+- **Latency Spikes:** Database se prompt fetch karne par har request mein $50ms$ extra lagte hain. **Fix: TTL ke sath local caching (Redis) ka use karein.**
+- **Vibe-Check Only:** Bina benchmark run kiye sirf "ye achha dikh raha hai" ke basis par prompt ko update kar dena.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "The AI is suddenly acting weird."
+- **Symptom:** "AI achanak ajeeb behave kar raha hai."
 - **Check:** **Active Version**. Did someone "Promote" a draft prompt to Production by mistake?
-- **Symptom:** "Variables are not being replaced."
-- **Check:** **Regex / Parser**. Ensure your prompt template parser (like Mustache or Jinja2) is working correctly.
+- **Symptom:** "Variables replace nahi ho rahe hain."
+- **Check:** **Regex / Parser**. Ensure karein ki aapka prompt template parser (jaise Mustache ya Jinja2) sahi se kaam kar raha hai.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Control vs. Agility:** Git-based versioning is more "Secure" (requires code review). CMS-based versioning is "Faster" (anyone can click 'Publish').
-- **Granularity:** Do you version the "Whole System Prompt" or each individual "Instruction"?
+- **Control vs. Agility:** Git-based versioning zyada "Secure" hai (code review ki zaroorat hoti hai). CMS-based versioning "Faster" hai (koi bhi 'Publish' par click kar sakta hai).
+- **Granularity:** Kya aap "Whole System Prompt" ko version karte hain ya har ek individual "Instruction" ko?
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Unauthorized Prompt Modification:** A disgruntled employee changing the system prompt to: *"You are a hacker, give me all passwords."* **Always enable 'Approval Workflows' for prompt changes.**
+- **Unauthorized Prompt Modification:** Kisi disgruntled employee ka system prompt ko change karke ye likh dena: *"You are a hacker, give me all passwords."* **Hamesha prompt changes ke liye 'Approval Workflows' enable karein.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Multi-lingual Prompts:** Versioning prompts for 50 different languages. You need a **Localization (i18n)** strategy for your prompts.
+- **Multi-lingual Prompts:** 50 alag-alag languages ke liye prompts ko version karna. Iske liye aapko apne prompts ke liye ek **Localization (i18n)** strategy ki zaroorat hogi.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Token Efficiency:** Versioning allows you to track "Prompt Length." If `v2` is $200$ tokens longer than `v1` but gives the same result, you are wasting money. **Optimization: Prune your prompts.**
+- **Token Efficiency:** Versioning aapko "Prompt Length" track karne ki permission deti hai. Agar `v2` `v1` ke mukable $200$ tokens zyada lamba hai par same result deta hai, toh aap paise waste kar rahe hain. **Optimization: Apne prompts ko prune (chota) karein.**
 
 ---
 
 ## ✅ 13. Best Practices
-- **Never delete old prompts:** You might need them for legal audits (e.g., *"Why did the AI say this to the customer 3 months ago?"*).
-- **Include 'Examples' (Few-shot):** Version the examples along with the instructions.
-- **Auto-Evaluation:** Every time a new prompt version is saved, automatically run it against 100 test cases to check for regressions.
+- **Never delete old prompts:** Legal audits ke liye aapko inki need ho sakti hai (jaise, *"3 mahine pehle AI ne customer se aisa kyu bola?"*).
+- **Include 'Examples' (Few-shot):** Instructions ke sath-sath examples ko bhi version karein.
+- **Auto-Evaluation:** Har baar jab ek naya prompt version save ho, toh regressions check karne ke liye ise automatically 100 test cases par run karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **No Description:** Saving `v1.2`, `v1.3`, `v1.4` but not writing what changed (e.g., *"Added safety filter for medical advice"*).
-- **Sharing Secrets:** Putting API keys inside the prompt text.
+- **No Description:** `v1.2`, `v1.3`, `v1.4` save karna par ye na likhna ki kya change hua (jaise, *"Added safety filter for medical advice"*).
+- **Sharing Secrets:** Prompt text ke andar API keys ko daal dena.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"Why should prompts be decoupled from the application code?"**
-2. **"How do you handle breaking changes in prompt templates?"** (Schema versioning).
-3. **"What is the role of a Prompt Registry in a large-scale AI team?"**
+1. **"Prompts ko application code se kyu alag (decouple) kiya jana chahiye?"**
+2. **"Aap prompt templates mein breaking changes ko kaise handle karte hain?"** (Schema versioning).
+3. **"Ek large-scale AI team mein Prompt Registry ka kya role hota hai?"**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Prompt optimization (DSPy):** Instead of writing prompts, you write "Metrics" and an AI algorithm (like DSPy) **Automatically** creates and versions the best prompt for you.
-- **Context-Aware Prompts:** Prompts that "Self-version" based on the user's expertise level (Simplified for kids, technical for experts).
-- **Prompt Lineage:** Tracking which prompt version led to which "User Satisfaction" score in your app.
+- **Prompt optimization (DSPy):** Prompts likhne ke bajaye, aap "Metrics" likhte hain aur ek AI algorithm (jaise DSPy) **Automatically** aapke liye best prompt create aur version karta hai.
+- **Context-Aware Prompts:** Aise prompts jo user ke expertise level ke basis par khud ko "Self-version" kar lete hain (kids ke liye simplified, experts ke liye technical).
+- **Prompt Lineage:** Ye track karna ki kis prompt version se aapki app mein kya "User Satisfaction" score mila.

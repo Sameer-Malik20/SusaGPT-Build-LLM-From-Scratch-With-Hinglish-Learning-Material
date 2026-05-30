@@ -1,5 +1,5 @@
 # 🏗️ Data Pipelines for AI: The Nervous System
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the flow of data from source to model, exploring Orchestration, Data Lakes, and the 2026 patterns for building resilient, high-throughput pipelines for training and RAG.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Source se model tak data ke flow ko master karein, Orchestration, Data Lakes, aur training aur RAG ke liye resilient, high-throughput pipelines build karne ke 2026 patterns ko explore karte hue.
 
 ---
 
@@ -16,19 +16,19 @@ AI model ek "Petrol Engine" ki tarah hai. Agar aap usme "Ganda petrol" (Dirty da
 ---
 
 ## 🧠 2. Deep Technical Explanation
-AI data pipelines are specialized **DAGs (Directed Acyclic Graphs)** that handle both unstructured and structured data.
+AI data pipelines specialized **DAGs (Directed Acyclic Graphs)** hote hain jo structured aur unstructured dono tarah ke data ko handle karte hain.
 
 ### 1. Orchestration (The Brain):
 - Tools: **Apache Airflow**, **Dagster**, **Prefect**, **Temporal.**
-- These tools manage "Task Dependencies." 
-- *Example:* Task B (Embeddings) should only start AFTER Task A (Text Extraction) is finished successfully.
+- Ye tools "Task Dependencies" ko manage karte hain. 
+- *Example:* Task B (Embeddings) tabhi start hona chahiye jab Task A (Text Extraction) successfully finish ho jaye.
 
 ### 2. Data Lake vs. Data Warehouse:
-- **Data Lake (S3/GCS):** Stores raw, unstructured data (PDFs, Images, JSON). Essential for pretraining.
-- **Data Warehouse (BigQuery/Snowflake):** Stores structured, tabular data. Used for fine-tuning on business metrics.
+- **Data Lake (S3/GCS):** Raw, unstructured data (PDFs, Images, JSON) ko store karta hai. Pretraining ke liye essential hai.
+- **Data Warehouse (BigQuery/Snowflake):** Structured, tabular data ko store karta hai. Business metrics par fine-tuning karne ke liye use hota hai.
 
 ### 3. Mediation (The Glue):
-- Pipelines must handle "Rate Limits" of AI APIs (OpenAI/Claude) and "Retry Logic" if a GPU node fails.
+- Pipelines ko AI APIs (OpenAI/Claude) ke "Rate Limits" aur agar koi GPU node fail ho jaye toh "Retry Logic" ko handle karna padta hai.
 
 ---
 
@@ -44,11 +44,11 @@ AI data pipelines are specialized **DAGs (Directed Acyclic Graphs)** that handle
 
 ## 📐 4. Mathematical Intuition
 - **Throughput Calculation:** 
-  If you have 1 Million documents and each document takes 2 seconds to process (OCR + Embedding):
+  Agar aapke paas 1 Million documents hain aur har document ko process karne mein (OCR + Embedding) 2 seconds lagte hain:
   - 1 Thread: $\sim 23$ days.
   - 100 Parallel Threads: $\sim 5.5$ hours.
   - **The Math:** $\text{Time} = \frac{\text{Docs} \times \text{Processing Time}}{\text{Parallelism}}$. 
-  Data Engineering is the art of maximizing $Parallelism$.
+  Data Engineering asal mein $Parallelism$ ko maximize karne ki art hai.
 
 ---
 
@@ -107,64 +107,64 @@ if __name__ == "__main__":
 ---
 
 ## ❌ 7. Failure Cases
-- **Data Skew:** One task gets a 500MB PDF while others get 1KB text files. The 500MB task becomes a "Bottleneck."
-- **Silent Failures:** The OCR task fails and returns empty text. The pipeline says "Success," but your Vector DB is now full of "Empty" vectors. **Fix: Use Data Quality Checks (Great Expectations).**
-- **Dependency Hell:** Upgrading the `sentence-transformers` library breaks the embedding task, but the rest of the pipeline keeps running.
+- **Data Skew:** Alignment issue. Kisi ek task ko 500MB ki PDF milti hai aur dusron ko 1KB ki text files. Wo 500MB wala task ek "Bottleneck" ban jata hai.
+- **Silent Failures:** OCR task fail ho jata hai aur empty text return karta hai. Pipeline "Success" show karti hai, par aapka Vector DB ab "Empty" vectors se bhar chuka hai. **Fix: Data Quality Checks (jaise Great Expectations) ka use karein.**
+- **Dependency Hell:** `sentence-transformers` library ko upgrade karne se embedding task break ho jata hai, par baaki pipeline chalti rehti hai.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Pipeline is stuck."
+- **Symptom:** "Pipeline stuck hai."
 - **Check:** **Orchestrator Logs**. Is a task waiting for a "Lock" on the database?
-- **Symptom:** "Vector search is giving weird results."
+- **Symptom:** "Vector search ajeeb results de raha hai."
 - **Check:** **Transformation Logic**. Did the chunking step accidentally cut words in the middle?
 
 ---
 
 ## ⚖️ 9. Tradeoffs
 - **ETL vs. ELT:** 
-  - ETL: Clean data *before* storing. 
-  - ELT: Store raw data *first*, then clean it inside the database. ELT is better for AI because you can re-process the raw data with new AI models later.
-- **Python vs. SQL:** Python is better for unstructured data (PDFs/Images). SQL is faster for structured data.
+  - ETL: Data ko store karne se *pehle* clean karna.
+  - ELT: Raw data ko *pehle* store karna, phir use database ke andar clean karna. ELT AI ke liye behtar hai kyunki aap yaad mein raw data ko new AI models ke sath re-process kar sakte hain.
+- **Python vs. SQL:** Python unstructured data (PDFs/Images) ke liye behtar hai. SQL structured data ke liye fast hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Credentials Leakage:** Hardcoding S3 keys in your Airflow DAGs. **Use 'Secret Managers' (Vault/AWS Secrets Manager).**
+- **Credentials Leakage:** Apne Airflow DAGs mein S3 keys ko hardcode karna. **Hamesha 'Secret Managers' (jaise Vault/AWS Secrets Manager) ka use karein.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The "Thundering Herd" Problem:** When your pipeline suddenly starts 10,000 embedding requests at once, crashing the GPU server. **Use 'Rate Limiters' and 'Queues' (RabbitMQ/SQS).**
+- **The "Thundering Herd" Problem:** Jab aapka pipeline ek sath 10,000 embedding requests start kar deta hai, jisse GPU server crash ho jata hai. **Iske liye 'Rate Limiters' aur 'Queues' (RabbitMQ/SQS) ka use karein.**
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Storage cost of 'Bronze' (Raw) data:** Storing every version of every PDF. **Set Lifecycle Policies to move old data to 'Cold Storage'.**
+- **Storage cost of 'Bronze' (Raw) data:** Storing every version of every PDF. **Old data ko 'Cold Storage' mein move karne ke liye Lifecycle Policies set karein.**
 
 ---
 
 ## ✅ 13. Best Practices
-- **Idempotency:** A pipeline should be "Re-runnable." If it fails at $50\%$, running it again should not create duplicate data.
+- **Idempotency:** Ek pipeline "Re-runnable" hona chahiye. Agar ye $50\%$ par fail hota hai, toh ise fir se run karne par duplicate data create nahi hona chahiye.
 - **Schema Evolution:** What happens when you add a new field (like `summary`) to your Vector DB? Your pipeline must handle it gracefully.
-- **Modular Code:** Keep your "Extractor," "Embedder," and "Loader" as separate Python classes.
+- **Modular Code:** Apne "Extractor", "Embedder" aur "Loader" ko separate Python classes ke roop mein rakhein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **No Monitoring:** Running a pipeline and not knowing it failed until a user complains.
-- **Ignoring Retries:** Network requests fail all the time. Always use `retries=3`.
+- **No Monitoring:** Pipeline ko run karna aur user ke complain karne tak uske fail hone ke baare mein na pata chalna.
+- **Ignoring Retries:** Network requests har samay fail ho sakti hain. Hamesha `retries=3` ka use karein.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is a DAG and why is it used in Data Engineering?"**
-2. **"Explain the difference between Batch and Streaming pipelines for RAG."**
-3. **"How do you ensure data quality in an automated AI pipeline?"**
+1. **"DAG kya hai aur ise Data Engineering mein kyu use kiya jata hai?"**
+2. **"RAG ke liye Batch aur Streaming pipelines ke beige difference ko explain karein."**
+3. **"Aap ek automated AI pipeline mein data quality kaise ensure karte hain?"**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Declarative Pipelines:** Using tools like **dbt** or **SQLMesh** to define "What" the data should look like, and let the system figure out "How" to build it.
-- **AI-Agentic Pipelines:** Pipelines that use a small LLM to "Decide" which path a document should take (e.g., *"This is a resume, send it to the HR-Chunker"*).
-- **Zero-Copy Data Sharing:** Sharing data between Snowflake and your GPU server without physically "Copying" the files, saving massive time.
+- **Declarative Pipelines:** **dbt** ya **SQLMesh** jaise tools ka use karke ye define karna ki data "kaisa" dikhna chahiye, aur system ko khud figure out karne dena ki ise "kaise" banana hai.
+- **AI-Agentic Pipelines:** Pipelines jo ek chote LLM ka use karke "Decide" karte hain ki kisi document ko kaun sa path lena chahiye (jaise, *"Ye ek resume hai, ise HR-Chunker ke paas bhejo"*).
+- **Zero-Copy Data Sharing:** Files ko physically "Copy" kiye bina Snowflake aur GPU server ke beige data share karna, jisse massive time save hota hai.

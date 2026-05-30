@@ -1,5 +1,5 @@
 # ⏱️ Monitoring Latency & Throughput: The Speed of AI
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the performance metrics of AI systems, exploring TTFT (Time to First Token), TPOT (Time Per Output Token), Queries Per Second (QPS), and the 2026 strategies for building "Ultra-Responsive" AI.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** AI systems ke performance metrics ko master karein, TTFT, TPOT, QPS, aur 2026 mein "Ultra-Responsive" AI build karne ki strategies ko explore karte hue.
 
 ---
 
@@ -18,23 +18,23 @@ In 2026, hum sirf "Total Time" nahi dekhte, hum **TTFT** (Pehla word kab aaya?) 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Performance in LLMs is measured using specific metrics that reflect the **Autoregressive** nature of the model.
+LLMs mein performance ko specific metrics ka use karke measure kiya jata hai jo model ke **Autoregressive** nature ko reflect karte hain.
 
 ### 1. TTFT (Time to First Token):
-- The time from when the user hits 'Enter' to when the FIRST word appears on the screen.
-- Crucial for "Perceived Speed." Even if the whole answer takes 10s, a low TTFT makes the user happy.
+- User ke 'Enter' hit karne se lekar screen par FIRST word (token) dikhne tak ka time.
+- Yeh "Perceived Speed" (mehsus hone wali speed) ke liye crucial hai. Bhale hi pure answer mein 10s lag jayein, par low TTFT user ko happy rakhta hai.
 
 ### 2. TPOT (Time Per Output Token):
-- The average time taken to generate each subsequent token. 
-- **TPS (Tokens Per Second)** is $1 / TPOT$. 
-- Standard: $30-50$ TPS is human-reading speed. $>100$ TPS is ultra-fast.
+- Har ek subsequent (agle) token ko generate karne mein lagne wala average time. 
+- **TPS (Tokens Per Second)** $1 / TPOT$ hota hai. 
+- Standard: $30-50$ TPS human-reading speed hoti hai. $>100$ TPS ultra-fast hai.
 
 ### 3. Throughput (QPS / RPS):
-- How many **Queries Per Second** can the server handle before slowing down?
-- Higher throughput means you can serve more users with fewer GPUs.
+- Slow down hone se pehle server kitni **Queries Per Second** (QPS) handle kar sakta hai?
+- Higher throughput ka matlab hai ki aap kam GPUs ke sath zyada users ko serve kar sakte hain.
 
 ### 4. KV-Cache Impact:
-- Large contexts increase the "Prefill" time (TTFT) because the model has to process all the history before generating the first new word.
+- Large contexts "Prefill" time (TTFT) ko badha dete hain kyunki model ko pehla naya word generate karne se pehle pure history ko process karna padta hai.
 
 ---
 
@@ -51,7 +51,7 @@ Performance in LLMs is measured using specific metrics that reflect the **Autore
 ## 📐 4. Mathematical Intuition
 - **The Throughput Equation:** 
   $$\text{Throughput} = \frac{\text{Batch Size} \times \text{Avg. Generation Length}}{\text{Total Latency}}$$
-  To increase throughput, we use **Continuous Batching.** Instead of waiting for one user to finish, we "Inject" new users into the GPU batch as soon as any previous user finishes a sentence.
+  Throughput badhane ke liye, hum **Continuous Batching** ka use karte hain. Ek user ke finish hone ka wait karne ke bajaye, hum naye users ko GPU batch mein "Inject" (daalna) kar dete hain jaise hi koi purana user sentence finish karta hai.
 
 ---
 
@@ -74,14 +74,14 @@ graph TD
 
 ## 💻 6. Production-Ready Examples (Measuring TPS in Python)
 ```python
-# 2026 Pro-Tip: Use high-precision timers to measure performance.
+# 2026 Pro-Tip: Performance ko measure karne ke liye high-precision timers ka use karein.
 
 import time
 
 def measure_llm_speed(model, prompt):
     start_time = time.perf_counter()
     
-    # 1. Start generation
+    # 1. Generation start karein
     tokens = []
     first_token_time = None
     
@@ -97,72 +97,72 @@ def measure_llm_speed(model, prompt):
     print(f"TPS: {tps:.2f} tokens/sec")
     print(f"Total Tokens: {len(tokens)}")
 
-# This helps you find if your 'Bottleneck' is in the beginning or during generation.
+# Yeh aapko yeh find karne mein help karta hai ki aapka 'Bottleneck' beginning (shuruwat) mein hai ya generation ke dauran.
 ```
 
 ---
 
 ## ❌ 7. Failure Cases
-- **The 'Long Input' Slowdown:** A user pastes a $10,000$-word document. The TTFT jumps from $0.1s$ to $5s$ because the GPU is busy "Reading" the input. **Fix: Use 'Prompt Caching'.**
-- **Batching Jitter:** When you increase the batch size to save money, the latency for individual users might become "Inconsistent" (sometimes fast, sometimes slow).
-- **Cold Starts:** The first user of the day has to wait 2 minutes while the model loads from disk to VRAM. **Fix: Use 'Pre-warmed' instances.**
+- **The 'Long Input' Slowdown:** Ek user $10,000$-word ka document paste karta hai. TTFT $0.1s$ se jump karke $5s$ ho jata hai kyunki GPU input ko "Read" karne mein busy hai. **Fix: 'Prompt Caching' ka use karein.**
+- **Batching Jitter:** Jab aap paise bachane ke liye batch size badhate hain, toh individual users ke liye latency "Inconsistent" (kabhi fast, kabhi slow) ho sakti hai.
+- **Cold Starts:** Din ke pehle user ko 2 minutes tak wait karna padta hai jab model disk se VRAM mein load ho raha hota hai. **Fix: 'Pre-warmed' instances ka use karein.**
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "TTFT is low, but TPS is very slow (e.g. 2 tokens/sec)."
-- **Check:** **VRAM Overload**. The model might be swapping to System RAM. Reduce your batch size or use a smaller model.
-- **Symptom:** "Latency is fine for 10 users, but crashes for 11."
-- **Check:** **Max Connections**. Your server (vLLM/Triton) has a limit on how many requests it can queue. Increase the queue size or add more replicas.
+- **Symptom:** "TTFT low hai, par TPS bahut slow hai (e.g. 2 tokens/sec)."
+- **Check:** **VRAM Overload**. Model shayad System RAM par swap ho raha hai. Apne batch size ko reduce karein ya ek smaller model ka use karein.
+- **Symptom:** "Latency 10 users ke liye sahi hai, par 11 ke liye crash ho jati hai."
+- **Check:** **Max Connections**. Aapke server (vLLM/Triton) par requests ko queue karne ki ek limit hoti hai. Queue size ko badhayein ya aur replicas add karein.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
 - **Latency vs. Throughput:** 
-  - For a **Chatbot**, we want Low Latency (TTFT). 
-  - For **Batch Processing** (e.g., summarizing 1000 PDFs), we want High Throughput.
+  - Ek **Chatbot** ke liye, hume Low Latency (TTFT) chahiye. 
+  - **Batch Processing** ke liye (e.g., 1000 PDFs ko summarize karna), hume High Throughput chahiye.
 - **Precision vs. Speed:** 
-  - FP16 is slow. 
-  - INT4 is $2-3x$ faster.
+  - FP16 slow hota hai. 
+  - INT4 $2-3x$ faster hota hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Denial of Wallet (DoW):** An attacker sending thousands of "Very long" prompts to make your latency spike and your GPU bill explode. **Use 'Rate Limiting' and 'Max Token Limits'.**
+- **Denial of Wallet (DoW):** Ek attacker aapke latency spike aur GPU bill ko badhane ke liye thousands of "Very long" prompts bhej raha hai. **'Rate Limiting' aur 'Max Token Limits' ka use karein.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Dynamic Autoscaling:** Adding a new GPU server takes 2-5 minutes. If your traffic spikes in 10 seconds, your latency will go to "Infinite" before the new server is ready. **Solution: Keep 'Buffer' capacity of $20\%$.**
+- **Dynamic Autoscaling:** Ek naya GPU server add karne mein 2-5 minutes lagte hain. Agar aapka traffic 10 seconds mein spike ho jata hai, toh naya server ready hone se pehle aapki latency "Infinite" ho jayegi. **Solution: $20\%$ ki 'Buffer' capacity rakhein.**
 
 ---
 
 ## 💸 12. Cost Considerations
-- **TPS-per-Dollar:** In 2026, we don't just measure speed, we measure how many tokens we get per dollar. **Optimization: Move 'Cold' models to cheaper GPUs like L4.**
+- **TPS-per-Dollar:** 2026 mein, hum sirf speed ko measure nahi karte, balki yeh measure karte hain ki per dollar hume kitne tokens mil rahe hain. **Optimization: 'Cold' models ko L4 jaise cheaper GPUs par move karein.**
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use 'Continuous Batching' (vLLM/TGI):** This is the #1 way to improve throughput by $10x$.
-- **Implement 'Streaming':** Always stream tokens to the UI. Don't wait for the full answer.
-- **Monitor the 'Tail Latency' (P99):** Don't be fooled by a good "Average." The users with the worst experience are the ones who will complain.
+- **'Continuous Batching' (vLLM/TGI) ka use karein:** Throughput ko $10x$ improve karne ka yeh #1 tareeqa hai.
+- **'Streaming' implement karein:** Hamesha UI par tokens ko stream karein. Full answer ka wait na karein.
+- **'Tail Latency' (P99) ko monitor karein:** Ek acche "Average" ke behkawe mein na aayein. Jin users ka experience sabse kharab hota hai, complain wahi karenge.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Measuring only 'End-to-End' time:** If total time is 10s, you don't know if the problem was the "Input" or the "Generation."
-- **Ignoring Network Latency:** Your AI is fast, but your "Database" or "Internet Connection" is slow.
+- **Sirf 'End-to-End' time ko measure karna:** Agar total time 10s hai, toh aapko pata nahi chalega ki problem "Input" mein thi ya "Generation" mein.
+- **Network Latency ko ignore karna:** Aapka AI toh fast hai, par aapka "Database" ya "Internet Connection" slow hai.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is TTFT and why is it more important for chat than total latency?"**
-2. **"Explain the concept of 'Continuous Batching' in vLLM."**
-3. **"How does the KV-Cache affect inference performance?"**
+1. **"TTFT kya hai aur yeh chat ke liye total latency se zyada important kyun hai?"**
+2. **"vLLM mein 'Continuous Batching' ke concept ko explain karein."**
+3. **"KV-Cache inference performance ko kaise affect karta hai?"**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Speculative Decoding:** Running a "Small" model to predict tokens and a "Large" model to verify them, increasing speed by $2-3x$ without losing quality.
-- **Prefill-Decode Disaggregation:** Running the "Reading" (Prefill) on one GPU and the "Writing" (Decode) on another to eliminate latency jitter.
-- **FlashAttention-3:** The latest algorithm that makes LLM math $2x$ faster on H100 GPUs.
+- **Speculative Decoding:** Tokens predict karne ke liye ek "Small" model aur unhe verify karne ke liye ek "Large" model run karna, jisse bina quality loss ke speed $2-3x$ badh jati hai.
+- **Prefill-Decode Disaggregation:** Latency jitter ko eliminate karne ke liye ek GPU par "Reading" (Prefill) aur dusre par "Writing" (Decode) run karna.
+- **FlashAttention-3:** Latest algorithm jo H100 GPUs par LLM math calculations ko $2x$ faster banata hai.

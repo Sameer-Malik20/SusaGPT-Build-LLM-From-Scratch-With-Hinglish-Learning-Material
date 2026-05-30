@@ -1,5 +1,5 @@
 # 💠 Tensor Parallelism: Splitting the Weights
-> **Level:** Extreme Advanced | **Language:** Hinglish | **Goal:** Master the lowest level of model distribution, exploring how to split a single matrix multiplication across multiple GPUs, the role of NVLink, and the 2026 patterns for ultra-low latency inference on massive models.
+> **Level:** Extreme Advanced | **Language:** Hinglish | **Goal:** Model distribution ke lowest level ko master karein, explore karein ki kaise ek single matrix multiplication ko multiple GPUs par split kiya jata hai, NVLink ke role ko, aur 2026 mein massive models par ultra-low latency inference ke patterns ko.
 
 ---
 
@@ -17,37 +17,37 @@ Maan lo aapko ek bahut badi "Calculation" karni hai jisme 1000 numbers ko multip
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Tensor Parallelism (TP) splits individual layers (like Linear, Attention) across multiple devices.
+Tensor Parallelism (TP) individual layers (jaise Linear, Attention) ko multiple devices ke beech split karta hai.
 
 ### 1. Row-wise vs. Column-wise Splitting:
-- To split a Linear layer $Y = XW$:
-  - **Column Parallelism:** Split $W$ into $W_1$ and $W_2$ vertically. Each GPU calculates $XW_1$ and $XW_2$. The outputs are then concatenated.
-  - **Row Parallelism:** Split $W$ horizontally. Each GPU gets a slice of $X$ and $W$. The results are then summed using an **All-Reduce** operation.
+- Linear layer $Y = XW$ ko split karne ke liye:
+  - **Column Parallelism:** $W$ ko vertically $W_1$ aur $W_2$ mein split karein. Har ek GPU $XW_1$ aur $XW_2$ calculate karega. Phir in outputs ko concatenate (jod) kar diya jata hai.
+  - **Row Parallelism:** $W$ ko horizontally split karein. Har ek GPU ko $X$ aur $W$ ka ek slice milta hai. Phir in results ko ek **All-Reduce** operation ka use karke sum kiya jata hai.
 
 ### 2. Implementation in Transformers:
-- In a Transformer block, we typically use **Column Parallelism** for the first Linear layer of the MLP and **Row Parallelism** for the second. This minimizes communication by only requiring two sync points per block.
+- Ek Transformer block mein, hum MLP ki pehli Linear layer ke liye aamtaur par **Column Parallelism** aur dusri ke liye **Row Parallelism** use karte hain. Isse har block mein sirf do sync points ki zaroorat padti hai, jisse communication minimize ho jata hai.
 
 ### 3. The Requirement: NVLink
-- TP requires extremely high bandwidth and low latency because communication happens at every single layer of the model. Standard Ethernet is too slow for TP.
+- TP ke liye behad high bandwidth aur low latency ki zaroorat hoti hai kyunki communication model ki har ek single layer par hota hai. TP ke liye standard Ethernet bahut slow hai.
 
 ---
 
 ## 🏗️ 3. Tensor vs. Pipeline Parallelism
 | Feature | Tensor Parallelism (TP) | Pipeline Parallelism (PP) |
 | :--- | :--- | :--- |
-| **Splitting Unit** | **Inside a layer (Tensor)** | Between layers |
-| **Communication** | Constant (Every layer) | Occasional (End of block) |
-| **Latency** | **Lowest** | Higher (Due to bubbles) |
-| **Hardware** | Needs NVLink | Works on InfiniBand/Ethernet |
-| **Scaling** | Hard beyond 8 GPUs | Scales to 100s of GPUs |
+| **Splitting Unit** | **Layer ke andar (Tensor)** | Layers ke beech mein |
+| **Communication** | Constant (Har layer par) | Occasional (Block ke end mein) |
+| **Latency** | **Lowest** | Higher (Bubbles ki wajah se) |
+| **Hardware** | NVLink ki zaroorat hoti hai | InfiniBand/Ethernet par chal jata hai |
+| **Scaling** | 8 GPUs se aage mushkil hai | 100s of GPUs tak scale ho sakta hai |
 
 ---
 
 ## 📐 4. Mathematical Intuition
-- **The Matrix Split:** 
-  If $W \in \mathbb{R}^{A \times B}$ is split into 2 GPUs ($W_1, W_2 \in \mathbb{R}^{A \times B/2}$):
+- **The Matrix Split:**
+  Agar $W \in \mathbb{R}^{A \times B}$ ko 2 GPUs ($W_1, W_2 \in \mathbb{R}^{A \times B/2}$) ke beech split kiya jaye:
   $$Y = X [W_1 | W_2] = [XW_1 | XW_2]$$
-  This is "Column Parallelism." Notice that $X$ (the input) is copied to both GPUs. No communication is needed until the very end when we join the results.
+  Ye "Column Parallelism" hai. Dhyan dein ki $X$ (input) dono GPUs par copy hota hai. Jab tak hum end mein results ko join nahi karte, tab tak koi communication zaroori nahi hota.
 
 ---
 
@@ -67,7 +67,7 @@ graph LR
 
 ## 💻 6. Production-Ready Examples (Conceptual TP in PyTorch)
 ```python
-# 2026 Pro-Tip: Don't write TP from scratch. Use 'Megatron-LM' or 'vLLM'.
+# 2026 Pro-Tip: TP ko scratch se mat likhein. 'Megatron-LM' ya 'vLLM' ka use karein.
 
 import torch
 import torch.nn as nn
@@ -75,78 +75,79 @@ import torch.nn as nn
 class ColumnParallelLinear(nn.Module):
     def __init__(self, in_features, out_features, world_size):
         super().__init__()
-        # Each GPU only stores a fraction of the output features
+        # Har ek GPU output features ka sirf ek fraction hi store karta hai
         self.shard_out_features = out_features // world_size
         self.weight = nn.Parameter(torch.randn(self.shard_out_features, in_features))
 
     def forward(self, x):
         # Local matrix multiplication
         output_parallel = torch.matmul(x, self.weight.t())
-        # In a real system, we would then use dist.all_gather or dist.all_reduce
+        # Ek real system mein, hum iske baad dist.all_gather ya dist.all_reduce use karenge
         return output_parallel
 
-# This is how vLLM splits Llama-3-70B across 8 GPUs instantly.
+# Kuch is tarah vLLM achanak Llama-3-70B ko 8 GPUs par split kar deta hai.
 ```
 
 ---
 
 ## ❌ 7. Failure Cases
-- **Imbalanced Splitting:** Splitting a 4096-dim layer across 3 GPUs (4096 is not divisible by 3). One GPU will have more work, slowing down the other two.
-- **NVLink Failure:** If the bridge between two GPUs is loose or broken, TP will fall back to PCIe, making the model $20x$ slower.
-- **Deadlock:** If GPU-1 is waiting for GPU-2, but GPU-2 is waiting for a data signal that hasn't arrived.
+- **Imbalanced Splitting:** Ek 4096-dimension ki layer ko 3 GPUs par split karna (4096, 3 se divisible nahi hai). Ek GPU ke paas zyada kaam hoga, jisse baaki ke do GPUs slow ho jayenge.
+- **NVLink Failure:** Agar do GPUs ke beech ka bridge loose ya tuta hua hai, to TP PCIe par fall back kar jayega, jisse model $20x$ slow ho jayega.
+- **Deadlock:** Agar GPU-1 GPU-2 ka wait kar raha hai, lekin GPU-2 kisi aise data signal ka wait kar raha hai jo abhi tak aaya hi nahi.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Inference is fast on 1 GPU but slow on 2 GPUs."
-- **Check:** **Communication Overhead**. Is your model too small? If the model is small, the time spent "Talking" over NVLink is more than the time saved by splitting. TP is only for GIANT models.
-- **Symptom:** "Results are slightly different on multi-GPU."
-- **Check:** **Floating Point Precision**. Summing numbers in different orders (on different GPUs) can lead to tiny rounding differences.
+- **Symptom:** "Inference 1 GPU par to fast hai lekin 2 GPUs par slow hai."
+- **Check:** **Communication Overhead**. Kya aapka model bahut chhota hai? Agar model chhota hai, to NVLink par "Baat karne" (communicate) mein spent time, split karne se bache time se zyada hoga. TP sirf GIANT (bahut bade) models ke liye hai.
+- **Symptom:** "Multi-GPU par results thode se different aa rahe hain."
+- **Check:** **Floating Point Precision**. Alag-alag orders mein (alag-alag GPUs par) numbers ko sum karne se tiny rounding differences aa sakte hain.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Throughput vs. Memory:** TP is the best way to save memory while keeping latency low, but it is the hardest to scale across multiple physical servers (nodes).
-- **TP Size:** Usually, `tp_size` should match the number of GPUs in a single NVLink domain (typically 8).
+- **Throughput vs. Memory:** Latency ko low rakhte hue memory bachane ka TP sabse best tarika hai, lekin ise multiple physical servers (nodes) ke beech scale karna sabse zyada mushkil hai.
+- **TP Size:** Aamtaur par, `tp_size` ko ek single NVLink domain mein jitne GPUs hain usse match hona chahiye (typically 8).
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Data Synchronization:** Ensure that all GPUs are using the exact same "Random Seed" for things like Dropout, otherwise the tensors will diverge and the model will "Break."
+- **Data Synchronization:** Ye ensure karein ki Dropout jaisi cheezon ke liye saare GPUs bilkul same "Random Seed" use kar rahe hon, nahi to tensors diverge ho jayenge aur model "Break" ho jayega.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Inter-node TP:** Trying to do Tensor Parallelism between a GPU in India and a GPU in USA. Impossible. Even between two servers in the same rack, TP is very difficult without **InfiniBand/RDMA.**
+- **Inter-node TP:** India mein rakhe GPU aur USA mein rakhe GPU ke beech Tensor Parallelism karne ki koshish karna. Ye impossible hai. Same rack ke do servers ke beech bhi, **InfiniBand/RDMA** ke bina TP karna bahut mushkil hai.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Hardware Lock-in:** To do TP effectively, you MUST buy high-end NVIDIA GPUs with NVLink. You cannot use entry-level gaming GPUs (RTX 4090 doesn't support NVLink).
+- **Hardware Lock-in:** TP ko effectively karne ke liye, aapko NVLink wale high-end NVIDIA GPUs hi khareedne padenge. Aap entry-level gaming GPUs use nahi kar sakte (RTX 4090 NVLink support nahi karta).
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use Power-of-2:** Always use $2, 4, 8$ as your TP degree.
-- **Combine with Pipeline Parallelism:** Use TP for inside a single server, and PP for between different servers.
-- **Profile first:** Use **NVIDIA Nsight Systems** to see exactly how much time is spent in "NCCL Communication" vs. "Computation."
+- **Use Power-of-2:** Hamesha apne TP degree ke roop mein $2, 4, 8$ ka use karein.
+- **Combine with Pipeline Parallelism:** Ek single server ke andar ke liye TP use karein, aur alag-alag servers ke beech ke liye PP use karein.
+- **Profile first:** Ye dekhne ke liye ki actual mein kitna time "NCCL Communication" vs. "Computation" mein lag raha hai, **NVIDIA Nsight Systems** ka use karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Applying TP to small models:** Running Llama-7B across 8 GPUs using TP. It will likely be slower than a single GPU because of the communication overhead.
-- **Forgetting to shard the Optimizer:** If you use TP for weights but not for optimizer states, you aren't saving much VRAM.
+- **Applying TP to small models:** TP ka use karke Llama-7B ko 8 GPUs par chalana. Communication overhead ki wajah se ye single GPU se bhi slow ho sakta hai.
+- **Forgetting to shard the Optimizer:** Agar aap weights ke liye TP use karte hain lekin optimizer states ke liye nahi, to aap zyada VRAM nahi bacha pa rahe hain.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"Difference between Row Parallelism and Column Parallelism?"**
-2. **"Why does Tensor Parallelism require high-speed interconnects like NVLink?"**
-3. **"In a Transformer block, which layers are typically split using TP?"**
+1. **"Row Parallelism aur Column Parallelism ke beech kya difference hai?"**
+2. **"Tensor Parallelism ke liye NVLink jaise high-speed interconnects ki zaroorat kyu hoti hai?"**
+3. **"Ek Transformer block mein, aamtaur par kin layers ko TP ka use karke split kiya jata hai?"**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Context Parallelism (CP):** A new 2026 technique to split the "Sequence Length" across GPUs, allowing for 1 Million+ token context windows.
-- **Communication Overlapping:** New kernels that start the "All-Reduce" communication *while* the matrix multiplication is still running.
-- **Zero-bubble TP:** Advanced scheduling that eliminates the tiny gaps between GPU sync points.
+- **Context Parallelism (CP):** GPUs ke beech "Sequence Length" ko split karne ki ek nayi 2026 technique, jo 1 Million+ token context windows ki permission deti hai.
+- **Communication Overlapping:** Naye kernels jo matrix multiplication ke chalne ke *dauran* hi "All-Reduce" communication ko start kar dete hain.
+- **Zero-bubble TP:** Advanced scheduling jo GPU sync points ke beech ke tiny gaps (chhote gap) ko khatam kar deti hai.
+

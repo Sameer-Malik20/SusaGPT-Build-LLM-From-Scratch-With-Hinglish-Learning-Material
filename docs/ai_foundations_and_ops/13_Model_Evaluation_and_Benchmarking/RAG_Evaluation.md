@@ -1,5 +1,5 @@
 # 🔍 RAG Evaluation: Measuring the Knowledge Loop
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the art of measuring RAG (Retrieval-Augmented Generation) performance, exploring the RAG Triad, Faithfulness, Context Relevance, and the 2026 strategies for debugging "Knowledge Gaps."
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** RAG performance measure karne ki art ko master karein, RAG Triad, Faithfulness, Context Relevance, aur "Knowledge Gaps" ko debug karne ki 2026 strategies ko explore karte hue.
 
 ---
 
@@ -20,22 +20,22 @@ AI ke paas do cheezein hain:
 ---
 
 ## 🧠 2. Deep Technical Explanation
-RAG Evaluation is governed by the **RAG Triad**—three critical relationships that must be measured separately.
+RAG Evaluation **RAG Triad** ke dwara govern hota hai—teen critical relationships jinhe alag-alag measure kiya jana chahiye.
 
 ### 1. Context Relevance (Query $\to$ Context):
-- Is the retrieved context actually useful for answering the query?
-- Measures the quality of your **Vector Search** (Retrieval).
+- Kya retrieved context query ka answer dene ke liye sach mein useful hai?
+- Ye aapke **Vector Search** (Retrieval) ki quality ko measure karta hai.
 
 ### 2. Faithfulness (Context $\to$ Answer):
-- Is the answer based ONLY on the provided context? (Anti-Hallucination).
-- If the AI uses its training data instead of the provided context, it is "Unfaithful."
+- Kya answer SIRF provided context par hi based hai? (Anti-Hallucination).
+- Agar AI provided context ke bajaye apne training data ka use karta hai, toh wo "Unfaithful" hai.
 
 ### 3. Answer Relevance (Query $\to$ Answer):
-- Does the final answer directly address what the user asked?
+- Kya final answer directly usi baat ko address karta hai jo user ne puchi thi?
 
 ### 4. Advanced Metrics (RAGAS):
-- **Context Recall:** Did we find ALL the necessary information in our top-K results?
-- **Context Precision:** Are the most relevant documents at the top of the list?
+- **Context Recall:** Kya humne apne top-K results mein SAARI zaroori information dhoondh li?
+- **Context Precision:** Kya sabse relevant documents list ke top par hain?
 
 ---
 
@@ -50,9 +50,9 @@ RAG Evaluation is governed by the **RAG Triad**—three critical relationships t
 
 ## 📐 4. Mathematical Intuition
 - **The Faithfulness Score:** 
-  We extract "Claims" from the generated answer and check how many of them are supported by the context.
+  Hum generated answer se "Claims" extract karte hain aur check karte hain ki unme se kitne context ke dwara supported hain.
   $$\text{Faithfulness} = \frac{\text{Number of Claims Supported by Context}}{\text{Total Number of Claims in Answer}}$$
-  If the score is $1.0$, the model is $100\%$ grounded. If $0.2$, the model is hallucinating $80\%$ of its "facts."
+  Agar score $1.0$ hai, toh model $100\%$ grounded hai. Agar $0.2$ hai, toh model apne $80\%$ "facts" ko hallucinate kar raha hai.
 
 ---
 
@@ -100,64 +100,64 @@ print("RAG Performance:", result)
 ---
 
 ## ❌ 7. Failure Cases
-- **The 'Lost in the Middle' Problem:** Your search finds the right info, but it's at the 10th position in a long context. The AI fails to see it. Your "Retrieval" is fine, but "Generation" fails.
-- **Irrelevant Context Injection:** The search finds a document that has the SAME keywords but DIFFERENT meaning. The AI gets confused and gives a weird answer.
-- **Over-truncation:** You cut the context in the middle of a sentence, so the AI can't understand the full fact.
+- **The 'Lost in the Middle' Problem:** Aapki search sahi info toh dhoondh leti hai, par wo long context ke 10th position par hoti hai. AI use dekhne mein fail ho jata hai. Aapka "Retrieval" toh sahi hai, par "Generation" fail ho jata hai.
+- **Irrelevant Context Injection:** Search ko ek aisa document milta hai jisme keywords toh SAME hain par meaning DIFFERENT hai. AI confuse ho jata hai aur ajeeb answer deta hai.
+- **Over-truncation:** Aap context ko sentence ke beige mein hi cut kar dete hain, jisse AI poore fact ko samajh nahi pata.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
 - **Symptom:** "Low Faithfulness score."
-- **Check:** **Prompt**. Are you telling the model strictly to "Only use context"? Increase the "Pressure" in the system prompt.
+- **Check:** **Prompt**. Kya aap model ko strictly keh rahe hain ki "Only use context"? System prompt mein "Pressure" (emphasis) badhayein.
 - **Symptom:** "Low Context Relevance."
-- **Check:** **Embedding Model**. Maybe your embedding model doesn't understand the domain (e.g., Medical/Legal). Try a domain-specific model or **Hybrid Search.**
+- **Check:** **Embedding Model**. Ho sakta hai ki aapka embedding model us domain (jaise Medical/Legal) ko na samajhta ho. Try karein domain-specific model ya **Hybrid Search.**
 
 ---
 
 ## ⚖️ 9. Tradeoffs
 - **K-Value:** 
-  - $K=3$: Fast and cheap, but might miss info. 
-  - $K=20$: More info, but higher cost and higher chance of confusing the AI.
-- **Reranking:** Adding a Reranker improves "Context Precision" but adds $200ms$ of latency.
+  - $K=3$: Fast aur cheap hai, par ho sakta hai ki info miss ho jaye.
+  - $K=20$: Zyada info milti hai, par higher cost hoti hai aur AI ke confuse hone ke chances badh jate hain.
+- **Reranking:** Reranker add karne se "Context Precision" toh behtar hoti hai par isse $200ms$ ki extra latency add ho jati hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Context Poisoning:** If an attacker can upload a document to your knowledge base, they can "Bias" the AI's answers by making their document rank high for certain queries.
+- **Context Poisoning:** Agar koi attacker aapke knowledge base mein document upload kar sakta hai, toh wo certain queries ke liye apne document ko high rank karakar AI ke answers ko "Bias" (manipulate) kar sakta hai.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Continuous Evaluation:** Evaluating every single chat in production. **Solution: Use a 'Random Sample' ($5\%$) for deep evaluation and simple 'Logit-based' flags for the rest.**
+- **Continuous Evaluation:** Production mein har ek single chat ko evaluate karna. **Solution: Deep evaluation ke liye ek 'Random Sample' ($5\%$) ka use karein aur baaki ke liye simple 'Logit-based' flags ka use karein.**
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Evaluation Cost:** RAGAS uses GPT-4 as a judge. Evaluating 1000 chats can cost $\$20-50$. **Optimization: Use Llama-3-70B as your internal RAG judge to save money.**
+- **Evaluation Cost:** RAGAS judge ke roop mein GPT-4 ka use karta hai. 1000 chats ko evaluate karne par $\$20-50$ cost aa sakti hai. **Optimization: Paise bachane ke liye apne internal RAG judge ke roop mein Llama-3-70B ka use karein.**
 
 ---
 
 ## ✅ 13. Best Practices
-- **Separate Retrieval from Generation:** Evaluate them as two different systems. A bad RAG system is often just a "Bad Search" system.
-- **Use 'Synthetic Test Sets':** Use an LLM to look at your documents and generate "Questions" and "Answers" for them. This creates a "Golden Dataset" automatically.
-- **Monitor over time:** If your Faithfulness score drops after a data update, investigate the new documents immediately.
+- **Separate Retrieval from Generation:** Inhe do alag-alag systems ki tarah evaluate karein. Ek kharab RAG system aamtaur par sirf ek "Kharab Search" system hota hai.
+- **Use 'Synthetic Test Sets':** Apne documents ko dekhne aur unke liye "Questions" aur "Answers" generate karne ke liye ek LLM ka use karein. Ye automatically ek "Golden Dataset" create kar deta hai.
+- **Monitor over time:** Agar data update ke baad aapka Faithfulness score drop hota hai, toh immediately naye documents ko investigate karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Only measuring accuracy:** Ignoring if the answer was actually FOUND in the context.
-- **Ignoring the User's Intent:** Evaluating a "Greeting" (Hello!) using RAG metrics. (Greeters don't need RAG!).
+- **Only measuring accuracy:** Is baat ko ignore karna ki kya answer sach mein context mein FOUND (mila) tha ya nahi.
+- **Ignoring the User's Intent:** RAG metrics ka use karke kisi "Greeting" (jaise Hello!) ko evaluate karna. (Greeters ko RAG ki need nahi hoti!).
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What are the three pillars of the RAG Triad?"**
-2. **"How do you measure 'Faithfulness' without a reference answer?"** (Using the Context).
-3. **"Explain the difference between Context Recall and Context Precision."**
+1. **"RAG Triad ke teen pillars kya hain?"**
+2. **"Bina kisi reference answer ke aap 'Faithfulness' ko kaise measure karte hain?"** (Using the Context).
+3. **"Context Recall aur Context Precision ke beige ke difference ko explain karein."**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Agentic RAG Eval:** Evaluating if an AI "Agent" successfully decided to use a tool (like Search) when it didn't know the answer.
-- **End-to-End RAG Dashboard:** Real-time UI that shows "Faithfulness" graphs for every customer support interaction.
-- **Corrective RAG (CRAG):** Systems that "Grade" the retrieved documents in real-time. If the grade is low, the system goes to "Google Search" instead of using its own bad database.
+- **Agentic RAG Eval:** Ye evaluate karna ki kya kisi AI "Agent" ne successfully kisi tool (jaise Search) ka use karne ka decision liya jab use answer nahi pata tha.
+- **End-to-End RAG Dashboard:** Real-time UI jo har customer support interaction ke liye "Faithfulness" graphs show karta hai.
+- **Corrective RAG (CRAG):** Aise systems jo retrieved documents ko real-time mein "Grade" karte hain. Agar grade low hai, toh system apne kharab database ka use karne ke bajaye "Google Search" par jata hai.

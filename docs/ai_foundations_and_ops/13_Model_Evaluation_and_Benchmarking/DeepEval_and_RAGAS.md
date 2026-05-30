@@ -1,5 +1,5 @@
 # 🛠️ DeepEval & RAGAS: The Pro Developer's Toolkit
-> **Level:** Intermediate | **Language:** Hinglish | **Goal:** Master the two most popular open-source libraries for LLM and RAG evaluation, exploring how to integrate automated quality checks into your Python code and CI/CD pipelines in 2026.
+> **Level:** Intermediate | **Language:** Hinglish | **Goal:** LLM aur RAG evaluation ki do sabse popular open-source libraries ko master karein, explore karte hue ki kaise 2026 mein apne Python code aur CI/CD pipelines mein automated quality checks ko integrate kiya jaye.
 
 ---
 
@@ -18,20 +18,20 @@ Model bana liya, RAG setup kar liya. Ab "Testing" ki bari hai.
 ---
 
 ## 🧠 2. Deep Technical Explanation
-These libraries provide **Metric-based evaluation** and **Test suite management.**
+Ye libraries **Metric-based evaluation** aur **Test suite management** provide karti hain.
 
 ### 1. DeepEval (The "Framework"):
-- It treats LLM evaluation like **Unit Testing.**
+- Ye LLM evaluation ko **Unit Testing** ki tarah treat karta hai.
 - Key Metrics: `HallucinationMetric`, `SummarizationMetric`, `BiasMetric`, `ToxicityMetric`.
-- It has a UI (Confident AI) where you can track test results over time.
+- Iske paas ek UI (Confident AI) hai jahan aap time ke sath test results ko track kar sakte hain.
 
 ### 2. RAGAS (The "Specialist"):
-- Focused on the "RAG Triad."
-- It uses a "Judge LLM" (defaulting to OpenAI) to decompose answers into atomic claims and verify them against context.
-- It can generate **Synthetic Test Data**: It takes your documents and automatically creates 100 Query-Answer pairs to test your model.
+- "RAG Triad" par focused hai.
+- Ye ek "Judge LLM" (default OpenAI) ka use karta hai taaki answers ko atomic claims mein decompose kiya ja sake aur context ke sath verify kiya ja sake.
+- Ye **Synthetic Test Data** generate kar sakta hai: Ye aapke documents ko leta hai aur model ko test karne ke liye automatically 100 Query-Answer pairs create karta hai.
 
 ### 3. Integration:
-- Both libraries can be integrated into **GitHub Actions**. If the model's "Faithfulness" score drops below $0.8$ in a PR, the build fails.
+- Dono libraries ko **GitHub Actions** ke sath integrate kiya ja sakta hai. Agar kisi PR mein model ka "Faithfulness" score $0.8$ se niche jata hai, toh build fail ho jata hai.
 
 ---
 
@@ -48,10 +48,10 @@ These libraries provide **Metric-based evaluation** and **Test suite management.
 
 ## 📐 4. Mathematical Intuition
 - **The Faithfulness Algorithm (RAGAS):**
-  1. **Decomposition:** Answer $\to$ List of statements $S_1, S_2, ... S_n$.
-  2. **Verification:** Check if each $S_i$ is supported by context $C$.
+  1. **Decomposition:** Answer $\to$ statements ki list $S_1, S_2, ... S_n$.
+  2. **Verification:** Check karein ki kya har ek $S_i$ context $C$ ke dwara supported hai.
   3. **Score:** $\frac{\text{Supported Statements}}{\text{Total Statements}}$
-  This simple ratio is surprisingly powerful at detecting hallucinations in 2026 systems.
+  Ye simple ratio 2026 ke systems mein hallucinations ko detect karne mein surprisingly powerful hai.
 
 ---
 
@@ -99,61 +99,61 @@ print(f"Hallucination Score: {score} | Reason: {reason}")
 ---
 
 ## ❌ 7. Failure Cases
-- **Cost Explosion:** Running DeepEval on 10,000 queries using GPT-4o every time you make a small code change. **Fix: Use a smaller local model like Llama-3-8B for the 'Judge' tasks.**
-- **False Negatives:** The AI judge says "Fail" because the AI answer was "Better" and "More Detailed" than the golden reference.
-- **Environment Drift:** The tests pass on your laptop but fail on the server because of different Python versions or missing API keys.
+- **Cost Explosion:** Har baar jab aap chota sa code change karein, tab GPT-4o ka use karke 10,000 queries par DeepEval run karna. **Fix: 'Judge' tasks ke liye Llama-3-8B jaise smaller local model ka use karein.**
+- **False Negatives:** AI judge "Fail" keh deta hai kyunki AI ka answer golden reference ke mukable "Better" aur "More Detailed" tha.
+- **Environment Drift:** Tests aapke laptop par pass ho jate hain par alag Python versions ya missing API keys ki wajah se server par fail ho jate hain.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "Metrics are returning 0.0 for everything."
-- **Check:** **API Keys**. Ensure `OPENAI_API_KEY` is set. These libraries are "Models-as-a-Judge" and need an LLM to work.
-- **Symptom:** "Tests are very slow."
-- **Check:** **Concurrency**. Use `deepeval test run --parallel 4` to run multiple tests at once.
+- **Symptom:** "Metrics har cheez ke liye 0.0 return kar rahe hain."
+- **Check:** **API Keys**. Ensure karein ki `OPENAI_API_KEY` set ho. Ye libraries "Models-as-a-Judge" hain aur inke kaam karne ke liye ek LLM ki need hoti hai.
+- **Symptom:** "Tests bahut slow hain."
+- **Check:** **Concurrency**. Ek sath kai tests run karne ke liye `deepeval test run --parallel 4` ka use karein.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Custom vs. Library Metrics:** Libraries are fast to setup, but sometimes you need a "Custom Metric" (e.g., *"Did the AI follow our specific company's brand voice?"*). Both libraries allow custom G-Eval prompts.
+- **Custom vs. Library Metrics:** Libraries setup karne mein fast hain, par kabhi-kabhi aapko ek "Custom Metric" (jaise, *"Kya AI ne hamari company ki specific brand voice ko follow kiya?"*) ki need hoti hai. Dono libraries custom G-Eval prompts ki permission deti hain.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Eval Set Leakage:** If your evaluation set is public, an AI model can "Learn" it and pass all tests perfectly, while still being bad in the real world. **Keep your test sets private.**
+- **Eval Set Leakage:** Agar aapka evaluation set public hai, toh AI model use "Learn" kar sakta hai aur saare tests perfectly pass kar sakta hai, bhale hi wo real world mein kharab ho. **Apne test sets ko private rakhein.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Evaluating Multimodal AI:** Neither DeepEval nor RAGAS (in early 2026) are perfect for Video or Audio evaluation. You still need custom scripts for those.
+- **Evaluating Multimodal AI:** DeepEval aur RAGAS dono hi (early 2026 mein) Video ya Audio evaluation ke liye perfect nahi hain. Inke liye aapko abhi bhi custom scripts ki need hogi.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **The 'Judge' Tax:** Every test costs money. **Optimization: Run 'DeepEval' on every commit, but run 'RAGAS' (Detailed) only once a week.**
+- **The 'Judge' Tax:** Har test par paise lagte hain. **Optimization: Har commit par 'DeepEval' run karein, par 'RAGAS' (Detailed) ko week mein sirf ek baar run karein.**
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use 'G-Eval':** A method where you define a rubric (instructions) for the judge. This makes the evaluation much more specific to your business needs.
-- **Continuous Monitoring:** Integrate DeepEval with your production logs. If a user "Thumbs down" an answer, send it automatically to the evaluation suite to find out why.
-- **Synthetic Data Generation:** Use RAGAS to generate 50 test cases for every new document you add to your system.
+- **Use 'G-Eval':** Ek method jahan aap judge ke liye ek rubric (instructions) define karte hain. Ye evaluation ko aapke business needs ke liye bahut zyada specific bana deta hai.
+- **Continuous Monitoring:** DeepEval ko apne production logs ke sath integrate karein. Agar koi user kisi answer ko "Thumbs down" karta hai, toh use automatically evaluation suite par send kar dein taaki reason find kiya ja sake.
+- **Synthetic Data Generation:** Apne system mein add hone wale har naye document ke liye 50 test cases generate karne ke liye RAGAS ka use karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Relying on defaults:** Using the default "Helpfulness" prompt which is too generic.
-- **No thresholding:** Not failing the build when scores are low.
+- **Relying on defaults:** Default "Helpfulness" prompt ka use karna jo bahut generic hai.
+- **No thresholding:** Scores low hone par build ko fail na karna.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is the difference between DeepEval and RAGAS?"**
-2. **"How does 'Synthetic Data Generation' in RAGAS work?"** (Evolutionary approach).
-3. **"How do you implement an AI Unit Test in a CI/CD pipeline?"**
+1. **"DeepEval aur RAGAS ke beige kya difference hai?"**
+2. **"RAGAS mein 'Synthetic Data Generation' kaise kaam karta hai?"** (Evolutionary approach).
+3. **"Aap CI/CD pipeline mein AI Unit Test ko kaise implement karte hain?"**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **LLM-Judge Orchestration:** Systems that pick the best "Judge" for each test (e.g., a "Math-Judge" for math tests and a "Legal-Judge" for legal tests).
-- **Self-Healing AI:** If DeepEval detects a low score, it automatically triggers a "Retraining" or "Prompt Optimization" job.
-- **Visual Evals:** New extensions for DeepEval that can judge the "Layout" and "Images" generated by multimodal models.
+- **LLM-Judge Orchestration:** Aise systems jo har test ke liye best "Judge" select karte hain (jaise math tests ke liye "Math-Judge" aur legal tests ke liye "Legal-Judge").
+- **Self-Healing AI:** Agar DeepEval low score detect karta hai, toh ye automatically ek "Retraining" ya "Prompt Optimization" job ko trigger kar deta hai.
+- **Visual Evals:** DeepEval ke liye new extensions jo multimodal models ke dwara generated "Layout" aur "Images" ko judge kar sakte hain.

@@ -1,5 +1,5 @@
 # 📊 Project: Monitoring & Observability Dashboard
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Build a production-grade dashboard to track AI performance, exploring Prometheus, Grafana, Latency tracking, and the 2026 strategies for "AI Reliability Engineering."
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** AI performance ko track karne ke liye ek production-grade dashboard build karein; jisme Prometheus, Grafana, Latency tracking, aur 2026 mein "AI Reliability Engineering" ki strategies ko explore kiya gaya ho.
 
 ---
 

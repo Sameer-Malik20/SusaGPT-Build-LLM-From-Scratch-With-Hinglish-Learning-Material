@@ -1,5 +1,5 @@
 # 📊 Data Versioning: The Git for Large Datasets
-> **Level:** Intermediate | **Language:** Hinglish | **Goal:** Master the art of tracking changes in your data, exploring DVC, LakeFS, and the 2026 patterns for ensuring "Data Reproducibility" in AI pipelines.
+> **Level:** Intermediate | **Language:** Hinglish | **Goal:** Apne data mein changes track karne ki art ko master karein, DVC, LakeFS, aur 2026 ke patterns ko explore karte hue AI pipelines mein "Data Reproducibility" ensure karne ke liye.
 
 ---
 
@@ -18,22 +18,22 @@ Hum sab jaante hain ki Code ke liye **Git** hota hai. Agar code kharab ho jaye, 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Data versioning solves the problem of **Dataset Drift** and **Irreproducibility.**
+Data versioning **Dataset Drift** aur **Irreproducibility** ki problem ko solve karta hai.
 
 ### 1. Data Version Control (DVC):
-- DVC creates lightweight `.dvc` files that contain the **Hash (MD5)** of the actual data.
-- You commit the `.dvc` file to Git.
-- The actual data is pushed to a "Remote" (AWS S3, Google Cloud Storage).
-- To get the data back: `git checkout v1.0` then `dvc pull`.
+- DVC lightweight `.dvc` files create karta hai jisme actual data ka **Hash (MD5)** hota hai.
+- Aap `.dvc` file ko Git mein commit karte hain.
+- Actual data ko ek "Remote" (AWS S3, Google Cloud Storage) par push kiya jata hai.
+- Data ko wapas pane ke liye: `git checkout v1.0` aur phir `dvc pull`.
 
 ### 2. LakeFS:
-- The "Git for Data Lakes." 
-- It allows you to create "Branches" of your entire S3 bucket. 
-- You can experiment on `branch-new-data` without affecting the `master` dataset used in production.
+- Ye "Data Lakes ke liye Git" ki tarah hai. 
+- Ye aapko aapke poore S3 bucket ke "Branches" banane ki permission deta hai. 
+- Aap production mein use hone wale `master` dataset ko affect kiye bina `branch-new-data` par experiment kar sakte hain.
 
 ### 3. Feature Stores (Tecton / Feast):
-- Storing "Features" (pre-processed data) with versions.
-- Ensures that the same "Math" is applied to data during **Training** and **Inference.**
+- Versions ke sath "Features" (pre-processed data) ko store karna.
+- Ye ensure karta hai ki **Training** aur **Inference** ke dauran data par same "Math" (preprocessing logic) apply ho.
 
 ---
 
@@ -49,8 +49,8 @@ Data versioning solves the problem of **Dataset Drift** and **Irreproducibility.
 
 ## 📐 4. Mathematical Intuition
 - **The Hash Identity:** 
-  In 2026, we don't trust "File Names." We trust **Hashes (SHA-256/MD5).** 
-  If the hash of your 100GB dataset changes by even 1 bit, it's a NEW version. This ensures that your model was trained on the *exact* same bits every single time.
+  2026 mein, hum "File Names" par trust nahi karte. Hum **Hashes (SHA-256/MD5)** par trust karte hain. 
+  Agar aapke 100GB dataset ka hash 1 bit bhi change hota hai, toh ye ek NAYI version hai. Ye ensure karta hai ki aapka model har baar *exact* usi data par train ho.
 
 ---
 
@@ -97,64 +97,64 @@ dvc pull  # Automatically downloads the right version of the ZIP file
 ---
 
 ## ❌ 7. Failure Cases
-- **Diverged DVC/Git:** You committed the `.dvc` file but forgot to `dvc push` the data. Now your teammate has the "Link" but can't download the file. **Fix: Use Pre-commit hooks to automate this.**
-- **Storage Deletion:** Someone cleaned up the S3 bucket and deleted old data versions. Your Git history is now "Broken."
-- **Data Corruption:** A partial upload to S3 that looks complete but isn't. **Fix: Use MD5 checksum verification.**
+- **Diverged DVC/Git:** Aapne `.dvc` file toh commit kar di par data `dvc push` karna bhool gaye. Ab aapke teammate ke paas "Link" toh hai par wo file download nahi kar sakta. **Fix: Ise automate karne ke liye Pre-commit hooks ka use karein.**
+- **Storage Deletion:** Kisi ne S3 bucket ko clean up kiya aur purane data versions ko delete kar diya. Ab aapki Git history "Broken" ho gayi hai.
+- **Data Corruption:** S3 par partial upload jo complete lagta hai par hota nahi. **Fix: MD5 checksum verification ka use karein.**
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** "`dvc pull` says file not found."
-- **Check:** **Remote Config**. Are you pointing to the right S3 bucket?
-- **Symptom:** "The dataset looks the same but the model is performing differently."
-- **Check:** **Hidden changes**. Did someone change the "Order" of rows in a CSV? Even if content is same, order change can affect some training algorithms.
+- **Symptom:** "`dvc pull` file not found error deta hai."
+- **Check:** **Remote Config**. Kya aap sahi S3 bucket ko point kar rahe hain?
+- **Symptom:** "Dataset same dikh raha hai par model alag perform kar raha hai."
+- **Check:** **Hidden changes**. Kya kisi ne CSV mein rows ka "Order" change kar diya hai? Bhale hi content same ho, order change hone se training algorithms affect ho sakte hain.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Full Copy vs. Symlinks:** DVC uses symlinks to avoid copying data on your local disk, saving space.
+- **Full Copy vs. Symlinks:** Space save karne ke liye DVC local disk par data copy karne se bachne ke liye symlinks ka use karta hai.
 - **Git LFS vs. DVC:** 
-  - Git LFS is easier for small assets (logos, icons). 
-  - DVC is better for massive AI datasets and pipelines.
+  - Git LFS small assets (logos, icons) ke liye aasan hai. 
+  - DVC massive AI datasets aur pipelines ke liye behtar hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Sensitive Data in S3:** If your S3 bucket is public, anyone with the `.dvc` file (from your public GitHub) can download your private dataset. **Always keep your Data Remotes private.**
+- **Sensitive Data in S3:** Agar aapka S3 bucket public hai, toh koi bhi `.dvc` file (aapke public GitHub se) lekar aapka private dataset download kar sakta hai. **Hamesha apne Data Remotes ko private rakhein.**
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Data Lineage:** Tracking which *version* of data produced which *version* of a model. This is called **"Lineage Tracking"** and requires integration between DVC and MLflow.
+- **Data Lineage:** Ye track karna ki ki kis *version* ke data se kis *version* ka model bana hai. Ise **"Lineage Tracking"** kehte hain aur iske liye DVC aur MLflow ke beech integration ki need hoti hai.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Egress Fees:** Moving 1TB of data from S3 to your local machine for training can cost $\$20-50$ in "Egress fees." **Train inside the same Cloud region to avoid this.**
+- **Egress Fees:** Training ke liye S3 se 1TB data local machine par lane mein $\$20-50$ ki "Egress fees" lag sakti hai. **Isse bachne ke liye hamesha same Cloud region ke andar hi train karein.**
 
 ---
 
 ## ✅ 13. Best Practices
-- **Never modify a versioned file:** If you want to change the data, create a new folder or file and version it. 
-- **Use 'Data Pipelines' (dvc.yaml):** Define how raw data is transformed into features. If the raw data changes, DVC knows exactly which parts of the pipeline to re-run.
-- **Label your data:** Use DVC tags (e.g., `v1.0-gold-standard`) to mark important dataset milestones.
+- **Never modify a versioned file:** Agar aap data ko change karna chahte hain, toh ek naya folder ya file banayein aur use version karein.
+- **Use 'Data Pipelines' (dvc.yaml):** Define karein ki raw data features mein kaise transform hota hai. Agar raw data change hota hai, toh DVC ko pata hota hai ki pipeline ke kis part ko re-run karna hai.
+- **Label your data:** Important dataset milestones ko mark karne ke liye DVC tags (jaise `v1.0-gold-standard`) ka use karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Manually deleting files in S3:** This breaks the DVC link. Always use `dvc gc` (Garbage Collection) to safely remove old data.
-- **Adding the actual data to Git:** If you see a $100$ MB file in your Git history, you've made a mistake!
+- **Manually deleting files in S3:** Isse DVC link break ho jata hai. Purane data ko safely remove karne ke liye hamesha `dvc gc` (Garbage Collection) ka use karein.
+- **Adding the actual data to Git:** Agar aapko apni Git history mein $100$ MB ki file dikh rahi hai, toh aapne koi mistake ki hai!
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"Why shouldn't we store large datasets in Git directly?"**
-2. **"Explain how DVC tracks data without storing it in the repository."**
-3. **"What is 'Data Lineage' and why is it important for AI audits?"**
+1. **"Hume large datasets ko directly Git mein kyu store nahi karna chahiye?"**
+2. **"Explain karein ki DVC bina repository mein store kiye data ko kaise track karta hai."**
+3. **" 'Data Lineage' kya hai aur ye AI audits ke liye kyu important hai?"**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Diff-able Datasets:** New formats (like **Delta Lake**) that allow you to see exactly which "Rows" changed between two versions of a 1 Billion row table.
-- **Streaming Data Versioning:** Tracking versions of data as it flows through Kafka/Spark in real-time.
-- **AI-Verified Versions:** Systems that automatically "Test" a new data version (for bias or errors) before allowing it to be "Merged" into the master dataset.
+- **Diff-able Datasets:** Naye formats (jaise **Delta Lake**) jo aapko exact ye dekhne ki permission dete hain ki 1 Billion row table ke do versions ke beech kaun si "Rows" change hui hain.
+- **Streaming Data Versioning:** Kafka/Spark ke through real-time mein flow hone wale data ke versions ko track karna.
+- **AI-Verified Versions:** Aise systems jo master dataset mein "Merge" karne ki permission dene se pehle new data version ko automatically "Test" (bias or errors ke liye) karte hain.

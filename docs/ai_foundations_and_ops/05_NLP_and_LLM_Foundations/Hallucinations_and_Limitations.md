@@ -1,5 +1,5 @@
 # 🔍 Attention Mechanism: Focus is Everything
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the concept of Attention, from Bahdanau Attention to Self-Attention, and understand how it revolutionized NLP by removing the "Context Bottleneck."
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Bahdanau Attention se lekar Self-Attention tak ke Attention concept ko master karein, aur samjhein ki kaise isne "Context Bottleneck" ko remove karke NLP ko revolutionize kiya.
 
 ---
 
@@ -17,26 +17,26 @@ Yahi wo "Attention" hai jisne AI ko insaano ki tarah smart banaya hai.
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Attention is a mechanism that assigns **Weights** to different parts of the input sequence based on their relevance to the current output step.
+Attention ek aisi mechanism hai jo current output step ke relevance ke basis par input sequence ke different parts ko **Weights** assign karti hai.
 
 ### 1. Bahdanau Attention (Additive):
-The first version of attention. For every output word, it calculates an **Alignment Score** between the current decoder state and all encoder hidden states. It then takes a **Weighted Sum** of these states to create a "Dynamic Context Vector."
+Attention ka pehla version. Har ek output word ke liye, ye current decoder state aur sabhi encoder hidden states ke beech ek **Alignment Score** calculate karta hai. Fir ye ek "Dynamic Context Vector" create karne ke liye in states ka **Weighted Sum** leta hai.
 
 ### 2. Self-Attention (The Transformer Core):
-Instead of Encoder vs. Decoder, words in a single sentence look at each other to understand context.
-- **Query ($Q$):** What am I looking for?
-- **Key ($K$):** What do I contain?
-- **Value ($V$):** What information do I provide?
-The score is calculated as:
+Encoder vs. Decoder ke bajaye, ek single sentence ke words context ko samajhne ke liye ek-dusre ko dekhte hain.
+- **Query ($Q$):** Main kya dhoondh raha hoon?
+- **Key ($K$):** Mere paas kya hai?
+- **Value ($V$):** Main kya information provide karta hoon?
+Score ko is tarah calculate kiya jata hai:
 $$\text{Attention}(Q, K, V) = \text{Softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
 
 ### 3. Multi-Head Attention:
-Instead of one focus, the model has multiple "Heads" (e.g., 8 or 12). One head might focus on Grammar, another on Entities, and another on Verb-Subject relationships.
+Ek hi focus ke bajaye, model ke paas multiple "Heads" (e.g., 8 ya 12) hote hain. Ek head Grammar par focus kar sakta hai, dusra Entities par, aur teesra Verb-Subject relationships par.
 
 ---
 
 ## 🏗️ 3. Attention Components
-| Term | Role | Analogy |
+| Term (Shabd) | Role (Bhumika) | Analogy (Udaharan) |
 | :--- | :--- | :--- |
 | **Score** | Importance | Volume of a voice |
 | **Softmax** | Probability | Normalizing attention to $1$ |
@@ -47,9 +47,9 @@ Instead of one focus, the model has multiple "Heads" (e.g., 8 or 12). One head m
 ---
 
 ## 📐 4. Mathematical Intuition
-- **The Dot Product:** If Query and Key are similar (aligned), their dot product is high $\implies$ Attention is high.
-- **The Scaling Factor ($\sqrt{d_k}$):** As dimensions grow, dot products can become very large, pushing Softmax into regions with tiny gradients. Scaling prevents this, keeping the training stable.
-- **Parallelism:** Unlike RNNs, all $Q, K, V$ for an entire sentence can be calculated in ONE matrix multiplication ($O(1)$ time for the whole sequence).
+- **The Dot Product:** Agar Query aur Key similar (aligned) hain, toh unka dot product high hoga $\implies$ Attention high hoga.
+- **The Scaling Factor ($\sqrt{d_k}$):** Jaise-jaise dimensions grow karte hain, dot products bahut large ho sakte hain, jo Softmax ko tiny gradients wale regions me push kar dete hain. Scaling ise rokti hai aur training ko stable rakhti.
+- **Parallelism:** RNNs ke opposite, poore sentence ke liye sabhi $Q, K, V$ ko ONE matrix multiplication ($O(1)$ time poori sequence ke liye) me calculate kiya ja sakta hai.
 
 ---
 
@@ -81,7 +81,7 @@ import torch.nn.functional as F
 class SimpleSelfAttention(nn.Module):
     def __init__(self, embed_dim):
         super().__init__()
-        # Linear layers to project inputs into Q, K, V
+        # Inputs ko Q, K, V me project karne ke liye Linear layers
         self.q = nn.Linear(embed_dim, embed_dim)
         self.k = nn.Linear(embed_dim, embed_dim)
         self.v = nn.Linear(embed_dim, embed_dim)
@@ -107,62 +107,62 @@ class SimpleSelfAttention(nn.Module):
 ---
 
 ## ❌ 7. Failure Cases
-- **Quadratic Complexity ($O(N^2)$):** If a sentence is $1,000$ words, attention calculates $1,000,000$ relationships. For $1$ Million words, it's impossible. **Fix:** Use **Sparse Attention** or **Flash Attention**.
-- **Positional Loss:** Attention doesn't care about the "Order" of words. "Dog bites man" and "Man bites dog" have the same attention. **Fix:** Use **Positional Encodings**.
-- **Over-Attention:** Sometimes a model focuses too much on a single "Noise" word and ignores the real context.
+- **Quadratic Complexity ($O(N^2)$):** Agar sentence $1,000$ words ka hai, toh attention $1,000,000$ relationships calculate karta hai. $1$ Million words ke liye ye impossible hai. **Fix:** **Sparse Attention** ya **Flash Attention** ka use karein.
+- **Positional Loss:** Attention ko words ke "Order" (kram) se koi matlab nahi hota. "Dog bites man" aur "Man bites dog" dono ka same attention hota hai. **Fix:** **Positional Encodings** ka use karein.
+- **Over-Attention:** Kabhi-kabhi model kisi single "Noise" word par bahut zyada focus karne lagta hai aur real context ko ignore kar deta hai.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** Attention map is all "Uniform" (every word looks at every other word equally).
-- **Check:** **Initialization**. Your weights might be too small.
-- **Check:** **Scaling**. Did you forget to divide by $\sqrt{d_k}$?
-- **Symptom:** Model is "Cheating" in translation (looking at the answer).
-- **Check:** **Causal Masking**. Are you masking the future tokens during training?
+- **Symptom:** Attention map completely "Uniform" hai (har word dusre har word ko barabar dekh raha hai).
+- **Check:** **Initialization**. Aapke weights bahut small ho sakte hain.
+- **Check:** **Scaling**. Kya aap $\sqrt{d_k}$ se divide karna bhool gaye?
+- **Symptom:** Model translation me "Cheating" kar raha hai (answer ko dekh raha hai).
+- **Check:** **Causal Masking**. Kya aap training ke dauran future tokens ko mask kar rahe hain?
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Self-Attention vs. Cross-Attention:** Self-attention is within one sequence. Cross-attention is between two sequences (e.g., Encoder and Decoder).
-- **Hard vs. Soft Attention:** Soft attention (Standard) uses all inputs with weights. Hard attention picks only ONE input (faster but not differentiable).
+- **Self-Attention vs. Cross-Attention:** Self-attention ek hi sequence ke andar hota hai. Cross-attention do sequences ke beech hota hai (e.g., Encoder aur Decoder).
+- **Hard vs. Soft Attention:** Soft attention (Standard) weights ke sath sabhi inputs ka use karta hai. Hard attention sirf ONE input ko pick karta hai (fast hai par differentiable nahi hai).
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Prompt Leaking via Attention:** By analyzing the "Attention Maps" of a model, an attacker can sometimes see which part of the "Hidden System Prompt" the model is currently focusing on, revealing private instructions.
+- **Prompt Leaking via Attention:** Model ke "Attention Maps" ko analyze karke, attacker kabhi-kabhi ye dekh sakta hai ki model current me "Hidden System Prompt" ke kis part par focus kar raha hai, jisse private instructions reveal ho sakti hain.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The KV Cache:** During inference, we save the $K$ and $V$ vectors to avoid re-calculating them for every word. For long conversations, this cache can take $10GB+$ of VRAM.
+- **The KV Cache:** Inference ke dauran, hum har word ke liye $K$ aur $V$ vectors ko re-calculate karne se bachne ke liye unhe save karte hain. Long conversations ke liye, ye cache $10GB+$ VRAM le sakta hai.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Attention is Memory-Bound:** Most of the cost of attention is moving $Q, K, V$ from GPU memory to the GPU core. **Flash Attention** optimizes this "Movement," making models $3x$ faster for free.
+- **Attention is Memory-Bound:** Attention ki most of the cost $Q, K, V$ ko GPU memory se GPU core me move karne ki hoti hai. **Flash Attention** is "Movement" ko optimize karta hai, jisse models free me $3x$ fast ho jate hain.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Multi-Head is better than Single-Head:** It allows the model to "attend" to multiple aspects of a word (Context + Grammar + Entity) simultaneously.
-- **Use Dropout:** Apply dropout on the attention weights to prevent the model from becoming too reliant on a single word.
+- **Multi-Head is better than Single-Head:** Ye model ko ek word ke multiple aspects (Context + Grammar + Entity) par ek sath "attend" (dhyan dene) ki permission deta hai.
+- **Use Dropout:** Model ko kisi single word par bahut zyada reliant hone se rokne ke liye attention weights par dropout apply karein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Forgetting the Square Root Scale:** This is the most common mathematical error in implementing Transformers.
-- **Confusion between $Q$ and $K$:** Query is "what I want", Key is "what I have". Swapping them doesn't change the score, but it ruins the conceptual flow.
+- **Forgetting the Square Root Scale:** Transformers ko implement karne me ye sabse common mathematical error hai.
+- **Confusion between $Q$ and $K$:** Query ka matlab "what I want" hai, Key ka matlab "what I have". Unhe swap karne se score change nahi hota, par conceptual flow kharab ho jata hai.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What problem does Attention solve in Seq2Seq models?"** (The fixed-length bottleneck).
-2. **"Explain the Query, Key, and Value intuition."**
-3. **"Why is the Softmax score divided by the square root of the dimension?"**
+1. **"Seq2Seq models me Attention kis problem ko solve karta hai?"** (The fixed-length bottleneck).
+2. **"Query, Key, aur Value ke intuition ko explain karein."**
+3. **"Softmax score ko dimension ke square root se kyun divide kiya jata hai?"**
 
 ---
 
-## 🚀 15. Latest 2026 Industry Patterns
-- **FlashAttention-3:** Hardware-specific kernels that use the H100 Tensor Cores to compute attention $2x$ faster than FlashAttention-2.
+## 🚀 16. Latest 2026 Industry Patterns
+- **FlashAttention-3:** Hardware-specific kernels jo attention ko FlashAttention-2 se $2x$ fast compute karne ke liye H100 Tensor Cores ka use karte hain.
 - **Sliding Window Attention:** (Used in Mistral) Instead of looking at everything, each word only looks at the last $1000$ words, allowing for "Infinite" sequence lengths.
 - **Linear Attention (Mamba/SSM):** New math that reduces the $O(N^2)$ cost to $O(N)$, potentially killing the standard Transformer in 2027.

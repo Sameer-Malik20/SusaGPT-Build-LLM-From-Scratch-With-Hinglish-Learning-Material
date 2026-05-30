@@ -1,5 +1,5 @@
 # 🧠 Mixture of Experts (MoE): The Sparse Intelligence
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the architecture behind models like Mixtral and GPT-4, exploring how Sparsity, Gating, and Expert Specialization allow for massive model capacity with low computational cost in 2026.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Mixtral aur GPT-4 jaise models ke peeche ke architecture ko master karein, aur explore karein ki kaise Sparsity, Gating, aur Expert Specialization 2026 mein low computational cost ke sath massive model capacity allow karte hain.
 
 ---
 
@@ -15,38 +15,38 @@ Normal LLM ek giant "Brain" ki tarah hota hai. Jab aap koi sawal puchte hain, to
 ---
 
 ## 🧠 2. Deep Technical Explanation
-MoE replaces the standard **Feed-Forward Network (FFN)** layer with a sparse MoE layer.
+MoE standard **Feed-Forward Network (FFN)** layer ko ek sparse MoE layer se replace karta hai.
 
 ### 1. The Gating Network (Router):
-- It takes the input hidden state $x$ and calculates a probability distribution across $N$ experts.
-- Usually, it uses **Top-K Routing** (e.g., Top-2). Only the two experts with the highest score process the token.
-- $$G(x) = \text{Softmax}(\text{KeepTopK}(H(x)))$$ where $H(x)$ is a simple linear layer.
+- Ye input hidden state $x$ leta hai aur $N$ experts ke across probability distribution calculate karta hai.
+- Usually, ye **Top-K Routing** (e.g., Top-2) ka use karta hai. Sirf wahi do experts token ko process karte hain jinka score highest hota hai.
+- $$G(x) = \text{Softmax}(\text{KeepTopK}(H(x)))$$ jahan $H(x)$ ek simple linear layer hai.
 
-### 2. The Experts:
-- Each expert is an independent FFN. 
-- They don't share weights. Over time, experts naturally "Specialize" (e.g., one expert becomes good at Python, another at French).
+### 2. The Experts (Experts):
+- Har ek expert ek independent FFN hota hai. 
+- Wo weights share nahi karte. Time ke sath, experts naturally "Specialize" ho jate hain (e.g., ek expert Python me achha ho jata hai, dusra French me).
 
-### 3. MoE Output:
-- The final output is a weighted sum of the selected experts' outputs.
+### 3. MoE Output (MoE Output):
+- Final output selected experts ke outputs ka weighted sum hota hai.
 - $$y = \sum_{i=1}^{k} G(x)_i E_i(x)$$
 
 ---
 
 ## 🏗️ 3. Dense vs. Sparse (MoE) Architecture
-| Feature | Dense Model (Llama-3) | Sparse Model (Mixtral) |
+| Feature (Lakshan) | Dense Model (Llama-3) | Sparse Model (Mixtral) |
 | :--- | :--- | :--- |
 | **Parameters** | 70B Total / 70B Active | 141B Total / 12B Active |
-| **Compute Cost** | High | Low (Equivalent to active params) |
-| **Memory (VRAM)** | High | **Extreme** (Must load ALL experts) |
-| **Training Complexity** | Standard | High (Load balancing is hard) |
+| **Compute Cost** | High (Bada) | Low (Active params ke barabar) |
+| **Memory (VRAM)** | High | **Extreme** (SABHI experts load karne honge) |
+| **Training Complexity** | Standard | High (Load balancing difficult hai) |
 
 ---
 
 ## 📐 4. Mathematical Intuition
 - **The Expert Capacity Factor:**
-  If you have 8 experts and each token picks 2, you expect a load of $25\%$ per expert. But if all tokens pick the "Smartest" expert, the others sit idle.
+  Agar aapke paas 8 experts hain aur har token 2 picks karta hai, toh aap har expert par $25\%$ load expect karte hain. Par agar sabhi tokens "Smartest" expert ko select kar lete hain, toh baaki experts khali (idle) baithe rehte hain.
 - **Load Balancing Loss:**
-  To prevent "Expert Collapse," we add a secondary loss function during training that penalizes the model if it doesn't distribute tokens evenly across all experts.
+  "Expert Collapse" ko rokne ke liye, hum training ke dauran ek secondary loss function add karte hain jo model ko tab penalize karta hai jag wo tokens ko sabhi experts me evenly distribute nahi karta.
 
 ---
 
@@ -68,7 +68,7 @@ graph TD
 
 ## 💻 6. Production-Ready Examples (Conceptual MoE Logic in PyTorch)
 ```python
-# 2026 Pro-Tip: MoE is all about the Router.
+# 2026 Pro-Tip: MoE poora Router ke baare me hai.
 
 import torch
 import torch.nn as nn
@@ -84,18 +84,18 @@ class MoELayer(nn.Module):
         ) for _ in range(num_experts)])
 
     def forward(self, x):
-        # 1. Get routing scores
+        # 1. Routing scores paana
         logits = self.router(x)
-        # 2. Pick Top-2 Experts
+        # 2. Top-2 Experts select karna
         scores, indices = torch.topk(logits, k=2, dim=-1)
         scores = torch.softmax(scores, dim=-1)
         
-        # 3. Combine expert outputs
+        # 3. Expert outputs ko combine karna
         final_output = torch.zeros_like(x)
         for i in range(2):
             expert_idx = indices[:, i]
             expert_weight = scores[:, i].unsqueeze(-1)
-            # In production, we use optimized kernels to avoid this loop
+            # Production me hum is loop se bachne ke liye optimized kernels ka use karte hain
             final_output += expert_weight * self.experts[expert_idx](x)
             
         return final_output
@@ -104,62 +104,62 @@ class MoELayer(nn.Module):
 ---
 
 ## ❌ 7. Failure Cases
-- **Expert Collapse:** 99% of tokens go to Expert 1. The model becomes a small dense model and loses its "Swarm Intelligence."
-- **Communication Bottleneck:** In distributed MoE, experts are on different GPUs. Moving tokens between GPUs for every layer can be very slow.
-- **VRAM Explosion:** A 141B MoE model needs a lot of VRAM to store the weights, even if only 12B are used per token.
+- **Expert Collapse:** $99\%$ tokens Expert 1 ke paas chale jate hain. Model ek small dense model ban jata hai aur apni "Swarm Intelligence" lose kar deta hai.
+- **Communication Bottleneck:** Distributed MoE me, experts different GPUs par hote hain. Har layer ke liye GPUs ke beech tokens ko move karna bahut slow ho sakta hai.
+- **VRAM Explosion:** Ek 141B MoE model ko weights store karne ke liye bahut saari VRAM ki need hoti hai, bhale hi per token sirf 12B use ho rahe hon.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-- **Symptom:** Training loss is not decreasing.
-- **Check:** **Router Balance**. Check the "Expert Utilization" stats. If utilization is skewed, increase the `auxiliary_loss` weight.
-- **Symptom:** Inference is slower than a dense model of the same active size.
-- **Check:** **Memory Bandwidth**. Loading experts from VRAM is the bottleneck. Use **Quantization**.
+- **Symptom:** Training loss decrease nahi ho raha hai.
+- **Check:** **Router Balance**. "Expert Utilization" stats check karein. Agar utilization skewed hai, toh `auxiliary_loss` weight badhayein.
+- **Symptom:** Inference same active size ke dense model se slow hai.
+- **Check:** **Memory Bandwidth**. VRAM se experts ko load karna hi bottleneck hai. **Quantization** ka use karein.
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Active vs. Total Parameters:** More total params = better world knowledge. Fewer active params = faster generation.
-- **Router Complexity:** A complex router is more accurate but adds latency to every single layer.
+- **Active vs. Total Parameters:** Zyada total params = better world knowledge. Kam active params = faster generation.
+- **Router Complexity:** Ek complex router zyada accurate hota hai par ye har ek layer me latency add karta hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Routing Leakage:** By observing which experts are activated for a specific prompt, an attacker can sometimes guess the "Internal logic" or "Hidden filters" of the model.
+- **Routing Leakage:** Kisi specific prompt ke liye kaunse experts activate ho rahe hain ye dekh kar, attacker kabhi-kabhi model ke "Internal logic" ya "Hidden filters" ko guess kar sakta hai.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Expert Parallelism:** How to split 64 experts across 8 GPUs? Usually, we put 8 experts per GPU. If a token needs an expert on another GPU, it must travel across the network (NVLink).
+- **Expert Parallelism:** Kaise 64 experts ko 8 GPUs me split karein? Usually, hum per GPU 8 experts rakhte hain. Agar kisi token ko kisi dusre GPU par maujood expert ki need hai, toh use network (NVLink) ke through travel karna hoga.
 
 ---
 
 ## 💸 12. Cost Considerations
-- **Training:** MoE is $3x-5x$ more efficient to train for the same level of performance as a dense model.
-- **Serving:** Serving is cheap (low FLOPs) but requires lots of memory (High VRAM cost).
+- **Training:** Same performance level ke liye, MoE ko train karna dense model ke comparison me $3x-5x$ zyada efficient hota hai.
+- **Serving:** Serving sasti hai (low FLOPs) par iske liye bahut saari memory (High VRAM cost) ki need hoti hai.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Fine-grained Experts:** 2026 models use many small experts (e.g., 64 or 128) instead of 8 large ones for better specialization.
-- **Expert Dropping:** In high-traffic systems, if an expert is too busy, "drop" the token or send it to the next best expert to maintain latency.
+- **Fine-grained Experts:** 2026 ke models behtar specialization ke liye 8 large experts ke bajaye kai saare small experts (e.g., 64 ya 128) ka use karte hain.
+- **Expert Dropping:** High-traffic systems me, agar koi expert bahut busy hai, toh token ko "drop" kar dein ya use latency maintain rakhne ke liye next best expert ke paas bhej dein.
 
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Applying MoE to Attention:** Usually, MoE is only for FFN layers. Applying it to Attention is much harder and often less effective.
+- **Applying MoE to Attention:** Usually, MoE sirf FFN layers ke liye hota hai. Ise Attention par apply karna kafi mushkil aur aksar less effective hota hai.
 - **Ignoring Inference RAM:** Don't forget that you need to fit the WHOLE model in VRAM, not just the active parts.
 
 ---
 
 ## 📝 15. Interview Questions
-1. **"What is the role of the Gating Network in MoE?"**
-2. **"Why does MoE need an Auxiliary Loss during training?"**
-3. **"How does MoE improve the 'Performance per Dollar' for LLM providers?"**
+1. **"MoE me Gating Network ki kya bhumika hai?"**
+2. **"MoE ko training ke dauran Auxiliary Loss ki zaroorat kyun hoti hai?"**
+3. **"MoE kaise LLM providers ke liye 'Performance per Dollar' ko improve karta hai?"**
 
 ---
 
-## 🚀 15. Latest 2026 Industry Patterns
+## 🚀 16. Latest 2026 Industry Patterns
 - **DeepSeek-style MoE:** Using "Shared Experts" (experts that process every token) combined with "Routed Experts" for maximum stability.
 - **Dynamic Routing:** Routers that change their "K" (number of experts) based on the difficulty of the token. (Easy tokens = 1 expert, Hard tokens = 4 experts).
 - **Asynchronous Expert Loading:** Loading the next layer's experts while the current layer is still calculating.

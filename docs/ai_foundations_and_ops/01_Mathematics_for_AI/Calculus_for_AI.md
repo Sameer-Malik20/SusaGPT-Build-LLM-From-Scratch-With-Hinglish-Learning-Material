@@ -1,5 +1,5 @@
-# 📉 Calculus for AI: The Engine of Learning & Backpropagation
-> **Level:** Intermediate | **Language:** Hinglish | **Goal:** Master the multivariate calculus, chain rules, and gradients that allow neural networks to update their weights and optimize their performance.
+# 📉 Calculus for AI: Learning & Backpropagation Ka Engine
+> **Level:** Intermediate | **Language:** Hinglish | **Goal:** Multivariate calculus, chain rules, aur gradients ko master karna jo neural networks ko weight update karne aur unki performance ko optimize karne me help karte hain.
 
 ---
 
@@ -16,13 +16,13 @@ Bina calculus ke, AI sirf ek static (Ruka hua) model hota jo kabhi apne aap ko s
 ---
 
 ## 🧠 2. Deep Technical Explanation
-In AI, we focus on **Multivariate Differential Calculus**:
-1. **Partial Derivatives ($\partial$):** Measuring how the loss $L$ changes with respect to ONE specific weight $w_i$, keeping all other weights constant.
-2. **The Gradient ($\nabla$):** A vector of all partial derivatives. It points towards the steepest increase of the function. For optimization, we move in the **Negative Gradient** direction.
-3. **The Chain Rule:** The backbone of Backpropagation. It allows us to calculate the derivative of a nested function: 
+AI me, hum **Multivariate Differential Calculus** par focus karte hain:
+1. **Partial Derivatives ($\partial$):** Ye measure karna ki baaki saare weights ko constant rakhte hue sirf EK specific weight $w_i$ ke respect me loss $L$ kaise change hota hai.
+2. **The Gradient ($\nabla$):** Saare partial derivatives ka ek vector. Ye function ke steepest increase ki direction me point karta hai. Optimization ke liye, hum **Negative Gradient** ki direction me move karte hain.
+3. **The Chain Rule:** Backpropagation ki backbone. Ye hume ek nested function ka derivative calculate karne ki permission deta hai:
    $$\frac{\partial L}{\partial w_1} = \frac{\partial L}{\partial y} \cdot \frac{\partial y}{\partial z} \cdot \frac{\partial z}{\partial w_1}$$
-4. **Jacobian Matrix:** A matrix containing all first-order partial derivatives of a vector-valued function. Essential for multi-output networks.
-5. **Hessian Matrix:** A matrix of second-order partial derivatives. It describes the **Curvature** of the loss landscape (helpful for advanced optimizers like AdaHessian).
+4. **Jacobian Matrix:** Ek aisi matrix jisme vector-valued function ke saare first-order partial derivatives hote hain. Multi-output networks ke liye ye zaroori hai.
+5. **Hessian Matrix:** Second-order partial derivatives ki matrix. Ye loss landscape ki **Curvature** ko describe karti hai (AdaHessian jaise advanced optimizers ke liye helpful hai).
 
 ---
 
@@ -68,7 +68,7 @@ graph LR
 
 ## 💻 6. Production-Ready Examples (Manual Gradient Check)
 ```python
-# 2026 Pro-Tip: Always verify your logic with a Numerical Gradient
+# 2026 Pro-Tip: Apne logic ko Numerical Gradient ke sath hamesha verify karein
 import torch
 
 def model_fn(x, w):
@@ -102,9 +102,9 @@ print(f"PyTorch Gradient: {w_torch.grad}")
 ---
 
 ## ❌ 6. Failure Cases
-- **Vanishing Gradients:** In very deep networks, as you multiply small derivatives (Chain Rule), the gradient becomes $0.0000001$. The weights stop updating. **Fix:** Use **ReLU** or **Residual Connections**.
-- **Exploding Gradients:** In RNNs, the derivatives grow to $10^{10}$, causing `NaN` values. **Fix:** Use **Gradient Clipping**.
-- **Divergence:** If the "Step" (Learning Rate) is too large, the model jumps over the valley and the loss increases.
+- **Vanishing Gradients:** Bahut deep networks me, jaise-jaise aap small derivatives ko multiply karte hain (Chain Rule), gradient $0.0000001$ ho jata hai. Weights update hona band ho jaate hain. **Fix:** **ReLU** ya **Residual Connections** ka use karein.
+- **Exploding Gradients:** RNNs me, derivatives grow hokar $10^{10}$ ho jaate hain, jiski wajah se `NaN` values aane lagti hain. **Fix:** **Gradient Clipping** ka use karein.
+- **Divergence:** Agar "Step" (Learning Rate) bahut large hai, toh model valley ke upar se jump kar jata hai aur loss increase hone lagta.
 
 ---
 
@@ -116,49 +116,49 @@ print(f"PyTorch Gradient: {w_torch.grad}")
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Exact Gradient (Full Batch):** Very accurate but slow and memory-intensive.
-- **Estimated Gradient (Stochastic/Batch):** Noisy but much faster and helps in escaping local minima.
-- **Numerical Gradient:** Extremely slow but 100% reliable for checking if your "Auto-diff" logic has a bug.
+- **Exact Gradient (Full Batch):** Bahut accurate par slow aur memory-intensive hota hai.
+- **Estimated Gradient (Stochastic/Batch):** Noisy hota hai par kafi fast hota hai aur local minima se bachne me help karta hai.
+- **Numerical Gradient:** Extremely slow hota hai par ye check karne ke liye 100% reliable hai ki aapke "Auto-diff" logic me koi bug toh nahi hai.
 
 ---
 
 ## 🛡️ 9. Security Concerns
-- **Gradient Inversion Attacks:** An attacker can observe the gradients sent by a client (in Federated Learning) and mathematically reconstruct the client's private training data.
-- **Adversarial Noise:** Using calculus to find the smallest possible change to an image (direction of highest sensitivity) that flips the model's classification.
+- **Gradient Inversion Attacks:** Ek attacker client dwara send kiye gaye gradients ko observe kar sakta hai (Federated Learning me) aur mathematically client ke private training data ko reconstruct kar sakta hai.
+- **Adversarial Noise:** Image me sabse chota possible change find karne ke liye calculus ka use karna (direction of highest sensitivity) jo model ki classification ko flip kar de.
 
 ---
 
 ## 📈 10. Scaling Challenges
-- **Second-Order Optimization:** Using the Hessian (2nd derivative) is $100x$ more powerful but requires $O(N^2)$ memory. For a 7B model, this is impossible. We use **Low-rank approximations** like L-BFGS.
+- **Second-Order Optimization:** Hessian (2nd derivative) ka use karna $100x$ zyada powerful hai par iske liye $O(N^2)$ memory chahiye hoti hai. 7B model ke liye ye impossible hai. Hum **Low-rank approximations** jaise L-BFGS ka use karte hain.
 
 ---
 
 ## 💸 11. Cost Considerations
-- Backpropagation requires storing every intermediate "Forward" value to calculate derivatives. This is why training uses $3x-4x$ more VRAM than inference.
-- **Saving Tip:** Use **Gradient Checkpointing** to recompute intermediate values instead of storing them, saving $70\%$ VRAM at the cost of $30\%$ more time.
+- Backpropagation ke liye derivatives calculate karne ke waste har ek intermediate "Forward" value ko store karna zaroori hai. Yahi wajah hai ki training me inference se $3x-4x$ zyada VRAM use hota hai.
+- **Saving Tip:** Intermediate values ko store karne ke bajaye unhe recompute karne ke liye **Gradient Checkpointing** ka use karein, jisse $30\%$ extra time ki cost par $70\%$ VRAM save hoti hai.
 
 ---
 
 ## ✅ 12. Best Practices
-- **Use Log-Probabilities:** When calculating derivatives of probabilities, always use the log-space to avoid precision loss (Numerical Stability).
-- **Normalize Inputs:** Calculus works best when slopes are uniform. Standardizing data ($mean=0, std=1$) prevents the loss landscape from becoming too "stretched".
+- **Use Log-Probabilities:** Probabilities ke derivatives calculate karte waqt, precision loss se bachne ke liye hamesha log-space use karein (Numerical Stability).
+- **Normalize Inputs:** Calculus tab best kaam karta hai jab slopes uniform ho. Data ko standardize karna ($mean=0, std=1$) loss landscape ko zyada "stretched" hone se rokta hai.
 
 ---
 
 ## ⚠️ 13. Common Mistakes
-- **Zeroing Gradients:** Forgetting `optimizer.zero_grad()` in PyTorch. Gradients accumulate by default, which will ruin your weight updates.
-- **Sigmoid at Output:** Using Sigmoid in deep layers leads to vanishing gradients. Only use it for the final binary output.
+- **Zeroing Gradients:** PyTorch me `optimizer.zero_grad()` karna bhul jana. Gradients by default accumulate hote hain, jo aapke weight updates ko kharab kar denge.
+- **Sigmoid at Output:** Deep layers me Sigmoid use karne se vanishing gradients ki problem hoti hai. Ise sirf final binary output ke liye hi use karein.
 
 ---
 
 ## 📝 14. Interview Questions
-1. **"Why do we use the 'Negative' of the gradient to update weights?"** (Because the gradient points up, and we want to go down to the minimum).
-2. **"Explain the 'Chain Rule' in the context of a 3-layer neural network."**
-3. **"What is the Jacobian and why is it used in Reinforcement Learning?"**
+1. **"Weights ko update karne ke liye hum gradient ke 'Negative' ka use kyun karte hain?"** (Kyunki gradient upar ki taraf point karta hai, aur hum niche minimum tak jana chahte hain).
+2. **"Ek 3-layer neural network ke context me 'Chain Rule' ko explain karein."**
+3. **"Jacobian kya hai aur Reinforcement Learning me iska use kyun hota hai?"**
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **K-FAC (Kronecker-Factored Approximate Curvature):** A way to use second-order information (Hessian) for massive LLM training with minimal memory overhead.
-- **Differentiable Programming:** The entire software stack (even Databases and OS kernels) being written in a way that is "Differentiable," allowing AI to optimize the whole system using calculus.
-- **Physics-Informed Neural Networks (PINNs):** Using calculus to embed physical laws (like gravity or fluid dynamics) directly into the model's loss function.
+- **K-FAC (Kronecker-Factored Approximate Curvature):** Minimal memory overhead ke sath massive LLM training ke liye second-order information (Hessian) use karne ka ek rasta.
+- **Differentiable Programming:** Pure software stack (yahan tak ki Databases aur OS kernels bhi) ko is tarah likhna jo "Differentiable" ho, jisse AI pure system ko calculus ka use karke optimize kar sake.
+- **Physics-Informed Neural Networks (PINNs):** Model ke loss function me directly physical laws (jaise gravity ya fluid dynamics) ko embed karne ke liye calculus ka use karna.
