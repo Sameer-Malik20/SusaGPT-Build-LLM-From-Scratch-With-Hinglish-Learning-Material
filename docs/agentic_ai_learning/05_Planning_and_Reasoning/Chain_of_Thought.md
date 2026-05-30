@@ -1,5 +1,5 @@
-# ⛓️ Chain-of-Thought (CoT) — Teaching Agents to Think
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the fundamental reasoning technique that enables LLMs to solve complex problems by breaking them into logical steps.
+# ⛓️ Chain-of-Thought (CoT) — Agents Ko Sochna Sikhana
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Fundamental reasoning technique master karna jo LLMs ko complex problems ko logical steps me tod kar solve karne me help karti hai.
 
 ---
 
@@ -13,12 +13,12 @@ AI ke liye bhi yahi logic hai. Jab hum model ko "Let's think step by step" bolte
 ---
 
 ## 🧠 2. Deep Technical Explanation
-CoT is a **Zero-shot or Few-shot Prompting Technique** that leverages the LLM's autoregressive nature.
-- **The Mechanism:** By forcing the model to generate intermediate reasoning tokens, the probability of the final answer token becomes conditioned on the correct logical sequence.
-- **Zero-shot CoT:** Simply adding "Let's think step by step" to the prompt.
-- **Few-shot CoT:** Providing examples that include a `Reasoning:` section before the `Answer:`.
-- **Cognitive Trace:** CoT creates a "trace" that can be audited. If the agent fails, you can see *exactly* at which logical step it went wrong.
-- **Limitations:** CoT is slow (more tokens generated) and doesn't guarantee accuracy for highly non-linear problems.
+CoT ek **Zero-shot ya Few-shot Prompting Technique** hai jo LLM ki autoregressive nature ka use karti hai.
+- **Mechanism:** Model ko intermediate reasoning tokens generate karne ke liye force karne se final answer token ki probability correct logical sequence par conditioned ho jati hai.
+- **Zero-shot CoT:** Prompt me simply "Let's think step by step" add karna.
+- **Few-shot CoT:** Aise examples provide karna jisme `Answer:` se pehle `Reasoning:` section ho.
+- **Cognitive Trace:** CoT ek "trace" create karta hai jise audit kiya ja sakta hai. Agar agent fail ho, to aap *exactly* dekh sakte ho ki kaunse logical step par galti hui.
+- **Limitations:** CoT slow hota hai (zyada tokens generate hote hain) aur highly non-linear problems ke liye accuracy guarantee nahi karta.
 
 ---
 
@@ -45,17 +45,17 @@ graph LR
 
 ```python
 COT_PROMPT = """
-Q: If John has 5 apples and eats 2, how many are left?
+Q: Agar John ke paas 5 apples hain aur wo 2 kha leta hai, to kitne bachte hain?
 A: Let's think step by step. 
-1. John starts with 5 apples.
-2. He eats 2, so we subtract 2 from 5.
+1. John 5 apples ke saath start karta hai.
+2. Wo 2 kha leta hai, isliye hum 5 me se 2 subtract karte hain.
 3. 5 - 2 = 3.
 Answer: 3
 
-Q: If a train leaves at 2 PM and travels for 3 hours, what time does it arrive?
+Q: Agar train 2 PM par nikalti hai aur 3 hours travel karti hai, to kis time arrive karegi?
 A: Let's think step by step.
-1. Starting time is 2 PM.
-2. Duration is 3 hours.
+1. Start ka time 2 PM hai.
+2. Duration 3 hours hai.
 3. 2 + 3 = 5.
 Answer: 5 PM
 
@@ -66,16 +66,16 @@ A: Let's think step by step.
 def get_cot_response(query: str):
     # Hinglish Logic: User query ko template mein dalo taaki model step-by-step soche
     full_prompt = COT_PROMPT.format(user_query=query)
-    print(f"Sending prompt to LLM...")
+    print(f"Prompt LLM ko bhej rahe hain...")
     # llm.generate(full_prompt)
 ```
 
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Mathematical Problem Solving:** Breaking down complex equations into arithmetic steps.
-- **Legal Reasoning:** Comparing a case against multiple laws step-by-step.
-- **Logic Puzzles:** Solving riddles where direct intuition often fails.
+- **Math Problems Solve Karna:** Complex equations ko arithmetic steps me break down karna.
+- **Legal Reasoning:** Ek case ko multiple laws ke against step-by-step compare karna.
+- **Logic Puzzles:** Aise riddles solve karna jahan direct intuition aksar fail ho jati hai.
 
 ---
 
@@ -88,7 +88,7 @@ def get_cot_response(query: str):
 
 ## 🛠️ 7. Debugging Guide
 - **Trace Analysis:** Check karein ki reasoning kahan diverge hui.
-- **Stop Sequences:** Use stop sequences like `Answer:` to extract the final result easily.
+- **Stop Sequences:** Final result easily extract karne ke liye `Answer:` jaise stop sequences use karein.
 
 ---
 
@@ -99,7 +99,7 @@ def get_cot_response(query: str):
 ---
 
 ## ✅ 9. Best Practices
-- **Use for Logic, not Creative:** Creative writing mein CoT ki zarurat nahi hoti.
+- **Logic Ke Liye Use Karein, Creative Ke Liye Nahi:** Creative writing me CoT ki zarurat nahi hoti.
 - **Self-Consistency:** CoT ke saath 3-5 paths generate karein aur majority answer pick karein.
 
 ---
@@ -115,7 +115,7 @@ def get_cot_response(query: str):
 ---
 
 ## 💰 12. Cost Considerations
-- **Output Token Heavy:** Since reasoning is part of the output, you pay for every thought token.
+- **Output Token Heavy:** Kyunki reasoning output ka part hoti hai, aap har thought token ke liye pay karte hain.
 
 ---
 
@@ -127,15 +127,15 @@ def get_cot_response(query: str):
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **No 'Think Step by Step':** Instruction bhool jana (Model will jump to wrong answer).
-- **Small Models:** 7B models par CoT try karna (Often reasoning quality poor hoti hai).
+- **'Think Step by Step' Nahi Dena:** Instruction bhool jana (model wrong answer par jump kar sakta hai).
+- **Small Models:** 7B models par CoT try karna (aksar reasoning quality poor hoti hai).
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Active CoT:** The model dynamically decides *when* it needs to use CoT and when it can answer directly.
-- **Chain-of-Verification (CoVe):** After the reasoning chain, the model creates "Verification questions" for its own steps to double-check accuracy.
+- **Active CoT:** Model dynamically decide karta hai ki *kab* CoT use karna hai aur kab directly answer kar sakta hai.
+- **Chain-of-Verification (CoVe):** Reasoning chain ke baad model accuracy double-check karne ke liye apne steps ke liye "Verification questions" create karta hai.
 
 ---
 
-> **Expert Tip:** CoT is the **Scratchpad** of the LLM. Use it whenever the path from Query to Answer involves more than one logical jump.
+> **Expert Tip:** CoT LLM ka **Scratchpad** hai. Jab Query se Answer tak ka path ek se zyada logical jumps involve kare, tab ise use karein.

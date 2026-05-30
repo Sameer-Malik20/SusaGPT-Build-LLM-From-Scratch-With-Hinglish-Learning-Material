@@ -1,5 +1,5 @@
-# 🧠 Short-Term vs Long-Term Memory — The Agent's Recall System
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the architectures that allow agents to remember context both within and across sessions.
+# 🧠 Short-Term vs Long-Term Memory — Agent Ka Recall System
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Aisi architectures master karna jo agents ko sessions ke andar aur across context remember karne deti hain.
 
 ---
 
@@ -14,10 +14,10 @@ Agent ki memory uske dimaag ka wo hissa hai jo "Puraani baatein" yaad rakhta hai
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Memory in agents is a multi-tier architecture:
-- **Short-Term (Context Window):** This is the active context. It uses the LLM's attention mechanism to process the most recent tokens. It is highly precise but limited by the **Context Window Size** (e.g., 128k or 1M tokens).
-- **Long-Term (Retrieval Augmented):** This uses **Vector Databases** (Pinecone, Weaviate) or **Graph Databases**. When the agent needs something from the past, it performs a **Semantic Search** to pull relevant snippets back into the short-term context.
-- **Working Memory:** A special scratchpad where the agent stores intermediate reasoning results (like a mathematical calculation or a plan) that don't need to stay in the chat history but are needed for the current step.
+Agents me memory ek multi-tier architecture hoti hai:
+- **Short-Term (Context Window):** Ye active context hota hai. Ye most recent tokens process karne ke liye LLM ka attention mechanism use karta hai. Ye highly precise hota hai, lekin **Context Window Size** (e.g., 128k ya 1M tokens) se limited hota hai.
+- **Long-Term (Retrieval Augmented):** Ye **Vector Databases** (Pinecone, Weaviate) ya **Graph Databases** use karta hai. Jab agent ko past se kuch chahiye hota hai, ye relevant snippets ko short-term context me wapas pull karne ke liye **Semantic Search** perform karta hai.
+- **Working Memory:** Ek special scratchpad jahan agent intermediate reasoning results store karta hai (jaise mathematical calculation ya plan) jo chat history me rehne ki zarurat nahi rakhte, lekin current step ke liye needed hote hain.
 
 ---
 
@@ -29,7 +29,7 @@ graph TD
     A <--> ST[Short-Term Memory\nContext Window]
     A <--> LT[Long-Term Memory\nVector DB / Zep / Mem0]
     
-    subgraph "The Flow"
+    subgraph "Flow"
     ST -->|If Limit Reached| LT
     LT -->|Search & Inject| ST
     end
@@ -46,30 +46,30 @@ class AgentMemory:
         self.long_term = {}  # Simulated Hard Drive (Vector DB)
 
     def add_to_memory(self, user_id, message):
-        # 1. Add to active context
+        # 1. Active context me add karein
         self.short_term.append(message)
         
-        # 2. Logic to move to Long-term (Hinglish: Agar important hai toh save karo)
+        # 2. Long-term me move karne ki logic (agar important hai to save karo)
         if "preference" in message.lower():
             key = f"pref_{user_id}"
             self.long_term[key] = message
-            print(f"Long-term memory updated: {message}")
+            print(f"Long-term memory update hui: {message}")
 
     def get_context(self, user_id):
-        # Combine short-term and relevant long-term
+        # Short-term aur relevant long-term combine karein
         pref = self.long_term.get(f"pref_{user_id}", "")
         return f"User Preference: {pref}\nRecent Chat: {self.short_term[-5:]}"
 
 # mem = AgentMemory()
-# mem.add_to_memory("user_1", "I prefer vegetarian food.")
+# mem.add_to_memory("user_1", "Mujhe vegetarian food pasand hai.")
 # print(mem.get_context("user_1"))
 ```
 
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Personal AI Tutors:** Remembering a student's weak subjects from the last 10 lessons (Long-term) and answering the current question (Short-term).
-- **Coding Agents:** Remembering the project structure (Long-term) while writing the current function (Short-term).
+- **Personal AI Tutors:** Last 10 lessons se student ke weak subjects remember karna (Long-term) aur current question answer karna (Short-term).
+- **Coding Agents:** Current function likhte waqt project structure remember karna (Long-term).
 
 ---
 
@@ -87,8 +87,8 @@ class AgentMemory:
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **More Long-term Memory:** Better personalization but higher latency and cost (Retrieval steps).
-- **Large Context Window:** Higher reasoning quality but prone to "Lost in the middle" and very expensive.
+- **More Long-term Memory:** Better personalization, lekin higher latency aur cost (retrieval steps).
+- **Large Context Window:** Higher reasoning quality, lekin "Lost in the middle" ke liye prone aur very expensive.
 
 ---
 
@@ -111,8 +111,8 @@ class AgentMemory:
 ---
 
 ## 💰 12. Cost Considerations
-- **Vector DB Pricing:** Monthly cost based on index size and query volume.
-- **Compute Cost:** Every memory retrieval is an extra LLM call for "Re-ranking" or "Selection".
+- **Vector DB Pricing:** Index size aur query volume ke basis par monthly cost.
+- **Compute Cost:** Har memory retrieval "Re-ranking" ya "Selection" ke liye extra LLM call hota hai.
 
 ---
 
@@ -124,15 +124,15 @@ class AgentMemory:
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **No Pruning:** Memory ko hamesha badhne dena (It will get slower and more expensive over time).
+- **No Pruning:** Memory ko hamesha badhne dena (time ke saath ye slower aur more expensive ho jayegi).
 - **Direct Injection:** Retrieval results ko bina validation ke model ko bhej dena.
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Mem0 (Personalized Intelligence):** A graph-based memory that learns user preferences dynamically across every interaction.
-- **Episodic Memory:** Agents that can "Replay" a past success or failure scenario to improve their current decision.
+- **Mem0 (Personalized Intelligence):** Graph-based memory jo har interaction across user preferences dynamically learn karti hai.
+- **Episodic Memory:** Agents jo current decision improve karne ke liye past success ya failure scenario "Replay" kar sakte hain.
 
 ---
 
-> **Expert Tip:** Memory is about **Relevance**, not Volume. A 100GB memory is useless if the agent can't find the 10 bytes that matter right now.
+> **Expert Tip:** Memory **Relevance** ke baare me hai, volume ke baare me nahi. 100GB memory useless hai agar agent right now matter karne wale 10 bytes find nahi kar sakta.

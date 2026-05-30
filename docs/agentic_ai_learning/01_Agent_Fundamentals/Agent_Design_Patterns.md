@@ -1,5 +1,5 @@
-# 🎨 Agent Design Patterns — The Blueprint for Success
-> **Level:** Fundamentals | **Language:** Hinglish | **Goal:** Master the proven structural patterns for organizing agents and workflows.
+# 🎨 Agent Design Patterns — Success ka Blueprint
+> **Level:** Fundamentals | **Language:** Hinglish | **Goal:** Agents aur workflows organize karne ke proven structural patterns master karna.
 
 ---
 
@@ -15,11 +15,11 @@ Jaise har ghar mein kitchen aur bathroom ki ek jagah fix hoti hai, waise hi comp
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Design patterns decouple the **Logical Flow** from the **Inference Logic**.
-- **Router Pattern:** Uses an LLM or Semantic Search to classify the input and route it to a specific node. This saves tokens by only activating the relevant agent.
-- **Supervisor Pattern (Orchestrator):** A master agent manages a state graph. It delegates tasks to specialized workers and collects their outputs. The Supervisor is the only one who can decide when the goal is met.
-- **Worker Pattern (Service Agents):** Agents with a highly restricted prompt and specific tools. They are "stateless" relative to the master goal.
-- **Planner-Executor:** The Planner creates a DAG of tasks. The Executor (or multiple Executors) processes these tasks. This is essential for long-horizon reasoning.
+Design patterns **Logical Flow** ko **Inference Logic** se decouple karte hain.
+- **Router Pattern:** Input classify karne aur specific node tak route karne ke liye LLM ya Semantic Search use karta hai. Sirf relevant agent activate karke ye tokens save karta hai.
+- **Supervisor Pattern (Orchestrator):** Master agent state graph manage karta hai. Ye specialized workers ko tasks delegate karta hai aur unke outputs collect karta hai. Supervisor hi decide karta hai ki goal meet hua ya nahi.
+- **Worker Pattern (Service Agents):** Highly restricted prompt aur specific tools wale agents. Master goal ke relative ye "stateless" hote hain.
+- **Planner-Executor:** Planner tasks ka DAG create karta hai. Executor (ya multiple Executors) in tasks ko process karte hain. Ye long-horizon reasoning ke liye essential hai.
 
 ---
 
@@ -53,27 +53,27 @@ class Route(BaseModel):
     destination: Literal["coding", "general"]
 
 def router_logic(query: str) -> str:
-    # Logic to classify the query (Simulated LLM call)
+    # Query classify karne ki logic (simulated LLM call)
     if "code" in query.lower() or "python" in query.lower():
         return "coding"
     return "general"
 
 def run_system(query: str):
     target = router_logic(query)
-    print(f"Routing to: {target}")
+    print(f"Routing ho raha hai: {target}")
     
     if target == "coding":
-        return "Executing coding logic..."
-    return "Executing general logic..."
+        return "Coding logic execute ho rahi hai..."
+    return "General logic execute ho rahi hai..."
 
-# run_system("Write a python script for a calculator.")
+# run_system("Calculator ke liye python script likho.")
 ```
 
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Enterprise Helpdesks:** Router pattern automatically assigns tickets to HR, IT, or Finance agents.
-- **Multi-modal Systems:** A Supervisor agent receives a video, sends frames to a Vision agent, audio to a Transcription agent, and then combines the result.
+- **Enterprise Helpdesks:** Router pattern tickets ko automatically HR, IT, ya Finance agents ko assign karta hai.
+- **Multi-modal Systems:** Supervisor agent video receive karta hai, frames Vision agent ko bhejta hai, audio Transcription agent ko bhejta hai, aur phir result combine karta hai.
 
 ---
 
@@ -85,14 +85,14 @@ def run_system(query: str):
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Pattern Isolation:** Har node ko individually test karein. Agar Router fail ho raha hai, toh pehle use fix karein before checking workers.
+- **Pattern Isolation:** Har node ko individually test karein. Agar Router fail ho raha hai, toh workers check karne se pehle use fix karein.
 - **Decision Logging:** Supervisor ne task kyu delegate kiya, uska "Reasoning" humesha log karein.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Modular (Multi-agent):** Scalable and robust but higher latency.
-- **Monolithic (Single agent):** Fast and simple but gets confused by complex tasks.
+- **Modular (Multi-agent):** Scalable aur robust hota hai, lekin latency higher hoti hai.
+- **Monolithic (Single agent):** Fast aur simple hota hai, lekin complex tasks me confuse ho jata hai.
 
 ---
 
@@ -108,13 +108,13 @@ def run_system(query: str):
 ---
 
 ## 📈 11. Scaling Challenges
-- **State Synchronization:** In the Supervisor pattern, syncing state between multiple parallel workers is complex.
-- **Node Sprawl:** Too many small nodes make the system hard to maintain.
+- **State Synchronization:** Supervisor pattern me multiple parallel workers ke beech state sync karna complex hota hai.
+- **Node Sprawl:** Bahut zyada small nodes system ko maintain karna hard bana dete hain.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Routing Cost:** Har incoming request par routing LLM call karna mehnga ho sakta hai (use small models for routing).
+- **Routing Cost:** Har incoming request par routing LLM call karna mehnga ho sakta hai (routing ke liye small models use karein).
 
 ---
 
@@ -127,14 +127,14 @@ def run_system(query: str):
 
 ## ⚠️ 14. Common Mistakes
 - **Over-engineering:** 2-step task ke liye Supervisor pattern use karna.
-- **Implicit Routing:** Model ko hi bolna ki "Check if this is tech or billing" (Use an explicit router node instead).
+- **Implicit Routing:** Model ko hi bolna ki "Check karo ye tech hai ya billing" (iske bajay explicit router node use karein).
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Dynamic Routing:** Systems that learn from past routing mistakes and update their logic autonomously.
-- **Federated Agents:** Patterns where agents from different organizations collaborate securely using standardized protocols.
+- **Dynamic Routing:** Systems jo past routing mistakes se learn karte hain aur apni logic autonomously update karte hain.
+- **Federated Agents:** Patterns jahan different organizations ke agents standardized protocols use karke securely collaborate karte hain.
 
 ---
 
-> **Final Insight:** A good design pattern **hides complexity** and **exposes control**. 
+> **Final Insight:** Ek good design pattern **complexity hide karta hai** aur **control expose karta hai**. 

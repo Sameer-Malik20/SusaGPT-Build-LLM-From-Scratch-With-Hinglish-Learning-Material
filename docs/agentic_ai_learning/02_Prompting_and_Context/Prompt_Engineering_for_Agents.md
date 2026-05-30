@@ -1,5 +1,5 @@
-# ✍️ Prompt Engineering for Agents — The Instruction Layer
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the art of writing prompts that drive autonomous reasoning and tool use.
+# ✍️ Agents Ke Liye Prompt Engineering — Instruction Layer
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Aise prompts likhne ki art master karna jo autonomous reasoning aur tool use drive karte hain.
 
 ---
 
@@ -17,11 +17,11 @@ Agents ke liye prompts unka **Standard Operating Procedure (SOP)** hote hain. Hu
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Agentic prompting is about **Inducing Reasoning Trajectories**. 
-- **System Prompts:** These define the "Persona", "Goal", and "Constraints". In 2026, we use **XML tags** or **Markdown headers** to separate instructions for better LLM parsing.
-- **Chain-of-Thought (CoT):** Adding "Let's think step by step" triggers a hidden reasoning state where the model processes logic before generating the final answer.
-- **ReAct Prompting:** The prompt must explicitly define the format: `Thought: ...`, `Action: ...`, `Observation: ...`. This allows the parser to split the LLM response accurately.
-- **Persona Engineering:** Assigning a role like "You are a Senior Security Auditor with 20 years of experience" changes the probability distribution of tokens towards more expert terminology.
+Agentic prompting ka matlab **Reasoning Trajectories induce karna** hai. 
+- **System Prompts:** Ye "Persona", "Goal", aur "Constraints" define karte hain. 2026 me hum better LLM parsing ke liye instructions separate karne ke liye **XML tags** ya **Markdown headers** use karte hain.
+- **Chain-of-Thought (CoT):** "Let's think step by step" add karna hidden reasoning state trigger karta hai jahan model final answer generate karne se pehle logic process karta hai.
+- **ReAct Prompting:** Prompt ko format explicitly define karna chahiye: `Thought: ...`, `Action: ...`, `Observation: ...`. Isse parser LLM response ko accurately split kar pata hai.
+- **Persona Engineering:** "You are a Senior Security Auditor with 20 years of experience" jaisa role assign karna token probability distribution ko more expert terminology ki taraf shift karta hai.
 
 ---
 
@@ -42,17 +42,17 @@ graph TD
 
 ```python
 SYSTEM_PROMPT = """
-You are a Research Assistant. You have access to the following tools:
-- search(query): Searches the web.
-- analyze(text): Summarizes the text.
+You are a Research Assistant. Aapke paas following tools ka access hai:
+- search(query): Web search karta hai.
+- analyze(text): Text summarize karta hai.
 
 You MUST use the following format:
-Thought: Describe your reasoning about the next step.
-Action: The tool to use (either 'search' or 'analyze').
-Action Input: The parameters for the tool.
-Observation: The result from the tool (This will be provided to you).
+Thought: Next step ke baare me apni reasoning describe karo.
+Action: Use karne wala tool (ya to 'search' ya 'analyze').
+Action Input: Tool ke parameters.
+Observation: Tool se aaya result (ye aapko provide kiya jayega).
 ... (this Thought/Action/Action Input/Observation can repeat N times)
-Final Answer: The final response to the user.
+Final Answer: User ko final response.
 
 Begin!
 """
@@ -60,14 +60,14 @@ Begin!
 def generate_prompt(user_query: str):
     return f"{SYSTEM_PROMPT}\nUser Query: {user_query}"
 
-# print(generate_prompt("Find the latest news on Llama-4."))
+# print(generate_prompt("Llama-4 par latest news find karo."))
 ```
 
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Autonomous Coders:** Prompting models to "Critique your own code before submitting" reduces bugs by 30%.
-- **Financial Agents:** Instructions like "If the stock price is above $X, alert the user immediately" for real-time monitoring.
+- **Autonomous Coders:** Models ko "Submit karne se pehle apna code critique karo" prompt karna bugs 30% tak reduce karta hai.
+- **Financial Agents:** Real-time monitoring ke liye "Agar stock price $X se upar ho, user ko immediately alert karo" jaise instructions.
 
 ---
 
@@ -80,13 +80,13 @@ def generate_prompt(user_query: str):
 
 ## 🛠️ 7. Debugging Guide
 - **A/B Testing:** Ek word change karke dekho result kitna badla.
-- **Negative Prompting:** Explicitly likho "DON'T use tool X unless Y happens."
+- **Negative Prompting:** Explicitly likho "Jab tak Y na ho, tool X use mat karo."
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Detailed Prompts:** Accurate results but high token cost and latency.
-- **Short Prompts:** Fast and cheap but high risk of hallucinations.
+- **Detailed Prompts:** Accurate results dete hain, lekin token cost aur latency high hoti hai.
+- **Short Prompts:** Fast aur cheap hote hain, lekin hallucinations ka high risk hota hai.
 
 ---
 
@@ -111,7 +111,7 @@ def generate_prompt(user_query: str):
 
 ## 💰 12. Cost Considerations
 - **System Prompt Caching:** Humesha static system prompts ko cache karein (Context Caching) to save money.
-- **Token Efficiency:** फालतू की (Useless) words prompts se remove karein.
+- **Token Efficiency:** Faltu (useless) words prompts se remove karein.
 
 ---
 
@@ -123,15 +123,15 @@ def generate_prompt(user_query: str):
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Being Too Polite:** "Please kindly try to search..." ki jagah Direct Command dein: "SEARCH the query."
-- **Vague Constraints:** "Be fast" bolne ki jagah "Use maximum 3 tools" bolrein.
+- **Being Too Polite:** "Please kindly try to search..." ki jagah direct command dein: "Query SEARCH karo."
+- **Vague Constraints:** "Fast raho" bolne ki jagah "Maximum 3 tools use karo" bolein.
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **DSPy (Programming, not Prompting):** Using algorithms to automatically optimize prompts based on a small dataset.
-- **Self-Improving Prompts:** Agents that rewrite their own system prompts based on failure cases in the logs.
+- **DSPy (Programming, not Prompting):** Small dataset ke basis par prompts automatically optimize karne ke liye algorithms use karna.
+- **Self-Improving Prompts:** Agents jo logs me failure cases ke basis par apne system prompts rewrite karte hain.
 
 ---
 
-> **Expert Tip:** Prompting is **Programming in Natural Language**. Treat it with the same discipline as code.
+> **Expert Tip:** Prompting **Natural Language me Programming** hai. Isse code jaisi discipline ke saath treat karein.

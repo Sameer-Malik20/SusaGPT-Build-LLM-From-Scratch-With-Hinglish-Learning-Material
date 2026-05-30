@@ -1,5 +1,5 @@
-# 🚀 Advanced Prompting — Beyond the Basics
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master advanced reasoning techniques like Reflection, Self-Consistency, and Constitutional AI.
+# 🚀 Advanced Prompting — Basics Se Aage
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Reflection, Self-Consistency, aur Constitutional AI jaise advanced reasoning techniques master karna.
 
 ---
 
@@ -14,11 +14,11 @@ Jaise ek student ko sirf math ka problem dena kafi nahi hota, use sikhana padta 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Advanced techniques focus on **Verification** and **Path Diversity**.
-- **Reflection (Self-Correction):** The prompt includes a second phase where the model is asked: "Critique your previous output for hallucinations and logical fallacies."
-- **Self-Consistency (CoT-SC):** Instead of one reasoning path, the agent generates multiple paths and uses "Majority Voting" to pick the final answer. This is highly effective for math and logic.
-- **Constitutional AI (CAI):** Pioneered by Anthropic, it uses a set of principles to align the model. The prompt forces the model to evaluate its draft against these principles before finalizing.
-- **Dynamic Few-Shot:** Selecting the most relevant examples from a vector database to inject into the prompt at runtime (RAG for prompts).
+Advanced techniques **Verification** aur **Path Diversity** par focus karti hain.
+- **Reflection (Self-Correction):** Prompt me ek second phase hota hai jahan model se pucha jata hai: "Apne previous output ko hallucinations aur logical fallacies ke liye critique karo."
+- **Self-Consistency (CoT-SC):** Ek reasoning path ke bajay agent multiple paths generate karta hai aur final answer pick karne ke liye "Majority Voting" use karta hai. Ye math aur logic ke liye highly effective hai.
+- **Constitutional AI (CAI):** Anthropic dwara pioneer kiya gaya, ye model ko align karne ke liye principles ka set use karta hai. Prompt model ko force karta hai ki finalizing se pehle apne draft ko in principles ke against evaluate kare.
+- **Dynamic Few-Shot:** Runtime par prompt me inject karne ke liye vector database se most relevant examples select karna (prompts ke liye RAG).
 
 ---
 
@@ -50,12 +50,12 @@ def generate_initial_draft(query: str):
     return f"Draft answer for: {query}"
 
 def reflect_and_critique(draft: str):
-    # Instruction to model: Find errors in this draft
-    return f"Critique of: {draft} - Found 1 potential error."
+    # Model ko instruction: Is draft me errors find karo
+    return f"Critique of: {draft} - 1 potential error mila."
 
 def final_revision(draft: str, critique: str):
-    # Instruction to model: Fix the draft using the critique
-    return f"Final Answer based on {critique}"
+    # Model ko instruction: Critique use karke draft fix karo
+    return f"{critique} ke basis par final answer"
 
 def run_advanced_agent(query: str):
     draft = generate_initial_draft(query)
@@ -68,15 +68,15 @@ def run_advanced_agent(query: str):
     print(f"Final: {final}")
     return final
 
-# run_advanced_agent("How do transformers handle positional information?")
+# run_advanced_agent("Transformers positional information ko kaise handle karte hain?")
 ```
 
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Legal Document Review:** Reflection ensures that the agent doesn't miss any clause or hallucinate legal terms.
-- **Complex Math/Coding:** Self-consistency helps in finding the most stable solution among multiple attempts.
-- **Content Moderation:** Constitutional AI ensures the agent follows "Human Rights" or "Safety" guidelines strictly.
+- **Legal Document Review:** Reflection ensure karta hai ki agent koi clause miss na kare ya legal terms hallucinate na kare.
+- **Complex Math/Coding:** Self-consistency multiple attempts me se most stable solution find karne me help karta hai.
+- **Content Moderation:** Constitutional AI ensure karta hai ki agent "Human Rights" ya "Safety" guidelines strictly follow kare.
 
 ---
 
@@ -111,7 +111,7 @@ def run_advanced_agent(query: str):
 ---
 
 ## 📈 11. Scaling Challenges
-- **Parallel Sampling:** Running 5 paths for self-consistency requires high throughput from the LLM provider.
+- **Parallel Sampling:** Self-consistency ke liye 5 paths run karne par LLM provider se high throughput chahiye hota hai.
 
 ---
 
@@ -128,14 +128,14 @@ def run_advanced_agent(query: str):
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Vague Rubrics:** Critique node ko "Check for errors" bolna (Instead, give a specific checklist: "Check for facts, tone, and grammar").
+- **Vague Rubrics:** Critique node ko "Errors check karo" bolna (iske bajay specific checklist dein: "Facts, tone, aur grammar check karo").
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Multi-modal Reflection:** Agents checking their text outputs against generated images/charts to ensure consistency.
-- **Automated Jailbreak Testing:** Using advanced prompts to try and break your own agent's constitution during the dev cycle.
+- **Multi-modal Reflection:** Agents consistency ensure karne ke liye apne text outputs ko generated images/charts ke against check karte hain.
+- **Automated Jailbreak Testing:** Dev cycle ke dauran advanced prompts use karke apne agent ki constitution break karne ki koshish karna.
 
 ---
 
-> **Expert Tip:** Reflection is the **Quality Control** department of your AI agent. Don't ship without it.
+> **Expert Tip:** Reflection aapke AI agent ka **Quality Control** department hai. Iske bina ship mat karein.

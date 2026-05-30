@@ -1,11 +1,11 @@
 # 🧩 Agentic AI Guide
 > **Level:** Beginner → Intermediate | **Language:** Hinglish | **Goal:** Agentic AI ko practically samajhna
 ## 🧭 Core Concepts (Concept-First)
-+- Agentic AI Fundamentals: Understanding the difference between generative and agentic AI systems
-+- Core Architecture: The perception-reasoning-action loop that defines agentic behavior
-+- Cognitive Capabilities: Planning, reflection, memory, and tool use in AI agents
-+- Real-World Applications: Practical examples of agentic AI in production systems
-+- Hands-On Learning: Exercises and tests to reinforce agentic AI concepts
++- Agentic AI Fundamentals: Generative aur agentic AI systems ke beech ka difference samajhna
++- Core Architecture: Perception-reasoning-action loop jo agentic behavior define karta hai
++- Cognitive Capabilities: AI agents me planning, reflection, memory, aur tool use
++- Real-World Applications: Production systems me agentic AI ke practical examples
++- Hands-On Learning: Agentic AI concepts reinforce karne ke liye exercises aur tests
 ---
 
 ## 📋 Is Guide Se Kya Seekhoge
@@ -40,14 +40,14 @@ Agentic AI ka matlab hota hai aise AI systems jo:
 
 ```mermaid
 flowchart LR
-    subgraph GEN ["🎨 Generative AI — Content Creation"]
+    subgraph GEN ["🎨 Generative AI — Content Banana"]
         G1["📝 Text Generate"]
         G2["🖼️ Image Generate"]
         G3["💻 Code Write"]
         G4["📄 Summary"]
     end
 
-    subgraph AGENT ["🤖 Agentic AI — Task Completion"]
+    subgraph AGENT ["🤖 Agentic AI — Task Complete Karna"]
         A1["📋 Plan Banao"]
         A2["🔧 Tools Use Karo"]
         A3["👁️ Observe Karo"]
@@ -83,7 +83,7 @@ flowchart LR
     Feedback["🔄 Feedback\nLoop"] --> Combined
     Goal["🎯 Goal"] --> Combined
 
-    Combined --> Result["✅ Task\nCompleted!"]
+    Combined --> Result["✅ Task\nComplete!"]
 ```
 
 ---
@@ -235,11 +235,11 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    A["🤖 Without Tools\n(Limited)"] --> B["Text only generate\nNo real actions\nOutdated info\nNo calculations"]
+    A["🤖 Tools Ke Bina\n(Limited)"] --> B["Sirf text generate\nReal actions nahi\nOutdated info\nCalculations nahi"]
 
-    C["🤖 With Tools\n(Powerful)"] --> D["🔍 Web Search\n(Fresh data)"]
+    C["🤖 Tools Ke Saath\n(Powerful)"] --> D["🔍 Web Search\n(Fresh data)"]
     C --> E["🧮 Calculator\n(Exact math)"]
-    C --> F["💻 Code Runner\n(Execute code)"]
+    C --> F["💻 Code Runner\n(Code execute)"]
     C --> G["📁 File Access\n(Read/Write)"]
     C --> H["🌐 APIs\n(External services)"]
 ```
@@ -291,7 +291,7 @@ flowchart TD
 ```python
 import time
 
-# ===== Simulated Tools =====
+# ===== Simulated tools =====
 def web_search(query):
     """Web se data fetch karta hai (simulated)"""
     # Real me ye requests + BeautifulSoup use karta
@@ -303,12 +303,12 @@ def web_search(query):
     for company, data in fake_data.items():
         if company.lower() in query.lower():
             return data
-    return {"error": "Data not found"}
+    return {"error": "Data nahi mila"}
 
 def analyze_data(raw_data):
     """Data analyze karta hai"""
     if "error" in raw_data:
-        return "Analysis failed"
+        return "Analysis fail ho gaya"
     return {
         "market_position": "Strong" if raw_data["users"].endswith("M+") else "Growing",
         "pricing_model": "Subscription" if "/month" in raw_data.get("pricing","") else "Freemium",
@@ -349,7 +349,7 @@ class CompetitorResearchAgent:
             print(f"  👁️ Data mila: {raw_data}")
 
             # ACT - Tool 2: Analyze
-            print(f"  📊 Analyzing data...")
+            print(f"  📊 Data analyze ho raha hai...")
             analysis = analyze_data(raw_data)
 
             # ACT - Tool 3: Write
@@ -378,7 +378,7 @@ agent.run("AI industry me top 3 competitors ka research karo")
 🤔 Step: OpenAI ke baare me research karna hai
   🔍 Searching: OpenAI AI products...
   👁️ Data mila: {'product': 'ChatGPT', 'users': '100M+', 'pricing': '$20/month'}
-  📊 Analyzing data...
+  📊 Data analyze ho raha hai...
   ✅ Section complete!
 
 ... (har competitor ke liye)
@@ -412,10 +412,10 @@ agent.run("AI industry me top 3 competitors ka research karo")
 ```mermaid
 flowchart TD
     F["⚠️ Common Failure Points"] --> A["❌ Galat Plan\n(Wrong task decomposition)"]
-    F --> B["❌ Wrong Tool Selected\n(Wrong approach)"]
+    F --> B["❌ Galat Tool Select Hua\n(Wrong approach)"]
     F --> C["❌ Hallucinated Observation\n(Made-up results)"]
     F --> D["❌ Unsafe Action\n(Dangerous operation)"]
-    F --> E["❌ Too Early Complete\n(Incomplete task)"]
+    F --> E["❌ Bahut Jaldi Complete\n(Incomplete task)"]
     F --> G["❌ Memory Confusion\n(Context mixing)"]
 ```
 
@@ -488,11 +488,11 @@ flowchart LR
 flowchart TD
     A["📖 Learn Gen AI Basics"] --> B["✍️ Learn Prompting"]
     B --> C["🔧 Learn Tool Use"]
-    C --> D["🔄 Build Small Agent Loop"]
+    C --> D["🔄 Small Agent Loop Banao"]
     D --> E["💾 Add Memory"]
     E --> F["📋 Add Planning"]
     F --> G["📊 Add Evaluation"]
-    G --> H["🛡️ Build Safer System"]
+    G --> H["🛡️ Safer System Banao"]
 
     style A fill:#E8F5E9
     style B fill:#E3F2FD
@@ -643,7 +643,7 @@ C) Generative AI sirf code generate karta hai
 D) Koi fark nahi
 ```
 
-<details><summary>Answer</summary>**B** ✅</details>
+<details><summary>Answer Dekho</summary>**B** ✅</details>
 
 ---
 
@@ -656,7 +656,7 @@ C) Action ke result ko evaluate karna aur next steps adjust karna
 D) Memory clear karna
 ```
 
-<details><summary>Answer</summary>**C** ✅</details>
+<details><summary>Answer Dekho</summary>**C** ✅</details>
 
 ---
 
@@ -669,7 +669,7 @@ C) Jab fast results chahiye hoon
 D) Jab tool use karna ho
 ```
 
-<details><summary>Answer</summary>**B** ✅ — Untested high-autonomy systems dangerous hote hain</details>
+<details><summary>Answer Dekho</summary>**B** ✅ — Untested high-autonomy systems dangerous hote hain</details>
 
 ---
 

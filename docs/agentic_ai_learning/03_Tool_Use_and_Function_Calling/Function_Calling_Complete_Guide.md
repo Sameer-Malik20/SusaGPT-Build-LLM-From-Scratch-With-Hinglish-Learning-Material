@@ -1,5 +1,5 @@
-# 🔧 Function Calling Complete Guide — The Agent's Hands
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master structured outputs and tool integration across OpenAI, Gemini, and Anthropic.
+# 🔧 Function Calling Complete Guide — Agent Ke Hands
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** OpenAI, Gemini, aur Anthropic across structured outputs aur tool integration master karna.
 
 ---
 
@@ -13,12 +13,12 @@ Imagine aapne ek car banayi. Function Calling uske **Hand-break, Accelerator, au
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Function calling is **not** the LLM executing code. It is the LLM generating a **Structured JSON Object** that represents a function call.
-1. **Schema Definition:** You provide a JSON schema of your functions (name, description, parameters).
-2. **Model Reasoning:** The LLM analyzes the user query and the schemas. It decides if a function call is needed.
-3. **Structured Generation:** The LLM outputs a specific string (usually JSON) like `{"name": "get_weather", "arguments": "{\"location\": \"Delhi\"}"}`.
-4. **Execution:** Your backend parses this JSON, runs the actual function, and sends the result back to the LLM.
-5. **Final Response:** The LLM uses the tool output to answer the user.
+Function calling ka matlab LLM ka code execute karna **nahi** hai. Ye LLM ka ek **Structured JSON Object** generate karna hai jo function call represent karta hai.
+1. **Schema Definition:** Aap apne functions ka JSON schema provide karte hain (name, description, parameters).
+2. **Model Reasoning:** LLM user query aur schemas analyze karta hai. Ye decide karta hai ki function call needed hai ya nahi.
+3. **Structured Generation:** LLM ek specific string (usually JSON) output karta hai jaise `{"name": "get_weather", "arguments": "{\"location\": \"Delhi\"}"}`.
+4. **Execution:** Aapka backend is JSON ko parse karta hai, actual function run karta hai, aur result wapas LLM ko bhejta hai.
+5. **Final Response:** LLM tool output use karke user ko answer deta hai.
 
 ---
 
@@ -31,13 +31,13 @@ sequenceDiagram
     participant L as LLM Brain
     participant T as Tool/API
 
-    U->>A: "What is the price of BTC?"
+    U->>A: "BTC ka price kya hai?"
     A->>L: Query + Tool Schema (get_price)
     L->>A: Tool Call JSON: {name: 'get_price', args: {symbol: 'BTC'}}
     A->>T: Call API: get_price('BTC')
     T->>A: API Result: "$60,000"
     A->>L: Observation: "$60,000"
-    L->>A: "The current price of BTC is $60,000."
+    L->>A: "BTC ka current price $60,000 hai."
     A->>U: Final Answer
 ```
 
@@ -49,20 +49,20 @@ sequenceDiagram
 from pydantic import BaseModel, Field
 from typing import Optional
 
-# 1. Define the tool schema using Pydantic (Cleanest way in 2026)
+# 1. Pydantic use karke tool schema define karein (2026 ka cleanest way)
 class GetWeather(BaseModel):
-    """Get the current weather in a given location"""
-    location: str = Field(description="The city and state, e.g. San Francisco, CA")
+    """Given location ka current weather lo"""
+    location: str = Field(description="City aur state, e.g. San Francisco, CA")
     unit: Optional[str] = Field(default="celsius", enum=["celsius", "fahrenheit"])
 
-# 2. Convert to OpenAI/Gemini format
+# 2. OpenAI/Gemini format me convert karein
 # tool_definition = {"type": "function", "function": GetWeather.model_json_schema()}
 
 # 3. Execution logic
 def execute_tool(name, args):
     if name == "GetWeather":
-        # logic to fetch weather
-        return f"Weather in {args['location']} is 30 degrees {args['unit']}."
+        # Weather fetch karne ki logic
+        return f"{args['location']} me weather 30 degrees {args['unit']} hai."
 ```
 
 ---
@@ -83,13 +83,13 @@ def execute_tool(name, args):
 
 ## 🛠️ 7. Debugging Guide
 - **Dry Run:** Tool call JSON ko manual execute karke dekhein.
-- **System Prompt Fix:** Agar model parameters miss kar raha hai, toh prompt mein likhein: "Always include the 'unit' parameter in the weather tool."
+- **System Prompt Fix:** Agar model parameters miss kar raha hai, toh prompt mein likhein: "Weather tool me hamesha 'unit' parameter include karo."
 
 ---
 
 ## ⚖️ 8. Tradeoffs
 - **Tool Count:** Zyaada tools (10+) reasoning confusion aur latency badhate hain.
-- **Specificity:** Ek generic `run_api` tool vs 10 specific tools (`get_user`, `update_user`, etc.). Specific tools are safer.
+- **Specificity:** Ek generic `run_api` tool vs 10 specific tools (`get_user`, `update_user`, etc.). Specific tools safer hote hain.
 
 ---
 
@@ -106,13 +106,13 @@ def execute_tool(name, args):
 ---
 
 ## 📈 11. Scaling Challenges
-- **Latency:** Har tool call LLM trip badhati hai. Use **Parallel Tool Calling** to speed up.
+- **Latency:** Har tool call LLM trip badhati hai. Speed up ke liye **Parallel Tool Calling** use karein.
 - **Reliability:** API down hai toh agent ko handle karna aana chahiye (Retry logic).
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Output Tokens:** Complex JSON objects generate karne mein tokens kharch hote hain. Keep schemas concise.
+- **Output Tokens:** Complex JSON objects generate karne me tokens kharch hote hain. Schemas concise rakhein.
 
 ---
 
@@ -131,8 +131,8 @@ def execute_tool(name, args):
 
 ## 🚀 15. Latest 2026 Industry Patterns
 - **Native Tool Use:** Models like Claude 3.5 aur GPT-4o ab tool calling ke liye optimized weights use karte hain (less hallucination).
-- **Tool Registry:** Managing thousands of tools in a central registry and using a "Router" to fetch the relevant ones for a specific task.
+- **Tool Registry:** Thousands of tools ko central registry me manage karna aur specific task ke liye relevant tools fetch karne ke liye "Router" use karna.
 
 ---
 
-> **Expert Tip:** In 2026, **Descriptions are Code**. The better you describe your function, the better the model will use it.
+> **Expert Tip:** 2026 me **Descriptions are Code**. Aap function ko jitna better describe karenge, model use utna better use karega.

@@ -1,5 +1,5 @@
-# ⚡ Parallel Tool Calling — Speeding Up the Agent
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the art of executing multiple tools simultaneously to reduce latency and improve agentic efficiency.
+# ⚡ Parallel Tool Calling — Agent Ko Speed Up Karna
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Latency reduce karne aur agentic efficiency improve karne ke liye multiple tools ko simultaneously execute karna master karna.
 
 ---
 
@@ -15,10 +15,10 @@ Production mein latency (wait time) sabse badi dushman hai. Parallel calling se 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Most modern models (GPT-4o, Claude 3.5, Gemini 1.5) support parallel tool calling out-of-the-box.
-- **The Protocol:** Instead of sending one `tool_call` object, the LLM sends a **list** of `tool_call` objects in its response.
-- **Execution:** Your backend should use **Asynchronous execution** (Python `asyncio.gather` or `ThreadedPool`) to run these functions at the same time.
-- **The Response:** You must send back the results in the *exact same order* or with the *exact same tool_call_id* so the LLM can map which result belongs to which call.
+Zyadatar modern models (GPT-4o, Claude 3.5, Gemini 1.5) parallel tool calling out-of-the-box support karte hain.
+- **Protocol:** Ek `tool_call` object bhejne ke bajay LLM apne response me `tool_call` objects ki **list** bhejta hai.
+- **Execution:** In functions ko same time par run karne ke liye aapke backend ko **Asynchronous execution** (Python `asyncio.gather` ya `ThreadedPool`) use karna chahiye.
+- **Response:** Results ko *exact same order* me ya *exact same tool_call_id* ke saath wapas bhejna chahiye taaki LLM map kar sake ki kaunsa result kis call ka hai.
 
 ---
 
@@ -33,8 +33,8 @@ sequenceDiagram
 
     L->>A: [ToolCall_1, ToolCall_2]
     par Parallel Execution
-        A->>T1: Executing Search...
-        A->>T2: Executing Calc...
+        A->>T1: Search execute ho raha hai...
+        A->>T2: Calc execute ho raha hai...
     end
     T1-->>A: Search Result
     T2-->>A: Calc Result
@@ -50,8 +50,8 @@ sequenceDiagram
 import asyncio
 
 async def fetch_stock_price(symbol: str):
-    await asyncio.sleep(1) # Simulate API call
-    return f"Price of {symbol}: $100"
+    await asyncio.sleep(1) # API call simulate karo
+    return f"{symbol} ka price: $100"
 
 async def run_parallel_tools(tool_calls: list):
     tasks = []
@@ -72,9 +72,9 @@ async def run_parallel_tools(tool_calls: list):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Travel Portals:** Checking multiple airlines for the same route simultaneously.
-- **Dashboards:** Fetching user profile, order history, and current balance in one go.
-- **Comparison Agents:** Comparing products across 5 different websites.
+- **Travel Portals:** Same route ke liye multiple airlines simultaneously check karna.
+- **Dashboards:** User profile, order history, aur current balance ek hi go me fetch karna.
+- **Comparison Agents:** 5 different websites across products compare karna.
 
 ---
 
@@ -87,7 +87,7 @@ async def run_parallel_tools(tool_calls: list):
 
 ## 🛠️ 7. Debugging Guide
 - **Trace IDs:** Har parallel call ke liye ek unique `tool_call_id` track karein.
-- **Timing Logs:** Check karein ki actual "Time Saved" kitna hai vs Sequential.
+- **Timing Logs:** Check karein ki sequential ke comparison me actual "Time Saved" kitna hai.
 
 ---
 
@@ -105,7 +105,7 @@ async def run_parallel_tools(tool_calls: list):
 
 ## 🛡️ 10. Security Concerns
 - **DDoS Risk:** Agent galti se ek hi server par thousands of parallel calls bhej sakta hai (Self-DDoS).
-- **Rate Limiting:** Protect your internal APIs from being overwhelmed by parallel agentic requests.
+- **Rate Limiting:** Apni internal APIs ko parallel agentic requests se overwhelm hone se protect karein.
 
 ---
 
@@ -115,7 +115,7 @@ async def run_parallel_tools(tool_calls: list):
 ---
 
 ## 💰 12. Cost Considerations
-- **Multiple Tool Outputs:** Har result wapas LLM ko bhejne mein tokens kharch hote hain. Ensure results are concise.
+- **Multiple Tool Outputs:** Har result wapas LLM ko bhejne me tokens kharch hote hain. Ensure karein ki results concise hon.
 
 ---
 
@@ -133,9 +133,9 @@ async def run_parallel_tools(tool_calls: list):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Speculative Tool Execution:** Agents predicting the next tool call and pre-fetching results before the LLM even confirms it.
-- **Batched Tooling:** Combining multiple small tool calls into one large "Batch Request" to save API round-trips.
+- **Speculative Tool Execution:** Agents next tool call predict karte hain aur LLM ke confirm karne se pehle hi results pre-fetch karte hain.
+- **Batched Tooling:** API round-trips save karne ke liye multiple small tool calls ko ek large "Batch Request" me combine karna.
 
 ---
 
-> **Expert Tip:** Parallelism is a **Performance Hack**. Use it for data fetching, avoid it for sequential logic steps.
+> **Expert Tip:** Parallelism ek **Performance Hack** hai. Ise data fetching ke liye use karein, sequential logic steps ke liye avoid karein.

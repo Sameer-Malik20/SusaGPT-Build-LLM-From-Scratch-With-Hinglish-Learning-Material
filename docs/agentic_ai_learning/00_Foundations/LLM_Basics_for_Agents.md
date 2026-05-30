@@ -1,5 +1,5 @@
-# 🧠 LLM Basics for Agents — The Neural Engine
-> **Level:** Foundations | **Language:** Hinglish | **Goal:** Master the fundamental LLM concepts that power intelligent agents.
+# 🧠 Agents Ke Liye LLM Basics — The Neural Engine
+> **Level:** Foundations | **Language:** Hinglish | **Goal:** Intelligent agents ko power dene wale fundamental LLM concepts master karna.
 
 ---
 
@@ -13,11 +13,11 @@ Agents ke liye LLM ka "smart" hona zaruri hai, lekin uski limitations (Hallucina
 ---
 
 ## 🧠 2. Deep Technical Explanation
-For an AI Engineer in 2026, understanding the **Transformer Architecture** is non-negotiable.
-- **Tokens:** Text is split into sub-word units. Agents are billed by tokens, so efficient prompting is key.
-- **Embeddings:** High-dimensional vector representations of text. Essential for **RAG** and semantic search.
-- **Attention Mechanism:** Specifically **Multi-Query Attention (MQA)** or **Grouped-Query Attention (GQA)** in modern models like Llama-3, which optimizes KV-cache and speeds up agentic reasoning.
-- **Temperature:** Controls randomness. For agents, we usually keep it low (0 to 0.2) to ensure deterministic tool calling.
+2026 me AI Engineer ke liye **Transformer Architecture** samajhna non-negotiable hai.
+- **Tokens:** Text ko sub-word units me split kiya jata hai. Agents ka billing tokens ke basis par hota hai, isliye efficient prompting key hai.
+- **Embeddings:** Text ke high-dimensional vector representations. Ye **RAG** aur semantic search ke liye essential hai.
+- **Attention Mechanism:** Modern models jaise Llama-3 me specifically **Multi-Query Attention (MQA)** ya **Grouped-Query Attention (GQA)**, jo KV-cache optimize karta hai aur agentic reasoning ko speed up karta hai.
+- **Temperature:** Randomness control karta hai. Agents ke liye hum usually ise low (0 to 0.2) rakhte hain taaki deterministic tool calling ensure ho.
 
 ---
 
@@ -45,13 +45,13 @@ graph LR
 import tiktoken
 
 def count_tokens(text: str, model: str = "gpt-4o"):
-    # Always count tokens before sending to LLM to avoid context overflow
+    # Context overflow avoid karne ke liye LLM ko bhejne se pehle hamesha tokens count karein
     encoding = tiktoken.encoding_for_model(model)
     tokens = encoding.encode(text)
     return len(tokens)
 
-# Example Usage
-prompt = "Explain the logic of an AI agent in one sentence."
+# Example usage
+prompt = "Ek sentence me AI agent ki logic explain karo."
 num_tokens = count_tokens(prompt)
 print(f"Token Count: {num_tokens}")
 
@@ -65,8 +65,8 @@ def prune_context(history: list, limit: int = 4096):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Context Window Management:** Large agents reading 100-page PDFs using RAG because the context window is limited/expensive.
-- **Model Selection:** Using a cheap model (GPT-4o-mini) for summarization and a smart model (Claude 3.5 Sonnet) for coding tasks.
+- **Context Window Management:** Large agents 100-page PDFs read karne ke liye RAG use karte hain kyunki context window limited/expensive hoti hai.
+- **Model Selection:** Summarization ke liye cheap model (GPT-4o-mini) aur coding tasks ke liye smart model (Claude 3.5 Sonnet) use karna.
 
 ---
 
@@ -77,20 +77,20 @@ def prune_context(history: list, limit: int = 4096):
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Log Logits:** Advanced users check token probabilities to see if the model was "confused" between two tools.
-- **System Prompt Testing:** Change one word and see if the token generation changes drastically.
+- **Log Logits:** Advanced users token probabilities check karte hain taaki dekh sakein ki model do tools ke beech "confused" tha ya nahi.
+- **System Prompt Testing:** Ek word change karke dekhein ki token generation drastically change hoti hai ya nahi.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Context Size vs. Latency:** Zyaada context = Better reasoning but Slower/Expensive responses.
+- **Context Size vs. Latency:** Zyaada context = Better reasoning lekin slower/expensive responses.
 - **Quantization:** 4-bit models memory kam leti hain par unki reasoning power (IQ) thodi kam ho jati hai.
 
 ---
 
 ## ✅ 9. Best Practices
-- **Stop Sequences:** Use stop sequences (like `Observation:`) to prevent the agent from hallucinating tool outputs.
-- **JSON Schema:** Always enforce a schema for structured outputs to make parsing reliable.
+- **Stop Sequences:** Agent ko tool outputs hallucinate karne se prevent karne ke liye stop sequences (jaise `Observation:`) use karein.
+- **JSON Schema:** Parsing reliable banane ke liye structured outputs par hamesha schema enforce karein.
 
 ---
 
@@ -102,12 +102,12 @@ def prune_context(history: list, limit: int = 4096):
 
 ## 📈 11. Scaling Challenges
 - **KV-Cache Memory:** Multiple users ke liye KV-cache store karna GPU memory kha jata hai.
-- **Throughput:** Tokens Per Second (TPS) optimize karna for real-time agent feedback.
+- **Throughput:** Real-time agent feedback ke liye Tokens Per Second (TPS) optimize karna.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Input vs. Output Pricing:** Agent loops mein input tokens (history) repeat hote hain, so **Context Caching** (supported by Anthropic/DeepSeek) saves 90% cost.
+- **Input vs. Output Pricing:** Agent loops me input tokens (history) repeat hote hain, isliye **Context Caching** (Anthropic/DeepSeek dwara supported) 90% cost save karta hai.
 
 ---
 
@@ -119,15 +119,15 @@ def prune_context(history: list, limit: int = 4096):
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Ignoring Token Limits:** Sending massive tool outputs (like a full 2MB JSON) directly to the LLM.
+- **Ignoring Token Limits:** Massive tool outputs (jaise full 2MB JSON) directly LLM ko bhejna.
 - **Static Temperature:** Sab tasks ke liye same temperature use karna (Creative vs. Logical).
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Context Caching:** Persistence of KV-cache across multiple turns to reduce latency and cost.
-- **Long-context RAG:** Using 1M+ context windows for "Needle in a Haystack" tasks instead of traditional chunking.
+- **Context Caching:** Latency aur cost reduce karne ke liye multiple turns across KV-cache ki persistence.
+- **Long-context RAG:** Traditional chunking ke bajay "Needle in a Haystack" tasks ke liye 1M+ context windows use karna.
 
 ---
 
-> **Expert Tip:** In 2026, tokens are currency. The best engineer is the one who achieves the goal with the fewest tokens.
+> **Expert Tip:** 2026 me tokens currency hain. Best engineer wahi hai jo sabse kam tokens me goal achieve karta hai.

@@ -1,5 +1,5 @@
-# ⚖️ Planning Algorithms Comparison — Choosing the Right Strategy
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the criteria for selecting between CoT, ToT, ReWOO, and ReAct based on task complexity, cost, and latency.
+# ⚖️ Planning Algorithms Comparison — Right Strategy Choose Karna
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Task complexity, cost, aur latency ke basis par CoT, ToT, ReWOO, aur ReAct ke beech select karne ke criteria master karna.
 
 ---
 
@@ -14,11 +14,11 @@ Is guide mein hum dekhenge ki kaunsa algorithm kab use karna hai taaki aapka age
 ---
 
 ## 🧠 2. Deep Technical Explanation
-The choice of planning algorithm is a function of **Task Horizon** and **Environmental Feedback**.
-- **ReAct (Reason + Act):** Best for **short-horizon** tasks with high feedback dependency (e.g., browsing a live website).
-- **Plan-and-Execute:** Best for **deterministic multi-step** tasks (e.g., "Generate a report, then email it").
-- **ToT (Tree of Thoughts):** Best for **search-heavy** logical problems with multiple valid/invalid paths (e.g., coding architecture, puzzles).
-- **ReWOO (Reasoning Without Observation):** Best for **latency-sensitive** parallelizable tasks (e.g., comparing prices across 10 APIs).
+Planning algorithm ka choice **Task Horizon** aur **Environmental Feedback** par depend karta hai.
+- **ReAct (Reason + Act):** High feedback dependency wale **short-horizon** tasks ke liye best hai (e.g., live website browse karna).
+- **Plan-and-Execute:** **Deterministic multi-step** tasks ke liye best hai (e.g., "Report generate karo, phir email karo").
+- **ToT (Tree of Thoughts):** Multiple valid/invalid paths wale **search-heavy** logical problems ke liye best hai (e.g., coding architecture, puzzles).
+- **ReWOO (Reasoning Without Observation):** **Latency-sensitive** parallelizable tasks ke liye best hai (e.g., 10 APIs across prices compare karna).
 
 ---
 
@@ -39,23 +39,23 @@ The choice of planning algorithm is a function of **Task Horizon** and **Environ
 def choose_strategy(task_description: str):
     # Hinglish Logic: Task ki complexity ke hisaab se algorithm choose karo
     if "compare" in task_description and "api" in task_description:
-        return "ReWOO (Parallel is best for speed)"
+        return "ReWOO (speed ke liye parallel best hai)"
     elif "complex puzzle" in task_description:
-        return "Tree of Thoughts (Search is needed)"
+        return "Tree of Thoughts (search needed hai)"
     elif "website" in task_description:
-        return "ReAct (Real-time feedback is key)"
+        return "ReAct (real-time feedback key hai)"
     else:
-        return "Plan-and-Execute (Default simple multi-step)"
+        return "Plan-and-Execute (default simple multi-step)"
 
-# print(choose_strategy("Search 5 websites for laptop prices and compare."))
+# print(choose_strategy("Laptop prices ke liye 5 websites search karo aur compare karo."))
 ```
 
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **ReWOO:** A travel agent fetching prices for flights, hotels, and cars at the same time.
-- **ToT:** A mathematician verifying a complex theorem.
-- **ReAct:** A customer support bot troubleshooting a user's local PC error.
+- **ReWOO:** Travel agent flights, hotels, aur cars ke prices same time par fetch karta hai.
+- **ToT:** Mathematician complex theorem verify karta hai.
+- **ReAct:** Customer support bot user ke local PC error ko troubleshoot karta hai.
 
 ---
 
@@ -67,12 +67,12 @@ def choose_strategy(task_description: str):
 
 ## 🛠️ 7. Debugging Guide
 - **Cost/Success Ratio:** Ek hi task ko different algorithms se run karein aur dekhein: "Kisme kam tokens mein success mila?"
-- **Latency Benchmarking:** Measure the end-to-end time of each algorithm for your specific use case.
+- **Latency Benchmarking:** Apne specific use case ke liye har algorithm ka end-to-end time measure karein.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **ReAct:** Most human-like but highest latency due to sequential LLM calls.
+- **ReAct:** Most human-like, lekin sequential LLM calls ki wajah se highest latency.
 - **ReWOO:** Fastest but "blind" during execution.
 
 ---
@@ -84,17 +84,17 @@ def choose_strategy(task_description: str):
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Orchestration Bias:** Choosing an algorithm that allows more room for prompt injection (e.g., long-horizon ReAct loops are more vulnerable).
+- **Orchestration Bias:** Aisa algorithm choose karna jo prompt injection ke liye zyada room deta ho (e.g., long-horizon ReAct loops zyada vulnerable hote hain).
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Infrastructure requirements:** ToT needs parallel inference capacity which not all providers (like OpenAI) handle well at scale.
+- **Infrastructure Requirements:** ToT ko parallel inference capacity chahiye hoti hai, jise sab providers (jaise OpenAI) scale par equally well handle nahi karte.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Token Efficiency:** ReWOO is the clear winner for saving tokens. ToT is the most expensive.
+- **Token Efficiency:** Tokens save karne ke liye ReWOO clear winner hai. ToT sabse expensive hai.
 
 ---
 
@@ -112,9 +112,9 @@ def choose_strategy(task_description: str):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Adaptive Planning:** Systems that start with ReWOO and automatically "Upgrade" to ReAct or ToT if they detect the problem is more complex than initially thought.
-- **Dyna-Reasoning:** Models that generate the "Planning Algorithm" itself as a Python script tailored for the user query.
+- **Adaptive Planning:** Systems jo ReWOO se start karte hain aur agar problem initially thought se zyada complex detect ho to automatically ReAct ya ToT par "Upgrade" karte hain.
+- **Dyna-Reasoning:** Models jo user query ke liye tailored Python script ke roop me "Planning Algorithm" khud generate karte hain.
 
 ---
 
-> **Final Note:** The best algorithm is the **Simplest one that works**. Don't use a Tree if a Chain is enough.
+> **Final Note:** Best algorithm wahi hai jo **sabse simple ho aur kaam kare**. Agar Chain enough hai, to Tree use mat karein.

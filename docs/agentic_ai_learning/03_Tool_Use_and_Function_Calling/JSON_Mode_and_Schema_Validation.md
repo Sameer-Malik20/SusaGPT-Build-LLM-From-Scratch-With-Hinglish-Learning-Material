@@ -1,5 +1,5 @@
-# 📄 JSON Mode & Schema Validation — Ensuring Structured Outputs
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the techniques to force LLMs to output valid, verifiable, and structured JSON for production tools.
+# 📄 JSON Mode & Schema Validation — Structured Outputs Ensure Karna
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Production tools ke liye LLMs se valid, verifiable, aur structured JSON output karwane ki techniques master karna.
 
 ---
 
@@ -14,11 +14,11 @@ Schema Validation wo **"Check-post"** hai jo ensure karta hai ki AI ne jo JSON d
 ---
 
 ## 🧠 2. Deep Technical Explanation
-JSON Mode is a constraint applied during the decoding process of an LLM.
-- **Native JSON Mode:** Supported by OpenAI (since `gpt-3.5-turbo-1106`) and Gemini. It forces the model to generate a valid JSON string.
-- **Structured Outputs (2026 Standard):** Beyond just JSON mode, models now support **Constrained Decoding** where the logits are masked to only allow tokens that follow a specific **JSON Schema (Pydantic)**.
-- **Schema Validation:** Using libraries like `pydantic` or `jsonschema` to parse and validate the LLM's output before passing it to tools.
-- **Repair Logic:** If the JSON is slightly broken (e.g. missing trailing brace), using regex or "JSON Repair" models to fix it.
+JSON Mode ek constraint hai jo LLM ke decoding process ke dauran apply hota hai.
+- **Native JSON Mode:** OpenAI (`gpt-3.5-turbo-1106` se) aur Gemini dwara supported. Ye model ko valid JSON string generate karne ke liye force karta hai.
+- **Structured Outputs (2026 Standard):** Sirf JSON mode se aage, models ab **Constrained Decoding** support karte hain jahan logits mask kiye jate hain taaki sirf specific **JSON Schema (Pydantic)** follow karne wale tokens allow hon.
+- **Schema Validation:** Tools ko pass karne se pehle LLM output parse aur validate karne ke liye `pydantic` ya `jsonschema` jaise libraries use karna.
+- **Repair Logic:** Agar JSON thoda broken ho (e.g. trailing brace missing), to regex ya "JSON Repair" models use karke ise fix karna.
 
 ---
 
@@ -41,32 +41,32 @@ graph LR
 from pydantic import BaseModel, ValidationError
 import json
 
-# Define the expected schema
+# Expected schema define karein
 class SearchParameters(BaseModel):
     query: str
     limit: int = 5
 
 def process_llm_output(raw_json: str):
     try:
-        # 1. Parse JSON
+        # 1. JSON parse karein
         data = json.loads(raw_json)
-        # 2. Validate against schema
+        # 2. Schema ke against validate karein
         params = SearchParameters(**data)
         return params.model_dump()
     except (json.JSONDecodeError, ValidationError) as e:
         # Hinglish Logic: Agar validation fail ho, toh error dikhao
-        return {"error": f"Invalid JSON or Schema: {str(e)}"}
+        return {"error": f"Invalid JSON ya Schema: {str(e)}"}
 
-# llm_output = '{"query": "AI news", "limit": "high"}' # This will fail validation because limit must be int
+# llm_output = '{"query": "AI news", "limit": "high"}' # Ye validation fail karega kyunki limit int honi chahiye
 # print(process_llm_output(llm_output))
 ```
 
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Data Extraction:** Extracting structured info from invoices or medical records.
-- **API Payloads:** Generating the exact JSON body needed for a REST API call.
-- **Frontend State:** Directly updating a React state based on LLM's structured instructions.
+- **Data Extraction:** Invoices ya medical records se structured info extract karna.
+- **API Payloads:** REST API call ke liye needed exact JSON body generate karna.
+- **Frontend State:** LLM ki structured instructions ke basis par directly React state update karna.
 
 ---
 
@@ -79,18 +79,18 @@ def process_llm_output(raw_json: str):
 
 ## 🛠️ 7. Debugging Guide
 - **Print Raw Output:** Parse karne se pehle humesha raw string dekhein.
-- **Pydantic Error Details:** `e.errors()` use karein to see exactly kaunsi field fail hui.
+- **Pydantic Error Details:** Exactly kaunsi field fail hui dekhne ke liye `e.errors()` use karein.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **JSON Mode:** High reliability for format but doesn't guarantee the *content* is correct.
-- **Few-shot Examples:** Content sahi rehta hai par format kabhi-kabhi toot jata hai.
+- **JSON Mode:** Format ke liye high reliability deta hai, lekin *content* correct hai ye guarantee nahi karta.
+- **Few-shot Examples:** Content sahi rehta hai, par format kabhi-kabhi toot jata hai.
 
 ---
 
 ## ✅ 9. Best Practices
-- **JSON Mode + System Prompt:** Sirf JSON mode on mat karein, prompt mein bhi likhein: "Respond ONLY in JSON format following the schema."
+- **JSON Mode + System Prompt:** Sirf JSON mode on mat karein, prompt mein bhi likhein: "Schema follow karte hue ONLY JSON format me respond karo."
 - **Optional Fields:** Pydantic mein `Optional[]` use karein taaki model crash na ho agar data missing ho.
 
 ---
@@ -107,7 +107,7 @@ def process_llm_output(raw_json: str):
 ---
 
 ## 💰 12. Cost Considerations
-- **Tokens for Braces:** JSON is token-heavy (lots of quotes, braces, spaces). Use **minified JSON** instructions if cost is a concern.
+- **Tokens for Braces:** JSON token-heavy hota hai (bahut quotes, braces, spaces). Cost concern ho to **minified JSON** instructions use karein.
 
 ---
 
@@ -125,9 +125,9 @@ def process_llm_output(raw_json: str):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Grammar-based Decoding:** Using libraries like **Guidance** or **Outlines** to force the LLM to follow a Regex or BNF grammar at the token level (100% reliability).
-- **Multi-step Validation:** One agent generates JSON, another agent validates it, a third one fixes it.
+- **Grammar-based Decoding:** **Guidance** ya **Outlines** jaise libraries use karke LLM ko token level par Regex ya BNF grammar follow karne ke liye force karna (100% reliability).
+- **Multi-step Validation:** Ek agent JSON generate karta hai, doosra agent validate karta hai, teesra use fix karta hai.
 
 ---
 
-> **Expert Tip:** In 2026, **Schema is Contract**. Don't let your agent talk to your code without a signed contract (Pydantic).
+> **Expert Tip:** 2026 me **Schema is Contract**. Signed contract (Pydantic) ke bina apne agent ko code se baat na karne dein.

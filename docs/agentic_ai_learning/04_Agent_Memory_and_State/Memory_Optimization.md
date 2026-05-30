@@ -1,5 +1,5 @@
-# 📉 Memory Optimization — Pruning the Agent's Mind
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the techniques to keep agent memory efficient, low-cost, and high-precision through pruning, summarization, and ranking.
+# 📉 Memory Optimization — Agent Ke Mind Ko Prune Karna
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Pruning, summarization, aur ranking ke through agent memory ko efficient, low-cost, aur high-precision rakhne ki techniques master karna.
 
 ---
 
@@ -15,12 +15,12 @@ Optimization sikhata hai ki kaise hum "Dudh ka dudh aur pani ka pani" karein—s
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Advanced memory optimization involves **Cognitive Pruning** and **Information Compression**.
-- **Context Window Management:** Keeping only the last $N$ messages or using **Sliding Window** attention.
-- **Incremental Summarization:** Every 10 turns, the agent summarizes the previous 10 messages into a 1-paragraph "State Snapshot" and deletes the raw logs.
-- **Importance Scoring:** Using an LLM to score each memory chunk from 1-10. Memories with score < 5 are deleted or moved to cold storage.
-- **Semantic Deduplication:** Before adding a new memory to the Vector DB, check if a similar memory already exists. If yes, update it instead of adding a duplicate.
-- **Hierarchical Memory:** Moving from "Short-term" to "Medium-term" to "Long-term" storage based on access frequency.
+Advanced memory ko optimize karne me **Cognitive Pruning** aur **Information Compression** shamil hota hai.
+- **Context Window Management:** Sirf last $N$ messages rakhna ya **Sliding Window** attention use karna.
+- **Incremental Summarization:** Har 10 turns par agent previous 10 messages ko 1-paragraph "State Snapshot" me summarize karta hai aur raw logs delete karta hai.
+- **Importance Scoring:** Har memory chunk ko 1-10 score dene ke liye LLM use karna. Score < 5 wali memories delete hoti hain ya cold storage me move hoti hain.
+- **Semantic Deduplication:** Vector DB me new memory add karne se pehle check karna ki similar memory already exist karti hai ya nahi. Agar haan, duplicate add karne ke bajay use update karo.
+- **Hierarchical Memory:** Access frequency ke basis par "Short-term" se "Medium-term" se "Long-term" storage tak move karna.
 
 ---
 
@@ -29,8 +29,8 @@ Advanced memory optimization involves **Cognitive Pruning** and **Information Co
 ```mermaid
 graph TD
     M[New Memory Incoming] --> S{Score Importance}
-    S -->|> 7| ST[Store in Short-term]
-    S -->|4 - 7| LT[Summarize & Move to Long-term]
+    S -->|> 7| ST[Short-term me Store]
+    S -->|4 - 7| LT[Summarize & Long-term me Move]
     S -->|< 4| D[Discard / Delete]
     
     subgraph "Optimization Loop"
@@ -49,21 +49,21 @@ def summarize_old_context(history: list):
     to_summarize = history[:-5] # Sab kuch chhod kar last 5 messages rakho
     keep_recent = history[-5:]
     
-    summary_text = f"Summary of {len(to_summarize)} messages: [Simulated Summary Content]"
+    summary_text = f"{len(to_summarize)} messages ka summary: [Simulated Summary Content]"
     
-    # Return new history with summary at the top
+    # Summary ko top par rakh kar new history return karo
     return [{"role": "system", "content": summary_text}] + keep_recent
 
 # history = [{"role": "user", "content": "..."}] * 20
 # optimized_history = summarize_old_context(history)
-# print(f"Messages reduced from 20 to {len(optimized_history)}")
+# print(f"Messages 20 se reduce hokar {len(optimized_history)} ho gaye")
 ```
 
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Long-term Support Agents:** Summarizing a 3-month long conversation so the agent can quickly understand the "Case History" without reading 5000 messages.
-- **Enterprise Search:** Removing duplicate or outdated versions of internal documents from the agent's vector memory.
+- **Long-term Support Agents:** 3-month long conversation summarize karna taaki agent 5000 messages read kiye bina "Case History" quickly samajh sake.
+- **Enterprise Search:** Agent ki vector memory se internal documents ke duplicate ya outdated versions remove karna.
 
 ---
 
@@ -81,14 +81,14 @@ def summarize_old_context(history: list):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **High Optimization:** Low token cost and low latency but risk of losing critical nuances.
-- **No Optimization:** High precision but extremely expensive and eventually crashes the context window.
+- **High Optimization:** Low token cost aur low latency, lekin critical nuances lose hone ka risk.
+- **No Optimization:** High precision, lekin extremely expensive aur eventually context window crash kar deta hai.
 
 ---
 
 ## ✅ 9. Best Practices
 - **Never Summarize System Prompts:** Humesha core instructions ko original format mein rakhein.
-- **Hybrid Storage:** Use Redis for raw recent messages and Postgres for summarized long-term facts.
+- **Hybrid Storage:** Raw recent messages ke liye Redis aur summarized long-term facts ke liye Postgres use karein.
 
 ---
 
@@ -116,15 +116,15 @@ def summarize_old_context(history: list):
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Summarizing every turn:** Token consumption badh jayega. Wait for a threshold (e.g., every 20 messages).
+- **Summarizing every turn:** Token consumption badh jayega. Threshold ka wait karein (e.g., every 20 messages).
 - **Losing the 'User Intent':** Summary mein user ka tone ya specific request bhool jana.
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Differential Compression:** Only summarizing parts of the context that haven't been accessed recently.
-- **Neural Pruning:** Models that are trained to automatically "Forget" irrelevant tokens during the attention phase.
+- **Differential Compression:** Sirf context ke un parts ko summarize karna jo recently access nahi hue.
+- **Neural Pruning:** Aise models jo attention phase ke dauran irrelevant tokens automatically "Forget" karne ke liye trained hote hain.
 
 ---
 
-> **Expert Tip:** Optimization is about **Signal vs Noise**. Your goal is to maximize the Signal while keeping the Noise (and cost) as low as possible.
+> **Expert Tip:** Optimization **Signal vs Noise** ke baare me hai. Aapka goal Signal maximize karna hai aur Noise (aur cost) ko jitna ho sake low rakhna hai.

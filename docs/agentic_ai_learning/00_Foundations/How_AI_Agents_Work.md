@@ -1,5 +1,5 @@
-# 🤖 How AI Agents Work — The Cognitive Loop
-> **Level:** Foundations | **Language:** Hinglish | **Goal:** Master the core architecture and execution cycle of AI Agents.
+# 🤖 AI Agents Kaise Kaam Karte Hain — The Cognitive Loop
+> **Level:** Foundations | **Language:** Hinglish | **Goal:** AI Agents ki core architecture aur execution cycle master karna.
 
 ---
 
@@ -16,11 +16,11 @@ Ye kaise hota hai? Ek loop ke zariye:
 ---
 
 ## 🧠 2. Deep Technical Explanation
-The core of an agent is the **Reasoning Loop** (often implemented as **ReAct** - Reasoning and Acting). 
-- **The State:** A snapshot of the world (conversation history, tool outputs).
-- **The Logic:** The LLM processes the current state and generates a "Thought" and an "Action".
-- **The Execution:** The system intercepts the "Action" string, calls the actual code/API, and feeds the "Observation" back to the LLM.
-- **Cognitive Load:** 2026 systems use **Long-term Memory** (Vector DBs) and **Short-term Memory** (Context Window) to maintain this loop across thousands of steps.
+Ek agent ka core **Reasoning Loop** hota hai (aksar **ReAct** - Reasoning and Acting ke roop me implement hota hai). 
+- **State:** Duniya ka snapshot (conversation history, tool outputs).
+- **Logic:** LLM current state ko process karta hai aur ek "Thought" aur ek "Action" generate karta hai.
+- **Execution:** System "Action" string ko intercept karta hai, actual code/API call karta hai, aur "Observation" ko wapas LLM ko feed karta hai.
+- **Cognitive Load:** 2026 systems is loop ko thousands of steps tak maintain karne ke liye **Long-term Memory** (Vector DBs) aur **Short-term Memory** (Context Window) use karte hain.
 
 ---
 
@@ -52,15 +52,15 @@ flowchart TD
 import json
 
 def get_weather(city: str):
-    # Simulated Tool
-    return f"The weather in {city} is 25°C and Sunny."
+    # Simulated tool
+    return f"{city} ka weather 25°C aur Sunny hai."
 
 def run_simple_agent(user_prompt: str):
-    # This is a simulation of what happens inside an agent loop
+    # Ye agent loop ke andar kya hota hai uski simulation hai
     print(f"Goal: {user_prompt}")
     
     # 1. THOUGHT
-    thought = "I need to find the weather for London to answer the user."
+    thought = "User ko answer dene ke liye mujhe London ka weather find karna hai."
     print(f"Thought: {thought}")
     
     # 2. ACT
@@ -72,18 +72,18 @@ def run_simple_agent(user_prompt: str):
     print(f"Observation: {observation}")
     
     # 4. FINAL ANSWER
-    final_answer = f"Based on my search, {observation}"
+    final_answer = f"Meri search ke basis par, {observation}"
     print(f"Final Result: {final_answer}")
 
-# run_simple_agent("What's the weather like in London?")
+# run_simple_agent("London me weather kaisa hai?")
 ```
 
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Customer Support:** Resolving issues by checking database orders and processing refunds.
-- **Data Analyst:** Running SQL queries on a database and generating charts autonomously.
-- **Personal Assistant:** Booking appointments by checking Google Calendar and sending invites.
+- **Customer Support:** Database orders check karke aur refunds process karke issues resolve karna.
+- **Data Analyst:** Database par SQL queries run karna aur autonomously charts generate karna.
+- **Personal Assistant:** Google Calendar check karke appointments book karna aur invites bhejna.
 
 ---
 
@@ -106,8 +106,8 @@ def run_simple_agent(user_prompt: str):
 ---
 
 ## ✅ 9. Best Practices
-- **Explicit Instruction:** System prompt mein likhein: "If you don't know the answer, use the search tool."
-- **Structured Output:** Model se humesha JSON ya specific format mein output maangein.
+- **Explicit Instruction:** System prompt mein likhein: "Agar answer nahi pata hai, to search tool use karo."
+- **Structured Output:** Model se hamesha JSON ya specific format mein output maangein.
 
 ---
 

@@ -1,5 +1,5 @@
-# 🔄 Agent Lifecycle & State — Keeping the Brain Alive
-> **Level:** Fundamentals | **Language:** Hinglish | **Goal:** Master the lifecycle stages of an agent and how to manage its persistent state.
+# 🔄 Agent Lifecycle & State — Brain Ko Alive Rakhna
+> **Level:** Fundamentals | **Language:** Hinglish | **Goal:** Agent ke lifecycle stages aur uski persistent state manage karna master karna.
 
 ---
 
@@ -13,11 +13,11 @@ Imagine karo aap ek recipe bana rahe ho. State wo "bartan" hai jisme saare ingre
 ---
 
 ## 🧠 2. Deep Technical Explanation
-In 2026, **State Management** is the differentiator between a toy and a production system.
+2026 me **State Management** toy system aur production system ke beech ka differentiator hai.
 - **Agent Lifecycle:** Initialization → Planning → Action → Observation → Reflection → Termination.
-- **State Persistence:** We use **Checkpointers** to save the state at every node transition in a graph (e.g., LangGraph).
-- **Snapshotting:** Saving the entire environment state so we can "Time Travel" back to a previous point if the agent makes a mistake.
-- **Thread Management:** Handling multiple users means each needs a separate `thread_id` to keep their state isolated.
+- **State Persistence:** Graph me har node transition par state save karne ke liye hum **Checkpointers** use karte hain (e.g., LangGraph).
+- **Snapshotting:** Entire environment state save karna taaki agar agent mistake kare to hum previous point par "Time Travel" kar sakein.
+- **Thread Management:** Multiple users handle karne ka matlab hai har user ko separate `thread_id` chahiye, taaki unki state isolated rahe.
 
 ---
 
@@ -26,16 +26,16 @@ In 2026, **State Management** is the differentiator between a toy and a producti
 ```mermaid
 stateDiagram-v2
     [*] --> Init: Goal Received
-    Init --> Planning: Decompose Task
-    Planning --> Action: Choose Tool
-    Action --> Observation: Get Result
-    Observation --> Reflection: Analyze Result
-    Reflection --> Planning: Need More?
+    Init --> Planning: Task Decompose
+    Planning --> Action: Tool Choose
+    Action --> Observation: Result Lo
+    Observation --> Reflection: Result Analyze
+    Reflection --> Planning: Aur Chahiye?
     Reflection --> Termination: Goal Met
     Termination --> [*]
     
     state Reflection {
-        Checkpointer --> DB: Save State
+        Checkpointer --> DB: State Save
     }
 ```
 
@@ -47,24 +47,24 @@ stateDiagram-v2
 from typing import Annotated, TypedDict
 from langgraph.graph import StateGraph, START, END
 
-# Define the State Schema
+# State schema define karein
 class AgentState(TypedDict):
-    # Annotated helps LangGraph understand how to 'update' the state
-    messages: Annotated[list[str], "List of chat messages"]
+    # Annotated LangGraph ko state 'update' karna samajhne me help karta hai
+    messages: Annotated[list[str], "Chat messages ki list"]
     task_completed: bool
 
 def node_executor(state: AgentState):
-    # Logic happens here
-    print(f"Processing state: {state['messages']}")
-    return {"messages": ["Added a new message"], "task_completed": True}
+    # Logic yahan hoti hai
+    print(f"State process ho rahi hai: {state['messages']}")
+    return {"messages": ["Naya message add hua"], "task_completed": True}
 
-# Build Graph
+# Graph build karein
 workflow = StateGraph(AgentState)
 workflow.add_node("worker", node_executor)
 workflow.add_edge(START, "worker")
 workflow.add_edge("worker", END)
 
-# In production, we add a checkpointer (e.g., SQLite/Redis)
+# Production me hum checkpointer add karte hain (e.g., SQLite/Redis)
 # config = {"configurable": {"thread_id": "user_123"}}
 # app = workflow.compile(checkpointer=MemorySaver())
 # app.invoke({"messages": ["Hello"], "task_completed": False}, config)
@@ -92,8 +92,8 @@ workflow.add_edge("worker", END)
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **In-Memory State:** Fast but data lost on restart.
-- **Persistent State (DB):** Secure and reliable but adds latency and cost.
+- **In-Memory State:** Fast hoti hai, lekin restart par data lost ho jata hai.
+- **Persistent State (DB):** Secure aur reliable hoti hai, lekin latency aur cost add karti hai.
 
 ---
 
@@ -135,9 +135,9 @@ workflow.add_edge("worker", END)
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Time-Travel Debugging:** Developers can "pause" a live agent, go back 10 steps in the state, fix a prompt, and resume.
-- **Cross-session Memory:** Persistent state that links multiple user sessions into one continuous "User Persona".
+- **Time-Travel Debugging:** Developers live agent ko "pause" kar sakte hain, state me 10 steps wapas ja sakte hain, prompt fix kar sakte hain, aur resume kar sakte hain.
+- **Cross-session Memory:** Persistent state jo multiple user sessions ko ek continuous "User Persona" me link karti hai.
 
 ---
 
-> **Expert Tip:** State management is the **glue** of agentic AI. If the glue is weak, the system falls apart.
+> **Expert Tip:** State management agentic AI ka **glue** hai. Agar glue weak hai, system toot jata hai.

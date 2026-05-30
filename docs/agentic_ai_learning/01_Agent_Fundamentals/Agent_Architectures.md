@@ -1,5 +1,5 @@
-# 🏛️ Agent Architectures — From ReAct to Reflexion
-> **Level:** Fundamentals | **Language:** Hinglish | **Goal:** Master the blueprint of how agents are structured and orchestrated.
+# 🏛️ Agent Architectures — ReAct se Reflexion tak
+> **Level:** Fundamentals | **Language:** Hinglish | **Goal:** Agents kaise structure aur orchestrate hote hain, us blueprint ko master karna.
 
 ---
 
@@ -16,11 +16,11 @@ Architecture sahi hogi toh agent fast aur accurate hoga.
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Modern agentic architectures are evolving beyond simple linear chains to **Stateful Directed Acyclic Graphs (DAGs)** or even **Cyclic Graphs**.
-- **ReAct (Reason + Act):** Interleaves thought traces and actions. High latency due to sequential token generation.
-- **Plan-and-Execute:** Separates the **Planner** (LLM that decomposes goal) from the **Executor** (LLM that calls tools). This reduces "Reasoning Drift".
-- **Reflexion:** Incorporates a **Linguistic Feedback Loop**. The agent stores its failures in a memory buffer and uses them as "critique" for the next attempt.
-- **Autonomous Agents (BabyAGI/AutoGPT style):** Use a dynamic Task Queue that prioritizes and adds tasks on the fly based on current observations.
+Modern agentic architectures simple linear chains se aage badh kar **Stateful Directed Acyclic Graphs (DAGs)** ya even **Cyclic Graphs** tak evolve ho rahi hain.
+- **ReAct (Reason + Act):** Thought traces aur actions ko interleave karta hai. Sequential token generation ki wajah se latency high hoti hai.
+- **Plan-and-Execute:** **Planner** (LLM jo goal decompose karta hai) ko **Executor** (LLM jo tools call karta hai) se separate karta hai. Ye "Reasoning Drift" reduce karta hai.
+- **Reflexion:** Ek **Linguistic Feedback Loop** include karta hai. Agent apni failures ko memory buffer me store karta hai aur next attempt ke liye unhe "critique" ke roop me use karta hai.
+- **Autonomous Agents (BabyAGI/AutoGPT style):** Dynamic Task Queue use karte hain jo current observations ke basis par tasks ko prioritize aur on the fly add karta hai.
 
 ---
 
@@ -55,13 +55,13 @@ class Plan(TypedDict):
     steps: List[str]
 
 def planner(goal: str) -> Plan:
-    # Logic to decompose goal into steps
-    return {"steps": ["Search for AI news", "Summarize top 3", "Format as email"]}
+    # Goal ko steps me decompose karne ki logic
+    return {"steps": ["AI news search karo", "Top 3 summarize karo", "Email format me likho"]}
 
 def executor(step: str):
-    # Logic to run a single step
-    print(f"Executing: {step}")
-    return f"Result of {step}"
+    # Single step run karne ki logic
+    print(f"Execute ho raha hai: {step}")
+    return f"{step} ka result"
 
 def run_plan_and_execute(goal: str):
     print(f"Goal: {goal}")
@@ -72,10 +72,10 @@ def run_plan_and_execute(goal: str):
         res = executor(step)
         results.append(res)
     
-    print("All tasks completed.")
+    print("Saare tasks complete ho gaye.")
     return results
 
-# run_plan_and_execute("Send a technology news summary to my email.")
+# run_plan_and_execute("Mere email par technology news summary bhejo.")
 ```
 
 ---
@@ -93,21 +93,21 @@ def run_plan_and_execute(goal: str):
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Visualize the Graph:** LangGraph built-in visuals use karein to see which node is failing.
+- **Visualize the Graph:** Kaunsa node fail ho raha hai dekhne ke liye LangGraph built-in visuals use karein.
 - **Step-by-Step logs:** Plan-and-Execute mein humesha Task Queue ka status log karein.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **ReAct:** Adaptive but slow and token-heavy.
-- **Plan-and-Execute:** Fast and organized but less flexible for dynamic changes.
-- **Reflexion:** Highest accuracy but highest cost and latency.
+- **ReAct:** Adaptive hota hai, lekin slow aur token-heavy hota hai.
+- **Plan-and-Execute:** Fast aur organized hota hai, lekin dynamic changes ke liye less flexible hota hai.
+- **Reflexion:** Highest accuracy deta hai, lekin cost aur latency bhi highest hoti hai.
 
 ---
 
 ## ✅ 9. Best Practices
-- **Hybrid Approach:** Use Plan-and-Execute for the big picture and ReAct for individual complex steps.
-- **Validation Nodes:** Always have a "Verification" node that checks if the task was actually completed.
+- **Hybrid Approach:** Big picture ke liye Plan-and-Execute use karein aur individual complex steps ke liye ReAct use karein.
+- **Validation Nodes:** Hamesha ek "Verification" node rakhein jo check kare ki task actually complete hua ya nahi.
 
 ---
 
@@ -117,14 +117,14 @@ def run_plan_and_execute(goal: str):
 ---
 
 ## 📈 11. Scaling Challenges
-- **Parallel Execution:** Executing multiple steps of a plan in parallel requires complex state synchronization.
+- **Parallel Execution:** Plan ke multiple steps ko parallel execute karne ke liye complex state synchronization chahiye hoti hai.
 - **Resource Locking:** Multiple agents same tool (e.g., Database) use karein toh conflicts ho sakte hain.
 
 ---
 
 ## 💰 12. Cost Considerations
 - **Planner Re-runs:** Agar plan fail hota hai, toh poora replanning mehnga ho sakta hai. 
-- **Efficiency:** Small models use karein for simple execution steps to save cost.
+- **Efficiency:** Cost save karne ke liye simple execution steps ke liye small models use karein.
 
 ---
 
@@ -142,9 +142,9 @@ def run_plan_and_execute(goal: str):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Hierarchical Planning:** A Master Planner delegating sub-plans to specialized Sub-Planners.
-- **Dynamic Replanning:** Agents that monitor their own execution and rewrite the plan mid-way if a bottleneck is found.
+- **Hierarchical Planning:** Master Planner specialized Sub-Planners ko sub-plans delegate karta hai.
+- **Dynamic Replanning:** Agents apni execution monitor karte hain aur bottleneck milne par plan ko mid-way rewrite karte hain.
 
 ---
 
-> **Final Insight:** Mastery of architecture is about knowing **when to plan** and **when to act**. 
+> **Final Insight:** Architecture ki mastery ka matlab ye samajhna hai ki **kab plan karna hai** aur **kab act karna hai**. 

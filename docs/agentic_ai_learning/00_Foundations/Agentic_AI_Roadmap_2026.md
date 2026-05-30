@@ -1,5 +1,5 @@
-# 🗺️ Agentic AI Roadmap 2026 — Zero to Expert
-> **Level:** Foundations | **Language:** Hinglish | **Goal:** Become a Top 1% Agentic AI Engineer in the 2026 market.
+# 🗺️ Agentic AI Roadmap 2026 — Zero se Expert
+> **Level:** Foundations | **Language:** Hinglish | **Goal:** 2026 market me Top 1% Agentic AI Engineer banna.
 
 ---
 
@@ -15,10 +15,10 @@ Aapko sirf prompts likhna nahi seekhna, balki systems design karna seekhna hai j
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Agentic AI 2026 revolves around **Cognitive Architectures**. It's moving from fixed loops to dynamic, stateful graphs.
+Agentic AI 2026 ka center **Cognitive Architectures** ke around hai. Ye fixed loops se dynamic, stateful graphs ki taraf move kar raha hai.
 - **Core Loop:** Observation (State) → Reasoning (LLM) → Tool Selection (Action) → Feedback (Environment).
-- **Emergent Behavior:** Systems like **Reason-without-Observation (ReWOO)** separate reasoning from tool execution to save costs and latency.
-- **Cognitive Load:** Understanding how much context an LLM can handle before "reasoning fatigue" sets in.
+- **Emergent Behavior:** **Reason-without-Observation (ReWOO)** jaise systems costs aur latency bachane ke liye reasoning ko tool execution se separate karte hain.
+- **Cognitive Load:** Ye samajhna ki "reasoning fatigue" set hone se pehle ek LLM kitna context handle kar sakta hai.
 
 ---
 
@@ -30,7 +30,7 @@ graph TD
     B --> C[Advanced: Stateful Multi-Agent Graphs]
     C --> D[Expert: Production-Grade Autonomous Systems]
     
-    subgraph "Skills Required"
+    subgraph "Zaroori Skills"
     B1[Python Async & Type Safety]
     B2[LangGraph & Persistence]
     B3[Evaluation Frameworks - RAGAS]
@@ -49,19 +49,19 @@ graph TD
 from typing import TypedDict, List
 from langgraph.graph import StateGraph, START, END
 
-# Roadmap State Definition
+# Roadmap state ki definition
 class RoadmapState(TypedDict):
     completed_milestones: List[str]
     current_focus: str
     is_job_ready: bool
 
 def update_roadmap(state: RoadmapState):
-    # Logic to progress the student
+    # Student ko progress karne ki logic
     if len(state["completed_milestones"]) >= 10:
         return {"is_job_ready": True, "current_focus": "Interview Prep"}
     return {"is_job_ready": False}
 
-# Simple Graph for Roadmap Tracking
+# Roadmap tracking ke liye simple graph
 builder = StateGraph(RoadmapState)
 builder.add_node("evaluator", update_roadmap)
 builder.add_edge(START, "evaluator")
@@ -72,9 +72,9 @@ builder.add_edge("evaluator", END)
 ---
 
 ## 🌍 5. Real-World Use Cases
-1. **Autonomous Coding Agents:** Agents that write tests, fix bugs, and commit to GitHub (e.g., OpenDevin).
-2. **AI SDRs (Sales):** Agents that research leads, send personalized emails, and handle follow-ups.
-3. **Automated Research Teams:** Multiple agents collaborating to write a 50-page technical paper.
+1. **Autonomous Coding Agents:** Agents jo tests likhte hain, bugs fix karte hain, aur GitHub par commit karte hain (e.g., OpenDevin).
+2. **AI SDRs (Sales):** Agents jo leads research karte hain, personalized emails bhejte hain, aur follow-ups handle karte hain.
+3. **Automated Research Teams:** Multiple agents jo 50-page technical paper likhne ke liye collaborate karte hain.
 
 ---
 
@@ -86,8 +86,8 @@ builder.add_edge("evaluator", END)
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Trace Viewer:** Always use **LangSmith** or **Arize Phoenix** to see the hidden thoughts of the agent.
-- **Log Everything:** Prompt inputs, tool outputs, and LLM reasoning tokens save karne chahiye for audit.
+- **Trace Viewer:** Agent ke hidden thoughts dekhne ke liye hamesha **LangSmith** ya **Arize Phoenix** use karein.
+- **Log Everything:** Audit ke liye prompt inputs, tool outputs, aur LLM reasoning tokens save karne chahiye.
 
 ---
 
@@ -136,9 +136,9 @@ builder.add_edge("evaluator", END)
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **MCP (Model Context Protocol):** Connecting agents to any data source instantly.
-- **Small Language Models (SLMs):** Fine-tuned 7B models performing better than 70B models for specific tool-calling tasks.
+- **MCP (Model Context Protocol):** Agents ko kisi bhi data source se instantly connect karna.
+- **Small Language Models (SLMs):** Specific tool-calling tasks ke liye fine-tuned 7B models ka 70B models se better perform karna.
 
 ---
 
-> **Final Note:** AI Engineer banna ek sprint nahi, marathon hai. Start building today!
+> **Final Note:** AI Engineer banna ek sprint nahi, marathon hai. Aaj se build karna start karein!

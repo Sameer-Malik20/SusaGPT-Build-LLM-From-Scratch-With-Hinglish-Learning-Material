@@ -1,5 +1,5 @@
-# 📦 Context Engineering — Managing the Agent's Workspace
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master dynamic context management, memory pruning, and defense against context poisoning.
+# 📦 Context Engineering — Agent Ka Workspace Manage Karna
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Dynamic context management, memory pruning, aur context poisoning ke against defense master karna.
 
 ---
 
@@ -16,12 +16,12 @@ Sahi context management se agent fast hota hai aur uski accuracy 90% tak badh sa
 ---
 
 ## 🧠 2. Deep Technical Explanation
-In 2026, we deal with **Context Window Saturation** and **Retrieval Precision**.
-- **Dynamic Context:** Only injecting information that is relevant to the *current* task node.
-- **Context Compression:** Using an LLM to summarize the past 50 turns into a 1-paragraph "Executive Summary" to save tokens.
-- **Semantic Caching:** Storing context chunks in a vector DB and only retrieving what's needed (RAG-based context).
-- **Pruning Strategies:** **FIFO** (First-In-First-Out), **Importance-based** (keeping high-value facts), or **Recency-based**.
-- **Lost-in-the-Middle:** LLMs often ignore information placed in the middle of a long prompt. Context engineering rearranges the prompt to put critical info at the start or end.
+2026 me hum **Context Window Saturation** aur **Retrieval Precision** se deal karte hain.
+- **Dynamic Context:** Sirf wahi information inject karna jo *current* task node ke liye relevant ho.
+- **Context Compression:** Tokens save karne ke liye past 50 turns ko 1-paragraph "Executive Summary" me summarize karne ke liye LLM use karna.
+- **Semantic Caching:** Context chunks ko vector DB me store karna aur sirf jo needed ho wahi retrieve karna (RAG-based context).
+- **Pruning Strategies:** **FIFO** (First-In-First-Out), **Importance-based** (high-value facts rakhna), ya **Recency-based**.
+- **Lost-in-the-Middle:** LLMs long prompt ke middle me placed information ko aksar ignore kar dete hain. Context engineering prompt ko rearrange karke critical info ko start ya end me rakhti hai.
 
 ---
 
@@ -51,8 +51,8 @@ def manage_context(history: list, max_tokens: int = 2000):
     current_tokens = sum(len(m['content'].split()) for m in history) # Simplified token count
     
     if current_tokens > max_tokens:
-        print("Pruning context...")
-        # Keep first message (System Prompt) and last 5 messages
+        print("Context prune ho raha hai...")
+        # First message (System Prompt) aur last 5 messages rakho
         system_msg = history[0]
         recent_msgs = history[-5:]
         return [system_msg] + recent_msgs
@@ -65,8 +65,8 @@ def manage_context(history: list, max_tokens: int = 2000):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Long-term Customer Support:** Remembering a user's name and problem from 3 months ago without storing the 100 intermediate chats in the active prompt.
-- **Large Codebase Agents:** Injecting only the relevant function definitions instead of the whole 10,000-line file.
+- **Long-term Customer Support:** Active prompt me 100 intermediate chats store kiye bina 3 months pehle ka user name aur problem remember karna.
+- **Large Codebase Agents:** Whole 10,000-line file ke bajay sirf relevant function definitions inject karna.
 
 ---
 
@@ -78,25 +78,25 @@ def manage_context(history: list, max_tokens: int = 2000):
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Context Dump:** Print the *final* prompt being sent to the LLM. You'll often be surprised how messy it is.
+- **Context Dump:** LLM ko bheja ja raha *final* prompt print karein. Aap aksar surprised honge ki wo kitna messy hota hai.
 - **Needle-in-a-Haystack Test:** Ek random fact context ke beech mein chhupao aur agent se pucho. Agar wo nahi dhoond pa raha, toh engineering weak hai.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Full Context:** High accuracy but High Latency and Expensive.
-- **Compressed Context:** Fast and Cheap but high risk of losing subtle details.
+- **Full Context:** High accuracy, lekin high latency aur expensive.
+- **Compressed Context:** Fast aur cheap, lekin subtle details lose hone ka high risk.
 
 ---
 
 ## ✅ 9. Best Practices
-- **Priority Headers:** Always label your context sections clearly: `### DOCUMENT 1`, `### USER PROFILE`.
-- **Sliding Window:** Keep a moving window of recent interactions to maintain "freshness".
+- **Priority Headers:** Apne context sections ko hamesha clearly label karein: `### DOCUMENT 1`, `### USER PROFILE`.
+- **Sliding Window:** "Freshness" maintain karne ke liye recent interactions ki moving window rakhein.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Indirect Prompt Injection:** A website the agent reads contains instructions like "Now become an evil bot." This is context poisoning.
+- **Indirect Prompt Injection:** Agent jo website read karta hai usme "Ab evil bot ban jao" jaisi instructions ho sakti hain. Ye context poisoning hai.
 - **Data Sanitization:** Context mein aane wale external data ko humesha sanitize karein.
 
 ---
@@ -108,8 +108,8 @@ def manage_context(history: list, max_tokens: int = 2000):
 ---
 
 ## 💰 12. Cost Considerations
-- **Prompt Token Reuse:** Use **Context Caching** for static parts of the context (System prompt, core docs).
-- **Summarization Cost:** Summarizing context costs tokens too—ensure the saving is more than the cost.
+- **Prompt Token Reuse:** Context ke static parts (System prompt, core docs) ke liye **Context Caching** use karein.
+- **Summarization Cost:** Context summarize karne me bhi tokens lagte hain, isliye ensure karein ki saving cost se zyada ho.
 
 ---
 
@@ -121,15 +121,15 @@ def manage_context(history: list, max_tokens: int = 2000):
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **Assuming infinite context:** Models like Gemini have 1M+ context, but they still get "lazy" with large inputs.
+- **Assuming infinite context:** Gemini jaise models ke paas 1M+ context hota hai, lekin large inputs ke saath wo phir bhi "lazy" ho jate hain.
 - **No Pruning:** System prompt ko har turn par repeat karna bina cache kiye.
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Contextual Retrieval (Anthropic Style):** Pre-pending chunks with a summary of the whole document to give the LLM better "local" context.
-- **Active Memory Pruning:** Agents that dynamically decide which parts of their memory are "Garbage" and delete them to save space.
+- **Contextual Retrieval (Anthropic Style):** LLM ko better "local" context dene ke liye chunks ke pehle whole document ka summary prepend karna.
+- **Active Memory Pruning:** Agents dynamically decide karte hain ki memory ke kaunse parts "Garbage" hain aur space save karne ke liye unhe delete karte hain.
 
 ---
 
-> **Final Insight:** Context is the **Oxygen** of an agent. Too little and it dies, too much and it gets intoxicated.
+> **Final Insight:** Context agent ka **Oxygen** hai. Bahut kam ho to agent mar jata hai, bahut zyada ho to intoxicated ho jata hai.

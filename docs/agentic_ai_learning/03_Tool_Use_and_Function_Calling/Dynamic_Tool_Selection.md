@@ -1,5 +1,5 @@
-# 🎯 Dynamic Tool Selection — Managing Tool Sprawl
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the techniques to handle hundreds of tools using semantic routing and selective injection.
+# 🎯 Dynamic Tool Selection — Tool Sprawl Manage Karna
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Semantic routing aur selective injection use karke hundreds of tools handle karne ki techniques master karna.
 
 ---
 
@@ -18,13 +18,13 @@ Ye bilkul waisa hi hai jaise ek mechanic poora workshop utha kar nahi lata, sirf
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Handling **Tool Sprawl** requires a two-step retrieval process:
-1. **Tool Indexing:** Descriptions of every tool are stored as embeddings in a **Vector Database**.
-2. **Semantic Retrieval:** When a query arrives, we perform a vector search to find the top $N$ most relevant tool descriptions.
-3. **Dynamic Injection:** Only these top $N$ tool schemas are injected into the LLM's system prompt or function calling configuration.
-4. **Tool Metadata:** Using tags or categories to filter tools before semantic search (e.g., "Finance Tools", "Admin Tools").
+**Tool Sprawl** handle karne ke liye two-step retrieval process chahiye hota hai:
+1. **Tool Indexing:** Har tool ki descriptions ko embeddings ke roop me **Vector Database** me store kiya jata hai.
+2. **Semantic Retrieval:** Jab query aati hai, hum top $N$ most relevant tool descriptions find karne ke liye vector search perform karte hain.
+3. **Dynamic Injection:** Sirf ye top $N$ tool schemas LLM ke system prompt ya function calling configuration me inject kiye jate hain.
+4. **Tool Metadata:** Semantic search se pehle tools filter karne ke liye tags ya categories use karna (e.g., "Finance Tools", "Admin Tools").
 
-This approach solves the **Context Window Limit** and reduces **Hallucinations** caused by overlapping tool descriptions.
+Ye approach **Context Window Limit** solve karta hai aur overlapping tool descriptions ki wajah se hone wali **Hallucinations** reduce karta hai.
 
 ---
 
@@ -39,7 +39,7 @@ graph TD
     TN[Tool N Description]
     end
     V --> R[Top 5 Relevant Tools]
-    R --> L[LLM with Reduced Schema]
+    R --> L[Reduced Schema wala LLM]
     L --> Call[Execution]
 ```
 
@@ -48,32 +48,32 @@ graph TD
 ## 💻 4. Production-Ready Code Example (Semantic Tool Picker)
 
 ```python
-# Simulated Tool Metadata
+# Simulated tool metadata
 tool_registry = [
-    {"name": "get_weather", "description": "Fetches weather data for a city"},
-    {"name": "send_email", "description": "Sends an email to a recipient"},
-    {"name": "query_db", "description": "Runs SQL queries on the production database"}
+    {"name": "get_weather", "description": "City ke liye weather data fetch karta hai"},
+    {"name": "send_email", "description": "Recipient ko email bhejta hai"},
+    {"name": "query_db", "description": "Production database par SQL queries run karta hai"}
 ]
 
 def find_relevant_tools(user_query: str):
-    # Hinglish Logic: Simple keyword matching (In production, use Vector Search)
+    # Hinglish logic: Simple keyword matching (production me Vector Search use karein)
     relevant = []
     for tool in tool_registry:
         if any(word in user_query.lower() for word in tool['description'].split()):
             relevant.append(tool)
     return relevant
 
-# query = "What's the weather in Delhi?"
+# query = "Delhi me weather kaisa hai?"
 # selected_tools = find_relevant_tools(query)
-# print(f"Tools injected into prompt: {[t['name'] for t in selected_tools]}")
+# print(f"Prompt me inject kiye gaye tools: {[t['name'] for t in selected_tools]}")
 ```
 
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Enterprise ERPs:** Systems with thousands of APIs where no single model can process all schemas at once.
-- **Personal Assistants:** Switching between "Work tools" (Email, Slack) and "Home tools" (Lights, Music) based on intent.
-- **Dynamic Plugin Systems:** Allowing users to upload their own tools which the agent automatically learns to use.
+- **Enterprise ERPs:** Aise systems jinke paas thousands of APIs hote hain jahan koi single model saare schemas ek saath process nahi kar sakta.
+- **Personal Assistants:** Intent ke basis par "Work tools" (Email, Slack) aur "Home tools" (Lights, Music) ke beech switch karna.
+- **Dynamic Plugin Systems:** Users ko apne tools upload karne dena, jinhe agent automatically use karna seekh leta hai.
 
 ---
 
@@ -91,8 +91,8 @@ def find_relevant_tools(user_query: str):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Dynamic Selection:** Saves context tokens and improves focus but adds a small latency for the retrieval step.
-- **Static Selection:** Faster (no retrieval) but limited to a small number of tools.
+- **Dynamic Selection:** Context tokens save karta hai aur focus improve karta hai, lekin retrieval step ke liye thodi latency add karta hai.
+- **Static Selection:** Faster hota hai (retrieval nahi), lekin small number of tools tak limited hota hai.
 
 ---
 
@@ -109,7 +109,7 @@ def find_relevant_tools(user_query: str):
 ---
 
 ## 📈 11. Scaling Challenges
-- **Vector DB Sync:** Thousands of developers adding tools means the index needs to be updated in real-time.
+- **Vector DB Sync:** Thousands of developers tools add kar rahe hon to index ko real-time me update karna padta hai.
 
 ---
 
@@ -132,9 +132,9 @@ def find_relevant_tools(user_query: str):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Agent-to-Tool Discovery:** Agents querying an "Agentic App Store" (using MCP protocol) to find and install tools they need for a task.
-- **On-the-fly Tool Generation:** Model creating a custom tool (writing code) when a matching one isn't found in the registry.
+- **Agent-to-Tool Discovery:** Agents task ke liye needed tools find aur install karne ke liye "Agentic App Store" query karte hain (MCP protocol use karke).
+- **On-the-fly Tool Generation:** Jab registry me matching tool nahi milta, model custom tool create karta hai (code likh kar).
 
 ---
 
-> **Expert Tip:** Don't drown your agent in tools. Give it a **Menu**, not the whole kitchen inventory.
+> **Expert Tip:** Apne agent ko tools me drown mat karo. Use **Menu** do, poora kitchen inventory nahi.

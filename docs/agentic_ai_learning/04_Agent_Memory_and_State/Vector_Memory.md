@@ -1,5 +1,5 @@
-# 📍 Vector Memory — Semantic Recall for Agents
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the use of Vector Databases to implement fuzzy, semantic memory for large-scale agentic systems.
+# 📍 Vector Memory — Agents Ke Liye Semantic Recall
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Large-scale agentic systems ke liye fuzzy, semantic memory implement karne me Vector Databases ka use master karna.
 
 ---
 
@@ -14,14 +14,14 @@ Ye kaise hota hai? Text ko numbers (**Vectors**) mein badal kar unhe ek map par 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Vector memory enables **Semantic Search** (instead of Keyword search).
-- **Embedding Models:** We use models like `text-embedding-3-small` or `nomic-embed-text` to turn strings into fixed-length arrays of floats (Vectors).
-- **Vector Database:** Specialized stores like **Pinecone**, **Milvus**, or **Chroma** that can perform **Cosine Similarity** or **Euclidean Distance** calculations across millions of vectors in milliseconds.
+Vector memory **Semantic Search** enable karti hai (Keyword search ke bajay).
+- **Embedding Models:** Hum `text-embedding-3-small` ya `nomic-embed-text` jaise models use karte hain jo strings ko fixed-length floats arrays (Vectors) me convert karte hain.
+- **Vector Database:** **Pinecone**, **Milvus**, ya **Chroma** jaise specialized stores jo millions of vectors across milliseconds me **Cosine Similarity** ya **Euclidean Distance** calculations perform kar sakte hain.
 - **Recall Cycle:** 
     1. User Query → Vector.
-    2. Search Vector DB for closest matches.
-    3. Inject matches into Prompt.
-- **Hybrid Search:** 2026 standard is combining Vector Search (Meaning) with BM25 (Exact Keywords) for the best results.
+    2. Closest matches ke liye Vector DB search.
+    3. Matches ko Prompt me inject.
+- **Hybrid Search:** 2026 standard best results ke liye Vector Search (Meaning) ko BM25 (Exact Keywords) ke saath combine karna hai.
 
 ---
 
@@ -45,7 +45,7 @@ graph LR
 ## 💻 4. Production-Ready Code Example (Simple Vector Memory)
 
 ```python
-# Using ChromaDB as an example (Local & Fast)
+# ChromaDB ko example ke roop me use kar rahe hain (Local & Fast)
 import chromadb
 
 def setup_vector_memory():
@@ -68,16 +68,16 @@ def recall_fact(collection, query):
     return results['documents'][0][0]
 
 # memory = setup_vector_memory()
-# store_fact(memory, "id1", "User's favorite color is Deep Blue.")
-# print(recall_fact(memory, "What color does the user like?"))
+# store_fact(memory, "id1", "User ka favorite color Deep Blue hai.")
+# print(recall_fact(memory, "User ko kaunsa color pasand hai?"))
 ```
 
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Document Q&A:** Asking questions about a 500-page manual. The agent uses vector memory to find the exact page.
-- **Customer Profiling:** Automatically retrieving a customer's past complaints when they start a new chat.
-- **Dynamic Coding:** Finding similar code snippets from a large repository to help the agent write new functions.
+- **Document Q&A:** 500-page manual ke baare me questions puchna. Agent exact page find karne ke liye vector memory use karta hai.
+- **Customer Profiling:** Jab customer new chat start karta hai to automatically uski past complaints retrieve karna.
+- **Dynamic Coding:** Agent ko new functions likhne me help karne ke liye large repository se similar code snippets find karna.
 
 ---
 
@@ -95,20 +95,20 @@ def recall_fact(collection, query):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Vector Search:** Handles "Fuzzy" questions perfectly but can be slow and expensive to index.
-- **Keyword Search:** Precise for names/dates but fails if the user uses a synonym.
+- **Vector Search:** "Fuzzy" questions perfectly handle karta hai, lekin index karne me slow aur expensive ho sakta hai.
+- **Keyword Search:** Names/dates ke liye precise hota hai, lekin user synonym use kare to fail ho jata hai.
 
 ---
 
 ## ✅ 9. Best Practices
 - **Chunking:** Poore document ko ek vector na banayein. Use **Recursive Character Splitting** (300-500 tokens per chunk).
-- **Re-ranking:** Retrieval ke baad ek smaller LLM (Cross-encoder) use karein to re-rank the top 5 results for accuracy.
+- **Re-ranking:** Retrieval ke baad accuracy ke liye top 5 results re-rank karne ko smaller LLM (Cross-encoder) use karein.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Vector Inversion:** Research shows that sometimes raw text can be reconstructed from vectors. Don't store plain PII in vector memory.
-- **Access Control at Chunk Level:** Ensure metadata includes "Owner ID" so one user's search doesn't see another's vectors.
+- **Vector Inversion:** Research dikhati hai ki kabhi-kabhi vectors se raw text reconstruct ho sakta hai. Vector memory me plain PII store na karein.
+- **Access Control at Chunk Level:** Ensure karein ki metadata me "Owner ID" ho taaki ek user ki search doosre ke vectors na dekhe.
 
 ---
 
@@ -119,7 +119,7 @@ def recall_fact(collection, query):
 ---
 
 ## 💰 12. Cost Considerations
-- **Managed Vector DBs:** Pinecone/Weaviate can be expensive. For low budget, use **Postgres + pgvector** on a standard server.
+- **Managed Vector DBs:** Pinecone/Weaviate expensive ho sakte hain. Low budget ke liye standard server par **Postgres + pgvector** use karein.
 
 ---
 
@@ -137,9 +137,9 @@ def recall_fact(collection, query):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **ColBERT / Multi-vector retrieval:** Each token is a vector, allowing for much more granular "Token-level" similarity.
-- **Graph-Vector Hybrid:** Linking vector memories into a Graph so the agent can traverse from one memory to a "Related" one.
+- **ColBERT / Multi-vector retrieval:** Har token ek vector hota hai, jisse much more granular "Token-level" similarity possible hoti hai.
+- **Graph-Vector Hybrid:** Vector memories ko Graph me link karna taaki agent ek memory se "Related" memory tak traverse kar sake.
 
 ---
 
-> **Expert Tip:** Vector memory is the **Search Engine** of the agent's brain. Without it, the agent is restricted to only what it can "Attentively" hold in its context window.
+> **Expert Tip:** Vector memory agent ke brain ka **Search Engine** hai. Iske bina agent sirf wahi tak restricted hai jo wo apne context window me "Attentively" hold kar sakta hai.

@@ -1,69 +1,69 @@
-# Agentic AI: Building Autonomous Intelligent Systems
+# Agentic AI: Autonomous Intelligent Systems Banana
 
-This folder focuses on the next frontier of AI: **Autonomous Agents**. It covers the transition from simple chat interfaces to agentic workflows where LLMs can plan, reason, use tools, and collaborate in multi-agent environments.
+Ye folder AI ke next frontier par focus karta hai: **Autonomous Agents**. Isme simple chat interfaces se agentic workflows tak ka transition cover hota hai jahan LLMs plan kar sakte hain, reason kar sakte hain, tools use kar sakte hain, aur multi-agent environments me collaborate kar sakte hain.
 
-## 🧠 What You Will Learn
+## ðŸ§  Aap Kya Seekhenge
 
-- **Agent Fundamentals**: The core architecture of an AI agent (Perception, Reasoning, Action).
-- **Tool Use & Function Calling**: Enabling LLMs to interact with APIs, databases, and code.
-- **Planning & Reasoning**: ReAct, Chain-of-Thought, and advanced planning strategies.
-- **Agent Memory & State**: Long-term vs. Short-term memory and state management.
-- **Multi-Agent Orchestration**: Coordinating multiple specialized agents for complex tasks.
-- **Agentic RAG**: Retrieval systems that use agents to improve accuracy and context.
-- **LangChain & LangGraph**: Mastering the industry-standard frameworks for building agents.
-- **Production Architecture**: Scaling and monitoring autonomous agent systems.
-- **Real-Time Agents**: Voice agents and low-latency interaction models.
+- **Agent Fundamentals**: Ek AI agent ki core architecture (Perception, Reasoning, Action).
+- **Tool Use & Function Calling**: LLMs ko APIs, databases, aur code ke saath interact karne layak banana.
+- **Planning & Reasoning**: ReAct, Chain-of-Thought, aur advanced planning strategies.
+- **Agent Memory & State**: Long-term vs. Short-term memory aur state management.
+- **Multi-Agent Orchestration**: Complex tasks ke liye multiple specialized agents ko coordinate karna.
+- **Agentic RAG**: Retrieval systems jo accuracy aur context improve karne ke liye agents use karte hain.
+- **LangChain & LangGraph**: Agents banane ke liye industry-standard frameworks par mastery.
+- **Production Architecture**: Autonomous agent systems ko scale aur monitor karna.
+- **Real-Time Agents**: Voice agents aur low-latency interaction models.
 
-## 💼 Career Roles
+## ðŸ’¼ Career Roles
 
-After completing this folder, you can prepare for:
+Is folder ko complete karne ke baad, aap in roles ke liye prepare kar sakte hain:
 - **Agentic AI Engineer**
 - **AI Solutions Architect**
 - **Autonomous Systems Developer**
 - **Generative AI Lead**
 - **AI Agent Product Manager**
 
-## 📂 Folder Structure
+## ðŸ“‚ Folder Structure
 
-- **[00_Foundations](00_Foundations/)**: Core concepts of agency and autonomy.
-- **[01_Agent_Fundamentals](01_Agent_Fundamentals/)**: The basic loop of an AI agent.
-- **[02_Prompting_and_Context](02_Prompting_and_Context/)**: Advanced prompting for agentic behavior.
-- **[03_Tool_Use_and_Function_Calling](03_Tool_Use_and_Function_Calling/)**: Connecting LLMs to the real world.
-- **[04_Agent_Memory_and_State](04_Agent_Memory_and_State/)**: Remembering user preferences and history.
-- **[05_Planning_and_Reasoning](05_Planning_and_Reasoning/)**: How agents solve multi-step problems.
-- **[06_Agent_Workflows](06_Agent_Workflows/)**: Designing deterministic and autonomous loops.
-- **[07_RAG_and_Agentic_RAG](07_RAG_and_Agentic_RAG/)**: Agents that research and retrieve data.
-- **[08_Multi_Agent_Systems](08_Multi_Agent_Systems/)**: Swarms, hierarchical, and collaborative agents.
+- **[00_Foundations](00_Foundations/)**: Agency aur autonomy ke core concepts.
+- **[01_Agent_Fundamentals](01_Agent_Fundamentals/)**: Ek AI agent ka basic loop.
+- **[02_Prompting_and_Context](02_Prompting_and_Context/)**: Agentic behavior ke liye advanced prompting.
+- **[03_Tool_Use_and_Function_Calling](03_Tool_Use_and_Function_Calling/)**: LLMs ko real world se connect karna.
+- **[04_Agent_Memory_and_State](04_Agent_Memory_and_State/)**: User preferences aur history ko remember karna.
+- **[05_Planning_and_Reasoning](05_Planning_and_Reasoning/)**: Agents multi-step problems kaise solve karte hain.
+- **[06_Agent_Workflows](06_Agent_Workflows/)**: Deterministic aur autonomous loops design karna.
+- **[07_RAG_and_Agentic_RAG](07_RAG_and_Agentic_RAG/)**: Agents jo research karte hain aur data retrieve karte hain.
+- **[08_Multi_Agent_Systems](08_Multi_Agent_Systems/)**: Swarms, hierarchical, aur collaborative agents.
 - **[09_LangChain_and_LangGraph](09_LangChain_and_LangGraph/)**: Advanced framework mastery.
-- **[10_Agent_Protocols](10_Agent_Protocols/)**: MCP (Model Context Protocol) and agent communication.
-- **[11_Agent_Evaluation_and_Observability](11_Agent_Evaluation_and_Observability/)**: Monitoring agentic success.
-- **[12_Agent_Security_and_Guardrails](12_Agent_Security_and_Guardrails/)**: Preventing prompt injection and unauthorized actions.
-- **[13_Production_Architecture](13_Production_Architecture/)**: Building resilient agent backends.
-- **[14_Deployment_and_Scaling](14_Deployment_and_Scaling/)**: Moving from prototype to production.
+- **[10_Agent_Protocols](10_Agent_Protocols/)**: MCP (Model Context Protocol) aur agent communication.
+- **[11_Agent_Evaluation_and_Observability](11_Agent_Evaluation_and_Observability/)**: Agentic success ko monitor karna.
+- **[12_Agent_Security_and_Guardrails](12_Agent_Security_and_Guardrails/)**: Prompt injection aur unauthorized actions ko prevent karna.
+- **[13_Production_Architecture](13_Production_Architecture/)**: Resilient agent backends banana.
+- **[14_Deployment_and_Scaling](14_Deployment_and_Scaling/)**: Prototype se production tak move karna.
 - **[15_Real_Time_and_Voice_Agents](15_Real_Time_and_Voice_Agents/)**: Interactive conversational agents.
 - **[16_Production_Projects](16_Production_Projects/)**: Hands-on agentic system builds.
-- **[17_Interview_Preparation](17_Interview_Preparation/)**: Cracking AI Agent engineering roles.
+- **[17_Interview_Preparation](17_Interview_Preparation/)**: AI Agent engineering roles crack karna.
 
-## 📋 Recommended Prerequisites
+## ðŸ“‹ Recommended Prerequisites
 
-Before starting:
-- **[llm_learning](../llm_learning/)**: Deep understanding of LLM capabilities and limitations.
-- Proficiency in **Python** (Async/Await is critical).
-- Experience with **REST APIs** and **JSON**.
-- Basic understanding of **State Machines**.
+Start karne se pehle:
+- **[llm_learning](../llm_learning/)**: LLM capabilities aur limitations ki deep understanding.
+- **Python** me proficiency (Async/Await critical hai).
+- **REST APIs** aur **JSON** ke saath experience.
+- **State Machines** ki basic understanding.
 
-## 🎯 Final Outcome
+## ðŸŽ¯ Final Outcome
 
-After completing this folder, you should be able to:
-- ✅ Build complex autonomous agents that use multiple tools.
-- ✅ Implement multi-agent systems using LangGraph and Autogen.
-- ✅ Design robust state and memory systems for persistent agents.
-- ✅ Debug and optimize agentic reasoning traces.
-- ✅ Deploy production-grade AI agents with safety guardrails.
+Is folder ko complete karne ke baad, aap ye kar paane chahiye:
+- âœ… Complex autonomous agents build karna jo multiple tools use karte hain.
+- âœ… LangGraph aur Autogen use karke multi-agent systems implement karna.
+- âœ… Persistent agents ke liye robust state aur memory systems design karna.
+- âœ… Agentic reasoning traces ko debug aur optimize karna.
+- âœ… Safety guardrails ke saath production-grade AI agents deploy karna.
 
-## 🔗 Recommended Next Learning Paths
+## ðŸ”— Recommended Next Learning Paths
 
-After this folder:
-- **[ai_agents_learning](../ai_agents_learning/)**: For deep cognitive agent architectures.
-- **[system_design](../system_design/)**: To build the infra for agentic swarms.
-- **[security](../security/)**: To secure autonomous AI actions.
+Is folder ke baad:
+- **[ai_agents_learning](../ai_agents_learning/)**: Deep cognitive agent architectures ke liye.
+- **[system_design](../system_design/)**: Agentic swarms ke liye infra build karne ke liye.
+- **[security](../security/)**: Autonomous AI actions ko secure karne ke liye.
