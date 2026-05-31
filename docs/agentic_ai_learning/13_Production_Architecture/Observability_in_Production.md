@@ -16,18 +16,18 @@ Jab aapka agent production mein hai, toh aap use 24/7 check nahi kar sakte.
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Monitoring agents requires a three-pillar approach: **Metrics**, **Logs**, and **Traces**.
+Agents ko monitor karne ke liye three-pillar approach ki zaroorat hoti hai: **Metrics**, **Logs**, aur **Traces**.
 1. **Metrics (Quantitative):**
-    - **P99 Latency:** Time taken by the slowest 1% of requests.
-    - **Token Burn Rate:** Cost monitoring in real-time.
-    - **Success/Failure Rate:** % of tasks successfully completed.
+    - **P99 Latency:** Sabse slow 1% requests dwara liya gaya time.
+    - **Token Burn Rate:** Real-time mein cost monitoring.
+    - **Success/Failure Rate:** Successfully completed tasks ka %.
 2. **Logs (Qualitative):**
-    - **Raw LLM Inputs/Outputs:** Saving exactly what was sent and received (Sanitized).
+    - **Raw LLM Inputs/Outputs:** Exactly jo sent aur received hua use save karna (Sanitized).
     - **System Events:** Worker starts, database timeouts, tool failures.
 3. **Traces (Logical):**
-    - **Chain-of-Thought Tracing:** visualizing every node jump in LangGraph.
-    - **Tool Traces:** Measuring how much time was spent inside a specific tool API.
-4. **Tools:** **Prometheus/Grafana** for metrics, **ELK Stack** for logs, and **LangSmith/Arize Phoenix** for agent-specific tracing.
+    - **Chain-of-Thought Tracing:** LangGraph mein har node jump ko visualize karna.
+    - **Tool Traces:** Specific tool API ke andar kitna time spend hua use measure karna.
+4. **Tools:** Metrics ke liye **Prometheus/Grafana**, logs ke liye **ELK Stack**, aur agent-specific tracing ke liye **LangSmith/Arize Phoenix**.
 
 ---
 
@@ -67,49 +67,49 @@ def run_agent(query):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Cost Alerting:** If the daily spend crosses $100, send a Slack alert immediately.
-- **Accuracy Monitoring:** Automatically running RAGAS on a 1% sample of live traffic to check for quality "Drift".
-- **Debugging Customer Reports:** If a user says "The bot is slow", checking the P99 latency charts to see if it's a systemic issue.
+- **Cost Alerting:** Agar daily spend $100 cross kare, toh immediately Slack alert bhejein.
+- **Accuracy Monitoring:** Quality "Drift" check karne ke liye live traffic ke 1% sample par automatically RAGAS run karna.
+- **Debugging Customer Reports:** Agar user kahe "The bot is slow", toh check karein P99 latency charts taaki dekh sakein ki kya ye ek systemic issue hai.
 
 ---
 
 ## ❌ 6. Failure Cases
-- **Metric Explosion:** Creating too many custom labels in Prometheus, causing it to crash.
-- **Log Overflow:** Millions of "Debug" logs filling up the disk in production.
-- **Blind Spots:** Monitoring the LLM but forgetting to monitor the database or tool API health.
+- **Metric Explosion:** Prometheus mein bahut saare custom labels create karna, jisse ye crash ho jaye.
+- **Log Overflow:** Production mein disk ko fill karne wale millions of "Debug" logs.
+- **Blind Spots:** LLM ko monitor karna par database ya tool API health ko monitor karna bhool jana.
 
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Correlation IDs:** Link your traces to your logs using a shared ID.
-- **Alert Fatigue:** Set alerts only for "Actionable" issues. Don't alert for every small error.
+- **Correlation IDs:** Ek shared ID ka use karke apne traces ko logs se link karein.
+- **Alert Fatigue:** Alerts sirf "Actionable" issues ke liye hi set karein. Har small error par alert na karein.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Full Observability:** 100% visibility but high cost and slight performance hit.
-- **Minimal Monitoring:** Fast and cheap but you are "Blind" when things fail.
+- **Full Observability:** 100% visibility par high cost aur slight performance hit.
+- **Minimal Monitoring:** Fast aur cheap hai par fail hone par aap "Blind" (andha) ho jate hain.
 
 ---
 
 ## ✅ 9. Best Practices
-- **Standardized Labels:** Use common labels like `model_name`, `user_id`, and `version` across all metrics.
-- **Retention Policies:** Delete detailed traces after 14-30 days to save storage costs.
+- **Standardized Labels:** Sabhi metrics ke across common labels jaise `model_name`, `user_id`, aur `version` ka use karein.
+- **Retention Policies:** Storage costs bachane ke liye 14-30 days ke baad detailed traces delete karein.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **PII in Traces:** Ensure that sensitive information is "Masked" before it's sent to the observability platform (LangSmith/Datadog).
+- **PII in Traces:** Observability platform (LangSmith/Datadog) par bhejne se pehle ensure karein ki sensitive information "Masked" ho.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Log Aggregation:** Millions of logs per second require specialized clusters like **Kafka** to handle the data stream.
+- **Log Aggregation:** Per second millions of logs ko handle karne ke liye data stream ke liye **Kafka** jaise specialized clusters ki zaroorat hoti hai.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Datadog/SaaS Bills:** Observability services can sometimes cost more than the LLM itself! Use open-source self-hosted alternatives (Grafana/Mimir) for high traffic.
+- **Datadog/SaaS Bills:** Observability services kabhi-kabhi LLM se bhi zyada expensive ho sakti hain! High traffic ke liye open-source self-hosted alternatives (Grafana/Mimir) use karein.
 
 ---
 
@@ -121,8 +121,8 @@ def run_agent(query):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **LLM-Guided Observability:** An AI that watches your metrics and automatically suggests architectural changes to improve speed or cost.
-- **Semantic Monitoring:** Alerts that trigger if the agent starts sounding "Rude" or "Confused" even if the technical metrics are green.
+- **LLM-Guided Observability:** Ek AI jo aapke metrics ko watch karta hai aur speed ya cost ko improve karne ke liye automatically architectural changes suggest karta hai.
+- **Semantic Monitoring:** Alerts jo tab trigger hote hain agar agent "Rude" ya "Confused" sound karne lage bhale hi technical metrics green hon.
 
 ---
 

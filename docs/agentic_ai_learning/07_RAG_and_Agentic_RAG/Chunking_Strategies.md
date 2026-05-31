@@ -15,12 +15,12 @@ Chunking humein batata hai ki kaise hum documents ko sahi size mein kaatein taak
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Chunking is the most underrated part of RAG. It determines the **Semantic Density** of your vectors.
-- **Fixed-size Chunking:** Splitting by character count (e.g., 500 chars). Simple but breaks sentences mid-way.
-- **Recursive Character Splitting:** Splitting by hierarchy (Paragraphs → Sentences → Words). This keeps related text together.
-- **Semantic Chunking:** Using an LLM or Embedding model to find "Natural breaks" in meaning. If the topic changes, start a new chunk.
-- **Overlap:** Keeping 10-20% of the previous chunk at the start of the next one. This ensures that the context at the "Edges" isn't lost.
-- **Token-based Chunking:** Splitting based on LLM tokens to ensure chunks fit perfectly into the model's budget.
+Chunking RAG ka sabse underrated part hai. Ye aapke vectors ki **Semantic Density** ko determine karta hai.
+- **Fixed-size Chunking:** Character count (e.g., 500 chars) ke basis par split karna. Simple hai par sentences ko beech mein break kar deta hai.
+- **Recursive Character Splitting:** Hierarchy (Paragraphs → Sentences → Words) ke basis par split karna. Ye related text ko ek sath rakhta hai.
+- **Semantic Chunking:** Meaning mein "Natural breaks" dhoondhne ke liye LLM ya Embedding model ka use karna. Agar topic change hota hai, toh naya chunk start karein.
+- **Overlap:** Agle chunk ke start mein pichle chunk ka 10-20% rakhna. Ye ensure karta hai ki "Edges" par context loss na ho.
+- **Token-based Chunking:** Chunks ko model ke budget mein perfectly fit karne ke liye LLM tokens ke basis par split karna.
 
 ---
 
@@ -63,9 +63,9 @@ print(f"First Chunk: {chunks[0]}")
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Markdown Docs:** Chunking by headers (`#`, `##`) to keep sections intact.
-- **Code Repositories:** Chunking by functions or classes so the logic isn't split across chunks.
-- **Financial Reports:** Chunking by tables or quarters.
+- **Markdown Docs:** Sections ko intact rakhne ke liye headers (`#`, `##`) ke basis par chunking karna.
+- **Code Repositories:** Functions ya classes ke basis par chunking karna taaki logic chunks mein split na ho.
+- **Financial Reports:** Tables ya quarters ke basis par chunking karna.
 
 ---
 
@@ -83,8 +83,8 @@ print(f"First Chunk: {chunks[0]}")
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Small Chunks:** High precision but might lose the "Big Picture".
-- **Large Chunks:** Better context but high token cost and more noise.
+- **Small Chunks:** High precision par ho sakta hai ki "Big Picture" lose ho jaye.
+- **Large Chunks:** Better context par high token cost aur zyada noise.
 
 ---
 
@@ -123,8 +123,8 @@ print(f"First Chunk: {chunks[0]}")
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Late Interaction Chunking:** Models that generate multiple embeddings per chunk to capture different "Meanings".
-- **Contextual Chunking:** Pre-pending every chunk with a 1-sentence global summary of the parent document.
+- **Late Interaction Chunking:** Aise models jo different "Meanings" ko capture karne ke liye per chunk multiple embeddings generate karte hain.
+- **Contextual Chunking:** Har chunk ke aage parent document ki 1-sentence global summary lagana.
 
 ---
 

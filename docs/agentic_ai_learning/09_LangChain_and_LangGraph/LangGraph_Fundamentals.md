@@ -15,14 +15,14 @@ Ye 2026 mein agents banane ka **Industry Standard** hai kyunki ye aapko "Fine-gr
 ---
 
 ## 🧠 2. Deep Technical Explanation
-LangGraph is a library for building stateful, multi-actor applications with LLMs.
-- **The State:** A shared dictionary or Pydantic object that represents the current world-view. Every node in the graph reads from and writes to this state.
-- **Nodes:** Simple Python functions that take the state, do some work (like calling an LLM), and return the updated state.
-- **Edges:** Define the transition between nodes.
-    - **Normal Edges:** Always go from A to B.
-    - **Conditional Edges:** Use an LLM to decide whether to go to B, C, or END.
-- **Cycles:** The ability to loop back to a previous node. This is what enables "Self-correction" and "Iterative Search".
-- **Compilation:** Converting the graph into a "Runnable" that can be invoked like any other LangChain component.
+LangGraph LLMs ke sath stateful, multi-actor applications build karne ke liye ek library hai.
+- **The State:** Ek shared dictionary ya Pydantic object jo current world-view ko represent karta hai. Graph ka har node is state se read aur write karta hai.
+- **Nodes:** Simple Python functions jo state ko lete hain, kuch kaam karte hain (jaise LLM call karna), aur updated state return karte hain.
+- **Edges:** Nodes ke beech transition ko define karte hain.
+    - **Normal Edges:** Humesha A se B ki taraf jate hain.
+    - **Conditional Edges:** Ye decide karne ke liye LLM ka use karte hain ki B, C ya END par jana hai.
+- **Cycles:** Pichle node par wapas loop back karne ki ability. Yahi "Self-correction" aur "Iterative Search" ko enable karta hai.
+- **Compilation:** Graph ko ek "Runnable" mein convert karna jise kisi bhi doosre LangChain component ki tarah invoke kiya ja sake.
 
 ---
 
@@ -70,9 +70,9 @@ graph = builder.compile()
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Self-Correcting Code Agents:** Node A writes code, Node B runs tests. If tests fail, it goes back to Node A.
-- **Research Agents:** Searching for info in a loop until enough data is collected.
-- **Multi-step Reasoning:** Breaking a complex math problem into nodes for each logical step.
+- **Self-Correcting Code Agents:** Node A code likhta hai, Node B tests run karta hai. Agar tests fail ho jayein, toh ye wapas Node A par chala jata hai.
+- **Research Agents:** Ek loop mein info search karna jab tak enough data collect na ho jaye.
+- **Multi-step Reasoning:** Ek complex math problem ko har logical step ke liye nodes mein break karna.
 
 ---
 
@@ -84,14 +84,14 @@ graph = builder.compile()
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Breakpoint Debugging:** LangGraph allows you to set "Interrupts" at any node to inspect the state.
-- **Visualizer:** Use `graph.get_graph().draw_mermaid()` to see if your logic matches your drawing.
+- **Breakpoint Debugging:** LangGraph aapko state inspect karne ke liye kisi bhi node par "Interrupts" set karne deta hai.
+- **Visualizer:** `graph.get_graph().draw_mermaid()` use karke dekhein ki kya aapka logic aapki drawing se match karta hai.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **LangGraph:** Perfect for complex, iterative, and stateful agents.
-- **LangChain Chains:** Better for simple, one-off tasks without loops.
+- **LangGraph:** Complex, iterative, aur stateful agents ke liye perfect hai.
+- **LangChain Chains:** Loops ke bina simple, one-off tasks ke liye better hai.
 
 ---
 
@@ -112,7 +112,7 @@ graph = builder.compile()
 ---
 
 ## 💰 12. Cost Considerations
-- **Turn-based Billing:** Every edge transition is a potential LLM call. Monitor the number of "Hops" per query.
+- **Turn-based Billing:** Har edge transition ek potential LLM call hai. Per query "Hops" ke number ko monitor karein.
 
 ---
 
@@ -130,8 +130,8 @@ graph = builder.compile()
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Human-in-the-loop Graphs:** Graphs that automatically pause at a specific node and wait for a human to click "Approve" before continuing.
-- **Graph as a Service:** Deploying agentic graphs as independent microservices.
+- **Human-in-the-loop Graphs:** Aise graphs jo automatically ek specific node par pause ho jate hain aur aage badhne se pehle human dwara "Approve" click karne ka wait karte hain.
+- **Graph as a Service:** Agentic graphs ko independent microservices ke roop mein deploy karna.
 
 ---
 

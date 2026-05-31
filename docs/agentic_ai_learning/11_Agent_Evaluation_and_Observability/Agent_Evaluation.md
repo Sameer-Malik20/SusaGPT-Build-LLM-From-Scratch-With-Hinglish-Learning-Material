@@ -16,18 +16,18 @@ Evaluation humein confidence deta hai ki humara AI production mein "Dhamaka" nah
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Evaluation in agentic systems is divided into **Output metrics** and **Process metrics**.
+Agentic systems mein evaluation ko **Output metrics** aur **Process metrics** mein divide kiya jata hai.
 1. **Output Metrics:**
-    - **Exact Match / F1:** For deterministic answers.
-    - **Semantic Similarity:** Using embeddings (Cosine similarity) to check if the meaning matches.
-    - **LLM-as-a-Judge:** Using a stronger model (GPT-4) to grade the response on a scale of 1-5.
+    - **Exact Match / F1:** Deterministic answers ke liye.
+    - **Semantic Similarity:** Meaning match karta hai ya nahi ye check karne ke liye embeddings (Cosine similarity) ka use karna.
+    - **LLM-as-a-Judge:** Response ko 1-5 ke scale par grade karne ke liye ek stronger model (GPT-4) ka use karna.
 2. **Process Metrics (Agentic specific):**
-    - **Pass@k:** Probability that at least one of top $k$ generated responses is correct.
-    - **Success Rate:** % of times the final state matches the goal.
-    - **Avg Steps per Task:** Efficiency metric. Lower is usually better.
+    - **Pass@k:** Probability ki top $k$ generated responses mein se kam se kam ek correct ho.
+    - **Success Rate:** % of times jab final state goal se match karti hai.
+    - **Avg Steps per Task:** Efficiency metric. Lower aamtaur par better hota hai.
 3. **Hallucination Detection:**
-    - **Self-Consistency:** Running the same prompt 3 times and checking if the answer is the same.
-    - **NLI (Natural Language Inference):** Checking if the answer is logically supported by the retrieved context.
+    - **Self-Consistency:** Same prompt ko 3 times run karna aur check karna ki kya answer same hai.
+    - **NLI (Natural Language Inference):** Check karna ki kya answer retrieved context dwara logically supported hai.
 
 ---
 
@@ -62,9 +62,9 @@ def calculate_success_rate(test_results):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Customer Support:** Ensuring the bot doesn't give wrong refund information.
-- **E-commerce:** Verifying that the agent adds the *correct* items to the cart every time.
-- **Coding Assistants:** Checking if the generated code actually runs and passes unit tests.
+- **Customer Support:** Ensure karna ki bot wrong refund information na de.
+- **E-commerce:** Verify karna ki agent har baar cart mein *correct* items add kare.
+- **Coding Assistants:** Check karna ki kya generated code actually run hota hai aur unit tests pass karta hai.
 
 ---
 
@@ -82,9 +82,9 @@ def calculate_success_rate(test_results):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Human Eval:** 100% Accurate but slow and expensive.
-- **AI Eval:** 90% Accurate, fast, and cheap.
-- **Deterministic Eval:** 100% Fast but can't handle creative answers.
+- **Human Eval:** 100% Accurate par slow aur expensive.
+- **AI Eval:** 90% Accurate, fast, aur cheap.
+- **Deterministic Eval:** 100% Fast par creative answers ko handle nahi kar sakta.
 
 ---
 
@@ -105,7 +105,7 @@ def calculate_success_rate(test_results):
 ---
 
 ## 💰 12. Cost Considerations
-- **Judge Model:** Use `gpt-4o-mini` as a judge for cost-effectiveness instead of full `gpt-4o`.
+- **Judge Model:** Full `gpt-4o` ke bajaye cost-effectiveness ke liye `gpt-4o-mini` ko judge ke roop mein use karein.
 
 ---
 
@@ -117,8 +117,8 @@ def calculate_success_rate(test_results):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Continuous Evaluation:** Evals running in the background of production 24/7.
-- **Simulation-based Evals:** Putting the agent in a virtual "Sandbox" and watching it solve tasks.
+- **Continuous Evaluation:** Production ke background mein 24/7 chalne wale evals.
+- **Simulation-based Evals:** Agent ko ek virtual "Sandbox" mein rakhna aur use tasks solve karte hue dekhna.
 
 ---
 

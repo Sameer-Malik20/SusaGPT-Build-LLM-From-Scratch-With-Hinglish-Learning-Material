@@ -15,12 +15,12 @@ Isse aapka agent 10,000 users ko ek saath handle kar sakta hai bina hang huye.
 ---
 
 ## 🧠 2. Deep Technical Explanation
-FastAPI is built on **Starlette** (for web) and **Pydantic** (for data validation).
-1. **Async/Await:** Leveraging Python's `asyncio` to handle long-running LLM calls without blocking the main event loop.
-2. **Pydantic Validation:** Automatically checking if the user's input (JSON) matches the required format (e.g. `query` must be a string).
-3. **Auto-Generated Docs:** Every FastAPI app comes with built-in Swagger UI (`/docs`) to test your agent.
-4. **Streaming Responses:** Sending the LLM's output token-by-token (Streaming) to the frontend using `StreamingResponse`.
-5. **Background Tasks:** Finishing a request and then running a heavy task (like saving to a DB) in the background.
+FastAPI **Starlette** (web ke liye) aur **Pydantic** (data validation ke liye) par built hai.
+1. **Async/Await:** Main event loop ko block kiye bina long-running LLM calls ko handle karne ke liye Python ke `asyncio` ka fayda uthana.
+2. **Pydantic Validation:** User input (JSON) required format (e.g. `query` string hona chahiye) se match karta hai ya nahi ye automatically check karna.
+3. **Auto-Generated Docs:** Har FastAPI app ke sath built-in Swagger UI (`/docs`) aata hai taaki aap apne agent ko test kar sakein.
+4. **Streaming Responses:** `StreamingResponse` ka use karke LLM ke output ko token-by-token (Streaming) frontend par bhejna.
+5. **Background Tasks:** Request finish karna aur fir background mein ek heavy task (jaise DB mein save karna) run karna.
 
 ---
 
@@ -59,9 +59,9 @@ async def chat(query: str):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Real-time Chatbots:** Where users expect to see characters appearing one-by-one.
-- **Enterprise Middleware:** A central API that takes requests and routes them to different specialized agents.
-- **Mobile Apps:** Serving AI features to iOS/Android apps with low overhead.
+- **Real-time Chatbots:** Jahan users expect karte hain ki characters ek-ek karke appear hon.
+- **Enterprise Middleware:** Ek central API jo requests leta hai aur unhe different specialized agents par route karta hai.
+- **Mobile Apps:** Low overhead ke sath iOS/Android apps ko AI features serve karna.
 
 ---
 
@@ -74,35 +74,35 @@ async def chat(query: str):
 
 ## 🛠️ 7. Debugging Guide
 - **Uvicorn Logs:** Check karein "Worker restarts" or "Timeouts".
-- **Swagger UI:** Use `http://localhost:8000/docs` to verify your API inputs and outputs.
+- **Swagger UI:** Apne API inputs aur outputs verify karne ke liye `http://localhost:8000/docs` use karein.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **FastAPI:** Extreme performance and modern features, but requires understanding of `async/await`.
-- **Flask:** Very simple to learn but not suitable for high-performance streaming or long-running AI tasks.
+- **FastAPI:** Extreme performance aur modern features, par iske liye `async/await` ki samajh zaroorat hoti hai.
+- **Flask:** Seekhna bahut simple hai par high-performance streaming ya long-running AI tasks ke liye suitable nahi hai.
 
 ---
 
 ## ✅ 9. Best Practices
-- **Use Dependency Injection:** Manage database sessions and API keys cleanly.
-- **Error Handling:** Use `HTTPException` to return clear error messages like "Invalid API Key" or "Agent Timeout".
+- **Use Dependency Injection:** Database sessions aur API keys ko cleanly manage karein.
+- **Error Handling:** "Invalid API Key" ya "Agent Timeout" jaise clear error messages return karne ke liye `HTTPException` use karein.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **CORS:** Ensure only your frontend website can talk to your API.
-- **Input Sanitization:** Preventing malicious code or prompts from being injected via the API body.
+- **CORS:** Ensure karein ki sirf aapki frontend website hi aapki API se baat kar sake.
+- **Input Sanitization:** API body ke through malicious code ya prompts inject hone se rokna.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Worker Processes:** Use `gunicorn` with `uvicorn` workers to utilize all CPU cores of your server.
+- **Worker Processes:** Apne server ke sabhi CPU cores utilize karne ke liye `gunicorn` with `uvicorn` workers use karein.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Small Footprint:** FastAPI uses very little RAM, meaning you can run it on the cheapest $5/month cloud servers.
+- **Small Footprint:** FastAPI bahut kam RAM use karta hai, jiska matlab hai ki aap ise sabse saste $5/month cloud servers par bhi run kar sakte hain.
 
 ---
 
@@ -114,8 +114,8 @@ async def chat(query: str):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **FastAPI + WebSockets:** For high-speed, two-way voice and text agents.
-- **Automatic SDK Generation:** Using the FastAPI schema to automatically generate a TypeScript client for your frontend.
+- **FastAPI + WebSockets:** High-speed, two-way voice aur text agents ke liye.
+- **Automatic SDK Generation:** Frontend ke liye automatically TypeScript client generate karne ke liye FastAPI schema ka use karna.
 
 ---
 

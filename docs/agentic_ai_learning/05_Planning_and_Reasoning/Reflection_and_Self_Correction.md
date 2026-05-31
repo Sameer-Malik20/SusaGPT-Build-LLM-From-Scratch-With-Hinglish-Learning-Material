@@ -16,12 +16,12 @@ Isse AI ki reliability 50% tak badh sakti hai kyunki wo apni "Hallucinations" kh
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Reflection is a **Dual-Node Architecture** in a state graph.
-- **Generator Node:** Takes the input and generates an initial response or code.
-- **Reflector Node:** Takes the Generator's output and evaluates it against a set of constraints (rubric).
-- **Corrective Loop:** If the Reflector finds issues, it sends a "Critique" back to the Generator. The Generator then re-runs with the critique as additional context.
-- **State Tracking:** In LangGraph, we keep a `revision_count` to ensure the agent doesn't loop forever.
-- **Verification Nodes:** Sometimes a third node (The Auditor) is used to perform external checks (e.g., "Does this generated code actually compile?").
+Reflection state graph mein ek **Dual-Node Architecture** hai.
+- **Generator Node:** Input leta hai aur initial response ya code generate karta hai.
+- **Reflector Node:** Generator ke output ko leta hai aur use constraints (rubric) ke against evaluate karta hai.
+- **Corrective Loop:** Agar Reflector ko issues milte hain, toh wo Generator ko wapas ek "Critique" bhejta hai. Generator phir critique ko additional context ki tarah use karke re-run karta hai.
+- **State Tracking:** LangGraph mein, hum ek `revision_count` rakhte hain taaki ensure kiya ja sake ki agent infinite loop mein na chala jaye.
+- **Verification Nodes:** Kabhi-kabhi external checks perform karne ke liye ek teesra node (The Auditor) use kiya jata hai (e.g., "Kya ye generated code actually compile hota hai?").
 
 ---
 
@@ -82,26 +82,26 @@ def run_reflection_cycle(query: str):
 
 ## 🌍 5. Real-World Use Cases
 - **Coding Assistants:** Agent code likhta hai, error message dekhta hai (Reflection), aur code fix karta hai.
-- **Legal Summarizers:** Checking if the summary missed any mandatory clauses.
-- **Data Analysts:** Verifying if the calculated average matches the sum/count.
+- **Legal Summarizers:** Check karna ki kya summary mein koi mandatory clauses miss toh nahi ho gaye.
+- **Data Analysts:** Verify karna ki kya calculated average sum/count se match karta hai.
 
 ---
 
 ## ❌ 6. Failure Cases
 - **Yes-man Problem:** Reflector node hamesha bolta hai "Looks great!" kyunki use galti pakadna nahi aata (Lack of critical thinking).
 - **Hallucinated Critique:** Reflector aisi galtiyan nikalta hai jo exist hi nahi karti, jisse original "Sahi" answer bhi kharab ho jata hai.
-- **Infinite Revision:** Agent ek word change karta hai, Reflector phir galti nikalta hai, and so on.
+- **Infinite Revision:** Agent ek word change karta hai, Reflector phir galti nikalta hai, aur ye chalta rehta hai.
 
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Analyze the Critique:** Kya critique specific hai? (e.g., "Line 5 has a syntax error") vs Generic ("Make it better").
+- **Analyze the Critique:** Kya critique specific hai? (e.g., "Line 5 mein syntax error hai") vs Generic ("Ise aur behtar banao").
 - **State History:** LangGraph mein check karein ki har revision ke saath accuracy badh rahi hai ya nahi.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Reliability:** Highest accuracy for logic-heavy tasks.
+- **Reliability:** Logic-heavy tasks ke liye highest accuracy.
 - **Latency/Cost:** Har turn double token aur double time leta hai.
 
 ---

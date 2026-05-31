@@ -87,12 +87,12 @@ def resolve_conflict(agent_a_res: dict, agent_b_res: dict):
 
 ## ⚖️ 8. Tradeoffs
 - **Voting/Arbitration:** Very high accuracy but very high token cost (Multiple agents + Judge).
-- **Static Rules:** Fast and cheap but can't handle complex semantic conflicts.
+- **Static Rules:** Fast aur cheap par complex semantic conflicts handle nahi kar sakte.
 
 ---
 
 ## ✅ 9. Best Practices
-- **Tie-breaker Rules:** Humesha ek default rasta rakhein agar sab agents disagree karein.
+- **Tie-breaker Rules:** Hamesha ek default rasta rakhein agar sab agents disagree karein.
 - **Fact-over-Reasoning:** Data-driven agents ko preference dein over reasoning-only agents.
 
 ---
@@ -108,7 +108,7 @@ def resolve_conflict(agent_a_res: dict, agent_b_res: dict):
 ---
 
 ## 💰 12. Cost Considerations
-- **Redundancy Pricing:** Conflict resolution is expensive. Only use it for "Mission Critical" decisions.
+- **Redundancy Pricing:** Conflict resolution expensive hai. Sirf "Mission Critical" decisions ke liye hi iska use karein.
 
 ---
 
@@ -126,8 +126,8 @@ def resolve_conflict(agent_a_res: dict, agent_b_res: dict):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Proof-of-Stake for Agents:** Agents placing "Token Bets" on their answers. If they are wrong, they lose reputation/priority.
-- **Nash Equilibrium in Agents:** Agents using Game Theory to find a solution that satisfies all constraints without a central judge.
+- **Proof-of-Stake for Agents:** Agents jo apne answers par "Token Bets" lagate hain. Agar wo galat hote hain, toh wo apni reputation/priority lose karte hain.
+- **Nash Equilibrium in Agents:** Agents jo central judge ke bina sabhi constraints ko satisfy karne wala solution dhoondhne ke liye Game Theory ka use karte hain.
 
 ---
 

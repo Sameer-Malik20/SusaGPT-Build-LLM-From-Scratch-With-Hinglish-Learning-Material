@@ -16,11 +16,11 @@ In failures ko samajhna zaruri hai taaki hum unhe **Guardrails** se rok sakein.
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Reasoning failures typically fall into four categories:
-1. **Logic Loops:** The agent's thought process enters a cycle where `Observation N` leads back to `Action 1`.
-2. **Context Saturation:** The "Lost-in-the-middle" effect where critical reasoning steps are buried in a large context window, leading to forgotten goals.
-3. **Knowledge Conflicts:** The agent's internal weights (pre-trained knowledge) conflict with the provided tool observations (e.g., Tool says price is $10, LLM "thinks" it should be $20).
-4. **Instruction Fatigue:** In long-running agents, the model gradually ignores the original "System Prompt" constraints.
+Reasoning failures typically chaar categories mein aate hain:
+1. **Logic Loops:** Agent ka thought process ek cycle mein chala jata hai jahan `Observation N` wapas `Action 1` ki taraf le jata hai.
+2. **Context Saturation:** "Lost-in-the-middle" effect jahan critical reasoning steps ek bade context window mein dab jate hain, jisse goals bhool jate hain.
+3. **Knowledge Conflicts:** Agent ke internal weights (pre-trained knowledge) aur provided tool observations ke beech conflict hona (e.g., Tool kehta hai price $10 hai, par LLM ko "lagta" hai ki $20 hona chahiye).
+4. **Instruction Fatigue:** Long-running agents mein, model gradually original "System Prompt" constraints ko ignore karne lagta hai.
 
 ---
 
@@ -62,8 +62,8 @@ class AgentMonitor:
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Customer Service:** Preventing the bot from repeatedly asking the user for the same "Account Number".
-- **Coding Agents:** Stopping the agent from trying the same buggy code fix over and over without changing strategy.
+- **Customer Service:** Bot ko user se baar-baar same "Account Number" poochne se rokna.
+- **Coding Agents:** Agent ko bina strategy change kiye baar-baar same buggy code fix try karne se rokna.
 
 ---
 
@@ -75,18 +75,18 @@ class AgentMonitor:
 
 ## 🛠️ 7. Debugging Guide
 - **Trace the 'Thought' vs 'Observation':** Agar thought logic ke against hai, toh problem System Prompt mein hai.
-- **Log Logits:** Check tokens probability to see if the model was "uncertain" during the failure step.
+- **Log Logits:** Tokens probability check karein taaki dekh sakein ki kya model failure step ke dauran "uncertain" tha.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Strict Monitoring:** Breaks loops but might stop valid complex multi-step processes.
-- **Relaxed Monitoring:** Allows complex tasks but wastes tokens on failures.
+- **Strict Monitoring:** Loops ko toh break karta hai par valid complex multi-step processes ko bhi rok sakta hai.
+- **Relaxed Monitoring:** Complex tasks allow karta hai par failures par tokens waste hote hain.
 
 ---
 
 ## ✅ 9. Best Practices
-- **Max Iterations:** Humesha `max_steps=10` set karein.
+- **Max Iterations:** Hamesha `max_steps=10` set karein.
 - **Self-Correction Checkpoints:** Har 5 steps ke baad agent se pucho: "Kya tum goal ke paas ja rahe ho?"
 
 ---
@@ -102,13 +102,13 @@ class AgentMonitor:
 ---
 
 ## 💰 12. Cost Considerations
-- **Failure Refund:** If an agent fails after 20 steps, you've already paid for 20 rounds of tokens. Prevention is 10x cheaper than recovery.
+- **Failure Refund:** Agar ek agent 20 steps ke baad fail hota hai, toh aap pehle hi 20 rounds of tokens ke liye pay kar chuke hain. Prevention recovery se 10x sasta hai.
 
 ---
 
 ## 📝 13. Interview Questions
 1. **"Reasoning drift ko kaise minimize karenge?"**
-2. **"Infinite loops in agents: Detection and Mitigation strategies?"**
+2. **"Agents mein infinite loops: Detection aur Mitigation strategies kya hain?"**
 3. **"Hallucination vs Reasoning error mein kya difference hai?"**
 
 ---
@@ -120,8 +120,8 @@ class AgentMonitor:
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Multi-Agent Sanity Check:** One agent works, another "Watchdog" agent monitors its reasoning steps and "Kills" the process if it detects a drift.
-- **Rule-based Reasoning Overrides:** Hard-coding "If/Else" logic for critical paths that agents are not allowed to deviate from.
+- **Multi-Agent Sanity Check:** Ek agent kaam karta hai, doosra "Watchdog" agent uske reasoning steps ko monitor karta hai aur drift detect hone par process ko "Kill" kar deta hai.
+- **Rule-based Reasoning Overrides:** Critical paths ke liye "If/Else" logic ko hard-code karna jisse agents deviate na ho sakein.
 
 ---
 

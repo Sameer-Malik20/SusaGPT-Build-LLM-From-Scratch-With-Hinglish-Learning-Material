@@ -18,14 +18,14 @@ Isse agent hamesha "Halka" (lightweight) rehta hai aur sirf wahi tool load karta
 ---
 
 ## 🧠 2. Deep Technical Explanation
-A tool registry system manages the lifecycle of tools: **Registration**, **Discovery**, and **Execution**.
-1. **Metadata Storage:** Storing tool names, descriptions, and JSON schemas for arguments (Pydantic models).
-2. **Semantic Search:** Using Vector Embeddings to find the right tool. 
+Ek tool registry system tools ki lifecycle ko manage karta hai: **Registration**, **Discovery**, aur **Execution**.
+1. **Metadata Storage:** Tool names, descriptions, aur arguments ke liye JSON schemas (Pydantic models) store karna.
+2. **Semantic Search:** Right tool dhoondhne ke liye Vector Embeddings ka use karna. 
     - Input: "Update my CRM". 
     - Registry finds: `update_salesforce_lead` tool.
-3. **Dynamic Loading:** The agent receives the tool definition at runtime and adds it to its capabilities.
-4. **Access Control:** Ensuring only authorized agents can access sensitive tools (e.g. `delete_db`).
-5. **Version Control:** Managing multiple versions of the same tool (v1 vs v2).
+3. **Dynamic Loading:** Agent runtime par tool definition receive karta hai aur use apni capabilities mein add karta hai.
+4. **Access Control:** Ensure karna ki sirf authorized agents hi sensitive tools (e.g. `delete_db`) ko access kar sakein.
+5. **Version Control:** Same tool ke multiple versions (v1 vs v2) manage karna.
 
 ---
 
@@ -64,9 +64,9 @@ def find_tool(query):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Enterprise Platforms:** A company-wide registry where different teams "Publish" their APIs for AI to use.
-- **Open Source Agent Frameworks:** Platforms like **Composio** or **CrewAI** that have thousands of pre-built tool integrations.
-- **Dynamic Workflows:** Agents that "Learn" to use new tools as they are added to the system.
+- **Enterprise Platforms:** Ek company-wide registry jahan different teams AI ke use ke liye apne APIs "Publish" karti hain.
+- **Open Source Agent Frameworks:** **Composio** ya **CrewAI** jaise platforms jinme thousands of pre-built tool integrations hain.
+- **Dynamic Workflows:** Aise agents jo new tools ke system mein add hote hi unhe use karna "Seekhte" hain.
 
 ---
 
@@ -84,8 +84,8 @@ def find_tool(query):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Centralized Registry:** High organization and discoverability but creates a single point of failure.
-- **Hardcoded Tools:** Fast and simple but impossible to manage more than 10-15 tools.
+- **Centralized Registry:** High organization aur discoverability par ek single point of failure create karta hai.
+- **Hardcoded Tools:** Fast aur simple hai par 10-15 tools se zyada manage karna impossible hai.
 
 ---
 
@@ -119,8 +119,8 @@ def find_tool(query):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **AI-Managed Registries:** AI itself categorizes and tags new tools as they are added.
-- **Inter-Cloud Registry:** A standard protocol that lets an AWS agent use a tool registered on Azure.
+- **AI-Managed Registries:** AI khud new tools ko categorize aur tag karta hai jaise hi wo add hote hain.
+- **Inter-Cloud Registry:** Ek standard protocol jo AWS agent ko Azure par registered tool use karne deta hai.
 
 ---
 

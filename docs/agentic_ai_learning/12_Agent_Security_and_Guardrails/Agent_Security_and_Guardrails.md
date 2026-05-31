@@ -15,12 +15,12 @@ Security agentic AI ka sabse bada challenge hai kyunki ye models "Instruction Fo
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Security must be implemented at multiple layers:
-1. **Input Guardrails (LlamaGuard):** Categorizing incoming prompts into "Safe" or "Unsafe" categories before the agent even sees them.
-2. **Output Guardrails (Guardrails AI):** Verifying the agent's response for PII (Private info), bias, or hallucination.
-3. **Indirect Prompt Injection Defense:** When an agent reads a webpage, that page might contain hidden instructions. We must "Sanitize" retrieved context.
-4. **Tool Access Control:** Only allowing specific agents to call sensitive tools (Principle of Least Privilege).
-5. **Sandboxing:** Running tool execution (like Python code) in isolated environments (Docker/E2B) so it can't harm the main server.
+Security ko multiple layers par implement kiya jana chahiye:
+1. **Input Guardrails (LlamaGuard):** Agent ke dekhne se pehle hi incoming prompts ko "Safe" ya "Unsafe" categories mein categorize karna.
+2. **Output Guardrails (Guardrails AI):** PII (Private info), bias, ya hallucination ke liye agent ke response ko verify karna.
+3. **Indirect Prompt Injection Defense:** Jab agent koi webpage read karta hai, toh us page mein hidden instructions ho sakti hain. Humein retrieved context ko "Sanitize" karna chahiye.
+4. **Tool Access Control:** Sirf specific agents ko hi sensitive tools call karne dena (Principle of Least Privilege).
+5. **Sandboxing:** Tool execution (jaise Python code) ko isolated environments (Docker/E2B) mein run karna taaki ye main server ko harm na kar sake.
 
 ---
 
@@ -58,9 +58,9 @@ def redact_pii(text):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Banking Agents:** Ensuring an agent doesn't reveal one user's account balance to another user.
-- **Enterprise Search:** Blocking employees from extracting salary data via "Social Engineering" the AI.
-- **Support Bots:** Preventing users from tricking the bot into giving "100% discount" coupons.
+- **Banking Agents:** Ensure karna ki agent ek user ka account balance kisi doosre user ko na bataye.
+- **Enterprise Search:** Employees ko AI ki "Social Engineering" ke through salary data extract karne se rokna.
+- **Support Bots:** Users ko bot ko trick karke "100% discount" coupons lene se rokna.
 
 ---
 
@@ -78,8 +78,8 @@ def redact_pii(text):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Strict Guardrails:** Very safe but the agent becomes "Stupid" or "Useless" for complex tasks.
-- **Loose Guardrails:** Very smart and helpful but can be hacked easily.
+- **Strict Guardrails:** Bahut safe hai par agent complex tasks ke liye "Stupid" ya "Useless" ho jata hai.
+- **Loose Guardrails:** Bahut smart aur helpful hai par easily hack kiya ja sakta hai.
 
 ---
 
@@ -90,7 +90,7 @@ def redact_pii(text):
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Prompt Leaking:** User tricks the agent into showing its system prompt. Use "Instruction Isolation".
+- **Prompt Leaking:** User agent ko its system prompt dikhane ke liye trick karta hai. "Instruction Isolation" use karein.
 
 ---
 

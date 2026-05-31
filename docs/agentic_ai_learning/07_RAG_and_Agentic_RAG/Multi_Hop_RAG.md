@@ -16,12 +16,12 @@ Multi-Hop RAG mein agent pehle ek step dhoondhta hai, uska result dekhta hai, au
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Multi-hop reasoning addresses questions that require **Information Synthesis** across multiple documents.
-- **Decomposition:** The query is broken down into sub-queries.
-- **Iterative Retrieval:** The agent retrieves a chunk → Extracts a "Bridge Entity" (e.g., a person's name or a date) → Uses that entity to retrieve more chunks.
-- **Context Accumulation:** Each "Hop" adds new information to the state, allowing the LLM to eventually "Connect the dots".
-- **Termination Logic:** The agent must decide when it has "Enough Information" to stop the hops and generate the final answer.
-- **Looping Graph:** This is typically implemented as a cyclic graph in LangGraph.
+Multi-hop reasoning un questions ko address karta hai jinhe multiple documents ke across **Information Synthesis** ki zaroorat hoti hai.
+- **Decomposition:** Query ko sub-queries mein break kiya jata hai.
+- **Iterative Retrieval:** Agent ek chunk retrieve karta hai → Ek "Bridge Entity" (e.g., person ka name ya date) extract karta hai → Uss entity ka use aur chunks retrieve karne ke liye karta hai.
+- **Context Accumulation:** Har "Hop" state mein nayi information add karta hai, jisse LLM eventually "Connect the dots" kar pata hai.
+- **Termination Logic:** Agent ko decide karna hoga ki kab uske paas hops ko rokne aur final answer generate karne ke liye "Enough Information" hai.
+- **Looping Graph:** Ye aamtaur par LangGraph mein ek cyclic graph ke roop mein implement kiya jata hai.
 
 ---
 
@@ -68,8 +68,8 @@ def multi_hop_agent(query):
 
 ## 🌍 5. Real-World Use Cases
 - **Investment Research:** "Company A ke parent company ke CEO ki background kya hai?"
-- **Scientific Literature Review:** Finding a protein, then its inhibitors, then the side effects of those inhibitors.
-- **Legal Discovery:** Finding a contract, then the person who signed it, then their other business affiliations.
+- **Scientific Literature Review:** Ek protein dhoondhna, fir uske inhibitors, fir un inhibitors ke side effects.
+- **Legal Discovery:** Ek contract dhoondhna, fir use sign karne wala person, fir unke doosre business affiliations.
 
 ---
 
@@ -87,8 +87,8 @@ def multi_hop_agent(query):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Depth:** Can answer questions that simple RAG can't even touch.
-- **Speed/Cost:** Extremely slow and expensive compared to single-hop RAG.
+- **Depth:** Un questions ka answer de sakta hai jinhe simple RAG touch bhi nahi kar sakta.
+- **Speed/Cost:** Single-hop RAG ke comparison mein extremely slow aur expensive.
 
 ---
 
@@ -109,7 +109,7 @@ def multi_hop_agent(query):
 ---
 
 ## 💰 12. Cost Considerations
-- **High Multiplier:** Each hop is essentially a new RAG call. 3 hops = 3x cost.
+- **High Multiplier:** Har hop essentially ek nayi RAG call hai. 3 hops = 3x cost.
 
 ---
 
@@ -127,8 +127,8 @@ def multi_hop_agent(query):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **GraphRAG Traversal:** Using a Knowledge Graph to "Jump" between nodes instead of doing multiple semantic searches.
-- **Beam Search Hops:** Exploring 2-3 different "Next Queries" in parallel and picking the best path.
+- **GraphRAG Traversal:** Multiple semantic searches karne ke bajaye nodes ke beech "Jump" karne ke liye ek Knowledge Graph ka use karna.
+- **Beam Search Hops:** Parallel mein 2-3 alag "Next Queries" explore karna aur best path pick karna.
 
 ---
 

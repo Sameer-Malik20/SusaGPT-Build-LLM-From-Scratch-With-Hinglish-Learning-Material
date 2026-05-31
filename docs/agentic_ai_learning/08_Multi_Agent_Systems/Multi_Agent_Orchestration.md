@@ -57,7 +57,7 @@ Multi-agent mein sabse bada risk **"Hallucination Loop"** hai.
 - **Agent A:** Ye galat hai.
 - **Agent B:** Theek hai, ab check karo.
 - **Agent A:** Abhi bhi galat hai.
-- **Solution:** **Max Iterations** (Count: 5) and **Early Stopping** (Finish if no progress).
+- **Solution:** **Max Iterations** (Count: 5) aur **Early Stopping** (agar progress na ho toh finish karein).
 
 ---
 

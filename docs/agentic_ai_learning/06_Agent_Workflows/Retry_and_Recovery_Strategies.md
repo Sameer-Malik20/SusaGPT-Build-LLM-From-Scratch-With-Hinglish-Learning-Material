@@ -15,11 +15,11 @@ Professional agents "Fragile" nahi hote. Wo mushkilon ke bawajood kaam pura kart
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Resilience in agentic workflows is achieved through **Fault-Tolerant Loops**.
-- **Exponential Backoff:** If an API fails, don't retry immediately. Wait 1s, then 2s, then 4s... This prevents overwhelming the server.
-- **Fallback Models:** If GPT-4 is down or rate-limited, automatically switch the request to Claude 3.5 or Llama-3.
-- **Self-Healing State:** If a node in the graph crashes, use the checkpointer to resume from the last successful state instead of starting over.
-- **Circuit Breakers:** If a tool fails 5 times in a row, "Trip" the circuit and stop calling that tool to save costs and prevent further errors.
+Agentic workflows mein resilience **Fault-Tolerant Loops** ke through achieve ki jati hai.
+- **Exponential Backoff:** Agar koi API fail hoti hai, toh immediate retry na karein. 1s wait karein, fir 2s, fir 4s... Ye server ko overwhelm hone se rokta hai.
+- **Fallback Models:** Agar GPT-4 down ya rate-limited hai, toh request ko automatically Claude 3.5 ya Llama-3 par switch karein.
+- **Self-Healing State:** Agar graph mein koi node crash hota hai, toh starting se shuru karne ke bajaye last successful state se resume karne ke liye checkpointer ka use karein.
+- **Circuit Breakers:** Agar koi tool lagatar 5 baar fail hota hai, toh circuit ko "Trip" karein aur costs bachane aur further errors ko rokne ke liye us tool ko call karna band karein.
 
 ---
 
@@ -60,9 +60,9 @@ def call_llm_api(prompt):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Data Scraping Agents:** Retrying if a website block is detected or using a different proxy.
-- **Payment Agents:** If a bank's API is slow, the agent waits and verifies the status before retrying to avoid double payments.
-- **Autonomous Coding:** If the generated code fails a test, the agent "Recovers" by rewriting the logic based on the error message.
+- **Data Scraping Agents:** Website block detect hone par retry karna ya different proxy ka use karna.
+- **Payment Agents:** Agar bank ki API slow hai, toh double payments se bachane ke liye agent wait karta hai aur retrying se pehle status verify karta hai.
+- **Autonomous Coding:** Agar generated code test mein fail ho jata hai, toh agent error message ke basis par logic ko rewrite karke "Recover" karta hai.
 
 ---
 
@@ -80,8 +80,8 @@ def call_llm_api(prompt):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **High Retry Count:** More robust but increases latency and cost.
-- **Low Retry Count:** Faster failure but less reliable in unstable environments.
+- **High Retry Count:** Zyada robust hai par latency aur cost ko badhata hai.
+- **Low Retry Count:** Faster failure hai par unstable environments mein kam reliable hai.
 
 ---
 
@@ -102,7 +102,7 @@ def call_llm_api(prompt):
 ---
 
 ## 💰 12. Cost Considerations
-- **Fallback Models:** Use cheaper models for retries if the task is simple.
+- **Fallback Models:** Agar task simple hai, toh retries ke liye saste models ka use karein.
 
 ---
 
@@ -120,8 +120,8 @@ def call_llm_api(prompt):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Multi-Cloud Failover:** Agents that automatically switch between OpenAI (Azure), Anthropic (AWS), and Google Cloud based on real-time availability.
-- **Reasoning Recovery:** Using a "Debug Agent" whose only job is to fix the state of another agent that has failed.
+- **Multi-Cloud Failover:** Aise agents jo real-time availability ke basis par OpenAI (Azure), Anthropic (AWS), aur Google Cloud ke beech automatically switch karte hain.
+- **Reasoning Recovery:** Ek "Debug Agent" ka use karna jiska kaam sirf kisi doosre agent ki state ko fix karna hai jo fail ho gaya hai.
 
 ---
 

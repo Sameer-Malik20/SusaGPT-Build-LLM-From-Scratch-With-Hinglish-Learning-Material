@@ -16,12 +16,12 @@ Agentic AI normal code jaisa nahi hota jahan `error: line 45` dikh jaye. Yahan g
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Debugging agents requires looking at **State Transitions** and **Tool Calls**.
-1. **Trace IDs:** Every request gets a unique ID. All logs (LLM calls, database queries, tool outputs) are linked to this ID.
-2. **Span Analysis:** Measuring how much time was spent in a specific "Span" (e.g. searching the database).
-3. **Prompt Debugging:** Testing if a small change in the system prompt fixes the logic.
-4. **Conditional Edge Debugging:** In LangGraph, checking why the graph took `Edge A` instead of `Edge B`.
-5. **Human-in-the-loop (HITL) Debugging:** Intercepting the agent's plan, correcting it manually, and letting the agent continue to see if it fixes the final output.
+Agents ko debug karne ke liye **State Transitions** aur **Tool Calls** dekhne ki zaroorat hoti hai.
+1. **Trace IDs:** Har request ko ek unique ID milti hai. Saare logs (LLM calls, database queries, tool outputs) is ID se linked hote hain.
+2. **Span Analysis:** Kisi specific "Span" (e.g. database search karne) mein kitna time spend hua use measure karna.
+3. **Prompt Debugging:** Test karna ki kya system prompt mein ek small change logic ko fix karta hai.
+4. **Conditional Edge Debugging:** LangGraph mein check karna ki graph ne `Edge B` ke bajaye `Edge A` kyu liya.
+5. **Human-in-the-loop (HITL) Debugging:** Agent ke plan ko intercept karna, use manually correct karna, aur agent ko continue karne dena ye dekhne ke liye ki kya ye final output ko fix karta hai.
 
 ---
 
@@ -64,49 +64,49 @@ def debug_wrapper(node_func):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Support Bots:** Finding out why a bot offered a discount to someone who wasn't eligible.
-- **Data Scraping:** Debugging why the agent is failing to parse a specific website's HTML.
-- **Workflow Automation:** Fixing a logic error where the agent sends an email *before* the document is ready.
+- **Support Bots:** Ye pata lagana ki bot ne kisi ko discount kyu offer kiya jo eligible nahi tha.
+- **Data Scraping:** Debugging ki agent kisi specific website ki HTML ko parse karne mein fail kyu ho raha hai.
+- **Workflow Automation:** Ek logic error fix karna jahan agent document ready hone se *pehle* email send kar deta hai.
 
 ---
 
 ## ❌ 6. Failure Cases
-- **Silent Failures:** AI "Hallucinates" a success message, but the action actually failed in the background.
-- **Feedback Loops:** Debugging info is so large that the LLM gets confused by its own logs.
-- **Log Bloat:** Millions of lines of traces making it impossible to find the one "True" error.
+- **Silent Failures:** AI ek success message "Hallucinate" karta hai, par background mein action actually fail ho gaya hota hai.
+- **Feedback Loops:** Debugging info itni large hoti hai ki LLM apne hi logs se confuse ho jata hai.
+- **Log Bloat:** Millions of lines of traces jo single "True" error dhoondhna impossible bana deti hain.
 
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Step-by-Step Execution:** Execute the graph node-by-node in a Jupyter notebook.
-- **Comparison Testing:** Run the same query with different models (GPT-4 vs Claude) to see if it's a model issue or a prompt issue.
+- **Step-by-Step Execution:** Graph ko Jupyter notebook mein node-by-node execute karein.
+- **Comparison Testing:** Same query ko different models (GPT-4 vs Claude) ke sath run karke dekhein ki kya ye model issue hai ya prompt issue.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Deep Tracing:** Easy debugging but slow and expensive.
-- **Minimal Logging:** Fast and cheap but "Impossible" to fix complex logic bugs.
+- **Deep Tracing:** Debugging easy hai par slow aur expensive hai.
+- **Minimal Logging:** Fast aur cheap hai par complex logic bugs fix karna "Impossible" hai.
 
 ---
 
 ## ✅ 9. Best Practices
-- **Standardized Formats:** Use JSON for logs so you can query them easily (e.g. via ELK stack or Datadog).
-- **Correlation IDs:** Link your frontend request ID to your agent's trace ID.
+- **Standardized Formats:** Logs ke liye JSON use karein taaki aap unhe easily query kar sakein (e.g. via ELK stack ya Datadog).
+- **Correlation IDs:** Apne frontend request ID ko apne agent ke trace ID ke sath link karein.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Leaking Internal Thought:** Sometimes "Internal Reasoning" (Chain of Thought) contains sensitive data. Don't show traces to the end user.
+- **Leaking Internal Thought:** Kabhi-kabhi "Internal Reasoning" (Chain of Thought) mein sensitive data hota hai. Traces end user ko na dikhayein.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Distributed Tracing:** If your agent calls 5 different microservices, you need **OpenTelemetry** to link all those traces together.
+- **Distributed Tracing:** Agar aapka agent 5 different microservices ko call karta hai, toh un saare traces ko ek sath link karne ke liye aapko **OpenTelemetry** ki zaroorat hogi.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Storage:** Traces can take GBs of space. Set a retention policy (e.g. Delete after 14 days).
+- **Storage:** Traces GBs of space le sakte hain. Ek retention policy set karein (e.g. Delete after 14 days).
 
 ---
 
@@ -118,8 +118,8 @@ def debug_wrapper(node_func):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **AI-Debugger Agents:** An agent that watches another agent's traces and automatically suggests "Prompt Fixes".
-- **Visual Debugging:** 3D graph visualizations of agent reasoning paths to see "Dead ends" and "Loops".
+- **AI-Debugger Agents:** Ek agent jo doosre agent ke traces ko watch karta hai aur automatically "Prompt Fixes" suggest karta hai.
+- **Visual Debugging:** "Dead ends" aur "Loops" dekhne ke liye agent reasoning paths ki 3D graph visualizations.
 
 ---
 

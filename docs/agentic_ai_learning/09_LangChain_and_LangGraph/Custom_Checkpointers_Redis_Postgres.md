@@ -16,12 +16,12 @@ Is guide mein hum dekhenge ki kaise hum LangGraph ko in professional databases s
 ---
 
 ## 🧠 2. Deep Technical Explanation
-In production, you need a **Distributed Checkpointer** to allow multiple server instances to share agent state.
-- **PostgresSaver:** Uses a relational database to store state blobs. It's best for long-term storage and complex queries.
-- **RedisSaver:** Stores state in RAM. It's extremely fast but requires careful configuration for persistence (RDB/AOF).
-- **Connection Pooling:** Using `psycopg` pool for Postgres or `aioredis` for Redis to handle thousands of concurrent read/write operations without exhausting connections.
-- **Schema Management:** LangGraph automatically manages the tables (e.g., `checkpoints`, `writes`) in your Postgres DB when you initialize the saver.
-- **JSON Serialization:** State is often saved as a binary blob (Pickle) or JSON. In Postgres, we use `BYTEA` or `JSONB` columns.
+Production mein, multiple server instances ko agent state share karne dene ke liye aapko ek **Distributed Checkpointer** ki zaroorat hoti hai.
+- **PostgresSaver:** State blobs ko store karne ke liye ek relational database ka use karta hai. Ye long-term storage aur complex queries ke liye best hai.
+- **RedisSaver:** State ko RAM mein store karta hai. Ye extremely fast hai par persistence (RDB/AOF) ke liye isme careful configuration ki zaroorat hoti hai.
+- **Connection Pooling:** Connections exhaust kiye bina thousands of concurrent read/write operations handle karne ke liye Postgres ke liye `psycopg` pool ya Redis ke liye `aioredis` ka use karna.
+- **Schema Management:** Jab aap saver initialize karte hain, toh LangGraph aapke Postgres DB mein tables (e.g., `checkpoints`, `writes`) ko automatically manage karta hai.
+- **JSON Serialization:** State aksar ek binary blob (Pickle) ya JSON ke roop mein save hoti hai. Postgres mein, hum `BYTEA` ya `JSONB` columns use karte hain.
 
 ---
 
@@ -68,9 +68,9 @@ with ConnectionPool(conninfo=DB_URI) as pool:
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Enterprise SaaS:** Storing conversation history for thousands of corporate clients.
-- **E-commerce Agents:** Keeping track of abandoned carts and user preferences across multiple devices.
-- **Banking Agents:** Storing sensitive transaction states with high ACID compliance (Postgres).
+- **Enterprise SaaS:** Thousands of corporate clients ke liye conversation history store karna.
+- **E-commerce Agents:** Multiple devices par abandoned carts aur user preferences ko track karna.
+- **Banking Agents:** High ACID compliance (Postgres) ke sath sensitive transaction states store karna.
 
 ---
 
@@ -88,8 +88,8 @@ with ConnectionPool(conninfo=DB_URI) as pool:
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Postgres:** Super reliable, handles huge data, but slightly slower than Redis.
-- **Redis:** Super fast, perfect for high-speed chat, but data might be lost if not configured for persistence properly.
+- **Postgres:** Super reliable hai, huge data handle karta hai, par Redis se slightly slower hai.
+- **Redis:** Super fast hai, high-speed chat ke liye perfect hai, par agar persistence properly configure na ho toh data loss ho sakta hai.
 
 ---
 
@@ -129,8 +129,8 @@ with ConnectionPool(conninfo=DB_URI) as pool:
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Hybrid Persistence:** Storing recent history in Redis for speed and archiving old sessions in Postgres for long-term storage.
-- **Vector-DB as Persistence:** Using vector databases to not just store state, but to also retrieve "Similar past conversations" for context.
+- **Hybrid Persistence:** Speed ke liye recent history Redis mein store karna aur long-term storage ke liye old sessions ko Postgres mein archive karna.
+- **Vector-DB as Persistence:** Context ke liye sirf state store karne ke liye hi nahi, balki "Similar past conversations" ko retrieve karne ke liye bhi vector databases ka use karna.
 
 ---
 

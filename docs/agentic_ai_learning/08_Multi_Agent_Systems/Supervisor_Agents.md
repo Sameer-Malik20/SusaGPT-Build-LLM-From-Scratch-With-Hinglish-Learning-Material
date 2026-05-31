@@ -16,11 +16,11 @@ Supervisor khud kaam nahi karta, wo sirf ye dekhta hai ki **"Kaunsa kaam kab aur
 ---
 
 ## 🧠 2. Deep Technical Explanation
-The Supervisor pattern centralizes the **Routing Logic** in a single LLM node.
-- **Master Node (Supervisor):** Has access to the descriptions of all worker agents. It uses an LLM to decide the "Next" step: `Agent_A`, `Agent_B`, or `FINISH`.
-- **Worker Nodes:** Specialized agents that execute a specific task and return their results back to the Supervisor.
-- **State Flow:** The Supervisor is the only node that has a "Cyclic" edge back to itself from every worker. This ensures it stays in control.
-- **State Redaction:** Workers shouldn't necessarily see everything. The Supervisor can "Clean" the state before passing it to a worker to save tokens.
+Supervisor pattern ek single LLM node mein **Routing Logic** ko centralize karta hai.
+- **Master Node (Supervisor):** Iske paas sabhi worker agents ke descriptions ka access hota hai. Ye "Next" step decide karne ke liye LLM ka use karta hai: `Agent_A`, `Agent_B`, ya `FINISH`.
+- **Worker Nodes:** Specialized agents jo ek specific task execute karte hain aur apne results Supervisor ko return karte hain.
+- **State Flow:** Supervisor hi ekmatra aisa node hai jiske paas har worker se khud tak ek "Cyclic" edge hota hai. Ye ensure karta hai ki control usi ke paas rahe.
+- **State Redaction:** Workers ke liye sab kuch dekhna zaroori nahi hai. Tokens bachane ke liye Supervisor worker ko pass karne se pehle state ko "Clean" kar sakta hai.
 
 ---
 
@@ -67,9 +67,9 @@ def supervisor_node(state):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Customer Support Hubs:** A supervisor identifies if a ticket is about "Refunds" or "Tech Issues" and sends it to the right specialist.
-- **Content Agencies:** A manager agent overseeing a writer and an editor to produce a 100% accurate blog post.
-- **Scientific R&D:** A supervisor managing multiple simulators to find the best material for a battery.
+- **Customer Support Hubs:** Ek supervisor identify karta hai ki ticket "Refunds" ke baare mein hai ya "Tech Issues" ke baare mein aur use sahi specialist ke paas bhejta hai.
+- **Content Agencies:** Ek manager agent jo 100% accurate blog post produce karne ke liye ek writer aur ek editor ki dekhbhai karta hai.
+- **Scientific R&D:** Battery ke liye best material dhoondhne ke liye multiple simulators ko manage karne wala ek supervisor.
 
 ---
 
@@ -87,8 +87,8 @@ def supervisor_node(state):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Supervisor:** Dynamic and smart but slow (every step needs a manager call) and expensive.
-- **Hard-coded Routing:** Fast and cheap but can't handle unexpected user requests.
+- **Supervisor:** Dynamic aur smart hai par slow (har step ke liye ek manager call chahiye) aur expensive hai.
+- **Hard-coded Routing:** Fast aur cheap hai par unexpected user requests ko handle nahi kar sakta.
 
 ---
 
@@ -104,12 +104,12 @@ def supervisor_node(state):
 ---
 
 ## 📈 11. Scaling Challenges
-- **Throughput:** Supervisor bottlenecks the entire team. If the supervisor is slow, everyone waits.
+- **Throughput:** Supervisor poori team ke liye bottleneck ban jata hai. Agar supervisor slow ho, toh sabhi wait karte hain.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Double Tokens:** Every worker output is processed twice—once by the worker and once by the supervisor.
+- **Double Tokens:** Har worker output do baar process hota hai—ek baar worker dwara aur ek baar supervisor dwara.
 
 ---
 
@@ -127,8 +127,8 @@ def supervisor_node(state):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Multi-Level Supervision:** A "Department Manager" supervising 3 agents, who reports to a "CEO Agent".
-- **Self-Improving Supervisor:** A manager that tracks which workers are "Failing" and updates their system prompts to fix them.
+- **Multi-Level Supervision:** Ek "Department Manager" jo 3 agents ko supervise karta hai, jo ek "CEO Agent" ko report karta hai.
+- **Self-Improving Supervisor:** Ek manager jo track karta hai ki kaunse workers "Fail" ho rahe hain aur unhe fix karne ke liye unke system prompts ko update karta hai.
 
 ---
 

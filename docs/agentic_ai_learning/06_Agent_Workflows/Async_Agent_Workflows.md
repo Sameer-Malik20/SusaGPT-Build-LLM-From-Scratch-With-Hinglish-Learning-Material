@@ -15,11 +15,11 @@ Modern web apps (Production) mein hum hamesha Async use karte hain taaki user ex
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Async workflows decouple the **User Request** from the **Agent Execution**.
-- **Event Loop:** Using Python's `asyncio` to manage thousands of concurrent I/O operations (like LLM calls or DB queries) without spawning a new thread for each.
-- **Message Queues:** Offloading heavy tasks to a worker process using **Redis Streams**, **RabbitMQ**, or **Celery**.
-- **Websockets / Server-Sent Events (SSE):** Since the response isn't immediate, the backend needs a way to "Push" the results to the frontend once they are ready.
-- **Task Status Tracking:** Storing the current state of a long-running agent in a database (`PENDING`, `RUNNING`, `COMPLETED`, `FAILED`) so the user can poll for updates.
+Async workflows **User Request** ko **Agent Execution** se decouple karte hain.
+- **Event Loop:** Bina har ek ke liye naya thread spawn kiye, hazaron concurrent I/O operations (jaise LLM calls ya DB queries) ko manage karne ke liye Python ke `asyncio` ka use karna.
+- **Message Queues:** **Redis Streams**, **RabbitMQ**, ya **Celery** ka use karke heavy tasks ko worker process par offload karna.
+- **Websockets / Server-Sent Events (SSE):** Kyunki response immediate nahi hota, isliye backend ko frontend par results "Push" karne ke liye ek tareeqe ki zaroorat hoti hai jab wo ready ho jayein.
+- **Task Status Tracking:** Long-running agent ki current state ko database (`PENDING`, `RUNNING`, `COMPLETED`, `FAILED`) mein store karna taaki user updates ke liye poll kar sake.
 
 ---
 
@@ -66,9 +66,9 @@ async def trigger_agent(query: str, background_tasks: BackgroundTasks):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Autonomous Research:** An agent that researches a topic for 30 minutes and sends a PDF report via email.
-- **Data Migration:** Moving millions of records from one DB to another with AI-driven schema mapping.
-- **Voice Agents:** Processing audio streams in real-time requires async handling to minimize lag.
+- **Autonomous Research:** Ek aisa agent jo 30 minutes tak kisi topic par research karta hai aur email ke through PDF report bhejta hai.
+- **Data Migration:** AI-driven schema mapping ke sath millions of records ko ek DB se doosre DB mein move karna.
+- **Voice Agents:** Lag ko minimize karne ke liye real-time mein audio streams ko process karne ke liye async handling zaroori hai.
 
 ---
 
@@ -80,14 +80,14 @@ async def trigger_agent(query: str, background_tasks: BackgroundTasks):
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Task Monitors:** Use tools like **Flower** (for Celery) to see real-time task status.
-- **Logging with Context:** Ensure every background log has the `task_id` attached.
+- **Task Monitors:** Real-time task status dekhne ke liye **Flower** (Celery ke liye) jaise tools ka use karein.
+- **Logging with Context:** Ensure karein ki har background log ke sath `task_id` attached ho.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Async:** Scalable, responsive UI, handles long tasks.
-- **Sync:** Simple to write, immediate feedback for small tasks, but doesn't scale for complex agents.
+- **Async:** Scalable, responsive UI, long tasks ko handle karta hai.
+- **Sync:** Likha jana simple hai, small tasks ke liye immediate feedback deta hai, par complex agents ke liye scale nahi hota.
 
 ---
 
@@ -110,7 +110,7 @@ async def trigger_agent(query: str, background_tasks: BackgroundTasks):
 ---
 
 ## 💰 12. Cost Considerations
-- **Concurrency Costs:** Many background tasks running at once = Many simultaneous LLM tokens. Manage your concurrency limits.
+- **Concurrency Costs:** Ek sath chalne wale kai background tasks = Kai simultaneous LLM tokens. Apne concurrency limits ko manage karein.
 
 ---
 
@@ -128,8 +128,8 @@ async def trigger_agent(query: str, background_tasks: BackgroundTasks):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Serverless Background Agents:** Using AWS Lambda or Vercel Functions to run agents only when an event arrives (zero idle cost).
-- **Streaming State Updates:** Users can see the agent's "Thought stream" live via SSE even while the final answer is still being computed.
+- **Serverless Background Agents:** Sirf tabhi agents run karne ke liye jab koi event aaye, AWS Lambda ya Vercel Functions ka use karna (zero idle cost).
+- **Streaming State Updates:** Users agent ke "Thought stream" ko live SSE ke through dekh sakte hain, jabki final answer abhi compute ho hi raha ho.
 
 ---
 

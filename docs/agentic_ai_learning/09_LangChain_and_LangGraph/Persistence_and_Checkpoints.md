@@ -18,14 +18,14 @@ Iska sabse bada fayda ye hai ki aap **"Time Travel"** kar sakte ho. Matlab, agar
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Checkpoints are snapshots of the **Thread State** at every step (edge) of the graph execution.
-- **The Checkpointer:** A persistent storage backend (SQLite, Postgres, Redis) that LangGraph uses to write the state object.
-- **Thread ID:** Every conversation has a unique `thread_id`. The checkpointer stores states indexed by this ID.
+Checkpoints graph execution ke har step (edge) par **Thread State** ke snapshots hote hain.
+- **The Checkpointer:** Ek persistent storage backend (SQLite, Postgres, Redis) jise LangGraph state object ko write karne ke liye use karta hai.
+- **Thread ID:** Har conversation ki ek unique `thread_id` hoti hai. Checkpointer is ID se index karke states store karta hai.
 - **Checkpoints vs Memory:**
     - **Memory:** Shared during a single run (RAM).
     - **Persistence:** Lasts across restarts and sessions (Disk/DB).
-- **Time Travel:** By passing a `checkpoint_id` (or `thread_ts`), you can load the graph at a specific point in time and re-execute from there.
-- **Human-in-the-loop:** Persistence is what enables HITL. The graph saves state, pauses (terminates the process), and waits for an external trigger to resume.
+- **Time Travel:** `checkpoint_id` (ya `thread_ts`) pass karke, aap graph ko ek specific point in time par load kar sakte hain aur wahan se re-execute kar sakte hain.
+- **Human-in-the-loop:** Persistence hi HITL ko enable karti hai. Graph state save karta hai, pause karta hai (process ko terminate karta hai), aur resume karne ke liye external trigger ka wait karta hai.
 
 ---
 
@@ -71,8 +71,8 @@ config = {"configurable": {"thread_id": "user_123"}}
 
 ## 🌍 5. Real-World Use Cases
 - **Customer Support Bots:** User 2 din baad wapas aata hai aur bot ko pichli baatein yaad hoti hain.
-- **Long-running Tasks:** Agents that work for hours (like researching a topic) and need to save progress in case of server failure.
-- **A/B Testing States:** Saving a specific point in a conversation and testing two different AI responses from that exact point.
+- **Long-running Tasks:** Aise agents jo ghanton kaam karte hain (jaise topic research karna) aur server failure ke case mein progress save karne ki zaroorat hoti hai.
+- **A/B Testing States:** Conversation mein ek specific point ko save karna aur us exact point se do different AI responses ko test karna.
 
 ---
 
@@ -84,30 +84,30 @@ config = {"configurable": {"thread_id": "user_123"}}
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Inspect Checkpoints:** Use `app.get_state(config)` to see the exact JSON saved in the DB.
-- **History Exploration:** `app.get_state_history(config)` lets you see all previous versions of the state for that thread.
+- **Inspect Checkpoints:** DB mein saved exact JSON dekhne ke liye `app.get_state(config)` ka use karein.
+- **History Exploration:** `app.get_state_history(config)` aapko us thread ke state ke saare previous versions dekhne deta hai.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Checkpoints:** Essential for reliability and multi-session, but adds database latency and storage cost.
-- **Stateless:** Faster and cheaper, but "Forgets" everything once the request is over.
+- **Checkpoints:** Reliability aur multi-session ke liye essential hain, par database latency aur storage cost add karte hain.
+- **Stateless:** Faster aur cheaper hai, par request end hone ke baad sab kuch "Bhool" jata hai.
 
 ---
 
 ## ✅ 9. Best Practices
-- **Unique Thread IDs:** Always use UUIDs or authenticated User IDs as `thread_id`.
+- **Unique Thread IDs:** Humesha UUIDs ya authenticated User IDs ko `thread_id` ki tarah use karein.
 - **Cleanup Policy:** Database se purane checkpoints (e.g. older than 30 days) delete karne ka script rakhein.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **State Encryption:** Encrypt the state blobs in the database to prevent direct data theft from the disk.
+- **State Encryption:** Disk se direct data theft ko rokne ke liye database mein state blobs ko encrypt karein.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Postgres Checkpointer:** At scale, you need `PostgresSaver` with connection pooling to handle thousands of concurrent state writes.
+- **Postgres Checkpointer:** Scale par, thousands of concurrent state writes handle karne ke liye connection pooling ke sath `PostgresSaver` ki zaroorat hoti hai.
 
 ---
 
@@ -130,8 +130,8 @@ config = {"configurable": {"thread_id": "user_123"}}
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Cloud-Native Checkpointing:** Using serverless databases (like Supabase or Upstash Redis) to handle agent state globally.
-- **State Branching:** Allowing an agent to "Fork" its state into two parallel paths to explore different strategies simultaneously.
+- **Cloud-Native Checkpointing:** Agent state ko globally handle karne ke liye serverless databases (jaise Supabase ya Upstash Redis) ka use karna.
+- **State Branching:** Agent ko state ko do parallel paths mein "Fork" karne dena taaki simultaneously different strategies explore ki ja sakein.
 
 ---
 

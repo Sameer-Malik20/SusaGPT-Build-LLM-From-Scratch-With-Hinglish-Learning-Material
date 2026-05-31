@@ -16,12 +16,12 @@ In failures ko dhoondhna aur fix karna hi ek professional AI Engineer ka asli ka
 ---
 
 ## 🧠 2. Deep Technical Explanation
-RAG failures typically occur in the **Retrieval-Generation Gap**.
-- **Low Recall:** The correct information was in the database, but the vector search didn't find it. (Fix: Better chunking or hybrid search).
-- **Low Precision:** The search found the information, but also pulled in 10 irrelevant chunks that confused the LLM. (Fix: Reranking).
-- **Hallucination (Faithfulness):** The LLM generates a claim that isn't in the provided context. (Fix: Self-RAG or grounded prompts).
-- **Context Overload:** Too much data retrieved causes the model to ignore the "Needle" in the "Haystack". (Fix: Context compression).
-- **Out-of-Sync Index:** The source data changed but the vector DB wasn't updated. (Fix: CDC or event-driven re-indexing).
+RAG failures aamtaur par **Retrieval-Generation Gap** mein hote hain.
+- **Low Recall:** Correct information database mein thi, par vector search use dhoondh nahi payi. (Fix: Better chunking ya hybrid search).
+- **Low Precision:** Search ne information toh dhoondh li, par sath hi 10 irrelevant chunks bhi pull kar liye jisne LLM ko confuse kar diya. (Fix: Reranking).
+- **Hallucination (Faithfulness):** LLM ek aisa claim generate karta hai jo provided context mein nahi hai. (Fix: Self-RAG ya grounded prompts).
+- **Context Overload:** Zyada data retrieve hone ke karan model "Haystack" mein "Needle" ko ignore kar deta hai. (Fix: Context compression).
+- **Out-of-Sync Index:** Source data change ho gaya par vector DB update nahi hua. (Fix: CDC ya event-driven re-indexing).
 
 ---
 
@@ -67,9 +67,9 @@ def run_rag_with_safety(query):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Medical Bots:** Ensuring no "Treatment" is suggested that isn't in the official medical guidelines.
-- **Financial Compliance:** Verifying that a report correctly quotes the latest tax laws.
-- **Customer Portals:** Preventing the bot from giving "Free Discounts" that don't exist in the company database.
+- **Medical Bots:** Ensure karna ki koi bhi "Treatment" suggest na ho jo official medical guidelines mein na ho.
+- **Financial Compliance:** Verify karna ki report latest tax laws ko sahi se quote karti hai.
+- **Customer Portals:** Bot ko "Free Discounts" dene se rokna jo company database mein exist nahi karte.
 
 ---
 
@@ -81,14 +81,14 @@ def run_rag_with_safety(query):
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **RAGAS (RAG Assessment):** Use the RAGAS framework to measure Faithfulness, Relevance, and Answer Correctness.
-- **Visualization:** Plot your query vector and retrieved vectors to see if they are actually "Close".
+- **RAGAS (RAG Assessment):** Faithfulness, Relevance, aur Answer Correctness ko measure karne ke liye RAGAS framework ka use karein.
+- **Visualization:** Apne query vector aur retrieved vectors ko plot karein taaki dekh sakein ki kya wo actually "Close" hain.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Strict Verification:** Very safe but slow and can lead to many "I don't know" answers.
-- **Relaxed Verification:** Fast and conversational but high risk of hallucinations.
+- **Strict Verification:** Bahut safe par slow aur isse kai "I don't know" answers mil sakte hain.
+- **Relaxed Verification:** Fast aur conversational par hallucinations ka high risk.
 
 ---
 
@@ -104,12 +104,12 @@ def run_rag_with_safety(query):
 ---
 
 ## 📈 11. Scaling Challenges
-- **Latency of Checks:** Evaluation nodes response time badhate hain. Use small models for checking.
+- **Latency of Checks:** Evaluation nodes response time badhate hain. Checking ke liye small models use karein.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Verification Cost:** Hallucination check nodes token consume karte hain. Use simple rules (regex/keywords) where possible before LLM checks.
+- **Verification Cost:** Hallucination check nodes tokens consume karte hain. LLM checks se pehle jahan ho sake simple rules (regex/keywords) use karein.
 
 ---
 
@@ -127,8 +127,8 @@ def run_rag_with_safety(query):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Automated Root Cause Analysis:** Agents that, when they fail, automatically run a debugger to tell you if the problem was in Retrieval, Context, or Generation.
-- **Real-time Re-indexing:** Systems that detect outdated data and trigger an index update instantly.
+- **Automated Root Cause Analysis:** Aise agents jo fail hone par automatically debugger run karke batate hain ki problem Retrieval, Context, ya Generation mein thi.
+- **Real-time Re-indexing:** Systems jo outdated data detect karte hain aur instantly index update trigger karte hain.
 
 ---
 

@@ -19,14 +19,14 @@ Caching se aapka agent "Fast" ho jata hai aur aapke "Tokens" (Paise) bachte hain
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Effective caching in agents requires a combination of **Exact** and **Semantic** layers.
-1. **Exact Match Caching (KV Store):** Using Redis to store hash-keys of prompts. 
+Agents mein effective caching ke liye **Exact** aur **Semantic** layers ka combination zaroorat hota hai.
+1. **Exact Match Caching (KV Store):** Prompts ke hash-keys ko store karne ke liye Redis ka use karna. 
     - Key: `hash(prompt + parameters)`
     - Value: `LLM Response`
-2. **Semantic Caching (Vector Store):** Using embeddings to find similar previous queries.
+2. **Semantic Caching (Vector Store):** Similar previous queries dhoondhne ke liye embeddings ka use karna.
     - Process: `Query -> Embedding -> Vector Search -> If similarity > threshold (0.95) -> Return Cached Response`.
-3. **Prompt Caching (API level):** Anthropic and OpenAI (2026) support caching the "System Prompt" part. You only pay for it once, and subsequent calls use the "Cached" version of the instructions.
-4. **Context Window Caching:** Saving the intermediate states of a long conversation so you don't re-process the first 50 messages every time.
+3. **Prompt Caching (API level):** Anthropic aur OpenAI (2026) "System Prompt" part ko cache karna support karte hain. Aap iske liye sirf ek baar pay karte hain, aur subsequent calls instructions ke "Cached" version ka use karti hain.
+4. **Context Window Caching:** Ek lambi conversation ke intermediate states ko save karna taaki aapko har baar pehle 50 messages ko re-process na karna pade.
 
 ---
 
@@ -65,9 +65,9 @@ def get_semantic_cache(query):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Public FAQ Bots:** Where 90% of users ask the same questions about pricing or hours.
-- **Data Scraping Agents:** Preventing re-scraping the same URL if the agent was there 1 hour ago.
-- **Educational Apps:** Reusing standard explanations for common math or science topics.
+- **Public FAQ Bots:** Jahan 90% users pricing ya hours ke baare mein same questions poochte hain.
+- **Data Scraping Agents:** Agar agent 1 ghante pehle wahan tha, toh same URL ko re-scrape karne se rokna.
+- **Educational Apps:** Common math ya science topics ke liye standard explanations ko reuse karna.
 
 ---
 
@@ -85,8 +85,8 @@ def get_semantic_cache(query):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **High Threshold (0.99):** Safer but fewer cache hits (High cost).
-- **Low Threshold (0.85):** More cache hits but high risk of giving the wrong answer (Hallucination).
+- **High Threshold (0.99):** Safer hai par cache hits kam hote hain (High cost).
+- **Low Threshold (0.85):** Cache hits zyada hote hain par wrong answer dene ka high risk hota hai (Hallucination).
 
 ---
 
@@ -119,8 +119,8 @@ def get_semantic_cache(query):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **LLM-native Prompt Caching:** Models that automatically "Remember" the context of the last 10 minutes for a specific session ID, charging 0 tokens for it.
-- **Global Federated Cache:** Multiple companies sharing a "Generic Cache" for common facts to reduce global AI power consumption.
+- **LLM-native Prompt Caching:** Aise models jo specific session ID ke liye automatically pichle 10 minutes ke context ko "Yaad" rakhte hain, aur iske liye 0 tokens charge karte hain.
+- **Global Federated Cache:** Global AI power consumption ko reduce karne ke liye common facts ke liye multiple companies ka "Generic Cache" share karna.
 
 ---
 

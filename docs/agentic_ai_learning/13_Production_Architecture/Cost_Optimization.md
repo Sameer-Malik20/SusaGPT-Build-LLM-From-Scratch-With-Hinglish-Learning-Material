@@ -16,13 +16,13 @@ Cost control sirf "Saving" nahi hai, ye "Sustainability" hai.
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Optimizing agent costs involves attacking **Token Density** and **Inference Frequency**.
+Agent costs ko optimize karne mein **Token Density** aur **Inference Frequency** par attack karna shamil hai.
 1. **Semantic Caching:** Using **GPTCache** or Redis to store `{Query: Response}` pairs. If a new query is 95% similar to an old one, return the cached result.
-2. **Model Router:** A logic layer that decides which model to use.
-    - *Example:* "Classification" task? Use Llama-3-8B. "Code Generation"? Use Claude-3.5-Sonnet.
-3. **Context Pruning:** Instead of sending the full conversation, send only the last 5 turns or a **Summary** of the history.
-4. **Token Budgeting:** Setting a hard limit on `max_tokens` per request.
-5. **Batch Processing:** Using OpenAI's **Batch API** (50% discount) for non-realtime tasks like "Processing 1000 reviews".
+2. **Model Router:** Ek logic layer jo decide karti hai ki kaunsa model use karna hai.
+    - *Example:* "Classification" task? Llama-3-8B use karein. "Code Generation"? Claude-3.5-Sonnet use karein.
+3. **Context Pruning:** Poori conversation bhejne ke bajaye, sirf last 5 turns ya history ki ek **Summary** bhejein.
+4. **Token Budgeting:** Per request `max_tokens` par ek hard limit set karna.
+5. **Batch Processing:** Non-realtime tasks jaise "1000 reviews process karna" ke liye OpenAI ke **Batch API** (50% discount) ka use karna.
 
 ---
 
@@ -56,9 +56,9 @@ from sentence_transformers import SentenceTransformer
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Public Chatbots:** Where 80% of users ask the same 50 questions (e.g. "What is your pricing?").
-- **Enterprise Automation:** Processing millions of invoices daily where every cent saved counts.
-- **Startup MVPs:** Keeping the burn rate low while searching for product-market fit.
+- **Public Chatbots:** Jahan 80% users same 50 questions poochte hain (e.g. "What is your pricing?").
+- **Enterprise Automation:** Daily millions of invoices process karna jahan bacha hua har ek paisa count hota hai.
+- **Startup MVPs:** Product-market fit search karte waqt burn rate ko low rakhna.
 
 ---
 
@@ -70,19 +70,19 @@ from sentence_transformers import SentenceTransformer
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Cost Dashboard:** Track "Cost per 1000 requests" daily.
+- **Cost Dashboard:** Daily "Cost per 1000 requests" ko track karein.
 - **Cache Hit Rate:** Measure karein ki kitne percent queries cache se fulfill ho rahi hain.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Aggressive Optimization:** Very cheap but higher risk of hallucinations or "Dumb" answers.
-- **No Optimization:** High quality but you will go broke very quickly.
+- **Aggressive Optimization:** Bahut sasta hai par hallucinations ya "Dumb" answers ka high risk hai.
+- **No Optimization:** High quality hai par aap bahut jaldi kangaal ho jayenge.
 
 ---
 
 ## ✅ 9. Best Practices
-- **Compress Context:** Use specialized prompts to "Summarize" long histories into 20% of their size.
+- **Compress Context:** Long histories ko unke size ke 20% mein "Summarize" karne ke liye specialized prompts use karein.
 - **Hard Caps:** Humesha OpenAI dashboard par "Hard Limit" set karein (e.g. $50/month).
 
 ---
@@ -93,12 +93,12 @@ from sentence_transformers import SentenceTransformer
 ---
 
 ## 📈 11. Scaling Challenges
-- **Global Cache:** Handling cache across multiple server regions (US vs India) requires distributed Redis clusters.
+- **Global Cache:** Multiple server regions (US vs India) ke across cache handle karne ke liye distributed Redis clusters ki zaroorat hoti hai.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Output vs Input:** Output tokens are usually 3x more expensive. Force agents to be "Concise" (chota jawab).
+- **Output vs Input:** Output tokens aamtaur par 3x zyada expensive hote hain. Agents ko "Concise" (chota jawab) dene ke liye force karein.
 
 ---
 
@@ -110,8 +110,8 @@ from sentence_transformers import SentenceTransformer
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Small Language Models (SLMs):** Using 1B - 3B models (like Phi-3 or Gemma) locally to handle 90% of basic tasks for FREE.
-- **Predictive Prefetching:** Predicting what the user will ask next and fetching it during idle time.
+- **Small Language Models (SLMs):** Basic tasks ke 90% ko FREE mein handle karne ke liye locally 1B - 3B models (jaise Phi-3 ya Gemma) ka use karna.
+- **Predictive Prefetching:** User aage kya poochega ise predict karna aur idle time ke dauran use fetch kar lena.
 
 ---
 

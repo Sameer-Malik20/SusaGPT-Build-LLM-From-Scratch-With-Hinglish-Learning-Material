@@ -35,7 +35,7 @@ Ye guide aapko wahi "Expert edge" degi jo aapko 99% baki candidates se alag bana
 
 ### 5. Evaluation & Metrics
 - **Q:** "Bina human ke agent accuracy kaise measure karoge?"
-- **Ans:** Frameworks like **RAGAS** (Faithfulness, Relevance) and **LLM-as-a-Judge** (G-Eval).
+- **Ans:** **RAGAS** (Faithfulness, Relevance) aur **LLM-as-a-Judge** (G-Eval) jaise frameworks.
 
 ---
 
@@ -66,7 +66,7 @@ def call_tool_safely(agent, tool):
 ---
 
 ## 🌍 5. Behavioral Questions
-- **"Sabse bada challenge kya tha aapke AI project mein?"** (Focus on: Latency, Hallucination, or Scaling).
+- **"Sabse bada challenge kya tha aapke AI project mein?"** (Focus on: Latency, Hallucination, ya Scaling).
 - **"AI ethics aur bias ko kaise handle karte ho?"** (Focus on: Guardrails and Diversified Datasets).
 
 ---
@@ -80,22 +80,22 @@ def call_tool_safely(agent, tool):
 ## ✅ 7. The "Expert" Keywords to Use
 - **Deterministic vs Stochastic:** Reasoning behaviors.
 - **Latency Budget:** Optimization focus.
-- **Semantic Caching:** Cost and speed focus.
+- **Semantic Caching:** Cost aur speed focus.
 - **Memory Persistence:** Long-term conversation focus.
 
 ---
 
 ## 🛡️ 8. Security Interview Focus
-- **Prompt Injection:** Explain how to sanitize context.
-- **Sandboxing:** Explain why code execution must be isolated.
+- **Prompt Injection:** Explain karein ki context ko kaise sanitize karna hai.
+- **Sandboxing:** Explain karein ki code execution ko kyu isolate karna chahiye.
 
 ---
 
 ## 📝 9. Final Checklist for Candidates
 - [ ] 2 projects ready on GitHub with README and Architecture diagrams.
-- [ ] Know the difference between LangChain and LangGraph.
-- [ ] Understand Tokenization and Context Windows.
-- [ ] Can explain "Reasoning Loops" (ReAct pattern) clearly.
+- [ ] LangChain aur LangGraph ke beech ka difference jaanein.
+- [ ] Tokenization aur Context Windows ko samjhein.
+- [ ] "Reasoning Loops" (ReAct pattern) ko clearly explain kar sakein.
 
 ---
 

@@ -16,14 +16,14 @@ Adaptive RAG mein AI pehle **Query ko analyze** karta hai aur phir decide karta 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Adaptive RAG is a **Routing Strategy** for RAG pipelines.
-- **Query Classifier:** A small, fast LLM or a set of rules that classifies the incoming query into categories like `SIMPLE`, `MODERATE`, or `COMPLEX`.
+Adaptive RAG, RAG pipelines ke liye ek **Routing Strategy** hai.
+- **Query Classifier:** Ek chota, fast LLM ya rules ka set jo incoming query ko `SIMPLE`, `MODERATE`, ya `COMPLEX` jaise categories mein classify karta hai.
 - **Strategy Routing:**
-    - `SIMPLE`: Direct LLM generation (No retrieval).
+    - `SIMPLE`: Direct LLM generation (Koi retrieval nahi).
     - `MODERATE`: Standard RAG (Single retrieval).
-    - `COMPLEX`: Corrective RAG or Multi-hop RAG (Iterative retrieval + Web search).
-- **Optimization:** This prevents over-using resources (tokens/time) for simple questions while ensuring high quality for hard ones.
-- **Implementation:** Often built as the "Entry Node" in a LangGraph workflow.
+    - `COMPLEX`: Corrective RAG ya Multi-hop RAG (Iterative retrieval + Web search).
+- **Optimization:** Ye simple questions ke liye resources (tokens/time) ko over-use karne se rokta hai aur hard questions ke liye high quality ensure karta hai.
+- **Implementation:** Aksar LangGraph workflow mein "Entry Node" ki tarah build kiya jata hai.
 
 ---
 
@@ -78,9 +78,9 @@ def run_adaptive_rag(query: str):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Enterprise Chatbots:** Handling "Hi" and "Bye" instantly while doing deep searches for "Policy details".
-- **Search Engines:** Identifying when a query needs a "Featured Snippet" vs a "Deep Research" report.
-- **Academic Assistants:** Answering basic definitions vs providing citations for a thesis.
+- **Enterprise Chatbots:** "Policy details" ke liye deep search karte waqt "Hi" aur "Bye" ko instantly handle karna.
+- **Search Engines:** Identify karna ki kab query ko "Featured Snippet" ki zaroorat hai vs "Deep Research" report ki.
+- **Academic Assistants:** Basic definitions ka answer dena vs thesis ke liye citations provide karna.
 
 ---
 
@@ -92,20 +92,20 @@ def run_adaptive_rag(query: str):
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Classifier Audit:** Regularly check the logs: "Did the router pick the right path?"
-- **Confusion Matrix:** Map the Query vs Path to see where the router is failing.
+- **Classifier Audit:** Regularly logs check karein: "Kya router ne sahi path pick kiya?"
+- **Confusion Matrix:** Query vs Path ko map karein taaki dekh sakein ki router kahan fail ho raha hai.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Efficiency:** Best balance between cost, speed, and accuracy.
-- **Maintenance:** Designing and maintaining 3 different RAG paths is 3x more work.
+- **Efficiency:** Cost, speed, aur accuracy ke beech best balance.
+- **Maintenance:** 3 different RAG paths ko design aur maintain karna 3x zyada kaam hai.
 
 ---
 
 ## ✅ 9. Best Practices
 - **Fast Router:** Router ke liye hamesha fast model (like Llama-3-8B or GPT-4o-mini) use karein.
-- **Fail-safe:** If in doubt, route to "Moderate RAG" instead of "Direct".
+- **Fail-safe:** Agar doubt ho, toh "Direct" ke bajaye "Moderate RAG" par route karein.
 
 ---
 
@@ -115,12 +115,12 @@ def run_adaptive_rag(query: str):
 ---
 
 ## 📈 11. Scaling Challenges
-- **Consistent Quality:** Ensuring that all 3 paths give the same "Tone" and "Style" of response.
+- **Consistent Quality:** Ensure karna ki teeno paths response ka same "Tone" aur "Style" dein.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Router tokens:** Since every query goes through the router, you pay for those extra tokens every time. Keep the router prompt small.
+- **Router tokens:** Kyunki har query router ke through jati hai, aap har baar un extra tokens ke liye pay karte hain. Router prompt ko chota rakhein.
 
 ---
 
@@ -138,8 +138,8 @@ def run_adaptive_rag(query: str):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Reinforcement Learning Router:** Routers that learn from user "Thumbs Up/Down" to improve their classification over time.
-- **Prompt-less Routing:** Using semantic similarity (Embeddings) to route instead of a full LLM call (Faster & Cheaper).
+- **Reinforcement Learning Router:** Aise routers jo time ke sath apni classification improve karne ke liye user "Thumbs Up/Down" se seekhte hain.
+- **Prompt-less Routing:** Full LLM call ke bajaye route karne ke liye semantic similarity (Embeddings) ka use karna (Faster & Cheaper).
 
 ---
 

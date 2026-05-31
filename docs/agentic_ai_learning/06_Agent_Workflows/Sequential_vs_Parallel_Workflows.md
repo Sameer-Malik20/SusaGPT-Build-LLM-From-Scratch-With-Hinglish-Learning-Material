@@ -15,11 +15,11 @@ AI Workflows mein bhi yahi hota hai. Agar Agent 1 ka output Agent 2 ko nahi chah
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Optimizing workflows requires identifying **Data Dependencies**.
-- **Sequential (Chains):** Data flows linearly. Node B requires the output of Node A as its input. This is safe and logical but slow.
-- **Parallel (Fan-out/Fan-in):** Multiple independent nodes run at the same time. Their results are combined in a final "Aggregator" node.
-- **Async Execution:** Using Python's `asyncio` or `ThreadedPoolExecutor` to handle parallel nodes without blocking the main event loop.
-- **Aggregator Logic:** When branches merge, the state must handle "Conflict Resolution"—how to combine multiple tool outputs into a single cohesive state.
+Workflows ko optimize karne ke liye **Data Dependencies** ko identify karna zaroori hai.
+- **Sequential (Chains):** Data linearly flow karta hai. Node B ko input ke roop mein Node A ke output ki zaroorat hoti hai. Ye safe aur logical hai par slow hai.
+- **Parallel (Fan-out/Fan-in):** Multiple independent nodes ek hi time par run hote hain. Unke results ko ek final "Aggregator" node mein combine kiya jata hai.
+- **Async Execution:** Main event loop ko block kiye bina parallel nodes ko handle karne ke liye Python ke `asyncio` ya `ThreadedPoolExecutor` ka use karna.
+- **Aggregator Logic:** Jab branches merge hoti hain, toh state ko "Conflict Resolution" handle karna hoga—yaani multiple tool outputs ko ek single cohesive state mein kaise combine kiya jaye.
 
 ---
 
@@ -67,9 +67,9 @@ async def run_parallel_workflow():
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Parallel Search:** Searching Google, Twitter, and LinkedIn simultaneously for a candidate.
-- **A/B Testing Prompts:** Running the same query through 3 different models/prompts in parallel to see which one performs best.
-- **Large Document Processing:** Splitting a 100-page PDF into 10 parts and summarizing each part in parallel.
+- **Parallel Search:** Kisi candidate ke liye Google, Twitter, aur LinkedIn par ek sath search karna.
+- **A/B Testing Prompts:** Same query ko parallel mein 3 different models/prompts ke through run karke dekhna ki kaunsa best perform karta hai.
+- **Large Document Processing:** Ek 100-page PDF ko 10 parts mein split karna aur har part ko parallel mein summarize karna.
 
 ---
 
@@ -87,8 +87,8 @@ async def run_parallel_workflow():
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Sequential:** Easy to debug, low resource usage, but high latency.
-- **Parallel:** Very fast but complex to implement, higher cost (simultaneous tokens), and harder to debug state conflicts.
+- **Sequential:** Debug karna easy hai, low resource usage hai, par high latency hai.
+- **Parallel:** Bahut fast hai par implement karna complex hai, higher cost (simultaneous tokens) hai, aur state conflicts ko debug karna hard hai.
 
 ---
 
@@ -104,7 +104,7 @@ async def run_parallel_workflow():
 ---
 
 ## 📈 11. Scaling Challenges
-- **Concurrent Inference:** LLM providers (like OpenAI) often have lower rate limits for concurrent requests than total tokens.
+- **Concurrent Inference:** LLM providers (jaise OpenAI) ki concurrent requests ke liye rate limits aamtaur par total tokens se lower hoti hain.
 
 ---
 

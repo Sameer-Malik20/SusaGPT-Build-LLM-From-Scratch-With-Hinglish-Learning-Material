@@ -19,12 +19,12 @@ Ye hi wo cheez hai jo AI ko "Agentic" banati hai kyunki wo khud apna rasta chunt
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Conditional edges are functions that take the **State** as input and return the **Name of the next node** (or a list of names).
-- **Routing Function:** A pure Python function. It can use simple `if/else` logic or call an LLM to make a complex decision.
-- **Mapping:** A dictionary that maps the router's output to the actual graph nodes.
+Conditional edges aise functions hote hain jo **State** ko input ke roop mein lete hain aur **Name of the next node** (ya names ki list) return karte hain.
+- **Routing Function:** Ek pure Python function. Ye simple `if/else` logic use kar sakta hai ya ek complex decision lene ke liye LLM ko call kar sakta hai.
+- **Mapping:** Ek dictionary jo router ke output ko actual graph nodes ke sath map karti hai.
     - Example: `{"tech": "tech_node", "billing": "billing_node"}`.
-- **The Router Node:** Often, we use a "Router LLM" with structured output (Pydantic) to ensure the returned string matches one of our mapping keys.
-- **Non-deterministic Routing:** Allowing the agent to decide when it's "Done" vs when it needs to "Retry".
+- **The Router Node:** Aksar, hum structured output (Pydantic) ke sath ek "Router LLM" use karte hain taaki ensure ho sake ki returned string hamari mapping keys mein se ek se match kare.
+- **Non-deterministic Routing:** Agent ko ye decide karne dena ki kab wo "Done" hai vs kab use "Retry" karne ki zaroorat hai.
 
 ---
 
@@ -73,9 +73,9 @@ def should_continue(state):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Self-Correction:** If the code execution fails, route back to the "Fixer" agent.
-- **Triage:** Routing a customer query to "Sales", "Support", or "Billing" based on the text.
-- **Loop Termination:** Ending a search loop after 3 attempts or when enough info is found.
+- **Self-Correction:** Agar code execution fail ho jaye, toh wapas "Fixer" agent par route karein.
+- **Triage:** Text ke basis par customer query ko "Sales", "Support", ya "Billing" par route karna.
+- **Loop Termination:** 3 attempts ke baad ya jab enough info mil jaye toh search loop ko end karna.
 
 ---
 
@@ -93,8 +93,8 @@ def should_continue(state):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **LLM Routing:** Very smart and flexible but slow and adds to the cost.
-- **Rule-based Routing (Regex/If-Else):** Very fast and free but "Dumb" and can easily break with minor text changes.
+- **LLM Routing:** Bahut smart aur flexible hai par slow hai aur cost badhata hai.
+- **Rule-based Routing (Regex/If-Else):** Bahut fast aur free hai par "Dumb" hai aur minor text changes se easily break ho sakta hai.
 
 ---
 
@@ -115,7 +115,7 @@ def should_continue(state):
 ---
 
 ## 💰 12. Cost Considerations
-- **Decision Token Cost:** Every conditional check is a potential LLM call. Use a small, cheap model (GPT-4o-mini) for routing.
+- **Decision Token Cost:** Har conditional check ek potential LLM call hai. Routing ke liye small, cheap model (GPT-4o-mini) use karein.
 
 ---
 
@@ -133,8 +133,8 @@ def should_continue(state):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Multi-Factor Routing:** Router considers not just the text, but also the remaining token budget and latency constraints.
-- **Semantic Routers:** Using embeddings to find the closest "Path Description" instead of an LLM call for faster decisions.
+- **Multi-Factor Routing:** Router sirf text hi nahi, balki remaining token budget aur latency constraints ko bhi consider karta hai.
+- **Semantic Routers:** Faster decisions ke liye LLM call ke bajaye closest "Path Description" dhoondhne ke liye embeddings ka use karna.
 
 ---
 

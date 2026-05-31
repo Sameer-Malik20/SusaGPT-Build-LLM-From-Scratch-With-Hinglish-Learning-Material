@@ -17,15 +17,15 @@ Sirf output dekhna kafi nahi hai, humein "Andar ki baat" (Traces) dekhni hoti ha
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Monitoring an agent requires moving from simple logs to **Structured Traces**.
-1. **The RAG Triad (Faithfulness, Relevance, Precision):** Using frameworks like **RAGAS** to score how well the agent retrieves and uses data.
-2. **LLM-as-a-Judge (G-Eval):** Using a stronger model (e.g., GPT-4o) to grade the performance of a smaller model.
-3. **Tracing (LangSmith / Arize Phoenix):** Every step of the agent's thought process is assigned a `trace_id`. This allows you to visualize the graph execution.
+Agent ko monitor karne ke liye simple logs se **Structured Traces** par move karne ki zaroorat hoti hai.
+1. **The RAG Triad (Faithfulness, Relevance, Precision):** Agent data ko kitne ache se retrieve aur use karta hai ise score karne ke liye **RAGAS** jaise frameworks ka use karna.
+2. **LLM-as-a-Judge (G-Eval):** Chote model ki performance ko grade karne ke liye ek stronger model (e.g., GPT-4o) ka use karna.
+3. **Tracing (LangSmith / Arize Phoenix):** Agent ke thought process ke har step ko ek `trace_id` assign kiya jata hai. Ye aapko graph execution ko visualize karne deta hai.
 4. **Agentic Metrics:**
-    - **Steps-to-Goal:** How many tool calls did it take?
-    - **Tool Success Rate:** % of tools that returned valid data.
-    - **Cost-per-Task:** Token usage monitoring in real-time.
-5. **Observability Pillars:** Logs, Metrics, and Traces (The "Golden Signals" of AI).
+    - **Steps-to-Goal:** Tool calls ke kitne steps lage?
+    - **Tool Success Rate:** % of tools jinhone valid data return kiya.
+    - **Cost-per-Task:** Real-time mein token usage ki monitoring.
+5. **Observability Pillars:** Logs, Metrics, aur Traces (AI ke "Golden Signals").
 
 ---
 
@@ -66,9 +66,9 @@ os.environ["LANGCHAIN_PROJECT"] = "Support_Agent_V1"
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Enterprise Helpdesks:** Tracking why a bot gave a wrong refund to a customer.
-- **R&D Pipelines:** Comparing different "Prompt Versions" to see which one has higher accuracy.
-- **Legal Agents:** Auditing the reasoning steps to ensure no laws were violated in the answer.
+- **Enterprise Helpdesks:** Track karna ki bot ne customer ko wrong refund kyu diya.
+- **R&D Pipelines:** Different "Prompt Versions" ko compare karna ye dekhne ke liye ki kiski accuracy higher hai.
+- **Legal Agents:** Reasoning steps ko audit karna ye ensure karne ke liye ki answer mein kisi law ka violation na ho.
 
 ---
 
@@ -86,8 +86,8 @@ os.environ["LANGCHAIN_PROJECT"] = "Support_Agent_V1"
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Deep Observability:** High visibility but adds to the token cost and storage.
-- **Simple Logging:** Free and fast but "Impossible" to debug complex reasoning errors.
+- **Deep Observability:** High visibility par token cost aur storage add karta hai.
+- **Simple Logging:** Free aur fast hai par complex reasoning errors ko debug karna "Impossible" hai.
 
 ---
 
@@ -127,7 +127,7 @@ os.environ["LANGCHAIN_PROJECT"] = "Support_Agent_V1"
 
 ## 🚀 15. Latest 2026 Industry Patterns
 - **Autonomous Evals:** Ek AI dusre AI ki galti dhoond kar khud hi prompt theek kar deta hai.
-- **Semantic Monitoring:** Monitoring not just tokens, but the "Intent" and "Sentiment" of the agent's work.
+- **Semantic Monitoring:** Sirf tokens hi nahi, balki agent ke kaam ke "Intent" aur "Sentiment" ko bhi monitor karna.
 
 ---
 

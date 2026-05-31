@@ -17,12 +17,12 @@ GPU aapke AI ko "Pankh" deta hai taaki wo local machine par bhi "Super-fast" cha
 ---
 
 ## 🧠 2. Deep Technical Explanation
-GPU inference is all about **VRAM (Video RAM)** and **Parallelism**.
-1. **VRAM Constraints:** A 7B model (like Llama-3) in 4-bit quantization needs ~5GB of VRAM. A 70B model needs ~40GB. If your GPU has only 8GB, you can't run the big models.
-2. **Quantization:** Reducing the "Precision" of model weights (e.g., from 16-bit to 4-bit) to make it 4x smaller without losing much intelligence.
-3. **Inference Engines:** Tools like **vLLM**, **Ollama**, or **TGI (Text Generation Inference)** that optimize how the GPU processes requests.
-4. **CUDA:** The software layer (by Nvidia) that lets Python talk to the GPU hardware.
-5. **Batching:** Running multiple requests at the same time on one GPU to maximize efficiency.
+GPU inference poori tarah se **VRAM (Video RAM)** aur **Parallelism** ke baare mein hai.
+1. **VRAM Constraints:** 4-bit quantization mein ek 7B model (jaise Llama-3) ko ~5GB VRAM ki zaroorat hoti hai. 70B model ko ~40GB ki zaroorat hoti hai. Agar aapke GPU mein sirf 8GB hai, toh aap bade models run nahi kar sakte.
+2. **Quantization:** Intelligence ko bina lose kiye model weights ki "Precision" ko reduce karna (e.g., 16-bit se 4-bit) taaki ye 4x chota ho sake.
+3. **Inference Engines:** **vLLM**, **Ollama**, ya **TGI (Text Generation Inference)** jaise tools jo optimize karte hain ki GPU requests ko kaise process karta hai.
+4. **CUDA:** Nvidia dwara banayi gayi software layer jo Python ko GPU hardware se baat karne deti hai.
+5. **Batching:** Efficiency ko maximize karne ke liye ek hi GPU par ek sath multiple requests run karna.
 
 ---
 
@@ -53,9 +53,9 @@ ollama run llama3
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Privacy-First Agents:** Companies that cannot send their sensitive legal or medical data to OpenAI.
-- **Offline Agents:** AI that needs to work in a factory or a ship with no internet connection.
-- **Cost-Saving Pipelines:** Using a small local model (Gemma/Phi-3) to "Filter" or "Classify" data before sending only the important bits to expensive GPT-4.
+- **Privacy-First Agents:** Aise companies jo apna sensitive legal ya medical data OpenAI ko nahi bhej sakti.
+- **Offline Agents:** AI jise bina internet connection ke factory ya ship mein kaam karne ki zaroorat ho.
+- **Cost-Saving Pipelines:** Expensive GPT-4 par sirf important data bhejne se pehle data ko "Filter" ya "Classify" karne ke liye small local model (Gemma/Phi-3) ka use karna.
 
 ---
 
@@ -67,36 +67,36 @@ ollama run llama3
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **`nvidia-smi`:** The gold standard command to check: "How much VRAM is left?" and "What is the GPU temperature?"
-- **Logs:** Check if the model is being loaded into RAM (Slow) or VRAM (Fast).
+- **`nvidia-smi`:** Check karne ke liye gold standard command: "Kitni VRAM bachi hai?" aur "GPU temperature kya hai?"
+- **Logs:** Check karein ki model RAM (Slow) mein load ho raha hai ya VRAM (Fast) mein.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Local GPU:** 100% Privacy and Zero API cost, but high upfront hardware cost ($1000 - $30,000) and maintenance.
-- **Cloud API:** Zero setup and Pay-as-you-go, but higher long-term cost and Data Privacy risks.
+- **Local GPU:** 100% Privacy aur Zero API cost hai, par high upfront hardware cost ($1000 - $30,000) aur maintenance hai.
+- **Cloud API:** Zero setup aur Pay-as-you-go hai, par higher long-term cost aur Data Privacy risks hain.
 
 ---
 
 ## ✅ 9. Best Practices
 - **Use Quantization:** Humesha GGUF or AWQ formats use karein memory bachane ke liye.
-- **Monitoring:** Track GPU usage to know when you need to upgrade or add more GPUs.
+- **Monitoring:** Track karein GPU usage taaki pata chale ki kab upgrade karne ya aur GPUs add karne ki zaroorat hai.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Model Poisoning:** Downloading weights from untrusted sources (use Hugging Face).
-- **Physical Security:** Since the data is on your server, physical access must be restricted.
+- **Model Poisoning:** Untrusted sources se weights download karna (Hugging Face use karein).
+- **Physical Security:** Kyunki data aapke server par hai, isliye physical access restricted hona chahiye.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Multi-GPU Setup:** Distributing a single model across 2 or 4 GPUs (Model Parallelism).
+- **Multi-GPU Setup:** Single model ko 2 ya 4 GPUs ke across distribute karna (Model Parallelism).
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Electricity Bill:** High-end GPUs consume a lot of power (300W - 700W). Calculate your monthly bill!
+- **Electricity Bill:** High-end GPUs bahut power consume karte hain (300W - 700W). Apne monthly bill ko calculate karein!
 
 ---
 
@@ -108,8 +108,8 @@ ollama run llama3
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Unified Memory:** Apple's M3/M4 chips sharing RAM between CPU and GPU, making them surprisingly good for running local agents.
-- **Speculative Decoding:** Using a small model to "Guess" tokens and a big model to "Verify" them, making local inference 2x faster.
+- **Unified Memory:** Apple ke M3/M4 chips jo CPU aur GPU ke beech RAM share karte hain, jo local agents chalane ke liye surprisingly acche hain.
+- **Speculative Decoding:** Tokens ko "Guess" karne ke liye ek small model aur unhe "Verify" karne ke liye big model ka use karna, jisse local inference 2x faster ho jata hai.
 
 ---
 

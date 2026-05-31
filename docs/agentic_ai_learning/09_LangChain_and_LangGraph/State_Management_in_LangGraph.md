@@ -16,13 +16,13 @@ Agar ye "Diary" (State) na ho, toh Node 2 ko pata hi nahi chalega ki Node 1 ne k
 ---
 
 ## 🧠 2. Deep Technical Explanation
-State in LangGraph is the **Single Source of Truth** for the entire graph execution.
-- **The State Schema:** A `TypedDict` or `Pydantic` class that defines what data is allowed (e.g., `messages`, `sender`, `next_step`).
-- **Reducers (Annotated):** This is the most powerful feature. It defines *how* the state is updated when a node returns a value.
-    - **Overwrite (Default):** The old value is replaced by the new one.
-    - **Append (using `operator.add`):** The new value is added to the old one (Common for message lists).
-- **Channels:** Internally, LangGraph uses "Channels" to store state variables.
-- **Isolation:** Each graph run has its own independent state, preventing data leaks between different users.
+LangGraph mein state poore graph execution ke liye **Single Source of Truth** hoti hai.
+- **The State Schema:** Ek `TypedDict` ya `Pydantic` class jo define karti hai ki kaunsa data allowed hai (e.g., `messages`, `sender`, `next_step`).
+- **Reducers (Annotated):** Ye sabse powerful feature hai. Ye define karta hai ki jab koi node value return karta hai toh state *kaise* update hoti hai.
+    - **Overwrite (Default):** Purani value ko nayi value se replace kar diya jata hai.
+    - **Append (using `operator.add`):** Nayi value ko purani value mein add kar diya jata hai (message lists ke liye common hai).
+- **Channels:** Internally, LangGraph state variables ko store karne ke liye "Channels" use karta hai.
+- **Isolation:** Har graph run ki apni independent state hoti hai, jo different users ke beech data leaks ko rokti hai.
 
 ---
 
@@ -71,9 +71,9 @@ def node_b(state: GraphState):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Conversation History:** Appending every user and AI message to a `messages` list.
-- **Task Tracking:** Storing a list of "Completed Tasks" so the agent doesn't repeat work.
-- **Variable Storage:** Keeping track of a `user_id` or `session_token` throughout the graph.
+- **Conversation History:** Har user aur AI message ko `messages` list mein append karna.
+- **Task Tracking:** "Completed Tasks" ki list store karna taaki agent kaam repeat na kare.
+- **Variable Storage:** Poore graph mein `user_id` ya `session_token` ko track karna.
 
 ---
 
@@ -86,13 +86,13 @@ def node_b(state: GraphState):
 
 ## 🛠️ 7. Debugging Guide
 - **Print State at each Node:** Function ke start mein `print(state)` karein to verify input.
-- **Snapshot Inspection:** Use `graph.get_state(config)` to see the current state from outside the graph.
+- **Snapshot Inspection:** Graph ke bahar se current state dekhne ke liye `graph.get_state(config)` ka use karein.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **TypedDict:** Lightweight and fast but doesn't provide runtime validation.
-- **Pydantic:** Robust validation but slightly slower and more verbose.
+- **TypedDict:** Lightweight aur fast hai par runtime validation provide nahi karta.
+- **Pydantic:** Robust validation hai par slightly slower aur zyada verbose hai.
 
 ---
 
@@ -108,12 +108,12 @@ def node_b(state: GraphState):
 ---
 
 ## 📈 11. Scaling Challenges
-- **Concurrent Updates:** LangGraph handles this via thread-safe checkpointers, but very high speed updates can still cause performance issues.
+- **Concurrent Updates:** LangGraph ise thread-safe checkpointers ke throw handle karta hai, par bahut high speed updates abhi bhi performance issues cause kar sakte hain.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Context Tokens:** Large states mean more input tokens for every subsequent node. Minimize state size!
+- **Context Tokens:** Large states ka matlab hai har subsequent node ke liye zyada input tokens. State size ko minimize karein!
 
 ---
 
@@ -131,8 +131,8 @@ def node_b(state: GraphState):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Differential State Updates:** Only sending the "Changed" parts of the state to the LLM to save tokens.
-- **Time-Travel Debugging:** Moving the state back to a previous "Checkpoint" to retry a failed node with different parameters.
+- **Differential State Updates:** Tokens bachane ke liye LLM ko state ke sirf "Changed" parts hi bhejna.
+- **Time-Travel Debugging:** Failed node ko different parameters ke sath retry karne ke liye state ko pichle "Checkpoint" par wapas le jana.
 
 ---
 

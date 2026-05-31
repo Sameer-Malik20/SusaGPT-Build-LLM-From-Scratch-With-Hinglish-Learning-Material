@@ -17,12 +17,12 @@ Ye un apps ke liye best hai jahan traffic unpredictable hai (kabhi kam, kabhi ba
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Serverless deployment for agents involves managing **Cold Starts** and **Statelessness**.
-1. **Event-Driven Execution:** The agent is triggered by an HTTP request, a file upload (S3), or a message in a queue.
-2. **Cold Starts:** The delay when a function starts from scratch. Since agents have heavy dependencies (LangChain, Pydantic), cold starts can be 2-5 seconds.
-3. **Stateless Nature:** Serverless functions don't "Remember" anything. You *must* store agent state in an external DB (Redis/Postgres) every time.
-4. **Timeouts:** Most serverless platforms have a limit (e.g., AWS Lambda is 15 mins). Long-running agent tasks (research, scraping) might hit this limit.
-5. **Edge Functions:** Running agents on the "Edge" (Cloudflare Workers) to reduce latency by being geographically closer to the user.
+Agents ke liye serverless deployment mein **Cold Starts** aur **Statelessness** ko manage karna shamil hota hai.
+1. **Event-Driven Execution:** Agent ek HTTP request, file upload (S3), ya queue mein message dwara trigger hota hai.
+2. **Cold Starts:** Jab koi function scratch se start hota hai toh hone wala delay. Kyunki agents ke paas heavy dependencies (LangChain, Pydantic) hoti hain, isliye cold starts 2-5 seconds ho sakte hain.
+3. **Stateless Nature:** Serverless functions kuch bhi "Yaad" nahi rakhte. Aapko har baar agent state ko external DB (Redis/Postgres) mein store *must* karna hoga.
+4. **Timeouts:** Zyadatar serverless platforms ki ek limit hoti hai (e.g., AWS Lambda is 15 mins). Long-running agent tasks (research, scraping) is limit ko hit kar sakte hain.
+5. **Edge Functions:** Latency ko reduce karne ke liye agents ko "Edge" (Cloudflare Workers) par run karna taaki wo user ke geographically closer ho sakein.
 
 ---
 
@@ -54,9 +54,9 @@ def handler(request):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Low-Traffic Startups:** Where you don't want to pay $50/month for a server that nobody uses at night.
-- **Micro-tasks:** A serverless agent that only "Categorizes" incoming support tickets.
-- **Webhook Handlers:** An agent that triggers every time you get a new lead in Salesforce.
+- **Low-Traffic Startups:** Jahan aap kisi aise server ke liye $50/month pay nahi karna chahte jise raat mein koi use na karta ho.
+- **Micro-tasks:** Ek serverless agent jo incoming support tickets ko sirf "Categorize" karta hai.
+- **Webhook Handlers:** Ek agent jo har baar Salesforce mein new lead milne par trigger hota hai.
 
 ---
 
@@ -68,25 +68,25 @@ def handler(request):
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **CloudWatch / Vercel Logs:** Check for "Execution Timed Out" or "Out of Memory" errors.
-- **Warm-up Requests:** Sending a "Dummy" request every 5 mins to keep the function "Warm" and avoid cold starts.
+- **CloudWatch / Vercel Logs:** Check karein "Execution Timed Out" or "Out of Memory" errors.
+- **Warm-up Requests:** Function ko "Warm" rakhne aur cold starts se bachne ke liye har 5 mins mein ek "Dummy" request bhejna.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Serverless:** $0 cost when idle, infinite scaling, but high latency (cold starts) and timeout limits.
-- **Persistent Server:** zero latency, no timeouts, but you pay even when nobody is using it.
+- **Serverless:** Idle hone par $0 cost, infinite scaling, par high latency (cold starts) aur timeout limits.
+- **Persistent Server:** zero latency, no timeouts, par aap tab bhi pay karte hain jab use koi nahi kar raha hota.
 
 ---
 
 ## ✅ 9. Best Practices
 - **Lean Dependencies:** Sirf wahi libraries use karein jo zaruri hon taaki function fast start ho.
-- **Async calls:** Use `asyncio` for model calls to finish as quickly as possible.
+- **Async calls:** Jitni jaldi ho sake finish karne ke liye model calls ke liye `asyncio` use karein.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Exposed Secrets:** Ensuring environment variables are encrypted and not visible in logs.
+- **Exposed Secrets:** Ensure karna ki environment variables encrypted hon aur logs mein visible na hon.
 
 ---
 
@@ -96,7 +96,7 @@ def handler(request):
 ---
 
 ## 💰 12. Cost Considerations
-- **Pay-per-Execution:** Calculate if your traffic is high enough that a persistent server might actually be cheaper (The "Serverless Wall").
+- **Pay-per-Execution:** Calculate karein ki kya aapka traffic itna high hai ki ek persistent server actually cheaper padega (The "Serverless Wall").
 
 ---
 
@@ -108,8 +108,8 @@ def handler(request):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Wasm on Edge:** Running agents in under 10ms on the edge using WebAssembly.
-- **GPU Serverless:** Platforms like **Modal** or **RunPod** that provide serverless GPUs—you only pay for the seconds the GPU was running your model.
+- **Wasm on Edge:** WebAssembly ka use karke edge par 10ms se kam samay mein agents run karna.
+- **GPU Serverless:** **Modal** ya **RunPod** jaise platforms jo serverless GPUs provide karte hain—aap sirf un seconds ke liye pay karte hain jab GPU aapka model run kar raha tha.
 
 ---
 

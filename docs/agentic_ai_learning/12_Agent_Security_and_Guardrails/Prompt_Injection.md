@@ -15,12 +15,12 @@ Ye agentic AI ka sabse bada security hole hai kyunki agent ke paas **Tools** (Em
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Prompt injection happens because LLMs cannot perfectly distinguish between **Instructions** and **Data**.
-1. **Direct Injection:** Bypassing system constraints via roleplay, emotional manipulation, or logical traps.
-2. **Indirect Injection:** Malicious payloads hidden in external data (PDFs, Emails, Webpages) that the agent retrieves during RAG.
-3. **Payload Delivery:** Forcing the agent to call a sensitive tool (e.g., `delete_account`) using injected commands.
-4. **Data Exfiltration:** Tricking the agent into sending private data to an external URL via a `search` or `web_request` tool.
-5. **Prompt Leaking:** Extracting the system prompt of the agent to find more vulnerabilities.
+Prompt injection isliye hota hai kyunki LLMs **Instructions** aur **Data** ke beech perfectly distinguish nahi kar pate.
+1. **Direct Injection:** Roleplay, emotional manipulation, ya logical traps ke through system constraints ko bypass karna.
+2. **Indirect Injection:** External data (PDFs, Emails, Webpages) mein hidden malicious payloads jo agent RAG ke dauran retrieve karta hai.
+3. **Payload Delivery:** Injected commands ka use karke agent ko sensitive tool (e.g., `delete_account`) call karne ke liye force karna.
+4. **Data Exfiltration:** `search` ya `web_request` tool ke through private data ko external URL par bhejne ke liye agent ko trick karna.
+5. **Prompt Leaking:** Aur zyada vulnerabilities dhoondhne ke liye agent ke system prompt ko extract karna.
 
 ---
 
@@ -60,22 +60,22 @@ def secure_invoke(user_data):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Email Agents:** Preventing an agent from deleting your emails just because it read a "Malicious" incoming mail.
-- **Enterprise Search:** Ensuring the agent doesn't reveal internal salaries by being tricked by a clever prompt.
-- **Autonomous Shopping:** Preventing the agent from buying 100 laptops because a website it visited said "Buy this now for free".
+- **Email Agents:** Agent ko aapke emails delete karne se rokna sirf isliye kyunki usne ek "Malicious" incoming mail read kar li.
+- **Enterprise Search:** Ensure karna ki agent clever prompt dwara trick hokar internal salaries reveal na kare.
+- **Autonomous Shopping:** Agent ko 100 laptops buy karne se rokna kyunki usne jo website visit ki usne kaha "Buy this now for free".
 
 ---
 
 ## ❌ 6. Failure Cases
-- **Instruction Overwrite:** "Ignore previous instructions" is very hard for models to resist.
+- **Instruction Overwrite:** "Ignore previous instructions" ko resist karna models ke liye bahut hard hota hai.
 - **Visual Injection:** OCR ke zariye images mein chupi instructions follow kar lena.
 - **Multi-lingual Injection:** Dusri language (e.g. Arabic/Hindi) mein injection dena jo English guardrail detect na kar paye.
 
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Red Teaming:** Try to hack your own agent. Can you make it say its system prompt?
-- **Injection Scanners:** Use specialized LLMs (like LlamaGuard) to scan inputs before they reach the main agent.
+- **Red Teaming:** Apne khud ke agent ko hack karne ki koshish karein. Kya aap use system prompt kehlwa sakte hain?
+- **Injection Scanners:** Inputs main agent tak pahunchne se pehle unhe scan karne ke liye specialized LLMs (jaise LlamaGuard) ka use karein.
 
 ---
 
@@ -93,7 +93,7 @@ def secure_invoke(user_data):
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Adaptive Injections:** Attackers are using other LLMs to generate 1000s of new injection patterns daily.
+- **Adaptive Injections:** Attackers daily 1000s naye injection patterns generate karne ke liye doosre LLMs ka use kar rahe hain.
 
 ---
 
@@ -103,7 +103,7 @@ def secure_invoke(user_data):
 ---
 
 ## 💰 12. Cost Considerations
-- **Secondary LLM Filter:** Using a second model for security doubles your token cost.
+- **Secondary LLM Filter:** Security ke liye second model use karne se aapki token cost double ho jati hai.
 
 ---
 
@@ -115,8 +115,8 @@ def secure_invoke(user_data):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Instruction Isolation:** Training models to have a "Hardware-level" separation between system instructions and user data.
-- **Perplexity-based Detection:** Blocking inputs that have "Weird" text structures common in injections.
+- **Instruction Isolation:** System instructions aur user data ke beech "Hardware-level" separation rakhne ke liye models ko train karna.
+- **Perplexity-based Detection:** Injections mein common "Weird" text structures wale inputs ko block karna.
 
 ---
 

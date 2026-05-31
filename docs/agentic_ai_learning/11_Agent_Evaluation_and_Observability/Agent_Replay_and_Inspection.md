@@ -15,15 +15,15 @@ Isse hum "Time Travel" debugging kehte hain kyunki hum past mein ja kar agent ke
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Agent Replay is built on **State Checkpointing**.
-1. **Snapshots:** Every time the agent moves from one node to another, the entire state (Variables, Messages, Tool results) is saved.
-2. **Replay Engine:** A system that can load a specific snapshot and "Resume" execution from that exact point.
-3. **Inspector UI:** A dashboard where you can see:
-    - **Prompt at Step X:** What was the instructions?
-    - **Tokens at Step X:** How much cost?
-    - **Reasoning at Step X:** What was the 'Thought'?
-4. **Time-Travel:** You can modify the state at Step 5 and "Rerun" the agent to see if it fixes the final output at Step 10.
-5. **Session ID:** All snapshots are linked via a unique session identifier.
+Agent Replay **State Checkpointing** par built hai.
+1. **Snapshots:** Har baar jab agent ek node se doosre node par jata hai, toh poora state (Variables, Messages, Tool results) save ho jata hai.
+2. **Replay Engine:** Ek aisa system jo specific snapshot ko load kar sake aur us exact point se execution ko "Resume" kar sake.
+3. **Inspector UI:** Ek dashboard jahan aap dekh sakte hain:
+    - **Prompt at Step X:** Instructions kya the?
+    - **Tokens at Step X:** Kitna cost laga?
+    - **Reasoning at Step X:** 'Thought' kya tha?
+4. **Time-Travel:** Aap Step 5 par state ko modify kar sakte hain aur agent ko "Rerun" karke dekh sakte hain ki kya ye Step 10 par final output ko fix karta hai.
+5. **Session ID:** Saare snapshots ek unique session identifier ke through linked hote hain.
 
 ---
 
@@ -65,28 +65,28 @@ def replay_session(thread_id, checkpoint_id):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Customer Dispute:** Replaying a conversation to see if the AI promised a refund it shouldn't have.
-- **Workflow Optimization:** Identifying why an agent takes 5 unnecessary steps in its research loop.
-- **User Experience:** Rewatching how a user interacted with the agent to improve the UI/UX.
+- **Customer Dispute:** Conversation ko replay karke dekhna ki kya AI ne kisi refund ka promise kiya tha jo use nahi karna chahiye tha.
+- **Workflow Optimization:** Identify karna ki agent apne research loop mein 5 unnecessary steps kyu le raha hai.
+- **User Experience:** UI/UX improve karne ke liye user ne agent ke sath kaise interact kiya use fir se dekhna.
 
 ---
 
 ## ❌ 6. Failure Cases
 - **Massive Storage:** Har step ka snapshot save karne se DB size bahut tezi se badhta hai.
 - **Broken References:** Agar aapne code badal diya, toh purana "Replay" naye code par nahi chalega (Logic mismatch).
-- **Security:** Replays contain sensitive user data. Access must be strictly controlled.
+- **Security:** Replays mein sensitive user data hota hai. Access strictly controlled hona chahiye.
 
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Side-by-Side Comparison:** Run the original trace and the "Fixed" replay side-by-side to verify the improvement.
+- **Side-by-Side Comparison:** Improvement ko verify karne ke liye original trace aur "Fixed" replay ko side-by-side run karein.
 - **State Diff:** Check karein ki Step A aur Step B mein "State" mein kya "Extra" data add hua?
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Full Checkpointing:** Perfect debugging but very expensive storage.
-- **Light Checkpointing:** Saves only key milestones but harder to debug exact failures.
+- **Full Checkpointing:** Perfect debugging hai par storage bahut expensive hai.
+- **Light Checkpointing:** Sirf key milestones ko save karta hai par exact failures ko debug karna harder hai.
 
 ---
 
@@ -97,7 +97,7 @@ def replay_session(thread_id, checkpoint_id):
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Unauthorized Replay:** Someone with access to the DB could watch entire private user sessions. Encrypt your snapshots!
+- **Unauthorized Replay:** DB access rakhne wala koi bhi person pure private user sessions dekh sakta hai. Apne snapshots encrypt karein!
 
 ---
 
@@ -107,7 +107,7 @@ def replay_session(thread_id, checkpoint_id):
 ---
 
 ## 💰 12. Cost Considerations
-- **DB Costs:** Amazon RDS or Managed Postgres cost increases with storage. Use **Compression** for snapshot JSONs.
+- **DB Costs:** Amazon RDS ya Managed Postgres ki cost storage ke sath badhti hai. Snapshot JSONs ke liye **Compression** ka use karein.
 
 ---
 
@@ -119,8 +119,8 @@ def replay_session(thread_id, checkpoint_id):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Interactive Replays:** Users can "Rewind" their own conversation and edit their previous prompt to see a different outcome.
-- **AI-Summarized Replays:** Instead of watching a 50-step trace, an AI summarizes the "Key failure points" for the developer.
+- **Interactive Replays:** Users apni conversation ko "Rewind" kar sakte hain aur different outcome dekhne ke liye apne previous prompt ko edit kar sakte hain.
+- **AI-Summarized Replays:** 50-step trace dekhne ke bajaye, AI developer ke liye "Key failure points" ko summarize karta hai.
 
 ---
 

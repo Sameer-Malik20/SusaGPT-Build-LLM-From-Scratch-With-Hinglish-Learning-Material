@@ -15,14 +15,14 @@ Isse aapka agent user ki help bhi kar payega aur unka sensitive data bhi "Leak" 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-PII Masking involves **Detection**, **Redaction**, and **Re-hydration**.
-1. **Detection:** Using NLP models (like **Presidio**, **Spacy**) or Regex to find patterns (Emails, Credit Cards, SSNs, Aadhaar).
+PII Masking mein **Detection**, **Redaction**, aur **Re-hydration** shamil hote hain.
+1. **Detection:** Patterns (Emails, Credit Cards, SSNs, Aadhaar) dhoondhne ke liye NLP models (jaise **Presidio**, **Spacy**) ya Regex ka use karna.
 2. **Redaction / Anonymization:**
-    - **Masking:** Replacing data with placeholders (e.g., `<PERSON>`).
-    - **Pseudonymization:** Replacing a real name with a fake one (e.g., "Rahul" becomes "John").
-    - **Encryption:** Encrypting the PII so only your backend can decrypt it later.
-3. **Re-hydration (Mapping):** Saving the real values in a secure database so that when the AI responds "Hello [NAME]", your backend can change it back to "Hello Rahul" before showing it to the user.
-4. **Differential Privacy:** Adding "Noise" to data so individual identities cannot be reverse-engineered.
+    - **Masking:** Data ko placeholders (e.g., `<PERSON>`) ke sath replace karna.
+    - **Pseudonymization:** Real name ko fake name se replace karna (e.g., "Rahul" "John" ban jata hai).
+    - **Encryption:** PII ko encrypt karna taaki sirf aapka backend hi baad mein use decrypt kar sake.
+3. **Re-hydration (Mapping):** Real values ko secure database mein save karna taaki jab AI "Hello [NAME]" respond kare, toh user ko dikhane se pehle aapka backend use badal kar "Hello Rahul" kar sake.
+4. **Differential Privacy:** Data mein "Noise" add karna taaki individual identities ko reverse-engineer na kiya ja sake.
 
 ---
 
@@ -66,9 +66,9 @@ def mask_pii(text):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Customer Support:** Agents that can help with orders without ever seeing the customer's home address.
-- **HealthTech:** Analyzing patient symptoms while keeping their name and hospital ID hidden from the cloud AI.
-- **FinTech:** Processing transaction queries while masking account numbers.
+- **Customer Support:** Aise agents jo customer ka home address dekhe bina hi orders ke sath help kar sakein.
+- **HealthTech:** Patient symptoms ko analyze karna jabki unka name aur hospital ID cloud AI se hidden rakhi jaye.
+- **FinTech:** Account numbers mask karte waqt transaction queries ko process karna.
 
 ---
 
@@ -86,8 +86,8 @@ def mask_pii(text):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Full Masking:** Highest privacy but AI might lose "Nuance" or "Connection" with the user.
-- **No Masking:** Best AI performance but high legal and security risk.
+- **Full Masking:** Highest privacy par ho sakta hai AI "Nuance" ya user ke sath "Connection" lose kar de.
+- **No Masking:** Best AI performance par high legal aur security risk.
 
 ---
 
@@ -108,7 +108,7 @@ def mask_pii(text):
 ---
 
 ## 💰 12. Cost Considerations
-- **Compute Cost:** Running PII detection models (like Spacy/BERT) on your own servers requires CPU/GPU resources.
+- **Compute Cost:** Apne servers par PII detection models (jaise Spacy/BERT) run karne ke liye CPU/GPU resources ki zaroorat hoti hai.
 
 ---
 
@@ -120,8 +120,8 @@ def mask_pii(text):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Synthetic Data Generation:** Using AI to replace real PII with "Fake but Realistic" data to maintain the agent's reasoning quality.
-- **Privacy-Preserving Embeddings:** Converting text into vectors that contain "Meaning" but no "PII", so they can be searched safely.
+- **Synthetic Data Generation:** Agent ki reasoning quality maintain karne ke liye real PII ko "Fake but Realistic" data se replace karne ke liye AI ka use karna.
+- **Privacy-Preserving Embeddings:** Text ko aise vectors mein convert karna jinme "Meaning" ho par "PII" na ho, taaki unhe safely search kiya ja sake.
 
 ---
 

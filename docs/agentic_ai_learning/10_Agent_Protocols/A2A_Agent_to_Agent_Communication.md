@@ -16,7 +16,7 @@ Agar Agent A seedha Agent B ko bolta hai "Ye lo plan, ab code likho", toh use **
 ---
 
 ## 🧠 2. Deep Technical Explanation
-A2A communication can be **Synchronous** (Direct call) or **Asynchronous** (Message Queue).
+A2A communication **Synchronous** (Direct call) ya **Asynchronous** (Message Queue) ho sakta hai.
 1. **The Handoff Pattern:** One agent finishes a task and "Yields" control to another agent along with the current state.
 2. **Standard Message Formats:** Using JSON schemas or FIPA-ACL to ensure both agents understand the `sender`, `receiver`, and `content`.
 3. **Capability Negotiation:** Agent A asks Agent B: "Kya tum SQL query chala sakte ho?" Agent B responds: "Haan, main level 3 certified SQL agent hoon."
@@ -57,14 +57,14 @@ def writer_agent(state):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Supply Chain:** A "Buyer Agent" negotiating price with a "Vendor Agent".
-- **Software Dev:** A "Coder Agent" sending a pull request to a "Linter Agent".
-- **Gaming:** Multi-agent NPCs coordinating to surround a player.
+- **Supply Chain:** Ek "Buyer Agent" jo "Vendor Agent" ke sath price negotiate kar raha ho.
+- **Software Dev:** Ek "Coder Agent" jo "Linter Agent" ko pull request bhej raha ho.
+- **Gaming:** Player ko gherne ke liye multi-agent NPCs ka coordinate karna.
 
 ---
 
 ## ❌ 6. Failure Cases
-- **Deadlocks:** Agent A is waiting for B, and B is waiting for A.
+- **Deadlocks:** Agent A B ka wait kar raha hai, aur B A ka wait kar raha hai.
 - **State Corruption:** Agent A ne data galat format mein bheja, aur Agent B crash ho gaya.
 - **Infinite Delegation:** Ek agent kaam karne ke bajaye doosre ko pass karta ja raha hai.
 
@@ -72,13 +72,13 @@ def writer_agent(state):
 
 ## 🛠️ 7. Debugging Guide
 - **Communication Logs:** Record karein: "Who sent what to whom at what time?"
-- **Sequence Diagrams:** Visualise the flow of messages to find where the logic broke.
+- **Sequence Diagrams:** Flow of messages ko visual ke throw dekhna taaki find kiya ja sake ki logic kahan break hua.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Peer-to-Peer (A2A):** Fast and decentralized, but hard to monitor and control.
-- **Supervisor Pattern:** Easy to control but creates a bottleneck at the manager.
+- **Peer-to-Peer (A2A):** Fast aur decentralized hai, par monitor aur control karna hard hai.
+- **Supervisor Pattern:** Control karna easy hai par manager par ek bottleneck create karta hai.
 
 ---
 
@@ -112,8 +112,8 @@ def writer_agent(state):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Autonomous Negotiation:** Agents that have their own budgets and pay each other in tokens for services.
-- **Swarm Intelligence:** Hundreds of tiny agents communicating via "Pheromones" (shared data state) to solve massive problems.
+- **Autonomous Negotiation:** Aise agents jin ke paas apna budget hota hai aur wo services ke liye ek doosre ko tokens mein pay karte hain.
+- **Swarm Intelligence:** Hundreds of tiny agents jo massive problems solve karne ke liye "Pheromones" (shared data state) ke throw communicate karte hain.
 
 ---
 

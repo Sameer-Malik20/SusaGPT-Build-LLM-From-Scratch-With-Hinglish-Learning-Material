@@ -17,12 +17,12 @@ Advanced patterns humein help karte hain taaki hum complicated AI apps ko bina "
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Advanced LangChain focuses on **LCEL (LangChain Expression Language)** and custom modularity.
-- **LCEL:** A declarative way to chain components. Syntax: `chain = prompt | model | parser`. It supports parallel execution and streaming out-of-the-box.
-- **RunnableParallel:** Executing multiple chains or tools simultaneously.
-- **Configurable Fields:** Allowing users to switch models (e.g., GPT-4 vs Claude) at runtime without changing the chain code.
-- **Custom Callbacks:** Monitoring token usage, latency, and intermediate steps for every node in the chain.
-- **Advanced Memory:** Using `ConversationSummaryBufferMemory` which summarizes old conversations while keeping the recent messages intact.
+Advanced LangChain **LCEL (LangChain Expression Language)** aur custom modularity par focus karta hai.
+- **LCEL:** Components ko chain karne ka ek declarative way. Syntax: `chain = prompt | model | parser`. Ye out-of-the-box parallel execution aur streaming support karta hai.
+- **RunnableParallel:** Multiple chains ya tools ko ek sath simultaneously execute karna.
+- **Configurable Fields:** Chain code badle bina users ko runtime par models (e.g., GPT-4 vs Claude) switch karne dene ki permission dena.
+- **Custom Callbacks:** Chain mein har node ke liye token usage, latency, aur intermediate steps ko monitor karna.
+- **Advanced Memory:** `ConversationSummaryBufferMemory` ka use karna jo recent messages ko intact rakhte hue old conversations ko summarize karta hai.
 
 ---
 
@@ -69,9 +69,9 @@ combined_chain = RunnableParallel(summary=summary_chain, hindi=translate_chain)
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Enterprise Dashboards:** Summarizing data and generating a chart simultaneously.
-- **Multi-lingual Bots:** Translating the user query and searching the English knowledge base in parallel.
-- **Self-Correction Loops:** Running a "Critic" chain immediately after the "Writer" chain.
+- **Enterprise Dashboards:** Data summarize karna aur simultaneously chart generate karna.
+- **Multi-lingual Bots:** User query ko translate karna aur English knowledge base ko parallel mein search karna.
+- **Self-Correction Loops:** "Writer" chain ke turant baad ek "Critic" chain run karna.
 
 ---
 
@@ -84,34 +84,34 @@ combined_chain = RunnableParallel(summary=summary_chain, hindi=translate_chain)
 
 ## 🛠️ 7. Debugging Guide
 - **Verbose Mode:** Use `debug=True` in your configurations.
-- **LangSmith Integration:** Use LangSmith to trace every single "Pipe" transition and see where the data was lost.
+- **LangSmith Integration:** Har single "Pipe" transition ko trace karne aur data kahan loss hua ye dekhne ke liye LangSmith use karein.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **LCEL:** Very powerful and clean but has a steep learning curve.
-- **Standard Classes:** Simple to write but hard to extend for complex, parallel logic.
+- **LCEL:** Bahut powerful aur clean hai par iska steep learning curve hai.
+- **Standard Classes:** Likhna simple hai par complex, parallel logic ke liye extend karna mushkil hai.
 
 ---
 
 ## ✅ 9. Best Practices
 - **Use Pydantic Output Parsers:** Humesha ensure karein ki chain ka result ek structured JSON/Pydantic object ho.
-- **Fallback Chains:** Use `.with_fallbacks([backup_chain])` so that if GPT-4 fails, the chain automatically retries with another model.
+- **Fallback Chains:** `.with_fallbacks([backup_chain])` use karein taaki agar GPT-4 fail ho jaye, toh chain automatically doosre model ke sath retry kare.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Prompt Injection in Chains:** Ensure that user inputs are properly sanitized before being piped into the next node.
+- **Prompt Injection in Chains:** Ensure karein ki next node mein pipe hone se pehle user inputs properly sanitize ho rahe hain.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Serialization Overhead:** Converting large data objects between chain steps in high-concurrency environments.
+- **Serialization Overhead:** High-concurrency environments mein chain steps ke beech large data objects ko convert karna.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Parallel Token Usage:** Parallel chains consume tokens at the same time, leading to sudden bill spikes.
+- **Parallel Token Usage:** Parallel chains ek hi time par tokens consume karti hain, jisse sudden bill spikes ho sakte hain.
 
 ---
 
@@ -129,8 +129,8 @@ combined_chain = RunnableParallel(summary=summary_chain, hindi=translate_chain)
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Composable RAG:** Building the retrieval, reranking, and generation as individual LCEL modules that can be swapped instantly.
-- **Prompt-to-Chain:** An AI that writes the LCEL code itself based on a high-level requirement.
+- **Composable RAG:** Retrieval, reranking, aur generation ko individual LCEL modules ke roop mein build karna jinhe instantly swap kiya ja sake.
+- **Prompt-to-Chain:** Ek AI jo high-level requirement ke basis par khud LCEL code likhta hai.
 
 ---
 

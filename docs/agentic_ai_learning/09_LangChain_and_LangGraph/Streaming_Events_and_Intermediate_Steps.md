@@ -18,14 +18,14 @@ Streaming se user ko "Wait" karna bura nahi lagta kyunki unhe dikh raha hai ki A
 ---
 
 ## 🧠 2. Deep Technical Explanation
-LangGraph supports granular streaming via the `astream_events` API (V2).
+LangGraph `astream_events` API (V2) ke through granular streaming support karta hai.
 - **Event Types:**
-    - `on_chat_model_stream`: Streaming the actual tokens of the LLM response.
-    - `on_tool_start`: Signal that an agent has started using a tool.
-    - `on_chain_start/end`: Signal when a specific node in the graph begins or finishes.
-- **Filtering Events:** In production, you don't want to show "Internal Debug Logs" to the user. You must filter only `on_chat_model_stream` for the final UI.
-- **Intermediate Steps:** Showing the "Thought Process" (ReAct steps) so the user understands *how* the agent reached the answer.
-- **Async Iterators:** Using `async for` to consume the stream in the backend (FastAPI) and send it to the frontend via **Server-Sent Events (SSE)**.
+    - `on_chat_model_stream`: LLM response ke actual tokens ko stream karna.
+    - `on_tool_start`: Signal ki agent ne tool use karna start kar diya hai.
+    - `on_chain_start/end`: Signal jab graph mein koi specific node begin ya finish hota hai.
+- **Filtering Events:** Production mein, aap user ko "Internal Debug Logs" nahi dikhana chahte. Final UI ke liye aapko sirf `on_chat_model_stream` filter karna hoga.
+- **Intermediate Steps:** "Thought Process" (ReAct steps) dikhana taaki user samajh sake ki agent answer tak *kaise* pahuncha.
+- **Async Iterators:** Backend (FastAPI) mein stream consume karne ke liye `async for` ka use karna aur use **Server-Sent Events (SSE)** ke throw frontend par bhejna.
 
 ---
 
@@ -74,9 +74,9 @@ async def chat_stream(query: str):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Research Chatbots:** Showing the user which websites are being searched in real-time.
-- **Coding Assistants:** Streaming the code block as it's being written.
-- **Customer Support:** Showing "Agent is typing..." and then the response words.
+- **Research Chatbots:** User ko real-time mein dikhana ki kaunsi websites search ki ja rahi hain.
+- **Coding Assistants:** Code block jaise-jaise likha ja raha ho use stream karna.
+- **Customer Support:** "Agent is typing..." dikhana aur fir response words.
 
 ---
 
@@ -88,35 +88,35 @@ async def chat_stream(query: str):
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Log Event Types:** Print `event["event"]` and `event["name"]` to see the sequence of triggers.
-- **cURL testing:** Use `curl -N http://localhost:8000/chat-stream?query=Hi` to test if streaming works without a frontend.
+- **Log Event Types:** Triggers ki sequence dekhne ke liye `event["event"]` aur `event["name"]` print karein.
+- **cURL testing:** Streaming bina frontend ke kaam karti hai ya nahi ye test karne ke liye `curl -N http://localhost:8000/chat-stream?query=Hi` use karein.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Streaming:** Excellent User Experience, feels faster, transparent.
-- **Non-Streaming:** Simple to implement, easy to cache, but feels slow for long-running agents.
+- **Streaming:** Excellent User Experience, faster aur transparent feel hota hai.
+- **Non-Streaming:** Implement karna simple hai, cache karna easy hai, par long-running agents ke liye slow feel hota hai.
 
 ---
 
 ## ✅ 9. Best Practices
 - **Content Aggregation:** Token-by-token update karne ki jagah frontend par chunks ko join karein.
-- **Status Indicators:** Use specialized events to show "Thinking..." animations.
+- **Status Indicators:** "Thinking..." animations dikhane ke liye specialized events use karein.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Sensitive Metadata:** Ensure that the `data` payload of events doesn't contain internal trace IDs or private configurations.
+- **Sensitive Metadata:** Ensure karein ki events ke `data` payload mein internal trace IDs ya private configurations na hon.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Concurrent Connections:** Streaming apps maintain many open HTTP connections (SSE), requiring high-performance servers like Gunicorn with Uvicorn workers.
+- **Concurrent Connections:** Streaming apps kai open HTTP connections (SSE) maintain karti hain, jiske liye Gunicorn with Uvicorn workers jaise high-performance servers ki zaroorat hoti hai.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **No extra token cost:** Streaming uses the same tokens as non-streaming. However, the extra server bandwidth might add a small cost.
+- **No extra token cost:** Streaming same tokens use karti hai jitne non-streaming. Halanki, extra server bandwidth thoda extra cost add kar sakti hai.
 
 ---
 
@@ -128,14 +128,14 @@ async def chat_stream(query: str):
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **No Version in astream_events:** `version="v2"` mention na karna (Old versions are less reliable).
+- **No Version in astream_events:** `version="v2"` mention na karna (Old versions less reliable hote hain).
 - **Blocking the stream:** Stream ke beech mein koi heavy sync operation karna jisse flow ruk jaye.
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Multi-Modal Streaming:** Streaming video/audio generation frames in parallel with text thoughts.
-- **Interactive Streams:** Allowing the user to "Stop" or "Edit" the stream mid-way if they see the agent is going in the wrong direction.
+- **Multi-Modal Streaming:** Text thoughts ke parallel mein video/audio generation frames stream karna.
+- **Interactive Streams:** User ko stream ko beech mein "Stop" ya "Edit" karne dena agar wo dekhein ki agent galat direction mein ja raha hai.
 
 ---
 

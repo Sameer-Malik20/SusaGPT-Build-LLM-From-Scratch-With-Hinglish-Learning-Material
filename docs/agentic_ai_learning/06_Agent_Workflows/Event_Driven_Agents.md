@@ -16,12 +16,12 @@ Ye agents "Active" rehte hain bina aapke instruction ke. Wo backgroud mein kaam 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Event-driven architecture (EDA) for agents relies on **Pub/Sub (Publisher-Subscriber)** models or **Webhooks**.
-- **The Event Producer:** A system (GitHub, Stripe, IoT sensor) that sends a signal when something happens.
-- **The Trigger:** A listener (FastAPI endpoint, AWS Lambda) that receives the signal and wakes up the agent.
-- **The Payload:** The metadata about the event (e.g., the content of the new email).
-- **Asynchronous Processing:** Since events can happen anytime, the agent usually processes them in a **Background Queue** (like Celery, RabbitMQ, or Redis Streams).
-- **Filtering Logic:** Not every event needs an LLM call. A rule-based filter should decide if the event is "Interesting" enough for the agent.
+Agents ke liye event-driven architecture (EDA) **Pub/Sub (Publisher-Subscriber)** models ya **Webhooks** par rely karti hai.
+- **The Event Producer:** Ek system (GitHub, Stripe, IoT sensor) jo tab signal send karta hai jab kuch hota hai.
+- **The Trigger:** Ek listener (FastAPI endpoint, AWS Lambda) jo signal receive karta hai aur agent ko wake up karta hai.
+- **The Payload:** Event ke baare mein metadata (e.g., new email ka content).
+- **Asynchronous Processing:** Kyunki events kabhi bhi ho sakte hain, isliye agent unhe aamtaur par ek **Background Queue** (jaise Celery, RabbitMQ, ya Redis Streams) mein process karta hai.
+- **Filtering Logic:** Har event ko LLM call ki zaroorat nahi hoti. Ek rule-based filter decide karega ki kya event agent ke liye kaafi "Interesting" hai.
 
 ---
 
@@ -90,8 +90,8 @@ async def github_event_handler(request: Request):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Reactive:** Very fast response to changes but complex to manage (Concurrency).
-- **Polling (Old way):** Simple but slow and wastes resources checking for updates when none exist.
+- **Reactive:** Changes par bahut fast response par ise manage karna complex hai (Concurrency).
+- **Polling (Old way):** Simple hai par slow hai aur jab koi updates na hon tab bhi updates check karne mein resources waste karta hai.
 
 ---
 
@@ -103,13 +103,13 @@ async def github_event_handler(request: Request):
 
 ## 🛡️ 10. Security Concerns
 - **Webhook Spoofing:** Attacker fake events bhej kar aapka agent trigger kar sakta hai. Always verify **HMAC signatures**.
-- **Data Flooding:** Rate limit your events to prevent DDoS attacks on your LLM budget.
+- **Data Flooding:** Apne LLM budget par DDoS attacks ko rokne ke liye apne events ko rate limit karein.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Concurrency Control:** How many agents can run in parallel without hitting LLM rate limits?
-- **Ordering:** Ensuring Event A is processed before Event B if they are related.
+- **Concurrency Control:** Bina LLM rate limits hit kiye kitne agents parallel mein run ho sakte hain?
+- **Ordering:** Agar Event A aur Event B related hain, toh ensure karna ki Event A Event B se pehle process ho.
 
 ---
 
@@ -126,14 +126,14 @@ async def github_event_handler(request: Request):
 ---
 
 ## ⚠️ 14. Common Mistakes
-- **No Retries:** Webhook fail ho gaya toh event lost (Use a persistent queue).
+- **No Retries:** Webhook fail ho gaya toh event lost (Ek persistent queue ka use karein).
 - **Processing Everything:** Har choti cheez ke liye GPT-4 call karna (Bankrupt hone ka rasta).
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Edge-Triggered Agents:** Running small agents on the device (Mobile/IoT) to process events locally before sending to the cloud.
-- **Cross-Platform Event Buses:** Systems like **Inngest** or **Temporal** that manage long-running stateful agent workflows triggered by external events.
+- **Edge-Triggered Agents:** Cloud par bhejne se pehle events ko locally process karne ke liye device (Mobile/IoT) par small agents run karna.
+- **Cross-Platform Event Buses:** **Inngest** ya **Temporal** jaise systems jo external events dwara triggered long-running stateful agent workflows ko manage karte hain.
 
 ---
 

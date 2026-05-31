@@ -15,12 +15,12 @@ Queue system AI ko "Patient" banata hai aur system ko "Crash" hone se bachata ha
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Background processing is critical for agents because LLM inference is slow.
-1. **The Broker (Redis/RabbitMQ):** A message storage where tasks wait to be processed.
-2. **The Worker (Celery/Python):** A separate process that listens to the queue and executes the agent logic.
-3. **State Management:** The worker must save the progress of the task in a database (Postgres) so the user can check the status (e.g. 50% done).
-4. **Visibility Timeout:** Ensuring that if a worker crashes, the task is put back in the queue for another worker to finish.
-5. **Rate Limiting Workers:** Ensuring you don't start 100 workers and hit your OpenAI API rate limit in 1 second.
+Agents ke liye background processing critical hai kyunki LLM inference slow hota hai.
+1. **The Broker (Redis/RabbitMQ):** Ek message storage jahan tasks process hone ka wait karte hain.
+2. **The Worker (Celery/Python):** Ek separate process jo queue ko listen karta hai aur agent logic ko execute karta hai.
+3. **State Management:** Worker ko database (Postgres) mein task ki progress save karni hogi taaki user status check kar sake (e.g. 50% done).
+4. **Visibility Timeout:** Ensure karna ki agar worker crash ho jaye, toh task wapas queue mein daal diya jaye taaki doosra worker use finish kar sake.
+5. **Rate Limiting Workers:** Ensure karna ki aap 100 workers start na karein aur 1 second mein apni OpenAI API rate limit hit na kar dein.
 
 ---
 
@@ -58,9 +58,9 @@ def long_running_agent_task(user_query, session_id):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Data Scraping:** Scraping 100 websites to find price comparison data.
-- **Report Generation:** Reading quarterly financials and creating a 10-page PDF report.
-- **Email Swarms:** An agent that has to read 500 unread emails and categorize them.
+- **Data Scraping:** Price comparison data dhoondhne ke liye 100 websites scrape karna.
+- **Report Generation:** Quarterly financials read karna aur 10-page PDF report create karna.
+- **Email Swarms:** Ek agent jise 500 unread emails read karke unhe categorize karna ho.
 
 ---
 
@@ -78,8 +78,8 @@ def long_running_agent_task(user_query, session_id):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Queue System:** High reliability and handles spikes, but adds infrastructure complexity and latency.
-- **Synchronous:** Fast for simple tasks but crashes under load.
+- **Queue System:** High reliability aur spikes handle karta hai, par infrastructure complexity aur latency add karta hai.
+- **Synchronous:** Simple tasks ke liye fast hai par load hone par crash ho jata hai.
 
 ---
 
@@ -95,7 +95,7 @@ def long_running_agent_task(user_query, session_id):
 ---
 
 ## 📈 11. Scaling Challenges
-- **KEDA Scaling:** Automatically adding more worker pods to Kubernetes when the Redis queue gets too long.
+- **KEDA Scaling:** Jab Redis queue bahut lambi ho jaye toh automatically Kubernetes mein aur worker pods add karna.
 
 ---
 
@@ -112,8 +112,8 @@ def long_running_agent_task(user_query, session_id):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Temporal.io for Agents:** Using Temporal to manage long-running "Workflows" that can survive server restarts and take months to finish.
-- **Distributed Agents:** Different workers for different agent roles (e.g. "Research Queue" vs "Email Queue").
+- **Temporal.io for Agents:** Long-running "Workflows" ko manage karne ke liye Temporal ka use karna jo server restarts ko survive kar sakein aur finish hone mein months le sakein.
+- **Distributed Agents:** Different agent roles ke liye different workers (e.g. "Research Queue" vs "Email Queue").
 
 ---
 

@@ -114,7 +114,7 @@ def recall_fact(collection, query):
 
 ## 📈 11. Scaling Challenges
 - **Indexing Latency:** 10 Million vectors index karne mein hours lag sakte hain.
-- **HNSW Algorithm:** Understanding how graphs (Hierarchical Navigable Small World) speed up search but consume more RAM.
+- **HNSW Algorithm:** Ye samajhna ki kaise graphs (Hierarchical Navigable Small World) search ko speed up karte hain par zyada RAM consume karte hain.
 
 ---
 

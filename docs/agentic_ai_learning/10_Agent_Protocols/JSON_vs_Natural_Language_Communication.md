@@ -18,15 +18,15 @@ Communication ke do tarike hote hain: **Formal (JSON)** aur **Informal (Natural 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-The choice depends on the **Parsing overhead** vs **Semantic richness**.
+Choice **Parsing overhead** vs **Semantic richness** par depend karti hai.
 1. **JSON-based (Structured):**
-    - **Pros:** Deterministic parsing, easy validation (JSON Schema), low token usage (concise).
-    - **Cons:** Rigid, cannot easily capture "Nuance" or "Tone".
+    - **Pros:** Deterministic parsing, easy validation (JSON Schema), low token usage (chota).
+    - **Cons:** Rigid hai, "Nuance" ya "Tone" ko easily capture nahi kar sakta.
 2. **Natural Language (Unstructured):**
-    - **Pros:** High flexibility, easy for humans to audit, captures complex logic without a strict schema.
-    - **Cons:** Parsing is stochastic (can fail), high token usage, prone to "Semantic drift".
-3. **The Middle Ground (Markdown/XML):** Using Markdown blocks or XML tags to encapsulate JSON within a natural language response.
-4. **Protocols:** Protocols like **MCP** and **LSP** strictly enforce JSON-RPC for reliability.
+    - **Pros:** High flexibility, humans ke liye audit karna easy, bina strict schema ke complex logic capture karta hai.
+    - **Cons:** Parsing stochastic hai (fail ho sakti hai), high token usage, "Semantic drift" ka khatra.
+3. **The Middle Ground (Markdown/XML):** Natural language response ke andar JSON ko encapsulate karne ke liye Markdown blocks ya XML tags ka use karna.
+4. **Protocols:** Reliability ke liye **MCP** aur **LSP** protocols strictly JSON-RPC enforce karte hain.
 
 ---
 
@@ -62,9 +62,9 @@ ACTION: { "type": "tool_call", "name": "search", "params": { "q": "..." } }
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Data Pipelines:** Agents that clean data use strictly **JSON** to avoid format errors.
-- **Creative Writing Swarms:** A "Plot Agent" and "Dialogue Agent" talking in **Natural Language** to maintain the story's flow.
-- **Financial Auditing:** Using **JSON** for numbers and **Natural Language** for explaining the "Risk Assessment".
+- **Data Pipelines:** Jo agents data clean karte hain wo format errors se bachne ke liye strictly **JSON** use karte hain.
+- **Creative Writing Swarms:** Story ka flow maintain karne ke liye **Natural Language** mein baat karne wale "Plot Agent" aur "Dialogue Agent".
+- **Financial Auditing:** Numbers ke liye **JSON** aur "Risk Assessment" explain karne ke liye **Natural Language** ka use karna.
 
 ---
 
@@ -82,30 +82,30 @@ ACTION: { "type": "tool_call", "name": "search", "params": { "q": "..." } }
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **JSON:** 100% Reliability but limited "Brainstorming" power.
-- **Natural Language:** 100% Creativity but 80% Reliability.
+- **JSON:** 100% Reliability par limited "Brainstorming" power.
+- **Natural Language:** 100% Creativity par 80% Reliability.
 
 ---
 
 ## ✅ 9. Best Practices
-- **Strict Mode:** Use **PydanticOutputParser** (LangChain) or **OpenAI JSON Mode** for structured tasks.
+- **Strict Mode:** Structured tasks ke liye **PydanticOutputParser** (LangChain) ya **OpenAI JSON Mode** use karein.
 - **Fallback to Text:** Agar JSON parsing fail ho, toh agent se dobara pucho text format mein.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **JSON Bombs:** Maliciously huge JSON payloads to crash the parser.
-- **Semantic Ambiguity:** In text communication, "Delete the first one" can be interpreted differently by different models.
+- **JSON Bombs:** Parser ko crash karne ke liye maliciously huge JSON payloads.
+- **Semantic Ambiguity:** Text communication mein, "Delete the first one" ko different models differently interpret kar sakte hain.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Token Efficiency:** Natural language uses 5x more tokens than compact JSON. Large swarms can become very expensive.
+- **Token Efficiency:** Natural language compact JSON se 5x zyada tokens use karti hai. Large swarms bahut expensive ho sakte hain.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Compression:** Use abbreviations in JSON keys (e.g. `q` instead of `query`) to save money.
+- **Compression:** Paise bachane ke liye JSON keys mein abbreviations (e.g. `q` instead of `query`) use karein.
 
 ---
 
@@ -117,7 +117,7 @@ ACTION: { "type": "tool_call", "name": "search", "params": { "q": "..." } }
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **LLM-Native Formats:** New serialization formats specifically designed to be "Easy for AI to write and cheap for humans to parse".
+- **LLM-Native Formats:** Naye serialization formats jo specifically designed hain taaki "AI ke liye likhna easy ho aur humans ke liye parse karna cheap ho".
 - **Dynamic Schema Negotiation:** Agents that tell each other: "Mujhe sirf JSON mein answer do, warna main accept nahi karunga."
 
 ---

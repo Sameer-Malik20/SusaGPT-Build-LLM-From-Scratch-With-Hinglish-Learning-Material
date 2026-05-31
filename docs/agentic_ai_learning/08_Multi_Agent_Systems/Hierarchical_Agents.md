@@ -17,11 +17,11 @@ Ye pattern tab zaruri hai jab kaam itna bada ho ki ek manager (Supervisor) confu
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Hierarchical systems implement **Nested State Graphs**.
-- **The Orchestrator (Top Node):** Manages high-level milestones. It delegates "Epics" to Lead Agents.
-- **Lead Agents (Sub-Managers):** Each Lead Agent is a Supervisor of its own **Sub-Graph**. They maintain their own local state and only report the "Summary" back to the Top Orchestrator.
-- **Encapsulation:** Sub-agents don't need to know about the entire system. They only care about the task their Lead Agent gave them.
-- **State Handoffs:** Reducing "Context Noise" by only bubbling up critical information to the higher layers.
+Hierarchical systems **Nested State Graphs** ko implement karte hain.
+- **The Orchestrator (Top Node):** High-level milestones ko manage karta hai. Ye Lead Agents ko "Epics" delegate karta hai.
+- **Lead Agents (Sub-Managers):** Har Lead Agent apne **Sub-Graph** ka Supervisor hota hai. Wo apni local state maintain karte hain aur sirf "Summary" hi Top Orchestrator ko report karte hain.
+- **Encapsulation:** Sub-agents ko poore system ke baare mein janne ki zaroorat nahi hoti. Wo sirf us task ki care karte hain jo unke Lead Agent ne unhe diya hai.
+- **State Handoffs:** Sirf critical information ko higher layers tak bubble up karke "Context Noise" ko kam karna.
 
 ---
 
@@ -69,9 +69,9 @@ def ceo_agent(goal: str):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Autonomous Software Houses:** One agent architecting the system, and delegating specific microservices to sub-teams.
-- **Large Content Production:** A Lead Producer managing a Research team, a Writing team, and a Video editing team.
-- **Cybersecurity SOC:** A Master Analyst managing sub-agents for Network monitoring, Endpoint protection, and Threat hunting.
+- **Autonomous Software Houses:** Ek agent jo system ko architect karta hai, aur sub-teams ko specific microservices delegate karta hai.
+- **Large Content Production:** Research team, Writing team, aur Video editing team ko manage karne wala ek Lead Producer.
+- **Cybersecurity SOC:** Network monitoring, Endpoint protection, aur Threat hunting ke sub-agents ko manage karne wala ek Master Analyst.
 
 ---
 
@@ -89,8 +89,8 @@ def ceo_agent(goal: str):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Hierarchical:** Handles massive complexity, very organized, and modular.
-- **Flat Team:** Faster and cheaper but gets confused by too many details.
+- **Hierarchical:** Massive complexity handle karta hai, bahut organized aur modular hai.
+- **Flat Team:** Fast aur cheap hai par bahut saari details se confuse ho jata hai.
 
 ---
 
@@ -111,7 +111,7 @@ def ceo_agent(goal: str):
 ---
 
 ## 💰 12. Cost Considerations
-- **Exponential Token Cost:** Every message bubbles up through layers, multiplying the cost. Use smaller models for mid-level managers.
+- **Exponential Token Cost:** Har message layers ke through bubble up hota hai, jisse cost multiply hoti hai. Mid-level managers ke liye smaller models ka use karein.
 
 ---
 
@@ -129,8 +129,8 @@ def ceo_agent(goal: str):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Dynamic Hierarchy:** Teams that create or dissolve "Middle Management" layers based on the task complexity in real-time.
-- **Agent Mesh:** A decentralized version of hierarchy where agents form temporary "Squads" to solve a task and then disperse.
+- **Dynamic Hierarchy:** Aise teams jo real-time mein task complexity ke basis par "Middle Management" layers create ya dissolve karte hain.
+- **Agent Mesh:** Hierarchy ka ek decentralized version jahan agents task solve karne ke liye temporary "Squads" banate hain aur fir disperse ho jate hain.
 
 ---
 

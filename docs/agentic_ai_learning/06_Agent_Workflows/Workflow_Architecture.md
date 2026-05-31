@@ -18,12 +18,12 @@ Workflow architecture humein batata hai ki ye steps kab, kaise aur kis order mei
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Workflow architecture in 2026 is dominated by **Stateful Graphs** (e.g., LangGraph).
-- **Nodes:** Individual units of work (LLM calls, Python functions, Tool executions).
-- **Edges:** The connections between nodes. They can be **Directed** (fixed path) or **Conditional** (based on LLM logic).
-- **State:** A shared object that travels through the graph, storing all observations and reasoning.
-- **Cycles:** Allowing the workflow to loop back (e.g., if validation fails, go back to the generation node). This is what makes a workflow "Agentic" rather than just a "Chain".
-- **Checkpointers:** Automatically saving the state at each edge so the workflow can be resumed or audited.
+2026 mein workflow architecture par **Stateful Graphs** (e.g., LangGraph) ka dabdaba hai.
+- **Nodes:** Work ki individual units (LLM calls, Python functions, Tool executions).
+- **Edges:** Nodes ke beech ke connections. Ye **Directed** (fixed path) ya **Conditional** (LLM logic ke basis par) ho sakte hain.
+- **State:** Ek shared object jo graph ke through travel karta hai, saare observations aur reasoning ko store karta hai.
+- **Cycles:** Workflow ko loop back allow karna (e.g., agar validation fail ho jaye, toh generation node par wapas jana). Ye wahi cheez hai jo workflow ko sirf ek "Chain" ke bajaye "Agentic" banati hai.
+- **Checkpointers:** Har edge par state ko automatically save karna taaki workflow ko resume ya audit kiya ja sake.
 
 ---
 
@@ -79,8 +79,8 @@ workflow.add_edge("validator", END)
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Insurance Claims:** A workflow that extracts data from images, checks policy documents, and approves/rejects the claim.
-- **Content Moderation:** A system that filters text, checks against safety rules, and flags for human review if uncertain.
+- **Insurance Claims:** Ek aisa workflow jo images se data extract karta hai, policy documents check karta hai, aur claim ko approve/reject karta hai.
+- **Content Moderation:** Ek aisa system jo text filter karta hai, safety rules ke against check karta hai, aur uncertain hone par human review ke liye flag karta hai.
 
 ---
 
@@ -92,14 +92,14 @@ workflow.add_edge("validator", END)
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Visual Tracing:** Use LangGraph's `draw_mermaid()` to visualize your graph.
-- **Breakpoints:** Stop the workflow at a specific node to inspect the state variables.
+- **Visual Tracing:** Apne graph ko visualize karne ke liye LangGraph ke `draw_mermaid()` ka use karein.
+- **Breakpoints:** State variables ko inspect karne ke liye workflow ko ek specific node par stop karein.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Graph-based Workflows:** Very flexible and powerful but complex to design and debug.
-- **Linear Chains:** Simple and fast but can't handle loops or complex logic.
+- **Graph-based Workflows:** Bahut flexible aur powerful hain par design aur debug karne mein complex hain.
+- **Linear Chains:** Simple aur fast hain par loops ya complex logic handle nahi kar sakte.
 
 ---
 
@@ -110,12 +110,12 @@ workflow.add_edge("validator", END)
 ---
 
 ## 🛡️ 10. Security Concerns
-- **State Manipulation:** Ensure that nodes from untrusted tools cannot overwrite critical state variables (like `is_admin`).
+- **State Manipulation:** Ensure karein ki untrusted tools ke nodes critical state variables (jaise `is_admin`) ko overwrite na kar sakein.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Memory Persistence:** Saving states for millions of concurrent graphs in a high-speed database like Redis.
+- **Memory Persistence:** Ek high-speed database jaise Redis mein millions of concurrent graphs ke liye states ko save karna.
 
 ---
 
@@ -138,8 +138,8 @@ workflow.add_edge("validator", END)
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Agentic Microservices:** Breaking down a large workflow graph into multiple microservices that communicate via events.
-- **Dynamic Graph Construction:** An LLM that builds the workflow graph *on the fly* based on the user's specific request.
+- **Agentic Microservices:** Ek bade workflow graph ko multiple microservices mein break karna jo events ke through communicate karte hain.
+- **Dynamic Graph Construction:** Ek LLM jo user ki specific request ke basis par *on the fly* workflow graph build karta hai.
 
 ---
 

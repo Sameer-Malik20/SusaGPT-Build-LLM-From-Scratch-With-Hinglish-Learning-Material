@@ -17,12 +17,12 @@ Production architecture sikhata hai ki kaise **Redis, Celery, aur Kubernetes** k
 ---
 
 ## 🧠 2. Deep Technical Explanation
-A production agent system requires an **Asynchronous Event-Driven Architecture**.
-1. **API Gateway (FastAPI):** Receives the user request and immediately returns a `task_id`. It doesn't wait for the LLM to finish.
-2. **Task Queue (Redis + Celery):** The request is sent to a queue. Background "Workers" pick up the task.
-3. **State Persistence (Postgres/Redis):** The agent's memory (history) must be saved in a distributed database so any worker can resume the conversation.
-4. **Load Balancing:** Distributing traffic across multiple GPU/CPU servers.
-5. **Caching Layer:** Using **Semantic Cache** (GPTCache) to store answers to common questions, saving tokens and time.
+Production agent system ke liye ek **Asynchronous Event-Driven Architecture** ki zaroorat hoti hai.
+1. **API Gateway (FastAPI):** User request receive karta hai aur immediately ek `task_id` return karta hai. Ye LLM ke finish hone ka wait nahi karta.
+2. **Task Queue (Redis + Celery):** Request ko queue mein bheja jata hai. Background "Workers" task ko pick karte hain.
+3. **State Persistence (Postgres/Redis):** Agent ki memory (history) ek distributed database mein save honi chahiye taaki koi bhi worker conversation resume kar sake.
+4. **Load Balancing:** Multiple GPU/CPU servers ke across traffic distribute karna.
+5. **Caching Layer:** Common questions ke answers store karne ke liye **Semantic Cache** (GPTCache) ka use karna, jisse tokens aur time dono bachein.
 
 ---
 
@@ -61,9 +61,9 @@ def run_agent_task(query, thread_id):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Customer Support:** Handling thousands of chats simultaneously without slowing down.
-- **Batch Document Processing:** Uploading 1000 PDFs and letting 10 workers process them in parallel.
-- **Autonomous SEO Agents:** Running daily crawls and content generation tasks in the background.
+- **Customer Support:** Bina slow hue thousands of chats ko simultaneously handle karna.
+- **Batch Document Processing:** 1000 PDFs upload karna aur 10 workers ko unhe parallel mein process karne dena.
+- **Autonomous SEO Agents:** Background mein daily crawls aur content generation tasks run karna.
 
 ---
 
@@ -75,14 +75,14 @@ def run_agent_task(query, thread_id):
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Flower:** Use the Flower dashboard to monitor Celery workers in real-time.
-- **Prometheus/Grafana:** Monitor CPU, RAM, and GPU usage of your agent pods.
+- **Flower:** Real-time mein Celery workers ko monitor karne ke liye Flower dashboard ka use karein.
+- **Prometheus/Grafana:** Apne agent pods ke CPU, RAM, aur GPU usage ko monitor karein.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Async Architecture:** Super scalable and reliable but very complex to code and debug.
-- **Sync Architecture:** Simple to build but fails immediately under high load.
+- **Async Architecture:** Super scalable aur reliable hai par code aur debug karna bahut complex hai.
+- **Sync Architecture:** Build karna simple hai par high load hone par immediately fail ho jata hai.
 
 ---
 
@@ -121,8 +121,8 @@ def run_agent_task(query, thread_id):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Serverless Agents:** Running agents on AWS Lambda or Modal where you only pay for the exact seconds the code runs.
-- **Micro-agent Mesh:** Breaking one big agent into 10 tiny containers that talk via a service mesh.
+- **Serverless Agents:** AWS Lambda ya Modal par agents run karna jahan aap sirf code chalne ke exact seconds ke liye pay karte hain.
+- **Micro-agent Mesh:** Ek bade agent ko 10 tiny containers mein break karna jo service mesh ke through baat karte hain.
 
 ---
 

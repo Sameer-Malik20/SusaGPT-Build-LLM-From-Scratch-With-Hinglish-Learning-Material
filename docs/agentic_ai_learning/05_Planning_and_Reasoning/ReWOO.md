@@ -17,11 +17,11 @@ Ye bilkul waisa hi hai jaise aap supermarket jaane se pehle "List" bana lete ho,
 ---
 
 ## 🧠 2. Deep Technical Explanation
-ReWOO solves the **Efficiency Gap** in agentic workflows by separating reasoning from execution.
-- **The Planner:** An LLM that takes the user query and generates a "Plan" with **placeholders** (e.g., `#E1`, `#E2`). Example: "Search for X (#E1). Then summarize #E1 (#E2)."
-- **The Worker:** A software module that parses the plan and executes tools. Crucially, if Tool 2 depends on Tool 1, the Worker handles the variable injection *without* calling the LLM again.
-- **The Solver:** A final, small LLM call that takes the original query and all the tool observations to give the final answer.
-- **Key Advantage:** Reduces the number of LLM "Round-trips" from $N$ to 2 (one for planning, one for solving).
+ReWOO execution se reasoning ko separate karke agentic workflows mein **Efficiency Gap** ko solve karta hai.
+- **The Planner:** Ek LLM jo user query leta hai aur **placeholders** (e.g., `#E1`, `#E2`) ke saath ek "Plan" generate karta hai. Example: "Search for X (#E1). Then summarize #E1 (#E2)."
+- **The Worker:** Ek software module jo plan ko parse karta hai aur tools execute karta hai. Crucially, agar Tool 2 Tool 1 par depend karta hai, toh Worker bina LLM ko dobara call kiye variable injection handle karta hai.
+- **The Solver:** Ek final, small LLM call jo original query aur saare tool observations ko lekar final answer deti hai.
+- **Key Advantage:** LLM "Round-trips" ke number ko $N$ se reduce karke sirf 2 kar deta hai (ek planning ke liye, ek solving ke liye).
 
 ---
 
@@ -77,9 +77,9 @@ def solver(query, results):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Comparison Shopping:** Fetching prices from 10 sites at once.
-- **Complex Reports:** Gathering data from 5 different databases simultaneously.
-- **Latency-Sensitive Apps:** Chatbots where the user expects an answer in < 5 seconds.
+- **Comparison Shopping:** Ek sath 10 sites se prices fetch karna.
+- **Complex Reports:** Ek sath 5 different databases se data gather karna.
+- **Latency-Sensitive Apps:** Chatbots jahan user < 5 seconds mein answer expect karta hai.
 
 ---
 
@@ -97,7 +97,7 @@ def solver(query, results):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Speed:** 2x-5x faster than ReAct.
+- **Speed:** ReAct se 2x-5x faster.
 - **Cost:** Bahut sasta (fewer LLM turns).
 - **Flexibility:** Kam hai (Doesn't adapt well if a tool output is unexpected).
 
@@ -115,12 +115,12 @@ def solver(query, results):
 ---
 
 ## 📈 11. Scaling Challenges
-- **Error Propagation:** Agar Step 1 fail hota hai, toh saare dependent steps (Step 2, 3) automatically fail ho jayenge bina chance of recovery ke.
+- **Error Propagation:** Agar Step 1 fail hota hai, toh saare dependent steps (Step 2, 3) automatically fail ho jayenge bina kisi recovery chance ke.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Huge Savings:** ReWOO is the best way to scale agents to millions of users without going bankrupt on API bills.
+- **Huge Savings:** API bills par bankrupt huye bina agents ko millions of users tak scale karne ka sabse behtar tareeqa ReWOO hai.
 
 ---
 
@@ -138,8 +138,8 @@ def solver(query, results):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Hybrid ReWOO:** Planning the first 5 steps with ReWOO, and then using ReAct for the final "Uncertain" steps.
-- **Pre-computed Plans:** Systems that store "Common Plans" for frequent user queries to bypass the Planner step entirely.
+- **Hybrid ReWOO:** Pehle 5 steps ko ReWOO ke saath plan karna, aur fir final "Uncertain" steps ke liye ReAct use karna.
+- **Pre-computed Plans:** Aise systems jo frequent user queries ke liye "Common Plans" store karte hain taaki Planner step ko poori tarah bypass kiya ja sake.
 
 ---
 

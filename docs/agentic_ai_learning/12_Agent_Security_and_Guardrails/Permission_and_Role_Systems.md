@@ -16,14 +16,14 @@ Agar aap ek hi agent ko saari power de denge, toh wo galti se kisi ki salary del
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Permission systems for agents are built using a **Policy Engine**.
-1. **RBAC (Role-Based Access Control):** Assigning agents to roles (e.g., `viewer`, `editor`, `admin`).
-2. **ABAC (Attribute-Based Access Control):** Permissions based on attributes like "Time of day", "Location", or "Project ID". 
-    - *Example:* "Agent can only edit files if it's during office hours."
-3. **Scoping Tools:** Restricting a tool's parameters based on the agent's role.
-    - *Example:* A `search` tool for a `Finance Agent` can only search the `/finance` folder.
-4. **Token-based Authorization:** Giving each agent a unique JWT (JSON Web Token) with its permissions encoded.
-5. **Human-in-the-loop (HITL) Triggers:** Automatically escalating to a human if the agent tries to perform a "High-Risk" action outside its role.
+Agents ke liye permission systems ek **Policy Engine** ka use karke build kiye jate hain.
+1. **RBAC (Role-Based Access Control):** Agents ko roles (e.g., `viewer`, `editor`, `admin`) assign karna.
+2. **ABAC (Attribute-Based Access Control):** "Time of day", "Location", ya "Project ID" jaise attributes ke basis par permissions. 
+    - *Example:* "Agent sirf tabhi files edit kar sakta hai jab office hours chal rahe hon."
+3. **Scoping Tools:** Agent ke role ke basis par tool ke parameters ko restrict karna.
+    - *Example:* `Finance Agent` ke liye ek `search` tool sirf `/finance` folder hi search kar sakta hai.
+4. **Token-based Authorization:** Har agent ko ek unique JWT (JSON Web Token) dena jisme uski permissions encoded hon.
+5. **Human-in-the-loop (HITL) Triggers:** Agar agent apne role ke bahar koi "High-Risk" action karne ki koshish karta hai, toh automatically human ke paas escalate karna.
 
 ---
 
@@ -62,15 +62,15 @@ def execute_agent_tool(agent_role, tool_name):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Multi-tenant SaaS:** Ensuring Agent 1 (Client A) cannot see Agent 2's (Client B) data.
-- **Internal Tools:** A support agent can read customer history but cannot see the CEO's private messages.
-- **Healthcare:** Agents can access patient vitals but need extra permission to view psychiatric history.
+- **Multi-tenant SaaS:** Ensure karna ki Agent 1 (Client A) Agent 2 (Client B) ka data na dekh sake.
+- **Internal Tools:** Support agent customer history read kar sakta hai par CEO ke private messages nahi dekh sakta.
+- **Healthcare:** Agents patient vitals access kar sakte hain par psychiatric history dekhne ke liye extra permission ki zaroorat hoti hai.
 
 ---
 
 ## ❌ 6. Failure Cases
-- **Privilege Escalation:** Agent tricks the system into giving it "Admin" rights via a bug in the prompt.
-- **Confused Deputy Problem:** Agent A (low priv) tricks Agent B (high priv) into doing a task for it.
+- **Privilege Escalation:** Agent prompt mein ek bug ke through system ko trick karke "Admin" rights le leta hai.
+- **Confused Deputy Problem:** Agent A (low priv) Agent B (high priv) ko trick karke apne liye task karwa leta hai.
 - **Stale Permissions:** Agent ke paas abhi bhi purani roles hain jo use ab nahi chahiye.
 
 ---
@@ -82,8 +82,8 @@ def execute_agent_tool(agent_role, tool_name):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Granular Permissions (ABAC):** Very secure but very hard to manage and slows down the system.
-- **Simple Roles (RBAC):** Easy to manage but might be too broad for complex apps.
+- **Granular Permissions (ABAC):** Bahut secure hai par manage karna bahut hard hai aur system ko slow karta hai.
+- **Simple Roles (RBAC):** Manage karna easy hai par complex apps ke liye bahut broad ho sakta hai.
 
 ---
 
@@ -104,7 +104,7 @@ def execute_agent_tool(agent_role, tool_name):
 ---
 
 ## 💰 12. Cost Considerations
-- **Metadata Overhead:** Checking permissions adds a small computation cost but saves millions in potential data breach fines.
+- **Metadata Overhead:** Permissions check karne se ek small computation cost add hoti hai par potential data breach fines mein millions bacha sakti hai.
 
 ---
 
@@ -117,7 +117,7 @@ def execute_agent_tool(agent_role, tool_name):
 
 ## 🚀 15. Latest 2026 Industry Patterns
 - **ZTA (Zero Trust Architecture):** Har ek tool call par naya authentication token mangna.
-- **AI-Managed Permissions:** An "Admin AI" that monitors agent behavior and "Revokes" permissions if it detects suspicious activity.
+- **AI-Managed Permissions:** Ek "Admin AI" jo agent behavior ko monitor karta hai aur suspicious activity detect hone par permissions "Revoke" kar deta hai.
 
 ---
 

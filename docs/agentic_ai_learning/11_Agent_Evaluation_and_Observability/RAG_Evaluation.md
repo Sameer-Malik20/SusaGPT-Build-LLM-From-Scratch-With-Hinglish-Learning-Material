@@ -15,12 +15,12 @@ Agar humara search galat hai, toh answer kabhi sahi nahi hoga. Agar search sahi 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-RAG evaluation is centered around the **RAG Triad**:
-1. **Context Relevance:** Does the retrieved document actually contain the answer to the query? (Retriever's job).
-2. **Groundedness / Faithfulness:** Is the answer derived *only* from the retrieved context? (No hallucinations).
-3. **Answer Relevance:** Does the final answer actually address the user's question?
-4. **Context Precision:** Are the most relevant documents ranked at the top of the search results?
-5. **Context Recall:** Did we find *all* the information needed to answer the query?
+RAG evaluation **RAG Triad** ke around centered hoti hai:
+1. **Context Relevance:** Kya retrieved document mein actually query ka answer hai? (Retriever ka job).
+2. **Groundedness / Faithfulness:** Kya answer *only* retrieved context se derived hai? (No hallucinations).
+3. **Answer Relevance:** Kya final answer actually user ke question ko address karta hai?
+4. **Context Precision:** Kya sabse relevant documents search results ke top par ranked hain?
+5. **Context Recall:** Kya humne query ka answer dene ke liye zaroorat ki *saari* information dhoondh li?
 
 ---
 
@@ -65,9 +65,9 @@ def check_groundedness(context, answer):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Medical RAG:** Ensuring the AI only provides advice based on the medical textbook, not its own training.
-- **Enterprise Search:** Checking if the internal HR bot is correctly quoting the 2026 policy.
-- **Legal Tech:** Verifying that a contract summary only includes terms actually present in the contract.
+- **Medical RAG:** Ensure karna ki AI sirf medical textbook ke basis par hi advice de, apne khud ke training data par nahi.
+- **Enterprise Search:** Check karna ki internal HR bot 2026 policy ko correctly quote kar raha hai ya nahi.
+- **Legal Tech:** Verify karna ki contract summary mein sirf wahi terms include ho jo actually contract mein present hain.
 
 ---
 
@@ -92,22 +92,22 @@ def check_groundedness(context, answer):
 
 ## ✅ 9. Best Practices
 - **Chunk Size Tuning:** Test karein ki 500 characters better hain ya 1000.
-- **Hybrid Search:** Mix Keyword (BM25) and Vector Search for best retrieval scores.
+- **Hybrid Search:** Best retrieval scores ke liye Keyword (BM25) aur Vector Search mix karein.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Context Injection:** Malicious data inside a PDF that tricks the RAG into giving wrong answers.
+- **Context Injection:** PDF ke andar malicious data jo RAG ko wrong answers dene ke liye trick karta hai.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Large Contexts:** Evaluation on 100,000 documents needs a specialized testing pipeline.
+- **Large Contexts:** 100,000 documents par evaluation ke liye ek specialized testing pipeline ki zaroorat hoti hai.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **LLM-as-a-Judge tokens:** RAG evaluation typically needs 2-3 LLM calls per test case.
+- **LLM-as-a-Judge tokens:** RAG evaluation ke liye typically per test case 2-3 LLM calls ki zaroorat hoti hai.
 
 ---
 
@@ -119,8 +119,8 @@ def check_groundedness(context, answer):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Active RAG:** Agents that "Self-evaluate" their retrieval and decide to "Search Again" if the score is low.
-- **Graph-RAG Evals:** Specialized metrics for Knowledge Graphs that measure relationship accuracy.
+- **Active RAG:** Aise agents jo apni retrieval ko "Self-evaluate" karte hain aur score low hone par "Search Again" ka decision lete hain.
+- **Graph-RAG Evals:** Knowledge Graphs ke liye specialized metrics jo relationship accuracy measure karte hain.
 
 ---
 

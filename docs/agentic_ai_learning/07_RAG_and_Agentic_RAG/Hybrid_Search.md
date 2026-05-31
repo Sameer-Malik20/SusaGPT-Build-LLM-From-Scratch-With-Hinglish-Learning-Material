@@ -15,11 +15,11 @@ Semantic search kabhi-kabhi specific names ya numbers miss kar deta hai. Keyword
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Hybrid search combines two different retrieval paradigms:
-1. **Dense Retrieval (Vector Search):** Uses embeddings to capture the **Semantic Meaning** of the query. Good for "What are the benefits of X?"
-2. **Sparse Retrieval (BM25 / Keyword Search):** Uses term frequency to find **Exact Matches**. Essential for names, product IDs, or technical acronyms.
-- **Fusion (RRF):** We use **Reciprocal Rank Fusion (RRF)** to combine the ranked lists from both searches. It calculates a unified score based on the rank in each list.
-- **Weighting:** You can adjust the balance (e.g., 70% Vector, 30% Keyword) based on your use case.
+Hybrid search do alag-alag retrieval paradigms ko combine karti hai:
+1. **Dense Retrieval (Vector Search):** Query ke **Semantic Meaning** ko capture karne ke liye embeddings ka use karta hai. "What are the benefits of X?" ke liye acha hai.
+2. **Sparse Retrieval (BM25 / Keyword Search):** **Exact Matches** dhoondhne ke liye term frequency ka use karta hai. Names, product IDs, ya technical acronyms ke liye zaruri hai.
+- **Fusion (RRF):** Dono searches ki ranked lists ko combine karne ke liye hum **Reciprocal Rank Fusion (RRF)** ka use karte hain. Ye har list mein rank ke basis par ek unified score calculate karta hai.
+- **Weighting:** Aap apne use case ke basis par balance (e.g., 70% Vector, 30% Keyword) ko adjust kar sakte hain.
 
 ---
 
@@ -64,9 +64,9 @@ def reciprocal_rank_fusion(vector_results: list, keyword_results: list, k=60):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Product Search:** Searching for "Cheap running shoes" (Semantic) vs "Nike Air Max 270" (Keyword).
+- **Product Search:** "Cheap running shoes" (Semantic) vs "Nike Air Max 270" (Keyword) ke liye search karna.
 - **Code Search:** Searching for "How to sort a list" vs a specific function name like `sort_v2_fast`.
-- **Medical Records:** Searching for "Heart issues" vs a specific drug code like "Lisinopril-20mg".
+- **Medical Records:** "Heart issues" (Semantic) vs drug code like "Lisinopril-20mg" (Keyword) ke liye search karna.
 
 ---
 
@@ -83,8 +83,8 @@ def reciprocal_rank_fusion(vector_results: list, keyword_results: list, k=60):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Hybrid:** Highest accuracy but requires maintaining two indexes (Vector + Keyword) which increases complexity.
-- **Vector-only:** Simple to maintain but poor at finding specific numbers/acronyms.
+- **Hybrid:** Highest accuracy par do indexes (Vector + Keyword) maintain karne ki zaroorat hoti hai jisse complexity badhti hai.
+- **Vector-only:** Maintain karna simple hai par specific numbers/acronyms dhoondhne mein weak hai.
 
 ---
 
@@ -123,8 +123,8 @@ def reciprocal_rank_fusion(vector_results: list, keyword_results: list, k=60):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Learnable Fusion:** Using a small neural network to dynamically decide the weights of Vector vs Keyword search for *every* query.
-- **Vector-based Sparse Retrieval:** Models like **SPLADE** that generate sparse vectors using LLM knowledge, replacing traditional BM25.
+- **Learnable Fusion:** *Every* query ke liye Vector vs Keyword search ke weights dynamically decide karne ke liye ek chote neural network ka use karna.
+- **Vector-based Sparse Retrieval:** **SPLADE** jaise models jo LLM knowledge ka use karke sparse vectors generate karte hain, jo traditional BM25 ko replace karte hain.
 
 ---
 

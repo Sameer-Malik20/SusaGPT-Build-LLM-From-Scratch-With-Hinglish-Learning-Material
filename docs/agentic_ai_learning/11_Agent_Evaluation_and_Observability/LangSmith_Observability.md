@@ -19,12 +19,12 @@ Isse "Debugging" 100x fast ho jati hai.
 ---
 
 ## 🧠 2. Deep Technical Explanation
-LangSmith is an **Observability Platform** built specifically for LLM workflows.
-1. **Tracing:** Every call to an LLM, Tool, or Chain is wrapped in a `trace`. You can see the full hierarchy of nested calls.
-2. **Datasets:** You can save "Good" or "Bad" outputs from your traces directly into a dataset for future evaluation.
-3. **Feedback Loops:** Users can give "Thumbs up/down" on the UI, and that feedback is attached to the specific trace ID.
-4. **Unit Testing:** Running a list of inputs (Dataset) against your agent and seeing the results in a table.
-5. **Cost & Latency Tracking:** Monitor exactly how many tokens were used in each step and where the delay (bottleneck) is.
+LangSmith ek **Observability Platform** hai jo specifically LLM workflows ke liye built hai.
+1. **Tracing:** LLM, Tool ya Chain ki har call ek `trace` mein wrap hoti hai. Aap nested calls ki full hierarchy dekh sakte hain.
+2. **Datasets:** Aap future evaluation ke liye apne traces se "Good" ya "Bad" outputs ko directly dataset mein save kar sakte hain.
+3. **Feedback Loops:** Users UI par "Thumbs up/down" de sakte hain, aur wo feedback specific trace ID ke sath attach ho jata hai.
+4. **Unit Testing:** Apne agent ke against inputs ki list (Dataset) run karna aur results ko ek table mein dekhna.
+5. **Cost & Latency Tracking:** Monitor karein ki har step mein exactly kitne tokens use hue aur delay (bottleneck) kahan hai.
 
 ---
 
@@ -59,9 +59,9 @@ os.environ["LANGCHAIN_PROJECT"] = "Customer-Support-V1"
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Root Cause Analysis:** Investigating why a specific user got a "Hallucinated" answer by looking at the exact context retrieved.
-- **Performance Tuning:** Finding out that 80% of your latency is coming from a slow "Web Scraping" tool, not the LLM.
-- **Collaborative Debugging:** Sharing a "Trace URL" with a teammate: "Hey, check this error on step 5".
+- **Root Cause Analysis:** Extract kiye gaye exact context ko dekh kar investigate karna ki kisi specific user ko "Hallucinated" answer kyu mila.
+- **Performance Tuning:** Ye pata lagana ki aapki latency ka 80% slow "Web Scraping" tool se aa raha hai, na ki LLM se.
+- **Collaborative Debugging:** Kisi teammate ke sath "Trace URL" share karna: "Hey, check this error on step 5".
 
 ---
 
@@ -74,13 +74,13 @@ os.environ["LANGCHAIN_PROJECT"] = "Customer-Support-V1"
 
 ## 🛠️ 7. Debugging Guide
 - **The "Playground" Button:** LangSmith UI mein ek button hota hai jahan aap failed input ko wapas "Tweaking" karke test kar sakte ho bina code change kiye.
-- **Filtering:** Use filters to find only "Failed" traces or traces where "Cost > $0.10".
+- **Filtering:** Sirf "Failed" traces ya aise traces jahan "Cost > $0.10" ho dhoondhne ke liye filters use karein.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **LangSmith:** Best-in-class UI, deep LangChain integration, but it's a paid SaaS product.
-- **Arize Phoenix:** Open source, can be self-hosted, but setup is more complex.
+- **LangSmith:** Best-in-class UI, deep LangChain integration, par ye ek paid SaaS product hai.
+- **Arize Phoenix:** Open source hai, self-host kiya ja sakta hai, par setup zyada complex hai.
 
 ---
 
@@ -101,7 +101,7 @@ os.environ["LANGCHAIN_PROJECT"] = "Customer-Support-V1"
 ---
 
 ## 💰 12. Cost Considerations
-- **Managed SaaS:** LangSmith tracks millions of steps, and the bill grows with your traffic. Use it strategically for debugging, not just raw logging.
+- **Managed SaaS:** LangSmith millions of steps ko track karta hai, aur bill aapke traffic ke sath badhta hai. Ise debug karne ke liye strategically use karein, na ki sirf raw logging ke liye.
 
 ---
 
@@ -113,8 +113,8 @@ os.environ["LANGCHAIN_PROJECT"] = "Customer-Support-V1"
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Trace-to-FineTune:** Automatically selecting the "Best" 100 traces from production to fine-tune a smaller, cheaper model.
-- **Real-time Alerting:** Alerts that trigger if the "Hallucination score" in production crosses a threshold.
+- **Trace-to-FineTune:** Ek chote aur saste model ko fine-tune karne ke liye production se automatically "Best" 100 traces ko select karna.
+- **Real-time Alerting:** Production mein "Hallucination score" threshold cross karne par trigger hone wale alerts.
 
 ---
 

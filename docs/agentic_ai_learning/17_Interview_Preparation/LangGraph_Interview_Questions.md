@@ -15,7 +15,7 @@
 3. **"Explain Conditional Edges."**
    - *Hinglish Answer:* Ye wo "If-Else" logic hai jo decide karta hai ki graph ab kaunse node par jayega (e.g., "Kya agent ko tool ki zarurat hai?").
 4. **"How do you handle 'Loops' in LangGraph without hitting infinite recursion?"**
-   - *Hinglish Answer:* Using a `recursion_limit` parameter in the `compile()` configuration.
+   - *Hinglish Answer:* `compile()` configuration mein `recursion_limit` parameter ka use karke.
 5. **"What is a Node in LangGraph?"**
    - *Hinglish Answer:* Ek Python function jo state leta hai, kuch processing karta hai, aur updated state return karta hai.
 
@@ -27,7 +27,7 @@
 7. **"Explain the 'Thread ID' concept."**
    - *Hinglish Answer:* Ek user ya session ki unique ID jo batati hai ki ye message kaunsi conversation ka part hai.
 8. **"How do you implement 'Human-in-the-loop' (HITL) in LangGraph?"**
-   - *Hinglish Answer:* Using the `interrupt_before` or `interrupt_after` parameters to pause the graph for human approval.
+   - *Hinglish Answer:* Human approval ke liye graph ko pause karne ke liye `interrupt_before` ya `interrupt_after` parameters ka use karke.
 
 ---
 
@@ -35,7 +35,7 @@
 9. **"What is 'Time Travel' in LangGraph?"**
    - *Hinglish Answer:* Purane state snapshots par "Rewind" karna aur wahan se agent ko dobara start karna debugging ke liye.
 10. **"How do you update the state manually between nodes?"**
-    - *Hinglish Answer:* Using the `update_state()` method to inject data or correct the agent's memory.
+    - *Hinglish Answer:* Data inject karne ya agent ki memory ko correct karne ke liye `update_state()` method ka use karke.
 
 ---
 

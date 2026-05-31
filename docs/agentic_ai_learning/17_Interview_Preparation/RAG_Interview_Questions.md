@@ -23,7 +23,7 @@
 
 ## 🧪 3. Evaluation & Metrics
 6. **"How do you measure RAG performance without human labels?"**
-   - *Hinglish Answer:* Using frameworks like **RAGAS** or **DeepEval** (LLM-as-a-Judge).
+   - *Hinglish Answer:* **RAGAS** ya **DeepEval** (LLM-as-a-Judge) jaise frameworks ka use karke.
 7. **"What is 'Hallucination' in RAG and how to detect it?"**
    - *Hinglish Answer:* Jab AI document se bahar ki baatein kare. Detect karne ke liye NLI (Natural Language Inference) use karte hain.
 
@@ -31,9 +31,9 @@
 
 ## 🏗️ 4. System Design & Scale
 8. **"How do you handle PDF documents with tables in RAG?"**
-   - *Hinglish Answer:* Using specialized parsers like **Unstructured.io** or converting tables into Markdown/JSON before embedding.
+   - *Hinglish Answer:* **Unstructured.io** jaise specialized parsers use karke ya embedding se pehle tables ko Markdown/JSON mein convert karke.
 9. **"Which vector database would you choose for 1 billion documents?"**
-   - *Hinglish Answer:* Pinecone (Managed), Milvus, or Qdrant (High performance at scale).
+   - *Hinglish Answer:* Pinecone (Managed), Milvus, ya Qdrant (High performance at scale).
 10. **"What is 'Semantic Chunking'?"**
     - *Hinglish Answer:* Fixed size ke bajaye "Topic change" hone par chunk break karna.
 

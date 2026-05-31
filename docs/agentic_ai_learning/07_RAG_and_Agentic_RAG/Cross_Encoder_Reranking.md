@@ -8,19 +8,19 @@ Reranking ka matlab hai **"Final Selection"**.
 
 Imagine aapne search kiya "AI jobs". Pehle step (Retrieval) ne aapko 100 results diye. Lekin ye results sirf "Similarity" par based hain. 
 Reranking bilkul waisa hi hai jaise aapka boss un 100 results ko dhang se padhta hai aur sirf top 5 select karta hai jo actually aapke kaam ke hain. 
-- **Step 1 (Retrieval):** Fast but thoda "Raw" (Vector search).
-- **Step 2 (Reranking):** Slow but bahut "Accurate" (Cross-Encoder).
+- **Step 1 (Retrieval):** Fast par thoda "Raw" (Vector search).
+- **Step 2 (Reranking):** Slow par bahut "Accurate" (Cross-Encoder).
 
 Production RAG mein bina Reranker ke accuracy kabhi 90% cross nahi karti.
 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Retrieval models (Bi-Encoders) are fast because they pre-compute embeddings. Rerankers (Cross-Encoders) are slow but accurate because they process the **Query** and the **Document** together.
-- **Bi-Encoder (Retrieval):** `Query Embedding` vs `Doc Embedding`. Good for finding 100 candidates from 1 million.
-- **Cross-Encoder (Reranker):** `LLM(Query + Doc)`. The model looks at the relationship between the two and gives a score (0 to 1). It captures nuances that Bi-Encoders miss.
-- **Why use it?** Vector search can find documents with similar words but different meanings. Rerankers actually "Read" both and verify the relevance.
-- **Model Examples:** Cohere Rerank, BGE-Reranker, or a small BERT-based model.
+Retrieval models (Bi-Encoders) fast hote hain kyunki wo embeddings ko pre-compute karte hain. Rerankers (Cross-Encoders) slow par accurate hote hain kyunki wo **Query** aur **Document** ko ek sath process karte hain.
+- **Bi-Encoder (Retrieval):** `Query Embedding` vs `Doc Embedding`. 1 million mein se 100 candidates dhoondhne ke liye acha hai.
+- **Cross-Encoder (Reranker):** `LLM(Query + Doc)`. Model dono ke beech ke relationship ko dekhta hai aur ek score (0 to 1) deta hai. Ye un nuances ko capture karta hai jo Bi-Encoders miss kar dete hain.
+- **Why use it?** Vector search same words wale par different meaning wale documents dhoondh sakta hai. Rerankers actually dono ko "Read" karte hain aur relevance verify karte hain.
+- **Model Examples:** Cohere Rerank, BGE-Reranker, ya ek chota BERT-based model.
 
 ---
 
@@ -67,9 +67,9 @@ def rerank_results(query, candidates):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Enterprise Search:** Finding the exact policy clause among thousands of similar-sounding legal documents.
-- **Medical Q&A:** Distinguishing between two symptoms that look similar in vector space but are medically different.
-- **Financial Audit:** Finding the specific transaction that matches an audit query.
+- **Enterprise Search:** Hazaron ek jaise lagne wale legal documents mein se exact policy clause dhoondhna.
+- **Medical Q&A:** Vector space mein ek jaise lagne wale par medically different symptoms ke beech ka difference identify karna.
+- **Financial Audit:** Audit query se match karne wali specific transaction dhoondhna.
 
 ---
 
@@ -88,7 +88,7 @@ def rerank_results(query, candidates):
 
 ## ⚖️ 8. Tradeoffs
 - **Precision:** Excellent accuracy boost.
-- **Latency:** Adds 100ms to 2s depending on the number of chunks and model size.
+- **Latency:** Chunks ke number aur model size ke basis par 100ms se 2s add karta hai.
 
 ---
 
@@ -104,12 +104,12 @@ def rerank_results(query, candidates):
 ---
 
 ## 📈 11. Scaling Challenges
-- **CPU/GPU Usage:** Running Cross-Encoders on your own server requires significant compute power.
+- **CPU/GPU Usage:** Apne server par Cross-Encoders run karne ke liye kaafi compute power ki zaroorat hoti hai.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Token Usage:** Reranking involves sending `Query + Doc` multiple times, which consumes tokens.
+- **Token Usage:** Reranking mein `Query + Doc` ko multiple times send karna padta hai, jo tokens consume karta hai.
 
 ---
 
@@ -127,8 +127,8 @@ def rerank_results(query, candidates):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **LLM-as-a-Reranker:** Using GPT-4o-mini directly to rerank by asking it: "Rank these 10 docs based on relevance."
-- **Multi-Vector Reranking:** Rerankers that look at multiple semantic "aspects" (e.g., tone, factuality, recency) at once.
+- **LLM-as-a-Reranker:** GPT-4o-mini se directly pooch kar rerank karna: "Rank these 10 docs based on relevance."
+- **Multi-Vector Reranking:** Aise rerankers jo ek sath multiple semantic "aspects" (e.g., tone, factuality, recency) ko dekhte hain.
 
 ---
 

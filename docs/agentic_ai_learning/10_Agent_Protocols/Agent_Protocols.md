@@ -16,12 +16,12 @@ Protocols ensure karte hain ki "Chaos" na ho aur saare systems ek doosre ke saat
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Protocols in agentic AI define the communication lifecycle, message format, and tool discovery.
-1. **MCP (Model Context Protocol):** Introduced by Anthropic, it allows models to connect to data sources and tools using a standardized server-client architecture.
-2. **JSON-RPC for Agents:** A lightweight remote procedure call protocol using JSON. It defines how an agent sends a `method` call and receives a `result` or `error`.
-3. **FIPA-ACL (Foundation for Intelligent Physical Agents):** A legacy but theoretically solid protocol that defines "Speech Acts" like `Request`, `Inform`, `Propose`, and `Refuse`.
-4. **Agent Communication Language (ACL):** Modern implementations often use Pydantic schemas to enforce structure in message passing.
-5. **Tool Discovery:** How an agent "Queries" a server to find out what tools are available (e.g., `list_tools` method).
+Agentic AI mein protocols communication lifecycle, message format, aur tool discovery define karte hain.
+1. **MCP (Model Context Protocol):** Anthropic dwara introduce kiya gaya, ye models ko standardized server-client architecture ka use karke data sources aur tools se connect karne deta hai.
+2. **JSON-RPC for Agents:** JSON use karne wala ek lightweight remote procedure call protocol. Ye define karta hai ki kaise agent ek `method` call bhejta hai aur `result` ya `error` receive karta hai.
+3. **FIPA-ACL (Foundation for Intelligent Physical Agents):** Ek legacy par theoretically solid protocol jo `Request`, `Inform`, `Propose`, aur `Refuse` jaise "Speech Acts" ko define karta hai.
+4. **Agent Communication Language (ACL):** Modern implementations aksar message passing mein structure enforce karne ke liye Pydantic schemas ka use karte hain.
+5. **Tool Discovery:** Kaise agent ek server ko "Query" karta hai ye pata lagane ke liye ki kaunse tools available hain (e.g., `list_tools` method).
 
 ---
 
@@ -64,9 +64,9 @@ print(f"Protocol Request: {discovery.to_json()}")
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Cross-Framework Agents:** A LangGraph agent using a tool server built in CrewAI.
-- **Enterprise Tool Hubs:** A central server where all company APIs are hosted as "MCP Tools" for any AI agent to use.
-- **Multi-Vendor Orchestration:** Microsoft's AutoGen talking to an OpenAI Assistant using a shared protocol.
+- **Cross-Framework Agents:** CrewAI mein built tool server use karne wala ek LangGraph agent.
+- **Enterprise Tool Hubs:** Ek central server jahan company ke saare APIs "MCP Tools" ke roop mein hosted hote hain taaki koi bhi AI agent use kar sake.
+- **Multi-Vendor Orchestration:** Microsoft AutoGen ka ek shared protocol use karke OpenAI Assistant se baat karna.
 
 ---
 
@@ -78,14 +78,14 @@ print(f"Protocol Request: {discovery.to_json()}")
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Protocol Sniffing:** Use tools like `Wireshark` or `Postman` to see raw messages between agents.
-- **Schema Validation:** Use Pydantic to ensure incoming messages follow the protocol strictly.
+- **Protocol Sniffing:** Agents ke beech raw messages dekhne ke liye `Wireshark` ya `Postman` jaise tools use karein.
+- **Schema Validation:** Ensure karne ke liye ki incoming messages protocol ko strictly follow karein, Pydantic use karein.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Standardized Protocols:** High compatibility and scalability but adds a layer of complexity.
-- **Custom Scripts:** Fast and simple for 1 agent but "Impossible" to scale for multi-agent systems.
+- **Standardized Protocols:** High compatibility aur scalability par complexity ki ek extra layer add karta hai.
+- **Custom Scripts:** Fast aur simple hai par 10-15 tools se zyada manage karna impossible hai.
 
 ---
 
@@ -125,8 +125,8 @@ print(f"Protocol Request: {discovery.to_json()}")
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Universal Tool Interface (UTI):** A newer protocol that allows agents to use physical hardware (Robots) via a standardized cloud API.
-- **Streaming Protocols:** Protocols specifically designed for low-latency voice/video agent communication.
+- **Universal Tool Interface (UTI):** Ek naya protocol jo agents ko standardized cloud API ke throw physical hardware (Robots) use karne deta hai.
+- **Streaming Protocols:** Low-latency voice/video agent communication ke liye specifically designed protocols.
 
 ---
 

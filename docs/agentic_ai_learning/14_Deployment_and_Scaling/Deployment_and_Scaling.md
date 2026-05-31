@@ -14,12 +14,12 @@ Jaise ek dukaan se puri chain (Franchise) banayi jati hai, scaling wahi process 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Deploying agents is different from normal web apps because of **GPU dependencies** and **Long-running requests**.
-1. **Dockerization:** Packaging your agent, dependencies, and environment variables into a "Container" that runs anywhere.
-2. **Kubernetes (K8s):** Orchestrating multiple containers. It automatically replaces "Dead" agents and starts new ones during high traffic.
-3. **GPU Clouds:** Using specialized providers like **Lambda Labs**, **CoreWeave**, or **RunPod** for hosting local models (Llama/Mistral).
-4. **CI/CD Pipelines:** Automatically testing and deploying new "Prompts" or "Code" every time you push to GitHub.
-5. **Horizontal Pod Autoscaling (HPA):** Scaling agents based on custom metrics like "Pending Tasks" or "GPU Memory".
+Agents ko deploy karna normal web apps se different hai kyunki isme **GPU dependencies** aur **Long-running requests** hote hain.
+1. **Dockerization:** Apne agent, dependencies, aur environment variables ko ek "Container" mein package karna jo kahin bhi run ho sake.
+2. **Kubernetes (K8s):** Multiple containers ko orchestrate karna. Ye high traffic ke dauran automatically "Dead" agents ko replace karta hai aur naye start karta hai.
+3. **GPU Clouds:** Local models (Llama/Mistral) host karne ke liye **Lambda Labs**, **CoreWeave**, ya **RunPod** jaise specialized providers ka use karna.
+4. **CI/CD Pipelines:** Har baar jab aap GitHub par push karte hain, toh automatically naye "Prompts" ya "Code" ko test aur deploy karna.
+5. **Horizontal Pod Autoscaling (HPA):** "Pending Tasks" ya "GPU Memory" jaise custom metrics ke basis par agents scale karna.
 
 ---
 
@@ -61,9 +61,9 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Global SaaS Apps:** Agents that serve users across USA, India, and Europe with low latency.
-- **Retail Holiday Sales:** Scaling up from 5 agents to 500 agents during "Black Friday" or "Diwali Sale".
-- **Medical AI:** Deploying secure, isolated agents within a hospital's private cloud.
+- **Global SaaS Apps:** USA, India, aur Europe ke users ko low latency ke sath serve karne wale agents.
+- **Retail Holiday Sales:** "Black Friday" ya "Diwali Sale" ke dauran 5 agents se 500 agents tak scale up karna.
+- **Medical AI:** Hospital ke private cloud ke andar secure, isolated agents deploy karna.
 
 ---
 
@@ -81,8 +81,8 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Managed Deployment (Vercel/Heroku):** Very easy but limited control and high cost.
-- **Self-Managed (K8s on AWS):** Full control and cheaper at scale, but requires a DevOps expert.
+- **Managed Deployment (Vercel/Heroku):** Bahut easy hai par limited control aur high cost.
+- **Self-Managed (K8s on AWS):** Full control aur scale par cheaper hai, par ek DevOps expert ki zaroorat hoti hai.
 
 ---
 
@@ -121,8 +121,8 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Edge Deployment:** Running agents on the "Edge" (like Cloudflare Workers) to reduce latency to <10ms.
-- **Serverless GPU:** Running models on "Spot Instances" that cost 90% less but can be taken back any time.
+- **Edge Deployment:** Latency ko <10ms tak reduce karne ke liye agents ko "Edge" (jaise Cloudflare Workers) par run karna.
+- **Serverless GPU:** "Spot Instances" par models run karna jo 90% less cost karte hain par kisi bhi time wapas liye ja sakte hain.
 
 ---
 

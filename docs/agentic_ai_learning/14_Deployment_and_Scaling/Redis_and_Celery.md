@@ -16,12 +16,12 @@ Jab kaam ho jata hai, Celery user ko notification bhej deta hai. Isse aapka main
 ---
 
 ## 🧠 2. Deep Technical Explanation
-This architecture is the industry standard for **Decoupling** compute-heavy tasks from the API.
-1. **Redis (The Broker):** An in-memory data store that acts as a message transport. It holds the "List of things to do".
-2. **Celery (The Worker):** A task queue that executes code asynchronously. It can run on separate servers from your API.
-3. **Serialization:** Converting Python objects (like Agent state) into JSON or Pickle to send them over the network to the worker.
-4. **Retry Logic:** Celery can automatically retry a task if the LLM API fails or if there is a network glitch.
-5. **Result Backend:** Using Redis or Postgres to store the "Final Answer" so the API can fetch it when the user asks "Is it done?".
+Ye architecture compute-heavy tasks ko API se **Decouple** karne ke liye industry standard hai.
+1. **Redis (The Broker):** Ek in-memory data store jo message transport ki tarah act karta hai. Ye "List of things to do" hold karta hai.
+2. **Celery (The Worker):** Ek task queue jo asynchronously code execute karta hai. Ye aapki API se separate servers par run ho sakta hai.
+3. **Serialization:** Agent state jaise Python objects ko JSON ya Pickle mein convert karna taaki unhe network ke through worker ko bheja ja sake.
+4. **Retry Logic:** Agar LLM API fail ho ya network glitch ho, toh Celery automatically task retry kar sakta hai.
+5. **Result Backend:** "Final Answer" ko store karne ke liye Redis ya Postgres ka use karna taaki jab user poochhe "Is it done?", toh API use fetch kar sake.
 
 ---
 
@@ -59,9 +59,9 @@ def research_task(self, query):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Bulk PDF Processing:** Summarizing 1000 resumes for an HR team.
-- **Scheduled Agents:** A bot that runs every morning at 8 AM to summarize your calendar.
-- **Email Campaigns:** An agent that generates and sends 500 personalized sales emails.
+- **Bulk PDF Processing:** HR team ke liye 1000 resumes ko summarize karna.
+- **Scheduled Agents:** Ek bot jo har morning 8 AM par aapke calendar ko summarize karne ke liye run hota hai.
+- **Email Campaigns:** Ek agent jo 500 personalized sales emails generate aur send karta hai.
 
 ---
 
@@ -73,35 +73,35 @@ def research_task(self, query):
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Flower:** A web UI to monitor Celery workers and tasks in real-time.
-- **Worker Logs:** Run workers in "Debug" mode to see exactly where the agent logic is failing.
+- **Flower:** Real-time mein Celery workers aur tasks ko monitor karne ke liye ek web UI.
+- **Worker Logs:** Run karein workers ko "Debug" mode mein taaki dekh sakein ki agent logic kahan fail ho raha hai.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Redis/Celery:** Extremely powerful and reliable, but adds infrastructure complexity (needs Redis server + Worker processes).
-- **BackgroundTasks (FastAPI):** Very simple to use but doesn't scale across multiple servers and tasks are lost if the server restarts.
+- **Redis/Celery:** Extremely powerful aur reliable hai, par infrastructure complexity add karta hai (needs Redis server + Worker processes).
+- **BackgroundTasks (FastAPI):** Use karne mein bahut simple hai par multiple servers ke across scale nahi karta aur server restart hone par tasks lost ho jate hain.
 
 ---
 
 ## ✅ 9. Best Practices
-- **Separate Queues:** Use different queues for "Fast tasks" (1s) and "Slow tasks" (5 min) so slow tasks don't block everything.
-- **Idempotency:** Ensure that running the same task twice doesn't cause bugs (like sending an email twice).
+- **Separate Queues:** "Fast tasks" (1s) aur "Slow tasks" (5 min) ke liye different queues use karein taaki slow tasks sab kuch block na karein.
+- **Idempotency:** Ensure karein ki same task ko do baar run karne se bugs na hon (jaise email do baar send hona).
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Pickle Vulnerability:** Use `json` as the task serializer instead of `pickle` to prevent remote code execution attacks.
+- **Pickle Vulnerability:** Remote code execution attacks ko rokne ke liye `pickle` ke bajaye `json` ko task serializer ke roop mein use karein.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Concurrency:** Finding the right balance—kitne workers start karein bina RAM khatam huye? (usually `1 worker per CPU core`).
+- **Concurrency:** Right balance dhoondhna—kitne workers start karein bina RAM khatam huye? (usually `1 worker per CPU core`).
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Memory Cost:** Redis stores everything in RAM. For millions of pending tasks, this can become expensive.
+- **Memory Cost:** Redis sab kuch RAM mein store karta hai. Millions of pending tasks ke liye, ye expensive ho sakta hai.
 
 ---
 
@@ -113,8 +113,8 @@ def research_task(self, query):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Serverless Celery:** Running Celery workers on AWS Lambda or Google Cloud Run for zero-idle cost.
-- **Redis Streams:** Using modern Redis Streams instead of simple lists for even higher performance and reliability.
+- **Serverless Celery:** Zero-idle cost ke liye Celery workers ko AWS Lambda ya Google Cloud Run par run karna.
+- **Redis Streams:** Aur bhi high performance aur reliability ke liye simple lists ke bajaye modern Redis Streams ka use karna.
 
 ---
 

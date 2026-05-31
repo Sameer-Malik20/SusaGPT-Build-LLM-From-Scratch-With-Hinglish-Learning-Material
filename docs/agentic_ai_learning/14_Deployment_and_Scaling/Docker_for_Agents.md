@@ -14,12 +14,12 @@ Imagine aapne ek agent banaya apne computer par. Wo wahan toh chal raha hai, par
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Containerizing agents requires careful management of large dependencies and secrets.
-1. **The Dockerfile:** A script that defines the environment (OS, Python, dependencies).
-2. **Multi-stage Builds:** Keeping the final image small by separating the "Build" environment from the "Run" environment.
-3. **Environment Variables:** Passing API keys (OpenAI, Tavily) securely at runtime using `.env` files or Secret Managers.
-4. **Volumes:** Persisting data (like local vector stores or logs) outside the container so they don't disappear when the container restarts.
-5. **Networking:** Exposing the agent's API port (e.g. 8000) so the outside world can talk to it.
+Agents ko containerize karne ke liye large dependencies aur secrets ke careful management ki zaroorat hoti hai.
+1. **The Dockerfile:** Ek script jo environment (OS, Python, dependencies) ko define karti hai.
+2. **Multi-stage Builds:** Final image ko small rakhne ke liye "Build" environment ko "Run" environment se separate karna.
+3. **Environment Variables:** Runtime par API keys (OpenAI, Tavily) ko secure tarike se pass karne ke liye `.env` files ya Secret Managers ka use karna.
+4. **Volumes:** Container ke bahar data (jaise local vector stores ya logs) persist karna taaki container restart hone par wo gayab na hon.
+5. **Networking:** Agent ke API port (e.g. 8000) ko expose karna taaki outside world usse baat kar sake.
 
 ---
 
@@ -60,9 +60,9 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **CI/CD Pipelines:** Automatically building a new Docker image every time you push code to GitHub.
-- **Local Testing:** Running a complex multi-agent system (LangGraph + Redis + Postgres) using a single `docker-compose up` command.
-- **Microservices:** Each agent (Researcher, Writer, Editor) running in its own isolated Docker container.
+- **CI/CD Pipelines:** Har baar jab aap GitHub par code push karte hain, toh automatically naya Docker image build karna.
+- **Local Testing:** Single `docker-compose up` command ka use karke complex multi-agent system (LangGraph + Redis + Postgres) run karna.
+- **Microservices:** Har agent (Researcher, Writer, Editor) ka apne isolated Docker container mein run hona.
 
 ---
 
@@ -75,19 +75,19 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 ## 🛠️ 7. Debugging Guide
 - **Interactive Shell:** `docker exec -it [container_id] /bin/bash` karke container ke andar ja kar check karein.
-- **Logs:** `docker logs -f [container_id]` for real-time error tracking.
+- **Logs:** Real-time error tracking ke liye `docker logs -f [container_id]` ka use karein.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Docker:** Consistent and scalable but adds a learning curve and disk space overhead.
-- **Bare Metal (venv):** Fast and lightweight but "Works on my machine" syndrome is a big risk.
+- **Docker:** Consistent aur scalable hai par ek learning curve aur disk space overhead add karta hai.
+- **Bare Metal (venv):** Fast aur lightweight hai par "Works on my machine" syndrome ka high risk hai.
 
 ---
 
 ## ✅ 9. Best Practices
 - **Use .dockerignore:** Faltu files (like `.venv`, `__pycache__`, `.git`) ko image mein na bhejien.
-- **Lightweight Base Images:** Always use `-slim` or `alpine` versions of Python to save space.
+- **Lightweight Base Images:** Space bachane ke liye humesha Python ke `-slim` ya `alpine` versions use karein.
 
 ---
 
@@ -103,7 +103,7 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ---
 
 ## 💰 12. Cost Considerations
-- **Image Storage:** Storing hundreds of versions of large Docker images in AWS ECR can cost money. Use a lifecycle policy to delete old images.
+- **Image Storage:** AWS ECR mein large Docker images ke hundreds of versions store karne mein paise kharch ho sakte hain. Old images delete karne ke liye lifecycle policy use karein.
 
 ---
 
@@ -115,8 +115,8 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Wasm Containers:** Using WebAssembly for even smaller and faster agent containers (100x faster startup than Docker).
-- **GPU-Ready Containers:** Specialized images (Nvidia-Docker) that let agents access the host GPU for local inference.
+- **Wasm Containers:** Aur bhi chote aur fast agent containers ke liye WebAssembly ka use karna (Docker se 100x faster startup).
+- **GPU-Ready Containers:** Specialized images (Nvidia-Docker) jo agents ko local inference ke liye host GPU access karne dete hain.
 
 ---
 

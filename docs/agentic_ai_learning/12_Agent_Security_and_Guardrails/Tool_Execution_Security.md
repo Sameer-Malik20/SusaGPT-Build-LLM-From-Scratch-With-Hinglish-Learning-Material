@@ -15,12 +15,12 @@ Isse kehte hain **Sandboxing**. Jaise hi agent ka kaam khatam hota hai, hum pura
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Sandboxing is the process of creating an isolated runtime for potentially dangerous operations like code execution or shell commands.
-1. **Container Isolation (Docker):** Running each tool call in a fresh Docker container with no access to the host network or filesystem.
-2. **Specialized Runtimes (E2B / Piston):** Services like **E2B (Engine for 2-way Bonding)** provide cloud-hosted sandboxes where agents can run code, edit files, and start servers in a secure, ephemeral environment.
-3. **Resource Limits (cgroups):** Restricting the amount of CPU, RAM, and Disk space the agent can use to prevent "Denial of Service" attacks via infinite loops.
-4. **Network Gapping:** Disabling internet access inside the sandbox so the agent cannot send your data to an external server.
-5. **Read-only Filesystems:** Making the system files immutable so the agent can only write to a specific `/tmp` directory.
+Sandboxing code execution ya shell commands jaise potentially dangerous operations ke liye ek isolated runtime create karne ki process hai.
+1. **Container Isolation (Docker):** Host network ya filesystem tak no access ke sath har tool call ko ek fresh Docker container mein run karna.
+2. **Specialized Runtimes (E2B / Piston):** **E2B (Engine for 2-way Bonding)** jaise services cloud-hosted sandboxes provide karte hain jahan agents secure, ephemeral environment mein code run kar sakte hain, files edit kar sakte hain, aur servers start kar sakte hain.
+3. **Resource Limits (cgroups):** Infinite loops ke throw "Denial of Service" attacks ko rokne ke liye agent dwara use kiye jane wale CPU, RAM, aur Disk space ko restrict karna.
+4. **Network Gapping:** Sandbox ke andar internet access ko disable karna taaki agent aapka data kisi external server ko na bhej sake.
+5. **Read-only Filesystems:** System files ko immutable banana taaki agent sirf specific `/tmp` directory mein hi write kar sake.
 
 ---
 
@@ -63,14 +63,14 @@ def run_secure_code(code):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **AI Coding Assistants:** Like OpenDevin or Aider, where the AI needs to run and test code safely.
-- **Data Analysis Agents:** Running complex SQL or Python Pandas operations on user data.
-- **Automated Pentesting:** Letting an agent run security tools without risk of hitting the wrong target.
+- **AI Coding Assistants:** OpenDevin ya Aider ki tarah, jahan AI ko safely code run aur test karne ki zaroorat hoti hai.
+- **Data Analysis Agents:** User data par complex SQL ya Python Pandas operations run karna.
+- **Automated Pentesting:** Wrong target ko hit karne ke risk ke bina agent ko security tools run karne dena.
 
 ---
 
 ## ❌ 6. Failure Cases
-- **Sandbox Escape:** A highly sophisticated exploit where the agent finds a bug in the VM/Docker itself to reach the host.
+- **Sandbox Escape:** Ek highly sophisticated exploit jahan agent host tak pahunchne ke liye VM/Docker mein hi bug dhoondh leta hai.
 - **High Latency:** Har tool call ke liye naya container start karna slow ho sakta hai (1-2 seconds delay).
 - **Incomplete Isolation:** Galti se environment variables (API keys) sandbox mein pass kar dena.
 
@@ -83,8 +83,8 @@ def run_secure_code(code):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Full Isolation (E2B/VM):** Safest but adds cost and latency.
-- **Process Isolation (Subprocess):** Fast and free but very easy to hack.
+- **Full Isolation (E2B/VM):** Safest hai par cost aur latency add karta hai.
+- **Process Isolation (Subprocess):** Fast aur free hai par hack karna bahut easy hai.
 
 ---
 
@@ -117,8 +117,8 @@ def run_secure_code(code):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Wasm Sandboxing:** Using WebAssembly to run agent code in the browser or on the edge with near-zero latency and high security.
-- **AI-Managed Sandboxes:** An AI that configures the sandbox security rules dynamically based on the "Risk Level" of the code it's about to run.
+- **Wasm Sandboxing:** Browser ya edge par near-zero latency aur high security ke sath agent code run karne ke liye WebAssembly ka use karna.
+- **AI-Managed Sandboxes:** Ek AI jo sandbox security rules ko dynamically configure karta hai based on the "Risk Level" of code jo wo run karne wala hai.
 
 ---
 

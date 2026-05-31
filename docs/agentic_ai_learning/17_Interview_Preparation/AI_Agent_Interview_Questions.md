@@ -25,7 +25,7 @@
 
 ## 🛠️ 3. Tool Use & Integration
 7. **"How do you secure an agent that has access to a SQL database?"**
-   - *Hinglish Answer:* Read-only permissions, parameterized queries, and whitelisting specific tables.
+   - *Hinglish Answer:* Read-only permissions, parameterized queries, aur specific tables ko whitelist karna.
 8. **"What is the Model Context Protocol (MCP)?"**
    - *Hinglish Answer:* Ye Anthropic ka naya standard hai tools aur data sources ko agents se connect karne ke liye (Cross-platform).
 
@@ -41,7 +41,7 @@
 
 ## 📈 5. Scaling & Production
 11. **"How do you reduce the latency of a multi-step agent?"**
-    - *Hinglish Answer:* Async tool calls, parallel execution, model tiering (using smaller models for easy steps), and semantic caching.
+    - *Hinglish Answer:* Async tool calls, parallel execution, model tiering (easy steps ke liye smaller models use karna), aur semantic caching.
 12. **"What is the P99 latency of an agent and why does it matter?"**
     - *Hinglish Answer:* Wo 1% slowest requests jo users ko frustrated rakhti hain. Inhe optimize karna production ke liye critical hai.
 
@@ -49,9 +49,9 @@
 
 ## 📝 6. Behavioral & Scenario
 13. **"Describe a time an agent you built failed in production. How did you fix it?"**
-    - *Tip:* Use the STAR (Situation, Task, Action, Result) method. Focus on the "Observability" and "Fix" applied.
+    - *Tip:* STAR (Situation, Task, Action, Result) method use karein. "Observability" aur apply kiye gaye "Fix" par focus karein.
 14. **"How do you stay updated with the daily research papers in AI Agents?"**
-    - *Hinglish Answer:* ArXiv, Hugging Face, research blogs of OpenAI/Anthropic, and active developer communities.
+    - *Hinglish Answer:* ArXiv, Hugging Face, OpenAI/Anthropic ke research blogs, aur active developer communities.
 
 ---
 

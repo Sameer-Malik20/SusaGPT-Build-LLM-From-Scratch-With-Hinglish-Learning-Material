@@ -17,14 +17,14 @@ Aapko bas ye decide karna hai ki team kaise kaam karegi: "Line mein" (Sequential
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Multi-Agent Systems (MAS) focus on **Separation of Concerns**.
-- **The Orchestrator:** The logic that determines which agent speaks next. This can be static (fixed code) or dynamic (an LLM Supervisor).
-- **Shared State vs Isolated State:** Do agents see each other's full conversation history, or only specific "Handoff" summaries?
+Multi-Agent Systems (MAS) **Separation of Concerns** par focus karte hain.
+- **The Orchestrator:** Wo logic jo determine karta hai ki kaunsa agent agla bolega. Ye static (fixed code) ya dynamic (ek LLM Supervisor) ho sakta hai.
+- **Shared State vs Isolated State:** Kya agents ek doosre ki full conversation history dekhte hain, ya sirf specific "Handoff" summaries?
 - **Communication Topology:**
-    - **Fully Connected:** Every agent can talk to every other agent.
-    - **Hierarchical:** Agents only talk to their supervisor.
+    - **Fully Connected:** Har agent har doosre agent se baat kar sakta hai.
+    - **Hierarchical:** Agents sirf apne supervisor se baat karte hain.
     - **Sequential:** Agent A → Agent B → Agent C.
-- **Frameworks:** CrewAI (Task-based), AutoGen (Conversation-based), and LangGraph (State-graph based).
+- **Frameworks:** CrewAI (Task-based), AutoGen (Conversation-based), aur LangGraph (State-graph based).
 
 ---
 
@@ -75,45 +75,45 @@ def simple_orchestrator(query: str):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Software Agencies:** A team of `Coder`, `Reviewer`, and `DevOps` agents building full features.
-- **Content Studios:** `Researcher`, `Script Writer`, `Voiceover`, and `Editor` agents producing videos.
-- **Market Analysis:** `Data Fetcher`, `Statistician`, and `Report Writer` agents analyzing stock trends.
+- **Software Agencies:** Coder, Reviewer, aur DevOps agents ki ek team jo full features build karti hai.
+- **Content Studios:** Researcher, Script Writer, Voiceover, aur Editor agents jo videos produce karte hain.
+- **Market Analysis:** Data Fetcher, Statistician, aur Report Writer agents jo stock trends analyze karte hain.
 
 ---
 
 ## ❌ 6. Failure Cases
-- **Infinite Loops:** Agent A calls Agent B, who calls Agent A back forever.
-- **Goal Drift:** Agents start arguing with each other and forget the original user query.
-- **State Corruption:** Two agents update the same shared state at the same time, leading to inconsistent data.
+- **Infinite Loops:** Agent A Agent B ko call karta hai, jo Agent A ko forever wapas call karta hai.
+- **Goal Drift:** Agents aapas mein argue karne lagte hain aur original user query ko bhool jate hain.
+- **State Corruption:** Do agents ek hi time par same shared state ko update karte hain, jisse inconsistent data ho jata hai.
 
 ---
 
 ## 🛠️ 7. Debugging Guide
 - **Trace the Handshake:** Logs mein humesha dekhein: "Who passed what to whom?"
-- **Visual Graph:** Use tools like LangGraph visualizer to see the flow of the team.
+- **Visual Graph:** Team ke flow ko dekhne ke liye LangGraph visualizer jaise tools ka use karein.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Multi-Agent:** High modularity and expertise but high latency and complex debugging.
-- **Single Agent:** Fast and simple but limited by context and "Jack-of-all-trades" reasoning fatigue.
+- **Multi-Agent:** High modularity aur expertise par high latency aur complex debugging.
+- **Single Agent:** Fast aur simple par context aur "Jack-of-all-trades" reasoning fatigue dwara limited.
 
 ---
 
 ## ✅ 9. Best Practices
-- **Explicit Personas:** Give every agent a very clear, distinct role.
+- **Explicit Personas:** Har agent ko ek bahut clear aur alag role dein.
 - **Atomic Handoffs:** Handoff ke waqt sirf wahi info bhejien jo agle agent ke liye zaruri ho.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Privilege Escalation:** A low-privilege worker agent tricking the supervisor agent into using admin tools.
-- **Cross-Agent Injection:** Malicious input passed from a compromised agent to a clean one.
+- **Privilege Escalation:** Ek low-privilege worker agent jo supervisor agent ko trick karke admin tools use karwa leta hai.
+- **Cross-Agent Injection:** Ek compromised agent se clean agent par pass hone wala malicious input.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Latency Multiplier:** 5 agents = 5x wait time for the user. Use async/parallel execution where possible.
+- **Latency Multiplier:** 5 agents = user ke liye 5x wait time. Jahan ho sake async/parallel execution ka use karein.
 
 ---
 
@@ -136,8 +136,8 @@ def simple_orchestrator(query: str):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Agent Hierarchies:** A "CEO Agent" managing "Manager Agents" who manage "Worker Agents".
-- **Dynamic Team Formation:** An agent that "Hires" other agents at runtime based on the specific skills needed for a task.
+- **Agent Hierarchies:** Ek "CEO Agent" jo "Manager Agents" ko manage karta hai jo "Worker Agents" ko manage karte hain.
+- **Dynamic Team Formation:** Ek aisa agent jo task ke liye zaroori specific skills ke basis par runtime par doosre agents ko "Hire" karta hai.
 
 ---
 

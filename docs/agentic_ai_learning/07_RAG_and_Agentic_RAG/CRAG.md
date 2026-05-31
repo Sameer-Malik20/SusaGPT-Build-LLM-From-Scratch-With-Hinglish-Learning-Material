@@ -17,11 +17,11 @@ CRAG ka kaam hai ensure karna ki AI kabhi purani ya galat info par bharosa na ka
 ---
 
 ## 🧠 2. Deep Technical Explanation
-CRAG introduces a **Retrieval Evaluator** node between the retrieval and generation phases.
-- **Evaluation Node:** A lightweight LLM call that scores the retrieved documents as `CORRECT`, `AMBIGUOUS`, or `INCORRECT`.
-- **Knowledge Refinement:** For ambiguous docs, it performs "Knowledge Partitioning"—splitting the chunk further and extracting only the relevant sub-sentences.
-- **Web Search Fallback:** If all retrieved documents are `INCORRECT`, it triggers a search tool (like Tavily or DuckDuckGo) to find external up-to-date data.
-- **Safety Layer:** It prevents "Garbage In, Garbage Out" by ensuring only validated context reaches the generator LLM.
+CRAG retrieval aur generation phases ke bech ek **Retrieval Evaluator** node introduce karta hai.
+- **Evaluation Node:** Ek lightweight LLM call jo retrieved documents ko `CORRECT`, `AMBIGUOUS`, ya `INCORRECT` ke roop mein score karti hai.
+- **Knowledge Refinement:** Ambiguous docs ke liye, ye "Knowledge Partitioning" perform karta hai—yaani chunk ko aur split karna aur sirf relevant sub-sentences ko extract karna.
+- **Web Search Fallback:** Agar saare retrieved documents `INCORRECT` hote hain, toh ye external up-to-date data dhoondhne ke liye ek search tool (jaise Tavily ya DuckDuckGo) trigger karta hai.
+- **Safety Layer:** Ye sirf validated context ko generator LLM tak pahunchana ensure karke "Garbage In, Garbage Out" ko rokta hai.
 
 ---
 
@@ -73,16 +73,16 @@ def run_crag_flow(query):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **News Chatbots:** If local DB doesn't have today's news, search the web (CRAG pattern).
-- **Technical Support:** If the local manual is outdated for a new version, finding the latest patch notes online.
-- **Fact-Checking Agents:** Verifying internal claims against public data sources.
+- **News Chatbots:** Agar local DB mein aaj ki news nahi hai, toh web search karein (CRAG pattern).
+- **Technical Support:** Agar naye version ke liye local manual outdated hai, toh online latest patch notes dhoondhna.
+- **Fact-Checking Agents:** Public data sources ke against internal claims ko verify karna.
 
 ---
 
 ## ❌ 6. Failure Cases
 - **False Negative:** Evaluator ne sahi document ko "Incorrect" bol diya aur faltu mein web search trigger kar di (Costly error).
 - **Web Search Noise:** Web se itni zyada info aa gayi ki model aur zyada confuse ho gaya.
-- **Latency:** Evaluation + Refining + Web Search milkar response time 20 second badha sakte hain.
+- **Latency:** Evaluation + Refining + Web Search milkar response time 20 seconds tak badha sakte hain.
 
 ---
 
@@ -93,8 +93,8 @@ def run_crag_flow(query):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Reliability:** Highest accuracy and up-to-date info.
-- **Complexity:** Complex graph structure (LangGraph) and higher latency.
+- **Reliability:** Highest accuracy aur up-to-date info.
+- **Complexity:** Complex graph structure (LangGraph) aur higher latency.
 
 ---
 
@@ -115,7 +115,7 @@ def run_crag_flow(query):
 ---
 
 ## 💰 12. Cost Considerations
-- **Web Search Pricing:** Every web search is expensive (~$0.01 to $0.05 per call). Use it sparingly.
+- **Web Search Pricing:** Har web search expensive hoti hai (~$0.01 to $0.05 per call). Ise dhyan se use karein.
 
 ---
 
@@ -133,8 +133,8 @@ def run_crag_flow(query):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Multi-Modal CRAG:** Checking if text retrieved matches an image or chart (Multi-modal verification).
-- **Self-Improving Evaluator:** Evaluator uses human feedback to learn which documents it was wrong about in the past.
+- **Multi-Modal CRAG:** Check karna ki kya retrieved text kisi image ya chart se match karta hai (Multi-modal verification).
+- **Self-Improving Evaluator:** Evaluator human feedback ka use karke seekhta hai ki pichle samay mein wo kaunse documents ke baare mein galat tha.
 
 ---
 

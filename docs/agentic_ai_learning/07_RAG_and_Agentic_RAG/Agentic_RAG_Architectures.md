@@ -18,13 +18,13 @@ Is architecture mein Retrieval sirf ek "Step" nahi, balki ek **"Skill"** hai jo 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Agentic RAG moves from a **Pipeline** (linear) to a **Graph** (cyclic).
-- **The Router:** Classifies if the query needs RAG, Web Search, or direct answer.
-- **The Retriever Agent:** Can refine its own search queries if the first result is poor.
-- **The Grader Agent:** Critiques the retrieved documents for relevance and support.
-- **The Hallucination Checker:** Verifies if the generation is grounded in the retrieval.
-- **Iterative Loop:** If any of the checks fail, the system loops back to re-retrieve or re-generate.
-- **Tool Integration:** RAG is treated as a "Tool" in the agent's toolbox, rather than a fixed wrapper.
+Agentic RAG **Pipeline** (linear) se **Graph** (cyclic) ki taraf move karta hai.
+- **The Router:** Classify karta hai ki kya query ko RAG, Web Search, ya direct answer ki zaroorat hai.
+- **The Retriever Agent:** Agar pehla result poor ho, toh wo apne search queries ko refine kar sakta hai.
+- **The Grader Agent:** Retrieved documents ko relevance aur support ke liye critique karta hai.
+- **The Hallucination Checker:** Verify karta hai ki kya generation retrieval mein grounded hai.
+- **Iterative Loop:** Agar koi bhi check fail hota hai, toh system re-retrieve ya re-generate karne ke liye wapas loop karta hai.
+- **Tool Integration:** RAG ko agent ke toolbox mein ek "Tool" ki tarah treat kiya jata hai, bajaye ek fixed wrapper ke.
 
 ---
 
@@ -82,9 +82,9 @@ builder.add_edge("generate", END)
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Autonomous Research Papers:** An agent that researches multiple sources, grades them, and writes a cited thesis.
-- **Dynamic Customer Support:** An agent that can look at your order history, shipping status, and company policy to solve a refund issue autonomously.
-- **Market Intelligence:** Searching news, financial reports, and social media to provide a real-time risk assessment.
+- **Autonomous Research Papers:** Ek aisa agent jo multiple sources research karta hai, unhe grade karta hai, aur cited thesis likhta hai.
+- **Dynamic Customer Support:** Ek aisa agent jo refund issue ko autonomously solve karne ke liye aapki order history, shipping status, aur company policy dekh sakta hai.
+- **Market Intelligence:** Real-time risk assessment provide karne ke liye news, financial reports, aur social media search karna.
 
 ---
 
@@ -102,9 +102,9 @@ builder.add_edge("generate", END)
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Quality:** Best-in-class grounding and factual accuracy.
-- **Latency:** Kafi zyada (Multiple LLM calls for grading and checks).
-- **Cost:** Expensive due to iterative nature.
+- **Quality:** Best-in-class grounding aur factual accuracy.
+- **Latency:** Kafi zyada (Grading aur checks ke liye multiple LLM calls).
+- **Cost:** Iterative nature ke karan expensive.
 
 ---
 
@@ -125,7 +125,7 @@ builder.add_edge("generate", END)
 ---
 
 ## 💰 12. Cost Considerations
-- **Incremental Cost:** Simple RAG vs Agentic RAG cost difference 3x-5x ho sakta hai. Optimize your loops.
+- **Incremental Cost:** Simple RAG vs Agentic RAG cost difference 3x-5x ho sakta hai. Apne loops ko optimize karein.
 
 ---
 
@@ -138,13 +138,13 @@ builder.add_edge("generate", END)
 
 ## ⚠️ 14. Common Mistakes
 - **No Stop Condition:** Agent ko bolna ki "Tab tak dhoondho jab tak perfect na mil jaye" (It will never stop).
-- **Manual Pathing:** Everything hard-coding (Instead, let the router decide the path).
+- **Manual Pathing:** Sab kuch hard-code karna (Iske bajaye, router ko path decide karne dein).
 
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Multi-Agent RAG Teams:** One researcher agent, one fact-checker agent, and one writer agent working in a parallel-serial hybrid graph.
-- **RAG as a Planning Algorithm:** Using the retrieved documents to *build* the reasoning plan, rather than just using them as context.
+- **Multi-Agent RAG Teams:** Ek researcher agent, ek fact-checker agent, aur ek writer agent jo parallel-serial hybrid graph mein kaam karte hain.
+- **RAG as a Planning Algorithm:** Retrieved documents ko sirf context ki tarah use karne ke bajaye reasoning plan *build* karne ke liye use karna.
 
 ---
 

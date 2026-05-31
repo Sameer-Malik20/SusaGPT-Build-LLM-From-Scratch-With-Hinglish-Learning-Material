@@ -17,13 +17,13 @@ Self-RAG mein AI in sawalon ke liye special tokens generate karta hai. Wo khud d
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Self-RAG uses a **Specialized LLM** (often fine-tuned) that outputs **Reflection Tokens**.
-- **Retrieve Token:** Decides if external retrieval is needed based on the query.
-- **Is-Rel Token:** Evaluates if the retrieved chunk is relevant.
-- **Is-Sup Token:** Evaluates if the generated response is "Supported" by the retrieved chunk (Grounding).
-- **Is-Use Token:** Scores the overall utility of the final answer.
-- **Beam Search:** The model can generate multiple response candidates, score them using these reflection tokens, and select the highest-scoring path.
-- **Fine-tuning:** Unlike normal RAG, Self-RAG often requires a model trained to output these special tokens (e.g., Self-RAG 7B or 13B).
+Self-RAG ek **Specialized LLM** (aksar fine-tuned) ka use karta hai jo **Reflection Tokens** output karta hai.
+- **Retrieve Token:** Query ke basis par decide karta hai ki kya external retrieval ki zaroorat hai.
+- **Is-Rel Token:** Evaluate karta hai ki kya retrieved chunk relevant hai.
+- **Is-Sup Token:** Evaluate karta hai ki kya generated response retrieved chunk dwara "Supported" (Grounded) hai.
+- **Is-Use Token:** Final answer ki overall utility ko score karta hai.
+- **Beam Search:** Model multiple response candidates generate kar sakta hai, unhe in reflection tokens ka use karke score kar sakta hai, aur highest-scoring path select kar sakta hai.
+- **Fine-tuning:** Normal RAG ke unlike, Self-RAG ke liye aksar ek aise model ki zaroorat hoti hai jo in special tokens ko output karne ke liye trained ho (e.g., Self-RAG 7B ya 13B).
 
 ---
 
@@ -72,9 +72,9 @@ def self_rag_step(query, state):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Scientific Research:** Verifying that every claim in a paper is backed by a specific study.
-- **Fact-Checking Portals:** Automatically grading the accuracy of an AI response.
-- **Highly Reliable Tutors:** Ensuring the AI doesn't teach wrong formulas by constant self-critique.
+- **Scientific Research:** Verify karna ki paper ka har claim ek specific study dwara backed ho.
+- **Fact-Checking Portals:** AI response ki accuracy ko automatically grade karna.
+- **Highly Reliable Tutors:** Constant self-critique ke through ensure karna ki AI wrong formulas na sikhaye.
 
 ---
 
@@ -94,7 +94,7 @@ def self_rag_step(query, state):
 ## ⚖️ 8. Tradeoffs
 - **Precision:** Extremely high grounding (No hallucinations).
 - **Inference Cost:** Bahut high (multiple generation paths aur tokens).
-- **Dependency:** Requiring specialized models or very long prompts.
+- **Dependency:** Specialized models ya bahut long prompts ki zaroorat hona.
 
 ---
 
@@ -133,8 +133,8 @@ def self_rag_step(query, state):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Unified Self-RAG:** Models like GPT-5 or Claude 4 having built-in self-RAG capabilities without explicit tokens.
-- **DPO for Self-RAG:** Fine-tuning models using Direct Preference Optimization to make their internal judging more accurate.
+- **Unified Self-RAG:** GPT-5 ya Claude 4 jaise models jinme explicit tokens ke bina built-in self-RAG capabilities hoti hain.
+- **DPO for Self-RAG:** Models ke internal judging ko behtar banane ke liye Direct Preference Optimization (DPO) ka use karke unhe fine-tune karna.
 
 ---
 

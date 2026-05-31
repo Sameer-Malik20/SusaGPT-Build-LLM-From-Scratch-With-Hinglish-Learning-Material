@@ -16,12 +16,12 @@ Ek baar MCP server banao, aur use kisi bhi AI model ya framework ke saath connec
 ---
 
 ## 🧠 2. Deep Technical Explanation
-MCP operates on a **Client-Server Architecture** using JSON-RPC.
-1. **Resources:** Static data that the model can read (e.g., files, documentation).
-2. **Tools:** Executable functions that the model can call (e.g., `get_weather`, `run_query`).
-3. **Prompts:** Pre-defined templates that the server provides to the client.
-4. **Transport:** MCP can run over `stdio` (local) or `HTTP/SSE` (remote).
-5. **Discovery:** When a client connects, it calls `list_tools` and `list_resources` to understand what the server can do.
+MCP JSON-RPC ka use karke ek **Client-Server Architecture** par kaam karta hai.
+1. **Resources:** Static data jise model read kar sakta hai (e.g., files, documentation).
+2. **Tools:** Executable functions jinhe model call kar sakta hai (e.g., `get_weather`, `run_query`).
+3. **Prompts:** Pre-defined templates jo server client ko provide karta hai.
+4. **Transport:** MCP `stdio` (local) ya `HTTP/SSE` (remote) par run ho sakta hai.
+5. **Discovery:** Jab client connect hota hai, toh wo server capabilities ko samajhne ke liye `list_tools` aur `list_resources` call karta hai.
 
 ---
 
@@ -59,9 +59,9 @@ if __name__ == "__main__":
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Unified Enterprise Search:** One MCP server connects to Slack, Jira, and Confluence; any company agent can now search across all three.
-- **Safe Database Access:** Agents query a database via an MCP server that enforces strict security rules.
-- **Local File Management:** Using the MCP "Filesystem" server to let Claude or GPT-4 edit local code safely.
+- **Unified Enterprise Search:** Ek MCP server Slack, Jira, aur Confluence se connect karta hai; ab company ka koi bhi agent in teeno ke across search kar sakta hai.
+- **Safe Database Access:** Agents database ko ek MCP server ke throw query karte hain jo strict security rules enforce karta hai.
+- **Local File Management:** Claude ya GPT-4 ko safely local code edit karne dene ke liye MCP "Filesystem" server ka use karna.
 
 ---
 
@@ -73,14 +73,14 @@ if __name__ == "__main__":
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **MCP Inspector:** Use the official MCP Inspector tool to test your server without an agent.
+- **MCP Inspector:** Bina agent ke apne server ko test karne ke liye official MCP Inspector tool ka use karein.
 - **Logs:** Server side par `stderr` logs check karein (kyunki `stdout` communication ke liye use hota hai).
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **MCP:** High interoperability, industry standard, but requires setting up a separate server process.
-- **Custom Functions:** Fast to write for a single script but doesn't scale across different AI tools.
+- **MCP:** High interoperability aur industry standard hai, par ek separate server process set up karne ki zaroorat hoti hai.
+- **Custom Functions:** Single script ke liye likhna fast hai par different AI tools ke across scale nahi karta.
 
 ---
 
@@ -102,7 +102,7 @@ if __name__ == "__main__":
 ---
 
 ## 💰 12. Cost Considerations
-- **Extra Overhead:** MCP adds a small latency and serialization cost compared to direct function calls.
+- **Extra Overhead:** Direct function calls ke comparison mein MCP thoda latency aur serialization cost add karta hai.
 
 ---
 
@@ -114,8 +114,8 @@ if __name__ == "__main__":
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **MCP Hubs:** Centralized registries (like npm for AI tools) where you can download pre-built MCP servers for anything.
-- **Edge MCP:** Running MCP servers on low-power devices to let AI control local hardware.
+- **MCP Hubs:** Centralized registries (jaise AI tools ke liye npm) jahan se aap kisi bhi cheez ke liye pre-built MCP servers download kar sakte hain.
+- **Edge MCP:** AI ko local hardware control karne dene ke liye low-power devices par MCP servers run karna.
 
 ---
 

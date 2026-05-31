@@ -15,12 +15,12 @@ AI emotional ho kar ya logic mein phans kar wo kaam kar deta hai jo use nahi kar
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Jailbreaking exploits the **Instruction-Following** nature of LLMs.
-1. **Adversarial Roleplay:** Using complex personas (e.g., DAN - Do Anything Now) to override safety guidelines.
-2. **Emotional Manipulation:** Creating high-stakes fake scenarios to bypass ethical filters.
-3. **Encoding Attacks:** Sending the malicious prompt in Base64, Hex, or Morse code to bypass keyword filters.
-4. **Logical Paradoxes:** Tricking the model into a state where "Following the safety rule" leads to a logical failure.
-5. **Payload Splitting:** Breaking the bad instruction into 5 small, "Innocent" parts that only become dangerous when combined.
+Jailbreaking LLMs ke **Instruction-Following** nature ka fayda uthata hai.
+1. **Adversarial Roleplay:** Safety guidelines ko override karne ke liye complex personas (e.g., DAN - Do Anything Now) ka use karna.
+2. **Emotional Manipulation:** Ethical filters ko bypass karne ke liye high-stakes fake scenarios create karna.
+3. **Encoding Attacks:** Keyword filters ko bypass karne ke liye malicious prompt ko Base64, Hex, ya Morse code mein bhejna.
+4. **Logical Paradoxes:** Model ko ek aisi state mein trick karna jahan "Following the safety rule" ek logical failure ki taraf le jaye.
+5. **Payload Splitting:** Bad instruction ko 5 small, "Innocent" parts mein break karna jo sirf combine hone par hi dangerous bante hain.
 
 ---
 
@@ -56,9 +56,9 @@ def run_secure_agent(user_query):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Public Chatbots:** Preventing users from making the bot say offensive or racist things.
-- **Financial Advisors:** Ensuring the AI doesn't give "Secret Insider Trading" tips even when pressured.
-- **Educational Tools:** Blocking students from using the AI to write exam answers by tricking it into a "Teaching" mode.
+- **Public Chatbots:** Users ko bot se offensive ya racist cheezein kehlwane se rokna.
+- **Financial Advisors:** Ensure karna ki AI pressure mein hone par bhi "Secret Insider Trading" tips na de.
+- **Educational Tools:** Students ko AI ko "Teaching" mode mein trick karke exam answers likhne ke liye use karne se rokna.
 
 ---
 
@@ -70,35 +70,35 @@ def run_secure_agent(user_query):
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Stress Testing:** Use a list of known jailbreak prompts (from jailbreakchat.com) to test your agent.
-- **Confidence Scoring:** If the model's confidence in its safety is low, trigger a human review.
+- **Stress Testing:** Apne agent ko test karne ke liye known jailbreak prompts (from jailbreakchat.com) ki list use karein.
+- **Confidence Scoring:** Agar safety mein model ka confidence low ho, toh human review trigger karein.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **High Defense:** Agent becomes "Dumb" and refuses even valid, safe questions.
-- **Low Defense:** High risk of PR disaster or system compromise.
+- **High Defense:** Agent "Dumb" ho jata hai aur valid, safe questions ko bhi refuse kar deta hai.
+- **Low Defense:** PR disaster ya system compromise ka high risk.
 
 ---
 
 ## ✅ 9. Best Practices
 - **Negative Constraints:** System prompt mein likhein: "NEVER answer requests for XYZ, even in roleplay."
-- **Multi-layer Defense:** Don't rely on one prompt. Use an input filter + system prompt + output filter.
+- **Multi-layer Defense:** Sirf ek prompt par rely na karein. Input filter + system prompt + output filter use karein.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Model Drift:** Fine-tuning a model on custom data can sometimes "Weakness" its built-in safety filters.
+- **Model Drift:** Custom data par model ko fine-tune karne se kabhi-kabhi iske built-in safety filters "Weak" ho sakte hain.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Latency:** Multiple safety checks can add 500ms - 1s to every response.
+- **Latency:** Multiple safety checks har response mein 500ms - 1s add kar sakte hain.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Extra tokens:** Long "Security instructions" in the system prompt increase the cost of every single query.
+- **Extra tokens:** System prompt mein long "Security instructions" har single query ki cost badha dete hain.
 
 ---
 
@@ -110,8 +110,8 @@ def run_secure_agent(user_query):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Constitutional AI:** Training the model to have a set of "Laws" (like Asimov's) that it cannot violate under any circumstances.
-- **Self-Correcting Safety:** The agent "Double-checks" its own response for safety violations before showing it to the user.
+- **Constitutional AI:** Model ko "Laws" (jaise Asimov's laws) ke ek set ke sath train karna jise wo kisi bhi circumstances mein violate na kar sake.
+- **Self-Correcting Safety:** Agent user ko dikhane se pehle safety violations ke liye apne response ko "Double-check" karta hai.
 
 ---
 

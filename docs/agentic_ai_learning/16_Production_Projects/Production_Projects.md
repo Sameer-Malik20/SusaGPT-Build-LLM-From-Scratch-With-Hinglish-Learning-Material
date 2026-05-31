@@ -69,7 +69,7 @@ workflow.add_edge("writer", END)
 
 ## 🌍 5. Real-World Impact
 - **Efficiency:** Jo kaam ek human team 1 hafte mein karti hai, ye agents 10 minute mein kar sakte hain.
-- **Cost:** Reducing operational costs by 80-90% for repetitive tasks.
+- **Cost:** Repetitive tasks ke liye operational costs ko 80-90% tak reduce karna.
 
 ---
 
@@ -81,7 +81,7 @@ workflow.add_edge("writer", END)
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Trace Visualization:** Use LangSmith to see exactly which agent failed.
+- **Trace Visualization:** LangSmith ka use karke dekhein ki exactly kaunsa agent fail hua.
 - **State Inspections:** Har step par state ko print karein: "Kya agent ke paas wo info hai jo use chahiye?"
 
 ---
@@ -106,7 +106,7 @@ workflow.add_edge("writer", END)
 ---
 
 ## 🚀 11. Latest 2026 Industry Patterns
-- **Autonomous Startups:** Entire companies run by 1 human and 100 specialized agents.
+- **Autonomous Startups:** Poori companies jinhe sirf 1 human aur 100 specialized agents run karte hain.
 - **Agentic SaaS:** Software jahan "User Interface" nahi, balki sirf "Agentic Workflows" hote hain.
 
 ---

@@ -19,12 +19,12 @@ Ab aap in sabko ek hi server par nahi rakh sakte kyunki agar "Researcher" crash 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Deploying multi-agent systems requires a **Distributed Systems** approach.
-1. **The Orchestrator:** A central service (like a LangGraph API) that holds the "Global State" and tells which agent to run next.
-2. **Worker Agents:** Each agent type (Researcher, Writer) runs as a separate deployment or service.
-3. **Communication (Pub/Sub):** Using **Redis Streams** or **Kafka** for agents to send results to each other.
-4. **State Syncing:** Every agent must read from and write to a shared "Brain" (Postgres/Redis) so the orchestrator knows the current status.
-5. **Service Mesh (Istio):** Managing the complex networking, retries, and security between 10+ different agent services.
+Multi-agent systems deploy karne ke liye ek **Distributed Systems** approach ki zaroorat hoti hai.
+1. **The Orchestrator:** Ek central service (jaise LangGraph API) jo "Global State" hold karti hai aur batati hai ki next kis agent ko run karna hai.
+2. **Worker Agents:** Har agent type (Researcher, Writer) ek separate deployment ya service ke roop mein run hota hai.
+3. **Communication (Pub/Sub):** Agents ko ek doosre ko results bhejne ke liye **Redis Streams** ya **Kafka** ka use karna.
+4. **State Syncing:** Har agent ko ek shared "Brain" (Postgres/Redis) par read aur write karna chahiye taaki orchestrator ko current status pata ho.
+5. **Service Mesh (Istio):** 10+ different agent services ke beech complex networking, retries, aur security ko manage karna.
 
 ---
 
@@ -63,49 +63,49 @@ services:
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Autonomous Newsroom:** A swarm of agents that find news, write articles, and post to social media.
-- **Supply Chain Management:** Agents for "Inventory", "Shipping", and "Payments" coordinating across different company systems.
-- **Complex Software Dev:** Different agents for "Frontend", "Backend", and "DevOps" building an app together.
+- **Autonomous Newsroom:** Agents ka ek swarm jo news dhoondhta hai, articles likhta hai, aur social media par post karta hai.
+- **Supply Chain Management:** Different company systems ke across coordinate karne wale "Inventory", "Shipping", aur "Payments" ke agents.
+- **Complex Software Dev:** Ek sath app build karne wale "Frontend", "Backend", aur "DevOps" ke different agents.
 
 ---
 
 ## ❌ 6. Failure Cases
 - **Partial Failure:** Researcher ne kaam kiya par Writer crash ho gaya. Ab user ko "Incomplete" data mil raha hai.
-- **Latency Stacking:** Har agent 5 second leta hai. 5 agents = 25 seconds wait time for the user.
+- **Latency Stacking:** Har agent 5 second leta hai. 5 agents = user ke liye 25 seconds wait time.
 - **Data Inconsistency:** Researcher ne state badal di par Fact-checker purana data hi padh raha hai.
 
 ---
 
 ## 🛠️ 7. Debugging Guide
-- **Distributed Tracing:** Use **OpenTelemetry** to see the "Life of a request" as it travels through 5 different agents.
+- **Distributed Tracing:** "Life of a request" dekhne ke liye **OpenTelemetry** use karein jab ye 5 different agents ke through travel kare.
 - **Dead Letter Queues (DLQ):** Tasks jo kisi bhi agent se poori nahi hui, unhe ek alag queue mein dalein for human review.
 
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Microservices Agents:** High reliability, independent scaling, but very complex to deploy and debug.
-- **Monolithic Agent:** Easy to build and fast, but if one part fails, everything fails.
+- **Microservices Agents:** High reliability aur independent scaling hai par deploy aur debug karna bahut complex hai.
+- **Monolithic Agent:** Build karna easy hai aur fast hai, par agar ek part fail hua toh sab fail ho jata hai.
 
 ---
 
 ## ✅ 9. Best Practices
-- **Standardized Messaging:** Use a common JSON schema for all agents to talk to each other.
-- **Agent Health Monitoring:** Alert if the "Writer Agent" is idle for too long while tasks are pending.
+- **Standardized Messaging:** Sabhi agents ko ek doosre se baat karne ke liye ek common JSON schema use karein.
+- **Agent Health Monitoring:** Agar tasks pending hone par bhi "Writer Agent" bahut time tak idle rahe, toh alert karein.
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Internal Attacks:** One compromised agent trying to "Socially Engineer" another agent into giving it admin access.
+- **Internal Attacks:** Ek compromised agent jo doosre agent ko admin access dene ke liye "Socially Engineer" karne ki koshish kar raha ho.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Resource Contention:** Multiple agents fighting for the same GPU or Database connection.
+- **Resource Contention:** Same GPU ya Database connection ke liye multiple agents ka aapas mein ladna.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Orchestration Overhead:** More agents = More API calls = More money. Use small models for the "Triage/Coordination" step.
+- **Orchestration Overhead:** More agents = More API calls = More money. "Triage/Coordination" step ke liye small models use karein.
 
 ---
 
@@ -117,8 +117,8 @@ services:
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Agentic Kubernetes Operators:** A specialized Kubernetes operator that manages agent lifecycles, retries, and scaling automatically.
-- **Heterogeneous Scaling:** Scaling the "Researcher" to 50 pods while keeping the "Writer" at 2 pods (because research is more parallelizable).
+- **Agentic Kubernetes Operators:** Ek specialized Kubernetes operator jo agent lifecycles, retries, aur scaling ko automatically manage karta hai.
+- **Heterogeneous Scaling:** "Researcher" ko 50 pods tak scale karna jabki "Writer" ko 2 pods par hi rakhna (kyunki research zyada parallelizable hai).
 
 ---
 

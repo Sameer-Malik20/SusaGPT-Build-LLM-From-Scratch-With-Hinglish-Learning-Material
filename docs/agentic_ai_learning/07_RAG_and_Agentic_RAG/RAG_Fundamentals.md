@@ -15,11 +15,11 @@ RAG ki wajah se AI kabhi outdated nahi hota kyunki wo humesha latest data dhoond
 ---
 
 ## 🧠 2. Deep Technical Explanation
-RAG is the process of optimizing the output of an LLM by referencing a dynamic, external knowledge base.
-- **Indexing:** Documents are split into **Chunks**, converted into **Embeddings** (Vectors), and stored in a **Vector Database**.
-- **Retrieval:** When a user asks a question, the system converts the query into a vector and finds the most similar chunks using **Cosine Similarity**.
-- **Augmentation:** The retrieved chunks are stuffed into the LLM's **Context Window** along with the user query.
-- **Generation:** The LLM generates a response "Grounded" in the provided context, reducing hallucinations.
+RAG ek dynamic, external knowledge base ko reference karke LLM ke output ko optimize karne ki process hai.
+- **Indexing:** Documents ko **Chunks** mein split kiya jata hai, **Embeddings** (Vectors) mein convert kiya jata hai, aur **Vector Database** mein store kiya jata hai.
+- **Retrieval:** Jab user question puchta hai, toh system query ko vector mein convert karta hai aur **Cosine Similarity** ka use karke most similar chunks dhoondhta hai.
+- **Augmentation:** Retrieved chunks ko user query ke sath LLM ke **Context Window** mein daal diya jata hai.
+- **Generation:** LLM provided context mein "Grounded" response generate karta hai, jisse hallucinations kam hote hain.
 
 ---
 
@@ -72,9 +72,9 @@ def generate(query, context):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Customer Support:** Reading company wikis to answer user queries.
-- **Legal/Compliance:** Searching thousands of pages of regulations.
-- **Personal Knowledge Management:** Chatting with your own notes (Notion/Obsidian).
+- **Customer Support:** User queries ka answer dene ke liye company wikis ko read karna.
+- **Legal/Compliance:** Regulatory rules ke hazaron pages search karna.
+- **Personal Knowledge Management:** Apne khud ke notes (Notion/Obsidian) ke sath chat karna.
 
 ---
 
@@ -92,8 +92,8 @@ def generate(query, context):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **RAG:** Accurate and up-to-date but adds latency (Retrieval step) and cost (Embedding + extra tokens).
-- **Fine-tuning:** Fast and specialized but expensive to train and can't handle new/dynamic data.
+- **RAG:** Accurate aur up-to-date par latency (Retrieval step) aur cost (Embedding + extra tokens) add karta hai.
+- **Fine-tuning:** Fast aur specialized par train karne ke liye expensive aur naye/dynamic data ko handle nahi kar sakta.
 
 ---
 
@@ -110,8 +110,8 @@ def generate(query, context):
 ---
 
 ## 📈 11. Scaling Challenges
-- **Massive Data:** Billions of chunks index karna and maintain karna.
-- **Real-time updates:** How fast can you index a new document?
+- **Massive Data:** Billions of chunks index karna aur maintain karna.
+- **Real-time updates:** Aap kitni tezi se naye document ko index kar sakte hain?
 
 ---
 
@@ -135,8 +135,8 @@ def generate(query, context):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **GraphRAG:** Using Knowledge Graphs + Vector DBs to understand relationships between entities, not just text similarity.
-- **Long-Context RAG:** Skipping retrieval and putting 1M tokens directly into the LLM context (Only for very high-budget apps).
+- **GraphRAG:** Sirf text similarity ke bajaye entities ke beech ke relationships ko samajhne ke liye Knowledge Graphs + Vector DBs ka use karna.
+- **Long-Context RAG:** Retrieval ko skip karna aur 1M tokens ko directly LLM context mein daal dena (Sirf bahut high-budget apps ke liye).
 
 ---
 

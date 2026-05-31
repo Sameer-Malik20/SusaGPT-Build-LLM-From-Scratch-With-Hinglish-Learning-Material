@@ -16,13 +16,13 @@ Production architecture sikhata hai ki kaise hum **FastAPI, Redis, aur Docker** 
 ---
 
 ## 🧠 2. Deep Technical Explanation
-A production agent system is built on **Asynchronous Event-Driven Design**.
-1. **The Gateway (FastAPI):** Handles incoming requests, authentication, and rate limiting.
-2. **Orchestrator (LangGraph/CrewAI):** Manages the logical flow and state transitions.
-3. **State Store (Postgres/Redis):** Persists conversation history and agent internal state across sessions.
-4. **Tool Layer:** A set of microservices or internal functions that the agent calls.
-5. **Evaluation Layer:** Continuous monitoring and scoring of agent responses.
-6. **Background Workers (Celery):** Handling long-running tasks like "Researching 100 PDFs" without blocking the user.
+Production agent system **Asynchronous Event-Driven Design** par built hota hai.
+1. **The Gateway (FastAPI):** Incoming requests, authentication, aur rate limiting ko handle karta hai.
+2. **Orchestrator (LangGraph/CrewAI):** Logical flow aur state transitions ko manage karta hai.
+3. **State Store (Postgres/Redis):** Sessions ke across conversation history aur agent internal state ko persist karta hai.
+4. **Tool Layer:** Microservices ya internal functions ka ek set jise agent call karta hai.
+5. **Evaluation Layer:** Agent responses ki continuous monitoring aur scoring.
+6. **Background Workers (Celery):** User ko block kiye bina "Researching 100 PDFs" jaise long-running tasks ko handle karna.
 
 ---
 
@@ -59,16 +59,16 @@ async def handle_request(query: str, background_tasks: BackgroundTasks):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Customer Support Bots:** Handling 24/7 queries with 99.9% uptime.
-- **Automated Trading:** Agents that monitor markets and execute trades with sub-second latency.
-- **Enterprise ERP:** AI that interacts with multiple company databases to generate reports.
+- **Customer Support Bots:** 99.9% uptime ke sath 24/7 queries handle karna.
+- **Automated Trading:** Markets monitor karne aur sub-second latency ke sath trades execute karne wale agents.
+- **Enterprise ERP:** Reports generate karne ke liye multiple company databases ke sath interact karne wali AI.
 
 ---
 
 ## ❌ 6. Failure Cases
-- **Database Locks:** Too many agents writing to the same state row simultaneously.
-- **Model Timeouts:** OpenAI API taking 60 seconds to respond, causing the API gateway to crash.
-- **State Inconsistency:** Agent thinks it did Task A, but Task A actually failed in the background.
+- **Database Locks:** Ek sath same state row par write karne wale bahut saare agents.
+- **Model Timeouts:** OpenAI API response dene mein 60 seconds le raha hai, jisse API gateway crash ho raha hai.
+- **State Inconsistency:** Agent ko lagta hai ki usne Task A kar diya, par Task A background mein actually fail ho gaya tha.
 
 ---
 
@@ -79,8 +79,8 @@ async def handle_request(query: str, background_tasks: BackgroundTasks):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Stateful (Graph):** Very smart and can handle complex flows, but expensive to maintain and scale.
-- **Stateless (Simple RAG):** Fast and cheap but lacks "Intelligence" for long-term tasks.
+- **Stateful (Graph):** Bahut smart hai aur complex flows handle kar sakta hai, par maintain aur scale karna expensive hai.
+- **Stateless (Simple RAG):** Fast aur cheap hai par long-term tasks ke liye "Intelligence" ki kami hoti hai.
 
 ---
 
@@ -96,12 +96,12 @@ async def handle_request(query: str, background_tasks: BackgroundTasks):
 ---
 
 ## 📈 11. Scaling Challenges
-- **Concurrent Connections:** handling 100,000 active websockets for voice agents.
+- **Concurrent Connections:** Voice agents ke liye 100,000 active websockets handle karna.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Token Usage:** Cache common answers to save 40-50% on API costs.
+- **Token Usage:** API costs par 40-50% bachane ke liye common answers ko cache karein.
 
 ---
 
@@ -113,8 +113,8 @@ async def handle_request(query: str, background_tasks: BackgroundTasks):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Serverless Agent Nodes:** Every node in the graph runs as a serverless function to minimize idle cost.
-- **Mesh Orchestration:** Multiple orchestrators talking to each other to solve global-scale problems.
+- **Serverless Agent Nodes:** Idle cost ko minimize karne ke liye graph ka har node serverless function ke roop mein run hota hai.
+- **Mesh Orchestration:** Global-scale problems solve karne ke liye multiple orchestrators ka aapas mein baat karna.
 
 ---
 

@@ -18,13 +18,13 @@ Handoff sahi hona chahiye taaki user ko "Loop" ya "Repetition" mehsoos na ho.
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Handoffs are the transitions between specialized nodes in a multi-agent graph.
-- **Explicit Handoff:** Agent A outputs a specific signal (e.g., `GOTO: BillingAgent`) that the router interprets.
-- **Context Summarization:** Instead of passing the entire chat history, Agent A passes a **State Summary**. This reduces token usage for Agent B.
-- **Schema Validation:** Using Pydantic to ensure that the data passed from Agent A is exactly what Agent B expects (e.g., a valid UUID or a specific JSON structure).
+Handoffs multi-agent graph mein specialized nodes ke beech ke transitions hote hain.
+- **Explicit Handoff:** Agent A ek specific signal (e.g., `GOTO: BillingAgent`) output karta hai jise router interpret karta hai.
+- **Context Summarization:** Poori chat history pass karne ke bajaye, Agent A ek **State Summary** pass karta hai. Ye Agent B ke liye token usage ko kam karta hai.
+- **Schema Validation:** Pydantic ka use karke ensure karna ki Agent A se pass kiya gaya data wahi ho jo Agent B expect karta hai (e.g., ek valid UUID ya ek specific JSON structure).
 - **Handoff Triggers:**
-    - **Intent-based:** "I need help with my bill" → Handoff to Finance.
-    - **Capability-based:** "Can you write Python?" → Handoff to Coder.
+    - **Intent-based:** "I need help with my bill" → Finance ko handoff.
+    - **Capability-based:** "Can you write Python?" → Coder ko handoff.
 
 ---
 
@@ -71,16 +71,16 @@ def billing_agent(handoff_data: dict):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Medical Triage:** A basic bot hands off to a specialist agent after collecting symptoms.
-- **E-commerce:** A chatbot handing off to a human agent or a specialized "Return" agent.
-- **Multi-lingual Support:** An English router agent handing off to a "Hindi Specialist" agent.
+- **Medical Triage:** Symptoms collect karne ke baad ek basic bot specialist agent ko handoff karta hai.
+- **E-commerce:** Ek chatbot human agent ya specialized "Return" agent ko handoff karta hai.
+- **Multi-lingual Support:** Ek English router agent "Hindi Specialist" agent ko handoff karta hai.
 
 ---
 
 ## ❌ 6. Failure Cases
-- **Context Loss:** Agent B ko ye nahi pata ki Agent A ne kya kiya, isliye wo user ko "Gussa" dila deta hai wahi sawal puchkar.
+- **Context Loss:** Agent B ko ye nahi pata ki Agent A ne kya kiya, isliye wo user ko wahi sawal poochkar irritate kar deta hai.
 - **Validation Error:** Agent A ne "String" bheja par Agent B ko "Int" chahiye tha (System crash).
-- **Infinite Handoff:** Agent A sends to B, B sends to A (Ping-pong loop).
+- **Infinite Handoff:** Agent A B ko bhejta hai, B A ko bhejta hai (Ping-pong loop).
 
 ---
 
@@ -91,13 +91,13 @@ def billing_agent(handoff_data: dict):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Full History Handoff:** Safest but most expensive (Token bloat).
-- **Summary Handoff:** Cheapest but risky (Important details might be missing in the summary).
+- **Full History Handoff:** Safest par sabse expensive (Token bloat).
+- **Summary Handoff:** Cheapest par risky (Summary mein important details miss ho sakte hain).
 
 ---
 
 ## ✅ 9. Best Practices
-- **Standardized Schema:** Use a common `HandoffObject` across all agents in your company.
+- **Standardized Schema:** Apni company ke sabhi agents ke across ek common `HandoffObject` ka use karein.
 - **Confirmation Message:** Handoff ke waqt user ko batayein: "Passing you to our Billing specialist who has your order details."
 
 ---
@@ -131,8 +131,8 @@ def billing_agent(handoff_data: dict):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Zero-Token Handoffs:** Using embeddings to pass context "Semantic pointers" instead of full text summaries.
-- **Predicted Handoffs:** The system predicts the need for a handoff 2 steps before it happens to pre-load the next agent.
+- **Zero-Token Handoffs:** Full text summaries ke bajaye context "Semantic pointers" pass karne ke liye embeddings ka use karna.
+- **Predicted Handoffs:** Next agent ko pre-load karne ke liye system handoff ki zaroorat ko 2 steps pehle hi predict kar leta hai.
 
 ---
 

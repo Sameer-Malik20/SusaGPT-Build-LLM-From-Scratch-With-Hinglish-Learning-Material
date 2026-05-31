@@ -16,12 +16,12 @@ Challenge ye hai ki ye sab "Real-time" (sub-second) mein hona chahiye. Agar AI j
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Voice agents require a **Low-Latency Pipeline**.
-1. **STT (Speech-to-Text):** Using models like **Whisper (Groq)** or **Deepgram** that can transcribe audio chunks as they arrive.
-2. **Realtime API (OpenAI/Gemini):** Bypassing the text-conversion step by sending audio tokens directly to the model for faster reasoning.
-3. **VAD (Voice Activity Detection):** Automatically detecting when the user starts and stops speaking.
-4. **TTS (Text-to-Speech):** Using high-speed providers like **ElevenLabs** or **Cartesia** to generate human-like audio.
-5. **Full-Duplex WebSockets:** A connection that allows the user and agent to speak at the same time (Interrupt handling).
+Voice agents ke liye ek **Low-Latency Pipeline** ki zaroorat hoti hai.
+1. **STT (Speech-to-Text):** **Whisper (Groq)** ya **Deepgram** jaise models ka use karna jo audio chunks aate hi unhe transcribe kar sakein.
+2. **Realtime API (OpenAI/Gemini):** Faster reasoning ke liye audio tokens ko directly model par bhejkar text-conversion step ko bypass karna.
+3. **VAD (Voice Activity Detection):** Automatically detect karna ki user ne kab bolna start aur stop kiya.
+4. **TTS (Text-to-Speech):** Human-like audio generate karne ke liye **ElevenLabs** ya **Cartesia** jaise high-speed providers ka use karna.
+5. **Full-Duplex WebSockets:** Ek connection jo user aur agent ko ek hi time par bolne deta hai (Interrupt handling).
 
 ---
 
@@ -63,9 +63,9 @@ async def voice_agent_loop():
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Customer Call Centers:** AI agents handling support tickets over the phone.
-- **Language Tutors:** AI that corrects your pronunciation in real-time.
-- **Voice Assistants:** Smart home devices that respond instantly to complex commands.
+- **Customer Call Centers:** Phone par support tickets handle karne wale AI agents.
+- **Language Tutors:** AI jo real-time mein aapki pronunciation ko correct karti hai.
+- **Voice Assistants:** Smart home devices jo complex commands par instantly respond karte hain.
 
 ---
 
@@ -83,8 +83,8 @@ async def voice_agent_loop():
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Cascaded Pipeline (STT + LLM + TTS):** Highly customizable but higher latency.
-- **Native Realtime API:** Extremely fast and natural but very expensive and limited control.
+- **Cascaded Pipeline (STT + LLM + TTS):** Highly customizable hai par higher latency hoti hai.
+- **Native Realtime API:** Extremely fast aur natural hai par bahut expensive aur limited control hai.
 
 ---
 
@@ -124,8 +124,8 @@ async def voice_agent_loop():
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Emotional Voice Models:** AI that detects user's stress level from their voice and changes its tone accordingly.
-- **Sub-100ms Responses:** New specialized hardware that makes AI talking indistinguishable from human talking.
+- **Emotional Voice Models:** AI jo user ke voice tone se unka stress level detect karti hai aur uske according apna tone change karti hai.
+- **Sub-100ms Responses:** New specialized hardware jo AI talking ko human talking se bilkul indistinguishable bana deta hai.
 
 ---
 

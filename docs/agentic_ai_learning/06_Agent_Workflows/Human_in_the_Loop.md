@@ -17,11 +17,11 @@ Isse agent autonomous bhi rehta hai aur safe bhi.
 ---
 
 ## 🧠 2. Deep Technical Explanation
-HITL in 2026 is implemented using **State Interrupts**.
-- **The Interrupt:** A workflow node that triggers a state save and "pauses" the execution thread. It waits for an external signal (Human Input).
-- **Review & Edit:** The human can not only "Approve/Reject" but also **Modify** the agent's state (e.g., editing the drafted email) before it proceeds.
-- **Time-Travel:** Users can look at the agent's history, go back to a previous turn, change the outcome, and restart from there.
-- **Wait Condition:** The backend exposes an API endpoint (`/approve`) that updates the state and signals the graph to continue.
+2026 mein HITL **State Interrupts** ka use karke implement kiya jata hai.
+- **The Interrupt:** Ek workflow node jo state save trigger karta hai aur execution thread ko "pause" karta hai. Ye ek external signal (Human Input) ka wait karta hai.
+- **Review & Edit:** Human na sirf "Approve/Reject" kar sakta hai balki agent ki state ko **Modify** bhi kar sakta hai (e.g., draft kiye gaye email ko edit karna) isse pehle ki wo aage badhe.
+- **Time-Travel:** Users agent ki history dekh sakte hain, pichle turn par wapas ja sakte hain, outcome change kar sakte hain, aur wahan se restart kar sakte hain.
+- **Wait Condition:** Backend ek API endpoint (`/approve`) expose karta hai jo state update karta hai aur graph ko continue karne ka signal deta hai.
 
 ---
 
@@ -68,9 +68,9 @@ def approve_action(thread_id: str, action_data: dict):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Medical AI:** Agent suggests a diagnosis, but the doctor must sign off before it's saved in the records.
-- **Enterprise Spend:** Agents can buy stationery < $50, but need manager approval for anything higher.
-- **Content Publishing:** Automating social media posts with a final "Quality Check" by a human editor.
+- **Medical AI:** Agent diagnosis suggest karta hai, par records mein save hone se pehle doctor ka sign off zaroori hai.
+- **Enterprise Spend:** Agents $50 se kam ka stationery buy kar sakte hain, par usse higher kisi bhi cheez ke liye manager approval ki zaroorat hoti hai.
+- **Content Publishing:** Ek human editor dwara final "Quality Check" ke sath social media posts ko automate karna.
 
 ---
 
@@ -88,8 +88,8 @@ def approve_action(thread_id: str, action_data: dict):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Full Autonomy:** Fast and efficient but risky.
-- **HITL:** Very safe and high quality but adds significant latency and requires human time.
+- **Full Autonomy:** Fast aur efficient hai par risky hai.
+- **HITL:** Bahut safe aur high quality hai par significant latency add karta hai aur human time ki zaroorat hoti hai.
 
 ---
 

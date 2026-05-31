@@ -15,15 +15,15 @@ Dono ka kaam ek hi hai: **"Evaluation ko automate karna"**.
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Both frameworks use **LLM-as-a-Judge** to calculate scores from 0.0 to 1.0.
+Dono frameworks scores 0.0 se 1.0 calculate karne ke liye **LLM-as-a-Judge** ka use karte hain.
 1. **RAGAS Metrics:**
-    - **Faithfulness:** Calculated using NLI (Natural Language Inference).
-    - **Context Precision:** Measuring how many of the top retrieved chunks are actually useful.
+    - **Faithfulness:** NLI (Natural Language Inference) ka use karke calculate kiya jata hai.
+    - **Context Precision:** Ye measure karna ki top retrieved chunks mein se kitne actually useful hain.
 2. **DeepEval Metrics:**
-    - **G-Eval:** Using a specific rubric to grade any criteria (Coherence, Fluency, etc.).
-    - **Answer Relevancy:** Using cross-encoders to measure semantic similarity.
-    - **Bias & Toxicity:** Pre-built metrics to detect safety violations.
-3. **Synthesis:** You can generate "Synthetic Test Cases" (Query-Context pairs) using these frameworks to test your system even if you don't have real user data.
+    - **G-Eval:** Kisi bhi criteria (Coherence, Fluency, etc.) ko grade karne ke liye ek specific rubric ka use karna.
+    - **Answer Relevancy:** Semantic similarity measure karne ke liye cross-encoders ka use karna.
+    - **Bias & Toxicity:** Safety violations ko detect karne ke liye pre-built metrics.
+3. **Synthesis:** Agar aapke paas real user data na bhi ho, toh bhi aap apne system ko test karne ke liye in frameworks ka use karke "Synthetic Test Cases" (Query-Context pairs) generate kar sakte hain.
 
 ---
 
@@ -60,16 +60,16 @@ print(f"Score: {metric.score}") # 1.0 (Pass)
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **CI/CD Integration:** Automatically running 500 tests every time a developer changes the prompt.
-- **Continuous Monitoring:** Sampling 5% of production data and running RAGAS to check for quality "Drift".
-- **Benchmarking:** Comparing `gpt-4o` vs `claude-3.5-sonnet` to see which one performs better on your specific company data.
+- **CI/CD Integration:** Har baar jab developer prompt change karta hai, toh automatically 500 tests run karna.
+- **Continuous Monitoring:** Production data ka 5% sample lena aur quality "Drift" check karne ke liye RAGAS run karna.
+- **Benchmarking:** `gpt-4o` vs `claude-3.5-sonnet` ko compare karna ye dekhne ke liye ki kaunsa aapki specific company data par better perform karta hai.
 
 ---
 
 ## ❌ 6. Failure Cases
-- **Judge Cost:** Running 1000 tests on GPT-4 is expensive.
+- **Judge Cost:** GPT-4 par 1000 tests run karna expensive hai.
 - **Judge Hallucination:** Framework ka judge hi galti kar de aur sahi answer ko galat bol de.
-- **Slow Tests:** Running evals during a build can take 10-15 minutes, slowing down the team.
+- **Slow Tests:** Build ke dauran evals run karne mein 10-15 minutes lag sakte hain, jisse team slow ho jati hai.
 
 ---
 
@@ -80,14 +80,14 @@ print(f"Score: {metric.score}") # 1.0 (Pass)
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **DeepEval:** More comprehensive, better for unit tests and safety.
-- **RAGAS:** Better research-backed metrics specific to RAG.
+- **DeepEval:** Zyada comprehensive hai, unit tests aur safety ke liye better hai.
+- **RAGAS:** RAG ke liye specific, better research-backed metrics.
 
 ---
 
 ## ✅ 9. Best Practices
 - **Use Ground Truth:** Humesha koshish karein ki kuch "Human-verified" answers hon benchmarks mein.
-- **Thresholds:** Set clear pass/fail thresholds (e.g., Fail if Faithfulness < 0.8).
+- **Thresholds:** Clear pass/fail thresholds set karein (e.g., Fail if Faithfulness < 0.8).
 
 ---
 
@@ -97,12 +97,12 @@ print(f"Score: {metric.score}") # 1.0 (Pass)
 ---
 
 ## 📈 11. Scaling Challenges
-- **Rate Limits:** Running thousands of evals in parallel hits OpenAI rate limits. Use **Queuing**.
+- **Rate Limits:** Parallel mein thousands of evals run karne se OpenAI rate limits hit ho sakti hain. **Queuing** ka use karein.
 
 ---
 
 ## 💰 12. Cost Considerations
-- **Open-source Judges:** Use Llama-3-70B (locally or via Groq) as a judge to save money.
+- **Open-source Judges:** Paise bachane ke liye Llama-3-70B (locally ya Groq ke throw) ko judge ki tarah use karein.
 
 ---
 
@@ -114,8 +114,8 @@ print(f"Score: {metric.score}") # 1.0 (Pass)
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **LLM-Judge Calibration:** Using a small set of human scores to "Tune" the AI judge's scoring behavior.
-- **Direct Alignment:** Training the main model directly on the metrics provided by DeepEval/RAGAS.
+- **LLM-Judge Calibration:** AI judge ke scoring behavior ko "Tune" karne ke liye human scores ke ek small set ka use karna.
+- **Direct Alignment:** Main model ko directly DeepEval/RAGAS dwara provided metrics par train karna.
 
 ---
 

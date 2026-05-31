@@ -19,15 +19,15 @@ In strategies ke bina aapka agent "Reliable" nahi ban sakta.
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Handling failures requires a multi-layer strategy:
-1. **Exponential Backoff:** Retrying the request after $1, 2, 4, 8...$ seconds to avoid overloading the API provider during a rate-limit event.
+Failures ko handle karne ke liye multi-layer strategy ki zaroorat hoti hai:
+1. **Exponential Backoff:** Rate-limit event ke dauran API provider ko overload karne se bachne ke liye $1, 2, 4, 8...$ seconds ke baad request retry karna.
 2. **Model Cascading (Fallback):**
     - Attempt 1: `gpt-4o` (Premium)
     - Fallback: `claude-3.5-sonnet` (Secondary)
     - Final Fallback: `gpt-4o-mini` (Cheapest/Fastest)
-3. **Logic Retry:** If the LLM returns an invalid JSON, send the error back to the LLM: "Your JSON was invalid, please fix it." (Self-Correction).
-4. **Circuit Breaker:** If the API fails 5 times in 1 minute, "Trip" the circuit and stop all requests for 5 minutes to allow the provider to recover.
-5. **Human-in-the-loop (HITL) Fallback:** If all models fail, escalate the task to a human operator.
+3. **Logic Retry:** Agar LLM invalid JSON return kare, toh error wapas LLM ko bhejein: "Your JSON was invalid, please fix it." (Self-Correction).
+4. **Circuit Breaker:** Agar API 1 minute mein 5 baar fail ho jaye, toh circuit ko "Trip" karein aur provider ko recover hone dene ke liye 5 minutes tak sabhi requests ko rok dein.
+5. **Human-in-the-loop (HITL) Fallback:** Agar saare models fail ho jayein, toh task ko human operator ke paas escalate karein.
 
 ---
 
@@ -62,16 +62,16 @@ def call_llm_safely(prompt):
 ---
 
 ## 🌍 5. Real-World Use Cases
-- **Payment Processing:** Ensuring an agent doesn't "Double charge" a user by retrying correctly.
-- **Enterprise Search:** Falling back to a local model if the cloud model is blocked by a corporate firewall.
-- **Support Bots:** Transferring to a human agent immediately if the AI's "Confidence Score" is too low.
+- **Payment Processing:** Correctly retry karke ensure karna ki agent user ko "Double charge" na kare.
+- **Enterprise Search:** Agar cloud model corporate firewall dwara blocked ho, toh local model par fallback karna.
+- **Support Bots:** AI ka "Confidence Score" bahut low hone par immediately human agent ko transfer karna.
 
 ---
 
 ## ❌ 6. Failure Cases
 - **Retry Storm:** 1000 agents ek saath retry kar rahe hain, jisse API provider unhe "Permanent Block" kar deta hai.
 - **State Confusion:** Retry karte waqt purana "Context" bhool jana.
-- **Infinite Fallback:** Agent A calls B, B calls C, C calls A (Looping failures).
+- **Infinite Fallback:** Agent A B ko call karta hai, B C ko, aur C A ko call karta hai (Looping failures).
 
 ---
 
@@ -82,8 +82,8 @@ def call_llm_safely(prompt):
 ---
 
 ## ⚖️ 8. Tradeoffs
-- **Aggressive Retries:** High reliability but higher token cost and latency.
-- **Immediate Fallback:** Faster response but might use a "Lower Quality" model too soon.
+- **Aggressive Retries:** High reliability par higher token cost aur latency.
+- **Immediate Fallback:** Faster response par ho sakta hai ki "Lower Quality" model ka use jaldi kar liya jaye.
 
 ---
 
@@ -94,7 +94,7 @@ def call_llm_safely(prompt):
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Denial of Wallet:** Attackers can force your system into expensive fallback loops.
+- **Denial of Wallet:** Attackers aapke system ko expensive fallback loops mein force kar sakte hain.
 
 ---
 
@@ -116,8 +116,8 @@ def call_llm_safely(prompt):
 ---
 
 ## 🚀 15. Latest 2026 Industry Patterns
-- **Semantic Fallbacks:** Routing to different models based on the "Topic" (e.g. Math goes to Model A, Creative goes to Model B).
-- **Proactive Retries:** Starting two model calls in parallel and taking the one that finishes first (Hedging).
+- **Semantic Fallbacks:** "Topic" ke basis par different models par route karna (e.g. Math Model A par jata hai, Creative Model B par jata hai).
+- **Proactive Retries:** Parallel mein do model calls start karna aur pehle finish hone wale ko accept karna (Hedging).
 
 ---
 
