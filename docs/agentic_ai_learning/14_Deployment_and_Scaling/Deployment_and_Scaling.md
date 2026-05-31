@@ -1,5 +1,5 @@
 # 🚢 Deployment & Scaling — Going Global
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the tools and workflows for deploying agents to the cloud (AWS, Azure, GCP) and scaling them to handle global traffic.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Agents ko cloud (AWS, Azure, GCP) par deploy karne aur global traffic handle karne ke liye scale karne ke tools aur workflows ko master karein.
 
 ---
 

@@ -1,5 +1,5 @@
 # 🛡️ CRAG (Corrective RAG) — Self-Healing Retrieval
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the Corrective RAG pattern that uses a "Retrieval Evaluator" to decide when to trust search results, when to refine them, and when to search the web.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Corrective RAG pattern ko master karein jo "Retrieval Evaluator" ka use karke decide karta hai ki kab search results par trust karna hai, kab refine karna hai, aur kab web search karni hai.
 
 ---
 

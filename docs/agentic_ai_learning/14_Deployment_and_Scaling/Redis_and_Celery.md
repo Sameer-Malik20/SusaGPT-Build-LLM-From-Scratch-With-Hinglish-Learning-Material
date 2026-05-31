@@ -1,5 +1,5 @@
 # 🐎 Redis & Celery — The Asynchronous Powerhouse
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the use of Redis as a broker and Celery as a worker to handle heavy, multi-step agentic workflows in the background.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Background mein heavy, multi-step agentic workflows ko handle karne ke liye Redis ko broker aur Celery ko worker ke roop mein use karna master karein.
 
 ---
 

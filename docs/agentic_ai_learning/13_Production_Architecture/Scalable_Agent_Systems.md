@@ -1,5 +1,5 @@
 # 🚀 Scalable Agent Systems — Handling the Traffic Wave
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the strategies for scaling AI agent systems horizontally and vertically to handle thousands of concurrent users.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Thousands of concurrent users handle karne ke liye AI agent systems ko horizontally aur vertically scale karne ki strategies ko master karein.
 
 ---
 

@@ -1,5 +1,5 @@
 # ⚡ FastAPI for Agents — The High-Speed Gateway
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the use of FastAPI to build high-performance, asynchronous APIs for serving AI agents to web and mobile applications.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Web aur mobile applications ke liye AI agents serve karne ke liye high-performance, asynchronous APIs build karne ke liye FastAPI ke use ko master karein.
 
 ---
 

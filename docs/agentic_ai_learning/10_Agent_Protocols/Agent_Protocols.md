@@ -1,5 +1,5 @@
 # 📜 Agent Protocols — The Language of Machines
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the standardized protocols (MCP, JSON-RPC, FIPA) that allow agents from different frameworks to talk to each other and share tools.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Standardized protocols (MCP, JSON-RPC, FIPA) ko master karein jo alag-alag frameworks ke agents ko aapas mein baat karne aur tools share karne enable karte hain.
 
 ---
 

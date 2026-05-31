@@ -1,5 +1,5 @@
 # 🏗️ Agentic RAG Architectures — The Synthesis of Search & Logic
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the end-to-end architectural designs that transform simple retrieval into autonomous, reasoning-driven knowledge discovery.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Simple retrieval ko autonomous, reasoning-driven knowledge discovery mein badalne wale end-to-end architectural designs ko master karein.
 
 ---
 

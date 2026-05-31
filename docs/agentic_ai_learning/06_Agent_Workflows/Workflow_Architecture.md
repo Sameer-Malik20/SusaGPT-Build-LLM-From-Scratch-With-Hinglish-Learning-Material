@@ -1,5 +1,5 @@
 # 🏗️ Workflow Architecture — Building Complex Agent Systems
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the structural design of agentic workflows, moving from linear chains to stateful graphs.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Linear chains se stateful graphs ki taraf agentic workflows ke structural design ko master karein.
 
 ---
 

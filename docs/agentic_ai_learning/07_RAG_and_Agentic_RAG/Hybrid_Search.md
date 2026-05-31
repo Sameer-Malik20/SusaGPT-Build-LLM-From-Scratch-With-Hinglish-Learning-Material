@@ -1,5 +1,5 @@
 # 🔀 Hybrid Search — The Best of Both Worlds
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the combination of Semantic Vector Search and Keyword-based Search to achieve maximum RAG precision.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Maximum RAG precision achieve karne ke liye Semantic Vector Search aur Keyword-based Search ke combination ko master karein.
 
 ---
 

@@ -1,14 +1,14 @@
 # 🤖 Project: Multi-Agent Autonomous System (Advanced)
-> **Level:** Advanced | **Goal:** Build a "Swarm" of agents (Manager, Researcher, Writer, Reviewer) that can complete complex, open-ended business tasks from scratch.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Ek agents ka "Swarm" (Manager, Researcher, Writer, Reviewer) banayein jo starting se complex, open-ended business tasks ko independently complete kar sake.
 
 ---
 
 ## 🏗️ 1. Architecture
-We use a **Hierarchical Orchestration (Supervisor)** pattern.
-- **Supervisor Agent:** Decides which worker (Researcher/Writer) to call and when.
-- **Worker Agents:** Specialized agents with restricted tools.
-- **State Management:** **LangGraph** to maintain the "Global State" and message history.
-- **Communication:** Internal message passing via the Graph.
+Hum ek **Hierarchical Orchestration (Supervisor)** pattern use karte hain.
+- **Supervisor Agent:** Decide karta hai ki kis worker (Researcher/Writer) ko kab call karna hai.
+- **Worker Agents:** Specialized agents jinpe restricted tools hote hain.
+- **State Management:** "Global State" aur message history ko maintain karne ke liye **LangGraph** ka use.
+- **Communication:** Graph ke through internal message passing.
 
 ---
 
@@ -60,43 +60,43 @@ workflow.add_edge("writer", "supervisor")
 ---
 
 ## 🔍 4. Observability
-- **LangSmith Trace:** visualizing the "Back and Forth" between the Supervisor and Workers.
-- **State History:** Checking how the "Global State" grows after every agent's contribution.
+- **LangSmith Trace:** Supervisor aur Workers ke beech ke "Back and Forth" communication ko visualize karna.
+- **State History:** Check karna ki har agent ke contribution ke baad "Global State" kaise grow hoti hai.
 
 ---
 
 ## 📊 5. Evaluation
-- **Task Success Rate:** % of times the swarm reaches the "END" node with a valid result.
-- **Token Efficiency:** Are agents "Chatting" too much without making progress?
+- **Task Success Rate:** Kitne percentage baar swarm valid result ke sath "END" node tak pahunchta hai.
+- **Token Efficiency:** Kya agents progress kiye bina aapas mein bahut zyada "Chatting" kar rahe hain?
 
 ---
 
 ## 🛡️ 6. Security
-- **Tool Scoping:** Researcher cannot call the "Publish" tool; only the Writer or Reviewer can.
-- **Input Sanitization:** Preventing one agent from "Socially Engineering" the Supervisor via its output.
+- **Tool Scoping:** Researcher "Publish" tool ko call nahi kar sakta; sirf Writer ya Reviewer hi kar sakte hain.
+- **Input Sanitization:** Kisi ek agent ko apne output ke through Supervisor ko "Socially Engineer" karne se rokna.
 
 ---
 
 ## 🚀 7. Deployment
-- **Microservices:** Run each agent as a separate Docker container for independent scaling.
-- **Orchestrator:** Deploy the main LangGraph app on a high-availability cluster.
+- **Microservices:** Independent scaling ke liye har agent ko ek separate Docker container ke roop mein run karein.
+- **Orchestrator:** Main LangGraph app ko ek high-availability cluster par deploy karein.
 
 ---
 
 ## 📈 8. Scaling
-- **Parallel Workers:** Running 5 "Researcher" agents in parallel to speed up large tasks.
-- **Redis Checkpointers:** Saving graph state in Redis so any server node can resume a swarm's work.
+- **Parallel Workers:** Bade tasks ko speed up karne ke liye 5 "Researcher" agents ko parallel mein run karna.
+- **Redis Checkpointers:** Graph state ko Redis mein save karna taaki koi bhi server node swarm ke kaam ko resume kar sake.
 
 ---
 
 ## 💰 9. Cost Optimization
-- **Tiered Inference:** Use `gpt-4o-mini` for the Supervisor and `gpt-4o` for the Reviewer.
-- **Prompt Caching:** Cache the complex "System Prompts" for all 4 agents.
+- **Tiered Inference:** Supervisor ke liye `gpt-4o-mini` aur Reviewer ke liye `gpt-4o` ka use karein.
+- **Prompt Caching:** Sabhi 4 agents ke complex "System Prompts" ko cache karein.
 
 ---
 
 ## ⚠️ 10. Failure Handling
-- **Deadlocks:** If Supervisor keeps calling Researcher in a loop, trigger a "Break" after 5 tries.
-- **Worker Crash:** If an agent fails, the Supervisor should "Re-assign" the task or report the error.
+- **Deadlocks:** Agar Supervisor loop mein Researcher ko call karta rahe, toh 5 tries ke baad "Break" trigger karein.
+- **Worker Crash:** Agar koi agent fail ho jata hai, toh Supervisor ko task ko "Re-assign" karna chahiye ya error report karna chahiye.
 
 ---

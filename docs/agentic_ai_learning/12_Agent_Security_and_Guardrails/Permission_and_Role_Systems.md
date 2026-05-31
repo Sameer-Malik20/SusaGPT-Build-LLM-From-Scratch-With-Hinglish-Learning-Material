@@ -1,5 +1,5 @@
 # 🔐 Permission & Role Systems — RBAC for Agents
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the implementation of Role-Based Access Control (RBAC) and attribute-based permissions for AI agents to ensure they only access what they are allowed to.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Ensure karne ke liye ki AI agents sirf usi ko access karein jiske liye wo allowed hain, Role-Based Access Control (RBAC) aur attribute-based permissions ke implementation ko master karein.
 
 ---
 

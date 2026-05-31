@@ -1,14 +1,14 @@
 # 📄 Project: PDF Chat Agent (Beginner)
-> **Goal:** Build a production-grade RAG agent that allows users to upload PDFs and ask questions with 99% accuracy.
+> **Level:** Beginner | **Language:** Hinglish | **Goal:** Ek aisa production-grade RAG agent banayein jo users ko PDFs upload karne aur 99% accuracy ke sath questions puchne ki permission de.
 
 ---
 
 ## 🏗️ 1. Architecture
-We use a **Classic RAG (Retrieval-Augmented Generation)** pipeline.
-- **Frontend:** Streamlit / React for file upload.
-- **Backend:** FastAPI for processing.
+Hum ek **Classic RAG (Retrieval-Augmented Generation)** pipeline use karte hain.
+- **Frontend:** File upload ke liye Streamlit / React.
+- **Backend:** Processing ke liye FastAPI.
 - **Ingestion:** PDF -> Text Chunks -> Vector Embeddings.
-- **Storage:** FAISS (Local) or Pinecone (Cloud).
+- **Storage:** FAISS (Local) ya Pinecone (Cloud).
 - **Retrieval:** Semantic Search + LLM Refinement.
 
 ---
@@ -56,44 +56,44 @@ def ask_question(query):
 ---
 
 ## 🔍 4. Observability
-- **LangSmith:** Trace every retrieval step to see which chunk was selected.
-- **Logging:** Log PDF upload failures and search latency.
+- **LangSmith:** Har retrieval step ko trace karein taaki dekh sakein ki kaunsa chunk select hua hai.
+- **Logging:** PDF upload failures aur search latency ko log karein.
 
 ---
 
 ## 📊 5. Evaluation
-- **RAGAS:** Measure Faithfulness (is the answer in the PDF?) and Answer Relevancy.
-- **Test Set:** 20 standard questions for every PDF to check for regression.
+- **RAGAS:** Faithfulness (kya answer PDF mein hai?) aur Answer Relevancy ko measure karein.
+- **Test Set:** Regression check karne ke liye har PDF ke liye 20 standard questions ka use karein.
 
 ---
 
 ## 🛡️ 6. Security
-- **File Validation:** Only allow `.pdf` files (prevent script execution).
-- **Size Limit:** Max 10MB to prevent Denial of Service (DoS) attacks.
-- **PII Masking:** Mask names/emails in PDF before sending to OpenAI.
+- **File Validation:** (Script execution ko rokne ke liye) sirf `.pdf` files hi allow karein.
+- **Size Limit:** Denial of Service (DoS) attacks ko prevent karne ke liye max 10MB size limit rakhein.
+- **PII Masking:** OpenAI ko bejne se pehle PDF se names/emails ko mask karein.
 
 ---
 
 ## 🚀 7. Deployment
-- **Docker:** Containerize the FastAPI app.
-- **Host:** Render / Fly.io for quick deployment.
+- **Docker:** FastAPI app ko containerize karein.
+- **Host:** Quick deployment ke liye Render / Fly.io ka use karein.
 
 ---
 
 ## 📈 8. Scaling
-- **Horizontal Scaling:** Run multiple workers for PDF processing.
-- **Vector DB:** Switch from local FAISS to **Pinecone** for handling 1000+ PDFs.
+- **Horizontal Scaling:** PDF processing ke liye multiple workers run karein.
+- **Vector DB:** 1000+ PDFs ko handle karne ke liye local FAISS se **Pinecone** par switch karein.
 
 ---
 
 ## 💰 9. Cost Optimization
-- **Chunk Tuning:** Smaller chunks use fewer tokens per query.
-- **Cache:** Cache answers for identical questions.
+- **Chunk Tuning:** Chote chunks query ke dauran kam tokens use karte hain.
+- **Cache:** Identical questions ke answers ko cache karein.
 
 ---
 
 ## ⚠️ 10. Failure Handling
-- **Malformed PDF:** Use try-except to catch parsing errors and tell the user "PDF is corrupt".
-- **No Results:** If similarity score < 0.7, tell user "Info not found in PDF".
+- **Malformed PDF:** Parsing errors ko catch karne ke liye try-except ka use karein aur user ko "PDF corrupt hai" batayein.
+- **No Results:** Agar similarity score < 0.7 ho, toh user ko batayein "Info PDF mein nahi mili".
 
 ---

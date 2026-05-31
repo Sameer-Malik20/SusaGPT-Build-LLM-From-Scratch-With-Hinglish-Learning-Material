@@ -1,5 +1,5 @@
 # 📡 Communication Protocols — Defining Agent Language
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the structured formats and protocols (JSON, Markdown, Tool calls) that enable agents to exchange data reliably.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Agents ke beech data reliability se exchange karne ke liye structured formats aur protocols (JSON, Markdown, Tool calls) ko master karein.
 
 ---
 

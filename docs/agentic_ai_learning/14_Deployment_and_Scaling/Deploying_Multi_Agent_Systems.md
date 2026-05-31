@@ -1,5 +1,5 @@
 # 🕸️ Deploying Multi-Agent Systems — Orchestrating the Swarm
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the deployment of complex, multi-agent architectures (CrewAI, LangGraph) using microservices, message queues, and service meshes.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Microservices, message queues, aur service meshes ka use karke complex, multi-agent architectures (CrewAI, LangGraph) ke deployment ko master karein.
 
 ---
 

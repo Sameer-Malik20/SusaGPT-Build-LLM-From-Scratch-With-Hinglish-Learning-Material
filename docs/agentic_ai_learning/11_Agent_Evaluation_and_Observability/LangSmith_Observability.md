@@ -1,5 +1,5 @@
 # 🛠️ LangSmith Observability — The Agent's X-Ray
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the use of LangSmith for tracing, debugging, and monitoring complex agentic workflows in real-time.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Real-time mein complex agentic workflows ko trace, debug, aur monitor karne ke liye LangSmith ke use ko master karein.
 
 ---
 

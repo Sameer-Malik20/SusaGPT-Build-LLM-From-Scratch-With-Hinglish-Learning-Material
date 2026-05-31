@@ -1,5 +1,5 @@
 # ☁️ Serverless Agents — Zero-Idle Infrastructure
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the deployment of AI agents using serverless functions like AWS Lambda, Vercel, and Cloudflare Workers to minimize costs and maximize scalability.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Costs ko minimize aur scalability ko maximize karne ke liye AWS Lambda, Vercel, aur Cloudflare Workers jaise serverless functions ka use karke AI agents ke deployment ko master karein.
 
 ---
 

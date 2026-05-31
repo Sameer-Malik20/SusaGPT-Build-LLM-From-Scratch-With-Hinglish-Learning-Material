@@ -1,5 +1,5 @@
 # 🎙️ Real-Time & Voice Agents — AI that Talks
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the development of low-latency voice agents using WebSockets, Realtime APIs, and specialized STT/TTS models.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** WebSockets, Realtime APIs, aur specialized STT/TTS models ka use karke low-latency voice agents ke development ko master karein.
 
 ---
 

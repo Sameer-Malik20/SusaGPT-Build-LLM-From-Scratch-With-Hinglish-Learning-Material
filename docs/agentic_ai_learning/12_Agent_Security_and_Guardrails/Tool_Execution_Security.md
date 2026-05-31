@@ -1,5 +1,5 @@
 # 📦 Tool Execution Security — Sandboxing the Agent's Power
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the techniques of isolating agentic tool execution using Docker, E2B, and restricted environments to prevent local system compromise.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Local system compromise ko rokne ke liye Docker, E2B, aur restricted environments ka use karke agentic tool execution ko isolate karne ki techniques ko master karein.
 
 ---
 

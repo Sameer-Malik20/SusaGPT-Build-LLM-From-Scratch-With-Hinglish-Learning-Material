@@ -1,5 +1,5 @@
 # 🛡️ Agent Security & Guardrails — The AI Fortress
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the security protocols to protect your agents from prompt injection, PII leakage, and unauthorized tool usage.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Apne agents ko prompt injection, PII leakage, aur unauthorized tool usage se bachane ke liye security protocols ko master karein.
 
 ---
 

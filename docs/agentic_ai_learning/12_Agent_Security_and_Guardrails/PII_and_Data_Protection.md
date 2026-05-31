@@ -1,5 +1,5 @@
 # 🔒 PII & Data Protection — Protecting User Identity
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the techniques of identifying and redacting Personally Identifiable Information (PII) like names, emails, and phone numbers before they reach the LLM.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** LLM tak pahunchne se pehle Personally Identifiable Information (PII) jaise names, emails, aur phone numbers ko identify aur redact karne ki techniques ko master karein.
 
 ---
 

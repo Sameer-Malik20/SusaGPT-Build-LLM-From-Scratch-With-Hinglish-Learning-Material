@@ -1,5 +1,5 @@
 # 🧱 Hierarchical Agents — Scaling Team Complexity
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the design of multi-layered agent teams where specialized squads report to mid-level managers, who report to a top-level orchestrator.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Multi-layered agent teams ke design ko master karein jahan specialized squads mid-level managers ko aur manager top-level orchestrator ko report karte hain.
 
 ---
 

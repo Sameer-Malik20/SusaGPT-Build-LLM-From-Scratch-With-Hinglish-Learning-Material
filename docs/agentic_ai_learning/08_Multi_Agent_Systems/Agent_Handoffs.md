@@ -1,5 +1,5 @@
 # 🤝 Agent Handoffs — Seamless State Transfer
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the techniques of passing tasks and context between agents without losing information or increasing token bloat.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Information khoye bina ya token bloat badhaye bina agents ke beech tasks aur context pass karne ki techniques ko master karein.
 
 ---
 

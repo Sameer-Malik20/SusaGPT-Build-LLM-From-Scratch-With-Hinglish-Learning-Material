@@ -1,5 +1,5 @@
 # 🦜 LangChain & LangGraph: AI Engineering (Expert Guide)
-> **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Build complex Agentic workflows & RAG pipelines
+> **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Complex Agentic workflows aur RAG pipelines build karna seekhein.
 
 ---
 

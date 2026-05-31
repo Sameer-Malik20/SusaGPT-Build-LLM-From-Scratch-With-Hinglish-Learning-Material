@@ -1,5 +1,5 @@
 # 📄 JSON vs Natural Language Communication — Structural vs Semantic
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the differences between structured (JSON) and unstructured (Natural Language) communication between agents and when to use each.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Agents ke beech structured (JSON) aur unstructured (Natural Language) communication ke differences aur kab kya use karna hai, ise master karein.
 
 ---
 

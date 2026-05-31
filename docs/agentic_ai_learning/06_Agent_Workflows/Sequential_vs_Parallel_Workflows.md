@@ -1,5 +1,5 @@
 # ⚡ Sequential vs Parallel Workflows — Mastering Speed
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the techniques to balance step-by-step logic with high-speed parallel execution in agentic systems.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Agentic systems mein step-by-step logic aur high-speed parallel execution ke balance ko master karein.
 
 ---
 

@@ -1,5 +1,5 @@
 # 🕷️ OWASP Top 10 for LLM Agents — The Security Checklist
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the OWASP (Open Web Application Security Project) top vulnerabilities specifically tailored for Large Language Models and AI Agents.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Large Language Models aur AI Agents ke liye specifically tailored OWASP top vulnerabilities ko master karein.
 
 ---
 

@@ -1,5 +1,5 @@
 # 🌊 Streaming Events — Live Visibility for Agents
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the techniques of streaming agent thoughts, tool calls, and final answers in real-time to the user interface.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Real-time user interface par agent thoughts, tool calls, aur final answers ko stream karne ki techniques ko master karein.
 
 ---
 

@@ -1,5 +1,5 @@
 # 🤖 Multi-Agent Orchestration — Orchestrating AI Entities
-> **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Master Autogen, CrewAI, Auto-GPT, Task-specific vs Orchestrator Agents, and Communication Protocols.
+> **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Autogen, CrewAI, Auto-GPT, Task-specific vs Orchestrator Agents, aur Communication Protocols ko master karein.
 
 ---
 

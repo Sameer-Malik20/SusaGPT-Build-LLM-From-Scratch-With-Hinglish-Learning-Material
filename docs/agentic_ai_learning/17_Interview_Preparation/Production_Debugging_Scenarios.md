@@ -1,5 +1,5 @@
 # 🕵️ Production Debugging Scenarios — Real-World Problem Solving
-> **Goal:** Master the "Troubleshooting" round of interviews by learning how to fix common production failures in agentic systems.
+> **Goal:** Agentic systems mein common production failures ko fix karna seekh kar interviews ke "Troubleshooting" round ko master karein.
 
 ---
 

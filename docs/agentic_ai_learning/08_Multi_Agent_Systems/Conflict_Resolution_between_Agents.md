@@ -1,5 +1,5 @@
 # ⚖️ Conflict Resolution between Agents — The Peacekeeper
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the techniques for resolving disagreements, data inconsistencies, and resource competition in multi-agent systems.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Multi-agent systems mein disagreements, data inconsistencies, aur resource competition ko resolve karne ki techniques ko master karein.
 
 ---
 

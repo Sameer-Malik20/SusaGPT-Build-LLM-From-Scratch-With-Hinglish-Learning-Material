@@ -1,5 +1,5 @@
 # ⛓️ Multi-Hop RAG — Connecting the Dots
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the technique of iterative retrieval where the agent uses the result of one search to formulate the next search query.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Iterative retrieval ki technique ko master karein jahan agent ek search ke result ka use agla search query formulate karne ke liye karta hai.
 
 ---
 

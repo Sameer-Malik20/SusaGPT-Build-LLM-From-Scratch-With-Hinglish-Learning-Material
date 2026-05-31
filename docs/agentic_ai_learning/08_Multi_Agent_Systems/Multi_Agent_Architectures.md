@@ -1,5 +1,5 @@
 # 🏛️ Multi-Agent Architectures — Organizing the Collective
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the design of systems where multiple specialized agents collaborate to solve complex, large-scale problems.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Aise systems ke design ko master karein jahan multiple specialized agents collaborate karke complex, large-scale problems ko solve karte hain.
 
 ---
 

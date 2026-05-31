@@ -1,5 +1,5 @@
 # ⛓️ LangGraph Interview Questions — Mastering State Machines
-> **Goal:** Master the specific technical questions about LangGraph, state management, and complex workflow orchestration.
+> **Goal:** LangGraph, state management, aur complex workflow orchestration ke baare mein specific technical questions ko master karein.
 
 ---
 

@@ -1,5 +1,5 @@
 # 📚 RAG Evaluation — Scoring the Knowledge Engine
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the specific metrics and techniques used to evaluate Retrieval-Augmented Generation (RAG) systems.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Retrieval-Augmented Generation (RAG) systems ke evaluation ke liye use hone wale specific metrics aur techniques ko master karein.
 
 ---
 

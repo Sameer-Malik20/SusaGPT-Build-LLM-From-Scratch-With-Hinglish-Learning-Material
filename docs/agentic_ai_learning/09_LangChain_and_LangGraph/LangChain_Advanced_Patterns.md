@@ -1,5 +1,5 @@
 # ⛓️ LangChain Advanced Patterns — Beyond the Basics
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the production-grade patterns of LangChain, focusing on LCEL, custom chains, and complex tool integration.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** LCEL, custom chains, aur complex tool integration par focus karte hue LangChain ke production-grade patterns ko master karein.
 
 ---
 

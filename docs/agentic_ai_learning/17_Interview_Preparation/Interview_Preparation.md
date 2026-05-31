@@ -1,5 +1,5 @@
 # 🎯 Interview Preparation — Crack the AI Engineer Role
-> **Level:** Career Prep | **Language:** Hinglish | **Goal:** Master the top technical and behavioral questions for AI Agent Engineering roles in 2026.
+> **Level:** Career Prep | **Language:** Hinglish | **Goal:** 2026 mein AI Agent Engineering roles ke liye top technical aur behavioral questions ko master karein.
 
 ---
 

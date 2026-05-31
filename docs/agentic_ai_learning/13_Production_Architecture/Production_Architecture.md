@@ -1,5 +1,5 @@
 # 🏗️ Production Architecture — Scaling to Millions
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the infrastructure design for deploying agents in high-concurrency environments with state management and task queues.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** State management aur task queues ke sath high-concurrency environments mein agents deploy karne ke infrastructure design ko master karein.
 
 ---
 

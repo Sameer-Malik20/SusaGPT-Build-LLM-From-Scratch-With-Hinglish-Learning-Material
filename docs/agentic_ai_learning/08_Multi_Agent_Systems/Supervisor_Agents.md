@@ -1,5 +1,5 @@
 # 👨‍💼 Supervisor Agents — The Orchestrator Pattern
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the Supervisor pattern where a central "Boss" agent manages a team of workers, delegating tasks and reviewing results.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Supervisor pattern ko master karein jahan ek central "Boss" agent workers ki team ko manage karta hai, tasks delegate karta hai, aur results review karta hai.
 
 ---
 

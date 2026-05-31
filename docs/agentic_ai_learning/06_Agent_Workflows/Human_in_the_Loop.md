@@ -1,5 +1,5 @@
 # 🧑‍💻 Human-in-the-Loop (HITL) — Collaborative Agency
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the patterns that allow humans to review, edit, and approve agentic actions in production-grade systems.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Production-grade systems mein humans ke review, edit, aur agentic actions approve karne ke patterns ko master karein.
 
 ---
 

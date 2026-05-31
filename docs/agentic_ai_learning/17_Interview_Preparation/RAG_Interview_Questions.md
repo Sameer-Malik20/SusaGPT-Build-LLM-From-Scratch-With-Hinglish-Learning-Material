@@ -1,5 +1,5 @@
 # 📚 RAG Interview Questions — From Retrieval to Reasoning
-> **Goal:** Master the specific questions about RAG (Retrieval-Augmented Generation) architectures, vector databases, and evaluation.
+> **Goal:** RAG (Retrieval-Augmented Generation) architectures, vector databases, aur evaluation ke baare mein specific questions ko master karein.
 
 ---
 

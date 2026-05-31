@@ -1,5 +1,5 @@
 # ⏳ Async Agent Workflows — Non-blocking Intelligence
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the techniques to build agentic systems that run in the background, handle long-running tasks, and communicate asynchronously.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Aise agentic systems build karne ki techniques ko master karein jo background mein run ho sakein, long-running tasks handle karein, aur asynchronously communicate karein.
 
 ---
 

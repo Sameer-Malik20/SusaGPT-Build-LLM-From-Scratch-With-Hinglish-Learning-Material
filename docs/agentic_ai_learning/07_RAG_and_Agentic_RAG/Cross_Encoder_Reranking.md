@@ -1,5 +1,5 @@
 # 🎯 Cross-Encoder Reranking — The Quality Filter
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the use of Rerankers to filter out irrelevant retrieval results and significantly improve RAG precision.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Irrelevant retrieval results ko filter karne aur RAG precision ko significantly improve karne ke liye Rerankers ke use ko master karein.
 
 ---
 

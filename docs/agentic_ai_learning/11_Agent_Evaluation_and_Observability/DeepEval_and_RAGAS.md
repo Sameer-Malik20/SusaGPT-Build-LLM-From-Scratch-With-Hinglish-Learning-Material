@@ -1,5 +1,5 @@
 # 🧪 DeepEval & RAGAS — The Pro Evaluation Toolkit
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the two most popular frameworks for automated RAG and LLM evaluation: DeepEval and RAGAS.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Automated RAG aur LLM evaluation ke do sabse popular frameworks: DeepEval aur RAGAS ko master karein.
 
 ---
 

@@ -1,5 +1,5 @@
 # 💾 Persistence & Checkpoints — The Agent's Save Game
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the use of Checkpointers to save agent state, enable multi-session conversations, and implement "Time Travel" debugging.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Agent state save karne, multi-session conversations enable karne, aur "Time Travel" debugging implement karne ke liye Checkpointers ke use ko master karein.
 
 ---
 

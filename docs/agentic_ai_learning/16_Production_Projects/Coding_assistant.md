@@ -1,13 +1,13 @@
 # 💻 Project: Smart Coding Assistant (Beginner)
-> **Goal:** Build an agent that takes a natural language request and generates, explains, or debugs Python code.
+> **Level:** Beginner | **Language:** Hinglish | **Goal:** Ek aisa agent banayein jo natural language request leta hai aur Python code generate, explain, ya debug kar sakta hai.
 
 ---
 
 ## 🏗️ 1. Architecture
-We use a **Code-Specialized Prompting** pattern.
-- **Model:** GPT-4o or Claude 3.5 Sonnet (Best for coding).
+Hum ek **Code-Specialized Prompting** pattern use karte hain.
+- **Model:** GPT-4o ya Claude 3.5 Sonnet (Coding ke liye best).
 - **Workflow:** Request -> Schema Check -> Code Generation -> Explanation.
-- **User Interface:** A simple CLI or a web code editor.
+- **User Interface:** Ek simple CLI ya web code editor.
 
 ---
 
@@ -40,50 +40,48 @@ def generate_code(request):
     ])
     
     return code_response.content
-
-# Example: generate_code("Fibonacci series up to 10")
 ```
 
 ---
 
 ## 🔍 4. Observability
-- **Syntactic Validation:** Checking if the generated code is actually valid Python before showing it.
-- **Latency Tracking:** How long does it take to generate a 100-line script?
+- **Syntactic Validation:** generated code ko dikhane se pehle check karna ki kya wo actually valid Python code hai.
+- **Latency Tracking:** Ek 100-line ka script generate karne mein kitna time lagta hai?
 
 ---
 
 ## 📊 5. Evaluation
-- **Execution Test:** Does the code actually run?
-- **Logic Score:** Does it solve the specific problem requested by the user?
+- **Execution Test:** Kya code actually run hota hai?
+- **Logic Score:** Kya ye user dwara requested specific problem ko solve karta hai?
 
 ---
 
 ## 🛡️ 6. Security
-- **No Direct Execution:** Never run the generated code automatically on your host machine (Risk of `os.system('rm -rf /')`).
-- **Input Sanitization:** Prevent "Code Injection" attacks where the user tries to steal system info.
+- **No Direct Execution:** Generated code ko apni host machine par automatically kabhi run na karein (`os.system('rm -rf /')` ka risk).
+- **Input Sanitization:** "Code Injection" attacks ko prevent karein jahan user system info steal karne ki koshish karta hai.
 
 ---
 
 ## 🚀 7. Deployment
-- **Web App:** Deploy as a microservice using FastAPI.
-- **CLI Tool:** Package as a Python library (`pip install my-coding-agent`).
+- **Web App:** FastAPI ka use karke microservice ke roop mein deploy karein.
+- **CLI Tool:** Python library ke roop mein package karein (`pip install my-coding-agent`).
 
 ---
 
 ## 📈 8. Scaling
-- **Model Switching:** Use smaller models for simple "Syntax check" and large models for "Logic building".
-- **Caching:** Cache common code snippets (e.g., "SQL connection string").
+- **Model Switching:** Simple "Syntax check" ke liye chote models aur "Logic building" ke liye bade models ka use karein.
+- **Caching:** Common code snippets (e.g., "SQL connection string") ko cache karein.
 
 ---
 
 ## 💰 9. Cost Optimization
-- **Temperature=0:** Keeps results deterministic and reduces "Random" token usage.
-- **Few-shot examples:** Provide 2-3 code examples in the prompt to reduce the need for long explanations.
+- **Temperature=0:** Results ko deterministic rakhta hai aur "Random" token usage ko reduce karta hai.
+- **Few-shot examples:** Long explanations ki need ko reduce karne ke liye prompt mein 2-3 code examples provide karein.
 
 ---
 
 ## ⚠️ 10. Failure Handling
-- **Hallucinated Libraries:** If the AI uses a library that doesn't exist, provide an error and ask it to "Use standard libraries only".
-- **Syntax Error:** If code fails to parse, send the error back to AI for self-correction.
+- **Hallucinated Libraries:** Agar AI kisi aisi library ka use karta hai jo exist nahi karti, toh error show karein aur use "Sirf standard libraries use karne" ke liye kahein.
+- **Syntax Error:** Agar code parse hone mein fail ho jata hai, toh self-correction ke liye error ko wapas AI ke paas bhejein.
 
 ---

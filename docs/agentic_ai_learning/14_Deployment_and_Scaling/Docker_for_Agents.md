@@ -1,5 +1,5 @@
 # 🐳 Docker for Agents — Packaging the Brain
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the art of containerizing AI agents and their dependencies for consistent deployment across different environments.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Alag-alag environments mein consistent deployment ke liye AI agents aur unki dependencies ko containerize karne ki art ko master karein.
 
 ---
 

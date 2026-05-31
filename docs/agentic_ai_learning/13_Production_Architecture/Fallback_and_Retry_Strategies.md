@@ -1,5 +1,5 @@
 # 🔄 Fallback & Retry Strategies — Building Unstoppable Agents
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the techniques of handling model failures, rate limits, and network errors using exponential backoff, secondary models, and human fail-safes.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Exponential backoff, secondary models, aur human fail-safes ka use karke model failures, rate limits, aur network errors ko handle karne ki techniques ko master karein.
 
 ---
 

@@ -1,5 +1,5 @@
 # ⚡ ReWOO (Reasoning Without Observation) — Decoupling Thought & Tool
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the optimization framework that reduces LLM token usage and latency by planning all tool calls before executing them.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Tool calls ko execute karne se pehle plan karke LLM token usage aur latency ko kam karne wale optimization framework ko master karein.
 
 ---
 

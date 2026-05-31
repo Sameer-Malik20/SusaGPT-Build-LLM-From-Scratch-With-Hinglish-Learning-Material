@@ -1,5 +1,5 @@
 # 📽️ Agent Replay & Inspection — Time-Travel Debugging
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the techniques of recording agent sessions and "Replaying" them step-by-step to understand failures and optimize performance.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Failures ko samajhne aur performance optimize karne ke liye agent sessions record karne aur unhe step-by-step "Replay" karne ki techniques ko master karein.
 
 ---
 

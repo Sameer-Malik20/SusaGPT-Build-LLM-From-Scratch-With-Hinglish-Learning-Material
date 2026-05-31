@@ -1,5 +1,5 @@
 # ❌ Reasoning Failure Cases — Why Agents Fail
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the identification and mitigation of common reasoning pitfalls in autonomous agents.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Autonomous agents mein hone wale common reasoning pitfalls ko identify aur mitigate karne mein master banein.
 
 ---
 

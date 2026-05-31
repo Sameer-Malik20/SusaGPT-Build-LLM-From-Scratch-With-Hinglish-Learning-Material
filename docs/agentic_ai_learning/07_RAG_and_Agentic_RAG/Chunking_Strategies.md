@@ -1,5 +1,5 @@
 # ✂️ Chunking Strategies — Splitting Knowledge for Precision
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the art of breaking down large documents into optimal pieces for high-performance RAG retrieval.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** High-performance RAG retrieval ke liye bade documents ko optimal pieces mein break karne ki art ko master karein.
 
 ---
 

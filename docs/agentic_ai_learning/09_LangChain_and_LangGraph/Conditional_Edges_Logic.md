@@ -1,5 +1,5 @@
 # 🔀 Conditional Edges Logic — The Decision Maker
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the logic that allows LangGraph to dynamically route execution between nodes based on LLM outputs or state variables.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Uss logic ko master karein jo LangGraph ko LLM outputs ya state variables ke basis par nodes ke beech dynamic routing allow karti hai.
 
 ---
 

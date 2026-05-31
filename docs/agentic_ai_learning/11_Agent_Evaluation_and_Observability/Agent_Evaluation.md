@@ -1,5 +1,5 @@
 # 📊 Agent Evaluation — Measuring Reliability & Success
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the metrics and frameworks used to evaluate agentic systems, focusing on reliability, hallucination detection, and success rates.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Reliability, hallucination detection, aur success rates par focus karte hue agentic systems ke evaluation ke metrics aur frameworks ko master karein.
 
 ---
 

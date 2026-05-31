@@ -1,12 +1,12 @@
 # 🔍 Project: Autonomous Research Assistant (Beginner)
-> **Goal:** Build an agent that takes a topic, searches the internet, and writes a structured summary report.
+> **Level:** Beginner | **Language:** Hinglish | **Goal:** Ek aisa agent banayein jo ek topic leta hai, internet par search karta hai, aur ek structured summary report likhta hai.
 
 ---
 
 ## 🏗️ 1. Architecture
-We use a **Looping Search Pattern**.
+Hum ek **Looping Search Pattern** use karte hain.
 - **Input:** User query (e.g., "Future of EVs in 2026").
-- **Tools:** Tavily Search API or DuckDuckGo.
+- **Tools:** Tavily Search API ya DuckDuckGo.
 - **Workflow:** Search -> Extract Text -> Summarize -> Format.
 - **Output:** Markdown report.
 
@@ -49,43 +49,43 @@ def run_research(topic):
 ---
 
 ## 🔍 4. Observability
-- **Tool Tracing:** Monitor how many search calls were made and the quality of URLs found.
-- **Cost Tracking:** Logging tokens used for summarization.
+- **Tool Tracing:** Monitor karein ki kitne search calls kiye gaye aur mile huye URLs ki quality kaisi thi.
+- **Cost Tracking:** Summarization ke liye use huye tokens ko log karna.
 
 ---
 
 ## 📊 5. Evaluation
-- **Hallucination Check:** Verify if the facts in the report match the search snippets.
-- **Completeness:** Does the report cover all sub-topics mentioned in the query?
+- **Hallucination Check:** Verify karein ki kya report ke facts search snippets se match karte hain.
+- **Completeness:** Kya report query mein mentioned sabhi sub-topics ko cover karti hai?
 
 ---
 
 ## 🛡️ 6. Security
-- **API Key Protection:** Use environment variables.
-- **Source Filtering:** Prevent the agent from visiting "Blacklisted" or harmful domains.
+- **API Key Protection:** Environment variables ka use karein.
+- **Source Filtering:** Agent ko "Blacklisted" ya harmful domains par jaane se prevent karein.
 
 ---
 
 ## 🚀 7. Deployment
-- **GitHub Actions:** Automate testing.
-- **Platform:** Vercel (Python Runtime) or AWS Lambda.
+- **GitHub Actions:** Testing ko automate karein.
+- **Platform:** Vercel (Python Runtime) ya AWS Lambda.
 
 ---
 
 ## 📈 8. Scaling
-- **Async Execution:** Use `asyncio.gather` to search 5 topics simultaneously.
-- **Concurrency:** Allow multiple users to run research tasks in the background.
+- **Async Execution:** Ek sath 5 topics search karne ke liye `asyncio.gather` ka use karein.
+- **Concurrency:** Multiple users ko background mein research tasks run karne ki permission dein.
 
 ---
 
 ## 💰 9. Cost Optimization
-- **Summarization Tiering:** Use GPT-4o-mini for initial summaries and GPT-4o only for the final polishing.
-- **Snippet Limiting:** Only send the most relevant 200 words from each search result.
+- **Summarization Tiering:** Initial summaries ke liye GPT-4o-mini aur final polishing ke liye hi sirf GPT-4o ka use karein.
+- **Snippet Limiting:** Har search result se sirf most relevant 200 words hi bhejein.
 
 ---
 
 ## ⚠️ 10. Failure Handling
-- **No Results Found:** If search returns empty, ask the user to provide more keywords.
-- **Rate Limit:** If Tavily is down, fallback to DuckDuckGo search tool.
+- **No Results Found:** Agar search empty return kare, toh user se aur keywords provide karne ke liye kahein.
+- **Rate Limit:** Agar Tavily down ho, toh DuckDuckGo search tool par fallback karein.
 
 ---

@@ -1,5 +1,5 @@
 # 🌳 Tree of Thoughts (ToT) — Multi-Path Reasoning
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the advanced reasoning framework that allows agents to explore multiple solutions and "backtrack" if a path fails.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Bade scale par agents ke explore-evaluate aur dynamic search structures ko master karein jo path fail hone par "backtrack" karna enable karte hain.
 
 ---
 

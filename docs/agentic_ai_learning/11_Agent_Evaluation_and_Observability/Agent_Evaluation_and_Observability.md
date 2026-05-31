@@ -1,5 +1,5 @@
 # 🔍 Agent Evaluation & Observability — Monitoring the Mind
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the art of measuring agent "Intelligence" and "Reliability" while monitoring their internal reasoning in production.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Production mein agent ki internal reasoning monitor karte hue uski "Intelligence" aur "Reliability" measure karne ki art ko master karein.
 
 ---
 

@@ -1,5 +1,5 @@
 # 💾 State Management in LangGraph — The Agent's Memory
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the concepts of the State Schema, Reducers, and how data travels through an agentic graph.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** State Schema, Reducers, aur data kaise agentic graph ke through flow karta hai, in concepts ko master karein.
 
 ---
 

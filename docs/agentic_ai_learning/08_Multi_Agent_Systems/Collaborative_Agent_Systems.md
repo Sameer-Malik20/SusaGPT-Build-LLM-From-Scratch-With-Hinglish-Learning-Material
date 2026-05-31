@@ -1,5 +1,5 @@
 # 🤝 Collaborative Agent Systems — Peer-to-Peer Intelligence
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the architecture where agents work as equals in a shared space, collaborating without a strict supervisor.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Uss architecture ko master karein jahan agents bina kisi strict supervisor ke ek shared space mein barabar ki tarah collaborate karte hain.
 
 ---
 

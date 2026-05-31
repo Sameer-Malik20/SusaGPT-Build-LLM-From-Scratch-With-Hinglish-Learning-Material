@@ -1,5 +1,5 @@
 # 🛡️ Jailbreak Defense — Keeping the Agent Inside the Lines
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the techniques to prevent "Jailbreaking" (bypassing safety filters) using adversarial prompting, roleplay, and logical traps.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Adversarial prompting, roleplay, aur logical traps ka use karke "Jailbreaking" (safety filters bypass karna) ko rokne ki techniques ko master karein.
 
 ---
 

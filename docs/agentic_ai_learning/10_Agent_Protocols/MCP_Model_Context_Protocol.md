@@ -1,5 +1,5 @@
 # 🔌 Model Context Protocol (MCP) — The Future of Tools
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the Model Context Protocol (MCP) for connecting agents to data sources and tools in a standardized, cross-platform way.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Standardized aur cross-platform tarike se agents ko data sources aur tools se connect karne ke liye Model Context Protocol (MCP) ko master karein.
 
 ---
 

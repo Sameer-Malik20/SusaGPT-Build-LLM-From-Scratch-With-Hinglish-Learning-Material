@@ -1,5 +1,5 @@
 # 💀 Prompt Injection — The Invisible Attack
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the art of identifying, testing, and defending against Direct and Indirect Prompt Injection in agentic systems.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Agentic systems mein Direct aur Indirect Prompt Injection ko identify, test, aur defend karne ki art ko master karein.
 
 ---
 

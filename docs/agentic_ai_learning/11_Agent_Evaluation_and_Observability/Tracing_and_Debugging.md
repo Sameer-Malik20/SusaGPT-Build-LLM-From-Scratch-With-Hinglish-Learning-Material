@@ -1,5 +1,5 @@
 # 🕵️ Tracing & Debugging — Hunting the Bugs in Reasoning
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the techniques of structured tracing and logical debugging for complex multi-agent systems.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Complex multi-agent systems ke liye structured tracing aur logical debugging ki techniques ko master karein.
 
 ---
 

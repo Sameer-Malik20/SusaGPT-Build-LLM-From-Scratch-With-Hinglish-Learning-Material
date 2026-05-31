@@ -1,5 +1,5 @@
 # 🧠 GPU Inference Basics — Running Local Models
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the fundamentals of GPU acceleration, VRAM management, and serving local LLMs (Llama, Mistral) for agentic systems.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Agentic systems ke liye GPU acceleration, VRAM management, aur local LLMs (Llama, Mistral) serve karne ke fundamentals ko master karein.
 
 ---
 

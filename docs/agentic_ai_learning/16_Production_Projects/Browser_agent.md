@@ -1,14 +1,14 @@
 # 🌐 Project: Autonomous Browser Agent (Intermediate)
-> **Level:** Intermediate | **Goal:** Build an agent that can navigate websites, click buttons, and extract data just like a human using Playwright or Selenium.
+> **Level:** Intermediate | **Language:** Hinglish | **Goal:** Ek aisa agent banayein jo Playwright ya Selenium ka use karke human ki tarah websites par navigate kar sake, buttons click kar sake, aur data extract kar sake.
 
 ---
 
 ## 🏗️ 1. Architecture
-We use a **Vision-Language Model (VLM)** or **DOM-Parser** approach.
+Hum ek **Vision-Language Model (VLM)** ya **DOM-Parser** approach use karte hain.
 - **Engine:** Playwright (Headless browser).
-- **Brain:** LLM that receives the "HTML DOM" or "Screenshot".
+- **Brain:** LLM jo "HTML DOM" ya "Screenshot" receive karta hai.
 - **Actions:** Click, Type, Scroll, Wait.
-- **Feedback Loop:** Action -> Observe New State -> Decide Next Action.
+- **Feedback Loop:** Action -> New State Observe karna -> Next Action decide karna.
 
 ---
 
@@ -52,43 +52,43 @@ def browse_and_extract(url, goal):
 ---
 
 ## 🔍 4. Observability
-- **Screenshot Traces:** Save a screenshot after every action to see where the agent got stuck.
-- **Action Logs:** Record every selector clicked and every text typed.
+- **Screenshot Traces:** Har action ke baad screenshot save karein taaki dekh sakein ki agent kahan stuck hua.
+- **Action Logs:** Click kiye gaye har selector aur type kiye gaye har text ko record karein.
 
 ---
 
 ## 📊 5. Evaluation
-- **Success Rate:** % of navigation tasks completed without errors.
-- **Step Efficiency:** Does the agent take 3 steps or 20 steps to reach the goal?
+- **Success Rate:** Bina kisi error ke complete huye navigation tasks ka percentage.
+- **Step Efficiency:** Kya agent goal tak pahunchne ke liye 3 steps leta hai ya 20 steps?
 
 ---
 
 ## 🛡️ 6. Security
-- **Sandboxing:** Run the browser in a restricted container to prevent "Local File Access" exploits.
-- **Sensitive Data:** Block the agent from visiting URLs like `localhost` or `169.254.169.254` (Cloud Metadata).
+- **Sandboxing:** "Local File Access" exploits ko rokne ke liye browser ko ek restricted container mein run karein.
+- **Sensitive Data:** Agent ko `localhost` ya `169.254.169.254` (Cloud Metadata) jaise URLs par jaane se block karein.
 
 ---
 
 ## 🚀 7. Deployment
-- **Docker:** Needs a "Heavy" image with Playwright dependencies installed.
-- **Environment:** Use **Browserless.io** or self-hosted Chromium clusters.
+- **Docker:** Iske liye ek "Heavy" image ki zaroorat hoti hai jisme Playwright dependencies installed hon.
+- **Environment:** **Browserless.io** ya self-hosted Chromium clusters ka use karein.
 
 ---
 
 ## 📈 8. Scaling
-- **Parallel Browsing:** Use a task queue (Celery) to run 10 browser agents at once.
-- **Session Reuse:** Keeping the browser open across multiple steps to avoid "Cold start" page loads.
+- **Parallel Browsing:** Ek sath 10 browser agents ko run karne ke liye task queue (Celery) ka use karein.
+- **Session Reuse:** "Cold start" page loads se bachane ke liye multiple steps ke dauran browser ko open rakhein.
 
 ---
 
 ## 💰 9. Cost Optimization
-- **Text-only Mode:** Disable images and CSS to save bandwidth and token usage during DOM parsing.
-- **DOM Pruning:** Only send "Interactive" elements (buttons, inputs) to the LLM.
+- **Text-only Mode:** DOM parsing ke dauran bandwidth aur token usage bachane ke liye images aur CSS ko disable karein.
+- **DOM Pruning:** LLM ko sirf "Interactive" elements (buttons, inputs) hi bhejein.
 
 ---
 
 ## ⚠️ 10. Failure Handling
-- **Anti-Bot Detection:** Use `stealth` plugins to avoid being blocked by Cloudflare/Captchas.
-- **Element Not Found:** If a selector is missing, tell the agent to "Scroll Down" and try again.
+- **Anti-Bot Detection:** Cloudflare/Captchas se block hone se bachane ke liye `stealth` plugins ka use karein.
+- **Element Not Found:** Agar koi selector missing hai, toh agent ko "Scroll Down" karne aur fir se try karne ke liye kahein.
 
 ---

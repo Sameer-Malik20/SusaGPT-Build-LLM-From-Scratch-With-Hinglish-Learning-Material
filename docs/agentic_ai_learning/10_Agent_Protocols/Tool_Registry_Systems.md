@@ -1,5 +1,5 @@
 # 🛠️ Tool Registry Systems — The Agent's App Store
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the architecture of centralized tool registries where agents can discover, fetch, and execute tools dynamically.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Centralized tool registries ke architecture ko master karein jahan agents tools ko dynamically discover, fetch, aur execute kar sakte hain.
 
 ---
 

@@ -1,5 +1,5 @@
 # 🕸️ LangGraph Fundamentals — The New Standard for Agents
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the fundamental concepts of LangGraph: Nodes, Edges, State, and Cycles to build reliable autonomous agents.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Reliable autonomous agents build karne ke liye LangGraph ke fundamental concepts: Nodes, Edges, State, aur Cycles ko master karein.
 
 ---
 

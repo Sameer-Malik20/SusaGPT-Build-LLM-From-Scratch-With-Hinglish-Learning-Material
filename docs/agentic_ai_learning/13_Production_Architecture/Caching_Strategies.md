@@ -1,5 +1,5 @@
 # 📦 Caching Strategies — Boosting Speed & Efficiency
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the use of Exact and Semantic caching to reduce latency and API costs in agentic systems.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Agentic systems mein latency aur API costs ko kam karne ke liye Exact aur Semantic caching ke use ko master karein.
 
 ---
 

@@ -1,5 +1,5 @@
 # 🗄️ Custom Checkpointers — Scaling Persistence (Postgres & Redis)
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the production-grade persistence layers for LangGraph using Postgres and Redis to handle millions of concurrent agent sessions.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Millions of concurrent agent sessions handle karne ke liye Postgres aur Redis ka use karke LangGraph ke production-grade persistence layers ko master karein.
 
 ---
 

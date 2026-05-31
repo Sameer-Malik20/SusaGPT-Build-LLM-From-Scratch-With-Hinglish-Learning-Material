@@ -1,5 +1,5 @@
 # 📚 RAG Fundamentals — Giving AI a Library
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the basics of Retrieval-Augmented Generation (RAG) to connect LLMs with private, external data.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** LLMs ko private aur external data se connect karne ke liye Retrieval-Augmented Generation (RAG) ke basics ko master karein.
 
 ---
 

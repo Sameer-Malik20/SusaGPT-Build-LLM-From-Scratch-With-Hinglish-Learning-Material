@@ -1,5 +1,5 @@
 # 🪞 Reflection & Self-Correction — The Agent's Internal Auditor
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the techniques that allow agents to review their own work, identify errors, and correct them before finalizing the output.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Un techniques ko master karein jo agents ko apna kaam review karne, errors identify karne, aur output finalize karne se pehle self-correct karne ki permission deti hain.
 
 ---
 

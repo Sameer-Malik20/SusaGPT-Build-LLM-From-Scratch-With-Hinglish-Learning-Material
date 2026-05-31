@@ -1,5 +1,5 @@
 # 📬 Queue Systems & Background Jobs — Handling Long-Running Tasks
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the use of Redis, RabbitMQ, and Celery to manage long-running agentic tasks without blocking the user interface.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** User interface ko block kiye bina long-running agentic tasks ko manage karne ke liye Redis, RabbitMQ, aur Celery ke use ko master karein.
 
 ---
 

@@ -1,5 +1,5 @@
 # 🤖 AI Agent Interview Questions — Top 50 (2026 Edition)
-> **Goal:** Master the conceptual, theoretical, and practical questions asked in AI Engineer interviews at top companies like OpenAI, Anthropic, and Google.
+> **Goal:** OpenAI, Anthropic, aur Google jaise top companies ke AI Engineer interviews mein pooche jane wale conceptual, theoretical, aur practical questions ko master karein.
 
 ---
 

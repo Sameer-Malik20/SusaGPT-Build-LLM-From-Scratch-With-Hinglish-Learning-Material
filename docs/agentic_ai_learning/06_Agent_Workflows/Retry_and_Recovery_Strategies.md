@@ -1,5 +1,5 @@
 # 🔄 Retry & Recovery Strategies — Building Fault-Tolerant Agents
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the patterns to handle API failures, rate limits, and reasoning errors through automated retries and fallback paths.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Automated retries aur fallback paths ke through API failures, rate limits, aur reasoning errors handle karne ke patterns ko master karein.
 
 ---
 

@@ -1,50 +1,50 @@
 # 🏗️ System Design for Agents — Thinking Like an Architect
-> **Goal:** Master the "System Design" interview round for AI Engineering roles by learning how to design end-to-end agentic platforms.
+> **Level:** Career Prep | **Language:** Hinglish | **Goal:** End-to-end agentic platforms design karna seekh kar AI Engineering roles ke liye "System Design" interview round ko master karein.
 
 ---
 
 ## 🧭 1. The Design Framework
 1. **Understand Requirements:** Latency? Cost? Accuracy?
 2. **High-Level Components:** API Gateway, Orchestrator, Workers, DB, Tools.
-3. **Data Flow:** How a query moves from User -> LLM -> Tool -> User.
+3. **Data Flow:** Ek query User -> LLM -> Tool -> User tak kaise move karti hai.
 4. **Scale & Reliability:** Caching, Retries, Queues.
 
 ---
 
 ## 🏗️ 2. Common Design Scenarios
 
-### Case 1: "Design a Customer Support Bot for 1M users"
+### Case 1: "1M users ke liye Customer Support Bot design karein"
 - **Key Focus:** Latency & Cost.
 - **Components:** Semantic Cache, FastAPI, Redis Queue, LangGraph supervisor.
-- **Optimization:** Use a small model (Llama-3-8B) for classification and a big model for answering.
+- **Optimization:** Classification ke liye ek chota model (Llama-3-8B) aur answering ke liye ek bada model use karein.
 
-### Case 2: "Design an Autonomous Research Agent for Hedge Funds"
+### Case 2: "Hedge Funds ke liye Autonomous Research Agent design karein"
 - **Key Focus:** Accuracy & Citations.
 - **Components:** RAG pipeline, Web Search Tool, PDF Parser, Fact-checker agent.
-- **Security:** Sandboxed code execution (E2B) for data analysis.
+- **Security:** Data analysis ke liye sandboxed code execution (E2B).
 
-### Case 3: "Design a Voice-AI Sales Agent"
+### Case 3: "Voice-AI Sales Agent design karein"
 - **Key Focus:** Latency (< 1s).
 - **Components:** WebSockets, VAD (Voice Activity Detection), Deepgram STT, Groq (Fast Inference), ElevenLabs TTS.
 
 ---
 
 ## 🛠️ 3. Handling Bottlenecks
-- **"LLM is too slow":** Use Streaming and parallel tool calling.
-- **"Database is too slow":** Use Read Replicas and Vector Indexing (HNSW).
-- **"Context is too large":** Use Summarization or Sliding Window memory.
+- **"LLM is too slow":** Streaming aur parallel tool calling ka use karein.
+- **"Database is too slow":** Read Replicas aur Vector Indexing (HNSW) ka use karein.
+- **"Context is too large":** Summarization ya Sliding Window memory ka use karein.
 
 ---
 
 ## 🛡️ 4. Security & Safety Design
-- **Human-in-the-loop (HITL):** Adding an approval step for high-value transactions.
-- **Guardrails:** Using LlamaGuard or NeMo Guardrails to block toxic/unsafe outputs.
+- **Human-in-the-loop (HITL):** High-value transactions ke liye ek approval step add karna.
+- **Guardrails:** Toxic/unsafe outputs ko block karne ke liye LlamaGuard ya NeMo Guardrails ka use karna.
 
 ---
 
 ## 📊 5. Monitoring & Ops
-- **Dashboard:** Prometheus for latency, LangSmith for traces, Grafana for cost.
-- **Alerting:** PagerDuty for API timeouts or high hallucination scores.
+- **Dashboard:** Latency ke liye Prometheus, traces ke liye LangSmith, cost ke liye Grafana.
+- **Alerting:** API timeouts ya high hallucination scores ke liye PagerDuty.
 
 ---
 
@@ -56,4 +56,6 @@
 
 ---
 
-> **Expert Tip:** In System Design, there is **No Single Right Answer**. There are only **Tradeoffs**. Always explain *why* you chose Redis over RabbitMQ or GPT-4 over Llama.
+> **Expert Tip:** System Design mein koi **Single Right Answer nahi hota**. Sirf **Tradeoffs** hote hain. Hamesha explain karein *why* aapne RabbitMQ ke bajaye Redis ko chuna, ya Llama ke bajaye GPT-4 ko chuna.
+
+---

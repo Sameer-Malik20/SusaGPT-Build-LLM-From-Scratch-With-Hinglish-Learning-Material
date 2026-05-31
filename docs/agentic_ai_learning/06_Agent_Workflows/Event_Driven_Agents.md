@@ -1,5 +1,5 @@
 # 📡 Event-Driven Agents — Reactive & Proactive Systems
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the architecture where agents respond to external events (webhooks, sensor data, database changes) rather than just user prompts.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Uss architecture ko master karein jahan agents user prompts ke bajaye external events (webhooks, sensor data, DB changes) par respond karte hain.
 
 ---
 

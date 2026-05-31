@@ -1,5 +1,5 @@
 # 🔍 Observability in Production — The Real-Time Dashboard
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the tools and metrics for monitoring agent health, performance, and accuracy in live production environments.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Live production environments mein agent health, performance, aur accuracy ko monitor karne ke tools aur metrics ko master karein.
 
 ---
 

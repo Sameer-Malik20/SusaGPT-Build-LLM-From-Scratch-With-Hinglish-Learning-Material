@@ -1,5 +1,5 @@
 # 🤝 Agent-to-Agent (A2A) Communication — Peer-to-Peer Intelligence
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the techniques of direct agent-to-agent communication, handoffs, and collaborative problem-solving.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Direct agent-to-agent communication, handoffs, aur collaborative problem-solving ki techniques ko master karein.
 
 ---
 

@@ -1,5 +1,5 @@
 # 🤖 Self-RAG — Self-Critique & Adaptive Retrieval
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the Self-RAG framework that enables an LLM to critique its own retrieval and generation using special "Reflection Tokens".
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Self-RAG framework ko master karein jo LLM ko special "Reflection Tokens" ka use karke khud ki retrieval aur generation ko critique karne enable karta hai.
 
 ---
 

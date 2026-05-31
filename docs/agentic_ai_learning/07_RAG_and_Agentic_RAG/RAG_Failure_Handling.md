@@ -1,5 +1,5 @@
 # 🚨 RAG Failure Handling — Debugging the Knowledge Loop
-> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** Master the identification and resolution of the most common points of failure in RAG pipelines.
+> **Level:** Core Engineering | **Language:** Hinglish | **Goal:** RAG pipelines mein failure ke sabse common points ki identification aur resolution ko master karein.
 
 ---
 

@@ -1,5 +1,5 @@
 # 💰 Cost Optimization — Saving Tokens, Saving Dollars
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the techniques to reduce LLM API costs by 50-80% without sacrificing agent intelligence.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Agent intelligence ko compromise kiye bina LLM API costs ko 50-80% tak kam karne ki techniques ko master karein.
 
 ---
 

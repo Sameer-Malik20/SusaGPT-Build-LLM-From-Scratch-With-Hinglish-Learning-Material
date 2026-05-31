@@ -1,5 +1,5 @@
 # 🧠 Adaptive RAG — Query-Driven Retrieval Logic
-> **Level:** Advanced | **Language:** Hinglish | **Goal:** Master the technique of dynamically choosing between different RAG strategies (Direct, CRAG, Self-RAG) based on query complexity.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Query complexity ke basis par alag-alag RAG strategies (Direct, CRAG, Self-RAG) ke beech dynamically choose karne ki technique ko master karein.
 
 ---
 

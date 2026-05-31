@@ -1,13 +1,13 @@
 # 🤝 Project: AI CRM Assistant (Intermediate)
-> **Level:** Intermediate | **Goal:** Build an agent that integrates with a CRM (like Salesforce or HubSpot) to manage leads, update records, and send follow-up emails.
+> **Level:** Intermediate | **Language:** Hinglish | **Goal:** Ek aisa agent banayein jo CRM (jaise Salesforce ya HubSpot) ke sath integrate ho sake leads manage karne, records update karne, aur follow-up emails bhejne ke liye.
 
 ---
 
 ## 🏗️ 1. Architecture
-We use a **Tool-Calling Agent** architecture.
+Hum ek **Tool-Calling Agent** architecture use karte hain.
 - **Tools:** `get_lead_info`, `update_stage`, `send_email`.
-- **Logic:** Agent analyzes user request -> Identifies lead -> Fetches current status -> Executes update.
-- **Database:** The CRM's API acts as the "Source of Truth".
+- **Logic:** Agent user request ko analyze karta hai -> Lead identify karta hai -> Current status fetch karta hai -> Update execute karta hai.
+- **Database:** CRM ki API "Source of Truth" ki tarah kaam karti hai.
 
 ---
 
@@ -21,6 +21,7 @@ crm_assistant/
 │   ├── manager.py       # Core agent logic
 │   └── tools.py         # Defined Pydantic tools
 ├── tests/
+│   └── mock_crm.py      # Mock API for testing
 │   └── mock_crm.py      # Mock API for testing
 └── main.py
 ```
@@ -49,44 +50,44 @@ def get_recent_notes(email: str):
 ---
 
 ## 🔍 4. Observability
-- **Audit Logs:** Record exactly "Who" (User ID) triggered "Which" CRM update.
-- **State Traces:** See the reasoning chain: "Why did the agent decide to move this lead to 'Closed-Lost'?"
+- **Audit Logs:** Exactly record karein ki "Kis" (User ID) ne "Kaunsa" CRM update trigger kiya.
+- **State Traces:** Reasoning chain ko dekhein: "Agent ne is lead ko 'Closed-Lost' mein move karne ka decision kyu liya?"
 
 ---
 
 ## 📊 5. Evaluation
-- **Task Success:** Does the lead status in the CRM actually change correctly?
-- **Tone Check:** Are the follow-up emails professional and personalized?
+- **Task Success:** Kya CRM mein lead status actually sahi tarike se change ho raha hai?
+- **Tone Check:** Kya follow-up emails professional aur personalized hain?
 
 ---
 
 ## 🛡️ 6. Security
-- **OAuth2:** Never store raw passwords; use API tokens or OAuth.
-- **Scoping:** Ensure the agent only has access to a specific set of leads (RBAC).
-- **Confirmation:** High-risk actions (like "Delete Lead") must require Human-in-the-loop (HITL) approval.
+- **OAuth2:** Raw passwords kabhi store na karein; API tokens ya OAuth use karein.
+- **Scoping:** Ensure karein ki agent ke paas sirf ek specific set of leads ka hi access ho (RBAC).
+- **Confirmation:** High-risk actions (jaise "Delete Lead") ke liye Human-in-the-loop (HITL) approval zaroori hona chahiye.
 
 ---
 
 ## 🚀 7. Deployment
-- **Microservice:** Deploy as a FastAPI app that listens to CRM Webhooks.
-- **Platform:** AWS App Runner or Google Cloud Run.
+- **Microservice:** Ek FastAPI app ke roop mein deploy karein jo CRM Webhooks ko listen karta ho.
+- **Platform:** AWS App Runner ya Google Cloud Run.
 
 ---
 
 ## 📈 8. Scaling
-- **Rate Limiting:** CRM APIs often have strict limits (e.g., 5000 calls/day). Use a queue to stagger updates.
-- **Multi-tenancy:** Handling multiple CRM accounts safely.
+- **Rate Limiting:** CRM APIs ki aksar strict limits hoti hain (e.g., 5000 calls/day). Updates ko stagger karne ke liye ek queue ka use karein.
+- **Multi-tenancy:** Multiple CRM accounts ko safely handle karna.
 
 ---
 
 ## 💰 9. Cost Optimization
-- **Batch Updates:** Instead of updating 1 lead at a time, collect 10 and update in one API call.
-- **Model Choice:** Use a cheaper model for data extraction and a premium model for writing the emails.
+- **Batch Updates:** Ek baar mein 1 lead update karne ke bajaye, 10 collect karein aur ek single API call mein update karein.
+- **Model Choice:** Data extraction ke liye ek sasta model aur emails likhne ke liye ek premium model use karein.
 
 ---
 
 ## ⚠️ 10. Failure Handling
-- **API Down:** If the CRM API returns a 503, the agent should say "CRM is temporarily unavailable, I will retry in 5 minutes."
-- **Entity Not Found:** If a lead doesn't exist, the agent should ask the user "Would you like me to create a new lead?"
+- **API Down:** Agar CRM API 503 return karti hai, toh agent ko bolna chahiye "CRM temporarily unavailable hai, main 5 minutes mein retry karunga."
+- **Entity Not Found:** Agar koi lead exist nahi karti, toh agent ko user se puchna chahiye "Kya aap chahte hain ki main ek new lead create karun?"
 
 ---

@@ -1,14 +1,14 @@
 # 🧠 Project: Self-Improving RAG Agent (Advanced)
-> **Level:** Advanced | **Goal:** Build a RAG system that learns from its mistakes, optimizes its own chunking, and fine-tunes its retrieval strategy based on user feedback.
+> **Level:** Advanced | **Language:** Hinglish | **Goal:** Ek aisa RAG system banayein jo apni mistakes se seekhe, apni chunking ko khud optimize kare, aur user feedback ke basis par apni retrieval strategy ko fine-tune kare.
 
 ---
 
 ## 🏗️ 1. Architecture
-We use a **Continuous Learning Loop**.
+Hum ek **Continuous Learning Loop** use karte hain.
 - **Ingestion:** Dynamic chunking + Metadata enrichment.
 - **Retrieval:** Hybrid Search (Vector + BM25).
-- **Self-Correction:** Agent checks its own answer -> If "Faithfulness" is low, it "Rewrites" the query and searches again.
-- **Learning:** Failed queries are saved and used to "Fine-tune" the embedding model or re-ranker.
+- **Self-Correction:** Agent apna answer khud check karta hai -> Agar "Faithfulness" low ho, toh wo query ko "Rewrite" karta hai aur fir se search karta hai.
+- **Learning:** Failed queries ko save kiya jata hai aur embedding model ya re-ranker ko "Fine-tune" karne ke liye use kiya jata hai.
 
 ---
 
@@ -52,43 +52,43 @@ def self_improving_rag(query):
 ---
 
 ## 🔍 4. Observability
-- **Self-Reflection Traces:** visualize when and why the agent decided to "Re-search".
-- **Feedback Correlation:** Link user thumbs-down to specific retrieval failures.
+- **Self-Reflection Traces:** Visualize karein ki agent ne kab aur kyu "Re-search" karne ka decision liya.
+- **Feedback Correlation:** User ke thumbs-down ko specific retrieval failures se link karein.
 
 ---
 
 ## 📊 5. Evaluation
-- **Faithfulness (RAGAS):** Is the agent becoming more grounded over time?
-- **Mean Reciprocal Rank (MRR):** Is the retriever getting better at finding the "Perfect" chunk?
+- **Faithfulness (RAGAS):** Kya agent time ke sath aur grounded (tathyatmak) ho raha hai?
+- **Mean Reciprocal Rank (MRR):** Kya retriever "Perfect" chunk dhoondhne mein behtar ho raha hai?
 
 ---
 
 ## 🛡️ 6. Security
-- **Data Integrity:** Ensuring that user "Feedback" doesn't poison the vector database with malicious info.
-- **Isolation:** The "Learning" phase must happen in a separate, secure environment before going live.
+- **Data Integrity:** Ensure karein ki user "Feedback" vector database ko malicious info se poison na kare.
+- **Isolation:** "Learning" phase live jaane se pehle ek separate, secure environment mein hona chahiye.
 
 ---
 
 ## 🚀 7. Deployment
-- **A/B Testing:** Deploy two versions (Base RAG vs Self-Improving RAG) and compare real-world performance.
-- **Vector DB:** Use **Weaviate** or **Qdrant** for easy metadata filtering and updating.
+- **A/B Testing:** Do versions (Base RAG vs Self-Improving RAG) deploy karein aur unki real-world performance ko compare karein.
+- **Vector DB:** Easy metadata filtering aur updating ke liye **Weaviate** ya **Qdrant** ka use karein.
 
 ---
 
 ## 📈 8. Scaling
-- **Background Training:** Fine-tuning the re-ranker model in the background using collected "Success" cases.
-- **Vector Re-indexing:** Automatically re-indexing documents if the "Optimizer" suggests a better chunking strategy.
+- **Background Training:** Collected "Success" cases ka use karke background mein re-ranker model ko fine-tune karna.
+- **Vector Re-indexing:** Agar "Optimizer" behtar chunking strategy suggest karta hai, toh documents ko automatically re-index karna.
 
 ---
 
 ## 💰 9. Cost Optimization
-- **Tiered Retrieval:** Use a fast BM25 search first; only use expensive Vector search if needed.
-- **Summarized Context:** Only send the "Golden Chunks" to the LLM to save tokens.
+- **Tiered Retrieval:** Pehle ek fast BM25 search use karein; expensive Vector search ka use sirf tabhi karein jab zaroorat ho.
+- **Summarized Context:** Tokens bachane ke liye LLM ko sirf "Golden Chunks" hi bhejein.
 
 ---
 
 ## ⚠️ 10. Failure Handling
-- **Infinite Loop:** If the agent keeps "Re-searching" and failing, trigger a "Hard Fallback" to a human.
-- **Inconsistent Feedback:** Handle cases where two users give contradictory feedback on the same answer.
+- **Infinite Loop:** Agar agent baar-baar "Re-searching" karta rahe aur fail ho, toh kisi human par "Hard Fallback" trigger karein.
+- **Inconsistent Feedback:** Un cases ko handle karein jahan do users same answer par contradictory feedback dete hain.
 
 ---
