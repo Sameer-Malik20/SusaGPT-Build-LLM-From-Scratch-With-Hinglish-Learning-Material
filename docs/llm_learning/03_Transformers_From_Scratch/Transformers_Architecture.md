@@ -1,5 +1,5 @@
-# 🏗️ Transformer Architecture Inside-Out (Deep Deep Dive)
-> **Level:** Expert (2026 Job Ready) | **Language:** Hinglish | **Goal:** Master every layer of GPT/Llama models with Math, Logic, and Optimization.
+# 🏗️ Transformer Architecture Andar-Bahar (Deep Deep Dive)
+> **Level:** Expert (2026 Job Ready) | **Language:** Hinglish | **Goal:** GPT/Llama models ke har layer ko master karo Math, Logic, aur Optimization ke saath.
 
 ---
 
@@ -7,20 +7,20 @@
 
 In 2026, sirf Transformer ka flow janna kafi nahi hai. Ek **AI Engineer** ko matrix dimensions, memory bottlenecks (KV-cache), aur scaling laws ka deep pata hona chahiye.
 
-- **Attention Mechanism:** Standard MHA vs GQA (Grouped Query Attention).
-- **Positional Embeddings:** RoPE (Rotary) and why it's the 2026 standard.
-- **Normalization:** RMSNorm and why we move away from LayerNorm.
-- **Feed-Forward:** SwiGLU activation and MoE (Mixture of Experts) basics.
-- **Memory Optimization:** KV-Cache, PagedAttention, and FlashAttention.
+- **Attention Mechanism:** Standard MHA vs GQA (Grouped Query Attention) ka fark.
+- **Positional Embeddings:** RoPE (Rotary) aur yeh 2026 ka standard kyun hai.
+- **Normalization:** RMSNorm aur hum LayerNorm se kyun door ja rahe hain.
+- **Feed-Forward:** SwiGLU activation aur MoE (Mixture of Experts) basics.
+- **Memory Optimization:** KV-Cache, PagedAttention, aur FlashAttention.
 
 ---
 
-## 📊 Matrix Math: The Real Heart of Attention
+## 📊 Matrix Math: Attention ka Real Heart
 
 Attention ka formula sirf yaad mat karo, uska logic samjho:
 $$ \text{Attention}(Q, K, V) = \text{Softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V $$
 
-### 1. The Matrix Dimensions (Mastery Level)
+### 1. Matrix Dimensions (Mastery Level)
 Agar aapka input `Batch=1, Seq_len=512, d_model=4096` hai:
 - **$Q, K, V$ Matrices:** $(512 \times 4096)$.
 - **$QK^T$ Score Matrix:** $(512 \times 512)$ — Ye token-to-token correlation dikhata hai.
@@ -35,11 +35,11 @@ Agar aapka input `Batch=1, Seq_len=512, d_model=4096` hai:
 Transformer by default "Set of Words" hai, "Sequence" nahi. Use order batane ke liye positional info chahiye.
 
 - **Why RoPE?** Ye relative position ko preserve karta hai. Jab word rotate hote hain complex plane mein, toh unka angle distance batata hai.
-- **2026 Trend:** Llama-3 and beyond use RoPE with **Scaling Factors** to handle 1M+ context windows.
+- **2026 Trend:** Llama-3 aur uske baad ke models RoPE ko **Scaling Factors** ke saath use karte hain taaki 1M+ context windows handle kar sakein.
 
 ---
 
-## 🧠 Multi-Query & Grouped-Query Attention (GQA)
+## 🧠 Multi-Query aur Grouped-Query Attention (GQA)
 
 MHA (Multi-Head Attention) memory kha jata hai because har head ka apna Key ($K$) aur Value ($V$) cache hota hai.
 
@@ -53,7 +53,7 @@ MHA (Multi-Head Attention) memory kha jata hai because har head ka apna Key ($K$
 
 ---
 
-## 🏢 MLP & SwiGLU: The Knowledge Storage
+## 🏢 MLP aur SwiGLU: Knowledge Storage
 
 Attention tokens ko "shuffling" karta hai, lekin MLP unhe "process" karta hai.
 - **SwiGLU ($x \cdot \sigma(x)$):** Swish activation use hota hai gating ke liye. Ye ReLU se zyada stable aur expressive hai.
@@ -61,10 +61,12 @@ Attention tokens ko "shuffling" karta hai, lekin MLP unhe "process" karta hai.
 
 ---
 
-## 🔄 6. KV-Cache & Memory Estimation
+## 🔄 6. KV-Cache aur Memory Estimation
 Ek expert ko memory math pata hona chahiye.
 - **KV-Cache size:** `2 * layers * heads * head_dim * seq_len * batch_size * bytes_per_param`.
-- **Example:** Llama-3 70B (80 layers, 64 heads, 128 dim) for 1k context (FP16) = ~2.6GB per user request.
+- **Example:** Llama-3 70B (80 layers, 64 heads, 128 dim) ke liye 1k context (FP16) mein ~2.6GB per user request.
+
+---
 
 ## ⚡ 7. Speculative Decoding (Speed Hack)
 2026 mein bade models ko fast chalane ke liye hum "Guesstimation" karte hain.
@@ -80,15 +82,15 @@ Ek expert ko memory math pata hona chahiye.
 **Ans:** Seq length 1k se 2k hone par computation time 4x ho jayega. Isliye long-context models mein specialized attention (like FlashAttention) use hota hai.
 
 ### Q2: "Pre-norm" vs "Post-norm" mein kya fark hai?
-**Ans:** Llama models **Pre-norm** use karte hain (Normalization before attention). Ye deep models ko train karna easier banata hai compared to original Transformer (Post-norm).
+**Ans:** Llama models **Pre-norm** use karte hain (Normalization before attention). Ye deep models ko train karna easier banata hai original Transformer (Post-norm) ke comparison mein.
 
 ---
 
 ## 🏆 Project Integration: SusaGPT
 Aapke `src/susagpt/model.py` mein ye architecture implemented hai:
-- [x] RoPE for long context.
-- [x] GQA for memory efficiency.
-- [x] RMSNorm for training stability.
-- [x] SwiGLU in the MLP block.
+- [x] RoPE long context ke liye.
+- [x] GQA memory efficiency ke liye.
+- [x] RMSNorm training stability ke liye.
+- [x] MLP block mein SwiGLU.
 
-> **Final Insight:** Transformer architecture is no longer a research experiment; it's an engineering pipeline where memory management (KV-cache) is as important as model logic.
+> **Final Insight:** Transformer architecture ab research experiment nahi raha; ye ek engineering pipeline hai jahan memory management (KV-cache) utna hi important hai jitna model logic.

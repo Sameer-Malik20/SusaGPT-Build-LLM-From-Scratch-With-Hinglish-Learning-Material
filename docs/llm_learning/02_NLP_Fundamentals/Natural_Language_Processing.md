@@ -8,18 +8,18 @@ Pehle computer sirf numbers samajhte the (0 aur 1). NLP ne unhe sikhaya ki "Appl
 ---
 
 ## 2. Deep Technical Explanation
-NLP combines computational linguistics with statistical, machine learning, and deep learning models.
+NLP computational linguistics ko statistical, machine learning, aur deep learning models ke saath combine karta hai.
 - **Core Tasks**: Tokenization, POS Tagging, Named Entity Recognition (NER), Sentiment Analysis.
-- **Syntactic Analysis**: Understanding grammar and structure.
-- **Semantic Analysis**: Understanding meaning and context.
+- **Syntactic Analysis**: Grammar aur structure ko samajhna.
+- **Semantic Analysis**: Meaning aur context ko samajhna.
 - **Evolution**: From N-grams and HMMs to LSTMs and finally Transformers.
 
 ---
 
 ## 3. Mathematical Intuition
-Traditional NLP used **TF-IDF** (Term Frequency-Inverse Document Frequency) to weigh words:
+Traditional NLP **TF-IDF** (Term Frequency-Inverse Document Frequency) use karta tha words weigh karne ke liye:
 $$W_{i,j} = tf_{i,j} \times \log\left(\frac{N}{df_i}\right)$$
-This quantified how "important" a word was to a document. Modern NLP uses **Distributed Representations** (Embeddings) where words are vectors in a continuous space.
+Yeh quantify karta tha ki ek word document ke liye kitna "important" tha. Modern NLP **Distributed Representations** (Embeddings) use karta hai jahan words continuous space mein vectors hote hain.
 
 ---
 
@@ -38,7 +38,7 @@ graph LR
 ---
 
 ## 5. Production-ready Examples
-Using `spaCy` for traditional NLP tasks:
+Traditional NLP tasks ke liye `spaCy` use karte hain:
 
 ```python
 import spacy
@@ -57,21 +57,21 @@ for ent in doc.ents:
 ---
 
 ## 6. Real-world Use Cases
-- **Spam Detection**: Gmail filtering emails.
+- **Spam Detection**: Gmail emails filter karta hai.
 - **Translation**: Google Translate.
-- **Search Engines**: Understanding user intent.
+- **Search Engines**: User intent ko samajhna.
 
 ---
 
 ## 7. Failure Cases
-- **Sarcasm**: "Oh great, another meeting!" (Traditional NLP might think it's positive).
-- **Ambiguity**: "I saw the man with the telescope" (Who has the telescope?).
+- **Sarcasm**: "Oh great, another meeting!" (Traditional NLP ise positive samajh sakta hai).
+- **Ambiguity**: "I saw the man with the telescope" (Durbin kis ke paas hai?).
 
 ---
 
 ## 8. Debugging Guide
-1. Check **Stopword removal**: Sometimes removing 'not' flips the sentiment.
-2. Verify **Lemmatization**: Ensure 'running' and 'ran' map to 'run' correctly.
+- **Stopword removal**: Kabhi kabhi 'not' hatane se sentiment palat sakta hai.
+- **Lemmatization**: Dhyaan rakhein ki 'running' aur 'ran' 'run' mein sahi se map ho.
 
 ---
 
@@ -84,31 +84,31 @@ for ent in doc.ents:
 ---
 
 ## 10. Security Concerns
-- **Adversarial attacks**: Adding "noise" to text to fool a classifier.
+- **Adversarial attacks**: Text mein "noise" daal kar classifier ko fool karna.
 
 ---
 
 ## 11. Scaling Challenges
-- **Language Coverage**: Most NLP tools work great for English, but struggle with "Low-resource" languages like Bhojpuri or Swahili.
+- **Language Coverage**: Zyada tar NLP tools English ke liye accha work karte hain, lekin "Low-resource" languages jaise Bhojpuri ya Swahili mein struggle karte hain.
 
 ---
 
 ## 12. Cost Considerations
-- **Preprocessing overhead**: Running a heavy NLP pipeline on millions of documents can be expensive in terms of CPU time.
+- **Preprocessing overhead**: Lakhon documents par heavy NLP pipeline chalaana CPU time ke hisaab se mehnga ho sakta hai.
 
 ---
 
 ## 13. Best Practices
-- Use **Pre-trained models** instead of building from scratch.
-- Always **Normalize** text (lowercase, remove extra spaces).
+- **Pre-trained models** use karein, scratch se banane ke bajaye.
+- Hamesha text ko **Normalize** karein (lowercase karein, extra spaces hata dein).
 
 ---
 
 ## 14. Interview Questions
-1. What is the difference between Stemming and Lemmatization?
-2. Explain the intuition behind TF-IDF.
+1. Stemming aur Lemmatization mein kya antar hai?
+2. TF-IDF ke peeche kya intuition hai? Samjhaayein.
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **LLM-assisted NLP**: Using LLMs to generate high-quality labeled data for smaller, specialized NLP models.
+- **LLM-assisted NLP**: LLMs ka use karke chhote, specialized NLP models ke liye high-quality labeled data generate karna.

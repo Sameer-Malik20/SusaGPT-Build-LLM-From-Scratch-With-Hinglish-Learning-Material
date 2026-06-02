@@ -1,4 +1,4 @@
-# LLMOps Fundamentals: AI in Production
+# LLMOps Fundamentals: Production mein AI
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
 Bhai, socho tumne apne laptop par ek badhiya AI model bana liya jo perfectly kaam kar raha hai. Ab tumhe ise 1 million users ke liye deploy karna hai. Kya tum apna laptop on rakhoge? Nahi na. 
@@ -7,20 +7,20 @@ Bhai, socho tumne apne laptop par ek badhiya AI model bana liya jo perfectly kaa
 
 ---
 
-## 2. Deep Technical Explanation
-LLMOps extends DevOps and MLOps to handle the unique challenges of Large Language Models.
-- **Data Lifecycle**: Managing prompt templates, RAG datasets, and synthetic data.
-- **Model Lifecycle**: Managing model versions (Llama-3 v1 vs v2), quantization variants (4-bit vs 8-bit), and adapters (LoRAs).
-- **Inference Lifecycle**: Scaling GPU clusters, managing throughput vs latency, and caching.
-- **Feedback Loop**: Collecting user ratings and "thumbs-up/down" to improve the model via fine-tuning.
+## 2. Gehra Technical Explanation
+LLMOps, DevOps aur MLOps ko extend karta hai taaki Large Language Models ke unique challenges ko handle kiya ja sake.
+- **Data Lifecycle**: Prompt templates, RAG datasets, aur synthetic data ko manage karna.
+- **Model Lifecycle**: Model versions (Llama-3 v1 vs v2), quantization variants (4-bit vs 8-bit), aur adapters (LoRAs) ko manage karna.
+- **Inference Lifecycle**: GPU clusters ko scale karna, throughput vs latency manage karna, aur caching.
+- **Feedback Loop**: User ratings aur "thumbs-up/down" collect karna taaki model ko fine-tuning ke through improve kiya ja sake.
 
 ---
 
 ## 3. Mathematical Intuition
-Operational efficiency is measured by **P99 Latency** and **Throughput**.
+Operational efficiency **P99 Latency** aur **Throughput** se measure kiya jaata hai.
 Throughput $T$:
 $$T = \frac{\text{Total Tokens Generated}}{\text{Total Time} \times \text{Number of GPUs}}$$
-LLMOps aim to maximize $T$ while keeping $P99 < 2s$ (for the first token). This requires balancing batch sizes and memory usage.
+LLMOps ka aim $T$ ko maximize karna hai jabki $P99 < 2s$ (first token ke liye) maintain kare. Iske liye batch sizes aur memory usage ko balance karna padta hai.
 
 ---
 
@@ -43,7 +43,7 @@ graph TD
 ---
 
 ## 5. Production-ready Examples
-A standard `docker-compose` for a production LLM stack:
+Ek standard `docker-compose` production LLM stack ke liye:
 
 ```yaml
 version: '3.8'
@@ -67,20 +67,20 @@ services:
 ---
 
 ## 6. Real-world Use Cases
-- **Scaling Startups**: Moving from an OpenAI API (Prototype) to a self-hosted Llama-3 model on AWS/GCP (Production).
-- **Enterprise Governance**: Tracking every prompt and response for compliance and auditing.
+- **Scaling Startups**: Ek OpenAI API (Prototype) se ek self-hosted Llama-3 model par AWS/GCP (Production) par move karna.
+- **Enterprise Governance**: Har prompt aur response ko track karna compliance aur auditing ke liye.
 
 ---
 
 ## 7. Failure Cases
-- **Silent Degradation**: The model's answers become worse over time (Model Drift) but the "Success" code (HTTP 200) stays the same.
-- **Cost Spike**: A recursive loop or a viral user causes a $10,000 GPU bill overnight.
+- **Silent Degradation**: Model ke answers time ke saath kharab ho jaate hain (Model Drift) lekin "Success" code (HTTP 200) wahi rahta hai.
+- **Cost Spike**: Ek recursive loop ya ek viral user raat bhar mein $10,000 ka GPU bill la sakta hai.
 
 ---
 
 ## 8. Debugging Guide
-1. **Tracing**: Use **LangSmith** or **Arize Phoenix** to trace exactly where a request failed (Was it the retrieval? The prompt? The model?).
-2. **Error Analysis**: Cluster 100 failed requests to see if there's a common pattern (e.g., "All failures are about medical questions").
+1. **Tracing**: **LangSmith** ya **Arize Phoenix** ka use karke exactly trace karo ki request kahan fail hui (Kya retrieval mein? Prompt mein? Model mein?).
+2. **Error Analysis**: 100 failed requests ko cluster karo dekhne ke liye ki koi common pattern hai (jaise, "Saare failures medical questions ke baare mein hain").
 
 ---
 
@@ -94,34 +94,34 @@ services:
 ---
 
 ## 10. Security Concerns
-- **API Key Leakage**: Accidentally committing your $10,000/mo OpenAI key to a public GitHub repo.
-- **Access Control**: Ensuring only authorized users can query the internal company Vector DB.
+- **API Key Leakage**: Galti se apni $10,000/mo wali OpenAI key ko public GitHub repo mein commit kar dena.
+- **Access Control**: Yeh ensure karna ki sirf authorized users hi internal company Vector DB ko query kar sakein.
 
 ---
 
 ## 11. Scaling Challenges
-- **Cold Starts**: Spinning up a new GPU instance and loading a 70B model can take 5-10 minutes, making "Serverless" LLMs difficult.
+- **Cold Starts**: Naya GPU instance spin up karna aur 70B model load karne mein 5-10 minute lag sakte hain, jisse "Serverless" LLMs difficult ho jaate hain.
 
 ---
 
 ## 12. Cost Considerations
-- **Token Budgeting**: Implementing "Quotas" for users so they don't burn the company's AI budget in one day.
+- **Token Budgeting**: Users ke liye "Quotas" implement karna taaki woh company ka AI budget ek din mein uda na dein.
 
 ---
 
 ## 13. Best Practices
-- **Version everything**: Models, Prompts, and Datasets.
-- **Automated Evals**: Never deploy a new prompt without running it against your "Golden Dataset".
-- **Monitor Token Usage**: Set up alerts for sudden spikes in spending.
+- **Sab kuch version karo**: Models, Prompts, aur Datasets.
+- **Automated Evals**: Kabhi bina "Golden Dataset" ke khilaf chalaye naya prompt deploy mat karo.
+- **Monitor Token Usage**: Spending mein sudden spikes ke liye alerts set up karo.
 
 ---
 
 ## 14. Interview Questions
-1. How does LLMOps differ from traditional MLOps?
-2. What are the key metrics you would monitor for a production RAG system?
+1. LLMOps, traditional MLOps se kaise different hai?
+2. Production RAG system ke liye aap kon se key metrics monitor karenge?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **PromptOps**: Treating prompt engineering as a first-class citizen with its own branching, testing, and deployment cycles.
-- **Multi-Model Orchestration**: Dynamically switching between models (GPT-4o for complex tasks, Llama-3-8B for simple ones) to optimize cost and speed.
+- **PromptOps**: Prompt engineering ko ek first-class citizen treat karna jiska apna branching, testing, aur deployment cycles hain.
+- **Multi-Model Orchestration**: Models ke beech dynamically switch karna (complex tasks ke liye GPT-4o, simple tasks ke liye Llama-3-8B) taaki cost aur speed optimize ho.

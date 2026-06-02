@@ -1,13 +1,13 @@
-# 📦 Batching Strategies: Maximizing Throughput
-> **Objective:** Master the art of grouping multiple user requests into a single GPU forward pass, understanding Continuous Batching and Chunked Prefills to optimize inference servers | **Language:** Hinglish | **Standard:** 2026 Expert Framework
+# 📦 Batching Strategies: Throughput Ko Maximize Karna
+> **Objective:** Multiple user requests ko ek single GPU forward pass mein group karne ki kala mein mahir hona, Continuous Batching aur Chunked Prefills ko samajhna aur inference servers ko optimize karna | **Language:** Hinglish | **Standard:** 2026 Expert Framework
 
 ---
 
 ## 🧭 1. Beginner-Friendly Hinglish Explanation
 Batching ka matlab hai "Ek sath dher saare kaam karna".
 
-- **The Problem:** Agar ek GPU par sirf ek user handle karoge, toh GPU $90\%$ time khaali baitha rahega. Par 100 users ko ek sath handle karna mushkil hai kyunki har koi alag length ka sawal puchta hai.
-- **The Solution:** 
+- **Samस्या:** Agar ek GPU par sirf ek user handle karoge, toh GPU $90\%$ time khaali baitha rahega. Par 100 users ko ek sath handle karna mushkil hai kyunki har koi alag length ka sawal puchta hai.
+- **Samadhaan:** 
   - **Static Batching:** Sabka wait karo jab tak batch bhar na jaye (Bad for latency).
   - **Continuous Batching:** Jaise hi ek user ka answer khatam ho, turant naye user ko batch mein "Ghusao" (2026 Standard).
 - **Intuition:** Ye ek "Bus" jaisa hai. Static batching mein bus tabhi chalti hai jab sab seats bhar jayein. Continuous batching mein bus chalti rehti hai aur log raste mein chadh-utar sakte hain.
@@ -15,21 +15,21 @@ Batching ka matlab hai "Ek sath dher saare kaam karna".
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Batching is the primary way to solve the **Memory-Bandwidth Bottleneck**:
+Batching **Memory-Bandwidth Bottleneck** ko solve karne ka primary tareeka hai:
 
-1. **Static Batching:** Multiple requests are padded to the same length. Wasteful because of the padding tokens.
-2. **Continuous Batching (Iteration-level Scheduling):** After every single decoding step, the scheduler looks for finished requests to remove and new requests to add. 
-3. **Chunked Prefill:** Breaking a long user prompt into smaller chunks so that the "Decoding" of other users doesn't get "Paused" while the long prompt is being processed.
-4. **The Goal:** Maximize the number of tokens generated per second per GPU.
+1. **Static Batching:** Multiple requests padded kiye jaate hain same length tak. Padding tokens ki vajah se ye wasteful hai.
+2. **Continuous Batching (Iteration-level Scheduling):** Har single decoding step ke baad, scheduler dekhta hai ki kaun si request finish hui hai aur nayi requests ko add kare.
+3. **Chunked Prefill:** Ek long user prompt ko chhote chunks mein todna taaki other users ka "Decoding" "Paused" na ho jab long prompt process ho raha ho.
+4. **Lakshya:** Har second per GPU generate hone wale tokens ki maximum number.
 
 ---
 
 ## 📐 3. Mathematical Intuition
-**Why Batching is Efficient:**
-Loading model weights ($W$) takes the same time for 1 user as it does for 64 users.
-- **1 User:** Load $W$, do 1 Vector-Matrix multiplication.
-- **64 Users:** Load $W$, do 1 Matrix-Matrix multiplication.
-GPUs are optimized for Matrix-Matrix math. Thus, 64 users are processed in almost the same time as 1 user, leading to **$64x$ higher throughput**.
+**Batching Efficient Kyun Hai:**
+Model weights ($W$) ko load karna 1 user ke liye utna hi time leta hai jitna 64 users ke liye.
+- **1 User:** $W$ load karo, 1 Vector-Matrix multiplication karo.
+- **64 Users:** $W$ load karo, 1 Matrix-Matrix multiplication karo.
+GPUs Matrix-Matrix math ke liye optimized hain. Isliye, 64 users almost utne hi time mein process hote hain jitna 1 user, jisse **$64x$ higher throughput** milta hai.
 
 ---
 
@@ -56,7 +56,7 @@ graph TD
 ---
 
 ## 💻 5. Production-Ready Examples
-Configuration for a high-throughput server (e.g., vLLM):
+High-throughput server ke liye configuration (e.g., vLLM):
 ```python
 # vLLM automatically handles continuous batching
 from vllm import LLM, SamplingParams
@@ -76,55 +76,57 @@ outputs = llm.generate(prompts, sampling_params)
 ---
 
 ## 🌍 6. Real-World Use Cases
-- **Public API Providers (OpenAI/Anthropic):** Using massive batches (e.g., 512+) to serve millions of users at low cost.
-- **Data Labeling:** Batching 1000 tasks together to finish the entire dataset in minutes instead of hours.
+- **Public API Providers (OpenAI/Anthropic):** Massive batches (e.g., 512+) use karke millions of users ko low cost par serve karte hain.
+- **Data Labeling:** 1000 tasks ko ek saath batch karke poora dataset minutes mein khatam kar dete hain, hours nahi lagte.
 
 ---
 
 ## ❌ 7. Failure Cases
-- **Padding Inefficiency:** In static batching, if one request is 1000 tokens and others are 10 tokens, $90\%$ of the computation is wasted on padding.
-- **The "Killer Request":** A single request with a 128k context can "Starve" the rest of the batch, taking up all the KV cache memory.
+- **Padding Inefficiency:** Static batching mein, agar ek request 1000 tokens ki hai aur baaki 10 tokens ki, toh $90\%$ computation padding par waste hota hai.
+- **The "Killer Request":** Ek single request jiska context 128k hai, poori batch ko "Starve" kar sakti hai, saari KV cache memory le kar.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-| Problem | Reason | Solution |
+| Samस्या | Karan | Samadhaan |
 | :--- | :--- | :--- |
-| **Throughput is low** | Batch size is too small | Increase **`max_num_seqs`** until you hit VRAM limits. |
-| **Latency spikes for new users** | Prefill is blocking decoding | Use **Chunked Prefill** (vLLM `--enable-chunked-prefill`). |
+| **Throughput low hai** | Batch size bahut chhota hai | **`max_num_seqs`** badhao jab tak VRAM limit na hit ho. |
+| **Naye users ke liye latency spike hoti hai** | Prefill decoding ko block kar raha hai | **Chunked Prefill** use karo (vLLM `--enable-chunked-prefill`). |
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **High Batch Size (High Throughput / High Latency)** vs **Low Batch Size (Low Throughput / Low Latency).**
+- **Zyada Batch Size (Zyada Throughput / Zyada Latency)** vs **Kam Batch Size (Kam Throughput / Kam Latency).**
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Side-Channel Analysis:** In a shared batch, one user might be able to guess the content of another user's prompt by measuring subtle differences in processing time.
+- **Side-Channel Analysis:** Ek shared batch mein, ek user doosre user ke prompt ke content ko guess kar sakta hai processing time mein subtle differences measure karke.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The Memory Wall:** A batch of 256 users with 8k context requires **$256 \times 8k$** KV cache slots. This can easily exceed 100GB of VRAM.
+- **Memory Wall Samस्या:** 256 users ka batch jiska context 8k hai, usme **$256 \times 8k$** KV cache slots chahiye. Ye aaram se 100GB VRAM se zyada ho sakta hai.
 
 ---
 
 ## 💰 12. Cost Considerations
-- Batching is the #1 way to reduce "Cost per 1M tokens". Always aim for the highest batch size your VRAM allows.
+- Batching #1 tareeka hai "Cost per 1M tokens" reduce karne ka. Hamesha highest batch size ka target rakho jo tumhara VRAM allow kare.
 
 漫
+
 ---
 
 ## 📝 14. Interview Questions
-1. "What is the difference between Static and Continuous batching?"
-2. "How does Continuous Batching improve GPU utilization?"
-3. "Explain the concept of 'Chunked Prefill' and why it's used."
+1. "Static aur Continuous batching mein kya antar hai?"
+2. "Continuous Batching GPU utilization kaise improve karta hai?"
+3. "'Chunked Prefill' ka concept aur iska upyog kyun kiya jata hai, samjhao."
 
 ---
 
 ## 🚀 15. Latest 2026 LLM Engineering Patterns
-- **Multi-Host Batching:** Distributing a single batch across multiple nodes using Tensor Parallelism.
-- **Predictive Batching:** A scheduler that "Predicts" how long a request will take and groups similar requests together to minimize "Wait time" in the batch.
+- **Multi-Host Batching:** Ek single batch ko multiple nodes mein distribute karna Tensor Parallelism ka use karke.
+- **Predictive Batching:** Ek scheduler jo "Predict" karta hai ki ek request kitna time lega aur similar requests ko group karta hai batch mein "Wait time" minimize karne ke liye.
 漫
 漫
+```

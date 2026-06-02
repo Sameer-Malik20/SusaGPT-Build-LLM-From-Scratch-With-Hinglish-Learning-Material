@@ -18,15 +18,15 @@ Interview mein woh tumse Transformer ke andar ka math pooch sakta hai, ya yeh ki
 ---
 
 ## 3. Mathematical Questions (Whiteboard)
-- Derive the time complexity of Self-Attention $O(N^2 d)$.
-- Explain the significance of the $\sqrt{d_k}$ denominator in Scaled Dot-Product Attention.
-- What is the difference between Cross-Entropy and KL Divergence in the context of DPO?
-- How does RoPE (Rotary Positional Embedding) use rotation matrices to maintain relative distance?
+- Self-Attention ka time complexity $O(N^2 d)$ derive karo.
+- Scaled Dot-Product Attention mein $\sqrt{d_k}$ denominator ka significance explain karo.
+- DPO ke context mein Cross-Entropy aur KL Divergence mein kya farak hai?
+- RoPE rotation matrices ka use karke relative distance kaise maintain karta hai?
 
 ---
 
 ## 4. Architecture Design Scenario
-**Question**: "Design a RAG system for a legal firm that needs to query 1 million 100-page PDF documents with extremely high accuracy and low latency."
+**Question**: "Ek legal firm ke liye RAG system design karo jise 1 million 100-page PDF documents ko extremely high accuracy aur low latency ke saath query karna hai."
 **Key points to cover**:
 - Chunking strategy (Semantic chunking).
 - Embedding model selection.
@@ -38,35 +38,35 @@ Interview mein woh tumse Transformer ke andar ka math pooch sakta hai, ya yeh ki
 ---
 
 ## 5. Coding Challenge Example
-"Implement a simple multi-head attention head in PyTorch without using `nn.MultiheadAttention`."
-(Refer to `03_Transformers_From_Scratch/Building_GPT_From_Scratch.md` for solution).
+"PyTorch mein `nn.MultiheadAttention` use kiye bina ek simple multi-head attention head implement karo."
+(`03_Transformers_From_Scratch/Building_GPT_From_Scratch.md` mein solution dekhein)
 
 ---
 
 ## 6. Failure Analysis Questions
-- "Your model is hallucinating specific dates in a financial report. How do you fix it without re-training?" (Answer: RAG with citations, prompt engineering with 'I don't know' instructions, or constrained decoding).
-- "The model's throughput dropped by 50% after moving to a new GPU. What do you check?" (Answer: CUDA version, Flash Attention compatibility, VRAM fragmentation).
+- "Aapka model financial report mein specific dates hallucinate kar raha hai. Bina re-training ke aap ise kaise fix karenge?" (Answer: RAG with citations, 'I don't know' instructions ke saath prompt engineering, ya constrained decoding).
+- "Naye GPU par migrate karne ke baad model ki throughput 50% gir gayi. Aap kya check karoge?" (Answer: CUDA version, Flash Attention compatibility, VRAM fragmentation).
 
 ---
 
 ## 7. Tradeoff Discussions
-- **Parameter Count vs. Context Length**: Larger models reason better but have smaller context limits on same hardware.
-- **RAG vs. Fine-tuning**: RAG for dynamic/private data; Fine-tuning for style/format/domain-specific language.
-- **Quantization vs. Accuracy**: 4-bit vs 8-bit tradeoffs in reasoning capability.
+- **Parameter Count vs. Context Length**: Bade models better reason karte hain but same hardware par unke context limits chhote hote hain.
+- **RAG vs. Fine-tuning**: RAG dynamic/private data ke liye; Fine-tuning style/format/domain-specific language ke liye.
+- **Quantization vs. Accuracy**: Reasoning capability mein 4-bit vs 8-bit tradeoffs.
 
 ---
 
 ## 8. Debugging Scenarios
-- "Training loss is flat for 5000 steps. Debug."
-- "The model is repeating the same sentence in a loop. Why?"
-- "The agent is stuck in an infinite tool-calling loop. How to break it?"
+- "Training loss 5000 steps tak flat hai. Debug karo."
+- "Model ek hi sentence ko baar-baar repeat kar raha hai. Kyun?"
+- "Agent infinite tool-calling loop mein phans gaya hai. Kaise break karein?"
 
 ---
 
 ## 9. Best Practices in Interviews
-- **Be Practical**: Don't just give theoretical answers. Mention specific libraries (vLLM, Unsloth, LangGraph).
-- **Cost Awareness**: Always mention how your design saves GPU costs.
-- **Security First**: Mention prompt injection and PII protection in every design question.
+- **Be Practical**: Sirf theoretical answers mat do. Specific libraries mention karo (vLLM, Unsloth, LangGraph).
+- **Cost Awareness**: Hamesha mention karo ki aapka design GPU costs kaise save karta hai.
+- **Security First**: Har design question mein prompt injection aur PII protection mention karo.
 
 ---
 
@@ -78,18 +78,18 @@ Interview mein woh tumse Transformer ke andar ka math pooch sakta hai, ya yeh ki
 ---
 
 ## 11. Mock Interview: The 15-Minute Technical Drill
-1. What is the KV Cache and why is it $O(N)$?
-2. Explain LoRA's rank $r$ and how it affects training.
-3. How does vLLM solve VRAM fragmentation?
-4. What is the 'Lost in the Middle' problem in long context?
-5. Difference between Hard vs Soft prompt tuning.
-6. When would you use DPO instead of RLHF?
-7. Explain 'Chain of Thought' prompting intuition.
-8. How to evaluate a RAG system using RAGAS?
-9. What is 'Semantic Chunking'?
-10. How to prevent Prompt Injection?
-11. Explain 'Flash Attention' VRAM saving logic.
-12. Why is 'Next Token Prediction' a good proxy for reasoning?
-13. What is the 'Chinchilla scaling law'?
-14. How to host a 70B model on two 40GB A100s?
-15. What are 'mixture of experts' (MoE) routing layers?
+1. KV Cache kya hai aur yeh $O(N)$ kyun hota hai?
+2. LoRA ka rank $r$ explain karo aur yeh training ko kaise affect karta hai?
+3. vLLM VRAM fragmentation kaise solve karta hai?
+4. Long context mein 'Lost in the Middle' problem kya hai?
+5. Hard vs Soft prompt tuning mein kya farak hai?
+6. Aap DPO kab use karoge instead of RLHF?
+7. 'Chain of Thought' prompting ki intuition explain karo.
+8. RAGAS ka use karke RAG system kaise evaluate karein?
+9. 'Semantic Chunking' kya hai?
+10. Prompt Injection kaise prevent karein?
+11. 'Flash Attention' ki VRAM saving logic explain karo.
+12. 'Next Token Prediction' reasoning ke liye ek good proxy kyun hai?
+13. 'Chinchilla scaling law' kya hai?
+14. Do 40GB A100s par 70B model kaise host karein?
+15. 'Mixture of experts' (MoE) routing layers kya hote hain?

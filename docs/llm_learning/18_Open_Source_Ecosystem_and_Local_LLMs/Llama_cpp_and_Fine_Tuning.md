@@ -8,20 +8,20 @@ Bhai, socho tumne Llama-3 download kar li, lekin woh tumhari company ke rules na
 ---
 
 ## 2. Deep Technical Explanation
-`llama.cpp` is a high-performance C++ implementation of the Transformer architecture with zero dependencies.
-- **Metal/CUDA Support**: It leverages Apple Silicon (Metal) and NVIDIA GPUs (CUDA) for acceleration.
-- **Mixed Precision**: Supports running parts of the model in FP16 and others in 4-bit.
-- **Local Fine-Tuning (PEFT)**: Using libraries like **Unsloth** or **LoRA_MLX** to fine-tune models on local GPUs. These libraries optimize memory so you can fine-tune a 7B model on as little as 6GB of VRAM.
-- **Dataset Prep**: Converting your local JSONL/CSV data into the specific format (Alpaca/ChatML) required for fine-tuning.
+`llama.cpp` ek high-performance C++ implementation hai Transformer architecture ka jisme zero dependencies hain.
+- **Metal/CUDA Support**: Yeh Apple Silicon (Metal) aur NVIDIA GPUs (CUDA) ko acceleration ke liye leverage karta hai.
+- **Mixed Precision**: Model ke parts ko FP16 mein aur dusron ko 4-bit mein run karne ki support karta hai.
+- **Local Fine-Tuning (PEFT)**: Libraries jaise **Unsloth** ya **LoRA_MLX** ka use karte hain local GPUs par models fine-tune karne ke liye. Yeh libraries memory optimize karti hain taake aap 7B model ko sirf 6GB VRAM par fine-tune kar sakte hain.
+- **Dataset Prep**: Apne local JSONL/CSV data ko specific format (Alpaca/ChatML) mein convert karna jo fine-tuning ke liye required hai.
 
 ---
 
 ## 3. Mathematical Intuition
-Fine-tuning with **LoRA (Low-Rank Adaptation)**:
-Instead of updating the full weight matrix $W$ ($d \times d$), we only update two small matrices $A$ and $B$.
+**LoRA (Low-Rank Adaptation)** ke saath fine-tuning:
+Full weight matrix $W$ ($d \times d$) ko update karne ke bajay, hum sirf do chhoti matrices $A$ aur $B$ ko update karte hain.
 $$W_{new} = W_{base} + \Delta W = W_{base} + B \cdot A$$
-where $B \in \mathbb{R}^{d \times r}$ and $A \in \mathbb{R}^{r \times d}$ with rank $r \ll d$.
-This reduces the number of parameters to train by 10,000x, allowing local GPUs to handle the backpropagation gradients in memory.
+jahan $B \in \mathbb{R}^{d \times r}$ aur $A \in \mathbb{R}^{r \times d}$ hain rank $r \ll d$ ke saath.
+Yeh number of parameters ko train karne mein 10,000x reduce karta hai, jisse local GPUs memory mein backpropagation gradients ko handle kar sakte hain.
 
 ---
 
@@ -44,7 +44,7 @@ graph TD
 ---
 
 ## 5. Production-ready Examples
-Fine-tuning with `Unsloth` (2x faster, 70% less memory):
+`Unsloth` ke saath Fine-tuning (2x faster, 70% less memory):
 
 ```python
 from unsloth import FastLanguageModel
@@ -75,21 +75,21 @@ model.save_pretrained_gguf("my_model", tokenizer)
 ---
 
 ## 6. Real-world Use Cases
-- **Specific Domain Expert**: Fine-tuning a model on your company's internal Slack messages or documentation to create a "Company Bot".
-- **Dialect Support**: Teaching Llama-3 to speak in a specific language or dialect (e.g., Hinglish, Bhojpuri).
-- **Function Calling**: Training a model to strictly output valid JSON for API integration.
+- **Specific Domain Expert**: Apni company ke internal Slack messages ya documentation par model fine-tune karke "Company Bot" banana.
+- **Dialect Support**: Llama-3 ko specific language ya dialect mein bolna sikhana (e.g., Hinglish, Bhojpuri).
+- **Function Calling**: Model ko strictly valid JSON output karne ki training dena API integration ke liye.
 
 ---
 
 ## 7. Failure Cases
-- **Catastrophic Forgetting**: The model learns the new data but forgets how to speak basic English or solve math. (Solve by using a "Base model" mix).
-- **Overfitting**: The model memorizes your 10 training examples perfectly but can't handle a slightly different query from a user.
+- **Catastrophic Forgetting**: Model naya data seekh leta hai lekin basic English bolna ya math solve karna bhool jaata hai. (Solve karein "Base model" mix use karke).
+- **Overfitting**: Model aapke 10 training examples ko perfectly yaad kar leta hai lekin user ke thode different query ko handle nahi kar pata.
 
 ---
 
 ## 8. Debugging Guide
-1. **Loss Curves**: If the loss goes to 0 instantly, you are overfitting. If it stays high, your learning rate is too low.
-2. **Tokenizer Mismatch**: Ensure you use the same tokenizer during fine-tuning that you will use during inference.
+1. **Loss Curves**: Agar loss instantly 0 ho jata hai, toh aap overfit kar rahe hain. Agar high rehta hai, toh aapki learning rate bahut low hai.
+2. **Tokenizer Mismatch**: Ensure karein ki aap wahi tokenizer use karein fine-tuning ke dauran jo inference mein use karenge.
 
 ---
 
@@ -103,33 +103,33 @@ model.save_pretrained_gguf("my_model", tokenizer)
 ---
 
 ## 10. Security Concerns
-- **Data Poisoning**: If someone injects "Wrong" answers into your local training set, your model will start lying to you.
+- **Data Poisoning**: Agar koi aapke local training set mein "Wrong" answers inject kar de, toh aapka model jhooth bolne lagega.
 
 ---
 
 ## 11. Scaling Challenges
-- **Context Length**: Local fine-tuning is usually limited to 2k-4k context length due to VRAM. Fine-tuning on 128k context requires a massive GPU cluster.
+- **Context Length**: Local fine-tuning usually limited hota hai 2k-4k context length tak VRAM ki wajah se. 128k context par fine-tuning ke liye massive GPU cluster chahiye.
 
 ---
 
 ## 12. Cost Considerations
-- **Training Time**: A 7B model can take 1-4 hours to fine-tune on a modern local GPU.
+- **Training Time**: 7B model ko fine-tune karne mein 1-4 hours lag sakte hain ek modern local GPU par.
 
 ---
 
 ## 13. Best Practices
-- **Use "Rank 16"**: It's usually enough for most tasks.
-- **Dataset Quality > Quantity**: 500 perfect examples are better than 10,000 noisy ones.
-- **Save as GGUF**: It makes it compatible with everything (Ollama, LM Studio, etc.).
+- **Use "Rank 16"**: Yeh usually enough hai most tasks ke liye.
+- **Dataset Quality > Quantity**: 500 perfect examples 10,000 noisy ones se behtar hain.
+- **Save as GGUF**: Yeh compatible banata hai har cheez ke saath (Ollama, LM Studio, etc.).
 
 ---
 
 ## 14. Interview Questions
-1. What is the benefit of LoRA over full-parameter fine-tuning?
-2. How does `llama.cpp` achieve high performance without using heavy libraries like PyTorch?
+1. LoRA ka benefit kya hai full-parameter fine-tuning ke upar?
+2. `llama.cpp` high performance kaise achieve karta hai bina heavy libraries jaise PyTorch ke use kiye?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Q-LoRA**: Quantized LoRA, which allows you to fine-tune a 4-bit model directly.
-- **GaLore (Gradient Low-Rank Projection)**: A new technique that allows full-parameter training on consumer GPUs by projecting the gradients.
+- **Q-LoRA**: Quantized LoRA, jo aapko 4-bit model ko directly fine-tune karne ki anumati deta hai.
+- **GaLore (Gradient Low-Rank Projection)**: Ek nayi technique jo consumer GPUs par full-parameter training ki anumati deti hai gradients ko project karke.

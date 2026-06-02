@@ -1,5 +1,5 @@
-# 🎲 Deterministic vs Probabilistic Testing: Hard vs Soft Rules
-> **Objective:** Master the balance between traditional unit tests (Deterministic) and modern LLM-based evaluations (Probabilistic) to create a comprehensive testing strategy for AI systems | **Language:** Hinglish | **Standard:** 2026 Expert Framework
+# 🎲 Deterministic vs Probabilistic Testing: Sakht vs Naram Rules
+> **Objective:** Traditional unit tests (Deterministic) aur modern LLM-based evaluations (Probabilistic) ke beech balance master karna, taaki AI systems ke liye ek comprehensive testing strategy bana sakein | **Language:** Hinglish | **Standard:** 2026 Expert Framework
 
 ---
 
@@ -13,25 +13,25 @@ Deterministic vs Probabilistic Testing ka matlab hai "Pakke rules vs Andaze wale
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Effective AI testing requires both **Unit Tests** and **Eval Suits**:
+Effective AI testing ke liye dono **Unit Tests** aur **Eval Suits** chahiye:
 
 1. **Deterministic Tests (The Guardrails):**
-   - **Schema Validation:** Does the JSON match the Pydantic model?
-   - **Tool Call Checks:** Did the model call the *exact* right function for a fixed input?
-   - **Keyword Matching:** Did the model include "Must-have" legal disclaimers?
+   - **Schema Validation:** Kya JSON Pydantic model se match karta hai?
+   - **Tool Call Checks:** Kya model ne fixed input ke liye *exact* right function call kiya?
+   - **Keyword Matching:** Kya model ne "Must-have" legal disclaimers include kiye?
 2. **Probabilistic Tests (The Nuance):**
-   - **Semantic Similarity:** Does the answer mean the same as the reference?
-   - **Style/Tone Checking:** Is the model's persona consistent?
-   - **Reasoning Quality:** Is the logic sound even if the wording changes?
+   - **Semantic Similarity:** Kya answer ka matlab reference ke same hai?
+   - **Style/Tone Checking:** Kya model ka persona consistent hai?
+   - **Reasoning Quality:** Kya logic sound hai jab wording change ho?
 
 ---
 
 ## 📐 3. Mathematical Intuition
 **Confidence Intervals:**
-In Probabilistic testing, we don't say "Pass" or "Fail". We say the model has a mean score $\mu$ with a standard deviation $\sigma$.
-We run the test $N$ times to ensure the result is statistically significant:
+Probabilistic testing mein hum "Pass" ya "Fail" nahi kehte. Hum kehte hain ki model ka mean score $\mu$ hai with standard deviation $\sigma$.
+Hum test $N$ baar chalaate hain taaki result statistically significant ho:
 $$\text{Margin of Error} = Z \frac{\sigma}{\sqrt{N}}$$
-If the margin of error is too high, the test is "Flaky" and needs a better Judge or more test cases.
+Agar margin of error bahut zyada hai, to test "Flaky" hai aur behtar Judge ya aur test cases chahiye.
 
 ---
 
@@ -51,7 +51,7 @@ graph TD
 ---
 
 ## 💻 5. Production-Ready Examples
-Combining both in a Python test suite:
+Dono ko ek Python test suite mein combine karte hain:
 ```python
 def test_support_bot():
     query = "Refund my order #123"
@@ -69,56 +69,55 @@ def test_support_bot():
 ---
 
 ## 🌍 6. Real-World Use Cases
-- **Medical AI:** Deterministic check to ensure it *never* gives a dosage amount, and Probabilistic check to ensure the explanation is easy for a patient to understand.
-- **SQL Agents:** Deterministic check that the SQL code is valid, and Probabilistic check that the query actually answers the user's question.
+- **Medical AI:** Deterministic check taaki ye kabhi dosage amount na de, aur Probabilistic check taaki explanation patient ko samajhne mein aasan ho.
+- **SQL Agents:** Deterministic check ki SQL code valid hai, aur Probabilistic check ki query actually user ke sawaal ka jawab deti hai.
 
 ---
 
 ## ❌ 7. Failure Cases
-- **The "Flaky" Test:** A probabilistic test that passes one day and fails the next because the "Judge Model" was updated or changed its mind.
-- **Rigid Determinism:** Failing an AI model because it used a synonym instead of the exact word you expected.
+- **The "Flaky" Test:** Ek probabilistic test jo ek din pass karta hai aur agle din fail ho jaata hai kyunki "Judge Model" update hua ya usne apna mind badal liya.
+- **Rigid Determinism:** AI model ko fail karna kyunki usne exact word ke badle synonym use kiya.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-| Problem | Reason | Solution |
+| Samasya | Karan | Samadhan |
 | :--- | :--- | :--- |
-| **Tests are too slow** | Too many Judge calls | Move deterministic checks to the **beginning** of the pipeline to "Fail fast". |
-| **Tests pass but AI is bad** | Logic is 'Gamed' | Add **Adversarial test cases** that try to trick the model. |
+| **Tests bahut slow hain** | Bahut zyada Judge calls | Deterministic checks ko pipeline ke **shuruaat** mein le jaao taaki "Fail fast" ho. |
+| **Tests pass hote hain lekin AI kharab hai** | Logic 'Gamed' kiya gaya hai | **Adversarial test cases** daalo jo model ko trick karne ki koshish karein. |
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Deterministic (Reliable / Fast / Rigid / Hard to write for text).**
-- **Probabilistic (Flexible / Slow / Flaky / Easy to write for text).**
+- **Deterministic (Vishwasniya / Tez / Sakht / Text ke liye likhna mushkil).**
+- **Probabilistic (Lachila / Dheema / Flaky / Text ke liye likhna aasan).**
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Regression Stealth:** A small change in the model might pass $99\%$ of deterministic tests but "Drift" in its probabilistic reasoning, leading to subtle bugs in production.
+- **Regression Stealth:** Model mein ek chhota sa badlav $99\%$ deterministic tests pass kar sakta hai lekin uske probabilistic reasoning mein "Drift" ho sakta hai, jisse production mein subtle bugs aa sakte hain.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The "Version" Problem:** When you upgrade from Llama-2 to Llama-3, ALL your probabilistic thresholds might need to be re-calibrated.
+- **The "Version" Problem:** Jab aap Llama-2 se Llama-3 mein upgrade karte hain, to aapke saare probabilistic thresholds ko re-calibrate karne ki zaroorat ho sakti hai.
 
 ---
 
 ## 💰 12. Cost Considerations
-- Deterministic tests are free ($0.0001 in CPU). Probabilistic tests cost money (API tokens). Always run Deterministic tests first.
-
+- Deterministic tests free hain ($0.0001 CPU mein). Probabilistic tests mein paisa lagta hai (API tokens). Hamesha pehle Deterministic tests chalao.
 漫
 ---
 
 ## 📝 14. Interview Questions
-1. "Give an example of a task that needs both deterministic and probabilistic testing."
-2. "How do you handle 'Flakiness' in AI testing?"
-3. "What is the role of Pydantic in deterministic LLM testing?"
+1. "Ek task ka udaharan do jisme dono deterministic aur probabilistic testing ki zaroorat hai."
+2. "AI testing mein 'Flakiness' ko kaise handle karte hain?"
+3. "Deterministic LLM testing mein Pydantic ka kya role hai?"
 
 ---
 
 ## 🚀 15. Latest 2026 LLM Engineering Patterns
-- **Assertion-based Evals:** Using libraries like `Promptfoo` to write assertions for AI (e.g., `assert output.contains('JSON')`, `assert output.matches_semantic('Polite')`).
-- **Statistical Significance Testing:** Only accepting a "Win" in A/B testing if the $p$-value is $<0.05$.
+- **Assertion-based Evals:** `Promptfoo` jaisi libraries ka upyog karke AI ke liye assertions likhna (jaise, `assert output.contains('JSON')`, `assert output.matches_semantic('Polite')`).
+- **Statistical Significance Testing:** A/B testing mein sirf "Win" accept karna agar $p$-value $<0.05$ ho.
 漫
 漫

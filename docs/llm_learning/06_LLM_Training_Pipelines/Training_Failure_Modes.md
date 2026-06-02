@@ -1,26 +1,26 @@
-# Training Failure Modes: When LLMs Go Wrong
+# Training Failure Modes: Jab LLMs Galat Ho Jaate Hain
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Shuruaati Hinglish Explanation 🇮🇳
 Bhai, LLM train karna ek "Mission Impossible" movie ki tarah hai—har step par kuch na kuch phatne (explode) ke chances hote hain. 
 
 Kabhi tumhara loss achanak se **NaN** (Not a Number) ho jayega, kabhi model "Pagal" hokar ek hi word repeat karne lagega, aur kabhi GPUs aapas mein baat karna band kar denge. In failures ko pehchanna aur fix karna hi ek "Junior" aur "Expert" AI Engineer ke beech ka farak hai. Agar tumne training failure handle karna nahi seekha, toh tumhari company ka lakho dollar ka compute dhuan ho jayega.
 
 ---
 
-## 2. Deep Technical Explanation
-Training failures fall into three categories:
-- **Numerical Instability**: Loss exploding ($Inf$) or vanishing ($0$). Often caused by bad initialization or high learning rates.
-- **Hardware Failures**: GPU hardware errors (XID errors), InfiniBand timeouts, or silent data corruption.
-- **Algorithmic Failures**: Posterior collapse, catastrophic forgetting, or "Grokking" taking too long.
+## 2. Gehri Technical Explanation
+Training failures teen categories mein aate hain:
+- **Numerical Instability**: Loss exploding ($Inf$) ya vanishing ($0$). Aksar aisa hota hai kyunki initialization kharab hai ya learning rate high hai.
+- **Hardware Failures**: GPU hardware errors (XID errors), InfiniBand timeouts, ya silent data corruption.
+- **Algorithmic Failures**: Posterior collapse, catastrophic forgetting, ya "Grokking" bahut time le raha hai.
 
 ---
 
-## 3. Mathematical Intuition
+## 3. Ganitik Intuition
 **Loss Explosion**:
-If $\frac{\partial L}{\partial w}$ is too large, $w_{new} = w - \eta \cdot \text{Grad}$ can jump to a region of the loss landscape where the output becomes $Inf$.
-This usually happens because of:
+Agar $\frac{\partial L}{\partial w}$ bahut bada hai, toh $w_{new} = w - \eta \cdot \text{Grad}$ loss landscape ke aise region mein jump kar sakta hai jahan output $Inf$ ho jata hai.
+Yeh aam taur par in vajah se hota hai:
 1. High Learning Rate $\eta$.
-2. Lack of Gradient Clipping.
+2. Gradient Clipping ki kami.
 3. Unstable Activation functions.
 
 ---
@@ -40,7 +40,7 @@ graph TD
 ---
 
 ## 5. Production-ready Examples
-Automatic detection of NaN and Restart:
+NaN aur Restart ki automatic detection:
 
 ```python
 import torch
@@ -62,61 +62,61 @@ def train_step(batch):
 ---
 
 ## 6. Real-world Use Cases
-- **Monitoring Dashboards**: Using Weights & Biases (W&B) to trigger alerts when loss spikes.
-- **Auto-remediation**: Systems that automatically restart a failed node and resume from S3.
+- **Monitoring Dashboards**: Loss spike hone par alerts trigger karne ke liye Weights & Biases (W&B) ka upyog.
+- **Auto-remediation**: Aise systems jo automatically failed node ko restart karte hain aur S3 se resume karte hain.
 
 ---
 
 ## 7. Failure Cases
-- **Silent Gradient Vanishing**: The loss is "fine" but the model stops improving. Hard to detect without monitoring gradient norms.
-- **Data Contamination**: The model starts "cheating" by memorizing test answers included in the training set.
+- **Silent Gradient Vanishing**: Loss "theek" hai lekin model improve karna band kar deta hai. Gradient norms monitor kiye bina detect karna mushkil.
+- **Data Contamination**: Model training set mein shamil test answers ko memorize karke "cheating" karne lagta hai.
 
 ---
 
 ## 8. Debugging Guide
-1. **Log Gradient Norms**: If norm > 10.0, use gradient clipping.
-2. **Layer-wise Analysis**: Check which layer's weights are growing the fastest.
-3. **Hardware Check**: Run `nvidia-smi -q -d PAGE_RETIREMENT` to check for dying GPUs.
+1. **Log Gradient Norms**: Agar norm > 10.0 hai, toh gradient clipping ka upyog karein.
+2. **Layer-wise Analysis**: Check karein ki kaun si layer ke weights sabse tezi se badh rahe hain.
+3. **Hardware Check**: `nvidia-smi -q -d PAGE_RETIREMENT` run karein dying GPUs check karne ke liye.
 
 ---
 
 ## 9. Tradeoffs
 | Action | Benefit | Drawback |
 |---|---|---|
-| Reduce LR | Stability | Slower Training |
-| Grad Clipping | Prevents NaN | Might bias learning |
-| FP32 Training | Precision | 2x Memory/Slow |
+| Reduce LR | Stability (Sthirta) | Training Dheemi |
+| Grad Clipping | NaN Prevent karta hai | Learning bias ho sakti hai |
+| FP32 Training | Precision (Shuddhata) | Double Memory / Dheemi |
 
 ---
 
 ## 10. Security Concerns
-- **Model Collapse**: Adversaries injecting "poison" data that causes the model to gradually lose its intelligence over time.
+- **Model Collapse**: Adversaries "poison" data inject karte hain jisse model dheere-dheere apni intelligence kho deta hai.
 
 ---
 
 ## 11. Scaling Challenges
-- **The "Butterfly Effect"**: In 10,000 GPU runs, a single bit-flip on one GPU can propagate and ruin the whole model.
+- **The "Butterfly Effect"**: 10,000 GPU runs mein, ek GPU par ek single bit-flip poori model ko bigaad sakta hai.
 
 ---
 
 ## 12. Cost Considerations
-- **Resumption Cost**: Every time the model crashes, you lose the time between the last checkpoint and the crash.
+- **Resumption Cost**: Har baar jab model crash hota hai, aap last checkpoint aur crash ke beech ka time kho dete hain.
 
 ---
 
 ## 13. Best Practices
-- **Always monitor Loss, Grad Norm, and Learning Rate**.
-- Use **BF16** instead of FP16 for better numerical range.
-- Implement **Health Checks** before every epoch.
+- **Hamesha Loss, Grad Norm, aur Learning Rate monitor karein**.
+- **BF16** ka upyog karein FP16 ki jagah behtar numerical range ke liye.
+- Har epoch se pehle **Health Checks** implement karein.
 
 ---
 
 ## 14. Interview Questions
-1. How do you debug a training run where the loss suddenly becomes NaN?
-2. What is the "Straggler" problem in distributed training?
+1. Aap training run mein suddenly loss NaN hone par kaise debug karte hain?
+2. Distributed training mein "Straggler" problem kya hoti hai?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Automatic Loss Scaling**: Dynamically adjusting the precision and scale to prevent underflow/overflow.
-- **Predictive Maintenance**: Using AI to predict which GPU will fail next based on temperature and voltage patterns.
+- **Automatic Loss Scaling**: Underflow/overflow rokne ke liye precision aur scale ko dynamically adjust karna.
+- **Predictive Maintenance**: Temperature aur voltage patterns ke aadhaar par predict karne ke liye AI ka upyog ki kaun si GPU next fail hogi.

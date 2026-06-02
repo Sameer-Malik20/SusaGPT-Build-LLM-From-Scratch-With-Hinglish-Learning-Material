@@ -1,5 +1,5 @@
 # 🎲 Decoding Strategies — Mastery 2026
-> **Level:** Expert | **Language:** Hinglish | **Goal:** Master Speculative Decoding, Grammar constraints, and advanced sampling.
+> **Level:** Expert | **Language:** Hinglish | **Goal:** Speculative Decoding, Grammar constraints, aur advanced sampling ko master karna.
 
 ---
 
@@ -7,11 +7,11 @@
 
 2026 mein model sirf tokens generate nahi kar rahe, wo **Inference Optimized** hain.
 
-- **Speculative Decoding:** 2x speedup using a small "Draft" model.
-- **Grammar-Constrained Decoding:** Forcing JSON, SQL, or XML valid outputs.
-- **Contrastive Decoding:** Penalizing "Dumb" model tendencies.
-- **Logit Manipulation:** Using biases and penalties (Frequency vs Presence).
-- **Beam Search vs Nucleus:** When to use search vs sampling.
+- **Speculative Decoding:** Chhote "Draft" model ke saath 2x speedup.
+- **Grammar-Constrained Decoding:** JSON, SQL, ya XML valid outputs force karna.
+- **Contrastive Decoding:** "Dumb" model tendencies ko penalize karna.
+- **Logit Manipulation:** Biases aur penalties use karna (Frequency vs Presence).
+- **Beam Search vs Nucleus:** Search vs sampling kab use karna hai.
 
 ---
 
@@ -19,7 +19,7 @@
 
 Standard decoding slow hai kyunki har token ke liye bada model run hota hai.
 - **Logic:** Ek chota model (e.g., Llama-1B) 5-10 tokens generate karta hai (Draft). Phir bada model (e.g., Llama-70B) unhe ek saath "Verify" karta hai.
-- **Result:** Same output, but **2x to 3x faster** inference.
+- **Result:** Same output, lekin **2x to 3x tez** inference.
 
 ---
 
@@ -41,8 +41,8 @@ Sirf "Best" token uthana repetitive ho sakta hai.
 
 ## 🛠️ 4. Repetition Control (OpenAI Style)
 
-- **Frequency Penalty:** Jo tokens baar-baar aa rahe hain unhe penalize karna. (Good for long articles).
-- **Presence Penalty:** Ek token ke "Appear" hone par use penalize karna (Encourages new topics).
+- **Frequency Penalty:** Jo tokens baar-baar aa rahe hain unhe penalize karna. (Long articles ke liye accha hai).
+- **Presence Penalty:** Ek token ke "Appear" hone par use penalize karna (Naye topics encourage karta hai).
 
 ---
 
@@ -56,17 +56,17 @@ Sirf "Best" token uthana repetitive ho sakta hai.
 ## 📝 2026 Interview Scenarios (Decoding)
 
 ### Q1: "JSON mode mein hallucination kaise rokein?"
-**Ans:** Grammar-constrained decoding use karke. Logits processor sirf valid characters (like `{`, `"`, `:`) allow karega at specific positions based on the schema.
+**Ans:** Grammar-constrained decoding use karke. Logits processor sirf valid characters (jaise `{`, `"`, `:`) allow karega specific positions par, schema ke hisaab se.
 
 ### Q2: "Temperature = 0 ka kya matlab hai?"
-**Ans:** Ye technically "Greedy Decoding" ban jata hai. Model hamesha highest probability wala token choose karega, koi randomness nahi hogi. Best for Math/Code.
+**Ans:** Ye technically "Greedy Decoding" ban jata hai. Model hamesha highest probability wala token choose karega, koi randomness nahi hogi. Math/Code ke liye best hai.
 
 ---
 
 ## 🏆 Project Integration: SusaGPT Inference
 Aapke inference engine mein:
-- [x] `Speculative Decoding` implemented for Llama-3-70B using a 1B drafter.
-- [x] `Repetition Penalty` of 1.2 to keep conversations fresh.
-- [x] `Guided Decoding` for structured output extraction.
+- [x] `Speculative Decoding` Llama-3-70B ke liye 1B drafter ke saath implement kiya gaya hai.
+- [x] `Repetition Penalty` 1.2 ka hai taaki conversations fresh rahe.
+- [x] `Guided Decoding` structured output extraction ke liye.
 
-> **Final Insight:** The difference between a "Stupid" AI and a "Smart" AI is often just the **Decoding Strategy**. Master the sampling, and you master the creativity of the model.
+> **Final Insight:** "Stupid" AI aur "Smart" AI ke beech ka farq aksar sirf **Decoding Strategy** hota hai. Sampling ko master karo, aur aap model ki creativity ko master karoge.

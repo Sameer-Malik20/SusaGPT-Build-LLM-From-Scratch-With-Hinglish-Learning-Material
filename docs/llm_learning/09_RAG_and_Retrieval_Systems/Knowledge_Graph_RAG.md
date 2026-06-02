@@ -8,19 +8,19 @@ Ismein hum data ko (Subject -> Relationship -> Object) ke format mein store kart
 ---
 
 ## 2. Deep Technical Explanation
-KG-RAG integrates structured graph data with LLMs.
-- **Triplets**: Data is stored as (head, relation, tail) triplets.
-- **Cypher/SPARQL**: LLMs generate queries to fetch data from graph databases like Neo4j or AWS Neptune.
-- **Path Traversal**: Ability to answer multi-hop questions by following edges in the graph.
-- **Schema Enforcement**: Unlike vector search, KG-RAG follows a strict schema, reducing hallucinations.
+KG-RAG structured graph data ko LLMs ke saath integrate karta hai.
+- **Triplets**: Data (head, relation, tail) triplets ke roop mein store hota hai.
+- **Cypher/SPARQL**: LLMs Neo4j ya AWS Neptune jaise graph databases se data fetch karne ke liye queries generate karte hain.
+- **Path Traversal**: Graph mein edges follow karke multi-hop questions ka answer dene ki ability.
+- **Schema Enforcement**: Vector search ke opposite, KG-RAG ek strict schema follow karta hai, jisse hallucinations kam hote hain.
 
 ---
 
 ## 3. Mathematical Intuition
-KG-RAG is a walk on a directed multigraph $G = (V, E, R)$.
-For a query $Q$, we find starting entities $v \in V$ and traverse edges $e \in E$ with labels $r \in R$.
-The search space is defined by the **N-hop neighborhood** of the query entities.
-Unlike vector search which is probabilistic ($P(\text{rel} | q)$), KG-RAG is deterministic ($E \in G$).
+KG-RAG ek directed multigraph $G = (V, E, R)$ par walk hai.
+Query $Q$ ke liye, hum starting entities $v \in V$ find karte hain aur labels $r \in R$ ke saath edges $e \in E$ traverse karte hain.
+Search space query entities ke **N-hop neighborhood** se define hota hai.
+Vector search jo probabilistic hai ($P(\text{rel} | q)$), uske opposite KG-RAG deterministic hai ($E \in G$).
 
 ---
 
@@ -37,7 +37,7 @@ graph LR
 ---
 
 ## 5. Production-ready Examples
-Generating Cypher queries with `LangChain`:
+`LangChain` ke saath Cypher queries generate karna:
 
 ```python
 from langchain_community.graphs import Neo4jGraph
@@ -45,31 +45,31 @@ from langchain.chains import GraphCypherQAChain
 
 graph = Neo4jGraph(url="bolt://localhost:7687", username="neo4j", password="password")
 
-# LLM translates natural language to Cypher
+# LLM natural language ko Cypher mein translate karta hai
 chain = GraphCypherQAChain.from_llm(llm, graph=graph, verbose=True)
 
-response = chain.invoke({"query": "Who is the CEO of Tesla and what else does he run?"})
+response = chain.invoke({"query": "Tesla ka CEO kaun hai aur woh aur kya chalta hai?"})
 # Output: MATCH (p:Person {name: 'Elon Musk'})-[:CEO_OF]->(c:Company) RETURN c.name
 ```
 
 ---
 
 ## 6. Real-world Use Cases
-- **Supply Chain**: "Which parts from Supplier A are used in Product B and are they delayed?"
-- **Fraud Detection**: "Is User X connected to any known fraudulent accounts within 3 hops?"
-- **Medical Diagnosis**: "What diseases share symptoms with Diabetes and have specific genetic markers?"
+- **Supply Chain**: "Supplier A ke kaun se parts Product B mein use hote hain aur kya woh delayed hain?"
+- **Fraud Detection**: "Kya User X kisi known fraudulent account se 3 hops ke andar connected hai?"
+- **Medical Diagnosis**: "Diabetes ke saath kaun si diseases symptoms share karti hain aur unmein specific genetic markers hote hain?"
 
 ---
 
 ## 7. Failure Cases
-- **Stale Schema**: If the graph schema changes, the LLM's query generation will break.
-- **Missing Edges**: If a relationship isn't explicitly in the graph, KG-RAG won't "guess" it (unlike Vector RAG).
+- **Stale Schema**: Agar graph schema change hota hai, toh LLM ki query generation break ho jayegi.
+- **Missing Edges**: Agar graph mein relationship explicitly exist nahi karta, toh KG-RAG uska "guess" nahi karega (Vector RAG ke opposite).
 
 ---
 
 ## 8. Debugging Guide
-1. **Query Inspection**: Print the generated Cypher/SPARQL query. If it's syntactically wrong, your prompt needs few-shot examples.
-2. **Schema Mapping**: Ensure your entity names (e.g., "Apple Inc.") match exactly what's in the DB.
+1. **Query Inspection**: Generated Cypher/SPARQL query ko print karo. Agar syntactically wrong hai, toh tumhare prompt mein few-shot examples chahiye.
+2. **Schema Mapping**: Ensure karo ki tumhare entity names (jaise "Apple Inc.") DB mein exactly match karte hain.
 
 ---
 
@@ -83,32 +83,32 @@ response = chain.invoke({"query": "Who is the CEO of Tesla and what else does he
 ---
 
 ## 10. Security Concerns
-- **Cypher Injection**: A user query designed to make the LLM generate a `DELETE` or `DROP` graph command. Always use read-only users.
+- **Cypher Injection**: Ek user query jo LLM ko `DELETE` ya `DROP` graph command generate karne ke liye design kiya gaya ho. Hamesha read-only users use karo.
 
 ---
 
 ## 11. Scaling Challenges
-- **Graph Density**: In a very dense graph, "traversing" can lead to an explosion of results (The "Supernode" problem).
+- **Graph Density**: Bohot dense graph mein "traversing" results ke explosion ka cause ban sakta hai (The "Supernode" problem).
 
 ---
 
 ## 12. Cost Considerations
-- **Graph Hosting**: Managed graph databases are generally more expensive per GB than vector databases.
+- **Graph Hosting**: Managed graph databases generally vector databases ke comparison mein per GB zyada expensive hote hain.
 
 ---
 
 ## 13. Best Practices
-- **Hybrid RAG**: Use Vector RAG for "Unstructured" info and KG-RAG for "Structured" facts.
-- **Entity Linking**: Use an LLM to link user mentions to specific IDs in your graph.
+- **Hybrid RAG**: "Unstructured" info ke liye Vector RAG aur "Structured" facts ke liye KG-RAG use karo.
+- **Entity Linking**: LLM ka use karke user mentions ko graph mein specific IDs se link karo.
 
 ---
 
 ## 14. Interview Questions
-1. Why is KG-RAG better at "Multi-hop" reasoning than Vector RAG?
-2. What are the risks of letting an LLM generate database queries?
+1. KG-RAG "Multi-hop" reasoning mein Vector RAG se behtar kyun hai?
+2. LLM ko database queries generate karne dena ke kya risks hain?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Text-to-Graph-to-Text**: Using an LLM to build the graph dynamically from news feeds and then querying it.
-- **Graph Embeddings**: Representing the entire graph structure as a vector to combine the strengths of both systems.
+- **Text-to-Graph-to-Text**: LLM ka use karke news feeds se dynamically graph build karna aur phir use query karna.
+- **Graph Embeddings**: Dono systems ki strengths combine karne ke liye poori graph structure ko ek vector ke roop mein represent karna.

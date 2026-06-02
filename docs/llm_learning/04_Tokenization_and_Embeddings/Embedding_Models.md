@@ -1,5 +1,5 @@
-# 🧠 Vector Embeddings Deep Dive (Mastery 2026)
-> **Level:** Expert | **Language:** Hinglish | **Goal:** Master Vector Space, Similarity Math, and Production Search Algorithms.
+# 🧠 Vector Embeddings Gahrai se Samajhna (Mahirta 2026)
+> **Level:** Expert | **Language:** Hinglish | **Goal:** Vector Space, Similarity Math, aur Production Search Algorithms mein Mahir hona.
 
 ---
 
@@ -7,15 +7,15 @@
 
 2026 mein "Embeddings" sirf vectors nahi hain, ye **Semantic Meaning** ka compress representation hain.
 
-- **The Latent Space:** How AI "sees" meaning in high dimensions (768, 1536, etc.).
+- **The Latent Space:** AI high dimensions (768, 1536, etc.) mein meaning kaise "dekhta" hai.
 - **Similarity Metrics:** Cosine vs L2 vs Inner Product.
-- **Dimensionality Reduction:** PCA and t-SNE for visualization.
-- **Search Algorithms:** HNSW (Hierarchical Navigable Small World) and IVF.
-- **Multi-modal Embeddings:** Representing Images and Text in the same space (CLIP).
+- **Dimensionality Reduction:** PCA aur t-SNE visualization ke liye.
+- **Search Algorithms:** HNSW (Hierarchical Navigable Small World) aur IVF.
+- **Multi-modal Embeddings:** Images aur Text ko same space mein represent karna (CLIP).
 
 ---
 
-## 🏗️ 1. What is an Embedding? (The Logic)
+## 🏗️ 1. Embedding Kya Hai? (Logic)
 
 Embedding ek vector (numbers ki list) hai jo text ki "Relationship" store karta hai.
 - **Example:** `King - Man + Woman = Queen`
@@ -23,15 +23,15 @@ Embedding ek vector (numbers ki list) hai jo text ki "Relationship" store karta 
 
 ---
 
-## 📏 2. Similarity Math: Which one to use?
+## 📏 2. Similarity Math: Kaunsa Use Karein?
 
-1. **Cosine Similarity:** Angle check karta hai. Best for text where length doesn't matter. (Industry Standard for RAG).
-2. **L2 (Euclidean) Distance:** Points ke beech ki straight line distance. Best for image features.
-3. **Inner Product (IP):** Magnitude and Angle. Best for recommendation systems.
+1. **Cosine Similarity:** Angle check karta hai. Un text ke liye best hai jahan length matter nahi karti. (RAG ke liye Industry Standard).
+2. **L2 (Euclidean) Distance:** Points ke beech ki straight line distance. Image features ke liye best hai.
+3. **Inner Product (IP):** Magnitude aur Angle. Recommendation systems ke liye best hai.
 
 ---
 
-## ⚡ 3. Indexing for Speed: HNSW & PQ
+## ⚡ 3. Speed ke liye Indexing: HNSW & PQ
 
 Agar aapke paas 1 billion vectors hain, toh "Linear Search" (comparing with everyone) fail ho jayega.
 - **HNSW:** Ek multi-layered graph jahan search "Jump" karke hota hai. $O(\log N)$ speed.
@@ -47,26 +47,26 @@ Agar aapke paas 1 billion vectors hain, toh "Linear Search" (comparing with ever
 
 ---
 
-## 🧪 5. Implementation: Generating Embeddings
+## 🧪 5. Implementation: Embeddings Generate Karna
 
 ```python
 from sentence_transformers import SentenceTransformer
 
-# Load a high-performance 2026 model
+# Load karo ek high-performance 2026 model
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
 sentences = ["AI is changing the world", "Artificial Intelligence is transformative"]
 embeddings = model.encode(sentences)
 
-# Calculate similarity
+# Similarity calculate karo
 from sklearn.metrics.pairwise import cosine_similarity
 score = cosine_similarity([embeddings[0]], [embeddings[1]])
-print(f"Similarity Score: {score[0][0]}") # Expect high score > 0.8
+print(f"Similarity Score: {score[0][0]}") # High score > 0.8 expect karo
 ```
 
 ---
 
-## 📝 2026 Interview Scenarios (Embeddings)
+## 📝 2026 Interview Ke Scenarios (Embeddings)
 
 ### Q1: "Curse of Dimensionality kya hai?"
 **Ans:** Jaise-jaise dimensions badhte hain (e.g., 1536), saare points ek doosre se "Almost equidistant" (door) hone lagte hain. Isliye higher dimensions mein search harder ho jata hai. Solution: Dimensionality reduction or specialized indexing (HNSW).
@@ -78,8 +78,8 @@ print(f"Similarity Score: {score[0][0]}") # Expect high score > 0.8
 
 ## 🏆 Project Integration: SusaGPT RAG Engine
 Aapke repository mein:
-- [x] Use `pgvector` for Postgres-based vector storage.
-- [x] Implement `HNSW` index for sub-100ms search on millions of docs.
-- [x] Multi-modal support for searching both text and images in SusaGPT.
+- [x] Postgres-based vector storage ke liye `pgvector` use karo.
+- [x] Millions of docs par sub-100ms search ke liye `HNSW` index implement karo.
+- [x] SusaGPT mein text aur images dono search karne ke liye multi-modal support.
 
-> **Final Insight:** Vectors are the **DNA of AI**. If you understand how meanings are mapped in high-dimensional space, you can build any AI application from scratch.
+> **Final Insight:** Vectors **AI ke DNA** hain. Agar aap samajh gaye ki high-dimensional space mein meanings kaise map hote hain, toh aap kisi bhi AI application ko scratch se bana sakte hain.

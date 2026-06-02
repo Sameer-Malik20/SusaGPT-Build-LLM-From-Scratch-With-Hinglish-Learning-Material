@@ -1,4 +1,4 @@
-# Video & Audio LLMs: The Future of Perception
+# Video & Audio LLMs: Perception ka Future
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
 Bhai, ab tak hum sirf "Text" aur "Images" ki baat kar rahe the. Lekin 2026 mein AI ab "Sun" (Audio) sakta hai aur "Dekh" (Video) sakta hai real-time mein. 
@@ -7,24 +7,24 @@ Bhai, ab tak hum sirf "Text" aur "Images" ki baat kar rahe the. Lekin 2026 mein 
 
 ---
 
-## 2. Deep Technical Explanation
-Processing temporal data (Audio/Video) requires handling an extra dimension of time.
-- **Audio LLMs**: Convert audio into spectrograms or discrete tokens using models like **EnCodec**. The LLM then treats these as "Audio Words".
-- **Video LLMs**: Treat video as a sequence of image patches across time. Use **3D Convolutions** or **Space-Time Transformers** to capture motion.
-- **Native Multimodality**: Instead of separate encoders, models like GPT-4o are trained "Natively" on all three modalities (Text, Audio, Video) simultaneously, allowing for seamless reasoning (e.g., "Tell me what's funny in this video based on the sound").
+## 2. Gehri Technical Explanation
+Temporal data (Audio/Video) process karne ke liye time ka extra dimension handle karna padta hai.
+- **Audio LLMs**: Audio ko spectrograms ya discrete tokens mein convert karte hain **EnCodec** jaise models se. Phir LLM inhe "Audio Words" ki tarah treat karta hai.
+- **Video LLMs**: Video ko time ke across image patches ke sequence ki tarah treat karte hain. Motion capture karne ke liye **3D Convolutions** ya **Space-Time Transformers** use karte hain.
+- **Native Multimodality**: Alag encoders ki jagah, GPT-4o jaise models tino modalities (Text, Audio, Video) par "Natively" train kiye jaate hain simultaneously, jisse seamless reasoning hota hai (e.g., "Batao is video mein kya funny hai sound ke basis par").
 
 ---
 
-## 3. Mathematical Intuition
-**Temporal Attention**:
-Standard attention $O = \text{softmax}(QK^T)V$ is $O(N^2)$. For a 1-minute video at 24fps, $N$ is massive.
-We use **Sparse Attention** or **Tubelet Embedding**:
-- Tubelet: Grouping $4 \times 4 \times 4$ pixels (Space x Space x Time) into a single token.
-This reduces the sequence length by a factor of 64, making video Transformers feasible.
+## 3. Mathematical Intuition (Ganit ki Samajh)
+**Temporal Attention (Samayik Dhyan)**:
+Standard attention $O = \text{softmax}(QK^T)V$ ka complexity $O(N^2)$ hai. 24fps par 1-minute video ke liye, $N$ bahut bada hota hai.
+Hum **Sparse Attention** ya **Tubelet Embedding** use karte hain:
+- Tubelet: $4 \times 4 \times 4$ pixels (Space x Space x Time) ko ek single token mein group karna.
+Isse sequence length 64 gunaa kam ho jaati hai, jo video Transformers ko feasible banata hai.
 
 ---
 
-## 4. Architecture Diagrams
+## 4. Architecture Diagrams (Aarkitektur Diagram)
 ```mermaid
 graph TD
     Video[Video Input] --> Patch[Tubelet Embedding: Space-Time Tokens]
@@ -35,8 +35,8 @@ graph TD
 
 ---
 
-## 5. Production-ready Examples
-Using `Whisper` for audio and `Gemini API` for video analysis:
+## 5. Production-ready Examples (Production ke Liye Tayar Examples)
+Audio ke liye `Whisper` aur video analysis ke liye `Gemini API` use karte hain:
 
 ```python
 # Whisper Audio Transcription
@@ -54,26 +54,26 @@ response = gemini.generate_content([
 
 ---
 
-## 6. Real-world Use Cases
-- **Security**: "Find the person wearing a red shirt who entered the building at 2 PM."
-- **Podcast Editing**: "Remove all the parts where the guest sounds 'Hesitant' or 'Nervous'."
-- **Autonomous Driving**: Predicting the next 5 seconds of a pedestrian's movement.
+## 6. Real-world Use Cases (Vastavik Duniya ke Use Cases)
+- **Security**: "Wo shakhs dhundho jisne laal shirt pehna hai aur 2 PM par building mein enter kiya."
+- **Podcast Editing**: "Saare parts hatao jahan guest ki awaaz 'Hesitant' ya 'Nervous' lagti hai."
+- **Autonomous Driving**: Pedestrian ki agle 5 seconds ki movement predict karna.
 
 ---
 
-## 7. Failure Cases
-- **Temporal Confusion**: The model sees a person "Eating a sandwich" but can't tell if the video is playing forward or backward.
-- **Hallucinated Sound**: In video-to-audio generation, the AI might add a "Bark" sound to a "Cat" if the scene is ambiguous.
+## 7. Failure Cases (Fail Hone ke Mamle)
+- **Temporal Confusion**: Model ek vyakti ko "Sandwich khaate" dekhta hai lekin yeh nahi bata paata ki video forward chal rahi hai ya backward.
+- **Hallucinated Sound**: Video-to-audio generation mein, AI scene ambiguous hone par "Cat" mein "Bark" ki awaaz add kar sakta hai.
 
 ---
 
-## 8. Debugging Guide
-1. **Frame Selection**: If the model misses an event, ensure your "Sampling Rate" (FPS) is high enough to capture that specific movement.
-2. **Audio Artifacts**: Check for "Robotic" sounds in generated audio, which usually indicates poor tokenization.
+## 8. Debugging Guide (Debugging ke Nirdesh)
+1. **Frame Selection**: Agar model kisi event ko miss kare, toh ensure karo ki tumhara "Sampling Rate" (FPS) us specific movement ko capture karne ke liye kaafi high hai.
+2. **Audio Artifacts**: Generated audio mein "Robotic" awaaz check karo, jo usually poor tokenization ko indicate karta hai.
 
 ---
 
-## 9. Tradeoffs
+## 9. Tradeoffs (Samjhauta)
 | Modality | Memory | Latency | Compute |
 |---|---|---|---|
 | Text | Low | Very Fast | Low |
@@ -82,35 +82,35 @@ response = gemini.generate_content([
 
 ---
 
-## 10. Security Concerns
-- **Deepfakes**: Generating highly realistic video/audio of people without their consent.
-- **Voice Cloning Attacks**: Using a 3-second clip of someone's voice to bypass bank security.
+## 10. Security Concerns (Suraksha Chintayein)
+- **Deepfakes**: Bina consent ke logon ke highly realistic video/audio generate karna.
+- **Voice Cloning Attacks**: Kisi ki awaaz ka 3-second clip use karke bank security bypass karna.
 
 ---
 
-## 11. Scaling Challenges
-- **Data Scarcity**: High-quality "Video + Transcript + Action" data is much harder to find than simple text data.
-- **VRAM**: Loading a Video Transformer can require multiple H100s just for a 10-second clip.
+## 11. Scaling Challenges (Badhne ki Chunautiyaan)
+- **Data Scarcity**: Simple text data ke comparison mein high-quality "Video + Transcript + Action" data dhundhna bahut mushkil hai.
+- **VRAM**: Video Transformer load karne ke liye sirf 10-second clip ke liye bhi multiple H100s ki zaroorat pad sakti hai.
 
 ---
 
-## 12. Cost Considerations
-- **Video API Pricing**: Google and OpenAI charge per second of video or per 1000 video tokens, which is 100x more expensive than text.
+## 12. Cost Considerations (Kharch ke Vichaar)
+- **Video API Pricing**: Google aur OpenAI video ke per second ya per 1000 video tokens charge karte hain, jo text se 100x zyada expensive hai.
 
 ---
 
-## 13. Best Practices
-- **Compress First**: Don't feed 4K video to an LLM. Downscale to 224x224 or 512x512.
-- **Keyframe Extraction**: Instead of all 24fps, use only 1-2 frames per second to save tokens.
+## 13. Best Practices (Sabse Achhe Tareeke)
+- **Pehle Compress Karo**: LLM ko 4K video mat khao. Use 224x224 ya 512x512 par downscale karo.
+- **Keyframe Extraction**: Saare 24fps ki jagah, tokens bachane ke liye prati second 1-2 frames istemal karo.
 
 ---
 
-## 14. Interview Questions
-1. How does a Space-Time Transformer differ from a standard Vision Transformer?
-2. What are "Tubelet Embeddings"?
+## 14. Interview Questions (Interview ke Sawal)
+1. Space-Time Transformer standard Vision Transformer se kaise alag hai?
+2. "Tubelet Embeddings" kya hote hain?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **World Models**: LLMs that act as "Simulators" for the real world (e.g., Sora predicting how physics works in a video).
-- **Infinite Video Context**: Using Ring Attention to process 24-hour long live streams in real-time.
+## 15. Latest 2026 Patterns (2026 ke Naye Pattern)
+- **World Models**: LLMs jo real world ke "Simulators" ki tarah act karte hain (e.g., Sora video mein physics kaise kaam karti hai predict karta hai).
+- **Infinite Video Context**: Ring Attention ka use karke 24-hour long live streams ko real-time mein process karna.

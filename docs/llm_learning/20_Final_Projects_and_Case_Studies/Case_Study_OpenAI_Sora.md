@@ -8,21 +8,21 @@ Yeh koi simple video generator nahi hai. Sora duniya ke "Physics" ko samajhta ha
 ---
 
 ## 2. Deep Technical Explanation
-Sora is a **Diffusion Transformer (DiT)** architecture.
-- **Space-Time Patches**: Sora breaks video into 3D patches (patches across space and time) and treats them like tokens in an LLM.
-- **Transformer Backbone**: Unlike previous U-Net based diffusion models, Sora uses a Transformer to handle the denoising process. This allows it to scale better and handle variable resolutions/aspect ratios.
-- **Recaptioning**: Using a separate model (DALL-E 3 style) to generate highly descriptive captions for the training videos, ensuring the model understands complex instructions.
-- **Latent Space**: The model operates in a compressed latent space using a Video Encoder/Decoder.
+Sora ek **Diffusion Transformer (DiT)** architecture hai.
+- **Space-Time Patches**: Sora video ko 3D patches mein todta hai (space aur time ke hisaab se) aur unhe LLM ki tarah tokens treat karta hai.
+- **Transformer Backbone**: Pehle U-Net based diffusion models se alag, Sora denoising process ke liye Transformer use karta hai. Yeh usse better scale karne aur variable resolutions/aspect ratios handle karne deta hai.
+- **Recaptioning**: Training videos ke liye highly descriptive captions generate karne ke liye ek separate model (DALL-E 3 style) use karta hai, jisse model complex instructions samajh sake.
+- **Latent Space**: Model compressed latent space mein kaam karta hai Video Encoder/Decoder ka use karke.
 
 ---
 
 ## 3. Mathematical Intuition
-Sora combines **Diffusion Models** and **Transformers**.
-Diffusion process: $x_t \to x_{t-1}$ by predicting the noise $\epsilon_\theta(x_t, t, c)$.
-Transformer replaces the U-Net for $\epsilon_\theta$.
-For a video $V \in \mathbb{R}^{T \times H \times W \times C}$, it is projected into $N$ patches:
+Sora **Diffusion Models** aur **Transformers** ko combine karta hai.
+Diffusion process: $x_t \to x_{t-1}$ noise $\epsilon_\theta(x_t, t, c)$ ko predict karke.
+Transformer $\epsilon_\theta$ ke liye U-Net ki jagah leta hai.
+Ek video $V \in \mathbb{R}^{T \times H \times W \times C}$ ko $N$ patches mein project kiya jata hai:
 $$z = \text{Flatten}(\text{Proj}(V))$$
-The Transformer calculates attention between all $N$ space-time patches, allowing it to maintain temporal consistency (e.g., an object doesn't disappear when it goes behind a tree).
+Transformer saare $N$ space-time patches ke beech attention calculate karta hai, jisse temporal consistency bani rehti hai (e.g., koi object tree ke peeche jaane par disappear nahi hota).
 
 ---
 
@@ -62,21 +62,21 @@ class DiTBlock(nn.Module):
 ---
 
 ## 6. Real-world Use Cases
-- **Film & Entertainment**: Generating background scenes or complex VFX shots without a full CGI team.
-- **Education**: Creating realistic "Historical Re-enactments" for learning.
-- **Advertising**: Making 100 different versions of a video ad in seconds.
+- **Film & Entertainment**: Bina full CGI team ke background scenes ya complex VFX shots generate karna.
+- **Education**: Learning ke liye realistic "Historical Re-enactments" create karna.
+- **Advertising**: Seconds mein 100 different versions of a video ad banana.
 
 ---
 
 ## 7. Failure Cases
-- **Physics Violations**: A person eating a cookie, but the cookie doesn't show a bite mark.
-- **Entity Morphing**: A cat suddenly turning into a dog mid-video because the model got confused between frames.
+- **Physics Violations**: Ek cookie kha raha hai, but cookie mein bite mark nahi dikhta.
+- **Entity Morphing**: Ek cat mid-video mein suddenly dog mein badal jati hai kyunki model frames ke beech confuse ho gaya.
 
 ---
 
 ## 8. Debugging Guide
-1. **Temporal Stability**: Check if the background "Wobbles". If yes, your temporal attention window is too small.
-2. **Coherence Check**: Ensure objects that leave the frame and return still have the same color and shape.
+1. **Temporal Stability**: Check karo ki background "Wobble" to nahi kar raha. Agar kar raha hai, to tumhara temporal attention window bahut chota hai.
+2. **Coherence Check**: Ensure karo ki objects jo frame se bahar jate hain aur wapas aate hain, unka color aur shape same rahe.
 
 ---
 
@@ -90,33 +90,33 @@ class DiTBlock(nn.Module):
 ---
 
 ## 10. Security Concerns
-- **Misinformation**: Generating fake videos of events that never happened (e.g., a fake natural disaster to cause panic).
-- **Copyright**: Training on movies without permission from the studios.
+- **Misinformation**: Aise events ke fake videos banana jo kabhi hue hi nahi (e.g., panic failane ke liye fake natural disaster).
+- **Copyright**: Studios ki permission ke bina movies par training karna.
 
 ---
 
 ## 11. Scaling Challenges
-- **The Context Wall**: A 60-second video at 24fps has 1440 frames. Processing all of them at once requires massive VRAM and Ring Attention.
+- **The Context Wall**: 24fps par ek 60-second video mein 1440 frames hote hain. Un sab ko ek saath process karne ke liye massive VRAM aur Ring Attention chahiye.
 
 ---
 
 ## 12. Cost Considerations
-- **Generation Time**: Generating 1 minute of video can take 10-20 minutes on a cluster of H100s, making it very expensive per second.
+- **Generation Time**: H100s ke cluster par 1 minute ka video generate karne mein 10-20 minutes lag sakte hain, jisse yeh per second bahut mehnga padta hai.
 
 ---
 
 ## 13. Best Practices
-- **Use Latent Diffusion**: Never work with raw pixels; always work in a compressed latent space.
-- **Long Context Transformers**: Use RoPE or Ring Attention to handle the massive number of patches in a long video.
+- **Use Latent Diffusion**: Kabhi raw pixels ke saath kaam na karein; hamesha compressed latent space mein kaam karein.
+- **Long Context Transformers**: Long video mein massive number of patches ko handle karne ke liye RoPE ya Ring Attention use karein.
 
 ---
 
 ## 14. Interview Questions
-1. How does Sora treat video as a "Sequence of Patches"?
-2. What are the benefits of using a Transformer instead of a U-Net for diffusion?
+1. Sora video ko "Sequence of Patches" ki tarah kaise treat karta hai?
+2. Diffusion ke liye U-Net ki jagah Transformer use karne ke kya fayde hain?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Interactable World Models**: Sora-like models where you can "Click" on an object and change its movement in real-time.
-- **Zero-Shot Video-to-Video**: Taking a stick-figure animation and turning it into a realistic cinematic scene using Sora as a "Renderer".
+- **Interactable World Models**: Aise Sora-like models jahan tum kisi object par "Click" karke real-time mein uski movement change kar sakte ho.
+- **Zero-Shot Video-to-Video**: Ek stick-figure animation le kar Sora ko "Renderer" ki tarah use karte hue use realistic cinematic scene mein badalna.

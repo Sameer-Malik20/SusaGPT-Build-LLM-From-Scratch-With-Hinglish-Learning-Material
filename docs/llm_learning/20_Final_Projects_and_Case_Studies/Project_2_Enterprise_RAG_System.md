@@ -1,31 +1,31 @@
 # Project: Enterprise RAG System with Hybrid Search
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
-Bhai, yeh tumhara "Grand Project" hai. Tumhe ek aisi system banani hai jo kisi company ke saare PDFs, Emails, aur SQL data ko padh sake aur employees ke sawalon ka sahi jawab de sake. 
+Bhai, yeh tumhara "Grand Project" hai. Tumhe ek aisi system banani hai jo kisi company ke saare PDFs, Emails, aur SQL data ko padh sake aur employees ke sawalon ka sahi jawab de sake.
 
 Sirf "Vector search" kaafi nahi hoga. Tumhe **Hybrid Search** use karni hogi (Keywords + Vectors), **Reranking** use karni hogi (Accuracy ke liye), aur **Semantic Caching** (Paisa bachane ke liye). Yeh project karne ke baad, tum kisi bhi AI company mein "Senior RAG Engineer" ke role ke liye apply kar sakte ho.
 
 ---
 
-## 2. Deep Technical Explanation
-The goal is to build a production-grade RAG pipeline that handles complex enterprise requirements.
-- **Data Ingestion**: Using `LlamaIndex` or `LangChain` to parse messy PDFs and sync with a SQL DB.
-- **Hybrid Retrieval**: Combining BM25 (Lexical) and Dense Vectors (Semantic) using Reciprocal Rank Fusion (RRF).
-- **Multi-Stage Reranking**: Using a Cross-Encoder (like BGE-Reranker) to filter the top 100 docs down to the top 5.
-- **LLM Synthesis**: Using Llama-3-70B (via vLLM) with a strict system prompt to avoid hallucinations.
-- **Observability**: Tracking faithfulness and relevance using RAGAS.
+## 2. Gehri Technical Samjhai
+Lakshya hai ek production-grade RAG pipeline banana jo complex enterprise requirements ko handle kare.
+- **Data Ingestion**: `LlamaIndex` ya `LangChain` ka use karke messy PDFs ko parse karna aur SQL DB ke saath sync karna.
+- **Hybrid Retrieval**: BM25 (Lexical) aur Dense Vectors (Semantic) ko combine karna using Reciprocal Rank Fusion (RRF).
+- **Multi-Stage Reranking**: Cross-Encoder (jaise BGE-Reranker) ka use karke top 100 docs ko top 5 mein filter karna.
+- **LLM Synthesis**: Llama-3-70B (via vLLM) ka use karke strict system prompt ke saath, hallucinations avoid karna.
+- **Observability**: RAGAS ka use karte hue faithfulness aur relevance track karna.
 
 ---
 
-## 3. Mathematical Intuition
+## 3. Ganitiya Samajh
 **Reciprocal Rank Fusion (RRF)**:
-Given multiple ranked lists of documents, the final score for document $d$ is:
+Jab multiple ranked lists of documents diye gaye hain, to document $d$ ke liye final score hai:
 $$RRFscore(d \in D) = \sum_{r \in R} \frac{1}{k + r(d)}$$
-where $r(d)$ is the rank of document $d$ in list $r$, and $k$ is a constant (usually 60). This allows you to combine results from Keyword search and Vector search fairly without needing to normalize scores.
+Yahan $r(d)$ rank hai document $d$ ki list $r$ mein, aur $k$ ek constant hai (usually 60). Yeh aapko Keyword search aur Vector search ke results ko fairly combine karne deta hai bina scores normalize kiye.
 
 ---
 
-## 4. Architecture Diagrams
+## 4. Sanrachna Diagram
 ```mermaid
 graph TD
     User[User Query] --> Embed[Embedder] & BM25[BM25 Search]
@@ -42,8 +42,8 @@ graph TD
 
 ---
 
-## 5. Production-ready Examples
-Implementing RRF Fusion (Conceptual Python):
+## 5. Production-ready Udaaharan
+RRF Fusion implement karna (Conceptual Python):
 
 ```python
 def rrf_fusion(vector_results, keyword_results, k=60):
@@ -58,21 +58,21 @@ def rrf_fusion(vector_results, keyword_results, k=60):
 
 ---
 
-## 6. Real-world Use Cases
-- **Internal HR Portal**: Employees asking "What is the maternity leave policy in Germany?"
-- **Technical Support**: Support agents asking "How do I fix error code X-999 for Model Y?"
+## 6. Vaastavik Duniya ke Use Cases
+- **Internal HR Portal**: Employees poochhte hain "Germany mein maternity leave policy kya hai?"
+- **Technical Support**: Support agents poochhte hain "Model Y ke liye error code X-999 ko kaise fix karein?"
 
 ---
 
-## 7. Failure Cases
-- **The "Wrong Version" problem**: The agent finds the policy from 2021 instead of 2024. (Solution: Add metadata filtering for 'Date').
-- **Context Window Overflow**: Too many retrieved chunks make the model forget the user's original question.
+## 7. Asafalta ke Mamle
+- **The "Wrong Version" problem**: Agent ko 2024 ki jagah 2021 ki policy mil jaati hai. (Solution: 'Date' ke liye metadata filtering add karo).
+- **Context Window Overflow**: Bahut saare retrieved chunks model ko user ka original sawaal bhoola dete hain.
 
 ---
 
-## 8. Debugging Guide
-1. **Retrieval Analysis**: If the answer is wrong, check the top 5 chunks. If the correct info isn't there, your retriever failed.
-2. **Hallucination Check**: Use the `Faithfulness` metric from RAGAS. If it's low, the model is making up facts that aren't in the chunks.
+## 8. Debugging Margdarshika
+1. **Retrieval Analysis**: Agar jawab galat hai, to top 5 chunks check karo. Agar sahi info wahan nahi hai, to retriever fail hua.
+2. **Hallucination Check**: RAGAS se `Faithfulness` metric use karo. Agar yeh low hai, to model woh facts bana raha hai jo chunks mein nahi hain.
 
 ---
 
@@ -85,34 +85,34 @@ def rrf_fusion(vector_results, keyword_results, k=60):
 
 ---
 
-## 10. Security Concerns
-- **Document Access Control**: User A should not be able to retrieve a document that only User B (Manager) has access to. You must include `user_id` filters in every vector search.
+## 10. Suraksha Chintayein
+- **Document Access Control**: User A ko woh document retrieve nahi karna chahiye jo sirf User B (Manager) ke paas access hai. Aapko har vector search mein `user_id` filters include karne chahiye.
 
 ---
 
 ## 11. Scaling Challenges
-- **Cold Storage**: Moving trillions of old logs to a slower disk while keeping them "Searchable".
+- **Cold Storage**: Purane trillions logs ko slower disk par move karte hue unhe "Searchable" rakhna.
 
 ---
 
-## 12. Cost Considerations
-- **Reranker Cost**: Running a Cross-Encoder for every user query can add $0.01 per request.
+## 12. Kharcha Vichaar
+- **Reranker Cost**: Har user query ke liye Cross-Encoder chalana $0.01 per request add kar sakta hai.
 
 ---
 
-## 13. Best Practices
-- **Use "Semantic Chunking"**: Don't just split by characters; split by paragraph or semantic meaning.
-- **Cache Embeddings**: Don't re-calculate the embedding for the same query.
-- **Implement a Feedback Loop**: Let users click "Incorrect" so you can add that query to your test set.
+## 13. Sabse Achchhe Tareeke
+- **"Semantic Chunking" ka istemal karein**: Sirf characters se na kate; paragraph ya semantic meaning se katein.
+- **Cache Embeddings**: Ek hi query ke liye embedding ko dubara na karein.
+- **Feedback Loop implement karein**: Users ko "Incorrect" click karne den taaki aap us query ko test set mein add kar sakein.
 
 ---
 
-## 14. Interview Questions
-1. Why is Hybrid Search better than Vector-only search for enterprise data?
-2. How do you handle document updates in a RAG system?
+## 14. Interview ke Sawaal
+1. Enterprise data ke liye Hybrid Search Vector-only search se behtar kyun hai?
+2. RAG system mein document updates ko kaise handle karte ho?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **Agentic RAG**: The system decides if it needs to search more, or if it needs to ask the user a clarifying question before searching.
-- **GraphRAG Integration**: Connecting documents via a Knowledge Graph to answer "Multi-hop" questions.
+## 15. 2026 ke Naye Patterns
+- **Agentic RAG**: System decide karta hai ki use aur search karna hai, ya user se clarifying question poochhna hai search karne se pehle.
+- **GraphRAG Integration**: Documents ko Knowledge Graph ke through connect karna taaki "Multi-hop" questions ka jawab de sake.

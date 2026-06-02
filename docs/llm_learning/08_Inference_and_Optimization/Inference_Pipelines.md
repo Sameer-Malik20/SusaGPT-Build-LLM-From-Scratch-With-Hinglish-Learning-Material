@@ -21,9 +21,9 @@
 ### A. Optimization Techniques
 
 #### 1. **Quantization**
-- **INT8 Quantization:** 4x memory reduction, minimal accuracy loss
-- **FP8 Quantization:** New standard for inference efficiency
-- **GPTQ/AWQ:** Post-training quantization for LLMs
+- **INT8 Quantization:** Memory mein 4x reduction, accuracy loss minimal hota hai
+- **FP8 Quantization:** Inference efficiency ke liye new standard
+- **GPTQ/AWQ:** LLMs ke liye post-training quantization
 
 #### 2. **Model Pruning**
 - **Unstructured Pruning:** Individual weights remove karna
@@ -32,12 +32,12 @@
 
 #### 3. **Knowledge Distillation**
 - Large teacher model se small student model train karna
-- **Benefit:** 10x smaller model with similar performance
+- **Benefit:** 10x smaller model, similar performance ke saath
 
 ### B. Packaging Formats
 
 #### 1. **ONNX (Open Neural Network Exchange)**
-- Framework-agnostic model format
+- Framework-agnostic model format hota hai
 - **Advantage:** Multiple inference engines support karte hain
 
 ```python
@@ -64,9 +64,9 @@ torch.onnx.export(model, dummy_input, "model.onnx")
 ### A. vLLM (Virtual LLM)
 
 #### Key Features:
-- **PagedAttention:** Efficient KV cache management
-- **Continuous Batching:** Dynamic request batching
-- **High throughput:** 2-4x better than traditional serving
+- **PagedAttention:** KV cache management efficient hoti hai
+- **Continuous Batching:** Dynamic request batching hota hai
+- **High throughput:** Traditional serving se 2-4x better
 
 #### Deployment Example:
 ```bash
@@ -257,15 +257,15 @@ spec:
 ### B. Load Balancing
 
 #### 1. **Round-robin Load Balancer**
-- Simple distribution across instances
-- **Limitation:** Doesn't consider instance load
+- Instances par simple distribution
+- **Limitation:** Instance load ko consider nahi karta
 
 #### 2. **Least Connections**
-- New requests to least busy instance
+- Naye requests least busy instance ko jaate hain
 - **Better for:** Variable request processing times
 
 #### 3. **Intelligent Routing**
-- Model-based routing (small models vs. large models)
+- Model-based routing (chhote models vs bade models)
 - **Advanced:** Request characteristics ke hisaab se routing
 
 ---
@@ -301,7 +301,7 @@ scrape_configs:
 ```
 
 #### Grafana Dashboard:
-- Real-time throughput visualization
+- Throughput ka real-time visualization
 - Latency distribution graphs
 - Resource utilization heatmaps
 
@@ -333,7 +333,7 @@ async def generate_text(request: GenerationRequest):
 - **Strategy:** Multiple availability zones, checkpointing
 
 #### 2. **Autoscaling**
-- Scale down during low traffic
+- Low traffic ke time scale down karo
 - **Implementation:** Schedule-based scaling
 
 #### 3. **Model Caching**
@@ -344,7 +344,7 @@ async def generate_text(request: GenerationRequest):
 
 #### 1. **Model Selection**
 - Task ke hisaab se right-sized model choose karna
-- **Rule of thumb:** Start small, scale up only if needed
+- **Rule of thumb:** Chhota start karo, zaroorat padhe tabhi scale up karo
 
 #### 2. **Dynamic Batching**
 - Batch size dynamically adjust karna based on load

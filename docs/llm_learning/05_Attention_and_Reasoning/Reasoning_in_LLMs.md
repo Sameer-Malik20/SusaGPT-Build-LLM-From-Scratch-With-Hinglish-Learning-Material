@@ -1,4 +1,4 @@
-# Reasoning in LLMs: System 1 vs System 2
+# LLMs me Reasoning: System 1 vs System 2
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
 Bhai, insaani dimaag do tarah se kaam karta hai (Daniel Kahneman ki theory ke mutabik). Ek hota hai **System 1**: "Fast aur Intuitive" (Jaise 2+2=4 bolna). Dusra hota hai **System 2**: "Slow aur Deliberate" (Jaise 17*24 solve karna). 
@@ -9,17 +9,17 @@ Puraane LLMs sirf "System 1" the—woh bas agla word guess kar rahe the. Par nay
 
 ## 2. Deep Technical Explanation
 Reasoning in LLMs is often debated: is it true logic or sophisticated pattern matching?
-- **Deductive Reasoning**: Drawing specific conclusions from general premises.
-- **Inductive Reasoning**: Making broad generalizations from specific observations.
-- **Abductive Reasoning**: Finding the most likely explanation for a set of facts.
-- **Computation via Thinking Tokens**: Modern reasoning models use a hidden scratchpad (CoT) to simulate System 2 thinking.
+- **Deductive Reasoning**: General premises se specific conclusions nikalna.
+- **Inductive Reasoning**: Specific observations se broad generalizations banana.
+- **Abductive Reasoning**: Kuch facts ke liye sabse likely explanation dhundhna.
+- **Computation via Thinking Tokens**: Modern reasoning models ek hidden scratchpad (CoT) use karte hain System 2 thinking ko simulate karne ke liye.
 
 ---
 
 ## 3. Mathematical Intuition
-Reasoning can be viewed as finding the most likely logical proof path $\pi$ in a graph of possible steps:
+Reasoning ko aise dekh sakte hain: ek graph of possible steps mein sabse likely logical proof path $\pi$ dhundhna:
 $$\pi^* = \arg \max_{\pi} \sum_{i=1}^{|\pi|} \log P(\text{step}_i | \text{step}_{<i}, \text{query})$$
-Models trained with **Reinforcement Learning (RL)** learn to reward paths that lead to the correct final answer, effectively "pruning" illogical reasoning steps.
+**Reinforcement Learning (RL)** se trained models aise paths ko reward karna seekhte hain jo correct final answer tak le jaate hain, effectively illogical reasoning steps ko "prune" karte hain.
 
 ---
 
@@ -36,37 +36,37 @@ graph LR
 ---
 
 ## 5. Production-ready Examples
-Benchmarking reasoning using **GSM8K** (Grade School Math) style datasets:
+Reasoning ko benchmark karne ke liye **GSM8K** (Grade School Math) style datasets use hote hain:
 
 ```python
-# Reasoning models often output a 'thought' block
+# Reasoning models aksar ek 'thought' block output karte hain
 response = {
     "thought": "The user wants the sum of prime numbers between 1 and 10. Primes are 2, 3, 5, 7. Sum is 2+3+5+7=17.",
     "answer": "17"
 }
 
-# Production Tip: If using o1-style models, handle the hidden thought blocks carefully.
+# Production Tip: Agar o1-style models use kar rahe ho, toh hidden thought blocks ko carefully handle karo.
 ```
 
 ---
 
 ## 6. Real-world Use Cases
-- **Scientific Discovery**: Hypothesizing new chemical reactions.
-- **Bug Fixing**: Reasonably deducing the cause of a crash from a stack trace.
-- **Strategic Planning**: Business strategy based on market data.
+- **Scientific Discovery**: Naye chemical reactions hypothesize karna.
+- **Bug Fixing**: Stack trace se crash ki wajah reasonably deduce karna.
+- **Strategic Planning**: Market data ke basis par business strategy banana.
 
 ---
 
 ## 7. Failure Cases
-- **Reasoning Sidetracks**: The model starts thinking about something unrelated.
-- **Logical Loops**: Getting stuck in a "circular" argument.
-- **Over-thinking**: Thinking for 30 seconds to answer "What is 2+2?".
+- **Reasoning Sidetracks**: Model kuch unrelated cheez ke baare mein sochne lagta hai.
+- **Logical Loops**: Ek "circular" argument mein phasna.
+- **Over-thinking**: "What is 2+2?" jaisa sawaal jawab dene mein 30 seconds sochna.
 
 ---
 
 ## 8. Debugging Guide
-1. **Consistency Check**: Ask the same reasoning question 5 times. If you get 5 different "thoughts", the model isn't stable.
-2. **Step-by-Step verification**: Verify each step of the thought process independently.
+1. **Consistency Check**: Ek hi reasoning question 5 baar pucho. Agar 5 alag "thoughts" aate hain, toh model stable nahi hai.
+2. **Step-by-Step verification**: Thought process ke har step ko alag se verify karo.
 
 ---
 
@@ -80,32 +80,32 @@ response = {
 ---
 
 ## 10. Security Concerns
-- **Reasoning Manipulation**: Forcing the model's System 2 to "justify" a malicious or biased conclusion through a series of logical-sounding but flawed steps.
+- **Reasoning Manipulation**: Model ke System 2 ko force karna ki woh ek malicious ya biased conclusion ko "justify" kare kuch logical-sounding lekin flawed steps ke through.
 
 ---
 
 ## 11. Scaling Challenges
-- **Inference Compute**: Reasoning models require GPUs to run for much longer per query, creating massive server load.
+- **Inference Compute**: Reasoning models ko GPUs ki zaroorat hoti hai ki woh har query ke liye zyada der tak chalein, jisse massive server load create hota hai.
 
 ---
 
 ## 12. Cost Considerations
-- **Price per Reason**: Instead of "Price per token", companies are starting to think about "Price per logical step".
+- **Price per Reason**: "Price per token" ki jagah, companies ab "Price per logical step" ke baare mein soch rahi hain.
 
 ---
 
 ## 13. Best Practices
-- Use **Large models** for reasoning and **Small models** for chatty tasks.
-- Enable **Stream thinking** so users don't think the app has crashed while the model is "thinking".
+- Reasoning ke liye **Large models** aur chatty tasks ke liye **Small models** use karo.
+- **Stream thinking** enable karo taake users ko na lage ki app crash ho gayi jab model "thinking" kar raha hai.
 
 ---
 
 ## 14. Interview Questions
-1. What is the difference between System 1 and System 2 in LLMs?
-2. How does Reinforcement Learning from Human Feedback (RLHF) affect a model's reasoning?
+1. LLMs mein System 1 aur System 2 mein kya fark hai?
+2. Reinforcement Learning from Human Feedback (RLHF) model ki reasoning ko kaise affect karta hai?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Process Reward Models (PRM)**: Rewarding the model for *each correct step* of reasoning, not just the final answer.
-- **Inference-Time Scaling**: Letting the model think longer for harder questions (test-time compute).
+- **Process Reward Models (PRM)**: Model ko *har ek sahi reasoning step* ke liye reward dena, sirf final answer ke liye nahi.
+- **Inference-Time Scaling**: Model ko mushkil sawaalon ke liye zyada der tak sochne dena (test-time compute).

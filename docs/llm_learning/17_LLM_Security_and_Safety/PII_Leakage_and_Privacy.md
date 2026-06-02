@@ -1,4 +1,4 @@
-# PII Leakage & Privacy: Protecting User Data
+# PII Leakage aur Privacy: User Data ko Kaise Bachayein
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
 Bhai, socho tumne ChatGPT ko apni "Salary Slip" ki photo bheji taaki woh use summarize kar sake. Kya woh salary slip hamesha ke liye model ki memory mein reh jayegi? Kya koi dusra user use "Nikal" sakta hai?
@@ -7,20 +7,20 @@ Bhai, socho tumne ChatGPT ko apni "Salary Slip" ki photo bheji taaki woh use sum
 
 ---
 
-## 2. Deep Technical Explanation
-Privacy risks in LLMs come from training data memorization and inference-time context leakage.
-- **Training Data Memorization**: Models can perfectly recall rare strings (like SSNs or API keys) present in the pre-training corpus.
-- **Context Leakage**: In RAG systems, if a document contains PII and is retrieved, the LLM might include that PII in its response to an unauthorized user.
-- **Differential Privacy (DP)**: Adding mathematical noise to gradients during training to ensure no single data point can be uniquely identified.
-- **PII Scrubbing**: Using NER (Named Entity Recognition) to replace "John Doe" with "[NAME]" before the data reaches the LLM.
+## 2. Gehri Technical Explanation
+LLMs mein privacy ke risks training data memorization aur inference-time context leakage ki wajah se aate hain.
+- **Training Data Memorization**: Models pre-training corpus mein maujood rare strings (jaise SSNs ya API keys) ko perfectly recall kar sakte hain.
+- **Context Leakage**: RAG systems mein, agar kisi document mein PII hai aur woh retrieve ho jaata hai, toh LLM unauthorized user ko response mein woh PII include kar sakta hai.
+- **Differential Privacy (DP)**: Training ke dauran gradients mein mathematical noise add karna taaki koi single data point uniquely identify na ho paye.
+- **PII Scrubbing**: NER (Named Entity Recognition) ka use karke "John Doe" ko "[NAME]" se replace karna, isse pehle ki data LLM tak pahuche.
 
 ---
 
 ## 3. Mathematical Intuition
 **$\epsilon$-Differential Privacy**:
-A randomized algorithm $M$ satisfies $\epsilon$-DP if for all neighboring datasets $D$ and $D'$ (differing by one record):
+Ek randomized algorithm $M$, $\epsilon$-DP ko satisfy karta hai agar sabhi neighboring datasets $D$ aur $D'$ (jo sirf ek record mein difference rakhte hain) ke liye:
 $$P(M(D) \in S) \le e^\epsilon \cdot P(M(D') \in S)$$
-This ensures that the presence or absence of a single user's data doesn't significantly change the model's output distribution. A smaller $\epsilon$ means better privacy but often lower model accuracy.
+Yeh ensure karta hai ki ek single user ke data ki maujoodgi ya non-maujoodgi model ke output distribution ko significantly change nahi karti. Chhota $\epsilon$ better privacy deta hai lekin aksar lower model accuracy hoti hai.
 
 ---
 
@@ -42,7 +42,7 @@ graph TD
 ---
 
 ## 5. Production-ready Examples
-Using Microsoft's `Presidio` for PII masking:
+Microsoft ke `Presidio` ka upyog karte hue PII masking ke liye:
 
 ```python
 from presidio_analyzer import AnalyzerEngine
@@ -64,61 +64,61 @@ print(anonymized_result.text)
 
 ---
 
-## 6. Real-world Use Cases
-- **Healthcare**: Summarizing patient records without revealing their real names or IDs (HIPAA Compliance).
-- **Customer Support**: Masking credit card numbers in chat logs before they are used for fine-tuning.
+## 6. Real-world Use Cases (Asli Duniya ke Upyog)
+- **Healthcare**: Patient records ko summarize karna unke asli naam ya IDs bina bataye (HIPAA Compliance).
+- **Customer Support**: Chat logs mein credit card numbers ko mask karna isse pehle ki woh fine-tuning ke liye use hoon.
 
 ---
 
-## 7. Failure Cases
-- **Indirect Leakage**: The model doesn't say the name, but says "The CEO of the company that makes the iPhone", effectively revealing the identity.
-- **Token Reconstruction**: An attacker asking the model to "Fill in the blanks: My password is p_ssw_rd" and getting the full string.
+## 7. Failure Cases (Nakami ke Mamle)
+- **Indirect Leakage**: Model naam nahi batata, lekin keh deta hai "The CEO of the company that makes the iPhone", jisse identity reveal ho jaati hai.
+- **Token Reconstruction**: Ek attacker model se "Fill in the blanks: My password is p_ssw_rd" poochta hai aur poora string hasil kar leta hai.
 
 ---
 
-## 8. Debugging Guide
-1. **Canary Insertion**: Insert a unique, fake secret (e.g., "The code is BLUE-MONKEY-123") into your training data and see if the model can recall it. If yes, your privacy controls are failing.
-2. **PII Recall Test**: Probe the model with queries like "What is the phone number of [Company X] employees?".
+## 8. Debugging Guide (Debugging Margdarshika)
+1. **Canary Insertion**: Apne training data mein ek unique, fake secret (jaise "The code is BLUE-MONKEY-123") daalo aur dekho ki model use recall kar pata hai ya nahi. Agar haan, toh aapke privacy controls fail ho rahe hain.
+2. **PII Recall Test**: Model ko queries se probe karo jaise "What is the phone number of [Company X] employees?".
 
 ---
 
-## 9. Tradeoffs
-| Method | Privacy | Utility |
+## 9. Tradeoffs (Samjhaute)
+| Method (Tareeqa) | Privacy | Utility (Upyogita) |
 |---|---|---|
 | No Masking | Zero | 100% |
 | Regex Masking | Medium | 95% |
-| Differential Privacy | Very High | 70-80% |
+| Differential Privacy | Bahut Zyada | 70-80% |
 
 ---
 
-## 10. Security Concerns
-- **Extraction Attacks**: Attackers querying the model millions of times to find "Edges" of its knowledge that reveal private data from the training set.
+## 10. Security Concerns (Suraksha Chintaen)
+- **Extraction Attacks**: Attackers model ko m illionon baar query karte hain taaki uske knowledge ke "Edges" dhundh sakein jo training set se private data reveal karein.
 
 ---
 
-## 11. Scaling Challenges
-- **Latency of Scrubbing**: Running a complex NER model on every user message adds 50-100ms of latency.
+## 11. Scaling Challenges (Badhawe ki Chunautiyan)
+- **Latency of Scrubbing**: Har user message par complex NER model chalane se 50-100ms latency badh jaati hai.
 
 ---
 
-## 12. Cost Considerations
-- **Compute for DP**: Training with Differential Privacy is usually 2x-5x slower and requires more GPU memory for gradient clipping.
+## 12. Cost Considerations (Kharcha)
+- **Compute for DP**: Differential Privacy ke saath training usually 2x-5x dheemi hoti hai aur gradient clipping ke liye zyada GPU memory chahiye hoti hai.
 
 ---
 
-## 13. Best Practices
-- **Scrub early, scrub often**: Mask PII before it hits the database and before it hits the model.
-- **Use "Opt-out" mechanisms**: Allow users to delete their data from your fine-tuning pipeline.
-- **Local Scrubbing**: If possible, run the PII scrubber on the user's device (phone/browser) before the data is sent to the cloud.
+## 13. Best Practices (Sarwottam Tareeke)
+- **Scrub early, scrub often**: PII ko mask karo usse pehle ki woh database mein jaye aur usse pehle ki woh model tak pahuche.
+- **"Opt-out" mechanisms ka upyog karein**: Users ko apne data ko aapke fine-tuning pipeline se delete karne ki suvidha dein.
+- **Local Scrubbing**: Agar possible ho, toh PII scrubber user ke device (phone/browser) par hi chalaayein isse pehle ki data cloud par bheja jaye.
 
 ---
 
-## 14. Interview Questions
-1. What is Differential Privacy and why is it useful for LLMs?
-2. How do you handle "Contextual PII" that regex can't find?
+## 14. Interview Questions (Interview Sawal)
+1. Differential Privacy kya hai aur yeh LLMs ke liye kyun useful hai?
+2. Aap "Contextual PII" ko kaise handle karte hain jo regex nahi dhundh pata?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **Privacy-Preserving RAG**: Using encrypted vector search (Homomorphic Encryption) so the database never "sees" the actual query or the results.
-- **Synthetic Privacy**: Replacing all real user names in a dataset with 100% synthetic but realistic names to preserve the "Meaning" of the conversation while protecting identity.
+## 15. Latest 2026 Patterns (2026 ke Naye Patterns)
+- **Privacy-Preserving RAG**: Encrypted vector search (Homomorphic Encryption) ka upyog karna taaki database actual query ya results ko kabhi "dekh" nahi paye.
+- **Synthetic Privacy**: Dataset mein saare asli user names ko 100% synthetic lekin realistic names se badalna taaki identity protect karte hue conversation ka "Meaning" preserve ho sake.

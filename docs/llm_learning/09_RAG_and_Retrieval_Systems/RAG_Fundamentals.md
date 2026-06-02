@@ -1,5 +1,5 @@
 # 🔍 RAG — Retrieval Augmented Generation Guide (Mastery 2026)
-> **Level:** Expert | **Language:** Hinglish | **Goal:** Build production-grade, agentic, and scalable RAG systems.
+> **Level:** Expert | **Language:** Hinglish | **Goal:** Production-grade, agentic, aur scalable RAG systems build karna.
 
 ---
 
@@ -7,11 +7,11 @@
 
 2026 mein simple RAG (Vector Search + LLM) kafi nahi hai. Modern applications use karte hain **Agentic RAG**, **GraphRAG**, aur **Multi-modal RAG**.
 
-- **Vector search basics:** Semantic similarity using embeddings.
-- **Advanced Retrieval:** HyDE, Parent Document Retrieval, and Re-ranking.
-- **GraphRAG:** Combining Knowledge Graphs with Vector DBs for complex reasoning.
-- **Agentic RAG:** Agents that decide *when* and *what* to retrieve.
-- **Evaluation (RAGAS):** Moving beyond "vibes" to metrics like Faithfulness and Relevancy.
+- **Vector search basics:** Semantic similarity embeddings ke through.
+- **Advanced Retrieval:** HyDE, Parent Document Retrieval, aur Re-ranking.
+- **GraphRAG:** Knowledge Graphs aur Vector DBs ko combine karke complex reasoning ke liye.
+- **Agentic RAG:** Agents jo *when* aur *what* retrieve karna hai decide karte hain.
+- **Evaluation (RAGAS):** "Vibes" se aage badhkar metrics jaise Faithfulness aur Relevancy.
 
 ---
 
@@ -25,7 +25,7 @@ Chote chunks (512 tokens) semantic search ke liye acche hain, lekin LLM ko conte
 Agar user ki query bohot choti hai ("AI safety?"), toh vector search weak ho sakta hai.
 - **Step 1:** LLM se ek hypothetical answer likhwao.
 - **Step 2:** Us hypothetical answer se vector search karo.
-- **Result:** Much better alignment between query and docs.
+- **Result:** Query aur docs ke beech alignment kaafi better hota hai.
 
 ### C. Re-ranking (The Secret Sauce)
 Vector search top 100 docs dega, lekin top 5 hamesha perfect nahi hote.
@@ -86,8 +86,9 @@ RAG system "accha lag raha hai" bolne se kaam nahi chalega. **RAGAS** framework 
 
 ## 🏆 Project Integration: SusaGPT RAG
 Aapke `generate.py` mein ye flow integrate ho sakta hai:
-- [ ] ChromaDB integration for local documents.
-- [ ] Re-ranking logic for better top-k accuracy.
-- [ ] Agentic loop using LangGraph for multi-step retrieval.
+- [ ] ChromaDB integration local documents ke liye.
+- [ ] Re-ranking logic better top-k accuracy ke liye.
+- [ ] Agentic loop LangGraph use karke multi-step retrieval ke liye.
 
-> **Final Insight:** RAG is the bridge between a static model and dynamic, private, and up-to-date business data. Master the "Retrieval" part, and the "Generation" becomes easy.
+> **Final Insight:** RAG static model aur dynamic, private, aur up-to-date business data ke beech ka bridge hai. "Retrieval" part master karo, toh "Generation" easy ho jata hai.
+```

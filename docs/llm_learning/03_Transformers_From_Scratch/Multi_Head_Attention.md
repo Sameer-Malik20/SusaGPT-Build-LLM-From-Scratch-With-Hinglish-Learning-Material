@@ -1,4 +1,4 @@
-# Multi-Head Attention: Many Eyes on the Sequence
+# Multi-Head Attention: Sequence par kai aankhen
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
 Bhai, socho tumhe ek ghar kharidna hai. Tum akele sab kuch nahi dekh sakte. Tum ek dost ko bolte ho "Budget dekho", dusre ko bolte ho "Location dekho", teesre ko "Legal papers check karo". 
@@ -8,20 +8,16 @@ Bhai, socho tumhe ek ghar kharidna hai. Tum akele sab kuch nahi dekh sakte. Tum 
 ---
 
 ## 2. Deep Technical Explanation
-Multi-Head Attention (MHA) projects the Queries, Keys, and Values $h$ times into lower-dimensional spaces.
-- **Why?**: It allows the model to jointly attend to information from different representation subspaces at different positions.
+Multi-Head Attention (MHA) Queries, Keys, aur Values ko $h$ baar lower-dimensional spaces mein project karta hai.
+- **Kyun?**: Yeh model ko different representation subspaces se alag positions par jointly attend karne deta hai.
 - **Mechanism**: Linear projections $\to$ Scaled Dot-Product Attention $\to$ Concatenation $\to$ Final Linear Projection.
-- **Hyperparameters**: $h$ (number of heads), $d_{model}$ (total dimension), $d_k = d_{model}/h$ (dimension per head).
-
----
+- **Hyperparameters**: $h$ (heads ki sankhya), $d_{model}$ (total dimension), $d_k = d_{model}/h$ (dimension per head).
 
 ## 3. Mathematical Intuition
 $$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, ..., \text{head}_h)W^O$$
-where each head is:
+jahan har head hai:
 $$\text{head}_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)$$
-By splitting the dimension, we maintain the same total compute as a single large head but gain parallel "representation" power.
-
----
+Dimension split karke, hum same total compute maintain karte hain jaise ek single large head mein hota hai, lekin parallel "representation" power milti hai.
 
 ## 4. Architecture Diagrams
 ```mermaid
@@ -37,10 +33,8 @@ graph TD
     Concat --> Out[Final Linear Projection Wo]
 ```
 
----
-
 ## 5. Production-ready Examples
-Implementing MHA from scratch:
+MHA ko scratch se implement karte hain:
 
 ```python
 import torch.nn as nn
@@ -74,62 +68,42 @@ class MultiHeadAttention(nn.Module):
         return self.w_o(x)
 ```
 
----
-
 ## 6. Real-world Use Cases
-- **Standard in Transformers**: Used in Llama, GPT, T5.
-- **Multi-modal**: Using some heads for text and some for image features.
-
----
+- **Standard in Transformers**: Llama, GPT, T5 mein use hota hai.
+- **Multi-modal**: Kuch heads text ke liye aur kuch image features ke liye use karna.
 
 ## 7. Failure Cases
-- **Head Redundancy**: Sometimes many heads learn the same thing, wasting compute.
-- **Overfitting**: Too many heads on small data can lead to noise memorization.
-
----
+- **Head Redundancy**: Kabhi kabhi bahut saare heads same cheez seekh lete hain, compute waste hota hai.
+- **Overfitting**: Chhote data par bahut saare heads noise memorization ka cause ban sakte hain.
 
 ## 8. Debugging Guide
-1. **Pruning**: Try zeroing out a head during inference; if performance doesn't drop, that head is useless.
-2. **Diversity Check**: Ensure different heads have different attention patterns.
-
----
+1. **Pruning**: Inference ke time ek head ko zero kar ke dekho; agar performance drop nahi hoti, to woh head bekaar hai.
+2. **Diversity Check**: Dhyaan do ki different heads ke attention patterns alag hain.
 
 ## 9. Tradeoffs
-| Metric | 1 Head (Big) | 8 Heads (Small) |
+| Metric | 1 Head (Bada) | 8 Heads (Chhota) |
 |---|---|---|
 | Richness | Low | High |
 | Memory | Same | Same |
 | Implementation | Simple | Complex |
 
----
-
 ## 10. Security Concerns
-- **Head Hijacking**: Specialized adversarial prompts that force all heads to focus on a single malicious token.
-
----
+- **Head Hijacking**: Khaas adversarial prompts jo saare heads ko ek single malicious token par focus karne par majboor kar dete hain.
 
 ## 11. Scaling Challenges
-- **Memory Bandwidth**: MHA is often memory-bound rather than compute-bound.
-
----
+- **Memory Bandwidth**: MHA aksar memory-bound hota hai, compute-bound nahi.
 
 ## 12. Cost Considerations
-- **GQA (Grouped Query Attention)**: A 2026 standard to reduce memory cost by sharing Keys/Values across multiple Query heads.
-
----
+- **GQA (Grouped Query Attention)**: Ek 2026 standard jo memory cost kam karta hai Keys/Values ko multiple Query heads mein share karke.
 
 ## 13. Best Practices
-- Use **GQA** for models > 7B parameters.
-- Keep the number of heads as a power of 2 for GPU optimization.
-
----
+- Models > 7B parameters ke liye **GQA** use karo.
+- Number of heads ko power of 2 rakho GPU optimization ke liye.
 
 ## 14. Interview Questions
-1. If we have 8 heads and $d_{model}=512$, what is $d_k$?
-2. What is the difference between Multi-Head Attention and Multi-Query Attention?
-
----
+1. Agar humare paas 8 heads hain aur $d_{model}=512$, to $d_k$ kya hoga?
+2. Multi-Head Attention aur Multi-Query Attention mein kya antar hai?
 
 ## 15. Latest 2026 Patterns
-- **Grouped Query Attention (GQA)**: Sharing K and V across heads to speed up inference (used in Llama-3).
-- **Sliding Window Attention**: Heads only look at a local neighborhood to handle 1M+ context.
+- **Grouped Query Attention (GQA)**: Inference speed up karne ke liye K aur V ko heads mein share karna (Llama-3 mein use hota hai).
+- **Sliding Window Attention**: Heads sirf local neighborhood dekhte hain taaki 1M+ context handle kar sakein.

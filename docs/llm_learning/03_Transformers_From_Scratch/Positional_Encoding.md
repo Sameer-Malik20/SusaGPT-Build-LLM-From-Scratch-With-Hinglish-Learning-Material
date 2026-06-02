@@ -1,4 +1,4 @@
-# Positional Encoding: Adding Order to Chaos
+# Positional Encoding: Chaos mein Order add karna
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
 Bhai, Self-Attention bohot smart hai, lekin usmein ek bohot badi kami hai: Use "Line" (Sequence) ka hosh nahi rehta. 
@@ -8,10 +8,10 @@ Socho ek sentence hai "Dog bites man" aur "Man bites dog". Self-Attention ke liy
 ---
 
 ## 2. Deep Technical Explanation
-Since Transformers process tokens in parallel, they lack an inherent sense of order (unlike RNNs).
+Kyunki Transformers tokens ko parallel process karte hain, unke paas order ka inherent sense nahi hai (RNNs ke opposite).
 - **Absolute Positional Encodings**: Sinusoidal functions (Original Transformer) or Learned Embeddings.
-- **Relative Positional Encodings**: Focus on the distance between tokens rather than absolute position (e.g., T5, ALIBI).
-- **Rotary Positional Embeddings (RoPE)**: The modern gold standard (used in Llama). It rotates the query and key vectors in a way that captures relative distance via trigonometry.
+- **Relative Positional Encodings**: Yeh tokens ke beech distance ko focus karte hain, absolute position ke bajaye (e.g., T5, ALIBI).
+- **Rotary Positional Embeddings (RoPE)**: Ye modern gold standard hai (Llama mein use hota hai). Ye query aur key vectors ko rotate karta hai aur relative distance ko trigonometry ke through capture karta hai.
 
 ---
 
@@ -19,7 +19,7 @@ Since Transformers process tokens in parallel, they lack an inherent sense of or
 **Sinusoidal Encoding** (Original):
 $$PE_{(pos, 2i)} = \sin(pos / 10000^{2i/d_{model}})$$
 $$PE_{(pos, 2i+1)} = \cos(pos / 10000^{2i/d_{model}})$$
-This allows the model to learn to attend by relative positions because for any fixed offset $k$, $PE_{pos+k}$ can be represented as a linear function of $PE_{pos}$.
+Yeh model ko relative positions ke hisaab se attend karne mein help karta hai kyunki kisi bhi fixed offset $k$ ke liye, $PE_{pos+k}$ ko $PE_{pos}$ ke linear function ke roop mein represent kiya ja sakta hai.
 
 ---
 
@@ -39,7 +39,7 @@ graph TD
 ---
 
 ## 5. Production-ready Examples
-Implementing RoPE (Conceptual snippet):
+RoPE ko implement karna (Conceptual snippet):
 
 ```python
 import torch
@@ -61,20 +61,20 @@ def apply_rotary_emb(x, cos, sin):
 ---
 
 ## 6. Real-world Use Cases
-- **Long Context Windows**: RoPE enables models to handle 128k+ tokens.
-- **Coding**: Understanding the strict order of characters in syntax.
+- **Long Context Windows**: RoPE models ko 128k+ tokens handle karne mein madad karta hai.
+- **Coding**: Coding mein characters ke strict order ko samajhna (syntax mein).
 
 ---
 
 ## 7. Failure Cases
-- **Length Generalization**: Sinusoidal encodings often fail if the inference sequence is longer than training.
-- **Catastrophic Forgetting of Order**: In very deep models, the positional signal can get "washed out" by noise.
+- **Length Generalization**: Sinusoidal encodings aksar fail ho jaate hain agar inference sequence training se zyada lamba ho.
+- **Catastrophic Forgetting of Order**: Bahut deep models mein, positional signal noise ke karan "wash out" ho sakta hai.
 
 ---
 
 ## 8. Debugging Guide
-1. **Shuffle Test**: If your model performs the same when you shuffle the words, your positional encoding is broken.
-2. **Phase Analysis**: Check if the high-frequency components of the sinusoidal waves are being learned.
+1. **Shuffle Test**: Agar aapka model words shuffle karne par bhi same perform karta hai, toh aapki positional encoding broken hai.
+2. **Phase Analysis**: Check karo ki sinusoidal waves ke high-frequency components learn ho rahe hain ya nahi.
 
 ---
 
@@ -88,32 +88,32 @@ def apply_rotary_emb(x, cos, sin):
 ---
 
 ## 10. Security Concerns
-- **Position Hijacking**: Manipulating the positional signal to make the model ignore the beginning of a prompt.
+- **Position Hijacking**: Positional signal mein manipulation karna taaki model prompt ke beginning ko ignore kare.
 
 ---
 
 ## 11. Scaling Challenges
-- **Memory**: Storing large positional tables for 1M+ contexts.
+- **Memory**: 1M+ contexts ke liye bade positional tables store karna.
 
 ---
 
 ## 12. Cost Considerations
-- **Compute**: RoPE adds a small trigonometric overhead to every attention layer.
+- **Compute**: RoPE har attention layer mein ek chota trigonometric overhead add karta hai.
 
 ---
 
 ## 13. Best Practices
-- Always use **RoPE** for modern 2026 architectures.
-- For extremely long sequences, consider **ALIBI** or **YaRN** (Yet another RoPE extension).
+- Hamesha modern 2026 architectures ke liye **RoPE** use karo.
+- Extremely long sequences ke liye **ALIBI** ya **YaRN** (Yet another RoPE extension) consider karo.
 
 ---
 
 ## 14. Interview Questions
-1. Why is the Transformer "Permutation Invariant" without Positional Encoding?
-2. What is the main advantage of RoPE over Sinusoidal encodings?
+1. Transformer bina Positional Encoding ke "Permutation Invariant" kyun hai?
+2. RoPE ka main advantage kya hai Sinusoidal encodings ke comparison mein?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Position-Independent Transformers**: Research into architectures that don't need explicit encodings and learn order from data structure alone.
-- **Dynamic RoPE Scaling**: Adjusting the frequency base during inference to support 10x longer contexts.
+- **Position-Independent Transformers**: Un architectures par research jo explicit encodings ki need nahi hai aur order ko data structure se hi learn karte hain.
+- **Dynamic RoPE Scaling**: Inference ke dauran frequency base ko adjust karna taaki 10x longer contexts ko support kar sake.

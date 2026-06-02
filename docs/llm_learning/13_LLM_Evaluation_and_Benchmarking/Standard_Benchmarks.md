@@ -1,26 +1,26 @@
-# Standard Benchmarks: How to Grade an AI
+# Standard Benchmarks: AI ko Grade kaise karein
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Shuruaat ke liye Hinglish Explanation 🇮🇳
 Bhai, jab koi naya LLM launch hota hai, toh har koi kehta hai "Main GPT-4 se achha hoon". Lekin hum kaise yakeen karein? 
 
 **Standard Benchmarks** AI ki duniya ke "Board Exams" hain. Jaise MMLU (General knowledge), GSM8K (Maths), aur HumanEval (Coding). Har model ko in exams se guzarna padta hai aur unhe ek score milta hai (e.g., 85% accuracy). In scores ko dekh kar hum decide karte hain ki kaunsa model "Top" par hai. Lekin dhyan rakhna, kabhi-kabhi models in exams ke answers "Ratta" (Memorize) maar lete hain, jise hum **Data Contamination** kehte hain.
 
 ---
 
-## 2. Deep Technical Explanation
-Benchmarks are standardized datasets used to measure different capabilities of an LLM.
-- **MMLU (Massive Multitask Language Understanding)**: Covers 57 subjects across STEM, humanities, and more. Measures world knowledge and problem-solving.
-- **GSM8K (Grade School Math 8K)**: 8,500 high-quality grade school math word problems. Measures multi-step reasoning.
-- **HumanEval / MBPP**: Coding challenges in Python. Measures code generation and logical correctness.
-- **LMSYS Chatbot Arena**: A "crowdsourced" Elo rating system where humans vote on model responses. Currently the gold standard for "Vibes" and helpfulness.
+## 2. Gehra Technical Explanation
+Benchmarks standardized datasets hote hain jo LLM ki different capabilities measure karne ke liye use hote hain.
+- **MMLU (Massive Multitask Language Understanding)**: Yeh 57 subjects cover karta hai STEM, humanities, aur aur bhi subjects. World knowledge aur problem-solving measure karta hai.
+- **GSM8K (Grade School Math 8K)**: 8,500 high-quality grade school math word problems hain. Multi-step reasoning measure karta hai.
+- **HumanEval / MBPP**: Python mein coding challenges hain. Code generation aur logical correctness measure karta hai.
+- **LMSYS Chatbot Arena**: Yeh ek "crowdsourced" Elo rating system hai jahan humans model responses par vote karte hain. Currently "Vibes" aur helpfulness ke liye gold standard hai.
 
 ---
 
-## 3. Mathematical Intuition
-Benchmark scores are usually reported as **Zero-shot** or **Few-shot** accuracy.
+## 3. Ganit ka Intuition
+Benchmark scores usually **Zero-shot** ya **Few-shot** accuracy ke roop mein report kiye jate hain.
 Accuracy $A$:
 $$A = \frac{\text{Correct Answers}}{\text{Total Questions}} \times 100$$
-For multiple-choice (like MMLU), the **Random Guessing Baseline** is 25%. A model must significantly beat this to prove it has actually learned something.
+Multiple-choice (jaise MMLU) ke liye, **Random Guessing Baseline** 25% hota hai. Model ko isse significantly beat karna padta hai yeh prove karne ke liye ki usne kuch actually seekha hai.
 
 ---
 
@@ -56,60 +56,60 @@ python main.py \
 ---
 
 ## 6. Real-world Use Cases
-- **Model Selection**: Choosing Llama-3-70B for a medical project because it has the highest "MedQA" score.
-- **Leaderboards**: Checking the **Open LLM Leaderboard** (HuggingFace) to find the best open-source model of the month.
+- **Model Selection**: Ek medical project ke liye Llama-3-70B choose karna kyunki uske paas sabse highest "MedQA" score hai.
+- **Leaderboards**: Mahine ke best open-source model ko dhundhne ke liye **Open LLM Leaderboard** (HuggingFace) check karna.
 
 ---
 
 ## 7. Failure Cases
-- **Goodhart's Law**: "When a measure becomes a target, it ceases to be a good measure." Models are now being trained specifically to beat MMLU, making the score less meaningful for real-world tasks.
-- **Data Contamination**: The model has seen the GSM8K test questions during its pre-training on the web, giving it a 100% score that is "fake".
+- **Goodhart's Law**: "Jab ek measure target ban jata hai, toh woh accha measure nahi rahta." Models ab specifically MMLU beat karne ke liye train kiye ja rahe hain, jo score ko real-world tasks ke liye kam meaningful bana raha hai.
+- **Data Contamination**: Model ne GSM8K ke test questions ko web pe pre-training ke dauran dekh liya hai, jisse usse 100% score mil raha hai jo "fake" hai.
 
 ---
 
 ## 8. Debugging Guide
-1. **Sanity Check**: If a small 1B model beats GPT-4 on a benchmark, it's almost certainly contaminated.
-2. **Prompts Matter**: Benchmarks are very sensitive to the prompt format. Use the exact prompt used by the original benchmark authors.
+1. **Sanity Check**: Agar ek chhota 1B model benchmark pe GPT-4 ko beat karta hai, toh yeh almost certainly contaminated hai.
+2. **Prompts Matter**: Benchmarks prompt format ke prati bahut sensitive hote hain. Original benchmark authors ne jo exact prompt use kiya hai, wohi istemal karein.
 
 ---
 
 ## 9. Tradeoffs
 | Benchmark | Focus | Pro | Con |
 |---|---|---|---|
-| MMLU | Knowledge | Comprehensive | Overused/Contaminated |
-| GSM8K | Reasoning | Objective | Easy to "Cheat" |
-| Chatbot Arena | Human Preference| Realistic | Subjective/Slow |
+| MMLU | Gyan | Vyakapak | Zyada upyog / Contaminated |
+| GSM8K | Tark | Nisargatmak | "Cheat" karna aasan |
+| Chatbot Arena | Manav Preference | Yatharthvadi | Vyaktigat / Dheema |
 
 ---
 
 ## 10. Security Concerns
-- **Benchmark Poisoning**: Intentionally leaking benchmark answers into public datasets so future models "accidentally" memorize them and look smarter than they are.
+- **Benchmark Poisoning**: Jaan-boojh kar benchmark answers ko public datasets mein leak karna taaki future models unhe "accidentally" memorize kar lein aur smart dikhein.
 
 ---
 
 ## 11. Scaling Challenges
-- **Infinite Benchmarks**: As models get smarter, we need "PhD-level" benchmarks (like GPQA) because MMLU is becoming too easy.
+- **Infinite Benchmarks**: Jaise-jaise models smarter hote ja rahe hain, humein "PhD-level" benchmarks (jaise GPQA) ki zaroorat hai kyunki MMLU bahut easy hota ja raha hai.
 
 ---
 
 ## 12. Cost Considerations
-- **Evaluation Cost**: Running a full MMLU + HumanEval suite on a 70B model can cost $100s in compute time.
+- **Evaluation Cost**: 70B model pe full MMLU + HumanEval suite chalane mein $100s compute time lag sakta hai.
 
 ---
 
 ## 13. Best Practices
-- **Never trust a single benchmark**. Use a suite (MMLU, GSM8K, HumanEval).
-- Use **LMSYS Chatbot Arena** for general chat quality.
-- Use **Needle-in-a-Haystack** for long-context evaluation.
+- **Kabhi bhi ek single benchmark par bharosa mat karo**. Suite ka istemal karo (MMLU, GSM8K, HumanEval).
+- General chat quality ke liye **LMSYS Chatbot Arena** use karo.
+- Long-context evaluation ke liye **Needle-in-a-Haystack** use karo.
 
 ---
 
 ## 14. Interview Questions
-1. What is the difference between Zero-shot and Few-shot evaluation?
-2. What is Data Contamination and how can you detect it?
+1. Zero-shot aur Few-shot evaluation mein kya antar hai?
+2. Data Contamination kya hai aur aap ise kaise detect kar sakte hain?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Live Benchmarks**: Using daily news or fresh GitHub commits for evaluation to ensure the model couldn't have memorized the answers.
-- **Self-Evolving Benchmarks**: Using an LLM to generate fresh, unseen test cases for other LLMs.
+- **Live Benchmarks**: Evaluation ke liye daily news ya fresh GitHub commits ka istemal karna taaki model answers memorize na kar sake.
+- **Self-Evolving Benchmarks**: Doosre LLMs ke liye fresh, unseen test cases generate karne ke liye ek LLM ka istemal karna.

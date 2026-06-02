@@ -1,37 +1,37 @@
-# 🧮 AI Math Mastery — From Tensors to Transformers (Expert Deep Dive)
-> **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** AI algorithms ka math aur internals master karna (Simplified + Deep)
-## 🧭 Core Concepts (Concept-First)
-+- Foundational Math: Tensors, matrices, dot products, similarity
-+- Calculus & Gradients: Derivatives, gradient descent, learning rate
-+- Probability & Sampling: Softmax, temperature, token generation
+# 🧮 AI Math Mastery — Tensors se Transformers tak (Expert Deep Dive)
+> **Level:** Beginner se Expert tak | **Language:** Hinglish | **Goal:** AI algorithms ka math aur internals master karna (Simplified + Deep)
+## 🧭 Core Concepts (Pehle Concept)
++- Buniyaadi Math: Tensors, matrices, dot products, similarity
++- Calculus aur Gradients: Derivatives, gradient descent, learning rate
++- Probability aur Sampling: Softmax, temperature, token generation
 +- Attention Math: Q, K, V, scaled dot-product attention, causality
 +- Optimizers: SGD, Momentum, Adam, AdamW, weight decay
-+- Practical Applications: From equations to transformer internals
++- Practical Applications: Equations se transformer internals tak
 ---
 
-## 📋 Table of Contents: Level-wise Learning
+## 📋 Table of Contents: Level ke hisaab se Learning
 
-| Level | Topic | Why Learn This? |
+| Level | Topic | Kyun Seekhein? |
 |-------|-------|-----------------|
-| **1. Beginner** | Tensors & Matrices | Every AI model is a box of numbers (Tensors). |
-| **2. Beginner** | Dot Products & Similarity | Reason why 'King - Man + Woman = Queen'. |
-| **3. Intermediate** | Calculus & Gradients | The motor that powers "Learning" (Gradient Descent). |
-| **4. Intermediate** | Probability (Softmax) | Language models are just "Predicting the Next Word". |
-| **5. Advanced** | Information Theory (Entropy) | Measuring how much "Surprise" or "Error" is in a model. |
-| **6. Expert** | Attention Math (Q, K, V) | The engine inside GPT/Transformers. |
-| **7. Expert** | Optimizer Evolution (AdamW) | Choosing the right way to update weights. |
+| **1. Beginner** | Tensors & Matrices | Har AI model numbers ka ek box hota hai (Tensors). |
+| **2. Beginner** | Dot Products & Similarity | Reason: 'King - Man + Woman = Queen'. |
+| **3. Intermediate** | Calculus & Gradients | Jo 'Learning' ko power karta hai (Gradient Descent). |
+| **4. Intermediate** | Probability (Softmax) | Language models sirf 'Next Word' predict karte hain. |
+| **5. Advanced** | Information Theory (Entropy) | Model mein kitna 'Surprise' ya 'Error' hai, ye measure karna. |
+| **6. Expert** | Attention Math (Q, K, V) | GPT/Transformers ke andar ka engine. |
+| **7. Expert** | Optimizer Evolution (AdamW) | Weights update karne ka sahi tarika chunna. |
 
 ---
 
-## 1. 🔢 Tensors & Matrices (The DNA of AI)
+## 1. 🔢 Tensors & Matrices (AI ka DNA)
 
 AI mein sab kuch numbers ki form mein hota hai. Simple variables nahi, bulky boxes hote hain.
 
 ### A. Tensor Hierarchy
-- **Scalar (0D):** Single number (e.g., `5`).
-- **Vector (1D):** List of numbers (e.g., `[1, 2, 3]`). Represent karta hai "Embedding".
-- **Matrix (2D):** Table of numbers (e.g., `[[1,2], [3,4]]`). Represent karta hai "Weight Layer".
-- **Tensor (3D+):** Stack of matrices. Used for RGB Images or Batches of text.
+- **Scalar (0D):** Ek single number (e.g., `5`).
+- **Vector (1D):** Numbers ki list (e.g., `[1, 2, 3]`). Represent karta hai "Embedding".
+- **Matrix (2D):** Numbers ki table (e.g., `[[1,2], [3,4]]`). Represent karta hai "Weight Layer".
+- **Tensor (3D+):** Matrices ka stack. RGB Images ya Batches of text ke liye use hota hai.
 
 ### B. Matrix Multiplication ($Y = W X + b$)
 Ye AI ka sabse common formula hai. 
@@ -44,24 +44,24 @@ Ye AI ka sabse common formula hai.
 
 ---
 
-## 2. 📏 Dot Product: The Magic of "Similarity"
+## 2. 📏 Dot Product: "Similarity" ka Jaadu
 
 AI mein similarity calculate karne ke liye hum **Dot Product** use karte hain.
 
-**Formula (Simple):** Multiply corresponding elements and sum them up.
+**Formula (Simple):** Corresponding elements ko multiply karo aur sum kar do.
 `[1, 2] · [3, 4] = (1*3) + (2*4) = 11`
 
 | Result | Kya Matlab Hai? | Similarity |
 |--------|-----------------|-----------|
 | **Positive & Big** | Dono vectors same direction mein ja rahe hain. | High |
-| **Zero** | Dono vectors ke beech 90° ka angle hai. | No Relation |
-| **Negative** | Dono vectors opposite direction mein hain. | Opposite |
+| **Zero** | Dono vectors ke beech 90° ka angle hai. | Koi Relation Nahi |
+| **Negative** | Dono vectors opposite direction mein hain. | Ulta |
 
-> 🧩 **Real World Example:** Jab aap RAG (Retrieval Augmented Generation) mein documents dhundte ho, toh backend mein vector database dot products hi kar raha hota hai.
+> 🧩 **Asli Duniya ka Udaharan:** Jab aap RAG (Retrieval Augmented Generation) mein documents dhundte ho, toh backend mein vector database dot products hi kar raha hota hai.
 
 ---
 
-## 3. 📈 Calculus: The "Slope" of Learning
+## 3. 📈 Calculus: Learning ka "Slope"
 
 Bina calculus ke, AI kabhi "seekh" nahi sakta. Hum **Derivatives** use karte hain ye janne ke liye ki model ki galti (Loss) ko kaise kam karein.
 
@@ -74,7 +74,7 @@ Imagine aap ek pahad (High Loss) ki choti par ho aur andhera hai. Aap apne pairo
 
 ---
 
-## 4. 🎲 Probability & Sampling: The LLM Brain
+## 4. 🎲 Probability & Sampling: LLM ka Brain
 
 LLMs discrete tokens predict karte hain. Wo deterministic (fixed) nahi hote, probabilistic hote hain.
 
@@ -82,7 +82,7 @@ LLMs discrete tokens predict karte hain. Wo deterministic (fixed) nahi hote, pro
 Ye raw scores (Logits) ko probabilities (0 to 1) mein badalta hai jinka sum 1 hota hai.
 **Example:** `[2.0, 1.0, 0.1]` -> Softmax -> `[0.7, 0.2, 0.1]` (Model 70% sure hai ki pehla word sahi hai).
 
-### B. Temperature ($T$) - The Creativity Knob
+### B. Temperature ($T$) - Creativity ka Knob
 - **$T < 1$ (Cold):** Model confident tokens ko choose karega. High logic, low creativity.
 - **$T > 1$ (Hot):** Probability distribution 'flat' ho jati hai. Model random words utha sakta hai. High creativity (ya hallucinations!).
 
@@ -92,7 +92,7 @@ Ye raw scores (Logits) ko probabilities (0 to 1) mein badalta hai jinka sum 1 ho
 
 Transformer ka dil **Scaled Dot-Product Attention** hai.
 
-**The Formula:** $\text{Attention}(Q, K, V) = \text{Softmax}(\frac{QK^T}{\sqrt{d_k}})V$
+**Formula:** $\text{Attention}(Q, K, V) = \text{Softmax}(\frac{QK^T}{\sqrt{d_k}})V$
 
 1. **Query ($Q$):** "Main kya search kar raha hoon?" (Current word).
 2. **Key ($K$):** "Mere paas kya kya knowledge hai?" (All words in context).
@@ -101,12 +101,12 @@ Transformer ka dil **Scaled Dot-Product Attention** hai.
 
 ---
 
-## 🏃 Optimizer Evolution: Why AdamW?
+## 🏃 Optimizer Evolution: AdamW kyun?
 
 1. **SGD (Stochastic Gradient Descent):** Simple, slow.
 2. **Momentum:** Pichla momentum yaad rakhta hai (bhaagne ki speed).
 3. **Adam:** Har weight ke liye alag learning rate (Adaptive).
-4. **AdamW:** Adam + **Weight Decay**. Ye model ko overfit hone se rokta hai (Weight ko bohot bada nahi hone deta). **This is the industry standard today.**
+4. **AdamW:** Adam + **Weight Decay**. Ye model ko overfit hone se rokta hai (Weight ko bohot bada nahi hone deta). **Aaj industry mein yahi standard hai.**
 
 ---
 
@@ -123,10 +123,10 @@ Jab hum model ko fine-tune karte hain (RLHF), toh hum chahte hain ki model "thod
 
 ## 📺 Video Resources (Hinglish/Hindi)
 
-| Topic | Link | Reason to Watch |
+| Topic | Link | Kyun Dekhein? |
 |-------|------|-----------------|
 | **Linear Algebra** | [YouTube Playlist](https://www.youtube.com/playlist?list=PLKnIA16_RmvYu0fS_RuIB2eTbJcTFdrAA) | Base strong karne ke liye. |
-| **Neural Network Math** | [Karpathy - Zero to Hero](https://karpathy.ai/zero-to-hero.html) | Best in the world. |
+| **Neural Network Math** | [Karpathy - Zero to Hero](https://karpathy.ai/zero-to-hero.html) | Duniya mein best. |
 | **Calculus simplified** | [3Blue1Brown](https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr) | Visualization ke liye. |
 
 ---

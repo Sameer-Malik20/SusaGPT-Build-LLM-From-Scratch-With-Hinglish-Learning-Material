@@ -1,4 +1,4 @@
-# Language Modeling: The Heart of LLMs
+# Language Modeling: LLMs Ka Dil
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
 Bhai, "Language Modeling" sunne mein bada technical lagta hai, par iska matlab bohot simple hai: **"Agla word kya hoga?"** predict karna.
@@ -7,21 +7,21 @@ Socho tum WhatsApp par "I am" likhte ho aur upar suggestions aate hain "fine", "
 
 ---
 
-## 2. Deep Technical Explanation
-Language Modeling is the task of estimating the probability distribution over sequences of words or tokens. There are two main types:
-- **Causal Language Modeling (CLM)**: Predicts the next token $x_t$ given $x_{1...t-1}$. This is the "Generative" part (e.g., GPT).
-- **Masked Language Modeling (MLM)**: Predicts a hidden ("masked") token given the context on both sides. This is the "Understanding" part (e.g., BERT).
-- **Auto-regressive property**: The model generates one token at a time and feeds it back into the input to generate the next.
+## 2. Gehra Technical Explanation
+Language Modeling ka task hai words ya tokens ke sequences par probability distribution estimate karna. Yeh do main types hain:
+- **Causal Language Modeling (CLM)**: $x_{1...t-1}$ ke base pe agla token $x_t$ predict karta hai. Yeh "Generative" part hai (e.g., GPT).
+- **Masked Language Modeling (MLM)**: Dono taraf ke context ke base pe ek hidden ("masked") token predict karta hai. Yeh "Understanding" part hai (e.g., BERT).
+- **Auto-regressive property**: Model ek token ek time pe generate karta hai aur use wapas input mein daal kar agla generate karta hai.
 
 ---
 
 ## 3. Mathematical Intuition
-A Language Model computes the joint probability of a sequence $w_1, ..., w_T$:
+Ek Language Model sequence $w_1, ..., w_T$ ki joint probability compute karta hai:
 $$P(w_1, ..., w_T) = \prod_{t=1}^T P(w_t | w_{1...t-1})$$
 
-In deep learning, we use a softmax over the vocabulary $V$ to get this probability:
+Deep learning mein, hum vocabulary $V$ par softmax use karte hain yeh probability pane ke liye:
 $$P(w_t | \text{context}) = \frac{\exp(h_t \cdot e_{w_t})}{\sum_{w \in V} \exp(h_t \cdot e_w)}$$
-where $h_t$ is the hidden state (context representation) and $e_{w}$ is the embedding for word $w$.
+Jahan $h_t$ hidden state (context representation) hai aur $e_{w}$ word $w$ ke liye embedding hai.
 
 ---
 
@@ -40,7 +40,7 @@ graph LR
 ---
 
 ## 5. Production-ready Examples
-Implementing a basic "Greedy" and "Top-K" sampling loop:
+Ek basic "Greedy" aur "Top-K" sampling loop implement karna:
 
 ```python
 import torch
@@ -66,70 +66,70 @@ def sample_next_token(logits, method="top_k", k=50, temperature=1.0):
 ---
 
 ## 6. Real-world Use Cases
-- **Autosuggest**: Email and chat completions.
-- **Translation**: Modeling the "target language" to ensure fluency.
-- **Code Completion**: Predicting the next line of code based on existing context.
-- **Zero-shot Task Solving**: Re-framing every task (classification, summary) as a "next word" prediction problem.
+- **Autosuggest**: Email aur chat completions.
+- **Translation**: Fluency ensure karne ke liye "target language" modeling.
+- **Code Completion**: Existing context ke base pe next line of code predict karna.
+- **Zero-shot Task Solving**: Har task (classification, summary) ko "next word" prediction problem ki tarah re-frame karna.
 
 ---
 
 ## 7. Failure Cases
-- **Repetitive Loops**: "The cat sat on the mat on the mat on the mat..." (Lack of diversity).
-- **Drift**: Over a long sequence, the model forgets the original topic.
-- **Probability Smearing**: Giving high probability to nonsensical but grammatically correct words.
+- **Repetitive Loops**: "The cat sat on the mat on the mat on the mat..." (Diversity ki kami).
+- **Drift**: Lambi sequence mein model original topic bhool jata hai.
+- **Probability Smearing**: Nonsensical lekin grammatically correct words ko high probability dena.
 
 ---
 
 ## 8. Debugging Guide
-1. **Perplexity**: A low perplexity means the model is "less surprised" by the data. If perplexity is high, your data or training is wrong.
-2. **Logit Visualization**: Plot the softmax distribution. If one word has 0.99 probability constantly, your model might be overfitted.
-3. **EOS Handling**: Check if the model is correctly generating the `<|endoftext|>` token.
+1. **Perplexity**: Low perplexity ka matlab model data se "less surprised" hai. Agar perplexity high hai, toh data ya training galat hai.
+2. **Logit Visualization**: Softmax distribution plot karo. Agar koi word lagatar 0.99 probability dikhata hai, toh model overfitted ho sakta hai.
+3. **EOS Handling**: Check karo ki model `<|endoftext|>` token sahi se generate kar raha hai ya nahi.
 
 ---
 
 ## 9. Tradeoffs
 | Feature | Greedy Search | Beam Search | Nucleus (Top-P) Sampling |
 |---------|---------------|-------------|--------------------------|
-| Quality | Low           | High        | Very High (Creative)     |
-| Speed   | Very Fast     | Slow        | Fast                     |
-| Diversity| None         | Low         | High                     |
+| Quality | Kam | Zyada | Bahut Zyada (Creative) |
+| Speed   | Bahut Tej | Dheema | Tej |
+| Diversity| Koi Nahi | Kam | Zyada |
 
 ---
 
 ## 10. Security Concerns
-- **Data Memorization**: The model might "model" a private API key or password that was in its training set.
-- **Poisoning**: Injecting specific patterns into the modeling data to trigger malicious outputs.
+- **Data Memorization**: Model apne training set mein koi private API key ya password ko "model" kar sakta hai.
+- **Poisoning**: Modeling data mein specific patterns daal kar malicious outputs trigger karna.
 
 ---
 
 ## 11. Scaling Challenges
-- **Vocabulary Size**: Large vocab (100k+ tokens) increases the final layer size significantly.
-- **Context Length**: The complexity of modeling the "context" grows quadratically with length in Transformers.
+- **Vocabulary Size**: Bada vocab (100k+ tokens) final layer size ko significantly increase karta hai.
+- **Context Length**: Transformers mein "context" modeling ki complexity length ke saath quadratically badhti hai.
 
 ---
 
 ## 12. Cost Considerations
-- **Training Tokens**: Modeling "trillions" of tokens requires months of compute.
-- **Inference Sampling**: Complex sampling (Beam Search) can be 5-10x more expensive than greedy.
+- **Training Tokens**: "Trillions" tokens modeling ke liye months of compute chahiye.
+- **Inference Sampling**: Complex sampling (Beam Search) greedy se 5-10x zyada expensive ho sakta hai.
 
 ---
 
 ## 13. Best Practices
-- **Use Dynamic Temperature**: High for creative tasks, low for factual tasks.
-- **Entropy Monitoring**: If the model's prediction entropy drops to zero, it's getting stuck.
-- **Pre-train on High Quality**: Garbage in, Garbage out applies heavily to Language Modeling.
+- **Use Dynamic Temperature**: Creative tasks ke liye high, factual tasks ke liye low.
+- **Entropy Monitoring**: Agar model ki prediction entropy zero ho jaye, toh wo stuck ho raha hai.
+- **Pre-train on High Quality**: Garbage in, Garbage out Language Modeling par heavily apply hota hai.
 
 ---
 
 ## 14. Interview Questions
-1. What is the difference between Auto-regressive and Auto-encoding models?
-2. How do you calculate Perplexity, and what does it represent?
-3. Why do we use Cross-Entropy loss for Language Modeling?
-4. Explain the "Exposure Bias" in training vs inference.
+1. Auto-regressive aur Auto-encoding models mein kya difference hai?
+2. Aap Perplexity kaise calculate karte hain, aur yeh kya represent karta hai?
+3. Hum Language Modeling ke liye Cross-Entropy loss kyun use karte hain?
+4. Training vs inference mein "Exposure Bias" explain karo.
 
 ---
 
 ## 15. Latest 2026 LLM Engineering Patterns
-- **Contrastive Decoding**: Comparing a large model's output with a small model's "bad" output to enhance quality.
-- **Test-Time Training (TTT)**: Updating the model's "context memory" during inference to model new information perfectly.
-- **Guided Generation**: Using grammar constraints (JSON schema) to force the language model into specific output formats.
+- **Contrastive Decoding**: Quality enhance karne ke liye bade model ke output ko chhote model ke "bad" output se compare karna.
+- **Test-Time Training (TTT)**: Inference ke dauran model ki "context memory" update karna taaki nayi information perfectly model ho.
+- **Guided Generation**: Language model ko specific output formats mein force karne ke liye grammar constraints (JSON schema) use karna.

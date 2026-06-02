@@ -1,29 +1,29 @@
-# Preference Optimization: Mastering Human Taste
+# Preference Optimization: Human Taste Ko Master Karna
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Shuruaat Ke Liye Hinglish Explanation 🇮🇳
 Bhai, socho tumne ek robot ko khana banana sikhaya. Model ne seekh toh liya ki namak kitna dalna hai, lekin use yeh nahi pata ki tumhare liye "Namak thoda kam" ka matlab kya hai. 
 
 **Preference Optimization** wahi step hai jahan hum model ko "Fine-tune" karte hain human preferences ke basis par. Hum use 2-3 answers dikhate hain aur kehte hain: "Yeh wala answer zyada polite hai, yeh wala zyada descriptive hai". Isse model sirf "Factually correct" nahi banta, balki woh "Pasandida" (preferred) bhi banta hai. Bina iske, AI sirf ek machine lagti, par iske baad woh ek "Companion" lagti hai.
 
 ---
 
-## 2. Deep Technical Explanation
-Preference optimization is the broad field of aligning model behavior with human values/tastes.
-- **RLHF (Reinforcement Learning from Human Feedback)**: The classic approach using PPO.
-- **DPO (Direct Preference Optimization)**: The modern classification-based approach.
-- **KTO (Kahneman-Tversky Optimization)**: Uses only binary "Good/Bad" signals instead of paired comparisons.
-- **IPO (Identity Preference Optimization)**: A variant of DPO that prevents the model from collapsing into high-probability modes.
+## 2. Gahrai Se Technical Explanation
+Preference optimization ek broad field hai jahan model behavior ko human values/tastes ke saath align kiya jata hai.
+- **RLHF (Reinforcement Learning from Human Feedback)**: Classic approach jo PPO use karti hai.
+- **DPO (Direct Preference Optimization)**: Modern classification-based approach.
+- **KTO (Kahneman-Tversky Optimization)**: Sirf binary "Good/Bad" signals use karta hai paired comparisons ke bajaye.
+- **IPO (Identity Preference Optimization)**: DPO ka ek variant jo model ko high-probability modes mein collapse hone se rokti hai.
 
 ---
 
-## 3. Mathematical Intuition
-The Bradley-Terry model for preferences:
+## 3. Mathematical Samajh
+Bradley-Terry model preferences ke liye:
 $$P(y_w > y_l | x) = \frac{\exp(r(x, y_w))}{\exp(r(x, y_w)) + \exp(r(x, y_l))}$$
-Where $r$ is the reward function. Preference optimization aims to find a policy $\pi$ that maximizes the expected reward while staying close to the base model.
+Jahan $r$ reward function hai. Preference optimization ka aim ek policy $\pi$ find karna hai jo expected reward maximize kare aur base model ke close rahe.
 
 ---
 
-## 4. Architecture Diagrams
+## 4. Architecture ke Diagrams
 ```mermaid
 graph TD
     User[Human Labeler] --> Choice[Choose A or B]
@@ -39,8 +39,8 @@ graph TD
 
 ---
 
-## 5. Production-ready Examples
-Using **KTO** (the easiest preference method for 2026):
+## 5. Production Ke Liye Taiyar Examples
+Use kar rahe hain **KTO** (2026 ka sabse aasan preference method):
 
 ```python
 # KTO only needs binary labels (1=Good, 0=Bad)
@@ -60,61 +60,61 @@ kto_trainer.train()
 
 ---
 
-## 6. Real-world Use Cases
-- **Creative Writing Style**: Training a model to write like a specific author.
-- **Legal Compliance**: Ensuring the model prefers formal, conservative language in contracts.
-- **Educational Personalization**: Making the model prefer "Simple" explanations for kids and "Technical" for PhDs.
+## 6. Asli Duniya Ke Use Cases
+- **Creative Writing Style**: Model ko kisi specific author ki tarah likhne ki training.
+- **Legal Compliance**: Model yeh ensure karna ki woh contracts mein formal, conservative language prefer kare.
+- **Educational Personalization**: Model ko prefer karwana ki woh bachchon ke liye "Simple" explanations aur PhDs ke liye "Technical" use kare.
 
 ---
 
 ## 7. Failure Cases
-- **Mode Collapse**: The model starts starting every sentence with "As an AI language model..." because it learned that labelers like polite introductions.
-- **Reward Hacking**: The model learns that adding "Emojis" gets higher scores, so it puts 50 emojis in every response.
+- **Mode Collapse**: Model har sentence "As an AI language model..." se start karne lagta hai kyunki usne seekh liya ki labelers polite introductions pasand karte hain.
+- **Reward Hacking**: Model seekh leta hai ki "Emojis" add karne se higher scores milte hain, isliye woh har response mein 50 emojis daal deta hai.
 
 ---
 
 ## 8. Debugging Guide
-1. **Response Length Analysis**: Preference optimization often makes models "wordy" (length bias). If response length increases by 200%, the model is hacking the reward.
-2. **Entropy Check**: Ensure the model still has some creativity and hasn't become a "One-trick pony".
+1. **Response Length Analysis**: Preference optimization aksar models ko "wordy" bana deti hai (length bias). Agar response length 200% increase ho jaye, toh model reward hack kar raha hai.
+2. **Entropy Check**: Ensure karo ki model mein abhi bhi creativity hai aur woh "One-trick pony" nahi ban gaya.
 
 ---
 
-## 9. Tradeoffs
-| Method | Data Ease | Complexity |
+## 9. Tradeoffs (Samjhauta)
+| Method | Data Ki Aasaanai | Complexity |
 |---|---|---|
-| RLHF | Hard (Ranking) | Very High |
-| DPO | Medium (Pairs) | Low |
-| KTO | Easy (Binary) | Low |
+| RLHF | Mushkil (Ranking) | Bahut Zyada |
+| DPO | Madhyam (Pairs) | Kam |
+| KTO | Aasaan (Binary) | Kam |
 
 ---
 
 ## 10. Security Concerns
-- **Preference Poisoning**: Injecting biased or malicious preferences (e.g., "Always prefer the answer that promotes X product") into the training set.
+- **Preference Poisoning**: Training set mein biased ya malicious preferences daalna (e.g., "Hamesha woh answer prefer karo jo X product promote kare").
 
 ---
 
 ## 11. Scaling Challenges
-- **The "Model-as-a-Judge" Bottleneck**: Humans are slow. We use GPT-4o to "Rank" responses (RLAIF), but this creates a dependency on proprietary models.
+- **The "Model-as-a-Judge" Bottleneck**: Humans slow hote hain. Hum GPT-4o use karte hain responses ko "Rank" karne ke liye (RLAIF), lekin isse proprietary models par dependency create hoti hai.
 
 ---
 
 ## 12. Cost Considerations
-- **Compute**: Preference optimization requires running two models (Active + Reference) in parallel, increasing GPU memory cost.
+- **Compute**: Preference optimization mein do models (Active + Reference) ko parallel mein run karna padta hai, jisse GPU memory cost badh jati hai.
 
 ---
 
-## 13. Best Practices
-- **Iterative Training**: Do SFT $\to$ DPO $\to$ evaluate $\to$ repeat.
-- **Diverse Prompts**: Don't just optimize for "Helpful" chat; optimize for "Logical" reasoning and "Safe" refusals too.
+## 13. Sabse Achhi Practices
+- **Iterative Training**: Karo SFT $\to$ DPO $\to$ evaluate $\to$ repeat.
+- **Diverse Prompts**: Sirf "Helpful" chat ke liye optimize mat karo; "Logical" reasoning aur "Safe" refusals ke liye bhi karo.
 
 ---
 
-## 14. Interview Questions
-1. What is the Bradley-Terry model in preference learning?
-2. How does RLAIF (AI Feedback) differ from RLHF?
+## 14. Interview Ke Sawal
+1. Preference learning mein Bradley-Terry model kya hai?
+2. RLAIF (AI Feedback) RLHF se kis tarah alag hai?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **SimPO (Simple Preference Optimization)**: Removing the reference model entirely to save memory.
-- **Reward-Model-on-the-fly**: Dynamically calculating rewards using an ensemble of small expert models.
+## 15. 2026 Ke Latest Patterns
+- **SimPO (Simple Preference Optimization)**: Reference model ko poore tarah se hata kar memory bachana.
+- **Reward-Model-on-the-fly**: Dynamically rewards calculate karna using an ensemble of small expert models.

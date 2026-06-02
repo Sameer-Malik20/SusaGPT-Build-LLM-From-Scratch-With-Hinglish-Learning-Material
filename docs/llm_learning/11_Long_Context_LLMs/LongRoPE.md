@@ -1,24 +1,24 @@
-# LongRoPE: Reaching 2 Million Tokens
+# LongRoPE: 2 Million Tokens Tak Pahunchana
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Shuruaat Ke Liye Hinglish Samjhaya 🇮🇳
 Bhai, socho tumne 4k context window ke liye RoPE scaling use ki, phir 128k ke liye YaRN use kiya. Lekin jab tumhe 20 Lakh (2 Million) tokens tak jana ho, toh purani math kaam nahi karti. 
 
 **LongRoPE** Microsoft Research ka ek naya approach hai. Isne dekha ki model ki har "Dimension" alag tarah se context ko yaad rakhti hai. Toh LongRoPE ne kya kiya? Usne ek **Evolutionary Algorithm** (AI se search karwaya) use kiya taaki har dimension ke liye "Perfect" scaling factor dhunda ja sake. Isse humne Llama-2-7B jaise models ko bina intelligence khoye 2 Million tokens tak stretch kar diya. Yeh context extension ki "Limit" ko tod deta hai.
 
 ---
 
-## 2. Deep Technical Explanation
-LongRoPE (2024/2025 research) identifies three key pillars for extreme context extension:
-- **Non-uniform RoPE Rescaling**: Instead of a single scaling factor $s$, it uses a vector of scaling factors $\vec{s}$ for different dimensions.
-- **Evolutionary Search**: Using an automated search to find the optimal $\vec{s}$ that minimizes perplexity on long sequences.
-- **Short-Context Recovery**: Fine-tuning with a mix of long and short documents to ensure the model doesn't become "Dumb" on 512-token prompts after being extended to 2M.
+## 2. Gehri Technical Vyakhya
+LongRoPE (2024/2025 research) extreme context extension ke liye teen key pillars identify karta hai:
+- **Non-uniform RoPE Rescaling**: Ek single scaling factor $s$ ki jagah, yeh different dimensions ke liye scaling factors $\vec{s}$ ka vector use karta hai.
+- **Evolutionary Search**: Automated search use karke optimal $\vec{s}$ dhunda jata hai jo long sequences par perplexity ko minimize kare.
+- **Short-Context Recovery**: Long aur short documents ke mixture se fine-tuning kiya jata hai taaki model 2M extended hone ke baad 512-token prompts par "Buddhu" na ban jaaye.
 
 ---
 
-## 3. Mathematical Intuition
-Standard RoPE scaling uses a constant $s$. LongRoPE replaces it with $\lambda_i$:
+## 3. Ganitiya Samajh
+Standard RoPE scaling ek constant $s$ use karta hai. LongRoPE isse $\lambda_i$ se replace karta hai:
 $$\theta_i = \theta \cdot \lambda_i$$
-where $\lambda_i$ is searched to balance the tradeoff between **Interpolation** (squeezing) and **Extrapolation** (expanding). This prevents the "Position Collapse" where the model thinks two different distant positions are the same.
+jahan $\lambda_i$ ko search kiya jata hai taaki **Interpolation** (squeezing) aur **Extrapolation** (expanding) ke beech tradeoff balance ho. Yeh "Position Collapse" ko rokta hai jahan model sochta hai ki do alag door positions ek jaise hain.
 
 ---
 
@@ -38,8 +38,8 @@ graph TD
 
 ---
 
-## 5. Production-ready Examples
-Implementing a non-uniform scaling (Simplified):
+## 5. Production Ke Liye Taiyar Examples
+Non-uniform scaling ko implement karna (Simplified):
 
 ```python
 # Conceptual LongRoPE implementation
@@ -54,22 +54,22 @@ def get_longrope_factors(dim, target_context):
 
 ---
 
-## 6. Real-world Use Cases
-- **Full Source Code Repo**: Reading the entire Linux Kernel source code in one prompt.
-- **Long-term Financial History**: Analyzing 10 years of bank statements and emails to find a specific transaction pattern.
-- **Personalized AI**: Remembering every conversation you've ever had with the user.
+## 6. Asli Duniya Ke Upayog Cases
+- **Full Source Code Repo**: Poore Linux Kernel source code ko ek prompt mein padh lena.
+- **Long-term Financial History**: 10 saal ke bank statements aur emails ka analysis karke kisi specific transaction pattern ko dhundna.
+- **Personalized AI**: User ke saath har baat cheet ko yaad rakhna.
 
 ---
 
 ## 7. Failure Cases
-- **Compute Ceiling**: Even if the model has a 2M window, calculating the attention takes forever (Minutes per response).
-- **Search Latency**: Finding the optimal scaling factors for a new model can take 1000s of GPU hours.
+- **Compute Ceiling**: Agar model ke paas 2M window bhi ho, attention calculate karna bahut waqt leta hai (Minutes per response).
+- **Search Latency**: Naye model ke liye optimal scaling factors dhundhne mein hazaaron GPU hours lag sakte hain.
 
 ---
 
 ## 8. Debugging Guide
-1. **Dimension Saturation**: Check if many dimensions have collapsed to the same value (Indicates poor search).
-2. **Short-context degradation**: Ensure the model can still solve a simple "2+2" question.
+1. **Dimension Saturation**: Check karo ki kai dimensions ek hi value mein collapse ho gaye hain (Yeh poor search ko indicate karta hai).
+2. **Short-context degradation**: Ensure karo ki model abhi bhi "2+2" jaisa simple sawaal solve kar sakta hai.
 
 ---
 
@@ -82,33 +82,33 @@ def get_longrope_factors(dim, target_context):
 
 ---
 
-## 10. Security Concerns
-- **Context Injection**: Since the window is so large, an attacker can hide 1.9 Million tokens of "Malicious Noise" and 100 tokens of "Instruction" that the user never sees.
+## 10. Security Chintayein
+- **Context Injection**: Window itna bada hone ki wajah se, attacker 1.9 Million tokens "Malicious Noise" aur 100 tokens "Instruction" chhupa sakta hai jo user kabhi nahi dekhta.
 
 ---
 
-## 11. Scaling Challenges
-- **VRAM**: 2 Million tokens requires ~320GB of VRAM just for the KV cache (using 8-bit GQA). You need an H100 8-GPU node for a single user!
+## 11. Scaling Chunautiyan
+- **VRAM**: 2 Million tokens ke liye around 320GB VRAM chahiye sirf KV cache ke liye (8-bit GQA use karte hue). Ek single user ke liye H100 8-GPU node chahiye!
 
 ---
 
-## 12. Cost Considerations
-- **Memory Cost**: Storing 2M tokens in VRAM is 16x more expensive than 128k context.
+## 12. Cost Vichar
+- **Memory Cost**: 2M tokens ko VRAM mein store karna 128k context se 16x zyada mahanga hai.
 
 ---
 
 ## 13. Best Practices
-- Use **LongRoPE** only when RAG fails due to "Cross-document reasoning" needs.
-- Combine with **KV Cache Quantization** (4-bit) to reduce VRAM requirements.
+- **LongRoPE** ko tabhi use karo jab RAG fail ho "Cross-document reasoning" ki wajah se.
+- **KV Cache Quantization** (4-bit) ke saath combine karo taaki VRAM requirements kam ho.
 
 ---
 
 ## 14. Interview Questions
-1. Why is non-uniform scaling better than uniform scaling for RoPE?
-2. What are the three pillars of the LongRoPE paper?
+1. RoPE ke liye non-uniform scaling uniform scaling se behtar kyun hai?
+2. LongRoPE paper ke teen pillars kya hain?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **Activation Sharding**: Splitting the 2M context window across multiple GPUs without using Ring Attention.
-- **Dynamic Context Windows**: The model starts with 4k window and "Expands" its scaling factors only as the prompt grows.
+## 15. 2026 Ke Naye Patterns
+- **Activation Sharding**: 2M context window ko multiple GPUs par split karna bina Ring Attention use kiye.
+- **Dynamic Context Windows**: Model 4k window se start hota hai aur "Expands" apne scaling factors ko tabhi karta hai jab prompt bada hota hai.

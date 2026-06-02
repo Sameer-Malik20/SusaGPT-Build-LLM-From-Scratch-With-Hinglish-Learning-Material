@@ -1,19 +1,19 @@
-# 🧠 Neural Networks from Scratch — Complete Guide
-> **Level:** Beginner → Intermediate | **Language:** Hinglish | **Goal:** Master perceptrons, backpropagation, and activation functions
+# 🧠 Neural Networks from Scratch — Poori Guide
+> **Level:** Beginner se Intermediate | **Language:** Hinglish | **Goal:** Perceptrons, backpropagation, aur activation functions master karna.
 
 ---
 
-## 🧭 Core Concepts (Concept-First)
+## 🧭 Core Concepts (Pehle Concept)
 
-- Perceptron: The basic building block of neural networks
+- Perceptron: Neural networks ka basic building block
 - Activation Functions: ReLU, Sigmoid, Tanh, Softmax
-- Backpropagation: How networks learn from errors
-- Gradient Descent: Optimization fundamentals
-- Layer stacking: Building deep networks
+- Backpropagation: Kaise networks errors se seekhte hain
+- Gradient Descent: Optimization ke fundamentals
+- Layer stacking: Deep networks banana
 
 ---
 
-## 1. 🧩 Perceptron — The Basic Unit
+## 1. 🧩 Perceptron — Mool Ikai
 
 Ek perceptron simple classifier hai jo inputs lekar output deta hai.
 
@@ -133,11 +133,11 @@ print(f"Probabilities: {probs}")  # Sum = 1.0
 
 ---
 
-## 3. 🔄 Backpropagation — The Learning Algorithm
+## 3. 🔄 Backpropagation — Seekhne ka Algorithm
 
 Backpropagation error ko peeche propagate karke weights update karta hai.
 
-### Complete Neural Network Implementation
+### Poora Neural Network Implementation
 
 ```python
 class NeuralNetwork:
@@ -241,7 +241,7 @@ def adam(gradients, m, v, t, beta1=0.9, beta2=0.999, epsilon=1e-8):
 
 ---
 
-## 5. 🏗️ Building a Complete Network
+## 5. 🏗️ Poora Network Banana
 
 ```python
 # XOR problem solve karo
@@ -262,10 +262,10 @@ for x in X:
 
 ## 🧪 Exercises
 
-### Exercise 1: Build a Digit Classifier
+### Exercise 1: Digit Classifier Banana
 MNIST data use karke neural network train karo.
 
-### Exercise 2: Visualize Hidden Layer Weights
+### Exercise 2: Hidden Layer Weights Visualize Karna
 Dekho hidden layers ne kya features learn kiye hain.
 
 ---
@@ -278,4 +278,4 @@ Dekho hidden layers ne kya features learn kiye hain.
 - [ ] Gradient descent types compare kar sakte ho
 - [ ] Complete network implement kar sakte ho
 
-> **Tip:** Neural networks boil down to: Forward pass → Compute loss → Backward pass → Update weights!
+> **Tip:** Neural networks ka essence: Forward pass → Loss compute karo → Backward pass → Weights update karo!

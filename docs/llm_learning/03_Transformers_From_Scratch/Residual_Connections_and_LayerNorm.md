@@ -1,5 +1,7 @@
 # Residual Connections & LayerNorm: The Stabilizers
 
+---
+
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
 Bhai, socho tum ek 100-floor ki building bana rahe ho. Agar tum har floor ka wazan pichle floor par daalte jaoge, toh niche wala floor dab jayega. 
 
@@ -8,21 +10,21 @@ Transformers mein bhi 100+ layers ho sakti hain. **Residual Connections** (Skip 
 ---
 
 ## 2. Deep Technical Explanation
-Deep networks suffer from signal degradation and gradient vanishing/explosion.
-- **Residual Connections**: Introduced by ResNet, implemented as $y = F(x) + x$. It creates an "identity shortcut" that allows gradients to flow unimpeded to early layers.
-- **Layer Normalization**: Normalizes the activations across the features for each training example. Unlike BatchNorm, it's independent of batch size, making it ideal for Transformers.
-- **Pre-Norm vs Post-Norm**: Modern LLMs use **Pre-Norm** (applying LN before the sub-layer) because it results in much more stable training for very deep networks.
+Deep networks signal degradation aur gradient vanishing/explosion se suffer karte hain.
+- **Residual Connections**: ResNet ne introduce kiya, implement kiya gaya $y = F(x) + x$. Yeh ek 'identity shortcut' create karta hai jo gradients ko bina rukawat early layers tak flow karne deta hai.
+- **Layer Normalization**: Har training example ke liye features ke across activations ko normalize karta hai. BatchNorm ke unlike, ye batch size se independent hai, jo ise Transformers ke liye ideal banata hai.
+- **Pre-Norm vs Post-Norm**: Modern LLMs **Pre-Norm** use karte hain (sub-layer se pehle LN apply karna) kyunki isse bahut deep networks mein zyada stable training hoti hai.
 
 ---
 
 ## 3. Mathematical Intuition
 **Residual logic**:
 $$\frac{\partial (F(x) + x)}{\partial x} = \frac{\partial F(x)}{\partial x} + 1$$
-The "$+1$" term ensures the gradient doesn't vanish even if $F(x)$ is very small.
+The "$+1$" term ensure karta hai ki gradient vanish na kare even agar $F(x)$ bahut chhota ho.
 
 **LayerNorm**:
 $$\hat{x} = \frac{x - \mu}{\sqrt{\sigma^2 + \epsilon}} \cdot \gamma + \beta$$
-where $\mu$ and $\sigma$ are mean and variance across the feature dimension.
+jahaan $\mu$ aur $\sigma$ mean aur variance hain feature dimension ke across.
 
 ---
 
@@ -39,7 +41,7 @@ graph TD
 ---
 
 ## 5. Production-ready Examples
-Implementing RMSNorm (The Llama variant of LayerNorm):
+RMSNorm implement karte hain (LayerNorm ka Llama variant):
 
 ```python
 import torch
@@ -64,20 +66,20 @@ class RMSNorm(nn.Module):
 ---
 
 ## 6. Real-world Use Cases
-- **Foundation of Deep Models**: Enabling the training of 70B+ parameter models.
-- **Stability**: Prevents the "NaN" loss problem during massive distributed training.
+- **Foundation of Deep Models**: 70B+ parameter models ko train karne mein enable karta hai.
+- **Stability**: Massive distributed training ke dauran 'NaN' loss problem se prevent karta hai.
 
 ---
 
 ## 7. Failure Cases
-- **Identity Collapse**: If $F(x)$ becomes 0, the model just copies the input, learning nothing.
-- **Scale Mismatch**: If $\gamma$ and $\beta$ in LN are not initialized properly, training will diverge.
+- **Identity Collapse**: Agar $F(x)$ 0 ho jaye, toh model sirf input copy karta hai, kuch nahi seekhta.
+- **Scale Mismatch**: Agar LN mein $\gamma$ aur $\beta$ sahi se initialize na hoon, toh training diverge ho jayegi.
 
 ---
 
 ## 8. Debugging Guide
-1. **Gradient Norm Flow**: If gradients are 100x smaller in layer 1 than layer 50, your residual connections might be broken.
-2. **Feature Saturation**: Check if LN is squashing all values to the same number.
+1. **Gradient Norm Flow**: Agar gradients layer 1 mein layer 50 se 100x chhote hain, toh aapke residual connections broken ho sakte hain.
+2. **Feature Saturation**: Check karo ki kya LN saare values ko ek hi number mein squash kar raha hai.
 
 ---
 
@@ -91,32 +93,32 @@ class RMSNorm(nn.Module):
 ---
 
 ## 10. Security Concerns
-- **Precision Poisoning**: Manipulating values to be extremely close to $\epsilon$ to trigger division by zero errors.
+- **Precision Poisoning**: Values ko $\epsilon$ ke bahut close manipulate karke division by zero errors trigger karna.
 
 ---
 
 ## 11. Scaling Challenges
-- **Numerical Stability**: In FP16, mean/variance calculations in LN can overflow. Use BF16 or FP32 for LN.
+- **Numerical Stability**: FP16 mein, LN ke mean/variance calculations overflow kar sakte hain. LN ke liye BF16 ya FP32 use karo.
 
 ---
 
 ## 12. Cost Considerations
-- **Memory**: LN requires storing intermediate means and variances for the backward pass.
+- **Memory**: LN ko backward pass ke liye intermediate means aur variances store karne padte hain.
 
 ---
 
 ## 13. Best Practices
-- Always use **Pre-Norm** architecture.
-- Use **RMSNorm** for a small speed boost in large models.
+- Hamesha **Pre-Norm** architecture use karo.
+- Large models mein thoda speed boost ke liye **RMSNorm** use karo.
 
 ---
 
 ## 14. Interview Questions
-1. Why is LayerNorm preferred over BatchNorm in Transformers?
-2. How do Residual Connections solve the Vanishing Gradient problem?
+1. Transformers mein LayerNorm ko BatchNorm se kyun prefer kiya jata hai?
+2. Residual Connections Vanishing Gradient problem ko kaise solve karte hain?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **DeepNorm**: A specialized initialization and scaling for LN that allows training up to 1000 layers.
-- **Normalization-Free Transformers**: Research into architectures that use clever initialization to remove LN entirely.
+- **DeepNorm**: LN ke liye ek specialized initialization aur scaling jo 1000 layers tak training allow karta hai.
+- **Normalization-Free Transformers**: Architectures mein research jo clever initialization use karke LN ko completely remove karte hain.

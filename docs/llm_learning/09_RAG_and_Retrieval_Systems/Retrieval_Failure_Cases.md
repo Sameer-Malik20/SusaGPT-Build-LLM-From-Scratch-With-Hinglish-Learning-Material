@@ -1,4 +1,4 @@
-# Retrieval Failure Cases: Why RAG Hallucinates
+# Retrieval Failure Cases: RAG Hallucinate Kyun Karta Hai?
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
 Bhai, log sochte hain ki RAG use karne se model hallucinate karna band kar dega. Yeh bilkul galat hai! 
@@ -13,18 +13,18 @@ In failure cases ko samajhna tumhe ek "Prompt Wrapper" se "RAG Architect" banata
 ---
 
 ## 2. Deep Technical Explanation
-Critical failure modes in RAG systems:
-- **Low Recall**: The retriever fails to find any relevant chunks (Semantic gap).
-- **Low Precision**: The retriever finds too many "False Positives" that confuse the LLM.
-- **Lost in the Middle**: The LLM ignores relevant info if it's placed in the middle of a long context window.
-- **Negative Rejection**: The LLM answers a question even when the retrieved documents don't have the answer (It should have said "I don't know").
+RAG systems mein critical failure modes:
+- **Low Recall**: Retriever kisi bhi relevant chunk ko dhundhne mein fail ho jata hai (Semantic gap).
+- **Low Precision**: Retriever bohot saare "False Positives" utha leta hai jo LLM ko confuse karte hain.
+- **Lost in the Middle**: LLM relevant info ko ignore kar deta hai agar woh long context window ke middle mein placed ho.
+- **Negative Rejection**: LLM ek question ka answer de deta hai, jabki retrieved documents mein answer nahi hai (Use "I don't know" bolna chahiye tha).
 
 ---
 
 ## 3. Mathematical Intuition
-RAG Success Probability $P(S)$ is the product of two probabilities:
+RAG Success Probability $P(S)$ do probabilities ka product hai:
 $$P(S) = P(\text{Retrieval Success}) \times P(\text{Generation Success} | \text{Retrieval})$$
-If your retriever is 80% accurate and your generator is 80% accurate, your overall system is only **64% accurate** ($0.8 \times 0.8$). This "Cascading Error" is the biggest hurdle in production RAG.
+Agar aapka retriever 80% accurate hai aur generator 80% accurate hai, toh aapka overall system sirf **64% accurate** hai ($0.8 \times 0.8$). Yeh "Cascading Error" production RAG mein sabse badi hurdle hai.
 
 ---
 
@@ -42,7 +42,7 @@ graph TD
 ---
 
 ## 5. Production-ready Examples
-Testing for "Negative Rejection":
+"Negative Rejection" ke liye testing:
 
 ```python
 # Test if model admits ignorance
@@ -56,20 +56,20 @@ retrieved_docs = ["Company X sells shoes.", "Company X was founded in 1990."]
 ---
 
 ## 6. Real-world Use Cases
-- **Medical Advice**: A RAG system giving wrong drug dosages because it retrieved an old research paper.
-- **Financial Audit**: Missing a small transaction because it was buried in a 1000-page bank statement.
+- **Medical Advice**: Ek RAG system wrong drug dosages de raha hai kyunki usne ek old research paper retrieve kar liya.
+- **Financial Audit**: Ek chhoti si transaction miss ho gayi kyunki woh 1000-page bank statement mein dabi hui thi.
 
 ---
 
 ## 7. Failure Cases
-- **The "Yes-Man" Problem**: The LLM agrees with a false statement because it was found in a (wrong) retrieved document.
-- **Conflicting Context**: Document A says "Yes" and Document B says "No". The model flips a coin.
+- **The "Yes-Man" Problem**: LLM ek false statement se agree kar leta hai kyunki woh (galat) retrieved document mein mila.
+- **Conflicting Context**: Document A "Yes" kehta hai aur Document B "No". Model coin flip karta hai.
 
 ---
 
 ## 8. Debugging Guide
-1. **Faithfulness Score**: Use **RAGAS** or **TruLens** to measure if the answer is actually supported by the retrieved chunks.
-2. **Answer Relevance**: Measure if the answer actually addresses the user's query.
+1. **Faithfulness Score**: Measure karne ke liye **RAGAS** ya **TruLens** ka use karo ki kya answer actually retrieved chunks par based hai.
+2. **Answer Relevance**: Measure karo ki kya answer actually user ki query ko address karta hai.
 
 ---
 
@@ -83,33 +83,35 @@ retrieved_docs = ["Company X sells shoes.", "Company X was founded in 1990."]
 ---
 
 ## 10. Security Concerns
-- **RAG Injection**: Injecting a "Poisoned" document into the database that says "The admin password is 'password123'". When an admin asks about passwords, the RAG system retrieves this and lies.
+- **RAG Injection**: Database mein ek "Poisoned" document inject karna jisme likha ho "The admin password is 'password123'". Jab admin passwords ke baare mein poochta hai, toh RAG system yeh retrieve karke jhooth bol deta hai.
 
 ---
 
 ## 11. Scaling Challenges
-- **Semantic Drift**: As you add more documents, the vector space becomes "Crowded", making it harder to find specific, rare facts.
+- **Semantic Drift**: Jaise aap aur documents add karte hain, vector space "Crowded" ho jata hai, jisse specific, rare facts dhundhna mushkil ho jata hai.
 
 ---
 
 ## 12. Cost Considerations
-- **LLM Context Pricing**: Feeding 20 retrieved chunks to a model like GPT-4o for every query can cost $0.10+ per request.
+- **LLM Context Pricing**: Har query ke liye 20 retrieved chunks ko GPT-4o jaise model ko feed karna $0.10+ per request cost kar sakta hai.
 
 ---
 
 ## 13. Best Practices
-- **Strict Guardrails**: Tell the model: "Answer ONLY using the provided context. If you don't find it, say 'I don't know'."
-- **Re-rank Everything**: Never trust your vector search results blindly.
-- **Filter by Date**: Always prefer the "Newest" document in case of conflicting info.
+- **Strict Guardrails**: Model ko bolo: "Sirf provided context ka istemal karke answer do. Agar answer nahi milta, toh 'I don't know' bolo."
+- **Re-rank Everything**: Kabhi bhi apne vector search results par blindly trust mat karo.
+- **Filter by Date**: Conflicting info ki case mein hamesha "Newest" document ko prefer karo.
 
 ---
 
 ## 14. Interview Questions
-1. What is the difference between Retrieval Failure and Generation Failure?
-2. How do you measure the "Faithfulness" of a RAG system?
+1. Retrieval Failure aur Generation Failure mein kya difference hai?
+2. Aap RAG system ki "Faithfulness" kaise measure karte hain?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Context-Aware Decoding**: Modifying the model's logits at inference time to favor tokens found in the retrieved context.
-- **RAGAS (RAG Assessment)**: Using an LLM to automatically audit 1000s of RAG responses for accuracy and relevance.
+- **Context-Aware Decoding**: Inference time par model ke logits ko modify karna taaki retrieved context mein jo tokens hain unhe favor kiya jaye.
+- **RAGAS (RAG Assessment)**: Ek LLM ka use karke automatically 1000s of RAG responses ki accuracy aur relevance audit karna.
+
+```

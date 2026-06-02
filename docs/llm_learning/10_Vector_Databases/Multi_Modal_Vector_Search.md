@@ -1,4 +1,4 @@
-# Multi-Modal Vector Search: Images, Audio, and Text
+# Multi-Modal Vector Search: Images, Audio, aur Text
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
 Bhai, socho tumne Google par search kiya "Lal rang ki car" aur tumhe sirf photos milin. Yeh kaise hota hai? Google ne "Lal rang ki car" (Text) aur "Car ki Photo" (Image) dono ko ek hi space mein rakh diya hai.
@@ -8,19 +8,19 @@ Bhai, socho tumne Google par search kiya "Lal rang ki car" aur tumhe sirf photos
 ---
 
 ## 2. Deep Technical Explanation
-Multi-modal search maps different data modalities into a single **Joint Embedding Space**.
-- **CLIP (Contrastive Language-Image Pretraining)**: The foundation model from OpenAI. It trains an Image Encoder and a Text Encoder simultaneously to maximize the cosine similarity between (image, text) pairs.
-- **Image-to-Image**: Find visually similar images.
-- **Text-to-Image**: Search images using natural language descriptions.
-- **Audio-to-Text**: Search through podcasts or recordings based on semantic intent.
+Multi-modal search different data modalities ko ek single **Joint Embedding Space** mein map karta hai.
+- **CLIP (Contrastive Language-Image Pretraining)**: OpenAI ka foundation model. Ye Image Encoder aur Text Encoder ko simultaneously train karta hai taaki (image, text) pairs ke beech cosine similarity maximize ho.
+- **Image-to-Image**: Visually similar images dhundho.
+- **Text-to-Image**: Natural language descriptions ka use karke images search karo.
+- **Audio-to-Text**: Semantic intent ke basis par podcasts ya recordings mein search karo.
 
 ---
 
 ## 3. Mathematical Intuition
 Contrastive Learning Loss (**InfoNCE**):
-The objective is to minimize the distance between a positive pair $(I_i, T_i)$ and maximize it for $N-1$ negative pairs $(I_i, T_j)$.
+Objective ye hai ki positive pair $(I_i, T_i)$ ke beech distance ko minimize karo aur $N-1$ negative pairs $(I_i, T_j)$ ke liye maximize karo.
 $$\mathcal{L} = -\log \frac{\exp(\cos(I_i, T_i) / \tau)}{\sum_{j=1}^N \exp(\cos(I_i, T_j) / \tau)}$$
-where $\tau$ is a temperature parameter. This forces the model to create a "Shared Meaning" between pixels and words.
+jahan $\tau$ ek temperature parameter hai. Ye model ko pixels aur words ke beech "Shared Meaning" create karne ke liye force karta hai.
 
 ---
 
@@ -37,7 +37,7 @@ graph TD
 ---
 
 ## 5. Production-ready Examples
-Using `OpenCLIP` for Multi-modal search:
+Multi-modal search ke liye `OpenCLIP` ka use:
 
 ```python
 import open_clip
@@ -63,60 +63,60 @@ print(f"Probabilities: {similarity}")
 ---
 
 ## 6. Real-world Use Cases
-- **Visual Search**: Pointing your phone at a dress and finding it on Amazon.
-- **Content Moderation**: Automatically flagging images that match a "Violent" text description.
-- **Digital Asset Management**: Searching through 1M stock photos using text queries.
+- **Visual Search**: Apne phone ko ek dress par point karo aur Amazon par dhundho.
+- **Content Moderation**: Automatically un images ko flag karo jo "Violent" text description se match karein.
+- **Digital Asset Management**: Text queries ka use karke 1M stock photos mein search karna.
 
 ---
 
 ## 7. Failure Cases
-- **Attribute Confusion**: Model can't distinguish between "A man holding a dog" and "A dog holding a man". It captures "Man" and "Dog" but misses the relationship.
-- **Counting Errors**: Models like CLIP are notoriously bad at counting (e.g., "Three apples" vs "Two apples").
+- **Attribute Confusion**: Model "A man holding a dog" aur "A dog holding a man" ke beech distinguish nahi kar sakta. Ye "Man" aur "Dog" ko capture karta hai lekin relationship miss kar deta hai.
+- **Counting Errors**: CLIP jaise models counting mein notoriously bad hain (e.g., "Three apples" vs "Two apples").
 
 ---
 
 ## 8. Debugging Guide
-1. **Zero-Shot Accuracy**: Test the model on standard datasets like ImageNet without fine-tuning.
-2. **Feature Visualization**: Use UMAP to see if your Image vectors and Text vectors are actually clustering together for the same concepts.
+1. **Zero-Shot Accuracy**: Model ko standard datasets jaise ImageNet par test karo bina fine-tuning ke.
+2. **Feature Visualization**: UMAP ka use karo dekhne ke liye ki kya tumhare Image vectors aur Text vectors same concepts ke liye actually cluster kar rahe hain.
 
 ---
 
 ## 9. Tradeoffs
-| Feature | Unimodal (Text Only) | Multi-modal |
+| Feature | Unimodal (Sirf Text) | Multi-modal |
 |---|---|---|
 | Complexity | Low | High |
 | Search Scope | Text data | Images, Audio, Video |
-| Compute | Low | High (Large Vision Models)|
+| Compute | Low | High (Large Vision Models) |
 
 ---
 
 ## 10. Security Concerns
-- **Adversarial Noise**: Adding a tiny bit of "Invisible Noise" to an image that makes the model think it's something completely different (e.g., a "Gun" looks like a "Banana" to the AI).
+- **Adversarial Noise**: Image mein thoda sa "Invisible Noise" add karna jisse model ko lagta hai ki kuch completely different hai (e.g., AI ko "Gun" "Banana" jaisa lagta hai).
 
 ---
 
 ## 11. Scaling Challenges
-- **Video Search**: Encoding 24 frames per second for millions of videos is a massive compute bottleneck. We use "Keyframe Extraction" to solve this.
+- **Video Search**: Millions of videos ke liye 24 frames per second encode karna ek massive compute bottleneck hai. Hum ise solve karne ke liye "Keyframe Extraction" use karte hain.
 
 ---
 
 ## 12. Cost Considerations
-- **Vision Model Latency**: Image encoders (like ViT-L) are much heavier and slower than small text encoders (like MiniLM).
+- **Vision Model Latency**: Image encoders (jaise ViT-L) small text encoders (jaise MiniLM) se kaafi heavier aur slower hote hain.
 
 ---
 
 ## 13. Best Practices
-- Always **Normalize** both image and text vectors before search.
-- Use **ViT (Vision Transformer)** based encoders for state-of-the-art performance in 2026.
+- Hamesha search se pehle image aur text vectors ko **Normalize** karo.
+- 2026 mein state-of-the-art performance ke liye **ViT (Vision Transformer)** based encoders ka use karo.
 
 ---
 
 ## 14. Interview Questions
-1. How does the contrastive loss function work in CLIP?
-2. What is the "Modality Gap" in multi-modal vector spaces?
+1. CLIP mein contrastive loss function kaise kaam karta hai?
+2. Multi-modal vector spaces mein "Modality Gap" kya hai?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Any-to-Any Models**: Models that can take Image, Audio, and Text as input and output anything (e.g., GPT-4o, Gemini 1.5).
-- **Temporal Video Embeddings**: Vectors that capture the "Action" or "Story" over time in a video, not just static frames.
+- **Any-to-Any Models**: Models jo Image, Audio, aur Text as input le sakte hain aur kuch bhi output kar sakte hain (e.g., GPT-4o, Gemini 1.5).
+- **Temporal Video Embeddings**: Vectors jo video mein time ke saath "Action" ya "Story" capture karte hain, sirf static frames nahi.

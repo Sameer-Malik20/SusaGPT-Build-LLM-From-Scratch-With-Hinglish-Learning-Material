@@ -1,11 +1,11 @@
-# 🎛️ Advanced Fine-tuning Techniques - LoRA, QLoRA & PEFT Mastery
+# 🎛️ Advanced Fine-tuning Techniques - LoRA, QLoRA aur PEFT Mastery
 > **Level:** Intermediate → Expert | **Language:** Hinglish | **Goal:** LLMs ke liye parameter-efficient fine-tuning methods master karna
 ## 🧭 Core Concepts (Concept-First)
-+- Parameter-Efficient Fine-tuning: Why full fine-tuning is impractical for large models
-+- LoRA Mechanics: Low-rank decomposition, adapter matrices, and targeted weight updates
-+- QLoRA Innovation: 4-bit quantization combined with LoRA for memory efficiency
-+- PEFT Framework: Unified interface for various parameter-efficient methods
-+- Practical Applications: Resource-constrained fine-tuning, adapter composition, merging strategies
++- Parameter-Efficient Fine-tuning: Large models ke liye full fine-tuning impractical kyun hai?
++- LoRA Mechanics: Low-rank decomposition, adapter matrices, aur targeted weight updates
++- QLoRA Innovation: Memory efficiency ke liye 4-bit quantization ko LoRA ke saath combine
++- PEFT Framework: Various parameter-efficient methods ke liye unified interface
++- Practical Applications: Resource-constrained fine-tuning, adapter composition, aur merging strategies
 ---
 
 ## 📋 Table of Contents: PEFT Methods
@@ -24,8 +24,8 @@
 
 Large models (7B+ parameters) ko fine-tune karne ke liye chahiye:
 - **Massive GPU memory:** 7B model in FP16 = ~14GB (sirf weights ke liye)
-- **Gradient storage:** Additional 14GB for gradients
-- **Optimizer states:** AdamW needs 2x parameters = 28GB
+- **Gradient storage:** Gradients ke liye additional 14GB
+- **Optimizer states:** AdamW ko 2x parameters chahiye = 28GB
 - **Total:** ~56GB for 7B model (consumer GPUs par impossible)
 
 **Solution:** Sirf chhota subset of parameters update karo!
@@ -46,7 +46,7 @@ jahaan:
 - **Applied to:** Query, Key, Value, aur Output projections in attention layers
 - **Rank selection:** Typically 4, 8, ya 16 (higher = more capacity)
 - **Alpha parameter:** Learned weights ke liye scaling factor
-- **Dropout:** Optional for regularization
+- **Dropout:** Regularization ke liye optional hai
 
 ### C. Code Example (PyTorch-like)
 ```python
@@ -76,9 +76,9 @@ class LoRALayer(nn.Module):
 
 ### A. The Innovation
 QLoRA combine karta hai:
-1. **4-bit quantization** of base model (NF4 format)
+1. **4-bit quantization** base model ka (NF4 format)
 2. **Paged Optimizers** memory spikes handle karne ke liye
-3. **Double quantization** of quantization constants
+3. **Double quantization** quantization constants ka
 
 ### B. Memory Savings
 | Component | Full FT (16-bit) | LoRA (16-bit) | QLoRA (4-bit) |
@@ -128,9 +128,9 @@ Hugging Face ka PEFT library sabhi methods ke liye unified interface provide kar
 
 ### A. Supported Methods
 - **LoRA:** Low-Rank Adaptation
-- **Prefix Tuning:** Learnable prompt embeddings
-- **P-Tuning:** Prompt tuning with continuous prompts
-- **Adapter Layers:** Small bottleneck layers
+- **Prefix Tuning:** Learnable prompt embeddings (sikhne wale prompt embeddings)
+- **P-Tuning:** Continuous prompts ke saath prompt tuning
+- **Adapter Layers:** Chhote bottleneck layers
 - **IA3:** Infused Adapter by Inhibiting and Amplifying Inner Activations
 
 ### B. Training Workflow
@@ -167,16 +167,16 @@ trainer.train()
 
 | Scenario | Recommended Method | Kyun |
 |----------|-------------------|-----|
-| **Single consumer GPU (8-12GB)** | QLoRA | Maximum memory savings |
-| **Multiple GPUs, abundant memory** | LoRA | Simpler, no quantization overhead |
-| **Need to switch between tasks quickly** | LoRA adapters | Easy adapter swapping |
-| **Very limited data (< 100 examples)** | Prefix Tuning | Less prone to overfitting |
-| **Production deployment** | Merged LoRA | Single model, no overhead |
+| **Single consumer GPU (8-12GB)** | QLoRA | Maximum memory savings (memory ki bachat maximum) |
+| **Multiple GPUs, abundant memory** | LoRA | Simpler, quantization overhead nahi |
+| **Need to switch between tasks quickly** | LoRA adapters | Adapter swapping easy |
+| **Very limited data (< 100 examples)** | Prefix Tuning | Overfitting hona kam |
+| **Production deployment** | Merged LoRA | Single model, overhead nahi |
 
 ### Performance Trade-offs
 - **Accuracy:** Full FT ≥ LoRA > QLoRA (chhota gap, typically < 1%)
-- **Training speed:** LoRA/QLoRA 2-3x faster than full FT
-- **Inference latency:** Merged LoRA = base model, unmerged has small overhead
+- **Training speed:** LoRA/QLoRA full FT se 2-3x fast
+- **Inference latency:** Merged LoRA = base model, unmerged mein small overhead hota hai
 
 ---
 
@@ -208,8 +208,8 @@ trainer.train()
 
 ### B. Optimization Techniques
 - **Gradient Checkpointing:** Compute ke badle memory trade
-- **Flash Attention:** Faster attention computation
-- **Gradient Accumulation:** Effective larger batch sizes
+- **Flash Attention:** Fast attention computation
+- **Gradient Accumulation:** Effective larger batch sizes ke liye
 
 ### C. Adapter Merging & Arithmetic
 - **Task arithmetic:** Adapter weights ko add/subtract karna
@@ -228,7 +228,7 @@ trainer.train()
 ### Libraries & Tools
 - **PEFT Library:** Hugging Face ka official PEFT implementation
 - **bitsandbytes:** 8-bit aur 4-bit quantization
-- **Axolotl:** Easy fine-tuning framework
+- **Axolotl:** Aasan fine-tuning framework
 - **Unsloth:** Consumer hardware ke liye optimized fine-tuning
 
 ---

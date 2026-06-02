@@ -1,4 +1,4 @@
-# Monitoring & Observability: Seeing Inside the Black Box
+# Monitoring aur Observability: Black Box ke Andar Dekhna
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
 Bhai, jab tumhara AI system production mein jata hai, toh woh ek "Black Box" ban jata hai. Tumhe kaise pata chalega ki woh sahi answers de raha hai ya nahi? Ya phir users use kaise use kar rahe hain? 
@@ -10,24 +10,24 @@ Bina sahi monitoring ke, tum tab tak nahi jaonoge ki tumhara AI "Pagal" (Halluci
 
 ---
 
-## 2. Deep Technical Explanation
-Observability for LLMs goes beyond standard HTTP metrics.
-- **Traces**: Seeing the full lifecycle of a request - from the user's query to the vector search, to the prompt construction, to the final model output.
-- **Span Analysis**: Measuring how long each sub-step takes (e.g., "Vector search took 200ms, Model generation took 1.5s").
-- **Quality Drift**: Using a "Shadow Model" or an "LLM-Judge" to score production outputs in real-time.
-- **Cost Tracking**: Attributing token usage to specific users, features, or organizations.
+## 2. Gehri Technical Vyakhya
+LLMs ke liye Observability standard HTTP metrics se aage badhti hai.
+- **Traces**: Request ka full lifecycle dekhna - user ke query se lekar vector search, prompt construction, aur final model output tak.
+- **Span Analysis**: Har sub-step ka time measure karna (e.g., "Vector search ne 200ms liya, Model generation ne 1.5s liya").
+- **Quality Drift**: "Shadow Model" ya "LLM-Judge" ka use karke production outputs ko real-time mein score karna.
+- **Cost Tracking**: Token usage ko specific users, features, ya organizations ke hisaab se attribute karna.
 
 ---
 
 ## 3. Mathematical Intuition
 **Drift Detection**:
-We monitor the distribution of embeddings of user queries $P_{queries}$. If the distribution shifts significantly (measured using **Kullback-Leibler Divergence** or **Cosine Similarity** mean shift), it means users are asking things the model wasn't prepared for.
+Hum user queries ke embeddings ki distribution monitor karte hain $P_{queries}$. Agar distribution significantly shift hoti hai (measured using **Kullback-Leibler Divergence** ya **Cosine Similarity** mean shift), iska matlab hai ki users aisi cheezein poochh rahe hain jinke liye model prepared nahi tha.
 $$D_{KL}(P || Q) = \sum_i P(i) \log \frac{P(i)}{Q(i)}$$
-A high $D_{KL}$ is a signal to update your RAG database or fine-tune your model.
+High $D_{KL}$ ek signal hai ki apna RAG database update karein ya apne model ko fine-tune karein.
 
 ---
 
-## 4. Architecture Diagrams
+## 4. Architecture ke Diagrams
 ```mermaid
 graph LR
     User[User] --> App[App Server]
@@ -46,7 +46,7 @@ graph LR
 ---
 
 ## 5. Production-ready Examples
-Using `Arize Phoenix` for OTel tracing (Conceptual):
+`Arize Phoenix` ka upyog karte hue OTel tracing ke liye (Conceptual):
 
 ```python
 from phoenix.trace.openai import OpenAIInstrumentor
@@ -65,45 +65,45 @@ OpenAIInstrumentor().instrument()
 ---
 
 ## 6. Real-world Use Cases
-- **Enterprise Support**: Detecting when the model is frequently saying "I don't know" to specific product questions (Signal to add more docs to RAG).
-- **Abuse Detection**: Flagging users who are trying to "Jailbreak" the model by analyzing their trace history.
+- **Enterprise Support**: Model jab specific product questions par baar baar "I don't know" bol raha ho toh detect karna (RAG mein aur docs add karne ka signal).
+- **Abuse Detection**: Un users ko flag karna jo model ko "Jailbreak" karne ki koshish kar rahe hain, unke trace history ko analyze karke.
 
 ---
 
 ## 7. Failure Cases
-- **Metric Overload**: Monitoring 1000 different things and ignoring the 1 thing that actually matters (Accuracy).
-- **Latency of Observability**: If your monitoring system is slow, it might slow down the user's response too much. Use **Asynchronous logging**.
+- **Metric Overload**: 1000 alag alag cheezein monitor karna aur 1 cheez jo actually matters (Accuracy) ko ignore karna.
+- **Latency of Observability**: Agar aapka monitoring system slow hai, toh yeh user ke response ko bhi slow kar sakta hai. **Asynchronous logging** ka upyog karein.
 
 ---
 
 ## 10. Security Concerns
-- **PII in Logs**: Traces often contain the full user prompt and model response. If these logs aren't encrypted or access-controlled, they are a massive privacy risk.
+- **PII in Logs**: Traces mein aksar full user prompt aur model response hota hai. Agar yeh logs encrypted nahi hain ya access-controlled nahi hain, toh yeh ek bada privacy risk hai.
 
 ---
 
 ## 11. Scaling Challenges
-- **Massive Trace Volumes**: Storing every single token for a system with 1M users can take petabytes of space. Use **Sampling** (e.g., log only 1% of successful requests but 100% of errors).
+- **Massive Trace Volumes**: 1M users wale system ke har token ko store karna petabytes space le sakta hai. **Sampling** ka upyog karein (e.g., successful requests ka sirf 1% log karein lekin errors ka 100%).
 
 ---
 
 ## 12. Cost Considerations
-- **Storage Cost**: Many observability platforms charge by the number of "Spans" or "Tokens" logged.
+- **Storage Cost**: Kai observability platforms "Spans" ya "Tokens" logged ke hisaab se charge karte hain.
 
 ---
 
 ## 13. Best Practices
-- **TTFT (Time to First Token)**: This is the most important latency metric for user experience.
-- **Log the "Retrieved Chunks"**: If the answer is wrong, you need to know if the retriever failed or the generator failed.
-- **Use OpenTelemetry (OTel)**: Don't lock yourself into one vendor's tracing format.
+- **TTFT (Time to First Token)**: User experience ke liye yeh sabse important latency metric hai.
+- **Log the "Retrieved Chunks"**: Agar answer galat hai, toh aapko yeh jaanna hoga ki retriever failed ya generator failed.
+- **Use OpenTelemetry (OTel)**: Ek vendor ke tracing format mein bandh na jaayein.
 
 ---
 
 ## 14. Interview Questions
-1. What is the difference between Monitoring and Observability in the context of LLMs?
-2. How would you detect "Model Drift" in a production RAG application?
+1. LLMs ke context mein Monitoring aur Observability mein kya antar hai?
+2. Production RAG application mein aap "Model Drift" kaise detect karenge?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **AI-Native Observability**: Using a small model to "Watch" your production traces and alert you only when it finds something "Interesting" or "Wrong".
-- **Semantic Monitoring**: Monitoring the "Meanings" of user queries in vector space to find gaps in your knowledge base automatically.
+## 15. 2026 ke Latest Patterns
+- **AI-Native Observability**: Ek chhote model ka upyog karke aapke production traces ko "Watch" karna aur aapko tab alert karna jab woh kuch "Interesting" ya "Wrong" paaye.
+- **Semantic Monitoring**: Vector space mein user queries ke "Meanings" ko monitor karna taaki aapke knowledge base mein automatically gaps find ho.

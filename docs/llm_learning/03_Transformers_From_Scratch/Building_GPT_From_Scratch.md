@@ -1,36 +1,36 @@
-# Building GPT From Scratch (Karpathy Style+)
+# GPT Ko Scratch Se Banana (Karpathy Style+)
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Shuruaat Ke Liye Hinglish Explanation 🇮🇳
 Bhai, agar tumhe sach mein samajhna hai ki LLM kaise kaam karta hai, toh tumhe use ZERO se banana padega.
 
 GPT (Generative Pre-trained Transformer) banana koi rocket science nahi hai. Yeh asal mein bas ek "Lego set" ki tarah hai. Hum pehle tokens banate hain, phir unhe space mein rakhte hain (Embeddings), phir "Self-Attention" ka dimaag lagate hain, aur end mein ek "Head" lagate hain jo batata hai ki agla word kya hoga. Is guide mein hum wahi Lego pieces jod kar ek chota sa "GPT" banayenge jo text generate kar sake.
 
 ---
 
-## 2. Deep Technical Explanation
-Building a GPT model involves implementing the **Decoder-only Transformer** architecture:
-- **Tokenization**: Converting characters or words into integers.
-- **Embedding Table**: A lookup table for vectors.
-- **Positional Encoding**: Usually learned or sinusoidal to give sequence order.
-- **Transformer Block**: Comprising Multi-Head Self-Attention (MHSA) and a Feed-Forward Network (FFN).
-- **Residual Connections**: $x + \text{Layer}(x)$ to prevent gradient vanishing.
-- **Layer Normalization**: Applied before each sub-block (Pre-norm is the modern standard).
+## 2. Gehri Technical Vyakhya
+GPT model banane mein **Decoder-only Transformer** architecture implement karna shamil hai:
+- **Tokenization**: Characters ya words ko integers mein convert karna.
+- **Embedding Table**: Vectors ke liye ek lookup table.
+- **Positional Encoding**: Usually learned ya sinusoidal hota hai jo sequence order deta hai.
+- **Transformer Block**: Jisme Multi-Head Self-Attention (MHSA) aur Feed-Forward Network (FFN) hote hain.
+- **Residual Connections**: $x + \text{Layer}(x)$ jo gradient vanishing ko prevent karta hai.
+- **Layer Normalization**: Har sub-block se pehle apply hota hai (Pre-norm modern standard hai).
 
 ---
 
-## 3. Mathematical Intuition
-The logic of a GPT block is:
+## 3. Mathematical Samajh
+GPT block ka logic kuch aisa hai:
 $$x_{mid} = \text{LayerNorm}(x)$$
 $$x = x + \text{Attention}(x_{mid})$$
 $$x_{mid2} = \text{LayerNorm}(x)$$
 $$x = x + \text{FFN}(x_{mid2})$$
 
-The FFN is typically a 2-layer MLP with a non-linearity like GELU:
+FFN typically ek 2-layer MLP hota hai jisme GELU jaisi non-linearity hoti hai:
 $$\text{FFN}(x) = \text{GELU}(xW_1 + b_1)W_2 + b_2$$
 
 ---
 
-## 4. Architecture Diagrams
+## 4. Architecture Chitra (Diagrams)
 ```mermaid
 graph TD
     Input[Input Tokens] --> Emb[Embedding + Positional]
@@ -54,7 +54,7 @@ graph TD
 
 ---
 
-## 5. Production-ready Examples (Minimal PyTorch)
+## 5. Production-ready Udaharan (Minimal PyTorch)
 ```python
 import torch
 import torch.nn as nn
@@ -86,71 +86,72 @@ class Head(nn.Module):
 
 ---
 
-## 6. Real-world Use Cases
-- **TinyLlama/NanoGPT**: Training very small models for edge devices.
-- **Domain Specific GPTs**: Training a model purely on legal or medical text from scratch.
-- **Research**: Prototyping new attention mechanisms (e.g., Linear Attention).
+## 6. Real-world Upyog Cases
+- **TinyLlama/NanoGPT**: Bahut chhote models ko edge devices ke liye train karna.
+- **Domain Specific GPTs**: Model ko purely legal ya medical text par scratch se train karna.
+- **Research**: Naye attention mechanisms (jaise Linear Attention) ka prototype banana.
 
 ---
 
-## 7. Failure Cases
-- **Dead Neurons**: If the learning rate is too high, GELU units can "die".
-- **Attention Collapse**: All tokens attending to the same token regardless of content.
-- **Unstable Training**: Without proper weight initialization (like Xavier), the model won't converge.
+## 7. Failure Cases (Asafalta ke Karan)
+- **Dead Neurons**: Agar learning rate bahut zyada ho, toh GELU units "mar" sakti hain.
+- **Attention Collapse**: Saare tokens ek hi token ki taraf attend kar rahe hain, content ki parwah nahi.
+- **Unstable Training**: Proper weight initialization (jaise Xavier) ke bina model converge nahi karega.
 
 ---
 
-## 8. Debugging Guide
-1. **Overfit a single batch**: If your model can't get 0 loss on one single sentence, the architecture has a bug.
-2. **Monitor Grad Norms**: If gradients are zero, check your residual connections.
-3. **Weight Histograms**: Check if weights are growing too large.
+## 8. Debugging Margdarshan
+1. **Overfit a single batch**: Agar model ek sentence par 0 loss nahi la sakta, toh architecture mein bug hai.
+2. **Monitor Grad Norms**: Agar gradients zero hain, toh residual connections check karo.
+3. **Weight Histograms**: Check karo ki weights bahut bade toh nahi ho rahe.
 
 ---
 
-## 9. Tradeoffs
+## 9. Tradeoffs (Samjhotey)
 | Factor | Character-level GPT | Subword-level GPT |
 |--------|---------------------|-------------------|
-| Vocab Size | Small (~256)       | Large (~50k-100k) |
-| Sequence Length | Very Long        | Compact           |
-| Training Speed | Fast              | Slow              |
-| Meaning Depth | Low               | High              |
+| Vocab Aakar | Chhota (~256) | Bada (~50k-100k) |
+| Sequence Lambai | Bahut Lamba | Chhota |
+| Training Gati | Tez | Dheela |
+| Meaning Gehrai | Kam | Zyada |
 
 ---
 
-## 10. Security Concerns
-- **Backdoors**: If you train from scratch on poisoned data, the model might have hidden triggers.
-- **Memorization**: Models are prone to memorizing the training set if they are too large for the data size.
+## 10. Security Chintayein
+- **Backdoors**: Agar aap scratch se poisoned data par train karte ho, toh model mein hidden triggers ho sakte hain.
+- **Memorization**: Models apne training set ko memorise kar sakte hain agar woh data size ke liye bahut bade hain.
 
 ---
 
-## 11. Scaling Challenges
-- **Quadratic Attention**: Doubling sequence length quadruples the memory required.
-- **Parallelization**: Implementing "Data Parallel" training across 8 GPUs for the first time.
+## 11. Scaling Chunautiyan
+- **Quadratic Attention**: Sequence length double karne par memory requirement char guna ho jati hai.
+- **Parallelization**: Pehli baar 8 GPUs par "Data Parallel" training implement karna.
 
 ---
 
-## 12. Cost Considerations
-- **Compute Budget**: Even a tiny GPT (124M) takes a few hours on an A100 to learn basic English.
-- **Data Collection**: High-quality "Clean" data is expensive to curate.
+## 12. Cost Vichar
+- **Compute Budget**: Ek chhota GPT (124M) ko basic English seekhne ke liye A100 par kuch ghante lagte hain.
+- **Data Collection**: High-quality "Clean" data ikattha karna mehnga hota hai.
 
 ---
 
-## 13. Best Practices
-- **Weight Tying**: Use the same weights for the embedding and the final linear head.
-- **Warmup & Decay**: Vital for Transformer training.
-- **Use `float16` or `bfloat16`**: To save memory and double the speed.
+## 13. Best Practices (Sabase Achhe Tareeke)
+- **Weight Tying**: Embedding aur final linear head ke liye same weights use karo.
+- **Warmup & Decay**: Transformer training ke liye vital hain.
+- **Use `float16` or `bfloat16`**: Memory bachane aur speed double karne ke liye.
 
 ---
 
-## 14. Interview Questions
-1. Why do we need the "Mask" in GPT attention?
-2. What is the purpose of Residual Connections in Transformers?
-3. How does the number of "Heads" affect the model's performance?
-4. Explain the difference between Encoder-only and Decoder-only models.
+## 14. Interview Sawal
+- GPT attention mein "Mask" ki kya zaroorat hai?
+- Transformers mein Residual Connections ka kya kaam hai?
+- Number of "Heads" model ke performance ko kaise affect karta hai?
+- Encoder-only aur Decoder-only models mein kya farak hai?
 
 ---
 
-## 15. Latest 2026 LLM Engineering Patterns
-- **Flash Attention 3**: Implementation for H100s that doubles throughput.
-- **RMSNorm**: Replacing LayerNorm for faster inference.
-- **SwiGLU**: A more efficient activation function used in Llama-3.
+## 15. 2026 Ke Naye LLM Engineering Patterns
+- **Flash Attention 3**: H100s ke liye implementation jo throughput ko double karta hai.
+- **RMSNorm**: Faster inference ke liye LayerNorm ki jagah use hota hai.
+- **SwiGLU**: Ek zyada efficient activation function jo Llama-3 mein use hua hai.
+```

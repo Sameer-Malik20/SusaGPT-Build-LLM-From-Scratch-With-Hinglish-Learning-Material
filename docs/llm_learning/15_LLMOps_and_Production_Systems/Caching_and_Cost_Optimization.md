@@ -1,5 +1,5 @@
-# 💰 LLM Cost Engineering & ROI Mastery (2026)
-> **Level:** Expert | **Language:** Hinglish | **Goal:** Master Semantic Caching, Tiered Inference, and Context-aware Cost Optimization.
+# 💰 LLM Cost Engineering aur ROI Mastery (2026)
+> **Level:** Expert | **Language:** Hinglish | **Goal:** Semantic Caching, Tiered Inference, aur Context-aware Cost Optimization ko Master karna.
 
 ---
 
@@ -41,7 +41,7 @@ Har task ke liye "Gold" ki zarurat nahi hoti.
 
 ---
 
-## 📉 4. Token Budgeting & Hard Limits
+## 📉 4. Token Budgeting aur Hard Limits
 
 Production apps mein "Unlimited Tokens" dangerous hain.
 - **Hard Limits:** Per-user daily token budget set karna.
@@ -62,15 +62,15 @@ Mastery matlab:
 ### Q1: "High traffic app mein cost kaise control karein?"
 **Ans:** Hum **Semantic Caching** aur **Tiered Inference** implement karenge. Most common queries cache se handle hongi, aur non-complex queries small models se. Complex queries ke liye context caching use karenge.
 
-### Q2: "Pre-fill cost vs Decode cost?"
+### Q2: "Pre-fill cost vs Decode cost mein kya farak hai?"
 **Ans:** Input tokens (Pre-fill) saste hote hain lekin unhe process karne mein memory lagti hai. Output tokens (Decode) mehnge hote hain. Cost optimize karne ke liye hum output ko concise rakhne ke liye `max_tokens` aur clear system prompts use karenge.
 
 ---
 
 ## 🏆 Project Integration: SusaGPT Cost Guard
 Aapke architecture mein:
-- [x] Redis-based Semantic Cache implementation.
-- [x] Router logic for Multi-model orchestration.
-- [x] Monthly budget monitoring and alerting via MLOps dashboard.
+- [x] Redis-based Semantic Cache implementation kiya gaya hai.
+- [x] Multi-model orchestration ke liye Router logic hai.
+- [x] MLOps dashboard ke through monthly budget monitoring aur alerting.
 
-> **Final Insight:** Cost is a **Technical Constraint**. An engineer who builds a $10,000/month system is good, but the one who builds the same value for $1,000/month is a Master.
+> **Final Insight:** Cost ek **Technical Constraint** hai. Jo engineer $10,000/month ka system banata hai woh achha hai, lekin jo wohi value $1,000/month mein banata hai woh Master hai.

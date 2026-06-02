@@ -1,44 +1,44 @@
-# 🚀 The Ultimate LLM Learning Roadmap (Mastery 2026)
-> **Goal:** Zero to Expert LLM Architect | **Language:** Hinglish | **Timeframe:** 6-12 Months.
+# 🚀 Sabse Ultimate LLM Learning Roadmap (Mastery 2026)
+> **Goal:** Zero se Expert LLM Architect | **Language:** Hinglish | **Timeframe:** 6-12 Months.
 
 ---
 
-## 🧭 The 2026 LLM Landscape
+## 🧭 2026 ka LLM Landscape
 
 2026 mein LLM Engineering ka matlab sirf "API call" nahi hai. Ab focus **Cognitive Architectures**, **Custom Alignment**, aur **Hardware-level Optimization** par hai.
 
 ---
 
-## 🗺️ The Mastery Path
+## 🗺️ Mastery ka Rasta
 
-### 🟦 Phase 1: Foundations (The First 4 Weeks)
-- **Math:** Matrix Calculus, Softmax derivation, and Probability.
-- **NLP:** Tokenization (BPE/Tiktoken) and Embeddings.
-- **Architecture:** Transformer internals (Self-attention, RoPE, RMSNorm).
+### 🟦 Phase 1: Foundations (Pehle 4 Weeks)
+- **Math:** Matrix Calculus, Softmax derivation, aur Probability.
+- **NLP:** Tokenization (BPE/Tiktoken) aur Embeddings.
+- **Architecture:** Transformer ke internals (Self-attention, RoPE, RMSNorm).
 - **Key Files:** `docs/llm_learning/Transformer_Architecture_Inside_Out.md`
 
-### 🟩 Phase 2: Retrieval & Context (The Memory)
-- **RAG:** Vector DBs (Chroma/Pinecone), Hybrid Search, and Re-ranking.
-- **Evaluation:** RAGAS, G-Eval, and Faithfulness metrics.
-- **Context:** Handling 128k+ windows and Semantic Caching.
+### 🟩 Phase 2: Retrieval & Context (Memory)
+- **RAG:** Vector DBs (Chroma/Pinecone), Hybrid Search, aur Re-ranking.
+- **Evaluation:** RAGAS, G-Eval, aur Faithfulness metrics.
+- **Context:** 128k+ windows handle karna aur Semantic Caching.
 - **Key Files:** `docs/llm_learning/RAG_Guide.md`
 
-### 🟨 Phase 3: Fine-Tuning & Alignment (The Soul)
-- **PEFT:** LoRA, QLoRA, and DoRA.
-- **Alignment:** SFT, DPO (Direct Preference Optimization), and KTO.
-- **Data:** Dataset curation and synthetic data generation.
+### 🟨 Phase 3: Fine-Tuning & Alignment (Aatma)
+- **PEFT:** LoRA, QLoRA, aur DoRA.
+- **Alignment:** SFT, DPO (Direct Preference Optimization), aur KTO.
+- **Data:** Dataset curation aur synthetic data generation.
 - **Key Files:** `docs/llm_learning/FineTuning_RLHF_Mastery.md`
 
-### 🟧 Phase 4: Agentic Systems (The Action)
-- **Planning:** ReAct, Tree of Thoughts, and Self-Reflection.
-- **Tools:** Function calling and MCP (Model Context Protocol).
+### 🟧 Phase 4: Agentic Systems (Action)
+- **Planning:** ReAct, Tree of Thoughts, aur Self-Reflection.
+- **Tools:** Function calling aur MCP (Model Context Protocol).
 - **Memory:** Short-term vs Long-term memory streams.
 - **Key Files:** `docs/ai_agents_learning/AI_Agents_Guide.md`
 
-### 🟥 Phase 5: Inference & MLOps (The Muscle)
-- **Optimization:** Quantization (FP8, INT4), PagedAttention, and Speculative Decoding.
-- **Deployment:** vLLM, TGI, and TensorRT-LLM.
-- **Observability:** Latency tracking (TTFT, TPOT) and cost monitoring.
+### 🟥 Phase 5: Inference & MLOps (Muscle)
+- **Optimization:** Quantization (FP8, INT4), PagedAttention, aur Speculative Decoding.
+- **Deployment:** vLLM, TGI, aur TensorRT-LLM.
+- **Observability:** Latency tracking (TTFT, TPOT) aur cost monitoring.
 - **Key Files:** `docs/system_design/Inference_Optimization_vLLM_TGI.md`
 
 ---
@@ -52,19 +52,19 @@
 
 ---
 
-## 📚 Essential Papers (2026 Required Reading)
-1. **Attention Is All You Need:** The foundation.
-2. **LoRA:** Efficient fine-tuning.
-3. **DPO:** Modern alignment.
-4. **FlashAttention:** Hardware efficiency.
-5. **Speculative Decoding:** Speed optimization.
+## 📚 Zaroori Papers (2026 Required Reading)
+1. **Attention Is All You Need:** Foundation hai.
+2. **LoRA:** Efficient fine-tuning hai.
+3. **DPO:** Modern alignment hai.
+4. **FlashAttention:** Hardware efficiency hai.
+5. **Speculative Decoding:** Speed optimization hai.
 
 ---
 
 ## 🏆 Project Milestones
 1. **Level 1:** SusaGPT Architecture scratch se build karna.
-2. **Level 2:** A RAG system with 90%+ retrieval accuracy on complex PDFs.
-3. **Level 3:** A fine-tuned Llama-3 model for a specific niche (e.g., Medical/Legal).
-4. **Level 4:** A fully autonomous agent team using CrewAI and MCP.
+2. **Level 2:** Ek RAG system jisme complex PDFs par 90%+ retrieval accuracy ho.
+3. **Level 3:** Ek specific niche (e.g., Medical/Legal) ke liye fine-tuned Llama-3 model.
+4. **Level 4:** CrewAI aur MCP ka upyog karke ek fully autonomous agent team.
 
-> **Final Insight:** Technology changes every week, but the **Mathematics** of Transformers and the **Logic** of Search remain the same. Master the foundations, and you will never be outdated.
+> **Final Insight:** Technology har week badalti hai, lekin Transformers ka **Mathematics** aur Search ka **Logic** hamesha same rehta hai. Foundations master karo, aur tum kabhi outdated nahi hoge.

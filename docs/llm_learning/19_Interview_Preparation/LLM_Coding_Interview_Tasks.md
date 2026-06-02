@@ -1,25 +1,25 @@
 # LLM Coding Interview Tasks: Hands-On Challenges
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Shuruaati-friendly Hinglish Samjhai 🇮🇳
 Bhai, AI Engineer ke interview mein sirf "Theoretical" sawal nahi aate. Woh tumhe bolenge: "Ek ghante mein ek chota sa RAG system likh kar dikhao" ya "PyTorch mein Self-Attention module implement karo". 
 
 Yeh module wahi "Practice Ground" hai. Ismein humne woh coding tasks rakhe hain jo Google, Meta, aur OpenAI ke interviews mein aksar pooche jate hain. Agar tumne in tasks ko bina Google kiye solve kar liya, toh samajh lo tumhari "Coding Muscle" bohot strong hai. Ismein math, PyTorch, aur prompt engineering teeno ka test hoga.
 
 ---
 
-## 2. Deep Technical Explanation
-Coding interviews for AI roles typically fall into three categories:
-- **Architecture Implementation**: Implementing core Transformer components (Attention, LayerNorm) from scratch using `torch`.
-- **System Integration**: Building a RAG pipeline or an Agentic loop using `LangChain` or `vLLM`.
-- **Data Engineering**: Writing scripts for tokenization, data cleaning, or vector database upserts.
+## 2. Deep Technical Samjhai
+AI roles ke coding interviews typically teen categories mein aate hain:
+- **Architecture Implementation**: `torch` ka use karke core Transformer components (Attention, LayerNorm) scratch se implement karna.
+- **System Integration**: `LangChain` ya `vLLM` ka use karke RAG pipeline ya Agentic loop build karna.
+- **Data Engineering**: Tokenization, data cleaning, ya vector database upserts ke scripts likhna.
 
 ---
 
 ## 3. Mathematical Intuition
-**Task: Implement Scaled Dot-Product Attention**
-The formula is:
+**Task: Scaled Dot-Product Attention ko implement karo**
+Formula yeh hai:
 $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
-Why divide by $\sqrt{d_k}$? To prevent gradients from vanishing when the dot product grows too large (which pushes the softmax into regions with very small gradients).
+Aise kyu divide karte hain $\sqrt{d_k}$? Taki gradients vanish na hone jab dot product bohot bada ho jata hai (jo softmax ko bohot chhote gradients wale regions mein push kar deta hai).
 
 ---
 
@@ -37,7 +37,7 @@ graph LR
 ---
 
 ## 5. Production-ready Examples
-**Task 1: Implement Self-Attention in PyTorch**
+**Task 1: PyTorch mein Self-Attention implement karo**
 
 ```python
 import torch
@@ -65,20 +65,20 @@ class SimpleSelfAttention(nn.Module):
 ---
 
 ## 6. Real-world Use Cases
-- **Interview Scenario**: "The model is producing gibberish. You suspect the attention mask is wrong. How do you fix it?"
-- **Answer**: Implement a causal mask (lower triangular) to prevent the model from "looking into the future".
+- **Interview Scenario**: "Model gibberish produce kar raha hai. Aapko suspect hai ki attention mask galat hai. Aap kaise fix karoge?"
+- **Answer**: Causal mask (lower triangular) implement karo taaki model "future mein dekhne" se bache.
 
 ---
 
 ## 7. Failure Cases
-- **Broadcasting Errors**: Forgetting to handle the batch dimension correctly in `torch.matmul`.
-- **Memory Inefficiency**: Creating a massive $N \times N$ attention matrix for a 1M sequence length (Solution: use `Flash Attention` or `Ring Attention`).
+- **Broadcasting Errors**: `torch.matmul` mein batch dimension ko sahi se handle karna bhool jana.
+- **Memory Inefficiency**: 1M sequence length ke liye massive $N \times N$ attention matrix create karna (Solution: `Flash Attention` ya `Ring Attention` use karo).
 
 ---
 
 ## 8. Debugging Guide
-1. **Shape Tracking**: Always print the shapes of your tensors after every operation (`[Batch, Seq, Dim]`).
-2. **Nan Detection**: If your loss becomes `NaN`, check for division by zero or very large exponents in your softmax.
+1. **Shape Tracking**: Har operation ke baad apne tensors ke shapes ko print karte raho (`[Batch, Seq, Dim]`).
+2. **Nan Detection**: Agar loss `NaN` ho jaye, toh division by zero ya softmax mein bahut bade exponents ko check karo.
 
 ---
 
@@ -92,33 +92,37 @@ class SimpleSelfAttention(nn.Module):
 ---
 
 ## 10. Security Concerns
-- **Code Injection**: When building a coding agent, ensure it can't execute harmful commands on the interviewer's machine.
+- **Code Injection**: Coding agent build karte waqt, ensure karo ki woh interviewer's machine par harmful commands execute na kar sake.
 
 ---
 
 ## 11. Scaling Challenges
-- **Implementing Multi-Head Attention**: Complexity increases as you have to split and concatenate tensors across heads efficiently.
+- **Multi-Head Attention implement karna**: Complexity badh jati hai kyunki tensors ko heads mein split aur efficiently concatenate karna padta hai.
 
 ---
 
 ## 12. Cost Considerations
-- **Mocking APIs**: Use `pytest-mock` or `unittest.mock` to avoid calling expensive APIs (like OpenAI) during your coding test.
+- **Mocking APIs**: Coding test ke dauran expensive APIs (jaise OpenAI) ko call karne se bachne ke liye `pytest-mock` ya `unittest.mock` use karo.
 
 ---
 
 ## 13. Best Practices
-- **Write Modular Code**: Don't put everything in one big function.
-- **Add Docstrings**: Explain your logic as you code.
-- **Test with Edge Cases**: "What if the sequence length is 1?", "What if the batch size is 0?".
+- **Modular Code likho**: Sab kuch ek bade function mein mat daalo.
+- **Docstrings add karo**: Code karte waqt apni logic ko samjhao.
+- **Edge Cases ke saath test karo**: "Agar sequence length 1 ho toh?", "Agar batch size 0 ho toh?"
 
 ---
 
 ## 14. Interview Questions
-1. How do you implement a causal mask for a decoder-only Transformer?
-2. What is the complexity of the attention mechanism?
+1. Decoder-only Transformer ke liye causal mask kaise implement karte hain?
+2. Attention mechanism ki complexity kya hai?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Implementing GQA (Grouped Query Attention)**: A common 2026 interview task for senior roles to test knowledge of inference optimization.
-- **Building a Tool-Caller**: Writing a script that parses an LLM's output and executes a specific Python function based on the intent.
+- **GQA (Grouped Query Attention) implement karna**: Senior roles ke liye 2026 mein common interview task jo inference optimization ka test leta hai.
+- **Tool-Caller build karna**: Aisa script likhna jo LLM ke output ko parse karke intent ke hisaab se specific Python function execute kare.
+
+``` 
+
+```

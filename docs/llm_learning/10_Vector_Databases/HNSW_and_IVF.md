@@ -1,6 +1,6 @@
-# HNSW & IVF: The Engines of Vector Search
+# HNSW & IVF: Vector Search ke Engines
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Shuruat Ke Liye Hinglish Samjhai 🇮🇳
 Bhai, socho tumhare paas 1 crore vectors hain. Agar tum har naye query ko 1-by-1 sabse compare karoge, toh search karne mein ghanto lag jayenge (O(N) complexity). 
 
 **HNSW** aur **IVF** wahi "Shortcuts" hain jo search ko millisecond mein khatam kar dete hain. 
@@ -9,22 +9,22 @@ Bhai, socho tumhare paas 1 crore vectors hain. Agar tum har naye query ko 1-by-1
 
 ---
 
-## 2. Deep Technical Explanation
-ANN (Approximate Nearest Neighbor) algorithms are critical for scaling vector search.
-- **IVF**: Uses K-Means to partition vectors into $nlist$ clusters. At query time, it only searches the top $nprobe$ clusters.
-- **HNSW**: Builds a multi-layered graph where the top layers are sparse (long-range edges) and bottom layers are dense (local edges). It uses a greedy search to find the nearest neighbor by traversing the graph layers.
-- **Flat Index**: No optimization. Exact search. Perfect accuracy but $O(N)$ speed.
+## 2. Gahri Technical Samjhai
+ANN (Approximate Nearest Neighbor) algorithms vector search ko scale karne ke liye critical hain.
+- **IVF**: K-Means use karta hai vectors ko $nlist$ clusters mein partition karne ke liye. Query time par, ye sirf top $nprobe$ clusters mein search karta hai.
+- **HNSW**: Ek multi-layered graph banata hai jahan top layers sparse hote hain (long-range edges) aur bottom layers dense (local edges). Yeh greedy search use karta hai nearest neighbor find karne ke liye graph layers ko traverse karke.
+- **Flat Index**: Koi optimization nahi. Exact search. Perfect accuracy lekin $O(N)$ speed.
 
 ---
 
-## 3. Mathematical Intuition
-HNSW search complexity is approximately **$O(\log N)$**.
-IVF search complexity is **$O(\frac{N}{nlist} \times nprobe)$**.
-By tuning $nprobe$ in IVF or $efSearch$ in HNSW, you can control the **Recall-vs-Latency** tradeoff. More probes = better accuracy but slower search.
+## 3. Ganitiya Intuition
+HNSW search complexity approximately **$O(\log N)$** hai.
+IVF search complexity **$O(\frac{N}{nlist} \times nprobe)$** hai.
+IVF mein $nprobe$ ya HNSW mein $efSearch$ ko tune karke tum **Recall-vs-Latency** tradeoff ko control kar sakte ho. Zyada probes = better accuracy lekin slower search.
 
 ---
 
-## 4. Architecture Diagrams
+## 4. Architecture ke Diagrams
 ```mermaid
 graph TD
     subgraph "HNSW Layered Graph"
@@ -39,8 +39,8 @@ graph TD
 
 ---
 
-## 5. Production-ready Examples
-Using `FAISS` to build an IVF and HNSW index:
+## 5. Production Ke Liye Examples
+`FAISS` ka use karke IVF aur HNSW index build karna:
 
 ```python
 import faiss
@@ -65,61 +65,61 @@ index_hnsw.add(xb)
 
 ---
 
-## 6. Real-world Use Cases
-- **Pinterest**: Searching through billions of images using HNSW.
-- **Real-time Ad Matching**: Finding the best ad for a user in < 20ms using IVF.
+## 6. Asli Duniya ke Use Cases
+- **Pinterest**: HNSW use karke billions of images mein search karna.
+- **Real-time Ad Matching**: IVF use karke user ke liye best ad <20ms mein find karna.
 
 ---
 
-## 7. Failure Cases
-- **Curse of Dimensionality**: In very high dimensions, HNSW graphs become too "flat", and search performance drops.
-- **Index Stale-ness**: In IVF, if your new data is very different from your "Training" data, the clusters will be suboptimal.
+## 7. Failure ke Cases
+- **Curse of Dimensionality**: Bahut high dimensions mein, HNSW graphs bohot "flat" ho jate hain, aur search performance gir jati hai.
+- **Index Stale-ness**: IVF mein, agar tumhara naya data tumhare "Training" data se bahut alag hai, toh clusters suboptimal ho jayenge.
 
 ---
 
 ## 8. Debugging Guide
-1. **Recall Check**: Compare your IVF/HNSW results with a `Flat` index. If the top 1 results match < 90% of the time, increase `nprobe` or `efSearch`.
-2. **Build Time**: HNSW takes a long time to build and uses a lot of RAM. If you are low on RAM, use IVF-PQ.
+1. **Recall Check**: Tumhare IVF/HNSW results ko `Flat` index se compare karo. Agar top 1 results <90% time match karte hain, toh `nprobe` ya `efSearch` badha do.
+2. **Build Time**: HNSW build hone mein time lagata hai aur bahut RAM use karta hai. Agar RAM kam hai toh IVF-PQ use karo.
 
 ---
 
 ## 9. Tradeoffs
 | Metric | Flat (Exact) | IVF | HNSW |
 |---|---|---|---|
-| Latency | Very High | Low | Very Low |
-| Accuracy | 100% | Medium-High | High |
-| Memory | Low | Medium | High |
+| Latency | Bahut Zyada | Kam | Bahut Kam |
+| Accuracy | 100% | Medium-High | Zyada |
+| Memory | Kam | Medium | Zyada |
 
 ---
 
 ## 10. Security Concerns
-- **Graph Traversal Attack**: An attacker crafting specific vectors that create "Bottlenecks" in the HNSW graph, slowing down everyone's searches.
+- **Graph Traversal Attack**: Attacker specific vectors create karta hai jo HNSW graph mein "Bottlenecks" create karte hain, jisse sabki searches slow ho jati hain.
 
 ---
 
 ## 11. Scaling Challenges
-- **RAM Bottleneck**: HNSW must stay in RAM for speed. Storing 1 Billion 1536D vectors requires ~6TB of RAM!
+- **RAM Bottleneck**: Speed ke liye HNSW ko RAM mein rehna padta hai. 1 Billion 1536D vectors store karne ke liye ~6TB RAM chahiye!
 
 ---
 
 ## 12. Cost Considerations
-- **IVF-PQ**: Using Product Quantization with IVF can reduce memory by 10x-20x, drastically cutting server costs.
+- **IVF-PQ**: IVF ke saath Product Quantization use karke memory 10x-20x tak reduce ho sakti hai, jisse server costs drastically cut hote hain.
 
 ---
 
 ## 13. Best Practices
-- Use **HNSW** for low-latency, high-accuracy needs (Small to Medium scale).
-- Use **IVF-PQ** for massive scale (Billions of vectors) where memory cost is a concern.
-- Always L2-normalize vectors for Cosine Similarity.
+- Low-latency, high-accuracy needs ke liye **HNSW** use karo (Small se Medium scale).
+- Massive scale (Billions of vectors) ke liye **IVF-PQ** use karo jahan memory cost concern hai.
+- Cosine Similarity ke liye hamesha L2-normalize vectors use karo.
 
 ---
 
-## 14. Interview Questions
-1. How does the "Small World" property apply to HNSW?
-2. What is the role of the 'Quantizer' in an IVF index?
+## 14. Interview ke Sawal
+1. HNSW mein "Small World" property kaise apply hoti hai?
+2. IVF index mein 'Quantizer' ka kya role hai?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **DiskANN**: An algorithm that allows HNSW-like performance while storing the vectors on SSD/NVMe instead of RAM.
-- **GPU-HNSW**: Implementing HNSW on NVIDIA GPUs to search millions of vectors in microseconds.
+## 15. 2026 ke Latest Patterns
+- **DiskANN**: Ek algorithm jo HNSW-like performance allow karta hai jab vectors RAM ke bajaye SSD/NVMe pe store hote hain.
+- **GPU-HNSW**: NVIDIA GPUs par HNSW implement karke millions of vectors microseconds mein search karna.

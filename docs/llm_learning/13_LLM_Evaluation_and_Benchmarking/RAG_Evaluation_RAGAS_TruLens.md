@@ -1,35 +1,35 @@
-# 📏 RAG Evaluation: RAGAS, TruLens, and Arize
-> **Objective:** Master the specialized "RAG Triad" metrics and frameworks like RAGAS and TruLens to evaluate the three pillars of RAG—Faithfulness, Answer Relevance, and Context Precision | **Language:** Hinglish | **Standard:** 2026 Expert Framework
+# 📏 RAG Evaluation: RAGAS, TruLens, aur Arize
+> **Udeshya:** Specialized "RAG Triad" metrics aur frameworks (jaise RAGAS aur TruLens) ko master karo, taake RAG ke teen pillars—Faithfulness, Answer Relevance, aur Context Precision—ko evaluate kar sako | **Bhasha:** Hinglish | **Standard:** 2026 Expert Framework
 
 ---
 
-## 🧭 1. Beginner-Friendly Hinglish Explanation
+## 🧭 1. Shuruat Ke Liye Hinglish Samjhai
 RAG Evaluation ka matlab hai "RAG system ki har kadi ko check karna".
 
-- **The Problem:** RAG mein teen jagah galti ho sakti hai:
+- **Problem:** RAG mein teen jagah galti ho sakti hai:
   1. Kya sahi document dhoonda? (Retrieval)
   2. Kya answer document par based hai? (Faithfulness)
   3. Kya answer user ke sawal ka hai? (Relevance)
-- **The Solution:** RAGAS/TruLens. 
+- **Solution:** RAGAS/TruLens. 
   - Ye frameworks "AI-as-a-Judge" use karte hain ye check karne ke liye ki RAG ke teeno hisse sahi kaam kar rahe hain ya nahi.
 - **Intuition:** Ye ek "Reporter" ko judge karne jaisa hai. Kya usne sahi file nikali? Kya usne file mein se sach bola? Aur kya usne aapka sawal answer kiya?
 
 ---
 
-## 🧠 2. Deep Technical Explanation
-The **RAG Triad** (The Gold Standard of 2026):
+## 🧠 2. Gehrai Se Technical Samjhai
+**RAG Triad** (2026 ka Gold Standard):
 
-1. **Context Precision:** How relevant are the retrieved chunks to the query? (Checks the Retriever).
-2. **Faithfulness (Groundedness):** Is every claim in the answer supported by the retrieved context? (Checks for Hallucinations).
-3. **Answer Relevance:** How well does the final answer address the original user query? (Checks the Generator).
-4. **Context Recall:** Did the retriever find ALL the information needed to answer the question?
+1. **Context Precision:** Retrieve ki gayi chunks query ke liye kitni relevant hain? (Retriever ko check karta hai).
+2. **Faithfulness (Groundedness):** Kya answer ka har claim retrieve kiye gaye context se supported hai? (Hallucinations ke liye check karta hai).
+3. **Answer Relevance:** Final answer original user query ko kitni achhi tarah address karta hai? (Generator ko check karta hai).
+4. **Context Recall:** Kya retriever ne sawaal ka jawab dene ke liye saari zaroori information dhoond li?
 
 ---
 
-## 📐 3. Mathematical Intuition
+## 📐 3. Ganitiya Samjhai
 **Faithfulness Score ($F$):**
 $$F = \frac{|\text{Verified Claims in Answer}|}{|\text{Total Claims in Answer}|}$$
-A "Claim" is a specific fact extracted by the LLM-Judge. If the answer says "The capital is Paris" but the context doesn't mention Paris, that claim is unverified, and the score drops.
+Ek "Claim" ek specific fact hota hai jo LLM-Judge dwara extract kiya gaya. Agar answer kehta hai "The capital is Paris" lekin context mein Paris ka zikr nahi hai, to woh claim unverified ho jaata hai, aur score drop ho jaata hai.
 
 ---
 
@@ -58,8 +58,8 @@ graph TD
 
 ---
 
-## 💻 5. Production-Ready Examples
-Using **RAGAS** for automated evaluation:
+## 💻 5. Production-Ready Udaharan
+Automated evaluation ke liye **RAGAS** use karna:
 ```python
 from ragas import evaluate
 from ragas.metrics import faithfulness, answer_relevance, context_precision
@@ -77,56 +77,56 @@ print(result)
 
 ---
 
-## 🌍 6. Real-World Use Cases
-- **Enterprise Search Audit:** Ensuring that the "AI HR Bot" isn't hallucinating company policies by running 500 test questions through RAGAS.
-- **R&D Experimentation:** Testing if "Chunk size 500" gives better **Context Precision** than "Chunk size 1000".
+## 🌍 6. Vastavik Duniya Ke Upyog
+- **Enterprise Search Audit:** 500 test questions ko RAGAS ke through chalaakar yeh ensure karna ki "AI HR Bot" company policies par hallucinate nahi kar raha.
+- **R&D Experimentation:** Yeh test karna ki kya "Chunk size 500" "Chunk size 1000" se better **Context Precision** deta hai.
 
 ---
 
-## ❌ 7. Failure Cases
-- **Reference Overlap:** If the LLM already knows the answer from its training data, it might give a "Correct" but "Unfaithful" answer (i.e., the answer is right, but it's not in the context). **Fix: Use synthetic 'Fake' data for testing.**
-- **Judge Fatigue:** If the context is 50 pages long, the LLM-Judge might miss a subtle hallucination.
+## ❌ 7. Viphalta Ke Mamle
+- **Reference Overlap:** Agar LLM apne training data se answer pehle se jaanta hai, to woh "Correct" lekin "Unfaithful" answer de sakta hai (yani answer sahi hai, lekin context mein nahi hai). **Fix: Testing ke liye synthetic 'Fake' data use karein.**
+- **Judge Fatigue:** Agar context 50 pages lamba hai, to LLM-Judge ek subtle hallucination miss kar sakta hai.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
-| Problem | Reason | Solution |
+| Samasya | Karan | Samadhan |
 | :--- | :--- | :--- |
-| **Low Context Precision** | Embedding model is weak | Switch to a **better embedding model** (e.g., OpenAI text-embedding-3-large). |
-| **Low Faithfulness** | Temperature too high | Lower **Temperature to 0** to make the generator more literal. |
+| **Low Context Precision** | Embedding model weak hai | Ek **better embedding model** (jaise OpenAI text-embedding-3-large) par switch karein. |
+| **Low Faithfulness** | Temperature bahut zyada hai | Generator ko aur literal banane ke liye **Temperature ko 0** karein. |
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **RAGAS (Easy / Fast / Needs LLM API)** vs **Manual Golden-Set (Perfect Accuracy / Very Slow).**
+- **RAGAS (Easy / Fast / LLM API ki zaroorat)** vs **Manual Golden-Set (Perfect Accuracy / Bahut Slow).**
 
 ---
 
-## 🛡️ 10. Security Concerns
-- **Data Leakage in Evals:** Don't send PII (Personally Identifiable Information) to an external LLM-Judge (like OpenAI) during evaluation unless you have a HIPAA/GDPR agreement.
+## 🛡️ 10. Suraksha Chintayein
+- **Evals mein Data Leakage:** Jab tak aapke paas HIPAA/GDPR agreement nahi hai, evaluation ke dauran PII (Personally Identifiable Information) bahar ke LLM-Judge (jaise OpenAI) ko na bhejein.
 
 ---
 
-## 📈 11. Scaling Challenges
-- **The "Context Noise" Problem:** As you retrieve more chunks (K=10+), context precision naturally drops, but faithfulness might increase. Finding the "Sweet Spot" is the goal.
+## 📈 11. Bade Scale Par Chunautiyan
+- **"Context Noise" Samasya:** Jaisi aap zyada chunks retrieve karte hain (K=10+), context precision naturally girta hai, lekin faithfulness badh sakti hai. "Sweet Spot" dhundhna goal hai.
 
 ---
 
-## 💰 12. Cost Considerations
-- Evaluating a single RAG turn with RAGAS can take 4-5 LLM calls. For 1000 tests, this can cost \$10 - \$20.
+## 💰 12. Cost Sambandhi Vichar
+- RAGAS ke saath ek single RAG turn evaluate karne mein 4-5 LLM calls lag sakte hain. 1000 tests ke liye, iski cost \$10 - \$20 ho sakti hai.
 
 漫
 ---
 
-## 📝 14. Interview Questions
-1. "Explain the three pillars of the RAG Triad."
-2. "What is 'Faithfulness' in RAG and how is it calculated?"
-3. "How do you distinguish between a retrieval failure and a generation failure?"
+## 📝 14. Interview Sawaal
+1. "RAG Triad ke teen pillars ko samjhao."
+2. "RAG mein 'Faithfulness' kya hai aur yeh kaise calculate kiya jaata hai?"
+3. "Retrieval failure aur generation failure ke beech kaise differentiate karte hain?"
 
 ---
 
-## 🚀 15. Latest 2026 LLM Engineering Patterns
-- **DeepEval:** A newer, faster framework that focuses on unit-testing for RAG.
-- **Guardrails-during-Inference:** Running a tiny "Faithfulness" check *during* the production chat to alert the user if the model is hallucinating in real-time.
+## 🚀 15. 2026 Ke Latest LLM Engineering Patterns
+- **DeepEval:** Ek naya, tez framework jo RAG ke liye unit-testing par focus karta hai.
+- **Guardrails-during-Inference:** Production chat ke dauran ek chhoti "Faithfulness" check chalaakar user ko alert karna agar model real-time mein hallucinate kar raha hai.
 漫
 漫

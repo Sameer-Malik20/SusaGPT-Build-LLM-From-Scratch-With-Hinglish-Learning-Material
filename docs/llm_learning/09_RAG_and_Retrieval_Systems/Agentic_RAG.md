@@ -8,19 +8,19 @@ Bhai, normal RAG bilkul ek "Gullible" (Seedha-saadha) system hai. Tumne jo pooch
 ---
 
 ## 2. Deep Technical Explanation
-Agentic RAG uses an LLM in a loop to control the retrieval process.
-- **Routing**: Deciding which tool to use (e.g., Vector DB vs. SQL vs. Web Search).
-- **Query Rewriting**: If initial results are poor, the agent rewrites the user query to be more "Search-friendly".
-- **Self-Correction**: The agent reviews retrieved chunks and rejects irrelevant ones.
-- **Multi-Step Retrieval**: Breaking a complex question into sub-questions and retrieving info for each step-by-step.
+Agentic RAG ek LLM ko loop mein use karta hai retrieval process ko control karne ke liye.
+- **Routing**: Decide karna kaunsa tool use karna hai (e.g., Vector DB vs. SQL vs. Web Search).
+- **Query Rewriting**: Agar initial results poor hain, toh agent user query ko rewrite karta hai taki woh zyada "Search-friendly" ho.
+- **Self-Correction**: Agent retrieved chunks ko review karta hai aur irrelevant ones ko reject karta hai.
+- **Multi-Step Retrieval**: Complex question ko sub-questions mein break karna aur har ek ke liye step-by-step info retrieve karna.
 
 ---
 
 ## 3. Mathematical Intuition
-Agentic RAG is a **Markov Decision Process (MDP)**.
-At each step $t$, the agent takes an action $a_t$ (Search, Summarize, Finish) based on current state $s_t$ (User query + already found info).
-The objective is to maximize the final answer quality $Q$.
-Unlike static RAG which is a single function $f(x) \to y$, Agentic RAG is a policy $\pi(a|s)$.
+Agentic RAG ek **Markov Decision Process (MDP)** hai.
+Har step $t$ par, agent current state $s_t$ (User query + already found info) ke basis par ek action $a_t$ (Search, Summarize, Finish) leta hai.
+Objective hai final answer quality $Q$ ko maximize karna.
+Static RAG ke opposite jo ek single function $f(x) \to y$ hai, Agentic RAG ek policy $\pi(a|s)$ hai.
 
 ---
 
@@ -40,7 +40,7 @@ graph TD
 ---
 
 ## 5. Production-ready Examples
-Implementing an Agentic RAG loop with `LangGraph`:
+Agentic RAG loop ko implement karna `LangGraph` ke saath:
 
 ```python
 # Conceptual LangGraph structure
@@ -64,21 +64,21 @@ workflow.add_conditional_edges(
 ---
 
 ## 6. Real-world Use Cases
-- **Technical Troubleshooting**: Searching through 100s of manuals, rewriting the error code until a match is found.
-- **Market Research**: Combining internal sales data (SQL) with external news (Web Search).
-- **Academic Writing**: Finding citations, checking their validity, and looking for counter-arguments.
+- **Technical Troubleshooting**: 100s of manuals mein search karna, error code ko rewrite karna jab tak match na mil jaye.
+- **Market Research**: Internal sales data (SQL) ko external news (Web Search) ke saath combine karna.
+- **Academic Writing**: Citations dhundhna, unki validity check karna, aur counter-arguments dhundhna.
 
 ---
 
 ## 7. Failure Cases
-- **Infinite Loops**: The agent keeps rewriting the query and searching forever.
-- **Tool Hallucination**: The agent tries to use a tool that doesn't exist or provides wrong arguments to the search function.
+- **Infinite Loops**: Agent query ko rewrite karta rehta hai aur hamesha search karta rehta hai.
+- **Tool Hallucination**: Agent aisa tool use karne ki koshish karta hai jo exist nahi karta ya search function ko wrong arguments provide karta hai.
 
 ---
 
 ## 8. Debugging Guide
-1. **Trace Analysis**: Use LangSmith or Arize Phoenix to see every step of the agent's thought process.
-2. **Step Limits**: Always set a `max_iterations=5` to prevent the agent from burning through your API credits.
+1. **Trace Analysis**: Agent ke thought process ke har step ko dekhne ke liye LangSmith ya Arize Phoenix ka use karein.
+2. **Step Limits**: Hamesha `max_iterations=5` set karein taaki agent aapke API credits ko burn na kare.
 
 ---
 
@@ -92,32 +92,32 @@ workflow.add_conditional_edges(
 ---
 
 ## 10. Security Concerns
-- **Agentic Escape**: If the agent is allowed to generate and run code (Code Interpreter) for data analysis, it could potentially be tricked into attacking the host system.
+- **Agentic Escape**: Agar agent ko data analysis ke liye code generate aur run karne diya jaye (Code Interpreter), toh yeh potentially host system par attack karne ke liye trick ho sakta hai.
 
 ---
 
 ## 11. Scaling Challenges
-- **Concurrency**: Managing hundreds of parallel "Reasoning" loops without hitting rate limits.
+- **Concurrency**: Rate limits ko hit kiye bina hundreds of parallel "Reasoning" loops ko manage karna.
 
 ---
 
 ## 12. Cost Considerations
-- **Token Multiplier**: Agentic RAG often uses 5x to 10x more tokens than standard RAG per user request.
+- **Token Multiplier**: Agentic RAG often 5x to 10x zyada tokens use karta hai standard RAG se per user request.
 
 ---
 
 ## 13. Best Practices
-- **Explicit Instruction**: Give the agent a "Persona" (e.g., "You are a picky librarian").
-- **Structured Output**: Use Pydantic to ensure the agent's "Actions" are always in a valid JSON format.
+- **Explicit Instruction**: Agent ko ek "Persona" dein (e.g., "You are a picky librarian").
+- **Structured Output**: Pydantic ka use karein taaki agent ke "Actions" hamesha valid JSON format mein hon.
 
 ---
 
 ## 14. Interview Questions
-1. How does Agentic RAG solve the "No results found" problem?
-2. What are the risks of using loops in RAG systems?
+1. Agentic RAG "No results found" problem ko kaise solve karta hai?
+2. RAG systems mein loops use karne ke risks kya hain?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Corrective RAG (CRAG)**: A specific pattern that uses a "Evaluator" to decide if retrieved docs are good, ambiguous, or bad, and triggers web search for "bad" results.
-- **Multi-Agent RAG**: One agent for retrieval, one for grading, and one for synthesis, all arguing to reach the best answer.
+- **Corrective RAG (CRAG)**: Ek specific pattern jo ek "Evaluator" use karta hai yeh decide karne ke liye ki retrieved docs good, ambiguous, ya bad hain, aur "bad" results ke liye web search trigger karta hai.
+- **Multi-Agent RAG**: Ek agent retrieval ke liye, ek grading ke liye, aur ek synthesis ke liye, sab best answer tak pahunchne ke liye arguing karte hain.

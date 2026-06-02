@@ -1,9 +1,9 @@
-# ✂️ Document Chunking Strategies: The Art of Splitting Text
-> **Objective:** Master the techniques of dividing large documents into optimal segments for RAG, balancing semantic coherence with retrieval precision and context window constraints | **Language:** Hinglish | **Standard:** 2026 Expert Framework
+# ✂️ Document Chunking Strategies: Text Ko Kaatne Ki Kala
+> **Objective:** Bade documents ko RAG ke liye optimal segments mein divide karne ki techniques master karna, semantic coherence aur retrieval precision aur context window constraints ko balance karte hue | **Language:** Hinglish | **Standard:** 2026 Expert Framework
 
 ---
 
-## 🧭 1. Beginner-Friendly Hinglish Explanation
+## 🧭 1. Beginners Ke Liye Hinglish Samjhaai
 Chunking ka matlab hai "Bade document ko sahi tarike se kaatna".
 
 - **The Problem:** Ek 500-page ki book ko aap ek sath LLM mein nahi bhej sakte (Context limit). Aur agar pura page ek vector banega, toh uske "Specific details" kho jayenge.
@@ -14,22 +14,22 @@ Chunking ka matlab hai "Bade document ko sahi tarike se kaatna".
 
 ---
 
-## 🧠 2. Deep Technical Explanation
-Chunking is the most underrated part of RAG. There are four main strategies:
+## 🧠 2. Gehra Technical Samjhaai
+Chunking RAG ka sabse underrated part hai. Iski char main strategies hain:
 
-1. **Fixed-Size Chunking:** Splitting by a fixed number of characters or tokens (e.g., 500 tokens). Simple but often cuts mid-sentence.
-2. **Recursive Character Chunking:** Splitting by a list of separators (e.g., `\n\n`, `\n`, ` `, ``). It tries to keep paragraphs and sentences together. (The industry standard).
-3. **Semantic Chunking:** Using an embedding model to find "Natural breaks" in the meaning of the text. It splits when the topic changes.
-4. **Structure-Aware Chunking:** Using Markdown or HTML headers to split. (e.g., every `###` is a new chunk).
+1. **Fixed-Size Chunking:** Fixed number of characters ya tokens ke basis par split karna (e.g., 500 tokens). Simple hai par aksar beech sentence mein cut kar deta hai.
+2. **Recursive Character Chunking:** Separators ki list ke hisaab se split karna (e.g., `\n\n`, `\n`, ` `, ``). Ye paragraphs aur sentences ko ek saath rakhne ki koshish karta hai. (Industry standard).
+3. **Semantic Chunking:** Text ke meaning mein "Natural breaks" dhundhne ke liye embedding model ka upyog karna. Jab topic badalta hai tab split karta hai.
+4. **Structure-Aware Chunking:** Markdown ya HTML headers ka upyog karke split karna. (e.g., har `###` ek naya chunk hai).
 
 ---
 
-## 📐 3. Mathematical Intuition
+## 📐 3. Ganit Samjhaai
 **The Overlap ($O$):**
-To ensure no context is lost at the boundary of two chunks, we overlap them by $10-20\%$.
-If chunk size is $C$ and overlap is $O$:
+Is baat ko pakka karne ke liye ki do chunks ki boundary par context lose na ho, hum unhe $10-20\%$ overlap karte hain.
+Agar chunk size $C$ hai aur overlap $O$ hai:
 $$\text{Next Chunk Start} = \text{Current Chunk Start} + (C - O)$$
-Overlap ensures that if a key fact is split at the end of Chunk A, it is also fully present at the start of Chunk B.
+Overlap yeh ensure karta hai ki agar ek important fact Chunk A ke end mein split ho jaye, toh woh Chunk B ke start mein bhi fully present ho.
 
 ---
 
@@ -69,22 +69,22 @@ print(f"Created {len(chunks)} chunks.")
 ---
 
 ## 🌍 6. Real-World Use Cases
-- **Customer Support:** Chunking a "Troubleshooting Guide" by each specific problem title.
-- **Financial Reports:** Chunking by "Quarterly Results" sections to ensure numbers aren't mixed up.
+- **Customer Support:** "Troubleshooting Guide" ko har specific problem title ke hisaab se chunk karna.
+- **Financial Reports:** "Quarterly Results" sections ke hisaab se chunk karna taake numbers mix na ho.
 
 ---
 
 ## ❌ 7. Failure Cases
-- **Broken Logic:** If you split in the middle of a "Not" (e.g., "This drug is [split] NOT safe"), the first chunk might say the drug is safe. **Fix: Use Overlap and Sentence-splitting.**
-- **Table Chaos:** Standard chunking destroys Markdown or CSV tables. **Fix: Use specialized Table-Parsers.**
+- **Broken Logic:** Agar aap "Not" ke beech mein split karte hain (e.g., "This drug is [split] NOT safe"), toh pehla chunk yeh kahega ki drug safe hai. **Fix: Overlap aur Sentence-splitting ka upyog karein.**
+- **Table Chaos:** Standard chunking Markdown ya CSV tables ko kharab kar deta hai. **Fix: Specialized Table-Parsers ka upyog karein.**
 
 ---
 
 ## 🛠️ 8. Debugging Guide
 | Problem | Reason | Solution |
 | :--- | :--- | :--- |
-| **Model loses context** | Chunk size too small | Increase **chunk_size** to 500-1000. |
-| **Search returns too much noise** | Chunk size too large | Decrease **chunk_size** and increase **overlap**. |
+| **Model context khota hai** | Chunk size bahut chota hai | **chunk_size** badhake 500-1000 karein. |
+| **Search bahut noise return karta hai** | Chunk size bahut bada hai | **chunk_size** kam karein aur **overlap** badhaye. |
 
 ---
 
@@ -94,36 +94,36 @@ print(f"Created {len(chunks)} chunks.")
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Context Injection:** Crafting a document that, when chunked, creates a specific malicious instruction that is highly likely to be retrieved.
+- **Context Injection:** Aisa document banana jo chunk hone par ek specific malicious instruction banaye jiske retrieve hone ki sambhavana bahut zyada ho.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **Dynamic Chunking:** Handling 100 different file types (PDF, Word, Code) requires 100 different chunking strategies.
+- **Dynamic Chunking:** 100 different file types (PDF, Word, Code) ko handle karne ke liye 100 different chunking strategies chahiye.
 
 ---
 
 ## 💰 12. Cost Considerations
-- More chunks = More vectors = Higher Vector DB bill. Don't over-chunk if your documents are already short.
+- Zyada chunks = Zyada vectors = Zyada Vector DB bill. Agar aapke documents already short hain toh over-chunk na karein.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use 10-15% Overlap.** 
-- **Chunk by Logic.** If it's code, chunk by functions. If it's a legal doc, chunk by clauses.
-- **Save Metadata.** Always keep the original filename and page number with every chunk.
+- **10-15% Overlap ka upyog karein.**
+- **Logic ke hisaab se chunk karein.** Agar code hai, functions ke hisaab se chunk karein. Agar legal document hai, clauses ke hisaab se.
+- **Metadata save karein.** Har chunk ke saath original filename aur page number hamesha rakhein.
 
 漫
 ---
 
 ## 📝 14. Interview Questions
-1. "Why is Recursive Character Chunking better than Fixed-Size Chunking?"
-2. "What is the role of 'Overlap' in document chunking?"
-3. "How would you handle chunking for a table in a PDF?"
+1. "Recursive Character Chunking Fixed-Size Chunking se behtar kyun hai?"
+2. "Document chunking mein 'Overlap' ki kya bhumika hai?"
+3. "Aap PDF mein ek table ke liye chunking kaise handle karenge?"
 
 ---
 
-## 🚀 15. Latest 2026 LLM Engineering Patterns
-- **LLM-Based Chunking:** Using a small model to read the document and say: "Split here, this is a new topic."
-- **Late Chunking:** Embedding the entire document first and then splitting the embeddings based on attention density (Very advanced).
+## 🚀 15. 2026 Ke Naye LLM Engineering Patterns
+- **LLM-Based Chunking:** Ek chhote model ka upyog document padhne aur yeh batane ke liye: "Yahan split karo, yeh naya topic hai."
+- **Late Chunking:** Pehle poore document ko embed karna aur phir attention density ke aadhar par embeddings ko split karna (Bahut advanced).
 漫

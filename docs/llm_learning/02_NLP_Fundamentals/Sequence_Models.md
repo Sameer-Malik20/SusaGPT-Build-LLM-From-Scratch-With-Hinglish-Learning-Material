@@ -1,4 +1,4 @@
-# Sequence Models: From RNNs to LSTMs
+# Sequence Models: RNNs se LSTMs tak
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
 Bhai, socho tum ek movie dekh rahe ho. Agar tum har frame ko pichle frame se alag dekhoge, toh tumhe story samajh nahi aayegi. Language bhi aisi hi hai. Har word pichle word par depend karta hai.
@@ -8,17 +8,17 @@ Bhai, socho tum ek movie dekh rahe ho. Agar tum har frame ko pichle frame se ala
 ---
 
 ## 2. Deep Technical Explanation
-Sequence models are designed to handle data where order matters.
-- **RNN (Recurrent Neural Network)**: Uses a loop to pass information from one step to the next. The state $h_t = \sigma(W_{hh}h_{t-1} + W_{xh}x_t)$.
-- **LSTM (Long Short-Term Memory)**: Introduces "Gates" (Input, Forget, Output) and a "Cell State" to control the flow of information and solve the vanishing gradient problem.
-- **GRU (Gated Recurrent Unit)**: A simpler version of LSTM with fewer gates.
+Sequence models aise data handle karne ke liye bane hain jahan order important hota hai.
+- **RNN (Recurrent Neural Network)**: Ek loop use karta hai information ko ek step se doosre step pass karne ke liye. State $h_t = \sigma(W_{hh}h_{t-1} + W_{xh}x_t)$.
+- **LSTM (Long Short-Term Memory)**: "Gates" (Input, Forget, Output) aur ek "Cell State" introduce karta hai information flow ko control karne aur Vanishing Gradient problem solve karne ke liye.
+- **GRU (Gated Recurrent Unit)**: LSTM ka simpler version hai jisme gates kam hote hain.
 
 ---
 
 ## 3. Mathematical Intuition
-The core problem with RNNs is the **Vanishing Gradient**. Since $h_t$ is computed by repeated multiplication of weights, if weights are small, the gradient for early steps becomes nearly zero:
+RNNs ki sabse badi problem hai **Vanishing Gradient**. Kyunki $h_t$ repeated multiplication of weights se compute hota hai, agar weights chhote hain toh early steps ke liye gradient lagbhag zero ho jata hai:
 $$\frac{\partial h_t}{\partial h_1} = \prod_{k=2}^t \frac{\partial h_k}{\partial h_{k-1}}$$
-LSTM solves this by using the **Constant Error Carousel** (Cell State), allowing gradients to flow unchanged via addition instead of multiplication.
+LSTM ise solve karta hai **Constant Error Carousel** (Cell State) use karke, jo gradients ko addition ke through unchanged flow karne deta hai multiplication ki jagah.
 
 ---
 
@@ -40,7 +40,7 @@ graph LR
 ---
 
 ## 5. Production-ready Examples
-Using `PyTorch` for a simple LSTM:
+Simple LSTM ke liye `PyTorch` use karte hain:
 
 ```python
 import torch
@@ -61,21 +61,21 @@ print(f"Final Hidden State: {h_n.shape}") # [2, 32, 1024]
 ---
 
 ## 6. Real-world Use Cases
-- **Time Series Forecasting**: Predicting stock prices or weather.
-- **Speech Recognition**: Converting audio frames (a sequence) to text.
-- **Legacy Machine Translation**: Before Transformers took over.
+- **Time Series Forecasting**: Stock prices ya weather predict karna.
+- **Speech Recognition**: Audio frames (sequence) ko text mein convert karna.
+- **Legacy Machine Translation**: Transformers ke aane se pehle.
 
 ---
 
 ## 7. Failure Cases
-- **Sequential Bottleneck**: Cannot process words in parallel (unlike Transformers).
-- **Forgetting**: Even LSTMs struggle with sequences longer than ~1000 tokens.
+- **Sequential Bottleneck**: Parallel mein words process nahi kar sakte (Transformers ke opposite).
+- **Forgetting**: LSTMs bhi approximately 1000 tokens se zyada lambi sequences mein struggle karte hain.
 
 ---
 
 ## 8. Debugging Guide
-1. **Gradient Clipping**: Essential for RNNs to prevent exploding gradients.
-2. **Hidden State Initialization**: Always initialize with zeros or learnable parameters, not random noise.
+1. **Gradient Clipping**: RNNs ke liye zaroori hai Exploding Gradients ko rokne ke liye.
+2. **Hidden State Initialization**: Hamesha zeros ya learnable parameters se initialize karo, random noise se nahi.
 
 ---
 
@@ -89,31 +89,31 @@ print(f"Final Hidden State: {h_n.shape}") # [2, 32, 1024]
 ---
 
 ## 10. Security Concerns
-- **State Manipulation**: If an attacker can control the hidden state, they can alter the model's "memory" across steps.
+- **State Manipulation**: Agar koi attacker Hidden State ko control kar sakta hai, toh woh model ki "memory" ko across steps alter kar sakta hai.
 
 ---
 
 ## 11. Scaling Challenges
-- **Speed**: Training is $O(N)$ sequential, making it 10-100x slower to train than Transformers on large datasets.
+- **Speed**: Training $O(N)$ sequential hai, jo large datasets pe Transformers ke muqable 10-100x slower hota hai.
 
 ---
 
 ## 12. Cost Considerations
-- **Training Time**: High GPU hours due to lack of parallelization.
+- **Training Time**: Parallelization ki kami ki vajah se high GPU hours lagte hain.
 
 ---
 
 ## 13. Best Practices
-- For modern LLMs, **don't use RNNs**. Use them only for low-latency time-series tasks.
-- Use **Bidirectional** LSTMs for tasks where the future context is available (like classification).
+- Modern LLMs ke liye, **RNNs use mat karo**. Sirf low-latency time-series tasks ke liye use karo.
+- **Bidirectional** LSTMs use karo un tasks ke liye jahan future context available ho (jaise classification).
 
 ---
 
 ## 14. Interview Questions
-1. Why do LSTMs use a "Forget Gate"?
-2. Explain the Vanishing Gradient problem in simple RNNs.
+1. LSTMs "Forget Gate" kyun use karte hain?
+2. Simple RNNs mein Vanishing Gradient problem ko explain karo.
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Mamba & SSMs**: The "Return of Sequences". Modern State Space Models like Mamba combine the speed of Transformers (parallel training) with the infinite memory/speed of RNNs (linear inference).
+- **Mamba & SSMs**: "Return of Sequences". Modern State Space Models jaise Mamba, Transformers ki speed (parallel training) ko RNNs ki infinite memory/speed (linear inference) ke saath combine karte hain.

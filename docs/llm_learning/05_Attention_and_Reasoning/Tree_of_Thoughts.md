@@ -1,29 +1,30 @@
-# Tree of Thoughts (ToT): Deliberate Problem Solving
+# Tree of Thoughts (ToT): Soch Samajh Kar Problem Solving
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
-Bhai, Chain of Thought (CoT) sirf ek seedhi line mein sochta hai. Par kuch problems aisi hoti hain jahan tumhe multiple raaste (options) check karne padte hain aur agar ek raasta galat lage, toh wapas aakar dusra try karna padta hai. 
+## 1. Shuruwat ke liye Hinglish Samjhai 🇮🇳
+
+Bhai, Chain of Thought (CoT) sirf ek seedhi line mein sochta hai. Par kuch problems aisi hoti hain jahan tumhe multiple raaste (options) check karne padte hain aur agar ek raasta galat lage, toh wapas aakar dusra try karna padta hai.
 
 **Tree of Thoughts (ToT)** wahi "Planning" ka tarika hai. Model ek problem ke liye 3-4 alag ideas generate karta hai, phir khud hi unhe judge karta hai ki kaunsa idea best hai, aur phir sirf best idea ko aage badhata hai. Yeh bilkul waise hi hai jaise tum Chess khelte waqt "Agar main yeh karun toh woh yeh karega" wale multiple scenarios sochte ho. Yeh system LLMs ko "Brilliant Architects" bana deta hai.
 
 ---
 
-## 2. Deep Technical Explanation
-Tree of Thoughts (ToT) is a framework that allows LLMs to perform deliberate decision-making by considering multiple reasoning paths.
-- **Thought Generation**: Generating several "thought" candidates at each step.
-- **Thought Evaluation**: Scoring each thought (e.g., Sure, Likely, Impossible).
-- **Search Algorithms**: Using Breadth-First Search (BFS) or Depth-First Search (DFS) to navigate the tree of reasoning.
-- **Backtracking**: Abandoning a branch if the evaluation score is low and trying a different branch.
+## 2. Gehri Technical Samjhai
+
+- **Thought Generation**: Har step pe kai "thought" candidates generate karna.
+- **Thought Evaluation**: Har thought ko score dena (e.g., Sure, Likely, Impossible).
+- **Search Algorithms**: Reasoning tree navigate karne ke liye Breadth-First Search (BFS) ya Depth-First Search (DFS) ka use karna.
+- **Backtracking**: Agar evaluation score low hai toh branch ko abandon karna aur dusri branch try karna.
 
 ---
 
-## 3. Mathematical Intuition
-ToT models the reasoning process as a state-space search. Each state $s = [x, z_{1...i}]$ consists of the input $x$ and the chain of thoughts $z$.
-The goal is to find a path that maximizes the probability of success $P(\text{Success} | z)$.
-Unlike CoT which is a greedy search (1 path), ToT explores the "frontier" of the reasoning tree.
+## 3. Ganitiya Samajh
+
+ToT reasoning process ko state-space search ki tarah model karta hai. Har state $s = [x, z_{1...i}]$ mein input $x$ aur thoughts $z$ ki chain hoti hai. Goal hai ek aisa path find karna jo success ki probability $P(\text{Success} | z)$ ko maximize kare. CoT ke opposite jo greedy search hai (1 path), ToT reasoning tree ke "frontier" ko explore karta hai.
 
 ---
 
 ## 4. Architecture Diagrams
+
 ```mermaid
 graph TD
     Root[Problem] --> T1[Thought A]
@@ -39,8 +40,9 @@ graph TD
 
 ---
 
-## 5. Production-ready Examples
-Implementing a simplified ToT controller:
+## 5. Production-ready Udaharan
+
+Ek simplified ToT controller implement karte hain:
 
 ```python
 def generate_thoughts(prompt, n=3):
@@ -67,26 +69,30 @@ def tree_of_thoughts_search(initial_prompt):
 
 ---
 
-## 6. Real-world Use Cases
-- **Creative Writing**: Exploring different plot twists and choosing the most consistent one.
-- **Software Architecture**: Designing a system with multiple components and evaluating trade-offs.
-- **Complex Puzzles**: Solving Sudoku or logic grids where trial and error is needed.
+## 6. Asli Duniya ke Use Cases
+
+- **Creative Writing**: Alag-alag plot twists explore karna aur sabse consistent wala choose karna.
+- **Software Architecture**: Multiple components ke saath system design karna aur trade-offs evaluate karna.
+- **Complex Puzzles**: Sudoku ya logic grids solve karna jahan trial and error ki zaroorat hai.
 
 ---
 
-## 7. Failure Cases
-- **Over-Analysis**: The model gets stuck in a loop of evaluating bad ideas.
-- **High Latency**: Exploring multiple paths can take 10-20x longer than a single response.
+## 7. Asafalta ke Mamle
+
+- **Over-Analysis**: Model bure ideas ko evaluate karte karte loop mein phas jaata hai.
+- **High Latency**: Multiple paths explore karne mein ek single response se 10-20x zyada time lag sakta hai.
 
 ---
 
-## 8. Debugging Guide
-1. **Log the Tree**: Save the entire reasoning tree to a JSON file to see where the model made a "Wrong Turn".
-2. **Evaluation Bias**: Sometimes the "Evaluator" LLM is too nice and gives 10/10 to everything. Use stricter criteria.
+## 8. Debugging Margdarshan
+
+1. **Log the Tree**: Poora reasoning tree JSON file mein save karo taake pata chale ki model ne "Wrong Turn" kahan liya.
+2. **Evaluation Bias**: Kabhi kabhi "Evaluator" LLM bahut nice hota hai aur har cheez ko 10/10 de deta hai. Stricter criteria use karo.
 
 ---
 
 ## 9. Tradeoffs
+
 | Metric | Chain of Thought | Tree of Thoughts |
 |---|---|---|
 | Latency | Medium | Very High |
@@ -95,33 +101,39 @@ def tree_of_thoughts_search(initial_prompt):
 
 ---
 
-## 10. Security Concerns
-- **State Injection**: If the state tracking is exposed, an attacker can force the model into a "Bad" branch of the tree.
+## 10. Suraksha Chintaein
+
+- **State Injection**: Agar state tracking exposed hai toh attacker model ko tree ki "Bad" branch mein force kar sakta hai.
 
 ---
 
-## 11. Scaling Challenges
-- **Compute Cost**: ToT is extremely expensive as it requires dozens of LLM calls for a single user query.
+## 11. Vistaar ki Chunautiyan
+
+- **Compute Cost**: ToT bahut expensive hai kyunki ek user query ke liye dozens of LLM calls chahiye hote hain.
 
 ---
 
-## 12. Cost Considerations
-- **Parallel Processing**: Running multiple thoughts in parallel on different GPUs to save time (but not money).
+## 12. Kharcha Sambandhi Vichaar
+
+- **Parallel Processing**: Multiple thoughts alag-alag GPUs par parallel run karna time bachata hai (lekin money nahi).
 
 ---
 
-## 13. Best Practices
+## 13. Sarvottam Padhate
+
 - Only use ToT for **High-Stakes** problems where accuracy is 100x more important than speed.
 - Use a **smaller, cheaper model** for generation and a **large, smart model** for evaluation.
 
 ---
 
-## 14. Interview Questions
-1. How does ToT differ from standard Monte Carlo Tree Search (MCTS)?
-2. What are the main bottlenecks in implementing ToT in production?
+## 14. Interview ke Sawal
+
+1. ToT standard Monte Carlo Tree Search (MCTS) se kaise alag hai?
+2. Production mein ToT implement karne ke main bottlenecks kya hain?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **Reinforced ToT**: Training models directly on successful tree-search paths so they learn to "internalize" the tree and do it faster in a single pass.
-- **Graph of Thoughts (GoT)**: Allowing reasoning paths to merge and loop, creating a non-linear graph.
+## 15. 2026 ke Naye Patterns
+
+- **Reinforced ToT**: Models ko successful tree-search paths par direct train karna taake woh tree ko "internalize" kar lein aur ek single pass mein faster kar sakein.
+- **Graph of Thoughts (GoT)**: Reasoning paths ko merge aur loop karne dena, jisse non-linear graph banta hai.

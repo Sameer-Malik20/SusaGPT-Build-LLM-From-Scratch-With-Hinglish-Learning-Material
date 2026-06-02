@@ -1,28 +1,28 @@
-# Calculus for Deep Learning
+# Deep Learning ke liye Calculus
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Shuruaat ke liye Hinglish Samjhaaiye 🇮🇳
 Bhai, agar Linear Algebra "Language" hai, toh Calculus woh "Engine" hai jo model ko sikhata hai.
 
 Socho tum ek pahad ki choti par ho aur tumhe niche utarna hai andhere mein. Tum har kadam par check karte ho ki dhalan (slope) kis taraf hai. Calculus humein wahi "Slope" ya **Gradient** nikal kar deta hai. Jab model galti karta hai, toh Calculus humein batata hai ki har ek Weight ko kitna "thoda sa" badalna hai taaki agli baar galti kam ho. Isi ko hum **Backpropagation** kehte hain.
 
 ---
 
-## 2. Deep Technical Explanation
-Deep Learning relies on **Differential Calculus** to optimize loss functions:
-- **Partial Derivatives**: Calculating how the loss changes with respect to one weight while keeping others constant.
-- **The Chain Rule**: Propagating the error gradient from the output layer back through thousands of layers to the first layer.
-- **Gradient Descent**: Updating weights in the direction of the negative gradient: $w = w - \eta \nabla L$.
-- **Automatic Differentiation**: The engine behind PyTorch and JAX that calculates these derivatives automatically.
+## 2. Gehri Technical Samjhaaiye
+Deep Learning, loss functions ko optimize karne ke liye **Differential Calculus** par rely karta hai:
+- **Partial Derivatives**: Loss kaise ek weight ke saath badalta hai jab doosre weights constant hain, ye calculate karna.
+- **The Chain Rule**: Error gradient ko output layer se wapas thousands layers ke through first layer tak propagate karna.
+- **Gradient Descent**: Weights ko negative gradient ki disha mein update karna: $w = w - \eta \nabla L$.
+- **Automatic Differentiation**: Engine jo PyTorch aur JAX ke peeche hai jo automatically ye derivatives calculate karta hai.
 
 ---
 
-## 3. Mathematical Intuition
-The core of training is minimizing a Loss Function $J(\theta)$ using the gradient $\nabla J(\theta)$.
+## 3. Mathematical Samjhaaiye
+Training ka core ek Loss Function $J(\theta)$ ko minimize karna hai, gradient $\nabla J(\theta)$ ka use karke.
 
-By the **Chain Rule**, for a nested function $L(y(x))$:
+**Chain Rule** ke hisaab se, ek nested function $L(y(x))$ ke liye:
 $$\frac{dL}{dx} = \frac{dL}{dy} \cdot \frac{dy}{dx}$$
 
-In a transformer, if $L$ is the loss, and $w$ is a weight in layer 1:
+Transformer mein, agar $L$ loss hai aur $w$ weight hai layer 1 mein:
 $$\frac{\partial L}{\partial w} = \frac{\partial L}{\partial a_n} \cdot \frac{\partial a_n}{\partial a_{n-1}} \cdots \frac{\partial a_2}{\partial a_1} \cdot \frac{\partial a_1}{\partial w}$$
 
 ---
@@ -45,8 +45,8 @@ graph LR
 
 ---
 
-## 5. Production-ready Examples
-Understanding gradients in `PyTorch`:
+## 5. Production-ready Udaaharan
+`PyTorch` mein gradients ko samajhna:
 
 ```python
 import torch
@@ -72,70 +72,70 @@ with torch.no_grad():
 
 ---
 
-## 6. Real-world Use Cases
-- **Training LLMs**: Updating billions of parameters based on massive text corpora.
-- **Adversarial Training**: Using gradients to find "vulnerable" inputs.
-- **Neural Architecture Search**: Using calculus to optimize the architecture itself.
+## 6. Asli Duniya ke Use Cases
+- **Training LLMs**: Massive text corpora ke basis par billions of parameters ko update karna.
+- **Adversarial Training**: Gradients ka use karke "vulnerable" inputs dhondhna.
+- **Neural Architecture Search**: Calculus ka use karke architecture ko optimize karna.
 
 ---
 
 ## 7. Failure Cases
-- **Vanishing Gradients**: In very deep networks, the gradient becomes so small (close to 0) that layers stop learning.
-- **Exploding Gradients**: The gradient becomes so large (Inf) that weights get destroyed.
-- **Local Minima/Saddle Points**: Getting stuck in a part of the loss landscape that isn't the best solution.
+- **Vanishing Gradients**: Bahut deep networks mein, gradient itna chhota (0 ke kareeb) ho jata hai ki layers sikhna band kar dete hain.
+- **Exploding Gradients**: Gradient itna bada (Inf) ho jata hai ki weights khatam ho jate hain.
+- **Local Minima/Saddle Points**: Loss landscape ke aise hisse mein phas jana jo best solution nahi hai.
 
 ---
 
 ## 8. Debugging Guide
-1. **Gradient Clipping**: If gradients explode, "clip" them to a max value.
-2. **Check for Infs/NaNs**: Use `torch.autograd.set_detect_anomaly(True)` to find where the math breaks.
-3. **Activation Scaling**: Use LayerNorm to prevent gradients from shrinking too fast.
+1. **Gradient Clipping**: Agar gradients explode karein, toh unhe max value par "clip" karein.
+2. **Check for Infs/NaNs**: `torch.autograd.set_detect_anomaly(True)` ka use karke pata lagayein ki math kahan toot rahi hai.
+3. **Activation Scaling**: Gradients ko bahut tez shrink hone se bachane ke liye LayerNorm ka use karein.
 
 ---
 
 ## 9. Tradeoffs
-| Technique | Precision | Speed |
+| Takneek | Samikta | Gati |
 |-----------|-----------|-------|
-| Full Batch Gradient | High | Very Slow |
-| Stochastic Gradient | Low | Very Fast |
-| Mini-batch Gradient | Medium| Optimal |
+| Full Batch Gradient | Zyaada | Bohot Dheere |
+| Stochastic Gradient | Kam | Bohot Tez |
+| Mini-batch Gradient | Madhyam | Anukool |
 
 ---
 
-## 10. Security Concerns
-- **Gradient Leakage**: In Federated Learning, an attacker can sometimes reconstruct private data just by looking at the shared gradients.
-- **Poisoning**: Slightly altering data to create "stealthy" gradients that misalign the model.
+## 10. Security Chintayein
+- **Gradient Leakage**: Federated Learning mein, attacker kabhi kabhi shared gradients dekhkar hi private data reconstruct kar sakta hai.
+- **Poisoning**: Data ko thoda sa badalkar "stealthy" gradients banana jo model ko misalign kare.
 
 ---
 
-## 11. Scaling Challenges
-- **Memory for Gradients**: Storing the "Backward" state requires 2-3x more VRAM than just the model itself.
-- **Communication Latency**: In distributed training, syncing gradients across thousands of GPUs is the main bottleneck.
+## 11. Scaling ki Chunautiyaan
+- **Memory for Gradients**: "Backward" state ko store karne ke liye model se 2-3x zyaada VRAM chahiye.
+- **Communication Latency**: Distributed training mein, thousands GPUs ke beech gradients sync karna main bottleneck hai.
 
 ---
 
-## 12. Cost Considerations
-- **Optimizer Memory**: Using Adam requires storing "momentum" and "variance" (4 bytes per parameter each), which is expensive.
-- **Gradient Accumulation**: A trick to simulate large batch sizes on small GPUs by summing gradients over multiple steps.
+## 12. Kharcha ke Vichaar
+- **Optimizer Memory**: Adam use karne ke liye "momentum" aur "variance" (4 bytes per parameter each) store karna padta hai, jo mehnga hai.
+- **Gradient Accumulation**: Chhoti GPUs par large batch sizes simulate karne ka trick hai, multiple steps mein gradients sum karke.
 
 ---
 
 ## 13. Best Practices
-- **Use Modern Optimizers**: AdamW is the 2026 gold standard for LLMs.
-- **Monitor Gradient Norms**: Plot them in WandB to ensure training is healthy.
-- **Learning Rate Scheduling**: Decay the learning rate using a Cosine schedule for better convergence.
+- **Use Modern Optimizers**: AdamW 2026 mein LLMs ke liye gold standard hai.
+- **Monitor Gradient Norms**: WandB mein plot karein taaki training healthy ho.
+- **Learning Rate Scheduling**: Learning rate ko Cosine schedule se decay karein better convergence ke liye.
 
 ---
 
 ## 14. Interview Questions
-1. Explain the Chain Rule in the context of a 3-layer neural network.
-2. What is the difference between Gradient Descent and Stochastic Gradient Descent?
-3. How do Residual Connections (ResNets) help with the Vanishing Gradient problem?
-4. Why do we need an activation function (like ReLU) to be differentiable?
+1. 3-layer neural network ke context mein Chain Rule ko samjhaaiye.
+2. Gradient Descent aur Stochastic Gradient Descent mein kya farak hai?
+3. Residual Connections (ResNets) Vanishing Gradient problem mein kaise madad karte hain?
+4. Activation function (jaise ReLU) ka differentiable hona kyun zaroori hai?
 
 ---
 
-## 15. Latest 2026 LLM Engineering Patterns
-- **Second-Order Optimization**: Using techniques like K-FAC or Shampoo that use the "Hessian" (curvature) for faster convergence.
-- **Gradient-Free Optimization**: For alignment tasks where gradients are hard to compute (Evolutionary strategies).
-- **Differentiable Tokenization**: Attempts to make the discrete tokenization step differentiable for end-to-end training.
+## 15. 2026 ke Latest LLM Engineering Patterns
+- **Second-Order Optimization**: K-FAC ya Shampoo jaise techniques ka use karte hain jo "Hessian" (curvature) use karte hain faster convergence ke liye.
+- **Gradient-Free Optimization**: Alignment tasks ke liye jahan gradients compute karna mushkil hai (Evolutionary strategies).
+- **Differentiable Tokenization**: Discrete tokenization step ko differentiable banane ke attempts end-to-end training ke liye.

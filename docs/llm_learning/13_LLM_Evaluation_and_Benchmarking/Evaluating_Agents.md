@@ -8,20 +8,20 @@ Bhai, ek normal LLM ko test karna simple hai—ek sawal pucho aur answer check k
 ---
 
 ## 2. Deep Technical Explanation
-Agent evaluation requires measuring both the **Process** and the **Outcome**.
-- **Success Rate**: Did the agent reach the goal?
-- **Trajectory Accuracy**: Were the intermediate steps (Tool calls, reasoning) correct?
-- **Efficiency**: How many tokens/steps did it take? (Lower is better).
-- **Robustness**: Can it recover if a tool returns an error or no results?
-- **Safety**: Does the agent try to perform illegal actions (e.g., deleting files) when asked?
+Agent evaluation ko **Process** aur **Outcome** dono measure karna hota hai.
+- **Success Rate**: Kya agent goal tak pahunch gaya?
+- **Trajectory Accuracy**: Kya intermediate steps (Tool calls, reasoning) sahi the?
+- **Efficiency**: Kitne tokens/steps lage? (Kam better hai).
+- **Robustness**: Agar tool error ya koi result nahi return kare, toh kya agent recover kar sakta hai?
+- **Safety**: Kya agent illegal actions perform karne ki koshish karta hai (e.g., files delete karna) jab poochha jaye?
 
 ---
 
 ## 3. Mathematical Intuition
-Agent performance can be modeled as a **Path Reward**.
+Agent performance ko **Path Reward** ke roop mein model kiya ja sakta hai.
 Total Reward $R = \mathbb{1}(\text{Success}) - \gamma \times \text{Number of Steps}$
-where $\gamma$ is a penalty for each step. This encourages the agent to be fast.
-We also use **Trajectory Similarity** (comparing the agent's steps to an "Expert" path) using metrics like Levenshtein distance on the tool-call sequence.
+jahaan $\gamma$ har step ke liye ek penalty hai. Yeh agent ko fast rehne ke liye encourage karta hai.
+Hum **Trajectory Similarity** bhi use karte hain (agent ke steps ko "Expert" path se compare karke) using metrics like Levenshtein distance jo tool-call sequence par hota hai.
 
 ---
 
@@ -44,7 +44,7 @@ graph TD
 ---
 
 ## 5. Production-ready Examples
-Evaluation using `AgentBench` (Conceptual):
+`AgentBench` ka use karte hue Evaluation (Conceptual):
 
 ```python
 # Test Case
@@ -62,22 +62,22 @@ goal = "Find the revenue of Apple in 2023 and multiply it by 1.1"
 ---
 
 ## 6. Real-world Use Cases
-- **Customer Service Agents**: Testing if the bot can solve a refund issue in < 5 steps.
-- **Data Analyst Agents**: Ensuring the agent writes valid SQL and doesn't hallucinate column names.
-- **Coding Agents (Devin style)**: Running the code the agent wrote to see if it actually fixes the bug (Unit Testing).
+- **Customer Service Agents**: Testing karna ki kya bot refund issue ko < 5 steps mein solve kar sakta hai.
+- **Data Analyst Agents**: Ensure karna ki agent valid SQL likhe aur column names hallucinate na kare.
+- **Coding Agents (Devin style)**: Agent ke likhe code ko run karke check karna ki woh actually bug fix karta hai ya nahi (Unit Testing).
 
 ---
 
 ## 7. Failure Cases
-- **Infinite Tool Loops**: The agent keeps calling `search` with the same query.
-- **Hallucinated Tools**: The agent tries to call a function that isn't in its toolbox.
-- **Context Overload**: The agent's "Thought history" becomes so long that it forgets the original goal.
+- **Infinite Tool Loops**: Agent ek hi query ke saath `search` call karta rahta hai.
+- **Hallucinated Tools**: Agent aisi function ko call karne ki koshish karta hai jo uske toolbox mein nahi hai.
+- **Context Overload**: Agent ka "Thought history" itna lamba ho jata hai ki woh original goal bhool jata hai.
 
 ---
 
 ## 8. Debugging Guide
-1. **Trace Visualization**: Use LangSmith or Phoenix to see the "DAG" of the agent's run.
-2. **Intermediate Unit Tests**: Run a validator after every tool call. If the tool returned "Error", see if the agent noticed and fixed it.
+1. **Trace Visualization**: Agent ke run ka "DAG" dekhne ke liye LangSmith ya Phoenix use karein.
+2. **Intermediate Unit Tests**: Har tool call ke baad ek validator run karein. Agar tool ne "Error" return kiya, toh dekhein ki agent ne notice kiya aur use fix kiya.
 
 ---
 
@@ -91,33 +91,33 @@ goal = "Find the revenue of Apple in 2023 and multiply it by 1.1"
 ---
 
 ## 10. Security Concerns
-- **Remote Code Execution (RCE)**: If your agent can run Python, an evaluator must ensure it doesn't try to `rm -rf /`. Always run agent evals in a sandboxed environment (Docker).
+- **Remote Code Execution (RCE)**: Agar aapka agent Python run kar sakta hai, toh evaluator ko ensure karna chahiye ki woh `rm -rf /` try na kare. Agent evals hamesha sandboxed environment (Docker) mein run karein.
 
 ---
 
 ## 11. Scaling Challenges
-- **Non-determinism**: Agent runs are often non-deterministic. You might need to run the same test 5 times and take the average success rate.
+- **Non-determinism**: Agent runs gen non-deterministic hote hain. Aapko same test 5 baar run karke average success rate lena pad sakta hai.
 
 ---
 
 ## 12. Cost Considerations
-- **Step Multiplier**: A single agentic request can trigger 10+ LLM calls, making evaluation 10x more expensive than standard LLM testing.
+- **Step Multiplier**: Ek single agentic request 10+ LLM calls trigger kar sakti hai, jo evaluation ko standard LLM testing se 10x zyada expensive bana deti hai.
 
 ---
 
 ## 13. Best Practices
-- **Mock your tools**: During evaluation, replace real APIs with "Mocks" that return fixed data to ensure consistency.
-- **Limit iterations**: Always set a `max_steps` to prevent runaway costs.
-- **Evaluate Tool-Call Syntax**: Check if the JSON for the tool call is actually valid before even running the tool.
+- **Mock your tools**: Evaluation ke dauran, real APIs ko "Mocks" se replace karein jo fixed data return karein, consistency ensure karne ke liye.
+- **Limit iterations**: Hamesha `max_steps` set karein, runaway costs rokne ke liye.
+- **Evaluate Tool-Call Syntax**: Check karein ki tool call ka JSON actually valid hai ya nahi, tool run karne se pehle.
 
 ---
 
 ## 14. Interview Questions
-1. Why is "Outcome-only" evaluation dangerous for agents?
-2. How do you measure an agent's "Planning" capability?
+1. "Outcome-only" evaluation agents ke liye dangerous kyun hai?
+2. Aap agent ki "Planning" capability kaise measure karte hain?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Simulated Environment Testing**: Putting the agent in a "Game-like" sandbox (like MineDojo) to see if it can survive and complete tasks over long periods.
-- **Automatic Trajectory Labeling**: Using a super-agent (like GPT-5) to grade the steps of a smaller agent.
+- **Simulated Environment Testing**: Agent ko "Game-like" sandbox (jaise MineDojo) mein daal kar dekhna ki woh long periods mein survive karke tasks complete kar sakta hai.
+- **Automatic Trajectory Labeling**: Ek super-agent (jaise GPT-5) ka use karke chhote agent ke steps ko grade karna.

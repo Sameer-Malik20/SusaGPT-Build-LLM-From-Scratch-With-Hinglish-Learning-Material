@@ -8,19 +8,19 @@ LLMs asal mein information compression machines hain. Jab model seekhta hai, toh
 ---
 
 ## 2. Deep Technical Explanation
-Information Theory provides the metrics for training LLMs:
-- **Entropy ($H$)**: Measure of uncertainty in the token distribution.
-- **Cross-Entropy ($CE$)**: The loss function we minimize. It measures the difference between the true distribution (data) and the predicted distribution (model).
-- **KL Divergence**: Measures how much one probability distribution diverges from a second, reference distribution. Essential for **RLHF/DPO**.
+Information Theory LLMs train karne ke liye metrics provide karti hai:
+- **Entropy ($H$)**: Token distribution mein uncertainty ka measure.
+- **Cross-Entropy ($CE$)**: Loss function jo hum minimize karte hain. Ye true distribution (data) aur predicted distribution (model) ke beech ka difference measure karta hai.
+- **KL Divergence**: Measure karta hai ki ek probability distribution doosre reference distribution se kitna diverge hota hai. **RLHF/DPO** ke liye essential hai.
 
 ---
 
 ## 3. Mathematical Intuition
 **Shannon Entropy**:
 $$H(X) = -\sum_{i} P(x_i) \log P(x_i)$$
-**Cross-Entropy Loss** (what we optimize):
+**Cross-Entropy Loss** (jisko hum optimize karte hain):
 $$L = -\sum_{i} y_i \log(\hat{y}_i)$$
-Where $y$ is the ground truth (one-hot) and $\hat{y}$ is the model prediction. Minimizing CE is equivalent to minimizing the KL Divergence between data and model.
+Jahan $y$ ground truth (one-hot) hai aur $\hat{y}$ model prediction hai. CE ko minimize karna, data aur model ke beech KL Divergence minimize karne ke equal hai.
 
 ---
 
@@ -39,70 +39,70 @@ graph LR
 import torch
 import torch.nn as nn
 
-# Target: index 2 (e.g., word 'apple')
+# Target: index 2 (jaise, word 'apple')
 target = torch.tensor([2]) 
-# Logits from model
+# Model se logits
 logits = torch.tensor([[0.1, 0.2, 5.0, 0.1]]) 
 
 criterion = nn.CrossEntropyLoss()
 loss = criterion(logits, target)
 
 print(f"Cross-Entropy Loss: {loss.item()}")
-# Lower loss = Better compression of truth into model
+# Loss jitna low = Truth ka model mein utna better compression
 ```
 
 ---
 
 ## 6. Real-world Use Cases
-- **Tokenization**: BPE is an information-theoretic algorithm to find the most efficient sub-units of language.
-- **Model Pruning**: Removing weights that contribute little to the information flow.
+- **Tokenization**: BPE ek information-theoretic algorithm hai jo language ke sabse efficient sub-units ko find karta hai.
+- **Model Pruning**: Un weights ko remove karna jo information flow mein zyada contribute nahi karte.
 
 ---
 
 ## 7. Failure Cases
-- **Information Bottleneck**: If the model is too small, it can't "fit" all the information, leading to loss of facts.
+- **Information Bottleneck**: Agar model bahut chhota hai, toh woh saari information ko "fit" nahi kar sakta, jisse facts ka loss hota hai.
 
 ---
 
 ## 8. Debugging Guide
-1. Monitor **Bits-per-character (BPC)**: A standard metric in language modeling.
-2. Check for **Mode Collapse**: When the model's entropy drops too low, it becomes repetitive.
+1. **Bits-per-character (BPC)** monitor karo: Language modeling mein ek standard metric hai.
+2. **Mode Collapse** check karo: Jab model ka entropy bahut low ho jata hai, toh woh repetitive ho jata hai.
 
 ---
 
 ## 9. Tradeoffs
 | Metric | Focus |
 |---|---|
-| Accuracy | Is the word correct? |
-| Entropy | How confident/diverse is the model? |
+| Accuracy | Kya word sahi hai? |
+| Entropy | Model kitna confident/diverse hai? |
 
 ---
 
 ## 10. Security Concerns
-- **Side-channel attacks**: Analyzing the entropy of outputs to guess internal model states.
+- **Side-channel attacks**: Outputs ki entropy analyze karke internal model states guess karna.
 
 ---
 
 ## 11. Scaling Challenges
-- **Data Saturation**: Eventually, adding more data doesn't provide new "information" to the model.
+- **Data Saturation**: Eventually, zyada data add karne se model ko nayi "information" nahi milti.
 
 ---
 
 ## 12. Cost Considerations
-- **Lossy Compression**: Quantization is a form of lossy compression. 4-bit vs 16-bit is an information-theoretic tradeoff.
+- **Lossy Compression**: Quantization lossy compression ka ek form hai. 4-bit vs 16-bit ek information-theoretic tradeoff hai.
 
 ---
 
 ## 13. Best Practices
-- Use **Label Smoothing** to prevent the model from becoming too overconfident (too low entropy).
+- **Label Smoothing** use karo taaki model overconfident na ho (bahut low entropy se bachne ke liye).
 
 ---
 
 ## 14. Interview Questions
-1. Why is Cross-Entropy used as a loss function instead of Mean Squared Error?
-2. What is KL Divergence and why is it important for model alignment?
+1. Cross-Entropy ko loss function ke tor par Mean Squared Error ki jagah kyun use kiya jata hai?
+2. KL Divergence kya hai aur yeh model alignment ke liye kyun important hai?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Information-Theoretic Discovery**: Using LLMs to find new patterns in scientific data by measuring "surprise" in experimental results.
+- **Information-Theoretic Discovery**: LLMs ka use karke scientific data mein naye patterns find karna, experimental results mein "surprise" measure kar ke.

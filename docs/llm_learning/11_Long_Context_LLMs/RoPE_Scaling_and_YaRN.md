@@ -1,6 +1,6 @@
-# RoPE Scaling & YaRN: Squeezing More Context
+# RoPE Scaling & YaRN: Zyada Context Kheenchna
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Beginner ke Liye Aasan Hinglish Explanation 🇮🇳
 Bhai, socho tum ek scale (ruler) use kar rahe ho jo sirf 30cm tak measure kar sakta hai. Ab tumhe 100cm measure karna hai. Tum kya karoge? 
 1. Ya toh tum 100cm ka bada scale banao (Retraining - Expensive!).
 2. Ya phir tum har 1cm ko 0.3cm maan lo (Interpolation). 
@@ -9,21 +9,21 @@ Bhai, socho tum ek scale (ruler) use kar rahe ho jo sirf 30cm tak measure kar sa
 
 ---
 
-## 2. Deep Technical Explanation
-RoPE (Rotary Positional Embeddings) represents positions as rotations in a 2D plane. 
-- **Linear Scaling**: Divide the position index by a factor $s$. This "smushes" the high-frequency waves, causing the model to lose fine-grained details.
-- **NTK-aware Scaling**: Modifies the base of the rotation frequency to prevent losing high-frequency information.
-- **YaRN (Yet another RoPE extensioN)**: Uses "Attention Scaling" and "Frequency Interpolation" to achieve near-perfect performance at 10x-32x context extensions.
+## 2. Gehri Technical Explanation
+RoPE (Rotary Positional Embeddings) positions ko 2D plane mein rotations ke roop mein represent karta hai. 
+- **Linear Scaling**: Position index ko factor $s$ se divide karo. Yeh high-frequency waves ko "smush" kar deta hai, jisse model fine-grained details kho deta hai.
+- **NTK-aware Scaling**: Rotation frequency ke base ko modify karta hai taaki high-frequency information lose na ho.
+- **YaRN (Yet another RoPE extensioN)**: "Attention Scaling" aur "Frequency Interpolation" use karta hai taaki 10x-32x context extensions par near-perfect performance achieve ho.
 
 ---
 
-## 3. Mathematical Intuition
-The RoPE frequency for dimension $d$ is:
+## 3. Ganitiya Intuition
+Dimension $d$ ke liye RoPE frequency yeh hai:
 $$f_i = \text{base}^{-2i/d}$$
-In **Linear Scaling**, we replace $pos$ with $pos/s$.
-In **NTK Scaling**, we change the base:
+**Linear Scaling** mein, hum $pos$ ki jagah $pos/s$ use karte hain.
+**NTK Scaling** mein, hum base change karte hain:
 $$\text{base}_{new} = \text{base} \cdot s^{d/(d-2)}$$
-This ensures that the "wavelength" of the highest frequency remains constant even as the context grows.
+Yeh ensure karta hai ki highest frequency ka "wavelength" constant rahe jab bhi context badhe.
 
 ---
 
@@ -38,8 +38,8 @@ graph LR
 
 ---
 
-## 5. Production-ready Examples
-Implementing NTK-aware scaling in a config:
+## 5. Production ke Liye Ready Examples
+Config mein NTK-aware scaling implement karna:
 
 ```python
 # In a HuggingFace config.json
@@ -52,27 +52,29 @@ Implementing NTK-aware scaling in a config:
 # which adjusts the factor based on the actual sequence length during inference.
 ```
 
----
-
-## 6. Real-world Use Cases
-- **Upgrading Old Models**: Taking a Llama-2-7B (4k context) and making it work on 32k context for a specialized RAG app.
-- **Long-form Writing**: Helping a model maintain plot consistency over a 50,000-word novel.
+2026 mein, kai models Dynamic RoPE Scaling use karte hain jo inference ke dauran actual sequence length ke hisaab se factor adjust karta hai.
 
 ---
 
-## 7. Failure Cases
-- **Information Washout**: If the scaling factor is too high (e.g., 100x), the "signal-to-noise" ratio of positions becomes too low, and the model starts mixing up the order of words.
-- **Training Gap**: If the model wasn't fine-tuned with the new scale, it might hallucinate more.
+## 6. Asli Duniya Ke Use Cases
+- **Upgrading Old Models**: Ek Llama-2-7B (4k context) ko lekar use 32k context par kaam karvana ek specialized RAG app ke liye.
+- **Long-form Writing**: Model ko 50,000-word novel mein plot consistency maintain karne mein madad karna.
 
 ---
 
-## 8. Debugging Guide
-1. **Perplexity Degradation**: Plot PPL as sequence length increases. If it spikes at 8k (for a 4k model), your scaling is failing.
-2. **Frequency Analysis**: Ensure that high-frequency components of the embedding are still active.
+## 7. Failure Cases (Nakami Ke Mamle)
+- **Information Washout**: Agar scaling factor bahut high hai (jaise 100x), toh positions ka "signal-to-noise" ratio bahut low ho jata hai, aur model words ka order mix up karne lagta hai.
+- **Training Gap**: Agar model ko naye scale ke saath fine-tune nahi kiya gaya, toh woh zyada hallucinate kar sakta hai.
 
 ---
 
-## 9. Tradeoffs
+## 8. Debugging Guide (Samasya Nivaran Guide)
+1. **Perplexity Degradation**: Sequence length badhne ke saath PPL plot karo. Agar 8k par spike aata hai (4k model ke liye), toh scaling fail ho rahi hai.
+2. **Frequency Analysis**: Ensure karo ki embedding ke high-frequency components abhi bhi active hain.
+
+---
+
+## 9. Tradeoffs (Sulah)
 | Method | Accuracy | Extrapolation Limit |
 |---|---|---|
 | Linear | Low | 2x - 4x |
@@ -81,33 +83,33 @@ Implementing NTK-aware scaling in a config:
 
 ---
 
-## 10. Security Concerns
-- **Position Confusion Attacks**: Crafting a prompt that exploits the "Interpolated" space to make the model attend to the wrong part of the document.
+## 10. Security Concerns (Suraksha Chintaein)
+- **Position Confusion Attacks**: Aisa prompt banana jo "Interpolated" space ka fayda uthakar model ko document ke galat hisse par attend karwade.
 
 ---
 
-## 11. Scaling Challenges
-- **Context Fine-tuning**: Even with YaRN, you usually need 500-1000 steps of "Continued Pre-training" on long documents to stabilize the model.
+## 11. Scaling Challenges (Scaling Ki Chunautiyan)
+- **Context Fine-tuning**: YaRN ke saath bhi, aam taur par model ko stabilize karne ke liye long documents par 500-1000 steps of "Continued Pre-training" ki zaroorat hoti hai.
 
 ---
 
-## 12. Cost Considerations
-- **Training Tokens**: You need a dataset of very long documents (books, codebases) to fine-tune the scale. These are harder to curate than short chat pairs.
+## 12. Cost Considerations (Kharcha Ke Vichar)
+- **Training Tokens**: Scale fine-tune karne ke liye dataset of very long documents (books, codebases) ki zaroorat hoti hai. Yeh short chat pairs se curate karna zyada mushkil hota hai.
 
 ---
 
-## 13. Best Practices
-- Use **YaRN** for extensions > 4x.
-- Always use **BFloat16** to avoid numerical overflow in the frequency calculations.
+## 13. Best Practices (Sabse Achhi Practices)
+- >4x extensions ke liye **YaRN** use karo.
+- Frequency calculations mein numerical overflow se bachne ke liye hamesha **BFloat16** use karo.
 
 ---
 
-## 14. Interview Questions
-1. Why does Linear Scaling fail at very large context windows?
-2. How does NTK scaling differ from simple interpolation?
+## 14. Interview Questions (Interview Ke Sawal)
+1. Linear Scaling very large context windows par kyun fail hota hai?
+2. NTK scaling simple interpolation se kaise alag hai?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **LongRoPE**: A search-based method that finds the "Optimal" scaling factor for each individual dimension, allowing 2M+ context windows.
-- **Rotary Persistence**: Training models with "Decaying" rotations to focus more on local context while still keeping global context.
+## 15. Latest 2026 Patterns (2026 Ke Naye Patterns)
+- **LongRoPE**: Ek search-based method jo har individual dimension ke liye "Optimal" scaling factor dhoondhta hai, jisse 2M+ context windows possible hote hain.
+- **Rotary Persistence**: "Decaying" rotations ke saath models ko train karna taaki local context par zyada focus ho aur global context bhi bana rahe.

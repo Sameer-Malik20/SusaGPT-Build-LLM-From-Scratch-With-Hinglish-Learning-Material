@@ -1,4 +1,4 @@
-# NLP Limitations: What LLMs Still Can't Do
+# NLP Limitations: LLMs abhi bhi kya nahi kar sakte hain?
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
 Bhai, LLM bohot smart lagte hain, lekin woh insaan nahi hain. Woh sirf "Patterns" samajhte hain, "Meaning" nahi. 
@@ -8,18 +8,18 @@ Socho ek tota (parrot) jo "Main ek chor hoon" bolna seekh gaya. Kya use pata hai
 ---
 
 ## 2. Deep Technical Explanation
-Despite the success of Transformers, NLP models face fundamental hurdles:
-- **Hallucinations**: Generating plausible but factually incorrect information.
-- **Lack of Grounding**: Models only know "Text", they don't have physical world experience (unless multimodal).
-- **Reasoning Gaps**: LLMs often fail at simple logic or multi-step math if not prompted correctly (Chain of Thought).
-- **Data Bias**: Models inherit prejudices present in the internet data they were trained on.
+Transformers ki safalta ke bawajood, NLP models kuch fundamental hurdles face karte hain:
+- **Hallucinations**: Plausible lekin factually galat information generate karna.
+- **Lack of Grounding**: Models sirf "Text" ko jaante hain, unke paas physical world experience nahi hai (unless multimodal ho).
+- **Reasoning Gaps**: LLMs aksar simple logic ya multi-step math mein fail ho jaate hain agar sahi prompting na ho (Chain of Thought).
+- **Data Bias**: Models un prejudices ko inherit karte hain jo internet data mein present hain jis par woh trained the.
 
 ---
 
 ## 3. Mathematical Intuition
-The **Maximum Likelihood Estimation (MLE)** objective used in training encourages the model to be "Average". If the training data says "The sky is blue" 90% of the time and "The sky is green" 10% of the time, the model will be uncertain and might "hallucinate" a mix.
+Training mein istemal hone wala **Maximum Likelihood Estimation (MLE)** objective model ko "Average" hone ke liye encourage karta hai. Agar training data 90% baar "The sky is blue" aur 10% baar "The sky is green" kahte hain, to model uncertain hoga aur ek mix "hallucinate" kar sakta hai.
 $$P(y|x) = \text{Average over diverse opinions in training data}$$
-This leads to "Regression to the mean" rather than absolute truth.
+Yeh "Regression to the mean" ki taraf le jaata hai, absolute truth ke bajaye.
 
 ---
 
@@ -35,7 +35,7 @@ graph TD
 ---
 
 ## 5. Production-ready Examples
-Using a "Guardrail" to catch common limitations:
+Common limitations ko catch karne ke liye ek "Guardrail" ka istemal karte hain:
 
 ```python
 # Simple factual check example
@@ -51,20 +51,20 @@ def validate_output(llm_output, ground_truth_facts):
 ---
 
 ## 6. Real-world Use Cases
-- **Legal/Medical**: Where hallucination can lead to life-threatening or legal consequences.
-- **Coding**: Models suggesting deprecated or insecure libraries.
+- **Legal/Medical**: Jahan hallucination life-threatening ya legal consequences ka cause ban sakta hai.
+- **Coding**: Models deprecated ya insecure libraries suggest karte hain.
 
 ---
 
 ## 7. Failure Cases
-- **Arithmetic**: "What is 98723 * 123?" (Model might guess the number of digits correctly but get the last few digits wrong).
-- **Temporal Knowledge**: "Who is the Prime Minister of UK?" (Might give an answer from 2 years ago if the data is old).
+- **Arithmetic**: "What is 98723 * 123?" (Model digits ka number sahi guess kar sakta hai lekin aakhri kuch digits galat kar deta hai.)
+- **Temporal Knowledge**: "Who is the Prime Minister of UK?" (Agar data purana hai toh 2 saal pehle ka jawab de sakta hai.)
 
 ---
 
 ## 8. Debugging Guide
-1. **Red Teaming**: Actively try to make the model fail using edge cases.
-2. **Confidence Calibration**: Check if the model's self-reported confidence matches its accuracy.
+1. **Red Teaming**: Edge cases ka istemal karke model ko fail karne ki koshish karna.
+2. **Confidence Calibration**: Check karna ki model ka self-reported confidence uski accuracy se match karta hai ya nahi.
 
 ---
 
@@ -77,33 +77,33 @@ def validate_output(llm_output, ground_truth_facts):
 ---
 
 ## 10. Security Concerns
-- **Prompt Injection**: Tricking the model into ignoring its safety training.
-- **Social Engineering**: Using LLMs to create highly personalized phishing attacks at scale.
+- **Prompt Injection**: Model ko uski safety training ko ignore karne mein trick karna.
+- **Social Engineering**: LLMs ka istemal karke bade scale par highly personalized phishing attacks banana.
 
 ---
 
 ## 11. Scaling Challenges
-- **The Intelligence Plateau**: Simply adding more parameters might not solve fundamental reasoning issues.
+- **The Intelligence Plateau**: Bas aur parameters add karne se fundamental reasoning issues solve nahi hote.
 
 ---
 
 ## 12. Cost Considerations
-- **Human Evaluation**: Measuring limitations requires expensive human experts (RLHF).
+- **Human Evaluation**: Limitations ko measure karne ke liye expensive human experts (RLHF) ki zaroorat hoti hai.
 
 ---
 
 ## 13. Best Practices
-- **Human-in-the-loop**: Never let an LLM make critical decisions without human oversight.
-- **RAG**: Use Retrieval Augmented Generation to ground the model in real, updated facts.
+- **Human-in-the-loop**: Kabhi bhi LLM ko bina human oversight ke critical decisions lene na den.
+- **RAG**: Model ko real, updated facts mein ground karne ke liye Retrieval Augmented Generation (RAG) ka istemal karein.
 
 ---
 
 ## 14. Interview Questions
-1. Why do LLMs hallucinate, and how can we mitigate it?
-2. Explain the "Data Contamination" problem in LLM evaluation.
+1. LLMs hallucinate kyun karte hain, aur hum ise kaise mitigate kar sakte hain?
+2. LLM evaluation mein "Data Contamination" problem ko samjhao.
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **World Models**: Building models that have an internal simulation of the physical world (Video models) to reduce hallucinations about reality.
-- **Self-Correction**: Models like o1 that use RL to "Reflect" and fix their own errors before showing the final answer.
+- **World Models**: Aise models banana jinke paas physical world ka internal simulation ho (Video models) taaki reality ke baare mein hallucinations kam ho.
+- **Self-Correction**: Models jaise o1 jo RL ka istemal karte hain "Reflect" karne aur apne errors theek karne ke liye final answer dikhane se pehle.

@@ -1,5 +1,5 @@
-# ♾️ Infinite Context Techniques: SSMs and Beyond
-> **Objective:** Master the architectures and techniques that break the $O(n^2)$ attention barrier, focusing on State Space Models (Mamba), Linear Attention, and Recurrent Transformers | **Language:** Hinglish | **Standard:** 2026 Expert Framework
+# ♾️ Infinite Context Techniques: SSMs aur Beyond
+> **Objective:** Master karo architectures aur techniques jo $O(n^2)$ attention barrier ko todte hain, focus karo State Space Models (Mamba), Linear Attention, aur Recurrent Transformers par | **Language:** Hinglish | **Standard:** 2026 Expert Framework
 
 ---
 
@@ -9,28 +9,28 @@ Infinite Context ka matlab hai ek aisi memory jo kabhi bharti nahi.
 - **The Problem:** Standard LLMs (Transformers) jaise-jaise tokens badhte hain, slow hote jate hain. 10 Million tokens par wo bilkul ruk jayenge.
 - **The Solution:** SSMs (State Space Models) like **Mamba**. 
   - Ye pura data save nahi karte. 
-  - Ye har token ke baad apni "State" (Internal summary) ko update karte hain. 
+  - Ye har token ke baad apni "State" (Internal summary) ko update karte hain.
 - **Intuition:** Ye ek "Radio" jaisa hai. Radio ko farak nahi padta ki gaana 1 minute se chal raha hai ya 1 ghante se, wo bas current signal catch karta hai aur aage badhta hai.
 
 ---
 
-## 🧠 2. Deep Technical Explanation
-Infinite context architectures replace global attention with **Recurrent** or **Selective** mechanisms:
+## 🧠 2. Gehra Technical Explanation
+Infinite context architectures global attention ko replace karte hain **Recurrent** ya **Selective** mechanisms se:
 
-1. **Linear Attention:** Modifying the attention math to be $O(n)$ by changing the order of matrix multiplication. 
-2. **State Space Models (SSMs):** Using differential equations to model sequence data. **Mamba** uses "Selective Scan" to decide what to remember and what to forget at each step.
-3. **Mamba-2:** A 2026 evolution that combines the best of SSMs and Transformers, providing $O(n)$ scaling with Transformer-like reasoning quality.
-4. **Recurrent Memory Transformers (RMT):** Passing a "Memory Token" from one segment to the next, allowing context to flow across millions of tokens without full attention.
+1. **Linear Attention:** Attention math ko modify karke $O(n)$ banate hain matrix multiplication ka order change karke.
+2. **State Space Models (SSMs):** Differential equations use karke sequence data model karte hain. **Mamba** uses "Selective Scan" decide karne ke liye ki har step par kya yaad rakhna aur kya bhoolna.
+3. **Mamba-2:** 2026 ka evolution jo combine karta hai SSMs aur Transformers dono ki best qualities, provide karta hai $O(n)$ scaling Transformer-like reasoning quality ke saath.
+4. **Recurrent Memory Transformers (RMT):** Ek segment se agle segment tak "Memory Token" pass karna, context ko flow karne deta hai millions of tokens across bina full attention ke.
 
 ---
 
-## 📐 3. Mathematical Intuition
-**Standard Attention:** Complexity is $N^2$.
-**SSM (Mamba):** Complexity is $N \times D$ (where $D$ is the constant state size).
-The hidden state $h_t$ is updated as:
+## 📐 3. Mathematical Samjh
+**Standard Attention:** Complexity $N^2$ hoti hai.
+**SSM (Mamba):** Complexity $N \times D$ hai (jahan $D$ constant state size hai).
+Hidden state $h_t$ update hota hai is prakar:
 $$h_t = A h_{t-1} + B x_t$$
 $$y_t = C h_t$$
-Because $A, B, C$ are constant-sized matrices, the memory needed for 1 token is exactly the same as for 1,000,000 tokens.
+Kyunki $A, B, C$ constant-sized matrices hain, to 1 token ke liye jo memory chahiye wahi 1,000,000 tokens ke liye bhi chahiye.
 
 ---
 
@@ -49,11 +49,11 @@ graph LR
 ---
 
 ## 💻 5. Production-Ready Examples
-Using **Mamba** in 2026:
+2026 mein **Mamba** ka istemal:
 ```python
 from mamba_ssm import Mamba
 
-# Initialize a Mamba block
+# Mamba block initialize karo
 model = Mamba(
     d_model=768, 
     d_state=16, 
@@ -61,64 +61,64 @@ model = Mamba(
     expand=2
 )
 
-# Unlike Transformers, Mamba's speed won't drop as sequence grows.
-# Perfect for streaming logs or real-time sensor data.
+# Transformers ke vipareet, Mamba ki speed nahi girti jaise sequence badhta hai.
+# Streaming logs ya real-time sensor data ke liye perfect.
 ```
 
 ---
 
 ## 🌍 6. Real-World Use Cases
-- **Genomic Sequencing:** Analyzing DNA sequences with billions of base pairs in a single pass.
-- **Long-form Video:** Processing every frame of a 24-hour video stream without "Windowing".
-- **Log Analysis:** Monitoring a server's entire lifetime of logs to find patterns that span weeks.
+- **Genomic Sequencing:** DNA sequences analyze karna billion base pairs ke saath ek hi pass mein.
+- **Long-form Video:** Har frame ko process karna 24-hour video stream ka bina "Windowing" ke.
+- **Log Analysis:** Server ke poore jeevan kaal ke logs monitor karna patterns dhundhne ke liye jo weeks tak chalein.
 
 ---
 
 ## ❌ 7. Failure Cases
-- **The "State Bottleneck":** If the hidden state is only 512D, it eventually "Forgets" details. You can't fit 1 million names in a small state vector without losing precision.
-- **Reasoning Gaps:** SSMs are currently slightly worse than Transformers at complex "Logic" tasks (like coding) because they can't "Look back" at the exact tokens.
+- **The "State Bottleneck":** Agar hidden state sirf 512D hai, to eventually details "Forget" ho jate hain. 1 million names ko ek chhote state vector mein fit nahi kar sakte precision khoye bina.
+- **Reasoning Gaps:** SSMs currently Transformers se kuch behtar nahi hain complex "Logic" tasks (jaise coding) mein kyunki wo exact tokens par "Look back" nahi kar sakte.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
 | Problem | Reason | Solution |
 | :--- | :--- | :--- |
-| **Model forgets specific facts** | State size is too small | Increase **d_state** or use a **Hybrid Transformer-SSM** architecture. |
-| **Training is unstable** | Recurrent gradients exploding | Use **Normalization layers** after every state update. |
+| **Model specific facts bhool jata hai** | **State size bohot chhota hai** | **d_state** badhayein ya **Hybrid Transformer-SSM** architecture use karein. |
+| **Training unstable hai** | **Recurrent gradients explode ho rahe hain** | State update ke baad **Normalization layers** use karein. |
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **SSMs/Mamba (Infinite Context / $O(n)$ speed / Lower reasoning).**
-- **Transformers (Limited Context / $O(n^2)$ speed / Higher reasoning).**
+- **SSMs/Mamba (Infinite Context / $O(n)$ speed / Kam reasoning).**
+- **Transformers (Limited Context / $O(n^2)$ speed / Zyada reasoning).**
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **State Poisoning:** Crafting a sequence of millions of "Innocent" tokens that slowly "Poisons" the hidden state to produce a malicious output at the end.
+- **State Poisoning:** Millions of "Innocent" tokens ki ek sequence banana jo slowly hidden state ko "Poison" kare aur end par malicious output produce kare.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The Reasoning-Efficiency Frontier:** Finding the perfect balance between "Global Attention" (for logic) and "Recurrence" (for speed).
+- **The Reasoning-Efficiency Frontier:** "Global Attention" (logic ke liye) aur "Recurrence" (speed ke liye) ke beech perfect balance dhundhna.
 
 ---
 
 ## 💰 12. Cost Considerations
-- SSMs are extremely cheap for long context because you don't need to store a massive KV Cache. Memory cost is constant.
+- SSMs long context ke liye bahut saste hain kyunki aapko massive KV Cache store nahi karna padta. Memory cost constant hai.
 
 漫
 ---
 
 ## 📝 14. Interview Questions
-1. "How does Mamba achieve $O(n)$ scaling?"
-2. "What is 'Selective Scan' in the context of SSMs?"
-3. "Can a pure SSM replace a Transformer for coding tasks? Why or why not?"
+1. "Mamba $O(n)$ scaling kaise achieve karta hai?"
+2. "'Selective Scan' kya hai SSMs ke context mein?"
+3. "Kya ek pure SSM Transformer ko badal sakta hai coding tasks ke liye? Kyun ya kyun nahi?"
 
 ---
 
 ## 🚀 15. Latest 2026 LLM Engineering Patterns
-- **Jamba:** A hybrid model from AI21 that layers Transformer blocks (for logic) and Mamba blocks (for long-range efficiency).
-- **Mamba-2-Hybrid:** The 2026 industry standard for large-scale long-context modeling.
+- **Jamba:** AI21 ka ek hybrid model jo Transformer blocks (logic ke liye) aur Mamba blocks (long-range efficiency ke liye) ko layer karta hai.
+- **Mamba-2-Hybrid:** 2026 ka industry standard large-scale long-context modeling ke liye.
 漫
 漫

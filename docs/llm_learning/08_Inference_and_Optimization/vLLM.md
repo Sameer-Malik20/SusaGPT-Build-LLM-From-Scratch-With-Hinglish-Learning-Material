@@ -1,29 +1,29 @@
 # vLLM: Production-Grade Inference Engine
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Beginner ke liye Hinglish Explanation 🇮🇳
 Bhai, socho tumne ek model train kar liya, ab tumhe use 10,000 logon ko serve karna hai. Agar tum simple PyTorch use karoge, toh tumhara server baith jayega (crash). 
 
 **vLLM** woh "Super Engine" hai jo models ko production mein chalane ke liye design kiya gaya hai. Iska sabse bada feature hai **PagedAttention**. Jaise computer ki RAM chote chote pages mein divided hoti hai taaki jagah waste na ho, vLLM bhi model ki memory (KV Cache) ko pages mein divide karta hai. Isse memory waste nahi hoti aur tum ek hi GPU par 10x zyada users handle kar sakte ho. Yeh 2026 mein LLM serving ka "Gold Standard" hai.
 
 ---
 
-## 2. Deep Technical Explanation
-vLLM is a high-throughput serving engine for LLMs.
-- **PagedAttention**: Manages KV cache memory by partitioning it into blocks (pages), similar to virtual memory in OS. This eliminates external fragmentation and reduces wasted memory by up to 96%.
-- **Continuous Batching**: Instead of waiting for a whole batch to finish, vLLM inserts new requests as soon as one request finishes a token.
-- **Support**: Supports Llama, Mistral, Mixtral, and most popular open-weight models.
+## 2. Gehri Technical Samjhaai
+vLLM ek high-throughput serving engine hai LLMs ke liye.
+- **PagedAttention**: KV cache memory ko blocks (pages) mein divide karke manage karta hai, jaise OS mein virtual memory hoti hai. Ye external fragmentation ko khatam karta hai aur wasted memory ko 96% tak reduce kar deta hai.
+- **Continuous Batching**: Poori batch ke finish hone ka wait karne ke bajay, vLLM naye requests insert karta hai jaise hi ek request ek token finish karti hai.
+- **Support**: Llama, Mistral, Mixtral, aur most popular open-weight models ko support karta hai.
 
 ---
 
-## 3. Mathematical Intuition
-Traditional serving has high **Internal Fragmentation**. If a user has a 512 token limit but only uses 10 tokens, 502 tokens worth of KV cache is reserved but wasted.
-vLLM uses **Logical to Physical mapping**:
+## 3. Ganit ka Intuition
+Traditional serving mein high **Internal Fragmentation** hoti hai. Agar kisi user ke paas 512 token limit hai lekin woh sirf 10 tokens use karta hai, toh 502 tokens ke equivalent KV cache reserve ho jaati hai lekin waste hoti hai.
+vLLM **Logical to Physical mapping** use karta hai:
 $$\text{Physical\_Addr} = \text{MappingTable}[\text{Logical\_Page\_ID}] \times \text{BlockSize} + \text{Offset}$$
-This allows non-contiguous memory allocation, maximizing GPU utilization.
+Ye non-contiguous memory allocation allow karta hai, jo GPU utilization ko maximize karta hai.
 
 ---
 
-## 4. Architecture Diagrams
+## 4. Architecture ke Diagrams
 ```mermaid
 graph TD
     Req[Incoming Requests] --> Sch[vLLM Scheduler]
@@ -39,8 +39,8 @@ graph TD
 
 ---
 
-## 5. Production-ready Examples
-Serving a model with `vLLM` (CLI):
+## 5. Production ke Liye Examples
+Model ko serve karna `vLLM` ke saath (CLI):
 
 ```bash
 # Start an OpenAI-compatible API server
@@ -50,7 +50,7 @@ python -m vllm.entrypoints.openai.api_server \
     --max-model-len 4096
 ```
 
-Using vLLM in Python code:
+Python code mein vLLM use karna:
 ```python
 from vllm import LLM, SamplingParams
 
@@ -66,60 +66,60 @@ for output in outputs:
 
 ---
 
-## 6. Real-world Use Cases
-- **Public API Providers**: Companies like Anyscale or Together AI use vLLM style engines.
-- **Self-hosted LLMs**: Companies serving their own internal models for employees.
+## 6. Asli Duniya ke Use Cases
+- **Public API Providers**: Companies jaise Anyscale ya Together AI vLLM style engines use karte hain.
+- **Self-hosted LLMs**: Companies jo apne internal models ko employees ke liye serve karti hain.
 
 ---
 
-## 7. Failure Cases
-- **VRAM OOM**: If you set `gpu_memory_utilization` too high, the system might crash during heavy load.
-- **Cold Starts**: Loading a 70B model into vLLM takes a minute or more.
+## 7. Fail Cases
+- **VRAM OOM**: Agar aap `gpu_memory_utilization` bahut high set karte hain, toh system heavy load ke dauran crash ho sakta hai.
+- **Cold Starts**: vLLM mein 70B model load karne mein ek minute ya usse zyada lagta hai.
 
 ---
 
-## 8. Debugging Guide
-1. **Throughput logs**: Watch the `avg_prompt_throughput` and `avg_generation_throughput` in the console.
-2. **Fragmentation check**: Monitor the `free_gpu_memory`. If it's always near zero, you are maximizing the engine.
+## 8. Debugging Guide (Debug ka Guide)
+1. **Throughput logs**: Console mein `avg_prompt_throughput` aur `avg_generation_throughput` dekhte raho.
+2. **Fragmentation check**: `free_gpu_memory` ko monitor karo. Agar ye hamesha zero ke paas hai, toh aap engine ko maximize kar rahe ho.
 
 ---
 
 ## 9. Tradeoffs
 | Feature | HuggingFace Generate | vLLM |
 |---|---|---|
-| Throughput | Low | 10x - 20x Higher |
+| Throughput | Low | 10x - 20x Zyada |
 | Latency | Medium | Low (Continuous Batching) |
-| Flexibility | High | Medium (Supports specific models) |
+| Flexibility | High | Medium (Khaas models ko support karta hai) |
 
 ---
 
-## 10. Security Concerns
-- **Request Poisoning**: Sending thousands of very short requests to fill up the PagedAttention slots and deny service to others.
+## 10. Security ke Chinta
+- **Request Poisoning**: Hazaaron chhote-chhote requests bhejna taaki PagedAttention slots bhar jayein aur doosron ko service na mile.
 
 ---
 
-## 11. Scaling Challenges
-- **Multi-GPU (Tensor Parallelism)**: Scaling vLLM across 8 GPUs requires fast NVLink interconnects.
+## 11. Scale karne ki Chunautiyaan
+- **Multi-GPU (Tensor Parallelism)**: vLLM ko 8 GPUs par scale karne ke liye fast NVLink interconnects chahiye.
 
 ---
 
-## 12. Cost Considerations
-- **Cost per Request**: vLLM drastically reduces the cost per request by fitting more users on one GPU.
+## 12. Cost ke Baare mein
+- **Cost per Request**: vLLM ek GPU par zyada users fit karke cost per request ko drastic reduce karta hai.
 
 ---
 
-## 13. Best Practices
-- Use **FP8 or AWQ quantization** with vLLM for even higher throughput.
-- Set **`max_num_seqs`** based on your GPU's VRAM to prevent thrashing.
+## 13. Best Practices (Sabase achhe tarike)
+- Use **FP8 ya AWQ quantization** with vLLM for even higher throughput.
+- **`max_num_seqs`** ko apne GPU ke VRAM ke hisaab se set karo taaki thrashing se bacha ja sake.
 
 ---
 
-## 14. Interview Questions
-1. How does PagedAttention solve memory fragmentation?
-2. What is "Continuous Batching" and why is it better than static batching?
+## 14. Interview ke Sawal
+1. PagedAttention memory fragmentation ko kaise solve karta hai?
+2. "Continuous Batching" kya hai aur ye static batching se behtar kyun hai?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **vLLM + LoRA Adapters**: Dynamically swapping LoRA adapters in and out of the vLLM engine without restarting the server.
-- **Prefix Caching**: Automatically caching the prompt prefix (like system instructions) across different users to save compute.
+## 15. 2026 ke Latest Patterns
+- **vLLM + LoRA Adapters**: Server ko restart kiye bina vLLM engine mein LoRA adapters ko dynamically swap karna.
+- **Prefix Caching**: Alag-alag users ke liye prompt prefix (jaise system instructions) ko automatically cache karna taaki compute bach sake.

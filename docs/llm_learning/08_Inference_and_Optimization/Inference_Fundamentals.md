@@ -1,36 +1,36 @@
-# ⚡ Inference Fundamentals: The Speed of Intelligence
-> **Objective:** Master the principles of LLM inference, focusing on the decoding process, latency vs throughput trade-offs, and the lifecycle of a request in a production environment | **Language:** Hinglish | **Standard:** 2026 Expert Framework
+# ⚡ Inference Fundamentals: Intelligence ki Speed
+> **Uddeshya:** LLM inference ke principles master karna, decoding process, latency vs throughput trade-offs, aur production environment mein ek request ke lifecycle par focus karna | **Bhaasha:** Hinglish | **Maanak:** 2026 Expert Framework
 
 ---
 
-## 🧭 1. Beginner-Friendly Hinglish Explanation
+## 🧭 1. Shuruwat Ke Liye Hinglish Samjhai
 Inference ka matlab hai "Train ho chuke model se answer mangna".
 
-- **The Problem:** LLM train karna ek baar ka kaam hai, par use millions of users ko serve karna asli challenge hai. Har token generate karne mein time lagta hai.
-- **The Lifecycle:** 
+- **Samashya:** LLM train karna ek baar ka kaam hai, par use millions of users ko serve karna asli challenge hai. Har token generate karne mein time lagta hai.
+- **Jeevan Chakra:** 
   - **Prefill:** Model pura prompt ek sath padhta hai (Fast).
   - **Decoding:** Model ek-ek karke tokens likhta hai (Slow).
-- **Intuition:** Ye ek "Author" jaisa hai. Padhne (Reading) mein wo fast hai, par likhne (Writing) mein wo ek-ek shabd karke likhta hai, jisme time lagta hai.
+- **Sahajbodh:** Ye ek "Author" jaisa hai. Padhne (Reading) mein wo fast hai, par likhne (Writing) mein wo ek-ek shabd karke likhta hai, jisme time lagta hai.
 
 ---
 
-## 🧠 2. Deep Technical Explanation
-Inference is an **Autoregressive** process governed by two main metrics:
+## 🧠 2. Gehri Technical Samjhai
+Inference ek **Autoregressive** process hai jo do main metrics se control hota hai:
 
-1. **TTFT (Time To First Token):** How fast the model starts responding. Depends on prompt processing speed (Prefill).
-2. **TPOT (Time Per Output Token):** How fast the model continues writing. Depends on the decoding speed.
-3. **Throughput:** Total tokens generated per second across all users.
-4. **The Bottleneck:** LLM inference is **Memory-Bound**, not Compute-bound. The speed is limited by how fast weights can be loaded from VRAM into the GPU cores, not by how fast the math is done.
+1. **TTFT (Time To First Token):** Model kitni tezi se respond karna start karta hai. Ye prompt processing speed (Prefill) par depend karta hai.
+2. **TPOT (Time Per Output Token):** Model kitni tezi se likhna (respond karna) continue karta hai. Ye decoding speed par depend karta hai.
+3. **Throughput:** Total tokens jo har second generate hote hain across all users.
+4. **Bottleneck:** LLM inference **Memory-Bound** hai, Compute-bound nahi. Speed limit hai ki weights ko VRAM se GPU cores mein kitni fast load kiya ja sakta hai, na ki math kitni fast hoti hai.
 
 ---
 
-## 📐 3. Mathematical Intuition
+## 📐 3. Ganitiya Samjhai
 **Memory Bandwidth Constraint:**
-To generate one token for a $70B$ model (FP16):
-- We must read $140GB$ of weights from VRAM.
-- If an A100 has $2000GB/s$ bandwidth:
+Ek $70B$ model (FP16) ke liye ek token generate karne ke liye:
+- Hume VRAM se $140GB$ weights read karne padte hain.
+- Agar A100 ka bandwidth $2000GB/s$ hai:
 - Max theoretical speed = $2000 / 140 \approx 14$ tokens/sec.
-**No matter how many GPUs you have, a single request is limited by this bandwidth.**
+**Aapke paas kitne bhi GPUs hain, ek single request is bandwidth ke through limit hoti hai.**
 
 ---
 
@@ -49,8 +49,8 @@ graph LR
 
 ---
 
-## 💻 5. Production-Ready Examples
-The basic inference loop in PyTorch:
+## 💻 5. Production-Ke-Liye-Tayar Examples
+PyTorch mein basic inference loop:
 ```python
 import torch
 
@@ -68,62 +68,62 @@ for _ in range(50):
 
 ---
 
-## 🌍 6. Real-World Use Cases
-- **Chatbots:** Optimizing for low TTFT so the user doesn't feel the "Lag".
-- **Batch Processing:** Optimizing for high throughput to summarize 1 million documents overnight at the lowest cost.
+## 🌍 6. Asli Duniya Ke Use Cases
+- **Chatbots:** Low TTFT ke liye optimize karte hain taaki user ko "Lag" feel na ho.
+- **Batch Processing:** High throughput ke liye optimize karte hain taaki 1 million documents ko overnight lowest cost mein summarize kar sakein.
 
 ---
 
-## ❌ 7. Failure Cases
-- **Token Starvation:** Too many users, and the GPU can't keep up, making everyone's "TPOT" drop to 1 token/sec.
-- **Context Overflow:** User sends a 100k token prompt that crashes the server's VRAM.
+## ❌ 7. Viphalta Ke Mamle
+- **Token Starvation:** Zyada users aa gaye, aur GPU kuch nahi kar paya, jiski wajah se sabki "TPOT" gir ke 1 token/sec ho gayi.
+- **Context Overflow:** User ne 100k token ka prompt bhej diya jisne server ka VRAM crash kar diya.
 
 ---
 
-## 🛠️ 8. Debugging Guide
-| Problem | Reason | Solution |
+## 🛠️ 8. Debugging Ke Liye Guide
+| Samashya | Karan | Samadhan |
 | :--- | :--- | :--- |
-| **High Latency** | Sequential decoding | Use **Batching** or **Speculative Decoding**. |
-| **CUDA Out of Memory** | KV Cache is too large | Use **PagedAttention** (vLLM) or Quantized KV caches. |
+| **High Latency** | Sequential decoding | **Batching** ya **Speculative Decoding** use karein. |
+| **CUDA Out of Memory** | KV Cache ka size bahut bada hai | **PagedAttention** (vLLM) ya Quantized KV caches use karein. |
 
 ---
 
-## ⚖️ 9. Tradeoffs
+## ⚖️ 9. Samjhauta (Tradeoffs)
 - **Streaming (Low TTFT / High perceived speed)** vs **Non-streaming (Simpler / High perceived lag).**
 
 ---
 
-## 🛡️ 10. Security Concerns
-- **DDoS via Long Prompts:** An attacker sending many maximum-length prompts to saturate your KV cache and crash your inference server.
+## 🛡️ 10. Suraksha Samasya
+- **DDoS via Long Prompts:** Attacker maximum-length wale bahut saare prompts bhej raha hai taaki KV cache ko saturate kare aur inference server ko crash kare.
 
 ---
 
-## 📈 11. Scaling Challenges
-- **The KV Cache Problem:** As context length grows, the memory needed to store the KV cache exceeds the memory needed for the model weights.
+## 📈 11. Scaling Ki Chunauti
+- **KV Cache Samasya:** Jaise jaise context length badhti hai, KV cache ko store karne ke liye jo memory chahiye wo model weights ke memory se zyada ho jati hai.
 
 ---
 
-## 💰 12. Cost Considerations
-- Inference is where $90\%$ of a company's AI budget goes. A $2x$ speedup in inference equals a $50\%$ reduction in annual burn.
+## 💰 12. Lagat Samjho
+- Inference hi wo jagah hai jahaan company ka $90\%$ AI budget kharch hota hai. Inference mein $2x$ speedup annual burn mein $50\%$ reduction ke barabar hai.
 
 ---
 
-## ✅ 13. Best Practices
-- **Always use a KV Cache.** Never re-process the whole prompt for every token.
-- **Use FP8 or INT8 quantization** for production serving to double your throughput.
-- **Implement request queuing** to prevent server crashes during traffic spikes.
+## ✅ 13. Behatar Tareeke
+- **Hamesha KV Cache use karein.** Har token ke liye pura prompt kabhi re-process na karein.
+- **FP8 ya INT8 quantization use karein** production serving ke liye, isse throughput double ho jayega.
+- **Request queuing implement karein** traffic spikes ke dauran server crashes se bachne ke liye.
 
 漫
 ---
 
-## 📝 14. Interview Questions
-1. "Why is LLM inference memory-bound rather than compute-bound?"
-2. "What is the difference between TTFT and TPOT?"
-3. "Explain why generating the first token is usually slower than subsequent tokens for large prompts."
+## 📝 14. Interview Prashna
+1. "LLM inference memory-bound kyun hai na ki compute-bound?"
+2. "TTFT aur TPOT mein kya difference hai?"
+3. "Samjhaye ki kyun large prompts ke liye first token generate karna aam taur par subsequent tokens se slower hota hai."
 
 ---
 
-## 🚀 15. Latest 2026 LLM Engineering Patterns
-- **Prefill-Decode Disaggregation:** Running the "Prefill" on one set of GPUs and the "Decoding" on another to maximize efficiency.
-- **Micro-Batching:** Processing requests in tiny batches of 4-8 to balance latency and throughput perfectly.
+## 🚀 15. 2026 Ke Naye LLM Engineering Patterns
+- **Prefill-Decode Disaggregation:** "Prefill" ko ek set of GPUs par aur "Decoding" ko doosre set par run karna, jisse efficiency maximize hoti hai.
+- **Micro-Batching:** Requests ko chhote batches (4-8) mein process karna, latency aur throughput ko perfectly balance karne ke liye.
 漫

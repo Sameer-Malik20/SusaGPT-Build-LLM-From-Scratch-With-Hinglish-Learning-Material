@@ -1,13 +1,13 @@
-# 👩‍⚖️ LLM-as-a-Judge: The New Gold Standard
-> **Objective:** Master the sophisticated technique of using high-capability models (like GPT-4o or Claude 3.5) to evaluate the outputs of smaller or specialized models, creating an automated, scalable feedback loop | **Language:** Hinglish | **Standard:** 2026 Expert Framework
+# 👩‍⚖️ LLM-as-a-Judge: Naya Gold Standard
+> **Objective:** Ucch kshamata wale models (jaise GPT‑4o ya Claude 3.5) ka upyog karke chhote ya vishesh models ke outputs ka moolyankan karna, jisse ek automated, scalable feedback loop banta hai | **Language:** Hinglish | **Standard:** 2026 Expert Framework
 
 ---
 
-## 🧭 1. Beginner-Friendly Hinglish Explanation
+## 🧭 1. Shuruaat ke Liye Hinglish Samjhaan
 LLM-as-a-Judge ka matlab hai "Ek bade AI se chote AI ka kaam check karwana".
 
 - **The Problem:** Insaano ke paas itna time nahi hai ki wo AI ke hazaro answers ko roz check karein.
-- **The Solution:** LLM-as-a-Judge. 
+- **The Solution:** LLM-as-a-Judge.
   - Hum ek super-smart model (Judge) ko bulate hain.
   - Use ek "Rules ki List" (Rubric) dete hain.
   - Wo har answer ko padhta hai aur batata hai ki "Isme ye galti hai, isliye ise 5 mein se 3 milenge".
@@ -15,27 +15,27 @@ LLM-as-a-Judge ka matlab hai "Ek bade AI se chote AI ka kaam check karwana".
 
 ---
 
-## 🧠 2. Deep Technical Explanation
-The LLM-as-a-Judge pattern involves three critical components:
+## 🧠 2. Gehra Technical Samjhaan (Deep Technical Explanation)
+LLM-as-a-Judge pattern mein teen important components shamil hain:
 
-1. **The Evaluation Prompt:** A highly detailed prompt that defines the task, the context, and the grading criteria.
-2. **The Scoring Rubric:** A 1-5 or 1-10 scale with explicit definitions for each point (e.g., "Score 2 if the answer is factual but the tone is rude").
-3. **Reasoning-First Grading:** Asking the Judge to provide an explanation *before* giving the final score. This forces the Judge to pay attention to details and reduces bias.
-4. **Pairwise Comparison:** Giving the Judge two answers (A and B) and asking "Which is better?". This is often more reliable than absolute scoring.
+1. **The Evaluation Prompt:** Ek highly detailed prompt jo task, context aur grading criteria define karta hai.
+2. **The Scoring Rubric:** Ek 1–5 ya 1–10 scale jisme har point ki explicit definitions hoti hain (e.g., “Score 2 agar answer factual hai lekin tone rude hai”).
+3. **Reasoning‑First Grading:** Judge ko final score dene se *pehle* explanation dene ko kehna. Yeh Judge ko details par dhyan dene ke liye majboor karta hai aur bias kam karta hai.
+4. **Pairwise Comparison:** Judge ko do answers (A aur B) dena aur poochna “Kaun behtar hai?”. Yeh aksar absolute scoring se zyada reliable hota hai.
 
 ---
 
-## 📐 3. Mathematical Intuition
-**Inter-Annotator Agreement (IAA):**
-We measure how often the LLM-Judge agrees with a Human-Judge using **Cohen's Kappa ($\kappa$):**
+## 📐 3. Ganitik Samajh (Mathematical Intuition)
+**Inter‑Annotator Agreement (IAA):**
+Hum measure karte hain ki LLM‑Judge kitni baar Human‑Judge se agree karta hai **Cohen’s Kappa ($\kappa$)** ka upyog karte hue:
 $$\kappa = \frac{p_o - p_e}{1 - p_e}$$
 - $p_o$: Observed agreement.
 - $p_e$: Agreement expected by chance.
-If $\kappa > 0.6$, the LLM-Judge is considered "Reliable" and can replace expensive human labeling.
+Agar $\kappa > 0.6$, toh LLM‑Judge ko “Reliable” mana jata hai aur yeh expensive human labeling ki jagah le sakta hai.
 
 ---
 
-## 🏗️ 4. Architecture Diagrams
+## 🏗️ 4. Architecture Diagram (Sanrachna Aarekh)
 ```mermaid
 graph TD
     User[Test Dataset] --> LLM[Student Model: Llama-3 8B]
@@ -49,8 +49,8 @@ graph TD
 
 ---
 
-## 💻 5. Production-Ready Examples
-A professional **Evaluation Rubric** (2026 Format):
+## 💻 5. Production‑Ready Examples (Udyog ke Liye Taiyar Udaaharan)
+Ek professional **Evaluation Rubric** (2026 Format):
 ```python
 def judge_response(query, response, context):
     prompt = f"""
@@ -73,59 +73,59 @@ def judge_response(query, response, context):
 
 ---
 
-## 🌍 6. Real-World Use Cases
-- **Content Moderation:** Using a "Judge" to see if a community post violates 50 different subtle company rules.
-- **Agent Tuning:** Evaluating if an agent chose the "Most efficient" tool path to reach its goal.
-- **Benchmark Creation:** Using a large model to generate "Questions and Answers" for a specific company's internal wiki.
+## 🌍 6. Real‑World Use Cases (Vastavik Duniya ke Upayog)
+- **Content Moderation:** Ek “Judge” ka istemal karke yeh dekhna ki kya ek community post 50 alag‑alag subtle company rules ka ullanghan karti hai.
+- **Agent Tuning:** Yeh moolyankan karna ki kya agent ne apne lakshya tak pahunchne ke liye “Most efficient” tool path chuna.
+- **Benchmark Creation:** Ek bade model ka upyog karke kisi specific company ke internal wiki ke liye “Questions and Answers” generate karna.
 
 ---
 
-## ❌ 7. Failure Cases
-- **Position Bias:** Judges often pick the "First" answer they see in a pairwise comparison. **Fix: Swap the order and run the test twice.**
-- **Verbosity Bias:** Judges tend to give higher scores to longer, more professional-sounding answers, even if they are factually identical to short ones.
-- **Self-Preference:** GPT-4 tends to prefer answers that sound like GPT-4.
+## ❌ 7. Failure Cases (Vifalta ke Mamale)
+- **Position Bias:** Judges aksar pairwise comparison mein pehla answer choose karte hain. **Fix: Order swap karo aur test do baar chalao.**
+- **Verbosity Bias:** Judges lambi aur professional‑sounding answers ko higher scores dete hain, bhale hi woh chhote answers ke factually identical hoon.
+- **Self‑Preference:** GPT‑4 un answers ko prefer karta hai jo GPT‑4 jaisi sound karte hain.
 
 ---
 
-## 🛠️ 8. Debugging Guide
+## 🛠️ 8. Debugging Guide (Samasya Nivaran Guide)
 | Problem | Reason | Solution |
 | :--- | :--- | :--- |
-| **Judge gives everyone a 5/5** | Rubric is too easy | Make the **Criteria** more strict. Add specific "Negative" examples to the prompt. |
-| **Judge is inconsistent** | Temperature too high | Set **Temperature = 0** for all Judge calls. |
+| **Judge sabko 5/5 de raha hai** | Rubric bahut aasan hai | **Criteria** ko aur strict banao. Prompt mein specific “Negative” examples jodo. |
+| **Judge inconsistent hai** | Temperature bahut zyada hai | Saare Judge calls ke liye **Temperature = 0** set karo. |
 
 ---
 
-## ⚖️ 9. Tradeoffs
-- **Pairwise Comparison (More accurate / $2x$ cost).**
-- **Absolute Scoring (Faster / Cheaper / Noisier).**
+## ⚖️ 9. Tradeoffs (Karya Vyapar)
+- **Pairwise Comparison (Zyada accurate / $2x$ cost).**
+- **Absolute Scoring (Tez / Sasta / Zyada noise).**
 
 ---
 
-## 🛡️ 10. Security Concerns
-- **Eval Hijacking:** If an attacker knows your "Judge Prompt," they can craft their model's output to specifically "Trick" the judge into giving a 5/5.
+## 🛡️ 10. Security Concerns (Suraksha Chintayen)
+- **Eval Hijacking:** Agar koi attacker aapka “Judge Prompt” jaan leta hai, to woh apne model ke output ko is tarah craft kar sakta hai ki Judge ko “Trick” karke 5/5 score le sake.
 
 ---
 
-## 📈 11. Scaling Challenges
-- **The "Recursive Intelligence" Wall:** You need a smarter model to judge a smart model. What happens when our models are smarter than GPT-4? We will need "Incentivized Debate" or "Multi-Judge consensus".
+## 📈 11. Scaling Challenges (Vistar ki Chunautiyan)
+- **The “Recursive Intelligence” Wall:** Ek smart model ko judge karne ke liye aapko aur smarter model chahiye. Kya hoga jab humare models GPT‑4 se bhi smarter ho jayenge? Tab humein “Incentivized Debate” ya “Multi‑Judge consensus” ki zaroorat hogi.
 
 ---
 
-## 💰 12. Cost Considerations
-- Running 1000 evaluations per day with a top-tier judge can cost \$3k/month. Use **"Small-Judge" fine-tuning** to create a 7B model that is as good as GPT-4 at judging *your* specific task.
+## 💰 12. Cost Considerations (Lagat ke Vichar)
+- Har din 1000 evaluations top‑tier judge ke saath chalane par lagbhag $3k/month kharch ho sakta hai. **“Small‑Judge” fine‑tuning** ka upyog karke ek 7B model banao jo aapke specific task par judge karne mein GPT‑4 jitna hi accha ho.
 
 漫
 ---
 
-## 📝 14. Interview Questions
-1. "How do you handle 'Verbosity Bias' in LLM-as-a-Judge?"
-2. "Why is 'Reasoning-First' grading important?"
-3. "How do you validate that your LLM-Judge is actually reliable?"
+## 📝 14. Interview Questions (Sakshaatkaar Prashna)
+1. “LLM‑as‑a‑Judge mein ‘Verbosity Bias’ ko aap kaise handle karte hain?”
+2. “ ‘Reasoning‑First’ grading kyun important hai?”
+3. “Aap kaise validate karte hain ki aapka LLM‑Judge actually reliable hai?”
 
 ---
 
-## 🚀 15. Latest 2026 LLM Engineering Patterns
-- **Prometheus Models:** Open-source models (like Prometheus-2) specifically fine-tuned to be "Judges" rather than "Chatbots".
-- **Multi-Agent Consensus Eval:** Using 3 different judges (GPT-4, Claude, Llama-3) and taking the median score to eliminate single-model bias.
+## 🚀 15. Latest 2026 LLM Engineering Patterns (2026 ke Naye LLM Engineering Patterns)
+- **Prometheus Models:** Open‑source models (jaise Prometheus‑2) jo specially “Judges” ki tarah fine‑tune kiye gaye hain, na ki “Chatbots”.
+- **Multi‑Agent Consensus Eval:** 3 different judges (GPT‑4, Claude, Llama‑3) ka upyog karke median score lena taki single‑model bias khatam ho.
 漫
 漫

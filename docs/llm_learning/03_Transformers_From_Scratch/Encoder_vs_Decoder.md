@@ -1,31 +1,31 @@
-# 🏗️ LLM Architecture Variants - Beyond Transformers
+# 🏗️ LLM Architecture Variants - Transformers se Aage
 > **Level:** Intermediate → Expert | **Language:** Hinglish | **Goal:** Transformers ke alternative architectures samajhna (Mamba, RWKV, etc.)
 
 ---
 
-## 📋 Table of Contents: Beyond Attention
+## 📋 Table of Contents: Attention se Aage
 
 | Architecture | Core Innovation | Key Advantage | Limitations |
 |--------------|-----------------|---------------|-------------|
-| **Transformer** | Self-attention | Parallel training, Long-range dependencies | Quadratic memory, Slow inference |
-| **Mamba** | Selective State Space Models (SSM) | Linear scaling, Fast inference | New paradigm, Less mature ecosystem |
+| **Transformer** | Self-attention | Parallel training, Long-range dependencies | Quadratic memory, dheemi inference |
+| **Mamba** | Selective State Space Models (SSM) | Linear scaling, tez inference | Naya paradigm, kam mature ecosystem |
 | **RWKV** | Recurrent Neural Network with attention-like gating | RNN efficiency + Transformer quality | Sequential training, Limited context mixing |
 | **Hyena** | Long convolutions | Sub-quadratic scaling, Theoretical guarantees | Experimental, Limited adoption |
-| **RetNet** | Retention mechanism | Training parallel + inference recurrent | New, Less tested at scale |
+| **RetNet** | Retention mechanism | Training parallel + inference recurrent | Naya, scale pe kam tested |
 
 ---
 
-## 1. ⚡ The Transformer Bottleneck
+## 1. ⚡ Transformer Bottleneck
 
 ### A. The Quadratic Attention Problem
 Sequence length $n$ ke liye, attention requires $O(n^2)$ computations:
 - **Memory:** $n \times n$ attention matrix
-- **Compute:** Matrix multiplication scales quadratically
+- **Compute:** Matrix multiplication quadratically scale karta hai
 - **Inference:** Tokens generate karne ki speed $O(n)$ per token se faster nahi ho sakti
 
 ### B. Real-world Impact
-- **Context length limited:** Most models max at 128k tokens
-- **Inference cost high:** Longer context = exponentially slower
+- **Context length limited:** Zyadatar models max 128k tokens pe hain
+- **Inference cost high:** Long context exponentially slower hota hai
 - **Memory bottleneck:** Very long documents process nahi kar sakte
 
 ---
@@ -74,7 +74,7 @@ RNN efficiency ko Transformer-quality training ke saath combine karo:
    $k_{t} = \sigma(K_{t} W_{k})$
 
 ### C. Advantages
-- **Infinite context:** Theoretically unlimited sequence length
+- **Infinite context:** Theory me unlimited sequence length
 - **Memory efficient:** Context ke hisaab se constant state size
 - **Fast inference:** KV cache ki zaroorat nahi
 
@@ -95,7 +95,7 @@ Attention ko **long convolutions** se replace karo:
 
 ### B. Key Components
 1. **Long convolutional filters:** Pure sequence par learnable filters
-2. **Gating mechanism:** Element-wise gating for nonlinearity
+2. **Gating mechanism:** Element-wise gating nonlinearity ke liye
 3. **Hierarchical decomposition:** Multi-scale processing
 
 ### C. Performance Characteristics
@@ -130,7 +130,7 @@ jahaan $D$ ek decay matrix hai jo distance ke saath decay karta hai
 | Architecture | Training FLOPs | Inference FLOPs/token | Max Context |
 |--------------|----------------|-----------------------|-------------|
 | Transformer | $O(n^2 d)$ | $O(nd)$ | ~128k |
-| Mamba | $O(n d^2)$ | $O(d^2)$ | **Theoretically infinite** |
+| Mamba | $O(n d^2)$ | $O(d^2)$ | **Theory me infinite** |
 | RWKV | $O(n d^2)$ | $O(d^2)$ | **Infinite** |
 | Hyena | $O(n \log n d)$ | $O(\log n d)$ | ~1M |
 | RetNet | $O(n^2 d)$ train, $O(d^2)$ infer | $O(d^2)$ | ~1M |
@@ -148,10 +148,10 @@ jahaan $D$ ek decay matrix hai jo distance ke saath decay karta hai
 
 | Use Case | Recommended Architecture | Kyun |
 |----------|-------------------------|-----|
-| **Production LLM service** | Transformer | Mature, proven, best tooling |
+| **Production LLM service** | Transformer | Mature, proven, sabse accha tooling |
 | **Long document processing** | Mamba ya RWKV | Linear scaling, infinite context |
-| **Edge/device deployment** | RWKV | Constant memory, fast inference |
-| **Research/experimentation** | Mamba | Cutting-edge, best scaling |
+| **Edge/device deployment** | RWKV | Constant memory, tez inference |
+| **Research/experimentation** | Mamba | Cutting-edge, sabse accha scaling |
 | **Multimodal models** | Transformer | Best cross-attention support |
 | **Real-time streaming** | RWKV | True streaming capability |
 

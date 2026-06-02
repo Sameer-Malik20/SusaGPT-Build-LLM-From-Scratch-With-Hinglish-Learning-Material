@@ -1,29 +1,29 @@
-# Vector Spaces: The Universe of Meaning
+# Vector Spaces: Meaning ka Universe
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Shuruaat-friendly Hinglish Samjhaaiye 🇮🇳
 Bhai, socho pura language ek "Space" hai, bilkul humare universe ki tarah. Har word ek "Tara" (Star) hai. 
 
 **Vector Space** woh 3D (ya actually 1536D) map hai jahan words ki location unke matlab (meaning) par depend karti hai. Agar do stars (words) paas hain, toh unka matlab similar hai. Agar woh door hain, toh woh unrelated hain. Jab hum "Semantic Search" karte hain, toh hum bas is universe mein "travel" karke sabse nazdeek wala star dhundte hain. Yeh math ki duniya ka sabse khoobsurat hissa hai.
 
 ---
 
-## 2. Deep Technical Explanation
-A vector space in NLP is typically a high-dimensional Euclidean space $\mathbb{R}^d$.
-- **Dimensions**: Range from 384 (small models) to 4096+ (large models).
-- **Metric**: How distance is measured. Most common is **Cosine Similarity**.
-- **Clustering**: Words with similar semantic properties form clusters (e.g., all fruits are in one corner, all tech companies in another).
-- **Linear Algebra**: The movement in this space (e.g., King - Man + Woman) corresponds to semantic shifts.
+## 2. Deep Technical Samjhaaiye
+NLP mein vector space typically ek high-dimensional Euclidean space $\mathbb{R}^d$ hota hai.
+- **Dimensions**: 384 (chhote models) se lekar 4096+ (bade models) tak hota hai.
+- **Metric**: Distance kaise measure kiya jata hai. Sabse common **Cosine Similarity** hai.
+- **Clustering**: Similar semantic properties wale words clusters form karte hain (jaise, saare fruits ek corner mein, saari tech companies dusre corner mein).
+- **Linear Algebra**: Is space mein movement (jaise King - Man + Woman) semantic shifts ke hisaab se hota hai.
 
 ---
 
-## 3. Mathematical Intuition
+## 3. Mathematical Samjhaaiye
 **Cosine Similarity**:
 $$\cos(\theta) = \frac{A \cdot B}{\|A\| \|B\|}$$
-This measures the angle between two vectors. If $\cos(\theta) = 1$, they point in the exact same direction (identical meaning). If $0$, they are orthogonal (unrelated).
+Yeh do vectors ke beech ka angle measure karta hai. Agar $\cos(\theta) = 1$ hai, toh woh exact same direction mein point karte hain (identical meaning). Agar $0$ hai, toh woh orthogonal hain (unrelated).
 
 **Euclidean Distance (L2)**:
 $$d(A, B) = \sqrt{\sum (A_i - B_i)^2}$$
-Measures the straight-line distance. Used less in NLP because it's sensitive to the magnitude (length) of vectors.
+Seedhi line ki doori measure karta hai. NLP mein kam use hota hai kyunki yeh magnitude (length) ke liye sensitive hai.
 
 ---
 
@@ -44,7 +44,7 @@ graph TD
 ---
 
 ## 5. Production-ready Examples
-Visualizing vector spaces with `scikit-learn`:
+Vector spaces ko `scikit-learn` ke saath visualize karna:
 
 ```python
 import numpy as np
@@ -64,60 +64,60 @@ plt.show()
 
 ---
 
-## 6. Real-world Use Cases
-- **Recommendation Engines**: Matching user vectors with item vectors.
-- **Anomaly Detection**: Finding inputs that fall into "Empty Space" (outliers).
+## 6. Real-world Use Cases (Vastavik Duniya ke Upyog)
+- **Recommendation Engines**: User vectors ko item vectors ke saath match karna.
+- **Anomaly Detection**: Aise inputs dhundhna jo "Empty Space" mein aate hain (outliers).
 
 ---
 
-## 7. Failure Cases
-- **Hubness Problem**: In very high dimensions, some vectors become "hubs" that are close to almost everyone, breaking similarity searches.
-- **Dimensionality Curse**: As dimensions increase, the difference between the nearest and farthest point vanishes.
+## 7. Failure Cases (Asafalta ke Mamle)
+- **Hubness Problem**: Bahut high dimensions mein, kuch vectors "hubs" ban jaate hain jo almost har kisi ke close hote hain, similarity searches ko break karte hain.
+- **Dimensionality Curse**: Jaisi dimensions badhti hain, nearest aur farthest point ke beech ka difference vanish ho jaata hai.
 
 ---
 
-## 8. Debugging Guide
-1. **Dimension Check**: Ensure your query and database vectors have the exact same dimensionality.
-2. **Norm Normalization**: Always L2-normalize vectors before using Cosine Similarity for speed.
+## 8. Debugging Guide (Samasya Samadhan Guide)
+1. **Dimension Check**: Yeh pakka karein ki aapke query aur database vectors ki dimensionality exactly same hai.
+2. **Norm Normalization**: Cosine Similarity use karne se pehle hamesha L2-normalize karein vectors ko, speed ke liye.
 
 ---
 
-## 9. Tradeoffs
-| Feature | 384-dim (Small) | 4096-dim (Large) |
+## 9. Tradeoffs (Samjhauta)
+| Feature | 384-dim (Chhota) | 4096-dim (Bada) |
 |---|---|---|
-| Precision | Low | High |
-| Search Speed | Very Fast | Slow |
-| Memory | Low | High |
+| Precision | Kam | Zyada |
+| Search Speed | Bahut Tez | Dheema |
+| Memory | Kam | Zyada |
 
 ---
 
-## 10. Security Concerns
-- **Vector Inversion**: Attacking the vector space to reconstruct the original text (De-anonymization).
+## 10. Security Concerns (Suraksha Chintayein)
+- **Vector Inversion**: Vector space par attack karke original text ko reconstruct karna (De-anonymization).
 
 ---
 
-## 11. Scaling Challenges
-- **Indexing**: Searching through 1 Billion vectors in a 1536D space requires specialized indexing like HNSW or IVF.
+## 11. Scaling Challenges (Vistar ki Chunautiyaan)
+- **Indexing**: 1536D space mein 1 Billion vectors ke beech search karne ke liye specialized indexing chahiye jaise HNSW ya IVF.
 
 ---
 
-## 12. Cost Considerations
-- **Storage**: Vectors are "Heavy". 1 Million 1536D vectors in Float32 take ~6GB of VRAM.
+## 12. Cost Considerations (Lagat ke Vichar)
+- **Storage**: Vectors "Heavy" hote hain. Float32 mein 1 Million 1536D vectors ~6GB VRAM lete hain.
 
 ---
 
-## 13. Best Practices
-- Use **L2 Normalization** to turn Cosine Similarity into a simple Dot Product (much faster).
-- Use **PCA** to reduce dimensions if you are hitting memory limits.
+## 13. Best Practices (Sarvottam Tareeke)
+- **L2 Normalization** ka upyog karein Cosine Similarity ko simple Dot Product mein badalne ke liye (bahut tez ho jaata hai).
+- **PCA** use karein dimensions kam karne ke liye agar aap memory limits tak pahunch rahe hain.
 
 ---
 
-## 14. Interview Questions
-1. Why is Cosine Similarity preferred over Euclidean Distance for text embeddings?
-2. What is the "Curse of Dimensionality"?
+## 14. Interview Questions (Interview ke Sawaal)
+1. Cosine Similarity ko Euclidean Distance se behtar kyun mana jaata hai text embeddings ke liye?
+2. "Curse of Dimensionality" kya hai?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **Matryoshka Embeddings**: Learning embeddings that are useful even if you truncate them (e.g., using only the first 64 dimensions of a 1024D vector).
-- **Binary Embeddings**: Storing only 0s and 1s to reduce storage by 32x.
+## 15. Latest 2026 Patterns (2026 ke Naye Patterns)
+- **Matryoshka Embeddings**: Aise embeddings seekhna jo upyogi hote hain chahe aap unhe truncate karein (jaise, 1024D vector ke sirf pehle 64 dimensions ka upyog karna).
+- **Binary Embeddings**: Sirf 0s aur 1s store karna, storage ko 32x kam karne ke liye.

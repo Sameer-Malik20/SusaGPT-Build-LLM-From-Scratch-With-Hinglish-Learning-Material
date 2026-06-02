@@ -1,4 +1,4 @@
-# Speculative Decoding: Two Models are Faster than One
+# Speculative Decoding: Do Models Ek Se Fast Hain
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
 Bhai, socho tumhe ek bada essay likhna hai. Tumne ek "Chote bhai" (Draft Model) ko bola: "Tum jaldi-jaldi guess karo ki main kya likhunga". Woh chota bhai tez hai lekin galtiyan karta hai. Phir tum (Main Model) sirf check karte ho ki chote bhai ne sahi guess kiya ya nahi. Agar sahi hai, toh tum wahi words rakh lete ho, agar galat hai toh tum use thik kar dete ho.
@@ -8,19 +8,19 @@ Bhai, socho tumhe ek bada essay likhna hai. Tumne ek "Chote bhai" (Draft Model) 
 ---
 
 ## 2. Deep Technical Explanation
-Speculative decoding leverages the fact that LLM inference is memory-bandwidth bound, not compute bound.
-- **Draft Model**: A small, fast model (e.g., Llama-3-1B).
-- **Target Model**: The large, high-quality model (e.g., Llama-3-70B).
-- **Mechanism**: The draft model generates $K$ tokens auto-regressively. The target model verifies all $K$ tokens in a single parallel forward pass. If the draft matches the target's distribution (sampled with rejection), the tokens are accepted.
+Speculative decoding is fact ka use karta hai ki LLM inference memory-bandwidth bound hai, compute bound nahi.
+- **Draft Model**: Ek chhota, fast model (e.g., Llama-3-1B).
+- **Target Model**: Bada, high-quality model (e.g., Llama-3-70B).
+- **Mechanism**: Draft model $K$ tokens auto-regressively generate karta hai. Target model ek single parallel forward pass mein saare $K$ tokens verify karta hai. Agar draft ka distribution target se match karta hai (rejection sampling ke saath), toh tokens accept ho jaate hain.
 
 ---
 
 ## 3. Mathematical Intuition
 Acceptance criteria (Rejection Sampling):
-For a token $x$ proposed by draft model $q$ and accepted by target model $p$:
-Keep $x$ with probability:
+Ek token $x$ jo draft model $q$ ne propose kiya aur target model $p$ ne accept kiya:
+$x$ ko is probability ke saath rakho:
 $$\min(1, \frac{p(x)}{q(x)})$$
-This ensures that the final output distribution is exactly the same as if the large model generated it alone. The speedup is proportional to the **Acceptance Rate** of the draft model.
+Yeh ensure karta hai ki final output distribution bilkul waisa hi hai jaise ki bade model ne akela generate kiya ho. Speedup draft model ke **Acceptance Rate** ke proportional hota hai.
 
 ---
 
@@ -65,20 +65,20 @@ print(tokenizer.decode(outputs[0]))
 ---
 
 ## 6. Real-world Use Cases
-- **Fast Chatbots**: Reducing latency for high-end models like GPT-4 or Llama-70B.
-- **Local Inference**: Using a tiny model on your phone to speed up a larger model running in the cloud (or local RAM).
+- **Fast Chatbots**: High-end models jaise GPT-4 ya Llama-70B ke liye latency kam karna.
+- **Local Inference**: Apne phone par ek chhota model use karke larger model ko speed up karna jo cloud mein chal raha hai (ya local RAM).
 
 ---
 
 ## 7. Failure Cases
-- **Poor Draft Model**: If the draft model is too stupid, the acceptance rate is low, and the overhead of verification actually makes the process *slower* than normal decoding.
-- **High Temperature**: At high temperatures, the draft model becomes random, making it harder for the target model to agree.
+- **Poor Draft Model**: Agar draft model bahut bekar hai, toh acceptance rate low hogi, aur verification ka overhead actual process ko normal decoding se *dheema* bana dega.
+- **High Temperature**: High temperatures par, draft model random ho jata hai, jisse target model ke liye agree karna mushkil ho jata hai.
 
 ---
 
 ## 8. Debugging Guide
-1. **Acceptance Rate Monitoring**: If you are accepting < 2 tokens per step on average, swap your draft model.
-2. **Overhead Check**: Measure "Tokens per second" with and without speculative decoding.
+1. **Acceptance Rate Monitoring**: Agar aap average prati step < 2 tokens accept kar rahe hain, toh apna draft model badal dijiye.
+2. **Overhead Check**: Speculative decoding ke saath aur bina, "Tokens per second" measure karein.
 
 ---
 
@@ -92,32 +92,9 @@ print(tokenizer.decode(outputs[0]))
 ---
 
 ## 10. Security Concerns
-- **Draft Bias**: Even though the output is verified, a malicious draft model could try to "steer" the target model by proposing specific high-probability paths that lead to biased results.
+- **Draft Bias**: Chahe output verify ho jata hai, ek malicious draft model target model ko "steer" karne ki koshish kar sakta hai specific high-probability paths propose karke jo biased results ki taraf le jaayein.
 
 ---
 
 ## 11. Scaling Challenges
-- **Multiple GPUs**: Synchronizing the draft and target models across different GPU nodes can introduce network latency that kills the speedup.
-
----
-
-## 12. Cost Considerations
-- **VRAM Cost**: You need extra memory to store the draft model. For a 70B model, adding a 7B draft model requires another ~14GB of VRAM.
-
----
-
-## 13. Best Practices
-- The draft model should be **10x-50x smaller** than the target model.
-- Use a draft model trained on the **same tokenizer** as the target model to avoid re-tokenization overhead.
-
----
-
-## 14. Interview Questions
-1. Why does speculative decoding not change the output quality?
-2. When does speculative decoding become slower than normal decoding?
-
----
-
-## 15. Latest 2026 Patterns
-- **Medusa**: A version of speculative decoding that doesn't need a separate draft model; it uses multiple "Heads" on the same model to predict future tokens.
-- **EAGLE**: Using a single-layer Transformer as the draft model that is much faster than an auto-regressive 1B model.
+- **Multiple GPUs**: Alag

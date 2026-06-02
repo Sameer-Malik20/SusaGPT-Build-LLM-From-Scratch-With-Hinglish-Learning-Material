@@ -1,4 +1,4 @@
-# History of Large Language Models (LLMs)
+# LLMs ka Itihaas (History of Large Language Models)
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
 Bhai, LLMs raato-raat nahi aaye. Iski ek lambi kahani hai. 
@@ -10,23 +10,23 @@ Lekin asli revolution aaya 2017 mein jab Google ne **"Attention Is All You Need"
 ---
 
 ## 2. Deep Technical Explanation
-The evolution of LLMs can be categorized into four major eras:
-1.  **Pre-RNN Era**: N-grams and Statistical Language Models (SLMs).
-2.  **The Sequential Era**: RNNs, LSTMs, and GRUs. These models processed data sequentially, leading to the "Vanishing Gradient" problem and slow training.
-3.  **The Attention Revolution (2014-2017)**: Introduction of Bahdanau Attention in Seq2Seq models. This allowed models to look at all parts of the input sequence simultaneously.
-4.  **The Transformer Era (2017-Present)**: Removal of recurrence entirely in favor of Multi-Head Self-Attention. This allowed for massive parallelization on GPUs.
+LLMs ke evolution ko chaar major eras mein baat sakte hain:
+1.  **Pre-RNN Era**: N-grams aur Statistical Language Models (SLMs).
+2.  **The Sequential Era**: RNNs, LSTMs, aur GRUs. Yeh models data ko sequentially process karte the, jiski wajah se "Vanishing Gradient" problem aati thi aur training slow hoti thi.
+3.  **The Attention Revolution (2014-2017)**: Seq2Seq models mein Bahdanau Attention ka introduction. Isne models ko input sequence ke saare parts ko ek saath dekhne ki ability di.
+4.  **The Transformer Era (2017-Present)**: Recurrence ko hata kar Multi-Head Self-Attention ko laana. Isne GPUs par massive parallelization ko possible banaya.
 
 ---
 
 ## 3. Mathematical Intuition
-The core shift was from $O(N)$ sequential processing to $O(N^2)$ parallel processing (in terms of attention).
+Core shift yeh tha ki $O(N)$ sequential processing se $O(N^2)$ parallel processing (attention ke terms mein) par aana.
 
-In LSTMs, the state $h_t$ depended on $h_{t-1}$:
+LSTMs mein, state $h_t$ $h_{t-1}$ par depend karti thi:
 $$h_t = f(x_t, h_{t-1})$$
 
-In Transformers, every token $x_i$ attends to every other token $x_j$ in a single operation:
+Transformers mein, har token $x_i$ ek single operation mein har doosre token $x_j$ par attend karta hai:
 $$\text{Output}_i = \sum_{j=1}^n \alpha_{ij} V_j$$
-where $\alpha_{ij}$ is the attention score between token $i$ and $j$.
+jahan $\alpha_{ij}$ token $i$ aur $j$ ke beech ka attention score hai.
 
 ---
 
@@ -48,8 +48,8 @@ timeline
 ---
 
 ## 5. Production-ready Examples
-Historical context isn't usually "code", but understanding how to use "Legacy" models vs Modern ones is key. 
-Example of using an older BERT model vs a modern Causal LLM:
+Historical context usually "code" nahi hota, lekin "Legacy" models vs Modern models ke use ko samajhna sabse zaroori hai. 
+Example purane BERT model vs modern Causal LLM ke use ka:
 
 ```python
 # Legacy: BERT for Classification (Encoder)
@@ -58,34 +58,34 @@ classifier = pipeline("sentiment-analysis", model="bert-base-uncased")
 print(classifier("This history is amazing!"))
 
 # Modern: Llama-3 for Reasoning (Decoder)
-# (See What_are_LLMs.md for implementation)
+# (Dekho What_are_LLMs.md for implementation)
 ```
 
 ---
 
 ## 6. Real-world Use Cases
-- **Legacy NLP**: Named Entity Recognition (NER) using LSTMs.
-- **Modern NLP**: Zero-shot translation, creative reasoning, and complex coding.
-- **Scientific Research**: Understanding the trajectory of AI to predict future bottlenecks.
+- **Legacy NLP**: LSTMs ka use karke Named Entity Recognition (NER).
+- **Modern NLP**: Zero-shot translation, creative reasoning, aur complex coding.
+- **Scientific Research**: Future bottlenecks predict karne ke liye AI ki trajectory ko samajhna.
 
 ---
 
 ## 7. Failure Cases
-- **Long-term Dependency (RNNs)**: LSTMs still struggled with very long sequences (>500 tokens).
-- **Compute Bottlenecks**: Transformers required specialized hardware (GPUs/TPUs) which weren't as accessible in the early days.
-- **Scaling Laws**: Initially, people thought bigger is always better, but we later found data quality matters more.
+- **Long-term Dependency (RNNs)**: LSTMs ko abhi bhi bahut lambi sequences (>500 tokens) handle karne mein problem hoti thi.
+- **Compute Bottlenecks**: Transformers ko specialized hardware (GPUs/TPUs) ki zaroorat thi jo pehle easily accessible nahi the.
+- **Scaling Laws**: Pehle log sochte the ki bada hamesha accha hota hai, lekin baad mein pata chala ki data quality zyada matter karti hai.
 
 ---
 
 ## 8. Debugging Guide
-When studying history, look at "Ablation Studies" in papers.
-1. **Why remove RNNs?** Because they can't parallelize.
-2. **Why add Positional Encoding?** Because Attention is permutation-invariant (doesn't know word order).
-3. **Why LayerNorm?** To stabilize training in deep networks.
+History padhte waqt, papers mein "Ablation Studies" dhyan se dekho.
+1. **RNNs kyun hataye?** Kyunki yeh parallelize nahi kar sakte.
+2. **Positional Encoding kyun add karein?** Kyunki Attention permutation-invariant hai (isse word order ka pata nahi hota).
+3. **LayerNorm kyun?** Deep networks mein training ko stabilize karne ke liye.
 
 ---
 
-## 9. Tradeoffs
+## 9. Tradeoffs (Fayde aur Nuksaan)
 | Model Type | Parallelization | Long-range Dependencies | Compute Efficiency |
 |------------|-----------------|-------------------------|-------------------|
 | RNN/LSTM   | No (Sequential) | Poor                    | High (Low VRAM)   |
@@ -94,40 +94,40 @@ When studying history, look at "Ablation Studies" in papers.
 
 ---
 
-## 10. Security Concerns
-- **Historical Bias**: Early models (like BERT) were trained on datasets that had significant gender and racial biases.
-- **Lack of Guardrails**: Early GPT models would generate toxic content without hesitation (Pre-RLHF era).
+## 10. Security Concerns (Suraksha Chintaein)
+- **Historical Bias**: Early models (jaise BERT) aise datasets par train kiye gaye jinmein significant gender aur racial biases the.
+- **Lack of Guardrails**: Early GPT models bina kisi hesitation ke toxic content generate kar dete the (Pre-RLHF era).
 
 ---
 
-## 11. Scaling Challenges
-- **The Chinchilla Scaling Law**: Research showed that most models were actually "under-trained" for their size.
-- **Communication Overhead**: Scaling to thousands of GPUs requires specialized interconnects like NVLink.
+## 11. Scaling Challenges (Bada Banane ki Chunautiyaan)
+- **The Chinchilla Scaling Law**: Research ne dikhaya ki zyadaatar models apne size ke hisaab se actually "under-trained" the.
+- **Communication Overhead**: Haatho'n GPU tak scale karne ke liye specialized interconnects jaise NVLink ki zaroorat hoti hai.
 
 ---
 
-## 12. Cost Considerations
-- **Training Cost Evolution**: GPT-3 cost ~$4.6M to train. Modern frontier models cost $100M+.
-- **Inference Cost**: Tokenizers like Tiktoken (OAI) vs Llama tokenizer affect how much you pay per "word".
+## 12. Cost Considerations (Kharcha)
+- **Training Cost Evolution**: GPT-3 ko train karne ka kharcha ~$4.6M tha. Modern frontier models ka kharcha $100M+ hai.
+- **Inference Cost**: Tiktoken (OAI) aur Llama tokenizer jaise tokenizers affect karte hain ki aapko har "word" ke liye kitna pay karna padta hai.
 
 ---
 
-## 13. Best Practices
-- **Stay Updated**: Read the "Attention Is All You Need" paper at least 3 times.
-- **Understand Fundamentals**: Don't just learn APIs; understand *why* we moved from Encoders to Decoders.
-- **Benchmark History**: Compare your modern RAG system against a simple BERT baseline to see if the complexity is worth it.
+## 13. Best Practices (Acchi Practices)
+- **Stay Updated**: "Attention Is All You Need" paper ko kam se kam 3 baar padho.
+- **Understand Fundamentals**: Sirf APIs mat seekho; yeh samjho ki hum *kyun* Encoders se Decoders par gaye.
+- **Benchmark History**: Apne modern RAG system ko ek simple BERT baseline se compare karo yeh dekhne ke liye ki complexity worth it hai ya nahi.
 
 ---
 
-## 14. Interview Questions
-1. What was the "Vanishing Gradient" problem in RNNs?
-2. How does the Transformer solve the sequential processing bottleneck?
-3. What is the difference between BERT and GPT in terms of architecture and training?
-4. Explain the significance of the "Attention" mechanism in the context of translation.
+## 14. Interview Questions (Interview Mein Puche Jane Wale Sawal)
+1. RNNs mein "Vanishing Gradient" problem kya thi?
+2. Transformer sequential processing bottleneck ko kaise solve karta hai?
+3. Architecture aur training ke terms mein BERT aur GPT mein kya difference hai?
+4. Translation ke context mein "Attention" mechanism ka kya significance hai?
 
 ---
 
-## 15. Latest 2026 LLM Engineering Patterns
-- **Post-Transformer Architectures**: Hybrid models combining Transformers with Mamba (SSMs) for infinite context.
-- **Mixture of Depths**: Dynamically deciding how many layers to use for a specific query to save compute.
-- **Data-Centric History**: Recognizing that the "History" of LLMs is actually the history of high-quality data curation.
+## 15. Latest 2026 LLM Engineering Patterns (2026 ke Naye Patterns)
+- **Post-Transformer Architectures**: Hybrid models jo Transformers ko Mamba (SSMs) ke saath combine karte hain infinite context ke liye.
+- **Mixture of Depths**: Compute save karne ke liye specific query ke liye dynamically decide karna ki kitni layers use karni hain.
+- **Data-Centric History**: Yeh recognize karna ki LLMs ka "History" asal mein high-quality data curation ka history hai.

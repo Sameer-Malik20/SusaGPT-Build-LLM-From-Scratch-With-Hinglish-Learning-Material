@@ -5,23 +5,17 @@ Bhai, socho tum ek khichdi bana rahe ho. Agar tum chawal aur daal ko bina dhoye 
 
 **Text Preprocessing** wahi "Safai" ka kaam hai. Internet par bohot "Kachra" data hota hai (HTML tags, random symbols, emojis, typos). Model ko train karne se pehle humein text ko clean karna padta hai taaki model sirf kaam ki cheezein seekhe. Jitna saaf data, utna smart model!
 
----
-
 ## 2. Deep Technical Explanation
-Text preprocessing is the process of transforming raw text into a format that the model can understand efficiently.
-- **Cleaning**: Removing HTML tags, URLs, and special characters.
-- **Normalization**: Lowercasing, removing accents, and expanding contractions (e.g., "don't" -> "do not").
-- **Handling PII**: Scrubbing names, emails, and phone numbers for privacy.
-- **Deduplication**: Removing exact or near-duplicate documents to prevent overfitting.
-
----
+Text preprocessing ek process hai jisme hum raw text ko aise format me convert karte hain jise model efficiently samajh sake.
+- **Cleaning**: HTML tags, URLs, aur special characters ko hataana.
+- **Normalization**: Lowercasing karna, accents hataana, aur contractions expand karna (e.g., "don't" -> "do not").
+- **Handling PII**: Privacy ke liye names, emails, aur phone numbers scrub karna.
+- **Deduplication**: Exact ya near-duplicate documents ko hataana overfitting se bachne ke liye.
 
 ## 3. Mathematical Intuition
-Preprocessing affects the **Vocabulary Statistics**. For example, if we don't lowercase, "Apple" and "apple" become two different vectors, splitting the probability mass:
+Preprocessing **Vocabulary Statistics** ko affect karta hai. Example ke liye, agar hum lowercase nahi karte, to "Apple" aur "apple" do alag vectors ban jaate hain, probability mass split ho jaata hai:
 $$P(\text{apple}) \neq P(\text{Apple})$$
-Effective preprocessing ensures that the model learns the "concept" rather than the "formatting".
-
----
+Effective preprocessing ensure karta hai ki model "concept" seekhe, na ki "formatting".
 
 ## 4. Architecture Diagrams
 ```mermaid
@@ -32,10 +26,8 @@ graph TD
     Dedup --> Final[Clean Corpus]
 ```
 
----
-
 ## 5. Production-ready Examples
-Using `re` and `cleantext` for robust cleaning:
+Robust cleaning ke liye `re` aur `cleantext` ka upyog karte hain:
 
 ```python
 import re
@@ -56,60 +48,19 @@ print(clean_text_for_llm(raw))
 # Output: Check this out Visit or email me at [EMAIL] !!!
 ```
 
----
-
 ## 6. Real-world Use Cases
-- **Data Curation**: Preparing the "Pile" or "Common Crawl" for pre-training.
-- **Chatbots**: Cleaning user input before sending it to the LLM to improve stability.
-
----
+- **Data Curation**: Pre-training ke liye "Pile" ya "Common Crawl" tayyar karna.
+- **Chatbots**: Stability improve karne ke liye user input ko LLM ko bhejne se pehle clean karna.
 
 ## 7. Failure Cases
-- **Over-cleaning**: Removing numbers might break a model that needs to do math.
-- **Language Erasure**: Some cleaning scripts accidentally remove non-Latin characters (Hindi, Chinese), making the model monolingual.
-
----
+- **Over-cleaning**: Numbers hataane se model jo math karta hai, toot sakta hai.
+- **Language Erasure**: Kuch cleaning scripts galti se non-Latin characters (Hindi, Chinese) hataa deti hain, jisse model monolingual ho jaata hai.
 
 ## 8. Debugging Guide
-1. Run **Word Frequency Analysis**: If `[EMAIL]` is the #1 token, your PII masking is too aggressive.
-2. Check **Length Distribution**: If documents are too short after cleaning, they might not be useful for training.
-
----
+1. **Word Frequency Analysis** chalaayein: Agar `[EMAIL]` #1 token hai, to aapki PII masking bahut aggressive hai.
+2. **Length Distribution** check karein: Agar cleaning ke baad documents bahut chhote ho gaye hain, to wo training ke liye upyogi nahi ho sakte.
 
 ## 9. Tradeoffs
 | Feature | Clean Everything | Keep Raw |
 |---|---|---|
-| Model Robustness | Low (only works on clean text)| High (handles typos) |
-| Training Efficiency| High | Low |
-
----
-
-## 10. Security Concerns
-- **PII Leakage**: Failing to remove social security numbers or private keys from training data.
-
----
-
-## 11. Scaling Challenges
-- **Terabyte Scale**: Preprocessing 10TB of text requires distributed frameworks like Apache Spark or Ray.
-
----
-
-## 12. Cost Considerations
-- **Storage**: Cleaned data is usually 20-30% smaller than raw data, saving disk costs.
-
----
-
-## 13. Best Practices
-- **Never lowercase** for modern Transformers (they handle case sensitivity well).
-- Use **MinHash/LSH** for large-scale deduplication.
-
----
-
-## 14. Interview Questions
-1. Why is deduplication important for LLM pre-training?
-2. How do you handle emojis in text preprocessing?
-
----
-
-## 15. Latest 2026 Patterns
-- **AI-Driven Cleaning**: Using a small "Classifier" model to score the quality of text and discarding "Low Quality" (GIGO - Garbage In Garbage Out) data automatically.
+| Model Robustness | Low (sirf clean text par kaam karta hai) | High (typos

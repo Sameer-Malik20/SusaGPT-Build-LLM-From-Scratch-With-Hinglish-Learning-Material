@@ -1,4 +1,4 @@
-# Quantization: GGUF, AWQ, and EXL2
+# Quantization: GGUF, AWQ, aur EXL2
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
 Bhai, socho tumhare paas ek 100GB ki 4K movie hai, lekin tumhare phone mein sirf 5GB space hai. Tum kya karoge? Tum use "Compress" karoge (jaise MP4 ya MKV format mein). AI models ke saath bhi yahi hota hai. 
@@ -12,16 +12,16 @@ Is module mein hum seekhenge ki kaise model ko chota karein bina use "Gajini" (D
 
 ---
 
-## 2. Deep Technical Explanation
-Quantization is the process of reducing the precision of the model weights from 16-bit floats to 8-bit, 4-bit, or even 1.5-bit integers.
-- **GGUF (GPT-Generated Unified Format)**: Succeeder of GGML. Optimized for `llama.cpp`. It packs weights, metadata, and vocabulary into a single file. Supports "K-Quants" (Mixed precision within layers).
-- **AWQ (Activation-aware Weight Quantization)**: Scales important weights before quantization to reduce rounding errors. Excellent for preserving reasoning capabilities.
-- **EXL2 (ExLlamaV2)**: Uses a variable-bitrate approach (e.g., 4.65 bits per weight). Highly optimized for Tensor Cores on NVIDIA GPUs.
-- **BitNet / 1.58-bit**: The cutting edge of research where weights are only -1, 0, or 1.
+## 2. Gehri Technical Vyakhya
+Quantization model weights ki precision ko 16-bit floats se 8-bit, 4-bit, ya 1.5-bit integers mein reduce karne ka process hai.
+- **GGUF (GPT-Generated Unified Format)**: GGML ka successor. `llama.cpp` ke liye optimized. Yeh weights, metadata, aur vocabulary ko ek single file mein pack karta hai. K-Quants (layers ke andar mixed precision) ko support karta hai.
+- **AWQ (Activation-aware Weight Quantization)**: Important weights ko quantization se pehle scale karta hai taaki rounding errors kam ho. Reasoning capabilities ko preserve karne mein umda hai.
+- **EXL2 (ExLlamaV2)**: Variable-bitrate approach use karta hai (e.g., 4.65 bits per weight). NVIDIA GPUs ke Tensor Cores ke liye highly optimized.
+- **BitNet / 1.58-bit**: Yeh research ka cutting edge hai jahan weights sirf -1, 0, ya 1 hote hain.
 
 ---
 
-## 3. Mathematical Intuition
+## 3. Ganitiya Intuition
 Linear Quantization for a weight $w$ to a $b$-bit integer:
 $$q = \text{round} \left( \frac{w}{\text{scale}} + \text{zero\_point} \right)$$
 The **Quantization Error** is $E = |w - \text{dequant}(q)|$. 
@@ -47,7 +47,7 @@ graph TD
 
 ---
 
-## 5. Production-ready Examples
+## 5. Production-ready Udaharan
 Using `AutoAWQ` to quantize a model:
 
 ```python
@@ -69,62 +69,62 @@ model.save_quantized(quant_path)
 
 ---
 
-## 6. Real-world Use Cases
-- **Mobile Apps**: Using GGUF to run a 3B model on a phone with 4GB RAM.
-- **Low-Cost Hosting**: Running a 70B model on a single 3090/4090 GPU instead of needing 4 of them.
-- **Edge Devices**: 1.58-bit models running on specialized AI chips with zero multiplication units.
+## 6. Real-world Upyog ke Cases
+- **Mobile Apps**: GGUF use karke 4GB RAM waale phone par 3B model chalana.
+- **Low-Cost Hosting**: 70B model ko 4 GPUs ki jagah single 3090/4090 GPU par chalana.
+- **Edge Devices**: 1.58-bit models jo specialized AI chips par zero multiplication units ke saath chalte hain.
 
 ---
 
 ## 7. Failure Cases
-- **Perplexity Spike**: If you go below 3 bits, the model's "Fluency" often drops sharply (e.g., it starts repeating the same word forever).
-- **Format Incompatibility**: You can't run an EXL2 model on a CPU; it requires an NVIDIA GPU.
+- **Perplexity Spike**: Agar aap 3 bits se neeche jaate hain, toh model ki 'Fluency' mein tez drop aata hai (e.g., wo ek hi word ko baar baar repeat karne lagta hai).
+- **Format Incompatibility**: Aap CPU par EXL2 model nahi chala sakte; iske liye NVIDIA GPU chahiye.
 
 ---
 
 ## 8. Debugging Guide
-1. **PPL Measurement**: Always measure Perplexity on a dataset like WikiText-2 before and after quantization. A small increase (e.g., 0.1 to 0.3) is acceptable.
-2. **Infinite Loops**: If the model gets stuck in a loop post-quantization, your `zero_point` or `scale` calculation might be wrong.
+1. **PPL Measurement**: Quantization se pehle aur baad WikiText-2 jaisi dataset par Perplexity hamesha measure karein. Chhota increase (e.g., 0.1 to 0.3) acceptable hai.
+2. **Infinite Loops**: Agar model quantization ke baad loop mein phas jaaye, toh aapka `zero_point` ya `scale` calculation galat ho sakta hai.
 
 ---
 
 ## 9. Tradeoffs
-| Format | Best For | Compatibility | Speed |
+| Format | Kiske Liye Best | Anukulata | Gati |
 |---|---|---|---|
-| GGUF | Local / CPU | High (Everything) | Medium |
+| GGUF | Local / CPU | High (Sab Kuch) | Medium |
 | AWQ | Production / GPU | Medium (NVIDIA) | High |
 | EXL2 | High-Speed Inference | Low (Modern NVIDIA) | Ultra-High |
 
 ---
 
-## 10. Security Concerns
-- **Hidden Bias**: Quantization can sometimes "Amplify" existing biases in the model because the "Safety" guardrails are often the first things to degrade at low bitrates.
+## 10. Security Chintayein
+- **Hidden Bias**: Quantization kabhi kabhi model ke existing biases ko 'Amplify' kar sakti hai kyunki 'Safety' guardrails low bitrates par sabse pehle degrade hote hain.
 
 ---
 
-## 11. Scaling Challenges
-- **Calibration Data**: AWQ and GPTQ need a "Calibration dataset" (usually 128 chunks of text). If the calibration data is bad, the whole quantized model will be bad.
+## 11. Scaling ki Chunautiyan
+- **Calibration Data**: AWQ aur GPTQ ko 'Calibration dataset' chahiye (usually text ke 128 chunks). Agar calibration data kharab hai, toh poora quantized model kharab hoga.
 
 ---
 
-## 12. Cost Considerations
-- **VRAM Savings**: 4-bit quantization reduces VRAM needs by **75%**. This is the difference between $1,000/mo and $250/mo in cloud costs.
+## 12. Cost sambandhit Vichaar
+- **VRAM Savings**: 4-bit quantization VRAM needs ko **75%** reduce kar deti hai. Yeh cloud costs mein $1,000/mo aur $250/mo ka antar hota hai.
 
 ---
 
-## 13. Best Practices
-- Use **Q4_K_M** for GGUF; it's the gold standard.
-- Use **AWQ** for VLLM-based production servers.
-- Use **EXL2** for personal gaming PCs with NVIDIA cards.
+## 13. Best Practices (Sarvottam Paddhatiyan)
+- GGUF ke liye **Q4_K_M** use karein; yeh gold standard hai.
+- VLLM-based production servers ke liye **AWQ** use karein.
+- Personal gaming PCs jinmein NVIDIA cards hain, unke liye **EXL2** use karein.
 
 ---
 
-## 14. Interview Questions
-1. What is the "Weight-Activation" mismatch in quantization?
-2. Why is INT4 quantization usually "Good enough" for LLMs?
+## 14. Interview Sawal
+1. Quantization mein 'Weight-Activation' mismatch kya hai?
+2. INT4 quantization usually LLMs ke liye 'Good enough' kyun hota hai?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **FP4 & FP6**: New data formats supported by NVIDIA Blackwell GPUs that provide quantization benefits without the intelligence loss of INT4.
-- **AQLM**: Multi-codebook quantization that allows 2-bit models to perform like 4-bit ones.
+## 15. 2026 ke Latest Patterns
+- **FP4 & FP6**: NVIDIA Blackwell GPUs ke dwara supported naye data formats jo INT4 ke intelligence loss ke bina quantization benefits provide karte hain.
+- **AQLM**: Multi-codebook quantization jo 2-bit models ko 4-bit models jaisa perform karne ki anumati deta hai.

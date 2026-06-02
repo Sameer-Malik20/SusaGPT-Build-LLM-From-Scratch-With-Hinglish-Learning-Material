@@ -1,5 +1,5 @@
 # 🌀 RoPE: Rotary Positional Embeddings
-> **Objective:** Master the mathematical innovation that replaced absolute positional encodings, enabling LLMs to extrapolate to sequence lengths far beyond what they saw during training | **Language:** Hinglish | **Standard:** 2026 Expert Framework
+> **Objective:** Us mathematical innovation ko master karna jisne absolute positional encodings ki jagah li, LLMs ko un sequence lengths tak extrapolate karne ki ability di jo training ke time dekhe gaye length se kaafi aage hain | **Language:** Hinglish | **Standard:** 2026 Expert Framework
 
 ---
 
@@ -15,19 +15,19 @@ RoPE (Rotary Positional Embeddings) ka matlab hai "Words ki position ko ek Circl
 ---
 
 ## 🧠 2. Deep Technical Explanation
-RoPE encodes positional information by rotating the **Query ($Q$)** and **Key ($K$)** vectors in a 2D complex plane:
+RoPE positional information encode karta hai **Query ($Q$)** aur **Key ($K$)** vectors ko 2D complex plane mein rotate karke:
 
-1. **The Rotation:** For each pair of dimensions $(d_i, d_{i+1})$, we apply a rotation matrix based on the token position $m$.
-2. **Relative Distance:** The dot product between $Q_m$ and $K_n$ only depends on the relative distance $(m - n)$.
-3. **Decay:** As the distance $|m - n|$ increases, the attention score naturally decays, which matches human language patterns (recent words are usually more important).
-4. **Extrapolation:** By changing the "Base" of the rotation (RoPE Scaling), we can stretch a 4k context model to 128k context without re-training.
+1. **The Rotation:** Har dimension pair $(d_i, d_{i+1})$ ke liye, hum token position $m$ ke basis par rotation matrix apply karte hain.
+2. **Relative Distance:** $Q_m$ aur $K_n$ ke beech jo dot product hai wo sirf relative distance $(m - n)$ par depend karta hai.
+3. **Decay:** Jaise jaise distance $|m - n|$ badhta hai, attention score naturally decay hota hai, jo human language patterns se match karta hai (recent words usually more important hote hain).
+4. **Extrapolation:** Rotation ki "Base" change karke (RoPE Scaling), hum 4k context model ko 128k context mein stretch kar sakte hain bina re-training ke.
 
 ---
 
 ## 📐 3. Mathematical Intuition
-The rotation of a 2D vector $\vec{x}$ by angle $\theta$:
+Ek 2D vector $\vec{x}$ ka rotation angle $\theta$ se:
 $$\begin{pmatrix} x_1' \\ x_2' \end{pmatrix} = \begin{pmatrix} \cos m\theta & -\sin m\theta \\ \sin m\theta & \cos m\theta \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix}$$
-In RoPE, $\theta$ is a function of the dimension index. For higher dimensions, the rotation is slower. This creates a multi-scale representation of position.
+RoPE mein, $\theta$ dimension index ka function hai. Higher dimensions ke liye rotation slower hoti hai. Ye position ki multi-scale representation create karta hai.
 
 ---
 
@@ -44,7 +44,7 @@ graph LR
 ---
 
 ## 💻 5. Production-Ready Examples
-The core RoPE logic (Simplified):
+Core RoPE logic (Simplified):
 ```python
 def apply_rope(q, k, cos, sin):
     # q, k: [batch, heads, seq_len, head_dim]
@@ -62,22 +62,22 @@ def rotate_half(x):
 ---
 
 ## 🌍 6. Real-World Use Cases
-- **Llama-2/3:** Uses RoPE as its fundamental positional encoding, allowing for stable context scaling.
-- **Long-context Finetuning:** Taking a base Llama-3 model and "Stretching" its RoPE base to support 128k tokens for enterprise RAG.
+- **Llama-2/3:** RoPE ko apne fundamental positional encoding ke roop mein use karta hai, jo stable context scaling allow karta hai.
+- **Long-context Finetuning:** Base Llama-3 model le kar uski RoPE base ko "Stretch" karna taaki enterprise RAG ke liye 128k tokens support ho.
 
 ---
 
 ## ❌ 7. Failure Cases
-- **Frequency Collapse:** If you scale the RoPE base too aggressively, the model loses the ability to distinguish between "Word #1" and "Word #2" (High-frequency details).
-- **Out-of-Distribution (OOD) Loss:** The model might work for 10k tokens but its performance drops sharply at 11k because the RoPE angles became too "Small" to distinguish.
+- **Frequency Collapse:** Agar RoPE base ko bahut aggressively scale kar diya, toh model "Word #1" aur "Word #2" ke beech distinguish karne ki capability kho deta hai (High-frequency details).
+- **Out-of-Distribution (OOD) Loss:** Model 10k tokens ke liye to sahi kaam kar sakta hai, lekin 11k par performance sharply drop ho jaati hai kyunki RoPE angles "Small" ho jate hain distinguish karne ke liye.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
 | Problem | Reason | Solution |
 | :--- | :--- | :--- |
-| **Accuracy drops at long context** | RoPE base is too small | Increase the **RoPE Base** (e.g., from 10k to 1M). |
-| **Model loses short-term logic** | Linear scaling used | Use **YaRN** or **Dynamic NTK-aware** scaling instead of simple linear scaling. |
+| **Long context par accuracy drop** | RoPE base bahut chhota hai | **RoPE Base** badhayein (e.g., 10k se 1M). |
+| **Model short-term logic kho deta hai** | Linear scaling use kiya | Simple linear scaling ki jagah **YaRN** ya **Dynamic NTK-aware** scaling use karein. |
 
 ---
 
@@ -87,30 +87,30 @@ def rotate_half(x):
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Positional Poisoning:** Crafting a sequence that "Wraps around" the RoPE cycle (since it's periodic) to make the model think a word at the end of a long prompt is actually at the beginning.
+- **Positional Poisoning:** Aisi sequence banana jo RoPE cycle mein "Wraps around" ho (kyunki ye periodic hai) jisse model ko lage ki long prompt ke end ka word actually beginning mein hai.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The Precision Wall:** In 16-bit floats (FP16), the tiny differences in RoPE angles for 1M+ tokens can be lost to "Round-off errors". **Fix: Use BF16 or FP32 for RoPE math.**
+- **Precision Wall:** 16-bit floats (FP16) mein, 1M+ tokens ke liye RoPE angles ke tiny differences "Round-off errors" ki wajah se lost ho sakte hain. **Fix: RoPE math ke liye BF16 ya FP32 use karein.**
 
 ---
 
 ## 💰 12. Cost Considerations
-- RoPE is "Free" in terms of parameters (0 extra params) but adds a tiny bit of compute overhead during the forward pass.
+- RoPE parameters ke mamle mein "Free" hai (0 extra params), lekin forward pass mein thoda compute overhead add hota hai.
 
 漫
 ---
 
 ## 📝 14. Interview Questions
-1. "Why is RoPE preferred over absolute positional encodings for long context?"
-2. "Explain how RoPE implements 'Relative Attention' mathematically."
-3. "What is 'RoPE Scaling' and how does it help in extending context windows?"
+1. "Long context absolute positional encodings se RoPE ko kyun prefer kiya jata hai?"
+2. "Explain karein kaise RoPE 'Relative Attention' ko mathematically implement karta hai."
+3. "'RoPE Scaling' kya hai aur context windows ko extend karne mein ye kaise help karti hai?"
 
 ---
 
 ## 🚀 15. Latest 2026 LLM Engineering Patterns
-- **YaRN (Yet another RoPE extensioN):** The 2026 gold standard for scaling RoPE context windows without catastrophic loss of high-frequency information.
-- **Learned RoPE:** Models that "Learn" their own rotation frequencies during pre-training to better match specific languages.
+- **YaRN (Yet another RoPE extensioN):** 2026 ka gold standard RoPE context windows ko scale karne ke liye bina catastrophic loss of high-frequency information ke.
+- **Learned RoPE:** Models jo pre-training ke dauran apni rotation frequencies "Seekhte" hain specific languages ko better match karne ke liye.
 漫
 漫

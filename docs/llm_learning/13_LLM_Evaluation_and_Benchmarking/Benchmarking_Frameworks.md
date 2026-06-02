@@ -1,18 +1,18 @@
-# 📊 LLM Evaluation & Benchmarks — Measuring AI Intelligence (Master Guide)
-> **Level:** Intermediate → Advanced | **Language:** Hinglish | **Goal:** Master MMLU, HumanEval, HELM, RAGAS, and LLM-as-a-Judge.
+# 📊 LLM Evaluation & Benchmarks — AI Intelligence Ko Measure Karna (Master Guide)
+> **Level:** Intermediate → Advanced | **Language:** Hinglish | **Lakshya:** MMLU, HumanEval, HELM, RAGAS, aur LLM-as-a-Judge ko master karna.
 
 ---
 
-## 📋 Table of Contents: How to Judge a Model?
+## 📋 Table of Contents: Model Ko Kaise Judge Karein?
 
-| Type | Name | What it Measures? |
+| Type | Name | Yeh Kya Measure Karta Hai? |
 |------|------|-------------------|
 | **1. Knowledge** | MMLU | Massive Multitask Language Understanding (57 topics). |
-| **2. Code** | HumanEval / MBPP | Python programming and unit tests. |
-| **3. Reasoning** | GSM8K / MATH | 8,000 Grade-school math word problems. |
-| **4. Alignment** | MT-Bench | Model's ability to follow complex multi-turn commands. |
-| **5. RAG** | RAGAS / TruLens | Faithfulness and Relevance in RAG systems. |
-| **6. Automation** | LLM-as-a-Judge | GPT-4 judging a 7B model. |
+| **2. Code** | HumanEval / MBPP | Python programming aur unit tests. |
+| **3. Reasoning** | GSM8K / MATH | 8,000 Grade-school ke math word problems. |
+| **4. Alignment** | MT-Bench | Model ki complex multi-turn commands follow karne ki ability. |
+| **5. RAG** | RAGAS / TruLens | RAG systems mein Faithfulness aur Relevance. |
+| **6. Automation** | LLM-as-a-Judge | GPT-4 dwara 7B model ko judge karna. |
 
 ---
 
@@ -30,7 +30,7 @@ OpenAI ka banaya hua dataset (164 coding problems). Unit tests pass karna hi goa
 - **Pass@1:** Pehle code attempt mein model kitne % sahi hai.
 
 ### C. GSM8K
-Grade school math word problems. Ye model ki **"Logical Reasoning"** test karta hai.
+Grade school ke math word problems. Ye model ki **"Logical Reasoning"** test karta hai.
 - Isme models aksar Step-by-Step (Chain of Thought) solve karte hain.
 
 ---
@@ -38,21 +38,21 @@ Grade school math word problems. Ye model ki **"Logical Reasoning"** test karta 
 ## 2. 🛡️ Alignment & Chat (MT-Bench)
 
 LLMs hamesha accurate nahi hote, par "Chat" mein helpful hone chahiye.
-- **MT-Bench:** 80 multi-turn questions. User 1st question puchta hai, model jawab deta hai, phir 2nd question related to the first context.
-- **Result Score:** 1 to 10 (Usually judged by GPT-4).
+- **MT-Bench:** 80 multi-turn questions. User 1st question puchta hai, model jawab deta hai, phir 2nd question pehle context se related.
+- **Result Score:** 1 to 10 (Usually GPT-4 judge karta hai).
 
 ---
 
 ## 3. 🔍 RAG Evaluation (RAGAS Framework)
 
 Retrieval Augmented Generation (RAG) ke liye special metrics hote hain:
-1. **Faithfulness:** Kitna model ne actual retrieve kiye hue documents se answer kiya? (No Hallucinations).
+1. **Faithfulness:** Kitna model ne actual retrieve kiye hue documents se answer kiya? (Koi Hallucination nahi).
 2. **Relevance:** Kya answer prompt ke liye useful tha?
 3. **Context Precision:** Kya sahi documents top par retrieve huye?
 
 ---
 
-## 🚀 The Modern Way: LLM-as-a-Judge
+## 🚀 Modern Tareeka: LLM-as-a-Judge
 
 Humans test cases check karne mein thak jate hain.
 **Strategy:** Ek powerful model (e.g. GPT-4o-latest) judge banta hai aur hamare fine-tuned 7B/8B model ke answers ko 1-10 points deta hai.
@@ -62,9 +62,9 @@ Humans test cases check karne mein thak jate hain.
 
 ## 🏗️ Python Tools for Eval
 
-- **LM Evaluation Harness (EleutherAI):** Standard tool to run 200+ benchmarks in 1 command.
-- **RAGAS:** For RAG pipeline evaluation.
-- **Giskard:** For testing security and bias in AI models.
+- **LM Evaluation Harness (EleutherAI):** Standard tool jo 200+ benchmarks 1 command mein run karta hai.
+- **RAGAS:** RAG pipeline evaluation ke liye.
+- **Giskard:** AI models mein security aur bias test karne ke liye.
 
 ```bash
 # Example command using LM-Eval Harness

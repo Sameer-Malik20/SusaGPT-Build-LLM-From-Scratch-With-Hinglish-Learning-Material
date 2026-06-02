@@ -1,40 +1,40 @@
-# 🏆 Benchmark Suites: MMLU, HumanEval, and Beyond
-> **Objective:** Master the industry-standard benchmarks used to rank LLMs, understanding their strengths, weaknesses, and how to interpret scores like MMLU, GSM8K, and HumanEval | **Language:** Hinglish | **Standard:** 2026 Expert Framework
+### 🏆 Benchmark Suites: MMLU, HumanEval, aur Beyond
+> **Objective:** Industry-standard benchmarks ko master karna jo LLMs ko rank karne ke liye use hote hain, unki strengths, weaknesses, aur MMLU, GSM8K, HumanEval jaisi scores ko interpret karna seekhein | **Language:** Hinglish | **Standard:** 2026 Expert Framework
 
 ---
 
-## 🧭 1. Beginner-Friendly Hinglish Explanation
+## 🧭 1. Beginner-Friendly Hinglish Samjhaaiye
 Benchmark Suites ka matlab hai AI ka "National Entrance Exam".
 
-- **The Problem:** Har company bolti hai "Hamara model best hai". Par hum kaise maanein?
-- **The Solution:** Standard Benchmarks. 
-  - **MMLU:** General knowledge (57 subjects like Law, History, Math).
-  - **GSM8K:** School-level math word problems.
+- **Samasya:** Har company bolti hai "Hamara model best hai". Par hum kaise maanein?
+- **Samadhan:** Standard Benchmarks.
+  - **MMLU:** General knowledge (57 vishay jaise Law, History, Math).
+  - **GSM8K:** School-level ke math word problems.
   - **HumanEval:** Coding skills (Python).
-- **Intuition:** Ye ek "Olympic Games" jaisa hai jahan sabhi models ek hi ground par compete karte hain takki pata chale ki "Asli Gold Medalist" kaun hai.
+- **Samajh:** Ye ek "Olympic Games" jaisa hai jahan sabhi models ek hi ground par compete karte hain takki pata chale ki "Asli Gold Medalist" kaun hai.
 
 ---
 
-## 🧠 2. Deep Technical Explanation
-Modern benchmarks test specific dimensions of intelligence:
+## 🧠 2. Gahrai se Technical Samjhaaiye
+Modern benchmarks intelligence ke specific dimensions ko test karte hain:
 
-1. **MMLU (Massive Multitask Language Understanding):** Tests world knowledge and problem-solving across 57 subjects. A score of $80\%+$ is considered "Expert level".
-2. **HumanEval / MBPP:** Tests a model's ability to write functional code. Evaluated using **Pass@k** (Running the code and checking if it actually works).
-3. **GSM8K:** Tests multi-step mathematical reasoning. Requires the model to use "Chain of Thought" to get the right answer.
-4. **HellaSwag:** Tests "Common Sense" by asking the model to predict the most likely next sentence in a daily scenario.
-5. **TruthfulQA:** Specifically designed to catch models that "Hallucinate" or follow common human myths.
+1. **MMLU (Massive Multitask Language Understanding):** Duniya ke gyaan aur problem-solving ko test karta hai 57 subjects mein. $80\%+$ ka score "Expert level" mana jata hai.
+2. **HumanEval / MBPP:** Model ki ability test karta hai functional code likhne ki. **Pass@k** se evaluate kiya jata hai (Code run karke check karte hain ki actually work karta hai ya nahi).
+3. **GSM8K:** Multi-step mathematical reasoning test karta hai. Model ko "Chain of Thought" use karna hota hai sahi answer pane ke liye.
+4. **HellaSwag:** "Common Sense" test karta hai model ko daily scenario mein sabse likely next sentence predict karne ke liye.
+5. **TruthfulQA:** Specifically designed hai un models ko pakadne ke liye jo "Hallucinate" karte hain ya common human myths follow karte hain.
 
 ---
 
-## 📐 3. Mathematical Intuition
+## 📐 3. Ganit Samajh
 **Pass@k (Coding Metric):**
-Instead of just checking one answer, we generate $n$ samples and check if $k$ of them are correct. 
+Sirf ek answer check karne ke bajaye, hum $n$ samples generate karte hain aur check karte hain ki unme se $k$ correct hain.
 $$\text{Pass@k} = 1 - \frac{\binom{n-c}{k}}{\binom{n}{k}}$$
-Where $c$ is the number of correct samples. This measures how "Reliable" a model is at coding.
+Jahan $c$ correct samples ki number hai. Ye measure karta hai ki model coding mein kitna "Reliable" hai.
 
 ---
 
-## 🏗️ 4. Architecture Diagrams
+## 🏗️ 4. Architecture Diagram
 ```mermaid
 graph TD
     Bench[Benchmark Suite] --> T1[Knowledge: MMLU]
@@ -47,8 +47,8 @@ graph TD
 
 ---
 
-## 💻 5. Production-Ready Examples
-Comparison of 2026's top models on key benchmarks:
+## 💻 5. Production Ready Examples
+2026 ke top models ka comparison key benchmarks par:
 | Model | MMLU | HumanEval | GSM8K |
 | :--- | :--- | :--- | :--- |
 | **GPT-4o** | 88.7% | 84.9% | 92.0% |
@@ -59,14 +59,14 @@ Comparison of 2026's top models on key benchmarks:
 ---
 
 ## 🌍 6. Real-World Use Cases
-- **Model Selection:** Using HumanEval scores to decide which model to use for a "GitHub Copilot" clone.
-- **R&D Validation:** A research team using GSM8K to see if their new "Attention mechanism" actually improved the model's math skills.
+- **Model Selection:** HumanEval scores use karke decide karna ki "GitHub Copilot" clone ke liye kaunsa model use karein.
+- **R&D Validation:** Ek research team GSM8K use karke check karti hai ki unka naya "Attention mechanism" actually model ki math skills improve kiya ya nahi.
 
 ---
 
 ## ❌ 7. Failure Cases
-- **Data Contamination:** The benchmark questions are on the internet $\rightarrow$ The model sees them during training $\rightarrow$ The model "Memorizes" the answers. This is the biggest problem in 2026.
-- **Over-fitting to Benchmarks:** Models that are "Good at MMLU" but fail at "Talking to a human" because they were only trained on multiple-choice questions.
+- **Data Contamination:** Benchmark questions internet par hain $\rightarrow$ Model unhe training mein dekhta hai $\rightarrow$ Model answers "Memorize" kar leta hai. 2026 mein ye sabse badi problem hai.
+- **Over-fitting to Benchmarks:** Models jo "MMLU mein achhe hain" par "insaan se baat karne mein fail hote hain" kyunki unhe sirf multiple-choice questions par train kiya gaya.
 
 ---
 
@@ -79,36 +79,35 @@ Comparison of 2026's top models on key benchmarks:
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Academic Benchmarks (Standardized / Easy to compare / Prone to contamination).**
-- **Internal Benchmarks (Custom / Secure / Hard to build / No baseline).**
+- **Academic Benchmarks (Standardized / Compare karna easy / Contamination prone).**
+- **Internal Benchmarks (Custom / Secure / Build karna mushkil / No baseline).**
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Benchmark Poisoning:** A developer "Injecting" benchmark answers into a public dataset so their model looks artificially smart on the leaderboard.
+- **Benchmark Poisoning:** Ek developer public dataset mein benchmark answers "Inject" karta hai taaki unka model leaderboard par artificially smart lage.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The Ceiling Effect:** Models are reaching $90\%+$ on many benchmarks. We need "Harder" exams (like GPQA—PhD level science questions) to find the difference between top models.
+- **The Ceiling Effect:** Models kai benchmarks par $90\%+$ reach kar rahe hain. Humein "Harder" exams chahiye (jaise GPQA—PhD level science questions) taki top models ke beech farak pata chal sake.
 
 ---
 
 ## 💰 12. Cost Considerations
-- Running a full MMLU suite on your own fine-tuned model costs roughly \$10 - \$50 in compute.
-
+- Apne fine-tuned model par full MMLU suite run karne ka compute cost roughly \$10 - \$50 hota hai.
 漫
 ---
 
 ## 📝 14. Interview Questions
-1. "What is 'Data Contamination' and why is it a problem for LLM benchmarks?"
-2. "Explain the difference between MMLU and GSM8K."
-3. "What does a high score on HumanEval indicate about a model?"
+1. "Data Contamination" kya hai aur ye LLM benchmarks ke liye problem kyun hai?
+2. MMLU aur GSM8K ke beech antar samjhaaiye.
+3. HumanEval par high score model ke baare mein kya indicate karta hai?
 
 ---
 
 ## 🚀 15. Latest 2026 LLM Engineering Patterns
-- **LMSYS Chatbot Arena:** The 2026 "Gold Standard"—where humans chat with two anonymous models and vote on the winner. It's the only benchmark that can't be easily "Gamed".
-- **LiveBench:** A benchmark that is updated every week with "New" news and coding problems to prevent model contamination.
+- **LMSYS Chatbot Arena:** 2026 ka "Gold Standard"—jahan insaan do anonymous models se chat karte hain aur winner ko vote karte hain. Ye aisa benchmark hai jise aasani se "Gamed" nahi kiya ja sakta.
+- **LiveBench:** Ye benchmark har week "New" news aur coding problems ke saath update hota hai taaki model contamination se bacha ja sake.
 漫
 漫

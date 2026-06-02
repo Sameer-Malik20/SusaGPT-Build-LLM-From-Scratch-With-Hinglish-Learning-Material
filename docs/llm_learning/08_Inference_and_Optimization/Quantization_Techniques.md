@@ -1,9 +1,9 @@
-# 📉 Quantization Techniques: Squeezing Knowledge into Bits
-> **Objective:** Master the art of reducing LLM precision (from 16-bit to 4-bit or even 1-bit) to run massive models on smaller hardware while maintaining intelligence | **Language:** Hinglish | **Standard:** 2026 Expert Framework
+# 📉 Quantization Techniques: Bits mein Knowledge ko Squeeze Karna
+> **Objective:** LLM precision ko reduce karne ka art master karna (16-bit se 4-bit ya 1-bit tak) taaki massive models ko chhoti hardware par run kiya ja sake, intelligence maintain karte hue | **Language:** Hinglish | **Standard:** 2026 Expert Framework
 
 ---
 
-## 🧭 1. Beginner-Friendly Hinglish Explanation
+## 🧭 1. Beginners ke liye Hinglish Explanation
 Quantization ka matlab hai "Numbers ko chota karna takki wo kam jagah gherien".
 
 - **The Problem:** Ek 70B model ko store karne ke liye 140GB RAM chahiye (FP16). Par saste GPUs mein sirf 8GB ya 24GB hoti hai.
@@ -14,26 +14,26 @@ Quantization ka matlab hai "Numbers ko chota karna takki wo kam jagah gherien".
 
 ---
 
-## 🧠 2. Deep Technical Explanation
-Quantization maps a large set of values (Floating point) to a smaller set (Integers):
+## 🧠 2. Gahrai se Technical Explanation
+Quantization values ke bade set (Floating point) ko chhote set (Integers) mein map karta hai:
 
-1. **PTQ (Post-Training Quantization):** Quantizing a model *after* it's trained. Fast and easy.
-2. **QAT (Quantization-Aware Training):** Training the model *while* simulating low precision. Much more accurate but slow.
+1. **PTQ (Post-Training Quantization):** Model ko trained hone ke *baad* quantize karna. Fast aur easy.
+2. **QAT (Quantization-Aware Training):** Low precision simulate karte hue model ko train karna. Kaafi accurate hai par slow.
 3. **Methods:**
-   - **GGUF:** The standard for CPU/Apple Silicon (llama.cpp).
-   - **AWQ (Activation-aware Weight Quantization):** Protects the most important $1\%$ of weights to keep accuracy high.
-   - **GPTQ:** One-shot weight quantization for 4-bit GPUs.
-   - **FP8/FP4:** Using new hardware-native formats for the highest speed.
+   - **GGUF:** CPU/Apple Silicon ke liye standard (llama.cpp).
+   - **AWQ (Activation-aware Weight Quantization):** Sabse important $1\%$ weights ko protect karta hai taki accuracy high rahe.
+   - **GPTQ:** 4-bit GPUs ke liye one-shot weight quantization.
+   - **FP8/FP4:** Sabse zyada speed ke liye new hardware-native formats use karna.
 
 ---
 
-## 📐 3. Mathematical Intuition
-Linear Quantization formula:
+## 📐 3. Mathematical Samajh
+Linear Quantization ka formula:
 $$Q(x) = \text{round}\left(\frac{x}{S} + Z\right)$$
-- $S$ (Scale): Controls the range.
-- $Z$ (Zero-point): Shifts the values.
-To recover (De-quantize): $x \approx S(Q(x) - Z)$.
-The "Quantization Error" is $|x - \text{dq}(Q(x))|$. We want to minimize this error during the mapping.
+- $S$ (Scale): Range ko control karta hai.
+- $Z$ (Zero-point): Values ko shift karta hai.
+Wapas pane ke liye (De-quantize): $x \approx S(Q(x) - Z)$.
+"Quantization Error" $|x - \text{dq}(Q(x))|$ hai. Is error ko mapping ke dauran minimize karna chahte hain.
 
 ---
 
@@ -52,8 +52,8 @@ graph TD
 
 ---
 
-## 💻 5. Production-Ready Examples
-Using `bitsandbytes` to load a model in 4-bit:
+## 💻 5. Production ke liye Ready Examples
+`bitsandbytes` ka use karke model ko 4-bit mein load karna:
 ```python
 from transformers import AutoModelForCausalLM, BitsAndBytesConfig
 
@@ -73,23 +73,23 @@ model = AutoModelForCausalLM.from_pretrained(
 
 ---
 
-## 🌍 6. Real-World Use Cases
-- **Local LLMs:** Running a 70B model on a single Mac Studio with 64GB Unified RAM (using GGUF).
-- **Mobile AI:** Running a 3B model (Phi-3) on an Android/iPhone using INT4 quantization.
+## 🌍 6. Vastavik Duniya ke Use Cases
+- **Local LLMs:** Ek aur Mac Studio par 64GB Unified RAM ke saath 70B model ko run karna (GGUF use karke).
+- **Mobile AI:** Android/iPhone par INT4 quantization ka use karke 3B model (Phi-3) run karna.
 
 ---
 
-## ❌ 7. Failure Cases
-- **Perplexity Spike:** If you quantize too much (e.g., to 2-bit), the model starts "Hallucinating" and losing its logic.
-- **Outlier Sensitivity:** If one weight is 1000 and others are 0.1, the quantization scale will be ruined. **Fix: Use AWQ or SmoothQuant.**
+## ❌ 7. Failure ke Cases
+- **Perplexity Spike:** Agar aap bahut zyada quantize karenge (jaise, 2-bit tak), to model "Hallucinate" karne lagta hai aur apni logic kho deta hai.
+- **Outlier Sensitivity:** Agar ek weight 1000 hai aur baaki 0.1 hain, to quantization scale kharab ho jayega. **Fix: AWQ ya SmoothQuant ka use karein.**
 
 ---
 
 ## 🛠️ 8. Debugging Guide
 | Problem | Reason | Solution |
 | :--- | :--- | :--- |
-| **Model says gibberish** | Bad quantization method | Try **AWQ** instead of GPTQ for better logic retention. |
-| **Model is slow despite INT4** | CPU bottleneck | Ensure you are using **GGUF** for CPU or **vLLM** for GPU optimization. |
+| **Model gibberish bolta hai** | Kharab quantization method | Better logic retention ke liye GPTQ ki jagah **AWQ** aazmaayein. |
+| **INT4 hone ke bawajood model slow hai** | CPU bottleneck | Yah sunishchit karein ki aap CPU ke liye **GGUF** ya GPU optimization ke liye **vLLM** use kar rahe hain. |
 
 ---
 
@@ -98,37 +98,37 @@ model = AutoModelForCausalLM.from_pretrained(
 
 ---
 
-## 🛡️ 10. Security Concerns
-- **Quantization Trojan:** Hiding a backdoor that only "Activates" after the model is quantized to a specific precision (e.g., INT4).
+## 🛡️ 10. Security ke Mamle
+- **Quantization Trojan:** Ek backdoor chhupana jo model ko specific precision (jaise INT4) par quantize karne ke baad hi "Activate" hota hai.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The 1-Bit Barrier:** Researchers are trying to reach "BitNet" (1-bit weights), where the model doesn't even use multiplication, only addition/subtraction.
+- **The 1-Bit Barrier:** Researchers "BitNet" (1-bit weights) tak pahunchne ki koshish kar rahe hain, jahan model multiplication bhi use nahi karta, sirf addition/subtraction.
 
 ---
 
 ## 💰 12. Cost Considerations
-- Quantization allows you to use $\$500$ GPUs instead of $\$30,000$ GPUs, reducing infrastructure costs by $95\%$.
+- Quantization aapko $\$500$ GPUs ka upayog karne deti hai $\$30,000$ GPUs ke bajaye, infrastructure costs $95\%$ tak kam kar deti hai.
 
 ---
 
 ## ✅ 13. Best Practices
-- **Use NF4 (NormalFloat 4)** for QLoRA fine-tuning.
-- **Use AWQ** for production inference.
-- **Always benchmark** your quantized model against the FP16 base model using a task-specific evaluation.
+- **NF4 (NormalFloat 4)** ka istemal karein QLoRA fine-tuning ke liye.
+- **AWQ** ka istemal karein production inference ke liye.
+- **Hamesha benchmark karein** apne quantized model ko FP16 base model ke against, task-specific evaluation ka istemal karte hue.
 
 漫
 ---
 
-## 📝 14. Interview Questions
-1. "What is the difference between Post-Training Quantization (PTQ) and Quantization-Aware Training (QAT)?"
-2. "How does AWQ differ from standard weight quantization?"
-3. "Explain why outliers in activations make quantization difficult."
+## 📝 14. Interview ke Sawal
+1. "Post-Training Quantization (PTQ) aur Quantization-Aware Training (QAT) mein kya antar hai?"
+2. "AWQ standard weight quantization se kaise alag hai?"
+3. "Samjhaaiye kyun outliers in activations quantization ko mushkil bana dete hain."
 
 ---
 
-## 🚀 15. Latest 2026 LLM Engineering Patterns
-- **K-Quants:** Using different bit-widths for different layers (e.g., 6-bit for important middle layers and 4-bit for others).
-- **Hardware-Native 4-bit:** New NVIDIA chips that can do math directly in 4-bit without de-quantizing, leading to $4x$ more speed.
+## 🚀 15. 2026 ke LLM Engineering Patterns
+- **K-Quants:** Alag-alag layers ke liye alag bit-widths ka istemal karna (e.g., important middle layers ke liye 6-bit aur baaki ke liye 4-bit).
+- **Hardware-Native 4-bit:** Naye NVIDIA chips jo bina de-quantize kiye directly 4-bit mein math kar sakte hain, jisse $4x$ zyada speed milti hai.
 漫

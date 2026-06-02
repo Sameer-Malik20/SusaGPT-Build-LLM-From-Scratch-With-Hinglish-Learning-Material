@@ -8,21 +8,21 @@ Bhai, socho tumne ek naya prompt likha hai aur tumhe lagta hai ki yeh puraane wa
 ---
 
 ## 2. Deep Technical Explanation
-A/B testing for LLMs involves comparing two different configurations (Models, Prompts, or RAG strategies) in a live environment.
-- **Random Assignment**: Users are assigned to either Group A or Group B based on their UserID (Consistent hashing).
-- **Metric Tracking**: Recording business-level KPIs (Conversion, Click-through rate) and model-level KPIs (Accuracy, Hallucination rate).
-- **Statistical Significance**: Using p-values to ensure that Model B is *actually* better and not just lucky.
-- **Canary Deployment**: Starting with 1% of traffic to Model B and gradually increasing it if no errors occur.
+A/B testing for LLMs ka matlab hai do different configurations (Models, Prompts, ya RAG strategies) ko live environment mein compare karna.
+- **Random Assignment**: Users ko Group A ya Group B mein assign kiya jata hai unke UserID ke basis par (Consistent hashing).
+- **Metric Tracking**: Business-level KPIs (Conversion, Click-through rate) aur model-level KPIs (Accuracy, Hallucination rate) track karna.
+- **Statistical Significance**: p-values ka use karke ensure karna ki Model B *actually* better hai aur sirf lucky nahi.
+- **Canary Deployment**: 1% traffic Model B ko dekar shuru karna aur gradually increase karna agar errors na hon.
 
 ---
 
 ## 3. Mathematical Intuition
-**Chi-Squared Test** for Conversion:
-If Model A had 100 successes out of 1000, and Model B had 120 out of 1000.
+**Chi-Squared Test** Conversion ke liye:
+Agar Model A ke 1000 mein se 100 successes the, aur Model B ke 1000 mein se 120.
 $$ \chi^2 = \sum \frac{(O-E)^2}{E} $$
-where $O$ is Observed and $E$ is Expected.
-If $p < 0.05$, we can say with 95% confidence that Model B is superior.
-For LLMs, we also use **Elo ratings** derived from human/AI comparisons in the test phase.
+jahan $O$ Observed hai aur $E$ Expected hai.
+Agar $p < 0.05$, to hum 95% confidence ke saath keh sakte hain ki Model B behtar hai.
+LLMs ke liye, hum **Elo ratings** bhi use karte hain jo human/AI comparisons se derived hote hain test phase mein.
 
 ---
 
@@ -63,20 +63,20 @@ else:
 ---
 
 ## 6. Real-world Use Cases
-- **E-commerce Chatbots**: Testing if a "Friendly" persona leads to more sales than a "Formal" one.
-- **Coding Assistants**: Testing if adding "Type Hints" to the prompt leads to fewer bugs in the generated code.
+- **E-commerce Chatbots**: Testing karna ki kya "Friendly" persona "Formal" se zyada sales lead karta hai.
+- **Coding Assistants**: Testing karna ki kya prompt mein "Type Hints" add karne se generated code mein bugs kam hote hain.
 
 ---
 
 ## 7. Failure Cases
-- **Metric Dilution**: Testing too many things at once (Prompt + Model + Temperature). If results improve, you won't know which change caused it.
-- **Small Sample Size**: Drawing conclusions from only 50 users. The results will be noisy and unreliable.
+- **Metric Dilution**: Ek saath bahut cheezon ki testing (Prompt + Model + Temperature). Agar results improve hote hain, to pata nahi chalega ki kaunsa change cause hua.
+- **Small Sample Size**: Sirf 50 users se conclusions nikalna. Results noisy aur unreliable honge.
 
 ---
 
 ## 8. Debugging Guide
-1. **Consistency Check**: Ensure that the *same* user doesn't see Model A in the morning and Model B in the evening. This ruins the user experience.
-2. **Health Check**: If Model B has a 500 Error rate > 1%, kill the experiment immediately.
+1. **Consistency Check**: Ensure karo ki ek hi user subah Model A aur shaam Model B na dekhe. Isse user experience kharab hota hai.
+2. **Health Check**: Agar Model B ka 500 Error rate > 1% hai, to experiment ko turant band kar do.
 
 ---
 
@@ -90,33 +90,33 @@ else:
 ---
 
 ## 10. Security Concerns
-- **Variant Leakage**: A malicious user finding out they are in the "Experimental" group and trying to find vulnerabilities that aren't present in the "Stable" version.
+- **Variant Leakage**: Ek malicious user ko pata chalna ki wo "Experimental" group mein hai aur "Stable" version mein na hone wali vulnerabilities find karne ki koshish karna.
 
 ---
 
 ## 11. Scaling Challenges
-- **Latency Overload**: Running two different models in production means you need to maintain enough GPU capacity for both, especially during the split.
+- **Latency Overload**: Production mein do different models run karne ka matlab hai ki tumhe dono ke liye sufficient GPU capacity maintain karni padegi, khaaskar split ke dauran.
 
 ---
 
 ## 12. Cost Considerations
-- **Infrastructure Cost**: If Model B is a larger model (e.g., 70B vs 8B), your operational costs will increase during the test period.
+- **Infrastructure Cost**: Agar Model B bada model hai (e.g., 70B vs 8B), to test period mein operational costs badh jayenge.
 
 ---
 
 ## 13. Best Practices
 - **Test one variable at a time**.
-- **Define success metrics BEFORE starting the test**.
-- **Use a "Kill Switch"**: An automated way to revert all traffic to Model A if something goes wrong.
+- **Define success metrics ko test shuru karne se PEHLE define karo**.
+- **Use a "Kill Switch"**: Ek automated tareeka jisse saara traffic turant Model A ko revert kiya ja sake agar kuch galat ho.
 
 ---
 
 ## 14. Interview Questions
-1. How do you ensure that A/B testing doesn't degrade the user experience?
-2. What is "Statistical Significance" and why is it important for LLM evals?
+1. Aap kaise ensure karte hain ki A/B testing user experience degrade na kare?
+2. "Statistical Significance" kya hai aur LLM evals ke liye yeh kyun important hai?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Multi-Armed Bandit (MAB)**: Instead of a fixed 50/50 split, an algorithm "Learns" in real-time which model is better and gradually sends more traffic to the winner.
-- **Counterfactual Evaluation**: Using past user data to "Simulate" what would have happened if they had seen Model B, saving time and money on live tests.
+- **Multi-Armed Bandit (MAB)**: Fixed 50/50 split ki jagah, ek algorithm real-time mein "Sikhata" hai ki kaunsa model behtar hai aur gradually winner ko zyada traffic bhejta hai.
+- **Counterfactual Evaluation**: Past user data ka use karke "Simulate" karna ki kya hota agar unhone Model B dekha hota, jo live tests par time aur money bachata hai.

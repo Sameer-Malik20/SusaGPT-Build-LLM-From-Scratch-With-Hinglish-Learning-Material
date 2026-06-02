@@ -1,6 +1,6 @@
 # Cross-Encoder Reranking: Precision Retrieval
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Shuruati Hinglish Samjhaai 🇮🇳
 Bhai, socho tum ek HR manager ho aur tumhe 10,000 resumes mein se 1 best candidate chunna hai. 
 1. Pehle tumne ek "Filter" lagaya aur 100 resumes select kiye (Yeh hai **Bi-Encoder / Vector Search**—Tez hai lekin rough hai). 
 2. Phir tumne un 100 resumes ko ek-ek karke dhyan se padha aur compare kiya (Yeh hai **Cross-Encoder**—Sasta nahi hai, time leta hai, lekin result 100% accurate deta hai).
@@ -9,18 +9,18 @@ Reranking wahi process hai jahan hum retrieval ke baad top results ko "Dhyan se"
 
 ---
 
-## 2. Deep Technical Explanation
-In RAG pipelines, retrieval is often a multi-stage process.
-- **Bi-Encoder (Retriever)**: Encodes query and docs independently. Fast ($O(1)$ search with ANN).
-- **Cross-Encoder (Reranker)**: Feeds the query and document *together* into a single Transformer. It sees the interaction between every word in the query and every word in the doc.
-- **Why it's better**: It uses full self-attention across the query-document pair, capturing nuances that embeddings miss.
+## 2. Deep Technical Samjhaai
+RAG pipelines me, retrieval aksar multi-stage process hota hai.
+- **Bi-Encoder (Retriever)**: Query aur documents ko independently encode karta hai. Fast hai ($O(1)$ search with ANN).
+- **Cross-Encoder (Reranker)**: Query aur document ko *ek saath* ek single Transformer me feed karta hai. Ye query ke har word aur doc ke har word ke beech interaction dekhta hai.
+- **Ye kyun behtar hai**: Ye full self-attention use karta hai query-document pair par, aise nuances capture karta hai jo embeddings miss karte hain.
 
 ---
 
-## 3. Mathematical Intuition
-Bi-Encoder: $s = \cos(f(q), f(d))$ - Separate embeddings.
-Cross-Encoder: $s = f(q, d)$ - Combined processing.
-The Cross-Encoder acts as a **Binary Classifier** (Is this doc relevant to this query? Yes/No) and outputs a probability score. Since it's $O(N \cdot M)$ where $N$ is query length and $M$ is doc length, we can only run it on a small number of documents (usually top 10-50).
+## 3. Mathematical Samajh
+Bi-Encoder: $s = \cos(f(q), f(d))$ - Alag embeddings.
+Cross-Encoder: $s = f(q, d)$ - Sanyukt processing.
+Cross-Encoder **Binary Classifier** ki tarah act karta hai (Kya ye doc is query ke liye relevant hai? Haan/Nahi) aur probability score output karta hai. Kyunki ye $O(N \cdot M)$ hai (jahaan $N$ query length hai aur $M$ doc length hai), hum ise sirf limited number of documents (usually top 10-50) par hi chala sakte hain.
 
 ---
 
@@ -35,8 +35,8 @@ graph TD
 
 ---
 
-## 5. Production-ready Examples
-Using `SentenceTransformers` for reranking:
+## 5. Production-ready Udaharan
+SentenceTransformers ka use karte hue reranking ke liye:
 
 ```python
 from sentence_transformers import CrossEncoder
@@ -61,21 +61,21 @@ for score, doc in results:
 
 ---
 
-## 6. Real-world Use Cases
-- **Enterprise Search**: Where retrieving the "Second best" document instead of the "Best" is a failure.
-- **Legal/Compliance**: Ensuring the exact clause is presented to the user.
+## 6. Real-world Upyog Ke Mamle
+- **Enterprise Search**: Jahaan "Best" document ki jagah "Second best" retrieve karna failure maana jaata hai.
+- **Legal/Compliance**: Exact clause user ko present ho, iska dhyan rakhna.
 
 ---
 
 ## 7. Failure Cases
-- **Latency Spikes**: Adding a reranker can add 100ms-500ms to the search time.
-- **Context Limits**: Cross-encoders have small context windows (usually 512 tokens), so they might miss relevant info if the chunk is too long.
+- **Latency Spikes**: Reranker add karne se search time me 100ms-500ms ka add ho sakta hai.
+- **Context Limits**: Cross-encoders ka context window chhota hota hai (usually 512 tokens), isliye agar chunk bahut lamba hai toh relevant info miss ho sakti hai.
 
 ---
 
 ## 8. Debugging Guide
-1. **MRR (Mean Reciprocal Rank)**: Check if MRR increases after adding the reranker.
-2. **Top-1 vs Top-5**: If the correct answer is in Top-5 but not Top-1, your reranker needs better fine-tuning.
+1. **MRR (Mean Reciprocal Rank)**: Check karo ki reranker add karne ke baad MRR badha ya nahi.
+2. **Top-1 vs Top-5**: Agar correct answer Top-5 me hai lekin Top-1 me nahi, toh tumhara reranker better fine-tuning maang raha hai.
 
 ---
 
@@ -88,33 +88,33 @@ for score, doc in results:
 
 ---
 
-## 10. Security Concerns
-- **Relevance Hijacking**: Crafting a document that "looks" extremely relevant to a Cross-Encoder (by repeating query keywords in context) to push it to the top.
+## 10. Security Chintaen
+- **Relevance Hijacking**: Aisa document banana jo Cross-Encoder ko "extremely relevant" lage (query keywords ko context me repeat karke) taaki wo top par aa jaye.
 
 ---
 
 ## 11. Scaling Challenges
-- **Throughput**: For a high-traffic site, you need a large GPU cluster just to run the reranking step for every user query.
+- **Throughput**: Ek high-traffic site ke liye, har user query ke liye reranking step chalane ke liye hi badi GPU cluster ki zaroorat hoti hai.
 
 ---
 
-## 12. Cost Considerations
-- **Compute cost**: Reranking consumes significantly more GPU FLOPs per query compared to simple vector lookups.
+## 12. Cost Khayal
+- **Compute cost**: Simple vector lookups ke comparison me, reranking prati query significantly zyada GPU FLOPs consume karta hai.
 
 ---
 
 ## 13. Best Practices
-- **Retrieve 100, Rerank 25**: Don't rerank too many documents; it's a waste of time.
-- **Use specialized models**: Models trained on MS-MARCO are the industry standard for reranking.
+- **Retrieve 100, Rerank 25**: Zyada documents ko rerank mat karo; ye time waste hai.
+- **Use specialized models**: MS-MARCO par trained models reranking ke liye industry standard hain.
 
 ---
 
-## 14. Interview Questions
-1. Why can't we use a Cross-Encoder for the initial retrieval step?
-2. How does the interaction between query and document differ in Bi-encoders vs Cross-encoders?
+## 14. Interview Sawal
+1. Initial retrieval step me Cross-Encoder kyun nahi use kar sakte?
+2. Bi-encoders aur Cross-encoders me query aur document ke beech interaction kaise differ karta hai?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Late Interaction (ColBERT)**: A middle-ground that provides Cross-Encoder accuracy with Bi-Encoder speed.
-- **LLM-as-a-Reranker**: Using GPT-4o-mini or a fine-tuned Llama-3-8B to rerank documents by simply asking "Is this relevant?".
+- **Late Interaction (ColBERT)**: Ek middle-ground jo Cross-Encoder accuracy aur Bi-Encoder speed provide karta hai.
+- **LLM-as-a-Reranker**: GPT-4o-mini ya fine-tuned Llama-3-8B ka use karke documents ko rerank karna, bas "Kya ye relevant hai?" pooch kar.

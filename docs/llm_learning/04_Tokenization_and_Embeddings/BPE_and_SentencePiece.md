@@ -1,27 +1,27 @@
-# BPE & SentencePiece: Breaking Language into Bits
+# BPE & SentencePiece: Bhasha ko Bits Mein Todna
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Shuruaat ke Liye Aasan Hinglish Explanation 🇮🇳
 Bhai, socho tumhe computer ko "Unstructured" word samjhana hai. Agar computer ne yeh word kabhi nahi dekha, toh woh confuse ho jayega (Out of Vocabulary). 
 
 **BPE (Byte Pair Encoding)** aur **SentencePiece** wahi "Scissors" hain jo words ko chote chote tukdon mein kaat deti hain. Jaise "Unstructured" ko "Un-", "struct", "-ured" mein tod dena. Isse model un words ko bhi samajh pata hai jo usne training mein nahi dekhe, kyunki woh unke chote parts ko pehchanta hai. Yeh bilkul waise hi hai jaise tum "Sandwich" ko "Sand" aur "Wich" mein tod kar uska matlab nikalne ki koshish karo!
 
 ---
 
-## 2. Deep Technical Explanation
-Subword tokenization is the balance between character-level and word-level tokenization.
-- **BPE (Byte Pair Encoding)**: Iteratively merges the most frequent pairs of adjacent characters/subwords into a single new subword. Used in GPT-2/3/4.
-- **WordPiece**: Similar to BPE but uses a likelihood-based criterion instead of frequency. Used in BERT.
-- **SentencePiece**: Language-independent tokenizer that treats text as a raw stream of characters, including spaces (no need for pre-tokenization). Used in Llama and T5.
+## 2. Gehri Technical Explanation
+Subword tokenization, character-level aur word-level tokenization ke beech ka balance hai.
+- **BPE (Byte Pair Encoding)**: Iteratively (baar baar) merge karta hai sabse zyada frequent adjacent characters/subwords ke pairs ko ek naye subword mein. GPT-2/3/4 mein use hota hai.
+- **WordPiece**: BPE jaise hai lekin frequency ke bajay likelihood-based criterion use karta hai. BERT mein use hota hai.
+- **SentencePiece**: Language-independent tokenizer jo text ko characters ke raw stream ki tarah treat karta hai, spaces bhi include karta hai (pre-tokenization ki zaroorat nahi). Llama aur T5 mein use hota hai.
 
 ---
 
-## 3. Mathematical Intuition
+## 3. Ganitiye Intuition
 BPE Algorithm:
-1. Start with a vocabulary of individual characters.
-2. Count frequency of all adjacent pairs.
-3. Merge the most frequent pair $(A, B) \to AB$.
-4. Repeat until target vocabulary size $V$ is reached.
-This minimizes the **Bits per Character (BPC)** needed to represent the corpus.
+1. Start karo individual characters ke vocabulary se.
+2. Saare adjacent pairs ki frequency count karo.
+3. Sabse zyada frequent pair $(A, B) \to AB$ ko merge karo.
+4. Is tab tak repeat karo jab tak target vocabulary size $V$ na aa jaye.
+Yeh corpus ko represent karne ke liye zaroori **Bits per Character (BPC)** ko minimize karta hai.
 
 ---
 
@@ -37,7 +37,7 @@ graph LR
 ---
 
 ## 5. Production-ready Examples
-Using `tokenizers` (Rust-based, very fast):
+`tokenizers` ka upyog karte hue (Rust-based, bahut fast):
 
 ```python
 from tokenizers import ByteLevelBPETokenizer
@@ -59,20 +59,20 @@ print(output.tokens)
 ---
 
 ## 6. Real-world Use Cases
-- **Handling Typos**: Model can still understand "helllooo" by breaking it down.
-- **Multilingual Models**: Sharing subwords like "tion" or "ing" across different languages.
+- **Handling Typos**: Model "helllooo" ko bhi samajh sakta hai use tod kar.
+- **Multilingual Models**: Different languages ke beech subwords jaise "tion" ya "ing" share karna.
 
 ---
 
 ## 7. Failure Cases
-- **Smushing**: "Nottingham" might be tokenized as "Notting" + "ham", which is fine, but weird names might get split into meaningless junk.
-- **Space Sensitivity**: BPE can behave differently if there are leading/trailing spaces.
+- **Smushing**: "Nottingham" ka tokenization "Notting" + "ham" ho sakta hai, jo theek hai, lekin ajeeb naam meaningless junk mein split ho sakte hain.
+- **Space Sensitivity**: BPE alag tarike se behave kar sakta hai agar aage/piche spaces hon.
 
 ---
 
 ## 8. Debugging Guide
-1. **Tokenization Visualization**: Check if your tokenizer is splitting "Python" into "Py", "th", "on" (Good) or "P", "y", "t", "h"... (Bad).
-2. **Vocab Overlap**: Ensure your tokenizer's vocab matches the one the model was trained with.
+1. **Tokenization Visualization**: Check karo ki aapka tokenizer "Python" ko "Py", "th", "on" mein split kar raha hai (Achha) ya "P", "y", "t", "h"... (Kharab).
+2. **Vocab Overlap**: Pakka karo ki aapke tokenizer ka vocab us model ke vocab se match karta hai jiss par model trained hai.
 
 ---
 
@@ -86,32 +86,32 @@ print(output.tokens)
 ---
 
 ## 10. Security Concerns
-- **Token Injection**: Using rare tokens (like Glitch Tokens) that cause the model to behave erratically because it hasn't seen them enough in training.
+- **Token Injection**: Rare tokens (jaise Glitch Tokens) ka upyog jisse model ajeeb tareeke se behave karta hai kyunki usne unhe training mein enough nahi dekha.
 
 ---
 
 ## 11. Scaling Challenges
-- **Tokenizer Training**: Training a tokenizer on 10TB of text requires efficient streaming implementations.
+- **Tokenizer Training**: 10TB text par tokenizer train karne ke liye efficient streaming implementations chahiye.
 
 ---
 
 ## 12. Cost Considerations
-- **Token Efficiency**: A better tokenizer represents the same text with fewer tokens, reducing your API bill.
+- **Token Efficiency**: Ek behtar tokenizer same text ko kam tokens mein represent karta hai, jisse aapka API bill kam hota hai.
 
 ---
 
 ## 13. Best Practices
-- Always use **SentencePiece** for multilingual or code-heavy models.
-- Don't use a tokenizer with a very small vocab for large models (it increases sequence length too much).
+- Hamesha multilingual ya code-heavy models ke liye **SentencePiece** istemal karo.
+- Bade models ke liye bahut chhote vocab wala tokenizer mat upyog karo (yeh sequence length bahut zyada badha deta hai).
 
 ---
 
 ## 14. Interview Questions
-1. What is the difference between BPE and WordPiece?
-2. Why is subword tokenization better than word-level tokenization for LLMs?
+1. BPE aur WordPiece mein kya antar hai?
+2. LLMs ke liye subword tokenization word-level tokenization se behtar kyun hai?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **Tiktoken**: OpenAI's highly optimized BPE implementation.
-- **Adaptive Tokenization**: Research into tokenizers that change their merges based on the complexity of the sentence in real-time.
+## 15. 2026 ke Latest Patterns
+- **Tiktoken**: OpenAI ka highly optimized BPE implementation.
+- **Adaptive Tokenization**: Tokenizers par research ki ja rahi hai jo apne merges ko sentence ki complexity ke hisaab se real-time badalte hain.

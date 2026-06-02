@@ -1,4 +1,4 @@
-# KV Cache: The Secret to Fast Generation
+# KV Cache: Fast Generation ka Secret
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
 Bhai, socho tum ek lamba sentence likh rahe ho. Har baar naya word likhne ke liye, kya tum pura sentence shuru se dubara padhoge? Nahi na. Tumhe pichle words yaad hain.
@@ -8,20 +8,20 @@ Transformers mein bhi yahi hota hai. Next word predict karne ke liye use pichle 
 ---
 
 ## 2. Deep Technical Explanation
-The KV Cache is a technique used during auto-regressive decoding to avoid redundant computation of self-attention.
-- **Problem**: In each step, the model computes $Q, K, V$ for all tokens in the sequence. For token $n+1$, the $K$ and $V$ vectors for tokens $1...n$ are identical to the previous step.
-- **Solution**: Store $K$ and $V$ for all tokens in GPU memory. Only compute $Q, K, V$ for the *newest* token and reuse the cached $K, V$ for previous tokens.
-- **Bottleneck**: KV cache consumes massive amounts of VRAM, especially with long sequences and large batches.
+KV Cache ek technique hai jo auto-regressive decoding mein use hoti hai redundant self-attention computation se bachne ke liye.
+- **Problem**: Har step mein, model sequence ke saare tokens ke liye $Q, K, V$ compute karta hai. Token $n+1$ ke liye, tokens $1...n$ ke $K$ aur $V$ vectors previous step jaisa hi same hote hain.
+- **Solution**: Saare tokens ke $K$ aur $V$ ko GPU memory mein store karo. Sirf *naye* token ke liye $Q, K, V$ compute karo aur purane tokens ke cached $K, V$ ko reuse karo.
+- **Bottleneck**: KV cache bahut zyada VRAM consume karta hai, especially jab sequences lambi hon aur batches bade hon.
 
 ---
 
 ## 3. Mathematical Intuition
 Standard Attention: $O(N^2)$ per sequence.
 With KV Cache:
-1. Compute $q_t, k_t, v_t$ for current token $t$.
-2. Fetch $K_{1:t-1}$ and $V_{1:t-1}$ from cache.
-3. Compute attention score: $\text{softmax}(q_t \cdot K_{1:t}^T / \sqrt{d_k}) V_{1:t}$.
-This reduces the per-token complexity from $O(N)$ (re-computing everything) to $O(1)$ in terms of flops, but increases memory bandwidth usage.
+1. Current token $t$ ke liye $q_t, k_t, v_t$ compute karo.
+2. Cache se $K_{1:t-1}$ aur $V_{1:t-1}$ fetch karo.
+3. Attention score compute karo: $\text{softmax}(q_t \cdot K_{1:t}^T / \sqrt{d_k}) V_{1:t}$.
+Isse per-token complexity $O(N)$ (sab kuch dubara compute karna) se reduce hokar $O(1)$ ho jati hai flops ke terms mein, lekin memory bandwidth usage badh jati hai.
 
 ---
 
@@ -42,7 +42,7 @@ graph TD
 ---
 
 ## 5. Production-ready Examples
-Visualizing KV Cache growth in `transformers`:
+`transformers` mein KV Cache growth ko visualize karna:
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -51,72 +51,72 @@ import torch
 model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-3-8B")
 inputs = tokenizer("Once upon a time", return_tensors="pt")
 
-# Use 'use_cache=True' to enable KV caching
+# 'use_cache=True' ka use karke KV caching enable karo
 outputs = model.generate(**inputs, use_cache=True, max_new_tokens=20, return_dict_in_generate=True)
 
-# The 'past_key_values' in output is the KV cache
+# Output mein 'past_key_values' hi KV cache hai
 kv_cache = outputs.past_key_values
-print(f"Number of layers in cache: {len(kv_cache)}")
-print(f"Shape of K in layer 0: {kv_cache[0][0].shape}") 
+print(f"Cache mein layers ki sankhya: {len(kv_cache)}")
+print(f"Layer 0 mein K ka shape: {kv_cache[0][0].shape}") 
 # [batch, heads, seq_len, head_dim]
 ```
 
 ---
 
 ## 6. Real-world Use Cases
-- **Real-time Chat**: Ensuring responses appear instantly.
-- **Streaming LLMs**: Keeping a "Rolling" KV cache to handle infinite conversations.
+- **Real-time Chat**: Responses turant dikhne ke liye ensure karna.
+- **Streaming LLMs**: "Rolling" KV cache rakhte hain infinite conversations handle karne ke liye.
 
 ---
 
 ## 7. Failure Cases
-- **OOM (Out of Memory)**: The KV cache grows until the GPU runs out of VRAM, crashing the inference.
-- **Context Length Limit**: Once the cache hits the max sequence length, the model must "forget" old tokens or stop.
+- **OOM (Out of Memory)**: KV cache tab tak badhta hai jab tak GPU ka VRAM khatam na ho jaye, jisse inference crash ho jata hai.
+- **Context Length Limit**: Jab cache max sequence length tak pahunch jati hai, toh model ko purane tokens "bhoolna" padega ya rukna padega.
 
 ---
 
 ## 8. Debugging Guide
-1. **Memory Profiling**: Use `nvidia-smi` to watch VRAM usage during long generations.
-2. **Cache Fragmentation**: Use vLLM to manage the "Paged" cache and avoid wasted memory blocks.
+1. **Memory Profiling**: `nvidia-smi` ka use karke long generations ke dauran VRAM usage watch karo.
+2. **Cache Fragmentation**: vLLM ka use karke "Paged" cache manage karo aur wasted memory blocks se bacho.
 
 ---
 
 ## 9. Tradeoffs
 | Metric | Without KV Cache | With KV Cache |
 |---|---|---|
-| Latency | Very High (Slows down) | Low (Constant speed) |
+| Latency | Bahut High (Slow hota hai) | Low (Constant speed) |
 | VRAM Usage | Low | High |
 | FLOPs | $O(N^2)$ total | $O(N)$ total |
 
 ---
 
 ## 10. Security Concerns
-- **Cache Side-Channel**: Measuring the time taken to fetch from KV cache to guess the content of previous tokens (Privacy risk).
+- **Cache Side-Channel**: KV cache se fetch karne mein lage time ko measure karke previous tokens ke content ka guess lagana (Privacy risk).
 
 ---
 
 ## 11. Scaling Challenges
-- **Multiple Users**: Serving 100 users means storing 100 separate KV caches in VRAM. This is why multi-user serving is VRAM-bound.
+- **Multiple Users**: 100 users ko serve karne ka matlab hai 100 alag KV caches ko VRAM mein store karna. Isliye multi-user serving VRAM-bound hoti hai.
 
 ---
 
 ## 12. Cost Considerations
-- **VRAM per User**: Storing the KV cache for a 128k context Llama-3 model can take 10-20GB per user!
+- **VRAM per User**: 128k context Llama-3 model ke liye KV cache store karne mein 10-20GB per user lag sakta hai!
 
 ---
 
 ## 13. Best Practices
-- Use **Multi-Query Attention (MQA)** or **Grouped-Query Attention (GQA)** to reduce the size of the KV cache by 8x.
-- Use **PagedAttention** (vLLM) to prevent memory fragmentation.
+- **Multi-Query Attention (MQA)** ya **Grouped-Query Attention (GQA)** use karo, jisse KV cache ka size 8x tak reduce ho jata hai.
+- **PagedAttention** (vLLM) use karo memory fragmentation se bachne ke liye.
 
 ---
 
 ## 14. Interview Questions
-1. Why does KV cache use more memory but less compute?
-2. How does Grouped Query Attention (GQA) optimize the KV cache?
+1. KV cache zyada memory kyun use karta hai lekin compute kam?
+2. Grouped Query Attention (GQA) KV cache ko kaise optimize karta hai?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **KV Cache Quantization**: Compressing the cache from FP16 to 4-bit (INT4) to store 4x more context on the same GPU.
-- **Dynamic Eviction**: Automatically dropping "unimportant" tokens from the KV cache based on attention weights.
+- **KV Cache Quantization**: Cache ko FP16 se 4-bit (INT4) mein compress karna, jisse same GPU par 4x zyada context store ho sake.
+- **Dynamic Eviction**: Attention weights ke basis par automatically "unimportant" tokens ko KV cache se drop karna.

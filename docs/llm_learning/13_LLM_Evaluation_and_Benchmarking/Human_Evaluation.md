@@ -1,31 +1,31 @@
-# Human Evaluation: The Ultimate Truth
+# Human Evaluation: Asli Sach
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Shuruwat ke liye aasan Hinglish Explanation 🇮🇳
 Bhai, math aur coding ke liye toh computer test kar leta hai, lekin "Creative Writing" ya "Helpful Conversation" ke liye koi computer program perfect nahi hota. 
 
 **Human Evaluation** wahi "Gold Standard" hai jahan asli insaan (Experts ya Crowd) model ke answers ko padhte hain aur unhe rank karte hain. Woh dekhte hain ki kya answer "Tameez" (Polite) se hai, kya woh "Helpful" hai, aur kya usmein "Hawa-baazi" (Hallucination) toh nahi hai. Jab do models ka comparison hota hai aur insaan vote dete hain, use hum **A/B Testing** ya **Side-by-Side (SxS)** evaluation kehte hain. Bina insaani feedback ke, AI sirf ek machine rahegi, "Friendly" nahi ban payegi.
 
 ---
 
-## 2. Deep Technical Explanation
-Human evaluation is the process of using human raters to assess model quality across subjective dimensions.
-- **Helpfulness**: Does the model follow the instruction?
-- **Honesty**: Is the information factually correct?
-- **Harmlessness**: Does it avoid toxic/dangerous content?
-- **SxS (Side-by-Side)**: Raters are shown two anonymized responses (Model A vs Model B) and must pick the winner or a tie. This is used to calculate **Elo Ratings**.
+## 2. Gehra Technical Explanation
+Human evaluation woh process hai jismein human raters model quality ko subjective dimensions par assess karte hain.
+- **Helpfulness**: Kya model instruction follow karta hai?
+- **Honesty**: Kya information factually sahi hai?
+- **Harmlessness**: Kya yeh toxic/dangerous content se bachta hai?
+- **SxS (Side-by-Side)**: Raters do anonymized responses (Model A vs Model B) dekhte hain aur winner ya tie pick karte hain. Isse **Elo Ratings** calculate hote hain.
 
 ---
 
 ## 3. Mathematical Intuition
 **Elo Rating System**:
-If Model A wins against Model B, its rating $R_A$ increases:
+Agar Model A Model B ko harata hai, toh uski rating $R_A$ increase hoti hai:
 $$E_A = \frac{1}{1 + 10^{(R_B - R_A)/400}}$$
 $$R'_A = R_A + K(S_A - E_A)$$
-Where $E_A$ is the expected win probability, $S_A$ is the actual outcome (1 for win, 0 for loss), and $K$ is the sensitivity factor. This allows us to create a global leaderboard like **Chatbot Arena**.
+Yahaan $E_A$ expected win probability hai, $S_A$ actual outcome hai (1 for win, 0 for loss), aur $K$ sensitivity factor hai. Isse hum **Chatbot Arena** jaisa global leaderboard bana sakte hain.
 
 ---
 
-## 4. Architecture Diagrams
+## 4. Architecture ke Diagrams
 ```mermaid
 graph LR
     User[Human Rater] --> Compare[Side-by-Side View]
@@ -36,8 +36,8 @@ graph LR
 
 ---
 
-## 5. Production-ready Examples
-A typical human rating interface schema:
+## 5. Production-ready Udaahran
+Ek typical human rating interface schema kuch aisa hota hai:
 
 ```json
 {
@@ -52,26 +52,26 @@ A typical human rating interface schema:
 
 ---
 
-## 6. Real-world Use Cases
-- **RLHF Training**: Collecting preference data to fine-tune a model.
-- **Launch Approval**: A company won't launch a new version of their bot until the Human Eval score is 10% higher than the previous version.
+## 6. Asli Duniya ke Use Cases
+- **RLHF Training**: Model ko fine-tune karne ke liye preference data collect karna.
+- **Launch Approval**: Company apne bot ka naya version launch nahi karegi jab tak Human Eval score previous version se 10% zyada na ho jaye.
 
 ---
 
 ## 7. Failure Cases
-- **Human Bias**: Raters might prefer a model that "Sounds confident" even if it's wrong (The Sycophancy problem).
-- **Fatigue**: After rating 100 responses, a human might start making mistakes or clicking "Tie" just to finish faster.
-- **Lack of Expertise**: A regular person can't evaluate a PhD-level physics answer accurately.
+- **Human Bias**: Raters us model ko prefer kar sakte hain jo "confident lagta hai" chahe woh galat ho (Sycophancy problem).
+- **Thakaan (Fatigue)**: 100 responses rate karne ke baad, insaan galatiyan kar sakta hai ya jaldi finish karne ke liye "Tie" click kar sakta hai.
+- **Expertise ki Kami**: Ek aam insaan PhD-level physics answer sahi tarah evaluate nahi kar sakta.
 
 ---
 
 ## 8. Debugging Guide
-1. **Inter-Rater Reliability**: If two humans look at the same answer and one says "Great" while the other says "Terrible", your rating instructions are unclear.
-2. **Gold Standard Checks**: Sneak in some "Obviously Bad" or "Obviously Good" answers to test if your raters are paying attention.
+1. **Inter-Rater Reliability**: Agar do insaan ek hi answer dekhe aur ek kahe "Great" aur doosra kahe "Terrible", toh aapki rating instructions unclear hain.
+2. **Gold Standard Checks**: Kuch "Obviously Bad" ya "Obviously Good" answers daal kar test karein ki aapke raters dhyan de rahe hain ya nahi.
 
 ---
 
-## 9. Tradeoffs
+## 9. Tradeoffs (Fayde-Nuksan)
 | Feature | Automated Eval | Human Eval |
 |---|---|---|
 | Speed | Instant | Weeks |
@@ -80,34 +80,34 @@ A typical human rating interface schema:
 
 ---
 
-## 10. Security Concerns
-- **Rater Bribery/Collusion**: If raters are from a specific group, they might bias the model towards their personal or political views.
+## 10. Security Concerns (Suraksha Chintayein)
+- **Rater Rishwat/Saazish**: Agar raters kisi specific group se hain, toh woh model ko apni personal ya political views ki taraf bias kar sakte hain.
 
 ---
 
-## 11. Scaling Challenges
-- **Crowdsourcing Logistics**: Managing 1,000+ raters across different time zones and languages is a massive operational challenge.
+## 11. Bada Paimane par Challenges (Scaling Challenges)
+- **Crowdsourcing Logistics**: 1,000+ raters ko different time zones aur languages mein manage karna ek badi operational challenge hai.
 
 ---
 
-## 12. Cost Considerations
-- **Professional Raters**: Experts (Doctors, Lawyers, Coders) can cost $50-$200 per hour for high-quality evaluation data.
+## 12. Cost Considerations (Kharcha)
+- **Professional Raters**: Experts (Doctors, Lawyers, Coders) high-quality evaluation data ke liye $50-$200 per hour le sakte hain.
 
 ---
 
-## 13. Best Practices
-- **Use Clear Rubrics**: Instead of "Rate 1-5", use "Does it have a bug? (Y/N)".
-- **Blind Testing**: Raters must not know which model generated which response to avoid brand bias.
-- **Diversity**: Ensure raters come from diverse backgrounds to prevent a single perspective from dominating the AI's behavior.
+## 13. Best Practices (Sabse Achhe Tareeke)
+- **Clear Rubrics use karein**: "Rate 1-5" ki jagah "Does it have a bug? (Y/N)" use karein.
+- **Blind Testing**: Raters ko nahi pata hona chahiye ki kaunsa response kiska model hai, brand bias se bachne ke liye.
+- **Vividhata (Diversity)**: Yah sure karein ki raters diverse backgrounds se aayein, taake koi ek perspective AI ke behavior par dominate na kare.
 
 ---
 
-## 14. Interview Questions
-1. Why is Human Evaluation still necessary when we have benchmarks like MMLU?
-2. What is "Sycophancy" in the context of human ratings?
+## 14. Interview ke Sawal
+1. Jab humare paas benchmarks jaise MMLU hain, toh Human Evaluation ab bhi kyun zaroori hai?
+2. Human ratings ke context mein "Sycophancy" kya hai?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **Hybrid Eval**: Using an "LLM Judge" to do the first 90% of filtering and only sending the most difficult "Ambiguous" cases to humans.
-- **Multi-Modal Human Eval**: Humans rating video or audio clips generated by AI for "Smoothness" and "Naturalness".
+## 15. 2026 ke Naye Patterns
+- **Hybrid Eval**: Ek "LLM Judge" use karke pehle 90% filtering karna aur sirf sabse mushkil "Ambiguous" cases humans ko bhejna.
+- **Multi-Modal Human Eval**: Insaan AI dwara generate kiye gaye video ya audio clips ko "Smoothness" aur "Naturalness" ke liye rate karte hain.

@@ -1,26 +1,26 @@
-# 🗜️ Model Quantization & Compression — LLMs on Low VRAM (Optimization Mastery)
-> **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** Master FP16, INT8, 4-bit, GGML/GGUF, EXL2, and AWQ.
+# 🗜️ Model Quantization & Compression — LLMs ko Low VRAM par Chalaana (Optimization Mastery)
+> **Level:** Beginner → Expert | **Language:** Hinglish | **Goal:** FP16, INT8, 4-bit, GGML/GGUF, EXL2, aur AWQ ko Master karna
 
 ---
 
-## 📋 Table of Contents: Squeezing Billions of Parameters
+## 📋 Table of Contents: Billions of Parameters ko Squeeze karna
 
-| Method | Full Name | Compression | Quality Loss |
+| Tarikah | Poora Naam | Compression | Quality Loss |
 |--------|-----------|-------------|--------------|
-| **1. FP16/BF16**| Half Precision | 2x | None |
-| **2. INT8** | 8-bit Integer | 4x | Very Low |
-| **3. NF4 / 4-bit**| 4-bit Normal Float | 8x | Observable |
-| **4. AWQ** | Activations-aware | 8x | Minimum |
+| **1. FP16/BF16**| Half Precision | 2x | Koi nahi |
+| **2. INT8** | 8-bit Integer | 4x | Bahut Kam |
+| **3. NF4 / 4-bit**| 4-bit Normal Float | 8x | Dikhta hai |
+| **4. AWQ** | Activations-aware | 8x | Sarvadhanik Kam |
 | **5. GGUF** | CPU-friendly | 4x-10x | Scalable |
-| **6. EXL2** | ExLlama (GPU-only) | Fastest | Minimum |
+| **6. EXL2** | ExLlama (GPU-only) | Sabse tez | Sarvadhanik Kam |
 
 ---
 
 ## 1. 🔢 Precision: FP32 vs FP16 vs BF16
 
 Computer numbers ko bits mein store karta hai.
-- **FP32 (Full):** 32 bits (4 bytes) per parameter. 7B model = 28GB VRAM.
-- **FP16 (Half):** 16 bits (2 bytes) per parameter. 7B model = 14GB VRAM. **Industry Standard for Training.**
+- **FP32 (Full):** 32 bits (4 bytes) per parameter. 7B model = 28GB VRAM lega.
+- **FP16 (Half):** 16 bits (2 bytes) per parameter. 7B model = 14GB VRAM. **Training ke liye Industry Standard.**
 - **BF16 (Brain Float):** Dynamic range zyada hota hai (Google design). Stable Training ke liye best.
 
 ---
@@ -47,12 +47,12 @@ Agar aapke paas GPU nahi hai, toh bhi aap LLM chala sakte ho.
 
 ## 🚀 Tool Comparison: Kiska Quantization Best Hai?
 
-| Backend | Format | Best For? |
+| Backend | Format | Kiske liye Best? |
 |---------|--------|-----------|
-| **AutoGPTQ** | `.safetensors` | General GPU serving. |
-| **AutoAWQ** | `.safetensors` | High-quality 4-bit on GPU. |
+| **AutoGPTQ** | `.safetensors` | General GPU serving ke liye. |
+| **AutoAWQ** | `.safetensors` | GPU par High-quality 4-bit. |
 | **llama.cpp** | `.gguf` | CPU / MacBook / Mobile. |
-| **ExLlamaV2** | `.exl2` | Single GPU speed (Fastest tokens/sec). |
+| **ExLlamaV2** | `.exl2` | Single GPU speed (Sabse tez tokens/sec). |
 
 ---
 
@@ -79,7 +79,7 @@ quant_config = BitsAndBytesConfig(
 **Answer:** FP16 mein numbers bohot bade ho jayein (Gradient Explosion) toh wo overflow ho jate hain (NaN values). BF16 is problem se bacha leti hai.
 
 ### Q2: Perplexity kya hai?
-**Answer:** Quantization ke baad model ki galthi (Error) badh jati hai. Perplexity measure karti hai "How confused is the model?". Low Perplexity = Good Quantization.
+**Answer:** Quantization ke baad model ki galthi (Error) badh jati hai. Perplexity measure karti hai "Model kitna confused hai?". Kam Perplexity = Accha Quantization.
 
 ---
 
@@ -96,4 +96,4 @@ quant_config = BitsAndBytesConfig(
 - [ ] CPU par model chalane ke liye kaunsa format chahiye? (GGUF).
 - [ ] AWQ weights ko protect kyu karti hai? (Based on activations).
 
-> **Expert Insight:** 4-bit quantization is nearly "Free" memory saving. Most users don't notice any quality drop compared to FP16, but memory 1/4th ho jati hai.
+> **Expert Insight:** 4-bit quantization nearly "Free" memory saving hai. Ziyada users ko FP16 ke compared me quality drop nahi dikhta, lekin memory 1/4th ho jati hai.

@@ -8,25 +8,21 @@ Training infrastructure ka matlab hai woh hardware aur network jo trillions of c
 ---
 
 ## 2. Deep Technical Explanation
-LLM training happens on specialized AI clusters.
-- **Compute**: NVIDIA A100/H100/B200 GPUs or Google TPUs.
-- **Interconnect**: NVLink (inside a node) and InfiniBand/RoCE (between nodes) for ultra-low latency.
-- **Parallelism**: Data Parallelism (DP), Tensor Parallelism (TP), and Pipeline Parallelism (PP) - collectively known as **3D Parallelism**.
-- **Cluster Management**: Slurm or Kubernetes (K8s) for scheduling jobs.
-
----
+LLM training specialized AI clusters par hoti hai.
+- **Compute**: NVIDIA A100/H100/B200 GPUs ya Google TPUs.
+- **Interconnect**: NVLink (node ke andar) aur InfiniBand/RoCE (nodes ke beech) ultra-low latency ke liye.
+- **Parallelism**: Data Parallelism (DP), Tensor Parallelism (TP), aur Pipeline Parallelism (PP) - collectively **3D Parallelism** ke naam se jana jata hai.
+- **Cluster Management**: Slurm ya Kubernetes (K8s) jobs scheduling ke liye.
 
 ## 3. Mathematical Intuition
-Training throughput is measured in **TFLOPS (Tera Floating Point Operations Per Second)**.
+Training throughput **TFLOPS (Tera Floating Point Operations Per Second)** mein measure kiya jata hai.
 Total training time $T$:
 $$T \approx \frac{6 \times P \times D}{n \times \text{TFLOPS}_{peak} \times \text{MFU}}$$
-Where:
+Jahan:
 - $P$: Parameters
 - $D$: Tokens
 - $n$: Number of GPUs
-- $MFU$: Model Flops Utilization (usually 40-50% for good infra).
-
----
+- $MFU$: Model Flops Utilization (aam taur par 40-50% achhe infra ke liye).
 
 ## 4. Architecture Diagrams
 ```mermaid
@@ -44,10 +40,8 @@ graph TD
     Storage[Flash Storage] --- IB
 ```
 
----
-
 ## 5. Production-ready Examples
-Checking GPU health before starting a run:
+Run start karne se pehle GPU health check karein:
 
 ```bash
 # Basic check
@@ -62,25 +56,17 @@ if dist.is_initialized():
     print(f"Rank: {dist.get_rank()}, World Size: {dist.get_size()}")
 ```
 
----
-
 ## 6. Real-world Use Cases
-- **Frontier Training**: Training GPT-5 level models on 50,000+ H100s.
-- **Private Clusters**: Large banks building their own air-gapped GPU clusters for security.
-
----
+- **Frontier Training**: GPT-5 level models ko 50,000+ H100s par train karna.
+- **Private Clusters**: Large banks apne air-gapped GPU clusters bana rahe hain security ke liye.
 
 ## 7. Failure Cases
-- **Zombies**: A GPU that looks "On" but isn't actually computing, slowing down the whole cluster (The "Straggler" problem).
-- **Network Congestion**: If InfiniBand switches are misconfigured, GPU synchronization becomes a bottleneck.
-
----
+- **Zombies**: Ek GPU jo "On" dikhta hai lekin actually compute nahi kar raha, poora cluster slow kar deta hai (The "Straggler" problem).
+- **Network Congestion**: Agar InfiniBand switches misconfigured hain, to GPU synchronization bottleneck ban jata hai.
 
 ## 8. Debugging Guide
-1. **MFU Monitoring**: If your MFU is < 30%, you have an infrastructure bottleneck (likely IO or Network).
-2. **NCCL Timeout**: Common error when nodes can't talk to each other. Increase `NCCL_TIMEOUT` or check firewalls.
-
----
+1. **MFU Monitoring**: Agar aapka MFU < 30% hai, to infrastructure bottleneck hai (likely IO ya Network).
+2. **NCCL Timeout**: Common error jab nodes ek dusre se baat nahi kar sakte. `NCCL_TIMEOUT` badhayein ya firewalls check karein.
 
 ## 9. Tradeoffs
 | Feature | Public Cloud (AWS/Azure) | On-Premise Cluster |
@@ -89,39 +75,27 @@ if dist.is_initialized():
 | Speed to Start | Instant | Months (Hardware lead time) |
 | Control | Limited | Full |
 
----
-
 ## 10. Security Concerns
-- **Side-channel attacks**: Analyzing power consumption of a cluster to reverse-engineer model weights.
-- **Tenant Isolation**: Ensuring your training data isn't visible to other users on a shared cluster.
-
----
+- **Side-channel attacks**: Cluster ki power consumption analyze karke model weights reverse-engineer karna.
+- **Tenant Isolation**: Ensure karna ki aapka training data shared cluster par doosre users ko visible na ho.
 
 ## 11. Scaling Challenges
-- **The 100k GPU Wall**: Networking becomes exponentially harder as the number of nodes increases.
-- **Power & Cooling**: A large cluster consumes Megawatts of power—as much as a small city.
-
----
+- **The 100k GPU Wall**: Nodes ki sankhya badhne ke saath networking exponentially harder ho jata hai.
+- **Power & Cooling**: Ek bada cluster Megawatts power consume karta hai—jitna ek chhota town leta hai.
 
 ## 12. Cost Considerations
-- **Egress Costs**: Moving 10TB of data from S3 to a GPU cluster can cost thousands of dollars.
-- **Idle Costs**: Paying for 1000 GPUs while your code is crashing is the fastest way to burn VC money.
-
----
+- **Egress Costs**: 10TB data S3 se GPU cluster par move karne par thousands of dollars ka kharcha ho sakta hai.
+- **Idle Costs**: 1000 GPUs ke liye pay karna jab aapka code crash raha hai, yeh VC money burn karne ka fastest way hai.
 
 ## 13. Best Practices
-- Use **Checkpointing** frequently (every 100 steps).
-- Monitor **GPU Temperatures**—throttling can cause non-deterministic training.
-- Use **PyTorch Distributed (FSDP)** for efficient memory usage.
-
----
+- **Checkpointing** ka use karein frequently (har 100 steps par).
+- **GPU Temperatures** monitor karein—throttling se non-deterministic training ho sakti hai.
+- **PyTorch Distributed (FSDP)** use karein efficient memory usage ke liye.
 
 ## 14. Interview Questions
-1. What is the difference between NVLink and InfiniBand?
-2. Explain the "3D Parallelism" strategy.
-
----
+1. NVLink aur InfiniBand mein kya difference hai?
+2. "3D Parallelism" strategy ko explain karein.
 
 ## 15. Latest 2026 Patterns
-- **Optical Interconnects**: Using light instead of electricity for even faster GPU-to-GPU communication.
-- **Liquid Cooling**: Moving away from fans to liquid cooling to support the 1000W+ power draw of future GPUs.
+- **Optical Interconnects**: Electricity ki jagah light use karna aur bhi faster GPU-to-GPU communication ke liye.
+- **Liquid Cooling**: Fans se hata kar liquid cooling ki taraf move karna future GPUs ke 1000W+ power draw ko support karne ke liye.

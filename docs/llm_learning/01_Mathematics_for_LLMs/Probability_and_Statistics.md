@@ -1,23 +1,23 @@
 # Probability and Statistics for LLMs
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Shuruati Hinglish Samjhai 🇮🇳
 Bhai, LLM koi magic machine nahi hai, yeh ek **"Probability Machine"** hai. Jab tum "Hello" likhte ho, toh model check karta hai ki uske training data mein "Hello" ke baad "World" aane ke kitne chances hain. Statistics humein batati hai ki data mein patterns kaise find karne hain aur Probability humein batati hai ki un patterns ke base par "Guess" kaise lagana hai. Bina iske, LLM sirf random words fekega.
 
 ---
 
-## 2. Deep Technical Explanation
-LLMs are probabilistic graphical models at scale.
-- **Joint Probability**: Probability of a sequence $P(w_1, w_2, ..., w_n)$.
-- **Conditional Probability**: $P(w_n | w_1, ..., w_{n-1})$ - the core of next-token prediction.
-- **Bayes' Theorem**: Updating our belief about a token given new context.
-- **Distributions**: Understanding Softmax outputs as a probability distribution over the vocabulary.
+## 2. Gehri Technical Samjhai
+LLMs probabilistic graphical models hote hain bade scale par.
+- **Joint Probability**: Ek sequence ki probability $P(w_1, w_2, ..., w_n)$.
+- **Conditional Probability**: $P(w_n | w_1, ..., w_{n-1})$ - yehi next-token prediction ka core hai.
+- **Bayes' Theorem**: Naye context ke saath ek token ke baare mein humare belief ko update karna.
+- **Distributions**: Softmax outputs ko vocabulary par ek probability distribution ke roop mein samajhna.
 
 ---
 
-## 3. Mathematical Intuition
-The model predicts the next token by sampling from a distribution:
+## 3. Ganitik Samajh
+Model next token predict karta hai ek distribution se sample leke:
 $$P(x_{t+1} | x_{1:t}) = \text{Softmax}(f(x_{1:t}))$$
-The **Perplexity** (a key evaluation metric) is derived from the exponential of the average negative log-likelihood:
+**Perplexity** (jo ek key evaluation metric hai) average negative log-likelihood ke exponential se derived hoti hai:
 $$PP(S) = \exp\left(-\frac{1}{N} \sum_{i=1}^N \log P(w_i | w_{<i})\right)$$
 
 ---
@@ -54,21 +54,21 @@ def nucleus_sampling(probs, p=0.9):
 ---
 
 ## 6. Real-world Use Cases
-- **Hallucination Detection**: Using entropy to see when the model is "unsure".
-- **Confidence Scoring**: Deciding whether to show an answer to a user.
-- **A/B Testing**: Statistical significance in model performance.
+- **Hallucination Detection**: Entropy use karke dekhna ki model kab "unsure" hai.
+- **Confidence Scoring**: Decide karna ki kya user ko answer dikhana hai.
+- **A/B Testing**: Model performance mein statistical significance.
 
 ---
 
 ## 7. Failure Cases
-- **Overconfidence**: High probability for wrong facts.
-- **Sampling Bias**: Model getting stuck in repetitive loops due to bad probability weightage.
+- **Overconfidence**: Galat facts ke liye high probability.
+- **Sampling Bias**: Model repetitive loops mein phas jaata hai bad probability weightage ki vajah se.
 
 ---
 
 ## 8. Debugging Guide
-1. Check **Entropy**: If entropy is too high, the model is confused.
-2. Monitor **Loss Curves**: Smooth descent in log-loss indicates healthy probabilistic learning.
+1. **Entropy** check karo: Agar entropy bahut high hai, toh model confused hai.
+2. **Loss Curves** monitor karo: Log-loss mein smooth descent healthy probabilistic learning ko indicate karta hai.
 
 ---
 
@@ -81,31 +81,31 @@ def nucleus_sampling(probs, p=0.9):
 ---
 
 ## 10. Security Concerns
-- **Data Leakage**: Models memorizing rare (low probability) but sensitive tokens.
+- **Data Leakage**: Models rare (low probability) lekin sensitive tokens ko memorize kar lete hain.
 
 ---
 
 ## 11. Scaling Challenges
-- **Large Vocab**: Computing softmax over 100k+ tokens is expensive.
+- **Large Vocab**: 100k+ tokens par softmax compute karna expensive hai.
 
 ---
 
 ## 12. Cost Considerations
-- **Search Algorithms**: Beam search is $O(k \cdot n)$ more expensive than simple sampling.
+- **Search Algorithms**: Beam search $O(k \cdot n)$ zyada expensive hai simple sampling se.
 
 ---
 
 ## 13. Best Practices
-- Always use **Bias Correction** in optimizers.
-- Use **Temperature** to flatten or sharpen the distribution.
+- Hamesha optimizers mein **Bias Correction** use karo.
+- Distribution ko flatten ya sharpen karne ke liye **Temperature** use karo.
 
 ---
 
 ## 14. Interview Questions
-1. What is Perplexity and how does it relate to Entropy?
-2. Explain the difference between Joint and Conditional probability in LLMs.
+1. Perplexity kya hai aur iska Entropy se kya relation hai?
+2. LLMs mein Joint aur Conditional probability ke beech difference explain karo.
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Calibrated LLMs**: Models that "know what they don't know" using advanced statistical calibration.
+- **Calibrated LLMs**: Models jo advanced statistical calibration ka upyog karte hain "know what they don't know".

@@ -1,29 +1,29 @@
-# Dataset Preparation: The Fuel for LLMs
+# Dataset Preparation: LLMs ke liye Fuel
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Shuruwat ke liye Hinglish Explanation 🇮🇳
 Bhai, socho tum ek super-intelligent robot bana rahe ho. Agar tum use sirf "Gali-Gloch" aur "Galat News" wali books padhaoge, toh woh robot waisa hi banega. 
 
 **Dataset Preparation** wahi "Curriculum" set karne ka kaam hai. Internet par bohot "Kachra" data hai. Humein "The Pile", "Common Crawl" jaise massive datasets se sirf best quality text (Code, Research papers, Wikipedia, Books) nikalna padta hai. Jitna saaf aur diverse tumhara dataset hoga, utna hi smart aur unbiased tumhara model banega. Yaad rakhna: **"Garbage In, Garbage Out"**.
 
 ---
 
-## 2. Deep Technical Explanation
-Pre-training datasets are measured in **Trillions of Tokens**.
+## 2. Gehra Technical Explanation
+Pre-training datasets **Trillions of Tokens** mein measure hote hain.
 - **Data Sourcing**: Common Crawl (web), GitHub (code), arXiv (research), Project Gutenberg (books).
-- **Filtering**: Using classifiers to remove low-quality text, adult content, or gibberish.
-- **Deduplication**: Removing near-duplicate documents using MinHash/LSH to prevent the model from memorizing.
-- **Mixing**: Deciding the ratio of Code vs. English vs. Math (e.g., 20% Code, 10% Math, 70% Text).
+- **Filtering**: Low-quality text, adult content, ya gibberish ko remove karne ke liye classifiers ka upyog.
+- **Deduplication**: Model ko memorizing se roknE ke liye MinHash/LSH use karke near-duplicate documents ko remove karna.
+- **Mixing**: Code, English, aur Math ka ratio decide karna (e.g., 20% Code, 10% Math, 70% Text).
 
 ---
 
-## 3. Mathematical Intuition
-The **Chinchilla Scaling Law** suggests that for a given compute budget, the model size $N$ and the number of training tokens $D$ should be scaled equally.
+## 3. Ganitik Intuition
+The **Chinchilla Scaling Law** suggest karta hai ki ek diye gaye compute budget ke liye, model size $N$ aur training tokens $D$ ki sankhya ko equally scale karna chahiye.
 $$D \propto N$$
-Most modern models are "Over-trained" (using more tokens than Chinchilla optimal) to reduce inference cost.
+Most modern models "Over-trained" hote hain (Chinchilla optimal se zyada tokens use karke) inference cost kam karne ke liye.
 
 ---
 
-## 4. Architecture Diagrams
+## 4. Sanrachna Diagram
 ```mermaid
 graph LR
     Source[Raw Web Crawl] --> Filter[Quality Filters]
@@ -35,7 +35,7 @@ graph LR
 
 ---
 
-## 5. Production-ready Examples
+## 5. Production-ready Udaharan
 Using `datatrove` (from HuggingFace) for large scale processing:
 
 ```python
@@ -56,60 +56,61 @@ executor.run()
 
 ---
 
-## 6. Real-world Use Cases
-- **Domain Specific Pre-training**: Creating a "Medical LLM" by weighting medical journals higher in the mix.
-- **Continual Pre-training**: Adding new 2024-2025 data to an existing model.
+## 6. Vastavik Duniya ke Use Cases
+- **Domain Specific Pre-training**: Mix mein medical journals ko zyada weight dekar "Medical LLM" banana.
+- **Continual Pre-training**: Existing model mein naya 2024-2025 data add karna.
 
 ---
 
-## 7. Failure Cases
-- **Data Contamination**: Accidentally including test sets (like GSM8K) in the training data, leading to fake high scores.
-- **Bias Amplification**: If the dataset has 80% male-centric text, the model will struggle with gender neutrality.
+## 7. Asafalta ke Case
+- **Data Contamination**: Galati se training data mein test sets (jaise GSM8K) shamil ho jana, jisse fake high scores aate hain.
+- **Bias Amplification**: Agar dataset mein 80% male-centric text hai, toh model gender neutrality mein problem karega.
 
 ---
 
 ## 8. Debugging Guide
-1. **PPL Analysis**: Check the perplexity of the model on different data "Slices" (Code vs. Books). If Code PPL is 100x higher, your code mix is too low.
-2. **N-gram Overlap**: Check if the model is just repeating training sentences.
+1. **PPL Analysis**: Different data "Slices" (Code vs. Books) par model ki perplexity check karo. Agar Code PPL 100x higher hai, toh aapka code mix bahut low hai.
+2. **N-gram Overlap**: Check karo ki model sirf training sentences ko repeat toh nahi kar raha.
 
 ---
 
-## 9. Tradeoffs
-| Feature | High Volume (Web) | High Quality (Textbooks)|
+## 9. Tradeoffs (Samjhauta)
+| Visheshata | Uchch Matra (Web) | Uchch Guna (Textbooks)|
 |---|---|---|
-| Knowledge Breadth | High | Low |
-| Reasoning Depth | Low | High |
-| Cost | Cheap | Expensive |
+| Gyan ka Vistaar | Uchch | Kam |
+| Tark ki Gehrai | Kam | Uchch |
+| LAGAT | Sasta | Mehnga |
 
 ---
 
-## 10. Security Concerns
-- **PII Leakage**: Failing to scrub Social Security numbers or private names from the trillions of tokens.
+## 10. Security Concerns (Suraksha Chinta)
+- **PII Leakage**: Trillions of tokens se Social Security numbers ya private names ko scrub karne mein asafalta.
 
 ---
 
-## 11. Scaling Challenges
-- **Storage**: Storing and streaming 10TB+ of data to thousands of GPUs without bottlenecking.
+## 11. Scaling ki Chunautiyan
+- **Storage**: Bina bottleneck ke hazaaron GPUs tak 10TB+ data ko store aur stream karna.
 
 ---
 
-## 12. Cost Considerations
-- **Human Curation**: Manually labeling or "Rating" data quality is the most expensive part of modern LLM pipelines.
+## 12. LAGAT ke Vichar
+- **Human Curation**: Manual tareeke se data quality ko label ya "Rating" karna modern LLM pipelines ka sabse mehnga hissa hai.
 
 ---
 
-## 13. Best Practices
-- Use **MinHash deduplication** at the document level.
-- Always include **Code** (Python/C++) even for non-coding models, as it improves reasoning.
+## 13. Behtareen Practices
+- Document level par **MinHash deduplication** ka upyog karein.
+- Hamesha **Code** (Python/C++) shamil karein, bhale hi model non-coding ho, kyunki isse reasoning behtar hoti hai.
 
 ---
 
-## 14. Interview Questions
-1. Why is deduplication critical for LLM pre-training?
-2. What are the Chinchilla scaling laws?
+## 14. Interview ke Prashn
+1. Deduplication LLM pre-training ke liye kyun mahatvapurna hai?
+2. Chinchilla scaling laws kya hain?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **Synthetic Data Mixing**: Training models on 50% human data and 50% high-quality synthetic data generated by stronger models.
-- **Online Data Selection**: Dynamically choosing which tokens the model should learn next based on its current weaknesses.
+## 15. 2026 ke Latests Patterns
+- **Synthetic Data Mixing**: Models ko 50% human data aur 50% high-quality synthetic data (jo stronger models ne generate kiya) par train karna.
+- **Online Data Selection**: Model ki current weaknesses ke based par dynamically yeh choose karna ki aage kaun se tokens learn karne chahiye.
+```

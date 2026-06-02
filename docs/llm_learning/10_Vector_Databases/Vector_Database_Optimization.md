@@ -1,4 +1,4 @@
-# Vector Database Optimization: Speed & Scale
+# Vector Database Optimization: Speed aur Scale
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
 Bhai, socho tumne ek Vector DB bana li. Ab tumhare paas 100 users hain, sab kuch badhiya chal raha hai. Par jab 1,000,000 users aayenge, toh kya tumhari DB handle kar payegi? 
@@ -7,24 +7,24 @@ Bhai, socho tumne ek Vector DB bana li. Ab tumhare paas 100 users hain, sab kuch
 
 ---
 
-## 2. Deep Technical Explanation
-Optimizing a Vector DB involves balancing the **Speed-Accuracy-Memory (SAM)** triangle.
-- **Scalar Quantization (SQ)**: Converting FP32 values to INT8. Reduces memory by 4x with minimal accuracy loss.
-- **Product Quantization (PQ)**: Compressing sub-vectors into codes. Reduces memory by up to 64x but loses more accuracy.
-- **Namespace/Filtering**: Using metadata to restrict the search space before doing vector comparisons.
-- **Sharding**: Splitting the index across multiple machines for horizontal scaling.
+## 2. Gehri Technical Explanation
+Vector DB ko optimize karna **Speed-Accuracy-Memory (SAM)** triangle ko balance karne jaisa hai.
+- **Scalar Quantization (SQ)**: FP32 values ko INT8 mein convert karna. Memory ko 4x reduce karta hai minimal accuracy loss ke saath.
+- **Product Quantization (PQ)**: Sub-vectors ko codes mein compress karna. Memory ko 64x tak reduce karta hai but accuracy zyada loss hota hai.
+- **Namespace/Filtering**: Metadata ka use karke search space ko restrict karna before vector comparisons.
+- **Sharding**: Index ko multiple machines mein split karna horizontal scaling ke liye.
 
 ---
 
 ## 3. Mathematical Intuition
-Memory usage of a Flat index: $N \times D \times 4$ bytes.
-With **SQ8 (INT8)**: $N \times D \times 1$ byte.
-With **PQ (e.g., $m=d/8$)**: $N \times (d/8) \times 1$ byte.
-For 1M vectors of 1536 dimensions:
+Flat index ka memory usage: $N \times D \times 4$ bytes hai.
+**SQ8 (INT8)** ke saath: $N \times D \times 1$ byte.
+**PQ (e.g., $m=d/8$)** ke saath: $N \times (d/8) \times 1$ byte.
+1536 dimensions ke 1M vectors ke liye:
 - Flat: 6.1 GB
 - SQ8: 1.5 GB
 - PQ: 192 MB
-The optimization allows you to fit 30x more data in the same RAM.
+Yeh optimization aapko same RAM mein 30x zyada data fit karne deta hai.
 
 ---
 
@@ -43,7 +43,7 @@ graph TD
 ---
 
 ## 5. Production-ready Examples
-Optimizing a search with Metadata Filtering:
+Metadata Filtering ke saath search ko optimize karna:
 
 ```python
 # Pinecone example with metadata filtering
@@ -62,20 +62,20 @@ index.query(
 ---
 
 ## 6. Real-world Use Cases
-- **Enterprise RAG**: Filtering documents by "Department" or "Access Level" before searching.
-- **Social Media**: Recommending posts only from a user's "Following" list.
+- **Enterprise RAG**: "Department" ya "Access Level" ke hisaab se documents ko filter karna searching se pehle.
+- **Social Media**: Sirf user ke "Following" list se posts recommend karna.
 
 ---
 
 ## 7. Failure Cases
-- **Quantization Overkill**: Using PQ for critical medical data where a 2% accuracy drop could lead to a wrong diagnosis.
-- **Metadata Bottleneck**: Having too many complex filters can sometimes be slower than the vector search itself if the database isn't optimized for SQL-like queries.
+- **Quantization Overkill**: Critical medical data ke liye PQ ka use karna, jahan 2% accuracy drop galat diagnosis ka karan ban sakta hai.
+- **Metadata Bottleneck**: Bohot zyada complex filters ka hona kabhi kabhi vector search se bhi slow ho sakta hai agar database SQL-like queries ke liye optimized na ho.
 
 ---
 
 ## 8. Debugging Guide
-1. **Search Latency P99**: Monitor your slowest queries. Are they slow because of large filters or high dimensions?
-2. **Memory Leaks**: Check if your Vector DB is swapping to disk (Slow death).
+1. **Search Latency P99**: Apne slowest queries ko monitor karo. Kya woh large filters ya high dimensions ki wajah se slow hain?
+2. **Memory Leaks**: Check karo ki kya aapka Vector DB disk par swap to nahi kar raha (Slow death).
 
 ---
 
@@ -89,33 +89,33 @@ index.query(
 ---
 
 ## 10. Security Concerns
-- **Filter Bypass**: Tricking the metadata filter to retrieve vectors that belong to a different user or department.
+- **Filter Bypass**: Metadata filter ko trick karke kisi aur user ya department ke vectors retrieve karna.
 
 ---
 
 ## 11. Scaling Challenges
-- **Re-indexing**: When you change your embedding model (e.g., from OpenAI to Llama), you must re-embed and re-index every single document from scratch.
+- **Re-indexing**: Jab aap apna embedding model badalte ho (e.g., OpenAI se Llama), toh aapko har single document ko scratch se re-embed aur re-index karna padta hai.
 
 ---
 
 ## 12. Cost Considerations
-- **VRAM vs Disk**: In-memory DBs like Pinecone are expensive. Disk-based DBs like Milvus or Zilliz are cheaper but slower.
+- **VRAM vs Disk**: In-memory DBs jaise Pinecone expensive hote hain. Disk-based DBs jaise Milvus ya Zilliz cheaper hote hain lekin slower.
 
 ---
 
 ## 13. Best Practices
-- **Pre-filtering**: Always filter by metadata FIRST to reduce the vector search space.
-- **Async Upserts**: Don't wait for the index to update before confirming to the user (Latency optimization).
-- **Use FP16**: For most LLM tasks, FP16 is indistinguishable from FP32 but saves 2x memory.
+- **Pre-filtering**: Hamesha pehle metadata se filter karo vector search space ko reduce karne ke liye.
+- **Async Upserts**: Index update hone ka intzaar mat karo user ko confirm karne se pehle (Latency optimization).
+- **Use FP16**: Zyadatar LLM tasks ke liye, FP16 aur FP32 mein koi farak nahi padta, lekin FP16 2x memory bachata hai.
 
 ---
 
 ## 14. Interview Questions
-1. What is Scalar Quantization and how does it affect precision?
-2. Why is metadata filtering important in a production RAG system?
+1. Scalar Quantization kya hai aur yeh precision ko kaise affect karta hai?
+2. Production RAG system mein metadata filtering kyun important hai?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Serverless Vector DBs**: Databases that "Scale to Zero" when not in use, saving massive costs for low-traffic apps.
-- **GPU-Accelerated Indexing**: Building billions of HNSW edges in minutes using high-end GPUs instead of weeks on CPUs.
+- **Serverless Vector DBs**: Aise databases jo "Scale to Zero" ho jaate hain jab use mein na hon, low-traffic apps ke liye massive costs bachate hain.
+- **GPU-Accelerated Indexing**: High-end GPUs ka use karke billions of HNSW edges ko minutes mein build karna, weeks lagne wale CPU operations ke bajaye.

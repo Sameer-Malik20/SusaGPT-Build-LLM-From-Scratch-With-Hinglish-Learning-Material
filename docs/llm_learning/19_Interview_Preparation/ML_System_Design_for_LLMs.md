@@ -1,29 +1,29 @@
 # LLM System Design Interview Guide (2026)
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Beginner ke liye Hinglish Explanation 🇮🇳
 Bhai, LLM ka system design normal "Backend design" se bohot alag hai. Yahan sirf "Database" aur "API" ki baat nahi hoti. Yahan tumhe GPU memory, token costs, context window, aur latency ke beech mein balance banana padta hai. 
 
 Interview mein woh tumse bolenge: "Ek AI-powered customer support system design karo jo 1 million daily users handle kar sake." Tumhe batana hoga ki tum kaunsa model chunoge, RAG kaise setup karoge, aur system ko "Fast" kaise banaoge (Caching, vLLM, etc.). Is guide mein hum wahi "High-level patterns" dekhenge jo tumhe senior AI Engineer banayenge.
 
 ---
 
-## 2. Deep Technical Explanation
-LLM System Design focuses on the lifecycle of a request from Prompt to Token generation.
+## 2. Gehrai se Technical Explanation
+LLM System Design focus karta hai ek request ke lifecycle par, Prompt se Token generation tak.
 - **Components**: API Gateway, Guardrails, Orchestrator (LangGraph), Retriever (Vector DB), LLM Cluster (vLLM), and Observability (LangSmith).
 - **The "Bottlenecks"**:
-    1. **GPU VRAM**: Limits batch size and context length.
+    1. **GPU VRAM**: Batch size aur context length ko limit karta hai.
     2. **API Latency**: Network overhead + Generation time.
-    3. **Token Costs**: Scaling to millions of users.
+    3. **Token Costs**: Millions of users ke liye scaling.
 - **Key Design Choices**: RAG vs. Fine-Tuning, Multi-Agent vs. Single-Agent, Cloud vs. On-Prem.
 
 ---
 
-## 3. Mathematical Intuition
+## 3. Mathematical Samajh
 **Memory Estimation**:
 To run a 70B parameter model in 4-bit quantization:
 $$\text{Memory} \approx \frac{70 \times 10^9 \text{ parameters} \times 0.5 \text{ bytes (4-bit)}}{10^9 \text{ (GB)}} \approx 35 \text{ GB}$$
 Add ~10-20GB for KV Cache and overhead. Total = ~50-60GB.
-This means you need at least one **A100 (80GB)** or two **A6000s** to serve this model effectively.
+Iska matlab hai ki model ko effectively serve karne ke liye kam se kam ek **A100 (80GB)** ya do **A6000s** chahiye.
 
 ---
 
@@ -44,30 +44,30 @@ graph TD
 ---
 
 ## 5. Production-ready Examples
-The "Golden Stack" for 2026:
-- **Model**: Llama-3-70B (Quantized) or GPT-4o-mini.
-- **Serving**: vLLM on Kubernetes.
+2026 ke liye "Golden Stack":
+- **Model**: Llama-3-70B (Quantized) ya GPT-4o-mini.
+- **Serving**: Kubernetes par vLLM.
 - **Database**: Qdrant (Vector) + Postgres (Metadata).
-- **Agents**: CrewAI or LangGraph for multi-step logic.
-- **Monitoring**: Arize Phoenix for drift and hallucination detection.
+- **Agents**: Multi-step logic ke liye CrewAI ya LangGraph.
+- **Monitoring**: Drift aur hallucination detection ke liye Arize Phoenix.
 
 ---
 
 ## 6. Real-world Use Cases
-- **Design Task**: "Build a GitHub Copilot clone for an internal enterprise codebase."
-    - Answer: RAG over the local repo, fine-tuned Llama-3-8B for code completion, vLLM for < 100ms TTFT.
+- **Design Task**: "Ek internal enterprise codebase ke liye GitHub Copilot clone banayein."
+    - Answer: Local repo par RAG, code completion ke liye fine-tuned Llama-3-8B, vLLM < 100ms TTFT ke liye.
 
 ---
 
 ## 7. Failure Cases
-- **The "Context Bomb"**: A user sends a 100k token prompt that eats up all GPU memory, slowing down other users. (Solution: Rate limit by total tokens, not just requests).
-- **Cache Poisoning**: Malicious user injects bad data into the RAG database, causing all subsequent answers to be wrong.
+- **The "Context Bomb"**: Ek user 100k token prompt bhejta hai jo saari GPU memory kha leta hai, doosre users ko slow kar deta hai. (Solution: Total tokens ke hisaab se rate limit karo, sirf requests se nahi).
+- **Cache Poisoning**: Malicious user RAG database mein galat data daal deta hai, jissey saare subsequent answers galat ho jaate hain.
 
 ---
 
 ## 8. Debugging Guide
-1. **P99 Latency Analysis**: If your system is slow, check the "Retriever" first. Vector search over millions of docs is often the hidden bottleneck.
-2. **TTFT vs. TPOT**: Monitor Time-to-First-Token (User experience) and Time-Per-Output-Token (Overall throughput).
+1. **P99 Latency Analysis**: Agar system slow hai toh pehle "Retriever" check karo. Millions of docs par vector search aksar hidden bottleneck hota hai.
+2. **TTFT vs. TPOT**: Time-to-First-Token (User experience) aur Time-Per-Output-Token (Overall throughput) monitor karo.
 
 ---
 
@@ -81,33 +81,33 @@ The "Golden Stack" for 2026:
 ---
 
 ## 10. Security Concerns
-- **Prompt Injection**: Always use a separate "Evaluator" model to scan the user input before sending it to the main orchestrator.
+- **Prompt Injection**: Hamesha ek alag "Evaluator" model use karo jo user input ko scan kare main orchestrator ko bhejne se pehle.
 
 ---
 
 ## 11. Scaling Challenges
-- **GPU Availability**: In 2026, GPUs are still expensive. Design your system to be "Model-Agnostic" so you can switch between providers (AWS, Azure, RunPod) based on price.
+- **GPU Availability**: 2026 mein bhi GPUs expensive hain. Apne system ko "Model-Agnostic" design karo taake aap providers (AWS, Azure, RunPod) ke beech price ke hisaab se shift kar sakte ho.
 
 ---
 
 ## 12. Cost Considerations
-- **Semantic Caching**: Using Redis to store "Similar" queries and their answers. If User B asks something 95% similar to User A, return the cached answer and save 100% of LLM costs.
+- **Semantic Caching**: Redis ka use karke "Similar" queries aur unke answers store karte hain. Agar User B 95% similar query poochta hai, toh cached answer return karo aur 100% LLM costs bachao.
 
 ---
 
 ## 13. Best Practices
-- **Implement Streaming**: Users hate waiting. Show tokens as they are generated.
-- **Asynchronous Logging**: Don't let your observability platform slow down the main response loop.
-- **Use "Flash Attention 3"**: For the best performance on H100 GPUs.
+- **Implement Streaming**: Users wait se nafrat karte hain. Tokens generated hote hi dikhao.
+- **Asynchronous Logging**: Apni observability platform ko main response loop ko slow nahi karne do.
+- **"Flash Attention 3" Use karo**: H100 GPUs par best performance ke liye.
 
 ---
 
 ## 14. Interview Questions
-1. How would you handle a RAG system where the documents change every 5 minutes?
-2. What is the difference between "Vertical" and "Horizontal" scaling for LLMs?
+1. Aap kaise handle karenge RAG system jahan documents har 5 minute badalte hain?
+2. LLMs ke liye "Vertical" aur "Horizontal" scaling me kya fark hai?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **Serverless LLM Inference**: Scaling to zero during nights and weekends to save 50% on infrastructure costs.
-- **Hybrid RAG**: Using a small local model to decide *if* a heavy cloud retrieval is even necessary.
+## 15. 2026 ke Latest Patterns
+- **Serverless LLM Inference**: Raat aur weekends mein zero tak scaling karke infrastructure costs par 50% bachat.
+- **Hybrid RAG**: Ek chhota local model use karke decide karna ki *kya* heavy cloud retrieval zaroori hai ya nahi.

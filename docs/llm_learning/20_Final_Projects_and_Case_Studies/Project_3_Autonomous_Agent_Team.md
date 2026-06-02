@@ -8,18 +8,18 @@ Yeh teeno AI agents aapas mein baat karenge. Researcher google karega, Writer dr
 ---
 
 ## 2. Deep Technical Explanation
-Building a multi-agent system involves defining specialized roles, tools, and communication protocols.
-- **Roles & Personas**: Explicitly defining the "Mission" and "Expertise" of each agent.
-- **Task Delegation**: Using a "Manager" agent or a "State Graph" to decide which agent works next.
-- **Inter-Agent Communication**: Passing messages or shared state (context) between agents.
-- **Tool Access**: Assigning specific tools (e.g., Python Interpreter, Web Search, PDF Reader) to specific agents.
+Multi-agent system build karne mein specialized roles, tools, aur communication protocols define karna padta hai.
+- **Roles & Personas**: Har agent ka "Mission" aur "Expertise" explicitly define karna.
+- **Task Delegation**: "Manager" agent ya "State Graph" use karke decide karna kaunsa agent next kaam karega.
+- **Inter-Agent Communication**: Agents ke beech messages ya shared state (context) pass karna.
+- **Tool Access**: Specific agents ko specific tools (e.g., Python Interpreter, Web Search, PDF Reader) assign karna.
 
 ---
 
 ## 3. Mathematical Intuition
-Multi-agent coordination can be modeled as a **Cooperative Game**.
-The goal is to find a set of actions $\{a_1, a_2, ..., a_n\}$ across $n$ agents that maximizes a global utility function $U$.
-We use **Hierarchical Planning** where a top-level LLM breaks the goal into sub-goals and assigns them to worker nodes.
+Multi-agent coordination ko ek **Cooperative Game** ki tarah model kiya ja sakta hai.
+Goal hai $n$ agents ke across actions $\{a_1, a_2, ..., a_n\}$ ka set dhoondhna jo global utility function $U$ ko maximize kare.
+Hum **Hierarchical Planning** use karte hain jahan ek top-level LLM goal ko sub-goals mein tod kar worker nodes ko assign karta hai.
 
 ---
 
@@ -43,7 +43,7 @@ graph TD
 ---
 
 ## 5. Production-ready Examples
-Implementing a team with `CrewAI`:
+`CrewAI` ke saath team implement karna:
 
 ```python
 from crewai import Agent, Task, Crew
@@ -73,21 +73,21 @@ result = my_crew.kickoff()
 ---
 
 ## 6. Real-world Use Cases
-- **Software Dev Team**: One agent for UI, one for Backend, one for Testing.
-- **Investment Research**: One agent for financial news, one for stock prices, one for risk analysis.
-- **Legal Team**: One agent for case law, one for contract drafting, one for compliance check.
+- **Software Dev Team**: Ek agent UI ke liye, ek Backend ke liye, ek Testing ke liye.
+- **Investment Research**: Ek agent financial news ke liye, ek stock prices ke liye, ek risk analysis ke liye.
+- **Legal Team**: Ek agent case law ke liye, ek contract drafting ke liye, ek compliance check ke liye.
 
 ---
 
 ## 7. Failure Cases
-- **Agent Hallucination**: The Researcher makes up a fake trend, and the Writer writes a 2000-word blog post based on that lie.
-- **Infinite Looping**: The Editor keeps rejecting the Writer's draft for minor reasons forever.
+- **Agent Hallucination**: Researcher ek fake trend bana leta hai, aur Writer us jhooth par 2000-word blog post likh deta hai.
+- **Infinite Looping**: Editor Writer ke draft ko minor reasons ke liye hamesha reject karta rehta hai.
 
 ---
 
 ## 8. Debugging Guide
-1. **Thought History**: Look at the "Internal Monologue" of every agent. If the Researcher says "I am done" but the Manager says "Go back", your delegation logic is flawed.
-2. **Context Window Management**: As agents chat with each other, the history grows. Use **Summarization** of past steps to save tokens.
+1. **Thought History**: Har agent ka "Internal Monologue" dekho. Agar Researcher kahe "I am done" lekin Manager kahe "Go back", toh tumhara delegation logic galat hai.
+2. **Context Window Management**: Jaise agents aapas mein chat karte hain, history badhti jati hai. Tokens bachane ke liye past steps ka **Summarization** use karo.
 
 ---
 
@@ -101,33 +101,33 @@ result = my_crew.kickoff()
 ---
 
 ## 10. Security Concerns
-- **Agent Collusion**: If one agent is compromised by prompt injection, it might "Convince" other agents to perform harmful actions.
+- **Agent Collusion**: Agar ek agent prompt injection se compromise ho jata hai, toh woh doosre agents ko harmful actions karne ke liye "Convince" kar sakta hai.
 
 ---
 
 ## 11. Scaling Challenges
-- **Synchronization**: Ensuring all agents are working on the *latest* version of the data.
+- **Synchronization**: Yeh ensure karna ki saare agents data ke *latest* version par kaam kar rahe hain.
 
 ---
 
 ## 12. Cost Considerations
-- **Multiplier Effect**: A multi-agent project can easily use 20x-50x more tokens than a single chat prompt. Use small models for the "Editor" and "Reviewer" steps.
+- **Multiplier Effect**: Ek multi-agent project single chat prompt ke comparison mein 20x-50x zyada tokens use kar sakta hai. "Editor" aur "Reviewer" steps ke liye chhote models use karo.
 
 ---
 
 ## 13. Best Practices
-- **Define clear "Input" and "Output" schemas** for every agent.
-- **Set a max number of iterations** (e.g., max 3 revisions).
-- **Use "Self-Correction" loops**: Let the agent check its own work before sending it to the next one.
+- **Define clear "Input" aur "Output" schemas** har agent ke liye.
+- **Iterations ki maximum number set karo** (e.g., max 3 revisions).
+- **"Self-Correction" loops use karo**: Agent apne kaam ko khud check kare next agent ko bhejne se pehle.
 
 ---
 
 ## 14. Interview Questions
-1. When would you choose a Multi-Agent system over a single LLM with a long prompt?
-2. How do you prevent agents from getting stuck in infinite feedback loops?
+1. Aap Multi-Agent system kab choose karenge single LLM long prompt ke comparison mein?
+2. Agents ko infinite feedback loops mein phansne se kaise rokenge?
 
 ---
 
 ## 15. Latest 2026 Patterns
-- **Meta-Agents**: Agents that can "Hire" other agents or "Write" new tools on-the-fly to solve a problem.
-- **Human-in-the-Loop Orchestration**: The system pauses and waits for a human signature before any "Real-world" action is taken.
+- **Meta-Agents**: Agents jo doosre agents ko "Hire" kar sakte hain ya problem solve karne ke liye on-the-fly naye tools "Write" kar sakte hain.
+- **Human-in-the-Loop Orchestration**: System pause hota hai aur koi bhi "Real-world" action lene se pehle human signature ka wait karta hai.

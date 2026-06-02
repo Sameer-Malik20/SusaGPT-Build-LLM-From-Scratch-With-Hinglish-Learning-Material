@@ -1,5 +1,5 @@
-# 🪟 Context Window Management: Handling the Flow
-> **Objective:** Master the engineering techniques used to efficiently manage LLM context—from sliding windows and token eviction to paged attention and prefix caching | **Language:** Hinglish | **Standard:** 2026 Expert Framework
+# 🪟 Context Window Management: Flow ko Handle Karna
+> **Objective:** LLM context ko efficiently manage karne ke engineering techniques master karna—sliding windows aur token eviction se lekar paged attention aur prefix caching tak | **Language:** Hinglish | **Standard:** 2026 Expert Framework
 
 ---
 
@@ -15,21 +15,21 @@ Context Window Management ka matlab hai "Limited memory mein bade data ko handle
 ---
 
 ## 🧠 2. Deep Technical Explanation
-Managing the context window is primarily a **KV Cache Management** problem:
+Context window ko manage karna primarily ek **KV Cache Management** problem hai:
 
-1. **Sliding Window Attention (Mistral):** A token only attends to the last $W$ tokens. Memory cost is fixed at $O(W)$ instead of $O(N)$.
-2. **StreamingLLM (Attention Sinks):** Keeping the first 4 tokens (The "Sinks") and the last 1000 tokens. This prevents the model's logic from crashing when the window "Slides".
-3. **Prefix Caching:** If 100 users are asking questions about the same 100k-word document, we store the KV cache for that document in RAM and "Attach" it to every request.
-4. **PagedAttention (vLLM):** Managing the KV cache as non-contiguous blocks to eliminate memory fragmentation.
+1. **Sliding Window Attention (Mistral):** Ek token sirf last $W$ tokens ko attend karta hai. Memory cost $O(W)$ par fixed hoti hai balke $O(N)$ nahi.
+2. **StreamingLLM (Attention Sinks):** Pehle 4 tokens (The "Sinks") aur last 1000 tokens ko keep karna. Ye model ke logic ko crash hone se rokta hai jab window "Slide" karti hai.
+3. **Prefix Caching:** Agar 100 users same 100k-word document ke baare mein questions pooch rahe hain, toh hum us document ka KV cache RAM mein store karte hain aur har request ke saath "Attach" karte hain.
+4. **PagedAttention (vLLM):** KV cache ko non-contiguous blocks ke roop mein manage karna memory fragmentation ko khatam karne ke liye.
 
 ---
 
 ## 📐 3. Mathematical Intuition
 **Memory Utilization Efficiency ($E$):**
-In standard batching, if max context is $C$ and average context is $A$:
+Standard batching mein, agar max context $C$ hai aur average context $A$ hai:
 $$E = \frac{A}{C}$$
-If $C=128k$ and $A=4k$, efficiency is only $3\%$.
-**PagedAttention** brings $E$ close to **$95\%$** by dynamically allocating memory only when needed.
+Agar $C=128k$ aur $A=4k$, toh efficiency sirf $3\%$ hoti hai.
+**PagedAttention** $E$ ko **$95\%$** ke kareeb laata hai dynamically memory allocate karke sirf jab zaroorat hoti hai.
 
 ---
 
@@ -46,7 +46,7 @@ graph LR
 ---
 
 ## 💻 5. Production-Ready Examples
-Setting up **Prompt Caching** in 2026:
+2026 mein **Prompt Caching** set up karna:
 ```python
 # API-side caching (e.g., Anthropic/OpenAI pattern)
 response = client.messages.create(
@@ -72,56 +72,56 @@ response = client.messages.create(
 ---
 
 ## 🌍 6. Real-World Use Cases
-- **Long-running Agents:** Keeping the history of a 24-hour coding session without the model forgetting the initial goal.
-- **Multi-user Chat:** Sharing a "Project Wiki" across 50 teammates in a single chat room.
+- **Long-running Agents:** 24-hour coding session ka history keep karna bina model ko initial goal bhoolna.
+- **Multi-user Chat:** Ek "Project Wiki" ko 50 teammates ke beech ek chat room mein share karna.
 
 ---
 
 ## ❌ 7. Failure Cases
-- **Attention Sink Loss:** If you don't keep the first few tokens (The Sinks), the Softmax values for the rest of the sequence explode, making the model output gibberish.
-- **Cache Eviction Policy:** Accidentally deleting the "System Prompt" from the cache to make room for a "User Joke".
+- **Attention Sink Loss:** Agar aap pehle kuch tokens (The Sinks) nahi rakhte, toh baaki sequence ke Softmax values explode ho jate hain, jisse model output gibberish ho jata hai.
+- **Cache Eviction Policy:** Galti se cache mein se "System Prompt" delete karna "User Joke" ke liye jagah banane ke liye.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
 | Problem | Reason | Solution |
 | :--- | :--- | :--- |
-| **Model loses track of instructions** | Window slid too far | Increase **Window Size** or use **Pinned Context** for instructions. |
-| **CUDA Out of Memory** | Fragmentation | Switch to **PagedAttention** or lower the batch size. |
+| **Model loses track of instructions** | Window slid too far | **Window Size** badhayein ya instructions ke liye **Pinned Context** use karein. |
+| **CUDA Out of Memory** | Fragmentation | **PagedAttention** par switch karein ya batch size kam karein. |
 
 ---
 
 ## ⚖️ 9. Tradeoffs
-- **Sliding Window (Fixed memory / Fast / Forgets deep history).**
+- **Sliding Window (Fixed memory / Fast / Deep history bhool jata hai).**
 - **Full Context (Perfect memory / High cost / Slow).**
 
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Cache Side-Channel:** One user might be able to detect if another user has already "Cached" a specific document by measuring the response time (Fast = Already Cached).
+- **Cache Side-Channel:** Ek user detect kar sakta hai ki kisi aur user ne already ek specific document "Cache" kiya hai response time measure karke (Fast = Already Cached).
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The "Context Wall":** Managing 10M tokens for 1000 users requires **Terabytes of VRAM**. **Fix: Multi-host KV Cache distribution.**
+- **The "Context Wall":** 1000 users ke liye 10M tokens manage karna **Terabytes of VRAM** require karta hai. **Fix: Multi-host KV Cache distribution.**
 
 ---
 
 ## 💰 12. Cost Considerations
-- Caching saves $90\%$ of costs for "Static" context (like docs), but "Dynamic" context (like chat history) is harder to cache effectively.
+- Caching "Static" context (jaise docs) ke $90\%$ costs save karta hai, lekin "Dynamic" context (jaise chat history) ko effectively cache karna mushkil hai.
 
 漫
 ---
 
 ## 📝 14. Interview Questions
-1. "What is an 'Attention Sink' and why is it important for sliding window models?"
-2. "How does Prefix Caching reduce inference costs?"
-3. "Explain the difference between 'Contiguous' and 'Paged' KV caches."
+1. "What is an 'Attention Sink' and why is it important for sliding window models?" 
+2. "How does Prefix Caching reduce inference costs?" 
+3. "Explain the difference between 'Contiguous' and 'Paged' KV caches." 
 
 ---
 
 ## 🚀 15. Latest 2026 LLM Engineering Patterns
-- **Context Offloading:** Moving the "Inactive" parts of a long context window to the CPU or SSD in real-time.
-- **Adaptive Context:** The model "Decides" which parts of its history are important and "Compresses" the rest into a few summary tokens.
+- **Context Offloading:** Long context window ke "Inactive" parts ko real-time mein CPU ya SSD par move karna.
+- **Adaptive Context:** Model "Decides" karta hai ki uske history ke kaun se parts important hain aur baaki ko kuch summary tokens mein "Compresses" karta hai.
 漫
 漫

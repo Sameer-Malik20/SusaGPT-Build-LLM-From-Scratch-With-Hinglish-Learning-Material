@@ -1,9 +1,9 @@
-# 📏 ALiBi and Extrapolation: Infinity and Beyond
-> **Objective:** Master the ALiBi (Attention with Linear Biases) architecture and positional extrapolation techniques that allow LLMs to handle sequence lengths longer than their training window without any retraining | **Language:** Hinglish | **Standard:** 2026 Expert Framework
+# 📏 ALiBi aur Extrapolation: Infinity aur Beyond
+> **Objective:** ALiBi (Attention with Linear Biases) architecture aur positional extrapolation techniques ko master karna jisse LLMs bina kisi retraining ke apne training window se zyada lambi sequence lengths handle kar sakte hain | **Language:** Hinglish | **Standard:** 2026 Expert Framework
 
 ---
 
-## 🧭 1. Beginner-Friendly Hinglish Explanation
+## 🧭 1. Beginner-Friendly Hinglish Samajh
 ALiBi (Attention with Linear Biases) ka matlab hai "Duri (Distance) ke hisaab se importance kam karna".
 
 - **The Problem:** Transformers ko kaise batayein ki "Paas wala word zyada important hai aur door wala kam"?
@@ -14,21 +14,21 @@ ALiBi (Attention with Linear Biases) ka matlab hai "Duri (Distance) ke hisaab se
 
 ---
 
-## 🧠 2. Deep Technical Explanation
-ALiBi removes positional embeddings entirely and modifies the **Attention Matrix**:
+## 🧠 2. Gehri Technical Samajh
+ALiBi positional embeddings ko puri tarah hata deta hai aur **Attention Matrix** ko modify karta hai:
 
-1. **The Bias:** A linear bias is added to the attention score (before Softmax).
+1. **Bias:** Attention score (Softmax se pehle) mein ek linear bias add kiya jata hai.
 2. **Formula:** $A_{ij} = q_i \cdot k_j - m \cdot |i - j|$
-3. **Slope ($m$):** Each attention head has a different slope $m$. This allows some heads to look very far back and others to focus only on immediate neighbors.
-4. **Extrapolation:** Because the bias is just a linear function of distance, the model can handle any distance (e.g., 1 million tokens) even if it was only trained on 2k tokens. It never "sees" a new position; it only sees "distances".
+3. **Slope ($m$):** Har attention head ka ek alag slope $m$ hota hai. Isse kuch heads bahut door tak dekh sakte hain aur kuch sirf immediate neighbors par focus karte hain.
+4. **Extrapolation:** Kyunki bias sirf distance ka ek linear function hai, model kisi bhi distance ko handle kar sakta hai (e.g., 1 million tokens) chahe wo sirf 2k tokens par hi trained kyun na ho. Ye kabhi bhi koi "naya" position nahi dekhta; sirf "distances" dekhta hai.
 
 ---
 
-## 📐 3. Mathematical Intuition
-The attention score $s$ for query $i$ and key $j$:
+## 📐 3. Ganitiya Samajh
+Attention score $s$ jo query $i$ aur key $j$ ke liye hai:
 $$s_{ij} = \frac{q_i k_j^T}{\sqrt{d}} - m \cdot (i - j)$$
-For $n$ heads, the slopes $m$ are chosen as a geometric progression (e.g., $1/2^1, 1/2^2, \dots, 1/2^n$).
-This ensures that the model has a "Multi-resolution" view of the past.
+$n$ heads ke liye, slopes $m$ ko geometric progression ke roop mein chuna jata hai (e.g., $1/2^1, 1/2^2, \dots, 1/2^n$).
+Isse model ko past ka ek "Multi-resolution" view milta hai.
 
 ---
 
@@ -45,8 +45,8 @@ graph TD
 
 ---
 
-## 💻 5. Production-Ready Examples
-The ALiBi bias calculation (Simplified):
+## 💻 5. Production Ke Liye Tayar Examples
+ALiBi bias calculation (Simplified):
 ```python
 def get_alibi_bias(seq_len, num_heads):
     # Calculate slopes for each head
@@ -59,23 +59,23 @@ def get_alibi_bias(seq_len, num_heads):
 
 ---
 
-## 🌍 6. Real-World Use Cases
-- **MPT (MosaicML Pretrained Transformer):** Famous for using ALiBi to support 64k+ context windows out of the box.
-- **Real-time Transcription:** Processing long audio streams where the model needs to maintain "Relative context" without knowing the absolute start time.
+## 🌍 6. Real-World Ke Upyog
+- **MPT (MosaicML Pretrained Transformer):** ALiBi istemal karne ke liye famous hai jo out of the box 64k+ context windows support karta hai.
+- **Real-time Transcription:** Lambe audio streams process karna jahan model ko "Relative context" maintain karna hota hai bina absolute start time jaane.
 
 ---
 
-## ❌ 7. Failure Cases
-- **Order Insensitivity:** Because ALiBi focuses purely on distance, it might struggle with tasks that require knowing *exactly* where a word is in a fixed structure (e.g., "The 5th word in the 3rd sentence").
-- **Slope Saturation:** If $m$ is too high, the model becomes too "Short-sighted" and ignores everything beyond 10 tokens.
+## ❌ 7. Asafalta Ke Mamle
+- **Order Insensitivity:** Kyunki ALiBi sirf distance par dhyan deta hai, isse un tasks mein problem ho sakti hai jahan exact word position janana zaroori hai (e.g., "The 5th word in the 3rd sentence").
+- **Slope Saturation:** Agar $m$ bahut zyada hai, toh model "Short-sighted" ho jata hai aur 10 tokens ke aage kuch bhi ignore karta hai.
 
 ---
 
 ## 🛠️ 8. Debugging Guide
 | Problem | Reason | Solution |
 | :--- | :--- | :--- |
-| **Model ignores distant context** | Slopes are too steep | Re-distribute the **head slopes** to allow more "Long-range" heads. |
-| **Quadratic memory issue** | standard attention | ALiBi doesn't solve $O(n^2)$, use it with **FlashAttention** for efficiency. |
+| **Model door ke context ko ignore karta hai** | Slopes bahut steep hain | **Head slopes** ko redistribute karke zyada "Long-range" heads allow karein. |
+| **Quadratic memory issue** | standard attention | ALiBi $O(n^2)$ solve nahi karta, isliye efficiency ke liye **FlashAttention** ke saath use karein. |
 
 ---
 
@@ -85,30 +85,30 @@ def get_alibi_bias(seq_len, num_heads):
 ---
 
 ## 🛡️ 10. Security Concerns
-- **Bias Manipulation:** An attacker can insert "Filler tokens" to push an important instruction so far back that the ALiBi penalty makes the model ignore it entirely.
+- **Bias Manipulation:** Attacker "Filler tokens" insert kar sakta hai jisse important instruction itna peechhe chala jaye ki ALiBi penalty ki vajah se model use ignore kar de.
 
 ---
 
 ## 📈 11. Scaling Challenges
-- **The "Lost in the Middle" problem is worse in ALiBi** because the linear penalty naturally favors the very end of the sequence.
+- **ALiBi mein "Lost in the Middle" ki samasya aur bhi badi hai** kyunki linear penalty naturally sequence ke bilkul aakhir ko favor karti hai.
 
 ---
 
 ## 💰 12. Cost Considerations
-- ALiBi saves memory during training (no positional embeddings to store/train) and is theoretically "Infinite" in scale for free.
+- ALiBi training ke dauran memory bachata hai (koi positional embeddings store/train nahi karni padti) aur theoretically "Infinite" in scale for free hai.
 
 漫
 ---
 
 ## 📝 14. Interview Questions
-1. "How does ALiBi differ from learned positional embeddings?"
-2. "Why do we use different 'Slopes' for different attention heads in ALiBi?"
-3. "Can ALiBi handle sequence lengths $10x$ longer than its training length? Why?"
+1. "ALiBi, learned positional embeddings se kaise alag hai?"
+2. "ALiBi mein alag attention heads ke liye alag 'Slopes' kyun use karte hain?"
+3. "Kya ALiBi sequence lengths ko apne training length se $10x$ zyada lamba handle kar sakta hai? Kyun?"
 
 ---
 
-## 🚀 15. Latest 2026 LLM Engineering Patterns
-- **ALiBi-RoPE Hybrid:** Using RoPE for short-range precision and ALiBi-style biases for long-range stability.
-- **Dynamic ALiBi:** Models that "Adjust" their slopes based on the complexity of the prompt.
+## 🚀 15. 2026 Ke Sabse Naye LLM Engineering Patterns
+- **ALiBi-RoPE Hybrid:** RoPE short-range precision ke liye hota hai aur ALiBi-style biases long-range stability ke liye.
+- **Dynamic ALiBi:** Aise models jo prompt ki complexity ke hisaab se apne slopes ko "Adjust" karte hain.
 漫
 漫

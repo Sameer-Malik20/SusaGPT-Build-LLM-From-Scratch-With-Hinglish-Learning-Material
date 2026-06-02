@@ -1,25 +1,25 @@
-# llama.cpp: LLMs on Every Device
+# llama.cpp: LLMs har device par
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Beginner ke liye Hinglish Samjhaayi 🇮🇳
 Bhai, socho tumhe Llama model chalana hai par tumhare paas koi mehenga NVIDIA GPU nahi hai. Sirf ek simple MacBook ya ek chota sa Windows laptop hai. Kya tum AI nahi chala sakte? Bilkul chala sakte ho!
 
 **llama.cpp** ek aisa magic tool hai jo LLMs ko C++ mein likhta hai taaki woh bina GPU ke bhi, sirf tumhare CPU aur RAM par super-fast chal sakein. Yeh **GGUF** format use karta hai jo model ko compress kar deta hai. Isse tum apne phone, Raspberry Pi, ya purane laptop par bhi "Local AI" chala sakte ho bina internet ke. Yeh "AI Democratization" ka asli hero hai.
 
 ---
 
-## 2. Deep Technical Explanation
-llama.cpp is a plain C/C++ implementation of the Llama architecture with no heavy dependencies (like PyTorch).
-- **Quantization (GGUF)**: Supports 2-bit, 3-bit, 4-bit, 5-bit, 6-bit, and 8-bit quantization.
-- **Metal/CUDA Support**: While it runs on CPU, it also uses Apple's Metal API (for Mac) and CUDA (for NVIDIA) to accelerate inference.
-- **Unified Memory**: On Macs (Apple Silicon), it uses the unified RAM for both CPU and GPU tasks, allowing it to run models larger than the VRAM of a standard GPU.
+## 2. Gehri Technical Samjhaayi
+llama.cpp ek saada C/C++ implementation hai Llama architecture ka jisme koi heavy dependencies nahi hain (jaise PyTorch).
+- **Quantization (GGUF)**: 2-bit, 3-bit, 4-bit, 5-bit, 6-bit, aur 8-bit quantization ko support karta hai.
+- **Metal/CUDA Support**: Yeh CPU par bhi chalta hai, lekin Apple ka Metal API (Mac ke liye) aur CUDA (NVIDIA ke liye) bhi use karta hai inference ko accelerate karne ke liye.
+- **Unified Memory**: Macs (Apple Silicon) par, yeh unified RAM use karta hai CPU aur GPU dono tasks ke liye, jisse yeh models chala sakta hai jo standard GPU ke VRAM se bade hain.
 
 ---
 
-## 3. Mathematical Intuition
-**Quantization logic**: Mapping a 16-bit float range $[-65504, 65504]$ to a 4-bit integer range $[0, 15]$.
-To minimize error, llama.cpp uses **Block-wise Quantization**:
+## 3. Mathematical Samajh
+**Quantization logic**: Ek 16-bit float range $[-65504, 65504]$ ko 4-bit integer range $[0, 15]$ mein map karna.
+Error minimize karne ke liye, llama.cpp **Block-wise Quantization** use karta hai:
 $$w_q = \text{round}\left(\frac{w}{s}\right) + z$$
-where $s$ is the scale and $z$ is the zero-point, calculated for every block of 32 or 64 weights. This preserves the "relative" importance of weights even at high compression.
+Jahan $s$ scale hai aur $z$ zero-point hai, jo har block of 32 ya 64 weights ke liye calculate kiya jaata hai. Yeh high compression par bhi weights ki "relative" importance ko preserve karta hai.
 
 ---
 
@@ -34,8 +34,8 @@ graph LR
 
 ---
 
-## 5. Production-ready Examples
-Running a model with `llama.cpp` CLI:
+## 5. Production-ready Udaharan
+`llama.cpp` CLI ke saath model chalana:
 
 ```bash
 # 1. Download a GGUF model
@@ -48,7 +48,7 @@ wget https://huggingface.co/lmstudio-community/Meta-Llama-3-8B-Instruct-GGUF/res
     --threads 8
 ```
 
-Using Python bindings (`llama-cpp-python`):
+Python bindings (`llama-cpp-python`) ka upyog karte hue:
 ```python
 from llama_cpp import Llama
 
@@ -59,22 +59,22 @@ print(output['choices'][0]['text'])
 
 ---
 
-## 6. Real-world Use Cases
-- **Local AI Assistants**: Tools like LM Studio or Ollama (which use llama.cpp under the hood).
-- **Edge Computing**: Running AI on drones or offline devices.
-- **Privacy-First AI**: Running sensitive medical/legal queries without sending data to the cloud.
+## 6. Real-world Upyog Cases
+- **Local AI Assistants**: Tools jaise LM Studio ya Ollama (jo under the hood llama.cpp use karte hain).
+- **Edge Computing**: AI ko drones ya offline devices par chalana.
+- **Privacy-First AI**: Sensitive medical/legal queries ko cloud par data bheje bina chalana.
 
 ---
 
-## 7. Failure Cases
-- **Perplexity Degradation**: 2-bit or 3-bit quantization can make the model "Dumb" and forget facts.
-- **Dependency on GGUF**: You can't just run a Safetensors model; you must convert it to GGUF first.
+## 7. Failure ke Mamle
+- **Perplexity Degradation**: 2-bit ya 3-bit quantization model ko "Dumb" bana sakta hai aur facts bhool sakta hai.
+- **Dependency on GGUF**: Aap directly Safetensors model nahi chala sakte; pehle usey GGUF mein convert karna padega.
 
 ---
 
 ## 8. Debugging Guide
-1. **Thread Tuning**: If inference is slow, ensure `--threads` matches your physical CPU cores (not logical ones).
-2. **Offloading Check**: Look for `llm_load_tensors: offloaded 32/32 layers to GPU` in the logs.
+1. **Thread Tuning**: Agar inference slow hai, to ensure karo ki `--threads` tumhare physical CPU cores se match kare (logical cores se nahi).
+2. **Offloading Check**: Logs mein `llm_load_tensors: offloaded 32/32 layers to GPU` dekho.
 
 ---
 
@@ -87,33 +87,33 @@ print(output['choices'][0]['text'])
 
 ---
 
-## 10. Security Concerns
-- **Binary Exploits**: Since it's C++, it's susceptible to memory safety issues (buffer overflows) if the GGUF file is maliciously crafted.
+## 10. Security ke Mudde
+- **Binary Exploits**: Since yeh C++ hai, yeh memory safety issues (buffer overflows) ke liye susceptible hai agar GGUF file maliciously craft ki gayi ho.
 
 ---
 
-## 11. Scaling Challenges
-- **Throughput**: llama.cpp is optimized for single-user latency, not high-throughput batching like vLLM.
+## 11. Scaling Chuneautiyan
+- **Throughput**: llama.cpp single-user latency ke liye optimized hai, na ki high-throughput batching jaisi vLLM mein hoti hai.
 
 ---
 
-## 12. Cost Considerations
-- **Hardware Cost**: Zero. Use your existing laptop instead of renting H100s at $4/hr.
+## 12. Kharch ke Vichar
+- **Hardware Cost**: Zero. Apne existing laptop ka upyog karen, H100s ko $4/hr kiraye par lene ke bajaye.
 
 ---
 
 ## 13. Best Practices
-- Use **Q4_K_M** quantization for the best balance of speed and intelligence.
-- On Mac, always use **-ngl 99** to offload all layers to the GPU (M1/M2/M3).
+- **Q4_K_M** quantization ka upyog karein speed aur intelligence ke behatar santulan ke liye.
+- Mac par, hamesha **-ngl 99** ka upyog karein sab layers ko GPU (M1/M2/M3) par offload karne ke liye.
 
 ---
 
-## 14. Interview Questions
-1. What is GGUF and why is it better than the older GGML format?
-2. How does llama.cpp achieve high speed on CPUs?
+## 14. Interview Sawaal
+1. GGUF kya hai aur yeh purane GGML format se behtar kyun hai?
+2. llama.cpp CPUs par high speed kaise prapt karta hai?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **LLM in a Browser**: Compiling llama.cpp to WebAssembly (WASM) to run LLMs directly in Chrome/Safari.
-- **Distributed llama.cpp**: Running a 70B model across two old laptops by splitting the layers between them over a local network.
+## 15. 2026 ke Latest Patterns
+- **LLM in a Browser**: llama.cpp ko WebAssembly (WASM) mein compile karke LLMs ko direct Chrome/Safari mein chalana.
+- **Distributed llama.cpp**: Do purane laptops par 70B model ko layers split karke local network par chalana.

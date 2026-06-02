@@ -1,25 +1,25 @@
-# Semantic Search: Beyond Keyword Matching
+# Semantic Search: Keyword Matching se Aage
 
 ## 1. Beginner-friendly Hinglish Explanation 🇮🇳
-Bhai, puraani search (Keyword search) bilkul "Tote" (Parrot) ki tarah thi. Agar tumne search kiya "Pila phal", toh woh sirf wahi dikhayega jahan "Pila" aur "Phal" likha hai. 
+Bhai, puraani search (Keyword search) bilkul "Tote" (Parrot) ki tarah thi. Agar tumne search kiya "Pila phal", toh woh sirf wahi dikhayega jahan "Pila" aur "Phal" likha hai.
 
 **Semantic Search** smart hai. Use pata hai ki "Pila phal" ka matlab "Banana" ya "Mango" bhi ho sakta hai. Yeh "Words" ko nahi, "Meaning" ko search karta hai. Yeh vectors ka use karke context samajhta hai. Yeh bilkul waise hi hai jaise tum kisi library mein ja kar bolo "Mujhe dard bhari kahaniyan chahiye" aur librarian tumhe "Sad stories" ki shelf par le jaye, bhale hi un books ke naam mein "Dard" word na ho.
 
 ---
 
-## 2. Deep Technical Explanation
-Semantic search maps queries and documents into the same vector space to find matches based on distance rather than character overlap.
-- **Bi-Encoders**: Encode query and document separately. Fast but less accurate. Used for initial retrieval.
-- **Cross-Encoders**: Encode query and document together. Very accurate but slow. Used for re-ranking.
-- **ANN (Approximate Nearest Neighbor)**: Algorithms like HNSW used to search billions of vectors in milliseconds.
+## 2. Gehri Technical Explanation
+Semantic search queries aur documents ko ek hi vector space mein map karta hai taaki distance ke basis par matches mile, character overlap ke bajay.
+- **Bi-Encoders**: Query aur document ko alag-alag encode karte hain. Fast hain but kam accurate. Initial retrieval ke liye use hote hain.
+- **Cross-Encoders**: Query aur document ko ek saath encode karte hain. Bahut accurate hain but slow hain. Re-ranking ke liye use hote hain.
+- **ANN (Approximate Nearest Neighbor)**: HNSW jaise algorithms jo billions vectors ko milliseconds mein search karne ke liye use hote hain.
 
 ---
 
-## 3. Mathematical Intuition
-The search problem: Find document $d$ that maximizes:
+## 3. Ganitik Samajh
+The search problem: Document $d$ dhoondho jo maximize kare:
 $$\text{sim}(q, d) = \frac{E(q) \cdot E(d)}{\|E(q)\| \|E(d)\|}$$
-Where $E$ is the embedding function.
-For large scale, we use **HNSW (Hierarchical Navigable Small World)** graphs which reduce search time from $O(N)$ to $O(\log N)$.
+Jahan $E$ embedding function hai.
+Bade scale ke liye, hum **HNSW (Hierarchical Navigable Small World)** graphs use karte hain jo search time $O(N)$ se $O(\log N)$ tak reduce kar dete hain.
 
 ---
 
@@ -65,60 +65,60 @@ print(f"Result: {documents[I[0][0]]}")
 ---
 
 ## 6. Real-world Use Cases
-- **E-commerce**: Finding products by description/intent.
+- **E-commerce**: Description/intent ke through products dhoondhna.
 - **Customer Support**: Automated FAQ matching.
-- **RAG Systems**: The "Retrieval" part of RAG.
+- **RAG Systems**: RAG ka "Retrieval" part.
 
 ---
 
 ## 7. Failure Cases
-- **Keyword Blindness**: Sometimes you *actually* want an exact word (e.g., a part number), but semantic search gives you a "similar" part that is wrong.
-- **Domain Shift**: A general-purpose search model failing on highly technical medical or legal terms.
+- **Keyword Blindness**: Kabhi kabhi aapko exact word chahiye (jaise part number), lekin semantic search aapko "similar" part de deta hai jo galat hota hai.
+- **Domain Shift**: General-purpose search model ka highly technical medical ya legal terms mein fail hona.
 
 ---
 
 ## 8. Debugging Guide
-1. **Precision@K**: Measure how many of the Top-K results are actually relevant.
-2. **Recall**: Ensure you aren't missing important documents that should have been found.
+1. **Precision@K**: Top-K results mein se kitne actually relevant hain, yah measure karna.
+2. **Recall**: Yeh ensure karna ki aap important documents ko miss na kar rahe hain jo milne chahiye.
 
 ---
 
 ## 9. Tradeoffs
-| Feature | Keyword (BM25) | Semantic (Embeddings) |
+| Feature (Visheshता) | Keyword (BM25) | Semantic (Embeddings) |
 |---|---|---|
-| Speed | Extremely Fast | Fast |
-| Understanding | Zero | High |
-| Technical Terms | Excellent | Poor |
+| Speed (Gati) | Bahut Tez | Tez |
+| Understanding (Samajh) | Zero | Uncha |
+| Technical Terms (Takniki Shabd) | Utkrisht | Kharab |
 
 ---
 
 ## 10. Security Concerns
-- **Prompt Leakage via Retrieval**: If an attacker can craft a query that retrieves sensitive "Context" chunks into the LLM prompt.
+- **Prompt Leakage via Retrieval**: Agar attacker aisa query bana sake jo sensitive "Context" chunks ko LLM prompt mein retrieve kar le.
 
 ---
 
 ## 11. Scaling Challenges
-- **Indexing Latency**: Adding millions of new documents to a vector index can take hours/days if not optimized.
+- **Indexing Latency**: Lakhon naye documents ko vector index mein add karne mein hours/days lag sakte hain agar optimized na ho.
 
 ---
 
 ## 12. Cost Considerations
-- **Hosting**: Managed vector DBs (Pinecone) can be expensive compared to simple SQL DBs.
+- **Hosting**: Managed vector DBs (Pinecone) expensive ho sakte hain simple SQL DBs ke comparison mein.
 
 ---
 
 ## 13. Best Practices
-- Use **Hybrid Search**: Combine BM25 (Keyword) + Embeddings (Semantic) for the best of both worlds.
-- Always use a **Re-ranker** for the top 5-10 results to improve precision.
+- **Hybrid Search** ka upyog karein: BM25 (Keyword) + Embeddings (Semantic) dono ka faida uthane ke liye.
+- Hamesha top 5-10 results ke liye **Re-ranker** ka istemal karein taaki precision sudhar jaaye.
 
 ---
 
 ## 14. Interview Questions
-1. What is the difference between a Bi-Encoder and a Cross-Encoder?
-2. Why is Hybrid Search better than pure Semantic Search?
+1. Bi-Encoder aur Cross-Encoder mein kya antar hai?
+2. Hybrid Search pure Semantic Search se behtar kyun hai?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **ColBERT**: Late interaction models that store multiple vectors per document for extreme precision.
-- **Neural Hashing**: Compressing vectors into 64-bit hashes for 100x faster search.
+## 15. 2026 ke Naye Patterns
+- **ColBERT**: Late interaction models jo extreme precision ke liye per document multiple vectors store karte hain.
+- **Neural Hashing**: Vectors ko 64-bit hashes mein compress karna jo search ko 100x tez banata hai.

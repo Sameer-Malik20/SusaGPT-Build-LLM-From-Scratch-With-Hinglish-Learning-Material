@@ -1,30 +1,30 @@
 # Reasoning Limitations: The "Stochastic Parrot" Wall
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
-Bhai, LLM koi "Albert Einstein" nahi hai. Woh logic sirf "Act" karta hai, use sach mein samajh nahi aata. 
+## 1. Beginner-friendly Hinglish Explanation (Shuruati logo ke liye Hinglish mein) 🇮🇳
+Bhai, LLM koi "Albert Einstein" nahi hai. Woh logic sirf "Act" karta hai, use sach mein samajh nahi aata.
 
 Ek bohot bada limitation hai **"Logical Fragility"**. Agar tum ek simple question ko thoda sa ghuma kar poochoge, toh model fail ho jayega. Use "Common Sense" ki kami hoti hai (Jaise: "Agar main 3 kapde dhoop mein 3 ghante mein sukhata hoon, toh 30 kapde kitne ghante mein sukhenge?"). Model aksar answers "ratta maar" (memorize) kar leta hai aur naye scenarios mein "Dabba gul" (fails) ho jata hai. Ek engineer ke liye yeh janna zaroori hai ki model kahan "Ghutne tek dega".
 
 ---
 
-## 2. Deep Technical Explanation
-Reasoning in current LLMs is bounded by several factors:
-- **Planning Fallacy**: Models are bad at long-horizon planning without external tools (Tree of Thoughts).
-- **Symbolic Manipulation**: Struggles with rigorous math or formal logic where a single character change alters the whole meaning.
-- **Sensitivity to Formatting**: Changing "Answer with A, B, C" to "Answer with 1, 2, 3" can change the model's accuracy.
-- **Memorization vs. Reasoning**: Many "reasoning" successes are actually just the model recalling a similar problem from its training data (Data contamination).
+## 2. Deep Technical Explanation (Gehri Technical Samjhaaiye)
+Current LLMs mein reasoning kuch factors ki wajah se bounded (limited) hai:
+- **Planning Fallacy**: Models long-horizon planning mein bure hote hain agar unke paas external tools nahi hain (jaise Tree of Thoughts).
+- **Symbolic Manipulation**: Rigorous math ya formal logic mein struggle karta hai jaha ek character badalne se poora meaning badal jaata hai.
+- **Sensitivity to Formatting**: "Answer with A, B, C" ko "Answer with 1, 2, 3" mein badalne se model ki accuracy change ho sakti hai.
+- **Memorization vs. Reasoning**: Bohat si "reasoning" successes asli mein model ka training data se similar problem yaad karna (recall) hota hai. Isse Data contamination kehte hain.
 
 ---
 
-## 3. Mathematical Intuition
-LLMs minimize **Next Token Entropy**. There is no explicit objective for **Logical Consistency**.
-If a logical path $\pi$ has a low probability in the training set, the model will gravitate towards a higher-probability (but incorrect) path $\pi'$.
+## 3. Mathematical Intuition (Ganitik Sahajbodh)
+LLMs **Next Token Entropy** ko minimize karte hain. Unke paas **Logical Consistency** ke liye koi explicit objective nahi hota.
+Agar koi logical path $\pi$ training set mein low probability rakhta hai, toh model zyada probability wale (lekin galat) path $\pi'$ ki taraf gravitate karega.
 $$P(\text{Common Answer} | Q) > P(\text{Logical Answer} | Q)$$
-This is why models often give "popular" wrong answers (e.g., common misconceptions).
+Yahi wajah hai ki models aksar "popular" wrong answers dete hain (jaise common misconceptions).
 
 ---
 
-## 4. Architecture Diagrams
+## 4. Architecture Diagrams (Architecture ke Diagram)
 ```mermaid
 graph TD
     Problem[Complex Logic Problem] --> LLM[LLM]
@@ -35,75 +35,75 @@ graph TD
 
 ---
 
-## 5. Production-ready Examples
-Testing for "Reverse Reasoning" (A common failure):
+## 5. Production-ready Examples (Production ke liye taiyar Examples)
+Testing "Reverse Reasoning" ke liye (Common failure):
 
 ```python
-# Question: "Who is Tom Cruise's mother?" (Model knows)
-# Question: "Who is Mary Lee Pfeiffer's son?" (Model might fail)
+# Sawaal: "Tom Cruise ki maa kaun hain?" (Model jaanta hai)
+# Sawaal: "Mary Lee Pfeiffer ka beta kaun hai?" (Model fail ho sakta hai)
 
 def test_reverse_reasoning(llm):
-    # Models are often 'Directional'. 
-    # They can go from A -> B but not B -> A easily.
+    # Models aksar 'Directional' hote hain.
+    # Yeh A -> B toh kar sakte hain lekin B -> A aaram se nahi kar paate.
     pass
 ```
 
 ---
 
-## 6. Real-world Use Cases
-- **Fraud Detection**: Models might miss a creative fraud pattern because they've never "seen" it before.
-- **Scientific Innovation**: Models struggle to propose truly "Novel" ideas that go against common literature.
+## 6. Real-world Use Cases (Asli Duniya ke Use Cases)
+- **Fraud Detection**: Models kisi creative fraud pattern ko miss kar sakte hain kyunki unhone woh pattern pehle kabhi "seen" nahi kiya hota.
+- **Scientific Innovation**: Models common literature ke opposite truly "Novel" ideas propose karne mein struggle karte hain.
 
 ---
 
-## 7. Failure Cases
-- **The "Mirror" Test**: Asking the model to solve a problem it just solved but with one minor variable changed.
-- **Circular Logic**: The model starts a proof and ends up assuming the conclusion.
+## 7. Failure Cases (Failure ke Mamle)
+- **The "Mirror" Test**: Model se wahi problem solve karne ke liye kahna jo usne abhi solve ki thi, lekin usme ek minor variable change kar diya ho.
+- **Circular Logic**: Model proof start karta hai aur conclusion ko assume karke end kar deta hai.
 
 ---
 
-## 8. Debugging Guide
-1. **Distractor Analysis**: Add irrelevant information to the prompt. If the model's answer changes, its reasoning is fragile.
-2. **Step-by-step audit**: If CoT is correct but the final answer is wrong, the model has "Calculation failure".
+## 8. Debugging Guide (Debugging ka Guide)
+1. **Distractor Analysis**: Prompt mein kuch irrelevant information daal do. Agar model ka answer badalta hai, toh uska reasoning fragile (kamzor) hai.
+2. **Step-by-step audit**: Agar CoT (Chain of Thought) sahi hai lekin final answer galat hai, toh model mein "Calculation failure" hai.
 
 ---
 
-## 9. Tradeoffs
-| Factor | Human Reasoning | LLM Reasoning |
+## 9. Tradeoffs (Samjhauta)
+| Factor (Karak) | Human Reasoning (Insani Reasoning) | LLM Reasoning (LLM Reasoning) |
 |---|---|---|
-| Speed | Slow | Fast |
-| Reliability | High | Variable |
-| Scalability | Low | Infinite |
+| Speed (Raftaar) | Slow (Dheema) | Fast (Tez) |
+| Reliability (Vishwasniyata) | High (Uchch) | Variable (Badalta) |
+| Scalability (Vistaar) | Low (Kam) | Infinite (Anant) |
 
 ---
 
-## 10. Security Concerns
-- **Logic Bombs**: Inputs designed to make the model's reasoning loop infinitely or consume massive compute (Denial of Service).
+## 10. Security Concerns (Security ki Chintaen)
+- **Logic Bombs**: Aise inputs jo model ke reasoning ko infinitely loop karwane ya massive compute consume karne ke liye design kiye gaye hain (Denial of Service).
 
 ---
 
-## 11. Scaling Challenges
-- **System 2 overhead**: Making every query a "Reasoning" query makes the system unusable for simple tasks.
+## 11. Scaling Challenges (Scaling ke Challenges)
+- **System 2 overhead**: Har query ko "Reasoning" query banana system ko simple tasks ke liye unusable (bekaar) bana deta hai.
 
 ---
 
-## 12. Cost Considerations
-- **Reasoning vs. Accuracy**: Is a 5% accuracy boost worth a 500% increase in token cost?
+## 12. Cost Considerations (Kharcha ke Considerations)
+- **Reasoning vs. Accuracy**: Kya 5% accuracy boost 500% token cost increase ke worth it hai?
 
 ---
 
-## 13. Best Practices
-- **Verify with Python**: If the problem is math or logic, let the LLM write and run a Python script (Code Interpreter) instead of "thinking" it.
-- **Sanity Checks**: Always have a fast, non-LLM "Sanity checker" for critical logic.
+## 13. Best Practices (Sabse Achchi Practices)
+- **Verify with Python**: Agar problem math ya logic ka hai, toh LLM ko "sochne" ke bajaye Python script likhne aur run karne do (Code Interpreter).
+- **Sanity Checks**: Critical logic ke liye hamesha ek fast, non-LLM "Sanity checker" rakho.
 
 ---
 
-## 14. Interview Questions
-1. Why do LLMs struggle with "Out-of-Distribution" reasoning?
-2. What is the "Reversal Curse" in Large Language Models?
+## 14. Interview Questions (Interview ke Sawaal)
+1. LLMs "Out-of-Distribution" reasoning mein struggle kyun karte hain?
+2. Large Language Models mein "Reversal Curse" kya hota hai?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **Neuro-Symbolic AI**: Combining LLMs with formal logic solvers (like Z3 or Prolog) to get 100% accurate reasoning.
-- **Test-Time Compute Scaling**: Using massive search (Tree of Thoughts) to overcome the "Parrot" wall.
+## 15. Latest 2026 Patterns (2026 ke Latest Trends)
+- **Neuro-Symbolic AI**: LLMs ko formal logic solvers (jaise Z3 ya Prolog) ke saath combine karna taaki 100% accurate reasoning mille.
+- **Test-Time Compute Scaling**: "Parrot" wall ko overcome karne ke liye massive search (Tree of Thoughts) ka use karna.

@@ -1,26 +1,26 @@
-# Chain of Thought (CoT): Teaching LLMs to Think
+# Chain of Thought (CoT): LLMs ko Sochne Sikhana
 
-## 1. Beginner-friendly Hinglish Explanation 🇮🇳
+## 1. Shuruaat ke liye Hinglish Samjhaaiye 🇮🇳
 Bhai, socho tum kisi bacche se poochte ho: "Agar 5 apple hain aur 2 kha liye, phir 3 aur laye, toh kitne bache?". Agar woh baccha seedha "6" bol de bina soche, toh galti hone ke chances hain. Par agar woh bole "Pehle 5 the, 2 gaye toh 3 bache, phir 3 aaye toh 6 ho gaye", toh woh zyada accurate hoga.
 
 **Chain of Thought (CoT)** wahi "Step-by-Step" sochne ka tarika hai. Hum LLM ko bolte hain ki seedha answer mat do, pehle pura reasoning process likho. Isse model complex problems (math, logic) bohot achhe se solve kar leta hai. Yeh bilkul "Rough work" karne jaisa hai exam mein.
 
 ---
 
-## 2. Deep Technical Explanation
-Chain of Thought (CoT) is a prompting technique that encourages the model to generate intermediate reasoning steps before the final answer.
-- **Few-shot CoT**: Providing a few examples of (Input, Reasoning, Output).
-- **Zero-shot CoT**: Simply adding the magic phrase **"Let's think step by step"** to the prompt.
-- **Why it works**: It allocates more "Computation Tokens" to the problem and allows the model to attend to its own previous reasoning steps.
+## 2. Gehra Technical Explanation
+Chain of Thought (CoT) ek prompting technique hai jo model ko final answer dene se pehle intermediate reasoning steps generate karne ke liye encourage karti hai.
+- **Few-shot CoT**: (Input, Reasoning, Output) ke kuch examples provide karna.
+- **Zero-shot CoT**: Prompt mein magic phrase **"Let's think step by step"** add karna.
+- **Yeh kaam kyun karta hai**: Yeh problem ko zyada "Computation Tokens" allocate karta hai aur model ko apne previous reasoning steps pe attend karne deta hai.
 
 ---
 
-## 3. Mathematical Intuition
-In standard prompting, the model predicts $P(\text{Answer} | \text{Query})$.
-In CoT, the model predicts $P(\text{Rationale}, \text{Answer} | \text{Query})$.
-The rationale acts as a "latent variable" that makes the path to the correct answer more probable in the high-dimensional space.
+## 3. Mathematical Samajh
+Standard prompting mein, model $P(\text{Answer} | \text{Query})$ predict karta hai.
+CoT mein, model $P(\text{Rationale}, \text{Answer} | \text{Query})$ predict karta hai.
+Rationale ek "latent variable" ki tarah kaam karta hai jo high-dimensional space mein correct answer ka path zyada probable banata hai.
 $$P(A|Q) = \sum_{R} P(A|R, Q) P(R|Q)$$
-By generating $R$, the model explicitly samples from the distribution of logical steps.
+$R$ generate karke, model explicitly logical steps ki distribution se sample leta hai.
 
 ---
 
@@ -36,7 +36,7 @@ graph TD
 ---
 
 ## 5. Production-ready Examples
-Implementation in a system prompt:
+System prompt mein implementation:
 
 ```python
 import openai
@@ -61,62 +61,62 @@ def get_reasoning_response(user_query):
 
 ---
 
-## 6. Real-world Use Cases
-- **Math Problem Solving**: Solving multi-step equations.
-- **Coding**: Explaining the logic before writing the function.
-- **Legal Analysis**: Breaking down a contract clause.
+## 6. Vastavik Duniya mein Upyog
+- **Math Problem Solving**: Multi-step equations solve karna.
+- **Coding**: Function likhne se pehle logic explain karna.
+- **Legal Analysis**: Contract clause ko todna (analyze karna).
 
 ---
 
-## 7. Failure Cases
-- **Logical Hallucination**: The model's "steps" are perfectly logical but based on a false fact.
-- **Incorrect Conclusion**: The steps are correct, but the final answer is a "typo".
+## 7. Viphata ke Cases
+- **Logical Hallucination**: Model ke "steps" perfectly logical hote hain lekin false fact par based hote hain.
+- **Incorrect Conclusion**: Steps correct hain, lekin final answer mein "typo" hai.
 
 ---
 
 ## 8. Debugging Guide
-1. **Trace Analysis**: Read the reasoning steps. If step 2 is wrong, the model never had a chance.
-2. **Temperature Check**: Lower temperature (0.0 - 0.2) is better for CoT to maintain logical consistency.
+1. **Trace Analysis**: Reasoning steps padho. Agar step 2 galat hai, toh model ke paas chance hi nahi tha.
+2. **Temperature Check**: CoT ke liye logical consistency banaye rakhne ke liye lower temperature (0.0 - 0.2) behtar hai.
 
 ---
 
-## 9. Tradeoffs
+## 9. Samjhauta (Tradeoffs)
 | Feature | Direct Prompt | CoT Prompt |
 |---|---|---|
-| Speed | Fast | Slow (more tokens) |
-| Cost | Low | Higher |
-| Accuracy | Low (for logic) | High (for logic) |
+| Speed (Gati) | Tez | Dheema (zyada tokens) |
+| Cost (Lागत) | Kam | Zyada |
+| Accuracy (Shuddhata) | Kam (logic ke liye) | Zyada (logic ke liye) |
 
 ---
 
-## 10. Security Concerns
-- **Reasoning Leakage**: If your reasoning contains proprietary logic, the model might show it to the user.
+## 10. Suraksha Sambandhi Chintayein
+- **Reasoning Leakage**: Agar aapka reasoning proprietary logic contain karta hai, toh model use user ko dikha sakta hai.
 
 ---
 
-## 11. Scaling Challenges
-- **Token Limits**: Very long reasoning chains can hit the model's max output token limit.
+## 11. Scaling Ki Chunauti
+- **Token Limits**: Bahut lambi reasoning chains model ke max output token limit ko hit kar sakti hain.
 
 ---
 
-## 12. Cost Considerations
-- **Output Token Costs**: CoT can double or triple the number of output tokens, increasing costs linearly.
+## 12. Lागat Sambandhi Vichar
+- **Output Token Costs**: CoT output tokens ki sankhya ko double ya triple kar sakta hai, jisse cost linearly badh jaati hai.
 
 ---
 
-## 13. Best Practices
-- Use **Zero-shot CoT** for quick testing.
-- Use **Few-shot CoT** for specialized domains (Medical/Legal).
-- Combine with **Self-Consistency** (sampling multiple paths and taking the majority).
+## 13. Shreshth Padhate (Best Practices)
+- Quick testing ke liye **Zero-shot CoT** ka upyog karein.
+- Vishesh domains (Medical/Legal) ke liye **Few-shot CoT** ka upyog karein.
+- **Self-Consistency** ke saath jodiye (multiple paths se sample lekar majority lena).
 
 ---
 
-## 14. Interview Questions
-1. Why does CoT improve performance on mathematical tasks?
-2. What is "Self-Consistency" in the context of CoT?
+## 14. Interview Prashn
+1. CoT mathematical tasks par performance kyun sudharta hai?
+2. CoT ke context mein "Self-Consistency" kya hai?
 
 ---
 
-## 15. Latest 2026 Patterns
-- **Active Reasoning (o1 Style)**: Models that perform "Hidden" CoT (thinking before speaking) and use Reinforcement Learning to optimize the reasoning path.
-- **Reasoning Distillation**: Training smaller models on the reasoning chains of larger models.
+## 15. Naye 2026 Patterns
+- **Active Reasoning (o1 Style)**: Models jo "Hidden" CoT perform karte hain (bolne se pehle sochna) aur Reinforcement Learning ka upyog reasoning path optimize karne ke liye karte hain.
+- **Reasoning Distillation**: Chhote models ko bade models ke reasoning chains par train karna.
