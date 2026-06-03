@@ -28,11 +28,11 @@ flowchart TD
 
 ## 📁 The Mastery Index
 
-### 1. [LLM & Cognitive Mastery](llm_learning/README.md)
-*From Tokens to Fine-tuning.*
-- [Transformer Internals](llm_learning/Transformer_Architecture_Inside_Out.md)
-- [RAG & Vector Search](llm_learning/RAG_Guide.md)
-- [Fine-tuning & DPO](llm_learning/FineTuning_RLHF_Mastery.md)
+### 1. [LLM Foundations & Ops Mastery](llm_learning/README.md)
+*From Math & Tokenizers to Training & LLMOps.*
+- [Transformer Architecture From Scratch](llm_learning/06_Transformer_Architecture_From_Scratch/README.md)
+- [RAG & Vector Databases](llm_learning/10_RAG_and_Vector_Databases/README.md)
+- [Inference & Optimization](llm_learning/11_Inference_and_Optimization/README.md)
 
 ### 2. [Autonomous Agents](ai_agents_learning/README.md)
 *Building Brains that Act.*
@@ -45,12 +45,6 @@ flowchart TD
 - [Next.js AI Dashboards](fullstack/NextJS_Production_Mastery.md)
 - [Enterprise NestJS](fullstack/NestJS_Microservices_Guide.md)
 - [Database & Auth](fullstack/Fullstack_Database_Patterns.md)
-
-### 4. [AI Infrastructure & Ops](ai_foundations_and_ops/README.md)
-*Deployment at Scale.*
-- [MLOps Lifecycle](ai_foundations_and_ops/MLOps_Lifecycle_Mastery.md)
-- [Inference Optimization](system_design/Inference_Optimization_vLLM_TGI.md)
-- [Hardware Ops (H100/Blackwell)](llm_learning/LLM_Hardware_Optimization.md)
 
 ---
 
