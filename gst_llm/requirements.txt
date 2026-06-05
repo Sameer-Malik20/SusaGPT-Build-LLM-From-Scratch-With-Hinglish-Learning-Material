@@ -1,0 +1,7 @@
+torch
+fastapi
+uvicorn
+pydantic
+tqdm
+onnx
+onnxruntime

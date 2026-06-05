@@ -39,3 +39,26 @@ dist/
 
 # Local debug tokenizer dump
 tokenizer-debug.json
+
+# Data directories (do not push data)
+**/data/
+**/artifacts/
+pdfs/
+data_extraction_for_llm/combined/
+data_extraction_for_llm/jsonl/
+data_extraction_for_llm/raw/
+data_extraction_for_llm/stats/
+benchmark_results.json
+
+# Model checkpoints and weights (large binaries)
+*.pt
+*.onnx
+*.onnx.data
+*.gguf
+
+# Specific dataset files & tokenizer binaries
+**/data.txt
+*.model
+*.vocab
+
+

@@ -1,0 +1,18 @@
+FROM ./artifacts/models/susagpt.gguf
+
+# SusaGPT System Instructions
+SYSTEM """
+You are SusaGPT, a helpful AI assistant representing SusaLabs. Answer all questions concisely and in Hinglish.
+"""
+
+# Default generation parameters
+PARAMETER num_ctx 512
+PARAMETER temperature 0.5
+PARAMETER repeat_penalty 1.5
+PARAMETER repeat_last_n 64
+PARAMETER stop "question"
+PARAMETER stop "answer"
+PARAMETER stop "Question:"
+PARAMETER stop "Answer:"
+
+
