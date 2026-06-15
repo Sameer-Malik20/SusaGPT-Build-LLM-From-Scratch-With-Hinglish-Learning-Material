@@ -56,6 +56,130 @@ Niche table mein in techniques, unka real-world mapping, and exact code files wi
 
 ---
 
+## 📚 Complete LLM Learning Mapping (llm_learning Catalog)
+
+SusaGPT, [`docs/llm_learning/`](file:///c:/Projects/MyLLM/docs/llm_learning) roadmap ke saare theoretical aur design concepts ko practically implement karne ke liye ek playground hai. Niche har module ka real-world GPT connection aur SusaGPT me iska direct implementation files aur line numbers ke sath detail me mapped hai:
+
+### 1. [00_Foundations_and_Roadmap](file:///c:/Projects/MyLLM/docs/llm_learning/00_Foundations_and_Roadmap)
+* **Real-World GPT Context**: Real-world GPT models ko maintain karne ke liye production-ready modular folder structure aur parameters configurations ko isolate karna critical hota hai taaki codebase readable aur scalable rahe.
+* **SusaGPT Implementation**:
+  * **Production Directory Layout**: Data processing (`susagpt/data`), core components (`susagpt/src`), and pipeline run scripts (`susagpt/scripts`) alag-alag directories me organize kiye gaye hain.
+  * **Hyperparameters Config Isolation**: Model architectures (vocab size, layer count, embed dims) aur optimizer configs (learning rate, weight decay) isolated hain [`susagpt/src/config.py`](file:///c:/Projects/MyLLM/susagpt/src/config.py) me **Lines 1–48** par.
+
+### 2. [01_Mathematics_for_AI_and_LLMs](file:///c:/Projects/MyLLM/docs/llm_learning/01_Mathematics_for_AI_and_LLMs)
+* **Real-World GPT Context**: GPT models me weights updates stabilize karne ke liye mathematical optimizers, learning rate scheduling (warmups & decay), aur exploding gradients control karna mandatory hota hai.
+* **SusaGPT Implementation**:
+  * **AdamW Optimizer**: Weights update ke time weight decay implement karta hai taaki overfitting reduce ho sake. Used in [`susagpt/scripts/train.py`](file:///c:/Projects/MyLLM/susagpt/scripts/train.py#L159-L163), [`susagpt/scripts/fine_tune.py`](file:///c:/Projects/MyLLM/susagpt/scripts/fine_tune.py#L142-L146), and [`susagpt/scripts/rlhf.py`](file:///c:/Projects/MyLLM/susagpt/scripts/rlhf.py#L114-L118) me.
+  * **Cosine Annealing with Warmup**: Start steps me learning rate control and stabilize karta hai. Implemented inside `build_scheduler` inside [`susagpt/scripts/train.py`](file:///c:/Projects/MyLLM/susagpt/scripts/train.py#L113-L124).
+  * **Gradient Clipping**: Large loss values ke gradients ko threshold clamp dekar loss divergence control karta hai. Implemented using `clip_grad_norm_` inside [`susagpt/scripts/train.py`](file:///c:/Projects/MyLLM/susagpt/scripts/train.py#L229-L231), [`susagpt/scripts/fine_tune.py`](file:///c:/Projects/MyLLM/susagpt/scripts/fine_tune.py#L204-L206), and [`susagpt/scripts/rlhf.py`](file:///c:/Projects/MyLLM/susagpt/scripts/rlhf.py#L150-L152).
+
+### 3. [02_Python_and_Software_Engineering](file:///c:/Projects/MyLLM/docs/llm_learning/02_Python_and_Software_Engineering)
+* **Real-World GPT Context**: Core models ko client applications me serve karne ke liye high-performance async APIs design kiye jate hain, aur pipelines execution speeds (latency, tokens-per-second) benchmark results generate karte hain.
+* **SusaGPT Implementation**:
+  * **FastAPI Server Endpoint**: Async API integration web requests serve karne ke liye inside [`susagpt/src/api.py`](file:///c:/Projects/MyLLM/susagpt/src/api.py) on **Lines 1–85**.
+  * **Benchmarking Pipeline**: Execution loops latency profile aur tokens-per-second performance metrics output checks inside [`susagpt/cli.py`](file:///c:/Projects/MyLLM/susagpt/cli.py#L168-L230), jo `benchmark_results.json` write karta hai.
+
+### 4. [03_Machine_Learning_Foundations](file:///c:/Projects/MyLLM/docs/llm_learning/03_Machine_Learning_Foundations)
+* **Real-World GPT Context**: Language model prediction metrics assess karne ke liye prediction target outputs loss functions evaluate karne padte hain, aur training runtime monitor karke overfitting prevent karni hoti hai.
+* **SusaGPT Implementation**:
+  * **Cross-Entropy Loss**: Next token predictions divergence loss check karne ke liye output calculation inside [`susagpt/scripts/train.py`](file:///c:/Projects/MyLLM/susagpt/scripts/train.py#L164) and [`susagpt/scripts/fine_tune.py`](file:///c:/Projects/MyLLM/susagpt/scripts/fine_tune.py#L147).
+  * **Validation Early Stopping**: Training status flags evaluation (jaise `overfit⚠`, `stable✓`, `watch` logs) monitoring and patience bounds checks inside [`susagpt/scripts/train.py`](file:///c:/Projects/MyLLM/susagpt/scripts/train.py#L268-L279,L285-L293) and [`susagpt/scripts/fine_tune.py`](file:///c:/Projects/MyLLM/susagpt/scripts/fine_tune.py#L244-L252).
+
+### 5. [04_Deep_Learning_Foundations](file:///c:/Projects/MyLLM/docs/llm_learning/04_Deep_Learning_Foundations)
+* **Real-World GPT Context**: Multi-Layer Perceptrons (MLP) representations coordinate spaces mapping handle karte hain, aur dropout layer layers ke random drop connections create karke neural networks co-adaptation block karti hai.
+* **SusaGPT Implementation**:
+  * **MLP Block**: Projection dimension spaces map setup in `SwiGLUFeedForward` class in [`susagpt/src/model.py`](file:///c:/Projects/MyLLM/susagpt/src/model.py#L156-L174).
+  * **Dropout Layers**: Attention maps weight drops and output dropout inside `SelfAttention` on **Lines 91–92** and `SusaGPT` forward projection on **Line 224** inside [`susagpt/src/model.py`](file:///c:/Projects/MyLLM/susagpt/src/model.py).
+
+### 6. [05_NLP_Fundamentals_and_Tokenization](file:///c:/Projects/MyLLM/docs/llm_learning/05_NLP_Fundamentals_and_Tokenization)
+* **Real-World GPT Context**: Sub-word tokenizer text ko representation indexes integer format maps me split karta hai taaki vocabulary bounds set rahein, aur Embeddings unhe numerical parameter space me convert karti hain.
+* **SusaGPT Implementation**:
+  * **Byte-level BPE Tokenizer**: Unicode character bytes merge merges logic sequence build and vocabulary construct karne ke liye inside [`susagpt/src/tokenizer.py`](file:///c:/Projects/MyLLM/susagpt/src/tokenizer.py) via `Tokenizer` on **Lines 38–256**.
+  * **Token Embeddings Layer**: Character mappings high-dimension dimensions projections mapping inside `EmbeddingLayer` inside [`susagpt/src/model.py`](file:///c:/Projects/MyLLM/susagpt/src/model.py#L57-L63).
+
+### 7. [06_Transformer_Architecture_From_Scratch](file:///c:/Projects/MyLLM/docs/llm_learning/06_Transformer_Architecture_From_Scratch)
+* **Real-World GPT Context**: Modern decoders architectures (LLaMA family) core mathematical block components check karti hain: RMSNorm layers normalize fast calculation steps, RoPE encodes distances parameters, and GQA optimizes inference.
+* **SusaGPT Implementation**:
+  * **RMSNorm**: Faster normalization logic without mean division operations on **Lines 14–24** of [`susagpt/src/model.py`](file:///c:/Projects/MyLLM/susagpt/src/model.py).
+  * **Rotary Position Embeddings (RoPE)**: positional coordinate values queries-keys rotate layers mapping in `RotaryEmbedding` class on **Lines 27–40** and `apply_rotary_pos_emb` function on **Lines 49–54** of [`susagpt/src/model.py`](file:///c:/Projects/MyLLM/susagpt/src/model.py).
+  * **Grouped Query Attention (GQA)**: KV head dimension repeats and query heads attention scoring matrices inside `SelfAttention` class on **Lines 66–153** of [`susagpt/src/model.py`](file:///c:/Projects/MyLLM/susagpt/src/model.py).
+  * **SwiGLU Activation Function**: Multiplies gate activated branch maps FFN projections inside `SwiGLUFeedForward` class on **Lines 156–174** of [`susagpt/src/model.py`](file:///c:/Projects/MyLLM/susagpt/src/model.py).
+  * **Causal Masking**: Future token predictions block outputs set to `-inf` on **Lines 137–142** of [`susagpt/src/model.py`](file:///c:/Projects/MyLLM/susagpt/src/model.py).
+
+### 8. [07_Modern_LLMs_and_Scaling_Laws](file:///c:/Projects/MyLLM/docs/llm_learning/07_Modern_LLMs_and_Scaling_Laws)
+* **Real-World GPT Context**: Hardware memory constraints check karke dimensions parameters allocation optimize karne ke liye design ratios control kiye jate hain.
+* **SusaGPT Implementation**:
+  * **Parameter Budget Optimization**: Vocabulary tokens target limit, hidden embedding steps, block sequence layer depths optimize settings inside [`susagpt/src/config.py`](file:///c:/Projects/MyLLM/susagpt/src/config.py#L38-L47).
+
+### 9. [08_LLM_Training_and_Data_Engineering](file:///c:/Projects/MyLLM/docs/llm_learning/08_LLM_Training_and_Data_Engineering)
+* **Real-World GPT Context**: Autoregressive next-token training targets pretraining loops run setup maps data prepare, aur initial model cycles start simple data chunks sorting steps se stable learn karte hain.
+* **SusaGPT Implementation**:
+  * **Dataset Loader**: `TextDataset` offsets inputs/targets next token tensors sequence generation inside [`susagpt/scripts/train.py`](file:///c:/Projects/MyLLM/susagpt/scripts/train.py#L59-L73).
+  * **Curriculum Learning Chunks**: text length metrics score sequence analysis aur complexity parameters sort mapping inside [`susagpt/scripts/train.py`](file:///c:/Projects/MyLLM/susagpt/scripts/train.py#L76-L110).
+
+### 10. [09_Fine_Tuning_and_Alignment](file:///c:/Projects/MyLLM/docs/llm_learning/09_Fine_Tuning_and_Alignment)
+* **Real-World GPT Context**: Base model fine-tuning outputs check instruct responses build karta hai, aur preference mapping selected choices probability sigmoid gaps maximize alignment setups detaye hain.
+* **SusaGPT Implementation**:
+  * **LoRA PEFT implementation**: base linear layers lock checks, custom parameter projections adapters update parameters logic (`LoRAParameterizedLinear`, `inject_lora`, and weights merging `merge_and_unload_lora`) inside [`susagpt/src/model.py`](file:///c:/Projects/MyLLM/susagpt/src/model.py#L266-L352).
+  * **SFT instruction tuning**: Q&A training loop loading datasets directly formatting responses via `QADataset` inside [`susagpt/scripts/fine_tune.py`](file:///c:/Projects/MyLLM/susagpt/scripts/fine_tune.py#L84-L118).
+  * **RLHF Preference Sigmoid Gaps Tuning**: chosen vs rejected logprob reward gap sigmoid loss backpropagation inside [`susagpt/scripts/rlhf.py`](file:///c:/Projects/MyLLM/susagpt/scripts/rlhf.py#L127-L160).
+
+### 11. [10_RAG_and_Vector_Databases](file:///c:/Projects/MyLLM/docs/llm_learning/10_RAG_and_Vector_Databases)
+* **Real-World GPT Context**: Real-time context information prompt integration through keyword queries, vectors indexing, and database lookups checks hallucination reduction detaye hain.
+* **SusaGPT Implementation**:
+  * **Keyword/TF-IDF Context matching**: Overlap scoring calculations inputs check to pick relevant document lines on **Lines 672–707** of [`susagpt/src/generate.py`](file:///c:/Projects/MyLLM/susagpt/src/generate.py).
+
+### 12. [11_Inference_and_Optimization](file:///c:/Projects/MyLLM/docs/llm_learning/11_Inference_and_Optimization)
+* **Real-World GPT Context**: Model output fast decode generation loops key-value cache buffer optimize keye jate hain, sampling outputs temperatures scale adjustments target filter parameters apply checks karte hain, aur deployment steps memory size compression dynamic quantization operations support format detaya hai.
+* **SusaGPT Implementation**:
+  * **Key-Value (KV) Cache**: Query updates calculations reduction logic self-attention models inside [`susagpt/src/model.py`](file:///c:/Projects/MyLLM/susagpt/src/model.py#L120-L126) and generate runs on **Lines 242–303** of [`susagpt/src/generate.py`](file:///c:/Projects/MyLLM/susagpt/src/generate.py).
+  * **Autoregressive sampling settings**: logits top-k/top-p filters, repetition penalty adjustments, Mirostat v2 adaptive surprise mu checks inside [`susagpt/src/generate.py`](file:///c:/Projects/MyLLM/susagpt/src/generate.py#L153-L220).
+  * **Beam Search**: candidate paths logs probabilities scoring updates evaluation inside [`susagpt/src/generate.py`](file:///c:/Projects/MyLLM/susagpt/src/generate.py#L335-L372).
+  * **Model Weights Quantization**: PyTorch Dynamic INT8 conversions of Linear operators inside [`susagpt/src/generate.py`](file:///c:/Projects/MyLLM/susagpt/src/generate.py#L36-L48) and [`susagpt/scripts/quantize.py`](file:///c:/Projects/MyLLM/susagpt/scripts/quantize.py#L35-L55).
+
+### 13. [12_MLOps_LLMOps_and_Infrastructure](file:///c:/Projects/MyLLM/docs/llm_learning/12_MLOps_LLMOps_and_Infrastructure)
+* **Real-World GPT Context**: Cross-platform deployment me PyTorch models dependencies universal runtime formats (jaise ONNX dynamic graphs) compilation pipelines output optimize detaye hain.
+* **SusaGPT Implementation**:
+  * **ONNX universal format graph export & quantization**: computation model exports aur ONNX quantization operations inside [`susagpt/scripts/export_onnx.py`](file:///c:/Projects/MyLLM/susagpt/scripts/export_onnx.py#L56-L100).
+
+### 14. [13_Production_Systems_and_Agents](file:///c:/Projects/MyLLM/docs/llm_learning/13_Production_Systems_and_Agents)
+* **Real-World GPT Context**: AI Agent configurations input query analysis routing, dialog patterns recognition, local databases check, and API fallbacks handle structures check framework design keye jate hain.
+* **SusaGPT Implementation**:
+  * **Conversational Agent router fallback loop**: greetings mapping check, local contexts evaluation, Ollama servers request forwarding fallback, Cloud APIs endpoints routing loops inside [`susagpt/src/generate.py`](file:///c:/Projects/MyLLM/susagpt/src/generate.py#L610-L879).
+
+### 15. [14_Model_Evaluation_and_Benchmarking](file:///c:/Projects/MyLLM/docs/llm_learning/14_Model_Evaluation_and_Benchmarking)
+* **Real-World GPT Context**: model prediction quality check aur latency statistics benchmark reports log verify checks compile jate hain.
+* **SusaGPT Implementation**:
+  * **Automated Benchmarks runner**: CLI evaluation on standard prompt lists testing profiling stats logging inside [`susagpt/cli.py`](file:///c:/Projects/MyLLM/susagpt/cli.py#L168-L230).
+
+### 16. [15_AI_Security_and_Safety](file:///c:/Projects/MyLLM/docs/llm_learning/15_AI_Security_and_Safety)
+* **Real-World GPT Context**: predictable defaults context safe fallback maps secure bounds execution boundaries setups verify logic apply calculations karte hain.
+* **SusaGPT Implementation**:
+  * **Graceful fallback exception maps routing**: connection checks wrapper inside [`susagpt/src/generate.py`](file:///c:/Projects/MyLLM/susagpt/src/generate.py) crash controls optimize settings.
+
+### 17. [16_Open_Source_Ecosystem_and_Local_LLMs](file:///c:/Projects/MyLLM/docs/llm_learning/16_Open_Source_Ecosystem_and_Local_LLMs)
+* **Real-World GPT Context**: Local environments local models integration interfaces (Ollama hosting setups) local requests serve checks design format setups detaye hain.
+* **SusaGPT Implementation**:
+  * **Ollama local request client API**: localhost requests micro-services connection setups for `qwen3.5:0.8b` fallback models inside [`susagpt/src/generate.py`](file:///c:/Projects/MyLLM/susagpt/src/generate.py#L717-L745).
+
+### 18. [17_Multimodal_LLMs](file:///c:/Projects/MyLLM/docs/llm_learning/17_Multimodal_LLMs)
+* **Real-World GPT Context**: Multimodal features integration coordinates sequence spaces mapping coordinate values layers projections parameters setups understand maps check pipelines define karta hai.
+* **SusaGPT Implementation**:
+  * **Structural blueprint mappings**: Token configurations embeddings, linear projection scaling layers, cross-attention networks architecture foundations mapping.
+
+### 19. [18_Case_Studies_and_Hands_On_Projects](file:///c:/Projects/MyLLM/docs/llm_learning/18_Case_Studies_and_Hands_On_Projects)
+* **Real-World GPT Context**: conceptual designs practical implementations code formats convert systems deployment workflows demonstrate details.
+* **SusaGPT Implementation**:
+  * **Production mini-LLM implementation repository**: GQA, RoPE, LoRA PEFT, RLHF alignment features merged pipeline codebase architecture sandbox.
+
+### 20. [19_Interview_Preparation](file:///c:/Projects/MyLLM/docs/llm_learning/19_Interview_Preparation)
+* **Real-World GPT Context**: engineering system designs, layer norm operations advantages calculation, parameters math scale analysis technical checks verify patterns maps target checks define jate hain.
+* **SusaGPT Implementation**:
+  * **Interview Design Sandboxing**: Working implementation reference portfolio verify questions calculations direct in code layers.
+
+---
+
+
 ## 🚀 How to Run the Pipeline (Commands)
 
 Aap in commands ko step-by-step terminal mein run karke model complete train aur deployment verify kar sakte hain:

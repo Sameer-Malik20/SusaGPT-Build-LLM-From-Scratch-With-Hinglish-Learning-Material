@@ -131,7 +131,7 @@ class SelfAttention(nn.Module):
 
         scale = math.sqrt(self.head_dim)
         scores = torch.matmul(queries, repeated_keys.transpose(-2, -1)) / scale
- k
+
         total_kv_len = repeated_keys.size(2)
         if not (layer_past is not None and time_steps == 1):
             query_positions = torch.arange(
